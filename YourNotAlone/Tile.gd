@@ -6,7 +6,13 @@ var rightTile
 var leftTile
 var occupied
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func getTileInDirection(direction):
+	match direction:
+		MovementUtility.moveDirection.up:
+			return topTile
+		MovementUtility.moveDirection.down:
+			return bottomTile
+		MovementUtility.moveDirection.left:
+			return leftTile
+		MovementUtility.moveDirection.right:
+			return rightTile

@@ -2,7 +2,8 @@ extends CanvasLayer
 
 var cardScene = preload("res://Card.tscn")
 var availableCards = [
-	"res://ItemData/Gladius.tres"
+	"res://ItemData/Gladius.tres",
+	"res://BoStaff.tres"
 ]
 var selectedCards = []
 
@@ -39,6 +40,8 @@ func spawnCard(pathOfResource):
 	
 	if resource in itemManager.managedItems:
 		currentTier = itemManager.managedItems[resource].currentTier + 1
+	else:
+		currentTier = 1
 		
 	card.setup(resource, currentTier)
 	card.connect("selectionMade", self, "disableDisplay")

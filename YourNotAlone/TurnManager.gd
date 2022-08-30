@@ -19,12 +19,15 @@ var allEnemies = []
 var currentRound = 0
 
 func _ready():
-	handleRoundUpdate()
+	call_deferred("handleRoundUpdate")
 
 func isPlayerTurn():
 	if currentTurnState == turnState.player:
 		return true
 	return false
+
+func itemPhaseEnded():
+	startEnemyTurn()
 
 func startEnemyTurn():
 	currentTurnState = turnState.enemy
@@ -32,7 +35,6 @@ func startEnemyTurn():
 
 func endPlayerTurn():
 	emit_signal("playerTurnEnded")
-	startEnemyTurn()
 
 func startPlayerTurn():
 	handleRoundUpdate()
@@ -60,7 +62,7 @@ func spawnEnemies():
 			GameManager.occupyTile(occupiedTile, instancedEnemy)
 			instancedEnemy.currentTile = occupiedTile
 			instancedEnemy.position = occupiedTile.position
-			get_tree().root.call_deferred("add_child", instancedEnemy)
+			get_tree().root.add_child(instancedEnemy)
 			allEnemies.append(instancedEnemy)
 
 func removeEnemy(enemy):
