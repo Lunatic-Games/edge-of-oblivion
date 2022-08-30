@@ -8,7 +8,7 @@
 script = ExtResource( 1 )
 sprite = ExtResource( 2 )
 itemScene = ExtResource( 3 )
-tier1Text = "Jump 1 tile in the last moved direction. Attacking where you land for 1 damage."
-tier2Text = "IDK MAN"
-tier3Text = "IDK MAN"
+tier1Text = "Vault an enemy, then deal 1 damage where you land."
+tier2Text = "Also deal 1 damage to the vaulted enemy."
+tier3Text = "You no longer require an enemy to vault."
 path = "res://BoStaff.tres"

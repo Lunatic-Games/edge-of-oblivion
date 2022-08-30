@@ -1,14 +1,14 @@
 extends "res://Item.gd"
 
 # Tiers
-# 1 - Jump Attack
-# 2 - Attack right space also
-# 3 - Attacks two turns in a row
+# 1 - Jump over an enemy and then attack where landing
+# 2 - Also attack the space we jump over
+# 3 - You no longer require an enemy to jump
 
 var itemDamage = 1
 
 func _ready():
-	maxTurnTimer = 5
+	maxTurnTimer = 7
 	turnTimer = maxTurnTimer
 	updateShaderParam()
 
@@ -30,12 +30,18 @@ func performAttack():
 	if directionTile == null:
 		return
 	
+	if !currentTier >= 3 and !directionTile.occupied:
+		return
+	
 	var landingTile = directionTile.getTileInDirection(MovementUtility.lastPlayerDirection)
 	if landingTile == null:
 		landingTile = directionTile
 	
 	if landingTile.occupied && landingTile.occupied.isEnemy():
 		attack(landingTile.occupied)
+	
+	if currentTier >= 2 && directionTile.occupied && directionTile.occupied.isEnemy():
+		attack(directionTile.occupied)
 	
 	var freeTileLocation = user.currentTile
 	if !landingTile.occupied or landingTile.occupied.occupantType == landingTile.occupied.occupantTypes.consumable:
