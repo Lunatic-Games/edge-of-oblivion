@@ -33,11 +33,18 @@ func upgradeTier() -> bool:
 func activateItem():
 	pass
 
-func spawnSlashParticle(occupant):
+func spawnSlashParticle(positionToSpawn):
 	# Spawn attack slash
 	var slashParticle = slashParticleScene.instance()
 	slashParticle.position = user.currentTile.position
-	if occupant.position < user.position:
+	if positionToSpawn.position < user.position:
 		slashParticle.scale.x = slashParticle.scale.x * -1
+	slashParticle.emitting = true
+	get_tree().root.add_child(slashParticle)
+
+func spawnLightningParticle(positionToSpawn):
+	# Spawn attack slash
+	var slashParticle = slashParticleScene.instance()
+	slashParticle.position = positionToSpawn.position
 	slashParticle.emitting = true
 	get_tree().root.add_child(slashParticle)

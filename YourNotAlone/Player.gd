@@ -9,15 +9,15 @@ var currentXp = 0
 var currentLevel = 1
 var levelThresholds = {
 	1:1,
-	2:2,
+	2:3,
 	3:3,
-	4:3,
-	5:3,
-	6:3,
-	7:3,
-	8:3,
-	9:3,
-	10:3
+	4:4,
+	5:5,
+	6:5,
+	7:5,
+	8:5,
+	9:5,
+	10:5
 }
 var items = []
 
@@ -52,6 +52,9 @@ func handleMovement():
 	if (Input.is_action_just_pressed("right")):
 		if(currentTile.rightTile):
 			moveToTile(currentTile.rightTile, MovementUtility.moveDirection.right)
+	
+	if (Input.is_action_just_pressed("levelUpCheat")):
+		levelUp()
 
 func moveToTile(tile, moveDirection):
 	if tile.occupied && tile.occupied.occupantType == tile.occupied.occupantTypes.blocking:
@@ -103,3 +106,6 @@ func gainItem(itemData):
 	else:
 		items.append(itemData)
 		ItemManager.addItem(itemData)
+
+func isEnemy():
+	return false

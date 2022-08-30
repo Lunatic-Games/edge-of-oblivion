@@ -16,3 +16,25 @@ func getTileInDirection(direction):
 			return leftTile
 		MovementUtility.moveDirection.right:
 			return rightTile
+
+func getRandomEnemyOccupiedAdjacentTile():
+	var occupiedAdjacentTiles = []
+	
+	if topTile && topTile.occupied && topTile.occupied.isEnemy():
+		occupiedAdjacentTiles.append(topTile)
+	
+	if bottomTile && bottomTile.occupied && bottomTile.occupied.isEnemy():
+		occupiedAdjacentTiles.append(bottomTile)
+	
+	if leftTile && leftTile.occupied && leftTile.occupied.isEnemy():
+		occupiedAdjacentTiles.append(leftTile)
+	
+	if rightTile && rightTile.occupied && rightTile.occupied.isEnemy():
+		occupiedAdjacentTiles.append(rightTile)
+	
+	if occupiedAdjacentTiles.size() == 0:
+		return null
+	
+	var randomIndex = randi()%(occupiedAdjacentTiles.size())
+	return occupiedAdjacentTiles[randomIndex]
+	

@@ -10,7 +10,11 @@ var roundSpawnData = {
 	15:[goblinScene, goblinScene],
 	19:[goblinScene, goblinScene],
 	23:[goblinScene, goblinScene],
-	27:[goblinScene, goblinScene]
+	27:[goblinScene, goblinScene],
+	31:[goblinScene, goblinScene, goblinScene],
+	35:[goblinScene, goblinScene, goblinScene],
+	38:[goblinScene, goblinScene, goblinScene],
+	42:[goblinScene, goblinScene, goblinScene, goblinScene]
 	}
 
 enum turnState {enemy, player}
