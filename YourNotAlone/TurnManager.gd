@@ -22,7 +22,7 @@ var currentTurnState = turnState.player
 var allEnemies = []
 var currentRound = 0
 
-func _ready():
+func initialize():
 	call_deferred("handleRoundUpdate")
 
 func isPlayerTurn():

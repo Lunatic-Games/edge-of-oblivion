@@ -11,11 +11,9 @@ var unoccupiedTiles = []
 
 onready var allTiles = []
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func startGame():
 	generateTiles()
 	spawnPlayer()
-
 
 func generateTiles():
 	var index = 0

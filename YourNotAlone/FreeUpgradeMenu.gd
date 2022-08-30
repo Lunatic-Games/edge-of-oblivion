@@ -7,8 +7,7 @@ var availableCards = [
 	"res://LightningBow.tres"
 ]
 var selectedCards = []
-
-onready var itemManager = get_tree().get_nodes_in_group('itemManager')[0]
+var itemManager
 
 func connectToPlayerTier(player):
 	player.connect("itemReachedMaxTier", self, "removeItemFromAvailability")
@@ -22,6 +21,9 @@ func disableDisplay():
 		child.queue_free()
 
 func spawnUpgradeCards(cardsToSpawn):
+	if !itemManager:
+		itemManager = get_tree().get_nodes_in_group('itemManager')[0]
+	
 	display()
 	
 	for x in cardsToSpawn:
@@ -52,4 +54,4 @@ func spawnCard(pathOfResource):
 	
 
 func removeItemFromAvailability(itemData):
-	availableCards.remove(itemData.path)
+	availableCards.remove(availableCards.find(itemData.path))
