@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/medieval-fantasy/icons/ffffff/transparent/1x1/lorc/visored-helm.svg" type="Texture" id=2]
+[ext_resource path="res://ItemManager.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 overlay_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float progress : hint_range(0.0,1.0) = 0.0;
+uniform float strength : hint_range(0.0,1.0) = 0.0;
+
+void fragment() {
+	if (1f - UV.y <= progress) {
+	  vec4 custom_color = texture(TEXTURE, UV);
+	  custom_color.rgb = mix(custom_color.rgb, overlay_color.rgb, strength);
+	  COLOR = custom_color;
+	} else {
+	  COLOR = texture(TEXTURE, UV);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/overlay_color = Color( 1, 0.396078, 0.396078, 1 )
+shader_param/progress = 0.0
+shader_param/strength = 1.0
+
+[node name="Player" type="Node2D" groups=["player"]]
+z_index = 1
+script = ExtResource( 1 )
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+current = true
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+scale = Vector2( 0.125, 0.125 )
+texture = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ItemManager" parent="CanvasLayer" instance=ExtResource( 3 )]
