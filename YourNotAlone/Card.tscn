@@ -26,8 +26,8 @@ margin_top = 78.0
 margin_right = 56.0
 margin_bottom = 176.0
 bbcode_enabled = true
-bbcode_text = "[center]Lorem ipsum sol dul ler fe fo fie fum bananana hanana"
-text = "Lorem ipsum sol dul ler fe fo fie fum bananana hanana"
+bbcode_text = "[center]Attack left for 1 damage."
+text = "Attack left for 1 damage."
 fit_content_height = true
 
 [connection signal="gui_input" from="Background" to="." method="_on_Background_gui_input"]

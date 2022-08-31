@@ -1,6 +1,7 @@
 extends Node2D
 
 signal itemReachedMaxTier
+signal playerDied
 
 var currentTile
 var moveSpeed = 1
@@ -81,6 +82,7 @@ func takeDamage(damage):
 	updateShaderParam()
 	
 	if hp <= 0:
+		emit_signal("playerDied")
 		print("GameOver")
 
 func gainExperience(experience):
