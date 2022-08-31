@@ -1,6 +1,7 @@
 extends Node2D
 
 signal itemReachedMaxTier
+signal playerDied
 
 var currentTile
 var moveSpeed = 1
@@ -9,15 +10,15 @@ var currentXp = 0
 var currentLevel = 1
 var levelThresholds = {
 	1:1,
-	2:2,
+	2:3,
 	3:3,
-	4:3,
-	5:3,
-	6:3,
-	7:3,
-	8:3,
-	9:3,
-	10:3
+	4:4,
+	5:5,
+	6:5,
+	7:5,
+	8:5,
+	9:5,
+	10:5
 }
 var items = []
 
@@ -39,21 +40,24 @@ func handleMovement():
 	
 	if (Input.is_action_just_pressed("up")):
 		if(currentTile.topTile):
-			moveToTile(currentTile.topTile)
+			moveToTile(currentTile.topTile, MovementUtility.moveDirection.up)
 	
 	if (Input.is_action_just_pressed("down")):
 		if(currentTile.bottomTile):
-			moveToTile(currentTile.bottomTile)
+			moveToTile(currentTile.bottomTile, MovementUtility.moveDirection.down)
 	
 	if (Input.is_action_just_pressed("left")):
 		if(currentTile.leftTile):
-			moveToTile(currentTile.leftTile)
+			moveToTile(currentTile.leftTile, MovementUtility.moveDirection.left)
 	
 	if (Input.is_action_just_pressed("right")):
 		if(currentTile.rightTile):
-			moveToTile(currentTile.rightTile)
+			moveToTile(currentTile.rightTile, MovementUtility.moveDirection.right)
+	
+	if (Input.is_action_just_pressed("levelUpCheat")):
+		levelUp()
 
-func moveToTile(tile):
+func moveToTile(tile, moveDirection):
 	if tile.occupied && tile.occupied.occupantType == tile.occupied.occupantTypes.blocking:
 		return
 	
@@ -66,6 +70,7 @@ func moveToTile(tile):
 	GameManager.occupyTile(tile, self)
 	currentTile = tile
 	position = tile.position
+	MovementUtility.lastPlayerDirection = moveDirection
 	
 	movesRemaining -= 1
 	if movesRemaining <= 0:
@@ -77,6 +82,7 @@ func takeDamage(damage):
 	updateShaderParam()
 	
 	if hp <= 0:
+		emit_signal("playerDied")
 		print("GameOver")
 
 func gainExperience(experience):
@@ -102,3 +108,6 @@ func gainItem(itemData):
 	else:
 		items.append(itemData)
 		ItemManager.addItem(itemData)
+
+func isEnemy():
+	return false

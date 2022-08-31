@@ -7,11 +7,10 @@ extends "res://Item.gd"
 
 var itemDamage = 1
 
-onready var slashParticleScene = preload("res://SlashParticles.tscn")
-
 func _ready():
 	maxTurnTimer = 3
 	turnTimer = maxTurnTimer
+	updateShaderParam()
 
 func triggerTimer():
 	turnTimer -= 1
@@ -41,11 +40,5 @@ func performAttack():
 	$AnimationPlayer.play("Shake")
 
 func attack(occupant):
-	# Spawn attack slash
-	var slashParticle = slashParticleScene.instance()
-	slashParticle.position = user.currentTile.position
-	if occupant.position < user.position:
-		slashParticle.scale.x = slashParticle.scale.x * -1
-	slashParticle.emitting = true
-	get_tree().root.add_child(slashParticle)
+	spawnSlashParticle(occupant)
 	occupant.takeDamage(itemDamage)

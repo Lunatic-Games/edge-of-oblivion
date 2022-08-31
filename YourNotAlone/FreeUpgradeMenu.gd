@@ -2,11 +2,12 @@ extends CanvasLayer
 
 var cardScene = preload("res://Card.tscn")
 var availableCards = [
-	"res://ItemData/Gladius.tres"
+	"res://ItemData/Gladius.tres",
+	"res://BoStaff.tres",
+	"res://LightningBow.tres"
 ]
 var selectedCards = []
-
-onready var itemManager = get_tree().get_nodes_in_group('itemManager')[0]
+var itemManager
 
 func connectToPlayerTier(player):
 	player.connect("itemReachedMaxTier", self, "removeItemFromAvailability")
@@ -20,6 +21,9 @@ func disableDisplay():
 		child.queue_free()
 
 func spawnUpgradeCards(cardsToSpawn):
+	if !itemManager:
+		itemManager = get_tree().get_nodes_in_group('itemManager')[0]
+	
 	display()
 	
 	for x in cardsToSpawn:
@@ -39,6 +43,8 @@ func spawnCard(pathOfResource):
 	
 	if resource in itemManager.managedItems:
 		currentTier = itemManager.managedItems[resource].currentTier + 1
+	else:
+		currentTier = 1
 		
 	card.setup(resource, currentTier)
 	card.connect("selectionMade", self, "disableDisplay")
@@ -48,4 +54,4 @@ func spawnCard(pathOfResource):
 	
 
 func removeItemFromAvailability(itemData):
-	availableCards.remove(itemData.path)
+	availableCards.remove(availableCards.find(itemData.path))

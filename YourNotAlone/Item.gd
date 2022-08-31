@@ -6,8 +6,9 @@ var maxTurnTimer
 var currentTier = 0
 var maxTier = 3
 
+onready var slashParticleScene = preload("res://SlashParticles.tscn")
+
 func _ready():
-	TurnManager.connect("playerTurnEnded", self, "triggerTimer")
 	turnTimer = maxTurnTimer
 	user = get_tree().get_nodes_in_group("player")[0]
 
@@ -31,3 +32,19 @@ func upgradeTier() -> bool:
 
 func activateItem():
 	pass
+
+func spawnSlashParticle(positionToSpawn):
+	# Spawn attack slash
+	var slashParticle = slashParticleScene.instance()
+	slashParticle.position = user.currentTile.position
+	if positionToSpawn.position < user.position:
+		slashParticle.scale.x = slashParticle.scale.x * -1
+	slashParticle.emitting = true
+	get_tree().root.add_child(slashParticle)
+
+func spawnLightningParticle(positionToSpawn):
+	# Spawn attack slash
+	var slashParticle = slashParticleScene.instance()
+	slashParticle.position = positionToSpawn.position
+	slashParticle.emitting = true
+	get_tree().root.add_child(slashParticle)

@@ -69,3 +69,16 @@ func die():
 	TurnManager.removeEnemy(self)
 	currentTile.occupied = null
 	queue_free()
+
+func moveToTile(tile):
+	if tile.occupied && tile.occupied.occupantType == tile.occupied.occupantTypes.blocking:
+		return
+	
+	if tile.occupied && tile.occupied.occupantType == tile.occupied.occupantTypes.collectable:
+		#tile.occupied.collect()
+		pass
+	
+	GameManager.unoccupyTile(currentTile)
+	GameManager.occupyTile(tile, self)
+	currentTile = tile
+	position = tile.position
