@@ -59,6 +59,7 @@ func spawnEnemies():
 	if currentRound in roundSpawnData:
 		# Spawn each unit in the spawn data
 		for enemy in roundSpawnData[currentRound]:
+			yield(get_tree().create_timer(0.2), "timeout")
 			var instancedEnemy = enemy.instance()
 			var occupiedTile = GameManager.getRandomUnoccupiedTile()
 			GameManager.occupyTile(occupiedTile, instancedEnemy)
@@ -66,7 +67,7 @@ func spawnEnemies():
 			instancedEnemy.position = occupiedTile.position
 			get_tree().root.add_child(instancedEnemy)
 			allEnemies.append(instancedEnemy)
-			yield(get_tree().create_timer(2.0), "timeout")
+			yield(instancedEnemy.setup(), "completed")
 	yield(get_tree(), "idle_frame")
 
 func removeEnemy(enemy):

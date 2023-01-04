@@ -8,14 +8,20 @@ var maxHp = 1
 var xp = 1
 var maxRoundsUntilReady = 2
 var damage = 1
+
 onready var hp = maxHp
 onready var roundsUntilReady = maxRoundsUntilReady
 onready var playerNode = get_tree().get_nodes_in_group("player")[0]
+onready var animation_player = $AnimationPlayer
 
 func _ready():
 	$Sprite.material = $Sprite.material.duplicate()
 	updateShaderParam()
 	targetTiles = [currentTile.topTile, currentTile.bottomTile, currentTile.leftTile, currentTile.rightTile]
+
+func setup():
+	animation_player.play("spawn")
+	yield(animation_player, "animation_finished")
 
 func isEnemy():
 	return true
