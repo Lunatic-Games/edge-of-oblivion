@@ -27,7 +27,7 @@ onready var hp = maxHp
 onready var ItemManager = $CanvasLayer/ItemManager
 
 func _ready():
-	var startingItems = [preload("res://ItemData/Gladius.tres")]
+	var startingItems = [preload("res://ItemData/Gladius/Gladius.tres")]
 	for item in startingItems:
 		gainItem(item)
 

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
-[ext_resource path="res://ItemData.gd" type="Script" id=1]
-[ext_resource path="res://LightningBow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ItemData/ITEM_DATA.gd" type="Script" id=1]
+[ext_resource path="res://ItemData/LightningBow/LightningBow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/weapons/icons/ffffff/transparent/1x1/lorc/lightning-bow.svg" type="Texture" id=3]
 
 [resource]
