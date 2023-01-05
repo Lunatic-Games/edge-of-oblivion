@@ -21,6 +21,7 @@ enum turnState {enemy, player}
 var currentTurnState = turnState.player
 var allEnemies = []
 var currentRound = 0
+var spawn_locations = []
 
 func initialize():
 	call_deferred("handleRoundUpdate")
@@ -52,8 +53,8 @@ func handleEnemyTurn():
 
 func handleRoundUpdate():
 	currentRound += 1
-	
 	yield(spawnEnemies(), "completed")
+	new_spawn_locations()
 
 func spawnEnemies():
 	if currentRound in roundSpawnData:
@@ -69,6 +70,13 @@ func spawnEnemies():
 			allEnemies.append(instancedEnemy)
 			yield(instancedEnemy.setup(), "completed")
 	yield(get_tree(), "idle_frame")
+
+func new_spawn_locations():
+	if currentRound in roundSpawnData:
+		for x in roundSpawnData[currentRound].size():
+			# Create a spawn point
+			# add it to the spawnpoints data
+			pass
 
 func removeEnemy(enemy):
 	allEnemies.remove(allEnemies.find(enemy))
