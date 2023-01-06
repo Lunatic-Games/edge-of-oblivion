@@ -1,11 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/medieval-fantasy/icons/ffffff/transparent/1x1/lorc/visored-helm.svg" type="Texture" id=2]
 [ext_resource path="res://ItemManager.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
+code = "/*shader_type canvas_item;
 
 uniform vec4 overlay_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform float progress : hint_range(0.0,1.0) = 0.0;
@@ -19,13 +19,38 @@ void fragment() {
 	} else {
 	  COLOR = texture(TEXTURE, UV);
 	}
+}*/
+
+
+shader_type canvas_item;
+
+uniform sampler2D noise;
+
+void fragment() {
+	float angle = TIME;
+	vec2 dist = vec2(.5) - UV;
+	float s = sin(angle);
+	float c = cos(angle);
+	mat2 m = mat2(vec2(c, -s), vec2(s, c));
+	dist *= m;
+	vec4 coord = texture(noise, dist);
+	coord.x -= .5;
+	coord.y -= .5 ;
+	vec4 lens_color = texture(TEXTURE, UV + coord.xy);
+    COLOR = lens_color;
 }"
+
+[sub_resource type="OpenSimplexNoise" id=3]
+period = 138.1
+
+[sub_resource type="NoiseTexture" id=4]
+seamless = true
+as_normalmap = true
+noise = SubResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/overlay_color = Color( 1, 0.396078, 0.396078, 1 )
-shader_param/progress = 0.0
-shader_param/strength = 1.0
+shader_param/noise = SubResource( 4 )
 
 [node name="Player" type="Node2D" groups=["player"]]
 z_index = 1
