@@ -1,10 +1,12 @@
 extends Node
 
+const spawn_flag_scene = preload("res://SpawnFlag.tscn")
+
 signal playerTurnEnded
 
 var goblinScene = preload("res://Goblin.tscn")
 var roundSpawnData = {
-	1:[goblinScene, goblinScene],
+	2:[goblinScene, goblinScene],
 	5:[goblinScene],
 	9:[goblinScene],
 	15:[goblinScene, goblinScene],
@@ -62,7 +64,9 @@ func spawnEnemies():
 		for enemy in roundSpawnData[currentRound]:
 			yield(get_tree().create_timer(0.2), "timeout")
 			var instancedEnemy = enemy.instance()
-			var occupiedTile = GameManager.getRandomUnoccupiedTile()
+			var occupiedTile = spawn_locations[0].currentTile
+			spawn_locations[0].destroySelf()
+			spawn_locations.pop_front()
 			GameManager.occupyTile(occupiedTile, instancedEnemy)
 			instancedEnemy.currentTile = occupiedTile
 			instancedEnemy.position = occupiedTile.position
@@ -72,11 +76,19 @@ func spawnEnemies():
 	yield(get_tree(), "idle_frame")
 
 func new_spawn_locations():
-	if currentRound in roundSpawnData:
-		for x in roundSpawnData[currentRound].size():
-			# Create a spawn point
-			# add it to the spawnpoints data
-			pass
+	for spawn_point in spawn_locations:
+		spawn_point.queue_free()
+		spawn_locations = []
+	
+	if currentRound+1 in roundSpawnData:
+		for x in roundSpawnData[currentRound+1].size():
+			var spawn_flag = spawn_flag_scene.instance()
+			var occupiedTile = GameManager.getRandomUnoccupiedTile()
+			GameManager.occupyTile(occupiedTile, spawn_flag)
+			spawn_flag.currentTile = occupiedTile
+			spawn_flag.position = occupiedTile.position
+			get_tree().root.add_child(spawn_flag)
+			spawn_locations.append(spawn_flag)
 
 func removeEnemy(enemy):
 	allEnemies.remove(allEnemies.find(enemy))
