@@ -7,7 +7,11 @@ func _ready():
 
 func collect():
 	# Grab a new random spawn location
-	destroySelf()
+	var new_tile = GameManager.getRandomUnoccupiedTile()
+	currentTile.occupied = null
+	currentTile = new_tile
+	position = currentTile.position
+	GameManager.occupyTile(currentTile, self)
 
 func destroySelf():
 	currentTile.occupied = null
