@@ -60,7 +60,7 @@ anchor_bottom = 1.0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.482353, 0.764706, 0.831373, 1 )
+modulate = Color( 0.984314, 0.960784, 0.937255, 1 )
 material = SubResource( 4 )
 scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 1 )
