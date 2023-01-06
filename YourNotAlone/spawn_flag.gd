@@ -6,7 +6,6 @@ func _ready():
 	occupantType = occupantTypes.collectable
 
 func collect():
-	# Grab a new random spawn location
 	var new_tile = GameManager.getRandomUnoccupiedTile()
 	currentTile.occupied = null
 	currentTile = new_tile
