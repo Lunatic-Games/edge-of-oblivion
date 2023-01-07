@@ -13,10 +13,12 @@ onready var hp = maxHp
 onready var roundsUntilReady = maxRoundsUntilReady
 onready var playerNode = get_tree().get_nodes_in_group("player")[0]
 onready var animation_player = $AnimationPlayer
+onready var attack_bar = $AttackBar
+onready var tween = $Tween
 
 func _ready():
 	$Sprite.material = $Sprite.material.duplicate()
-	updateShaderParam()
+	update_attack_bar()
 	targetTiles = [currentTile.topTile, currentTile.bottomTile, currentTile.leftTile, currentTile.rightTile]
 
 func setup():
@@ -33,10 +35,10 @@ func activate():
 			playerNode.takeDamage(damage)
 			
 		roundsUntilReady = maxRoundsUntilReady
-		updateShaderParam()
+		update_attack_bar()
 	else:
 		roundsUntilReady -= 1
-		updateShaderParam()
+		update_attack_bar()
 		
 		if roundsUntilReady <= 0:
 			spawnTargets()
@@ -59,8 +61,9 @@ func canAttackPlayer():
 		return true
 	return false
 
-func updateShaderParam():
-	$Sprite.material.set_shader_param("progress", float(roundsUntilReady)/float(maxRoundsUntilReady))
+func update_attack_bar():
+	tween.interpolate_property(attack_bar, "value", attack_bar.value, (1 - float(roundsUntilReady)/float(maxRoundsUntilReady)) * 100, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
 
 func spawnTargets():
 	for tile in targetTiles:
