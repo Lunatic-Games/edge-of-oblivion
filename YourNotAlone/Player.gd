@@ -25,6 +25,9 @@ var items = []
 onready var movesRemaining = moveSpeed
 onready var hp = maxHp
 onready var ItemManager = $CanvasLayer/ItemManager
+onready var tween = $Tween
+onready var sprite = $Sprite
+onready var health_bar = $HealthBar
 
 func _ready():
 	var startingItems = [preload("res://ItemData/Gladius/Gladius.tres")]
@@ -69,7 +72,11 @@ func moveToTile(tile, moveDirection):
 	GameManager.unoccupyTile(currentTile)
 	GameManager.occupyTile(tile, self)
 	currentTile = tile
-	position = tile.position
+	tween.interpolate_property(self, "position", position, tile.position, 0.20, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property(sprite, "position", sprite.position, sprite.position + Vector2(0.0, -15.0), 0.10, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property(sprite, "position", sprite.position + Vector2(0.0, -15.0), sprite.position, 0.10, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0.1)
+	tween.start()
+	yield(tween, "tween_all_completed")
 	MovementUtility.lastPlayerDirection = moveDirection
 	
 	movesRemaining -= 1
@@ -79,7 +86,7 @@ func moveToTile(tile, moveDirection):
 
 func takeDamage(damage):
 	hp -= 1
-	updateShaderParam()
+	update_health_bar()
 	
 	if hp <= 0:
 		emit_signal("playerDied")
@@ -99,8 +106,8 @@ func levelUp():
 	currentLevel += 1
 	currentXp = 0
 
-func updateShaderParam():
-	$Sprite.material.set_shader_param("progress", 1 - float(hp)/float(maxHp))
+func update_health_bar():
+	$HealthBar.value = float(hp)/float(maxHp) * 100
 
 func gainItem(itemData):
 	if itemData in items:
