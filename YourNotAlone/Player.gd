@@ -28,6 +28,7 @@ onready var ItemManager = $CanvasLayer/ItemManager
 onready var tween = $Tween
 onready var sprite = $Sprite
 onready var health_bar = $HealthBar
+onready var animation_player = $AnimationPlayer
 
 func _ready():
 	var startingItems = [preload("res://ItemData/Gladius/Gladius.tres")]
@@ -107,7 +108,9 @@ func levelUp():
 	currentXp = 0
 
 func update_health_bar():
-	$HealthBar.value = float(hp)/float(maxHp) * 100
+	health_bar.value = float(hp)/float(maxHp) * 100
+	tween.interpolate_property(health_bar, "value", health_bar.value, float(hp)/float(maxHp) * 100, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
 
 func gainItem(itemData):
 	if itemData in items:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/medieval-fantasy/icons/ffffff/transparent/1x1/lorc/visored-helm.svg" type="Texture" id=2]
@@ -57,12 +57,51 @@ bg_color = Color( 0.545098, 0.427451, 0.611765, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
+[sub_resource type="Animation" id=7]
+resource_name = "blink"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AttackReadySprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7, 1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.427451, 0.568627, 0.611765, 0 ), Color( 0.427451, 0.568627, 0.611765, 1 ), Color( 0.427451, 0.568627, 0.611765, 1 ), Color( 0.427451, 0.568627, 0.611765, 0 ), Color( 0.427451, 0.568627, 0.611765, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "stop_blink"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("AttackReadySprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.427451, 0.568627, 0.611765, 1 ), Color( 0.427451, 0.568627, 0.611765, 0 ) ]
+}
+
 [node name="Player" type="Node2D" groups=["player"]]
 z_index = 1
 script = ExtResource( 1 )
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 current = true
+
+[node name="AttackReadySprite" type="Sprite" parent="."]
+self_modulate = Color( 0.427451, 0.568627, 0.611765, 0 )
+material = SubResource( 2 )
+scale = Vector2( 0.145, 0.145 )
+texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 0.984314, 0.960784, 0.937255, 1 )
@@ -86,3 +125,7 @@ custom_styles/bg = SubResource( 6 )
 value = 100.0
 rounded = true
 percent_visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/blink = SubResource( 7 )
+anims/stop_blink = SubResource( 8 )

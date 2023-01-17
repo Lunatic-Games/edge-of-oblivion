@@ -7,6 +7,7 @@ var currentTier = 0
 var maxTier = 3
 
 onready var slashParticleScene = preload("res://SlashParticles.tscn")
+onready var cooldown_bar = $CoolDownBar
 
 func _ready():
 	turnTimer = maxTurnTimer
@@ -15,13 +16,18 @@ func _ready():
 func triggerTimer():
 	turnTimer -= 1
 	
-	updateShaderParam()
+	update_cool_down_bar()
+	
+	if turnTimer == 1:
+		return true
 	
 	if turnTimer <= 0:
 		activateItem()
+	
+	return false
 
-func updateShaderParam():
-	$Sprite.material.set_shader_param("progress", float(turnTimer-1)/float(maxTurnTimer-1))
+func update_cool_down_bar():
+	cooldown_bar.value = (1 - float(turnTimer-1)/float(maxTurnTimer-1)) * 100
 
 func upgradeTier() -> bool:
 	currentTier += 1

@@ -12,19 +12,25 @@ onready var remaining_chains = chains
 func _ready():
 	maxTurnTimer = 7
 	turnTimer = maxTurnTimer
-	updateShaderParam()
+	update_cool_down_bar()
 
 func triggerTimer():
 	turnTimer -= 1
-	updateShaderParam()
+	update_cool_down_bar()
+	
+	if turnTimer == 1:
+		return true
 	
 	if turnTimer <= 0:
-		activateItem()
+		yield(activateItem(), "completed")
+	
+	return false
 
 func activateItem():
-	performAttack()
+	yield(performAttack(), "completed")
 	turnTimer = maxTurnTimer
-	updateShaderParam()
+	update_cool_down_bar()
+	yield(get_tree(), "idle_frame")
 
 func performAttack():
 	# Get the tile two tiles up
@@ -32,6 +38,7 @@ func performAttack():
 	
 	var oneTileUp = user.currentTile.topTile
 	if !oneTileUp:
+		yield(get_tree(), "idle_frame")
 		return
 	
 	var twoTilesUp = oneTileUp.topTile
@@ -40,9 +47,10 @@ func performAttack():
 	else:
 		targetTile = oneTileUp
 	
-	attack(targetTile)
-		
 	$AnimationPlayer.play("Shake")
+	
+	yield(attack(targetTile), "completed")
+
 
 func attack(tile):
 	spawnLightningParticle(tile)
@@ -50,23 +58,28 @@ func attack(tile):
 	if tile.occupied && tile.occupied.isEnemy():
 		tile.occupied.takeDamage(itemDamage)
 	
+	yield(get_tree().create_timer(0.4), "timeout")
 	if remaining_chains > 0:
 		var newTarget = tile.getRandomEnemyOccupiedAdjacentTile()
 		remaining_chains -= 1
 		if newTarget:
-			attack(newTarget)
+			yield(attack(newTarget), "completed")
 	
 	if remaining_chains <= 0:
 		remaining_chains = chains
+	
+	yield(get_tree(), "idle_frame")
 
 func upgradeTier() -> bool:
 	currentTier += 1
 	
 	if currentTier == 2:
 		chains = 2
+		remaining_chains = 2
 	
 	if currentTier == 3:
 		chains = 4
+		remaining_chains = 2
 	
 	if currentTier >= maxTier:
 		return true

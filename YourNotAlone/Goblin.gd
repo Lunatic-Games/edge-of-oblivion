@@ -15,6 +15,7 @@ onready var playerNode = get_tree().get_nodes_in_group("player")[0]
 onready var animation_player = $AnimationPlayer
 onready var attack_bar = $AttackBar
 onready var tween = $Tween
+onready var attack_ready_sprite = $AttackReadySprite
 
 func _ready():
 	$Sprite.material = $Sprite.material.duplicate()
@@ -36,12 +37,14 @@ func activate():
 			
 		roundsUntilReady = maxRoundsUntilReady
 		update_attack_bar()
+		animation_player.play("attack_not_ready")
 	else:
 		roundsUntilReady -= 1
 		update_attack_bar()
 		
 		if roundsUntilReady <= 0:
 			spawnTargets()
+			animation_player.play("attack_ready")
 	
 
 func takeDamage(damageTaken):

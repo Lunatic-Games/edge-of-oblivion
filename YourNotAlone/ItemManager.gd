@@ -13,7 +13,9 @@ func _ready():
 
 func handleItemsTriggering():
 	for item in managedItems:
-		managedItems[item].triggerTimer()
+		var has_become_ready = managedItems[item].triggerTimer()
+		if has_become_ready:
+			item.start_blink()
 	
 	TurnManager.itemPhaseEnded()
 

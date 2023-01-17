@@ -10,22 +10,27 @@ var itemDamage = 1
 func _ready():
 	maxTurnTimer = 3
 	turnTimer = maxTurnTimer
-	updateShaderParam()
+	update_cool_down_bar()
 
 func triggerTimer():
 	turnTimer -= 1
-	updateShaderParam()
+	update_cool_down_bar()
 	
 	if currentTier == 3 && turnTimer == maxTurnTimer-1:
 		performAttack()
 	
+	if turnTimer == 1:
+		return true
+	
 	if turnTimer <= 0:
 		activateItem()
+	
+	return false
 
 func activateItem():
 	performAttack()
 	turnTimer = maxTurnTimer
-	updateShaderParam()
+	update_cool_down_bar()
 
 func performAttack():
 	var leftTile = user.currentTile.leftTile
