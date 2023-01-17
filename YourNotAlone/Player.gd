@@ -21,6 +21,7 @@ var levelThresholds = {
 	10:5
 }
 var items = []
+var lock_movement = false
 
 onready var movesRemaining = moveSpeed
 onready var hp = maxHp
@@ -31,7 +32,7 @@ onready var health_bar = $HealthBar
 onready var animation_player = $AnimationPlayer
 
 func _ready():
-	var startingItems = [preload("res://ItemData/Gladius/Gladius.tres")]
+	var startingItems = [preload("res://Item/ShortSword/ShortSword.tres")]
 	for item in startingItems:
 		gainItem(item)
 
@@ -39,7 +40,7 @@ func _physics_process(delta):
 	handleMovement()
 
 func handleMovement():
-	if !TurnManager.isPlayerTurn():
+	if !TurnManager.isPlayerTurn() or lock_movement:
 		return
 	
 	if (Input.is_action_just_pressed("up")):
@@ -73,11 +74,13 @@ func moveToTile(tile, moveDirection):
 	GameManager.unoccupyTile(currentTile)
 	GameManager.occupyTile(tile, self)
 	currentTile = tile
+	lock_movement = true
 	tween.interpolate_property(self, "position", position, tile.position, 0.20, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.interpolate_property(sprite, "position", sprite.position, sprite.position + Vector2(0.0, -15.0), 0.10, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.interpolate_property(sprite, "position", sprite.position + Vector2(0.0, -15.0), sprite.position, 0.10, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0.1)
 	tween.start()
 	yield(tween, "tween_all_completed")
+	lock_movement = false
 	MovementUtility.lastPlayerDirection = moveDirection
 	
 	movesRemaining -= 1

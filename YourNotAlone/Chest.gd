@@ -1,6 +1,6 @@
 extends "res://occupant.gd"
 
-var cardsToSpawn = 3
+var cardsToSpawn = 2
 var currentTile
 
 func _ready():

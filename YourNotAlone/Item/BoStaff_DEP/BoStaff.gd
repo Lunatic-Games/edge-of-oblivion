@@ -1,4 +1,4 @@
-extends "res://Item.gd"
+extends "res://Item/Item.gd"
 
 # Tiers
 # 1 - Jump over an enemy and then attack where landing

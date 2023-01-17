@@ -5,26 +5,33 @@ var turnTimer
 var maxTurnTimer
 var currentTier = 0
 var maxTier = 3
+var item_damage = 1
 
 onready var slashParticleScene = preload("res://SlashParticles.tscn")
 onready var cooldown_bar = $CoolDownBar
+onready var blink_tween = $BlinkTween
 
 func _ready():
-	turnTimer = maxTurnTimer
 	user = get_tree().get_nodes_in_group("player")[0]
+
+func setup(data):
+	$Sprite.texture = data.sprite
+	maxTurnTimer = data.max_turn_timer
+	turnTimer = maxTurnTimer
+	update_cool_down_bar()
 
 func triggerTimer():
 	turnTimer -= 1
 	
 	update_cool_down_bar()
 	
-	if turnTimer == 1:
-		return true
-	
 	if turnTimer <= 0:
-		activateItem()
+		yield(activateItem(), "completed")
+		end_blink()
+		turnTimer = maxTurnTimer
+		update_cool_down_bar()
 	
-	return false
+	yield(get_tree(), "idle_frame")
 
 func update_cool_down_bar():
 	cooldown_bar.value = (1 - float(turnTimer-1)/float(maxTurnTimer-1)) * 100
@@ -38,6 +45,21 @@ func upgradeTier() -> bool:
 
 func activateItem():
 	pass
+
+# returns wether or not the item should be displaying that it's activatable
+func is_ready_to_use():
+	if turnTimer == 1:
+		return true
+	return false
+
+func start_blink():
+	blink_tween.interpolate_property($Sprite, "material/shader_param/line_thickness", 0.0, 7.0, 0.6)
+	blink_tween.start()
+
+func end_blink():
+	blink_tween.interpolate_property($Sprite, "material/shader_param/line_thickness", 7.0, 0.0, 0.6)
+	blink_tween.start()
+
 
 func spawnSlashParticle(positionToSpawn):
 	# Spawn attack slash
