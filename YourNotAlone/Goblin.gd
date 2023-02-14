@@ -4,7 +4,7 @@ export (PackedScene) var targetScene = preload("res://Target.tscn")
 
 var currentTile
 var targetTiles = []
-var maxHp = 1
+var maxHp = 3
 var xp = 1
 var maxRoundsUntilReady = 2
 var damage = 1
@@ -14,8 +14,9 @@ onready var roundsUntilReady = maxRoundsUntilReady
 onready var playerNode = get_tree().get_nodes_in_group("player")[0]
 onready var animation_player = $AnimationPlayer
 onready var attack_bar = $AttackBar
+onready var health_bar = $HealthBar
 onready var tween = $Tween
-onready var attack_ready_sprite = $AttackReadySprite
+onready var attack_ready_particle = $AttackReadyParticle
 
 func _ready():
 	$Sprite.material = $Sprite.material.duplicate()
@@ -37,6 +38,7 @@ func activate():
 			
 		roundsUntilReady = maxRoundsUntilReady
 		update_attack_bar()
+		#attack_ready_particle.one_shot = true
 		animation_player.play("attack_not_ready")
 	else:
 		roundsUntilReady -= 1
@@ -45,13 +47,21 @@ func activate():
 		if roundsUntilReady <= 0:
 			spawnTargets()
 			animation_player.play("attack_ready")
+			#attack_ready_particle.one_shot = false
+			#attack_ready_particle.emitting = true
 	
 
 func takeDamage(damageTaken):
 	hp -= damageTaken
+	update_health_bar()
 	
 	if hp <= 0:
 		die()
+
+func update_health_bar():
+	health_bar.value = float(hp)/float(maxHp) * 100
+	tween.interpolate_property(health_bar, "value", health_bar.value, float(hp)/float(maxHp) * 100, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
 
 func canAttackPlayer():
 	if currentTile.topTile && currentTile.topTile.occupied && currentTile.topTile.occupied == playerNode:
@@ -81,6 +91,11 @@ func die():
 	TurnManager.removeEnemy(self)
 	currentTile.occupied = null
 	queue_free()
+
+func is_alive():
+	if hp > 0:
+		return true
+	return false
 
 func moveToTile(tile):
 	if tile.occupied && tile.occupied.occupantType == tile.occupied.occupantTypes.blocking:

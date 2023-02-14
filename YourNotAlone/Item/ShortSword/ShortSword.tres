@@ -12,4 +12,5 @@ tier1Text = "[center]Every 3 rounds, attacks left for [color=ff6565]1[color] dam
 tier2Text = "[center]Also attacks right."
 tier3Text = "[center]Attack two rounds in a row."
 max_turn_timer = 3
+item_damage = 2
 path = "res://Item/ShortSword/ShortSword.tres"

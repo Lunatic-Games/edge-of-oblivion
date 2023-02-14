@@ -4,7 +4,6 @@ extends "res://Item/Item.gd"
 # 1 - Attack left space
 # 2 - Attack right space also
 # 3 - Attacks two turns in a row
-
 func activateItem():
 	performAttack()
 	yield(get_tree(), "idle_frame")

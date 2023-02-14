@@ -18,6 +18,7 @@ func setup(data):
 	$Sprite.texture = data.sprite
 	maxTurnTimer = data.max_turn_timer
 	turnTimer = maxTurnTimer
+	item_damage = data.item_damage
 	update_cool_down_bar()
 
 func triggerTimer():
@@ -53,12 +54,14 @@ func is_ready_to_use():
 	return false
 
 func start_blink():
-	blink_tween.interpolate_property($Sprite, "material/shader_param/line_thickness", 0.0, 7.0, 0.6)
-	blink_tween.start()
+	#blink_tween.interpolate_property($Sprite, "material/shader_param/line_thickness", 0.0, 7.0, 0.6)
+	#blink_tween.start()
+	pass
 
 func end_blink():
-	blink_tween.interpolate_property($Sprite, "material/shader_param/line_thickness", 7.0, 0.0, 0.6)
-	blink_tween.start()
+	#blink_tween.interpolate_property($Sprite, "material/shader_param/line_thickness", 7.0, 0.0, 0.6)
+	#blink_tween.start()
+	pass
 
 
 func spawnSlashParticle(positionToSpawn):
