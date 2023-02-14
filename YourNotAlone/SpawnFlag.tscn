@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/targets/icons/ffffff/transparent/1x1/sbed/select.svg" type="Texture" id=1]
-[ext_resource path="res://Target.gd" type="Script" id=2]
+[ext_resource path="res://Assets/spawn_flag.png" type="Texture" id=1]
+[ext_resource path="res://spawn_flag.gd" type="Script" id=2]
 
-[node name="Target" type="Node2D"]
+[node name="SpawnFlag" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

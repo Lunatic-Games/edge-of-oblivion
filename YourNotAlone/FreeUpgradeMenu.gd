@@ -2,9 +2,9 @@ extends CanvasLayer
 
 var cardScene = preload("res://Card.tscn")
 var availableCards = [
-	"res://ItemData/Gladius.tres",
-	"res://BoStaff.tres",
-	"res://LightningBow.tres"
+	"res://Item/ShortSword/ShortSword.tres",
+	"res://Item/LightningBow/LightningBow.tres",
+	"res://Item/Hammer/Hammer.tres"
 ]
 var selectedCards = []
 var itemManager

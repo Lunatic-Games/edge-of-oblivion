@@ -13,15 +13,18 @@ func _ready():
 
 func handleItemsTriggering():
 	for item in managedItems:
-		managedItems[item].triggerTimer()
+		yield(managedItems[item].triggerTimer(), "completed")
+		if managedItems[item].is_ready_to_use():
+			managedItems[item].start_blink()
 	
 	TurnManager.itemPhaseEnded()
 
-func addItem(itemData):
-	var item = itemData.itemScene.instance()
+func addItem(item_data):
+	var item = item_data.itemScene.instance()
 	item.currentTier = 1
 	itemContainer.add_child(item)
-	managedItems[itemData] = item
+	managedItems[item_data] = item
+	item.setup(item_data)
 
 func upgradeItem(itemData):
 	var isMaxTier = managedItems[itemData].upgradeTier()

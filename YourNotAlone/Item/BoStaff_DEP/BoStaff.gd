@@ -1,4 +1,4 @@
-extends "res://Item.gd"
+extends "res://Item/Item.gd"
 
 # Tiers
 # 1 - Jump over an enemy and then attack where landing
@@ -10,19 +10,24 @@ var itemDamage = 1
 func _ready():
 	maxTurnTimer = 7
 	turnTimer = maxTurnTimer
-	updateShaderParam()
+	update_cool_down_bar()
 
 func triggerTimer():
 	turnTimer -= 1
-	updateShaderParam()
+	update_cool_down_bar()
+	
+	if turnTimer == 1:
+		return true # The item is now ready
 	
 	if turnTimer <= 0:
 		activateItem()
+	
+	return false # The item has not yet become ready
 
 func activateItem():
 	performAttack()
 	turnTimer = maxTurnTimer
-	updateShaderParam()
+	update_cool_down_bar()
 
 func performAttack():
 	# Get the furthest tile in the direction we last moved, up to 2 spaces away.
@@ -30,7 +35,8 @@ func performAttack():
 	if directionTile == null:
 		return
 	
-	if !currentTier >= 3 and !directionTile.occupied:
+	# If we are not tier 3, and the adjacent tile does not have an enemy
+	if currentTier < 3 and !directionTile.occupied:
 		return
 	
 	var landingTile = directionTile.getTileInDirection(MovementUtility.lastPlayerDirection)

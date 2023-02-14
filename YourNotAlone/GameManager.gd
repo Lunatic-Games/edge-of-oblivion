@@ -62,7 +62,8 @@ func spawnChest():
 func occupyTile(tile, occupant):
 	tile.occupied = occupant
 	var tileIndex = unoccupiedTiles.find(tile)
-	unoccupiedTiles.remove(tileIndex)
+	if tileIndex != -1:
+		unoccupiedTiles.remove(tileIndex)
 
 func unoccupyTile(tile):
 	tile.occupied = null

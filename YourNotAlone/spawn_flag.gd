@@ -1,14 +1,16 @@
 extends "res://occupant.gd"
 
-var cardsToSpawn = 3
 var currentTile
 
 func _ready():
 	occupantType = occupantTypes.collectable
 
 func collect():
-	FreeUpgradeMenu.spawnUpgradeCards(cardsToSpawn)
-	destroySelf()
+	var new_tile = GameManager.getRandomUnoccupiedTile()
+	currentTile.occupied = null
+	currentTile = new_tile
+	position = currentTile.position
+	GameManager.occupyTile(currentTile, self)
 
 func destroySelf():
 	currentTile.occupied = null
