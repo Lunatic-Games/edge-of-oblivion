@@ -1,7 +1,7 @@
 extends Node2D
 
 var baseTile = preload("res://Tile.tscn")
-var playerScene = preload("res://Player.tscn")
+var playerScene = preload("res://Data/Units/Player.tscn")
 var chestScene = preload("res://Chest.tscn")
 var width = 6
 var height = 6

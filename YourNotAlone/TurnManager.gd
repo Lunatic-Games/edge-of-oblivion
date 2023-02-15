@@ -4,7 +4,7 @@ const spawn_flag_scene = preload("res://SpawnFlag.tscn")
 
 signal playerTurnEnded
 
-var goblinScene = preload("res://Goblin.tscn")
+var goblinScene = preload("res://Data/Units/Enemies/Goblin.tscn")
 var roundSpawnData = {
 	2:[goblinScene, goblinScene],
 	5:[goblinScene],
