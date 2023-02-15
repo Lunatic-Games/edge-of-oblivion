@@ -1,10 +1,14 @@
 extends "res://Data/Units/Unit.gd"
 
 export (PackedScene) var targetScene = preload("res://Target.tscn")
-
+var xp = 1
+var maxRoundsUntilReady = 2
+var damage = 1
 var targetTiles = []
 
+onready var roundsUntilReady = maxRoundsUntilReady
 onready var attack_bar = $AttackBar
+onready var playerNode = get_tree().get_nodes_in_group("player")[0]
 
 func _ready():
 	update_attack_bar()

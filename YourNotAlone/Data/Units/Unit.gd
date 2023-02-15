@@ -1,14 +1,9 @@
-extends Node2D
+extends "res://occupant.gd"
 
 var currentTile
 var maxHp = 3
-var xp = 1
-var maxRoundsUntilReady = 2
-var damage = 1
 
 onready var hp = maxHp
-onready var roundsUntilReady = maxRoundsUntilReady
-onready var playerNode = get_tree().get_nodes_in_group("player")[0]
 onready var animation_player = $AnimationPlayer
 onready var health_bar = $HealthBar
 onready var tween = $Tween
@@ -19,7 +14,6 @@ func setup():
 
 func isEnemy():
 	pass
-	return false # PLAYER
 
 func takeDamage(damageTaken):
 	hp -= damageTaken
