@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Data/Units/Unit.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Data/Units/Player.gd" type="Script" id=2]
+[ext_resource path="res://ItemManager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/medieval-fantasy/icons/ffffff/transparent/1x1/lorc/barbute.svg" type="Texture" id=4]
+
+[node name="Player" groups=["player"] instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="PlayerCamera" type="Camera2D" parent="." index="0"]
+current = true
+smoothing_enabled = true
+
+[node name="Sprite" parent="." index="2"]
+texture = ExtResource( 4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="6"]
+
+[node name="ItemManager" parent="CanvasLayer" index="0" instance=ExtResource( 3 )]
