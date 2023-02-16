@@ -21,14 +21,14 @@ func activate(): # ENEMY also please move into more functions, so we can easily 
 			
 		roundsUntilReady = maxRoundsUntilReady
 		update_attack_bar()
-		animation_player.play("attack_not_ready")
+		#animation_player.play("attack_not_ready")
 	else:
 		roundsUntilReady -= 1
 		update_attack_bar()
 		
 		if roundsUntilReady <= 0:
 			spawnTargets()
-			animation_player.play("attack_ready")
+			#animation_player.play("attack_ready")
 
 func update_attack_bar():
 	tween.interpolate_property(attack_bar, "value", attack_bar.value, (1 - float(roundsUntilReady)/float(maxRoundsUntilReady)) * 100, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

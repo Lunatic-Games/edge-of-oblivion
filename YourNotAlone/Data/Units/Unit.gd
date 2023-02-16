@@ -38,7 +38,7 @@ func is_alive():
 		return true
 	return false
 
-func moveToTile(tile, direction):
+func moveToTile(tile):
 	if tile.occupied && tile.occupied.occupantType == tile.occupied.occupantTypes.blocking:
 		return
 	
