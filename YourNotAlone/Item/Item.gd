@@ -79,3 +79,26 @@ func spawnLightningParticle(positionToSpawn):
 	slashParticle.position = positionToSpawn.position
 	slashParticle.emitting = true
 	get_tree().root.add_child(slashParticle)
+
+func applyKnockBack(occupant, direction, knockback, collideDamage=0):
+	var new_tile = occupant.currentTile
+	if occupant.is_alive():
+		if direction == "up":
+			for x in knockback:
+				var tile_to_check = new_tile.topTile
+				if tile_to_check and tile_to_check.occupied:
+					# Then do damage to both the currrent enemy and the unit on this tile
+					pass
+				elif tile_to_check:
+					new_tile = tile_to_check
+		# Do check for left and right; bring complexity away from item implementation
+		elif direction == "down":
+			for x in knockback:
+				var tile_to_check = new_tile.bottomTile
+				if tile_to_check and tile_to_check.occupied:
+					# Then do damage to both the currrent enemy and the unit on this tile
+					pass
+				elif tile_to_check:
+					new_tile = tile_to_check
+	
+		occupant.moveToTile(new_tile)

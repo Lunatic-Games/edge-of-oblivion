@@ -23,28 +23,9 @@ func perform_attack():
 		attack(bottom_tile.occupied, "down")
 
 func attack(occupant, direction):
-	var new_tile = occupant.currentTile
 	spawnSlashParticle(occupant)
 	occupant.takeDamage(item_damage)
-	
+	applyKnockBack(occupant, direction, knockback)
 	#TODO Move all the code below this into a "knockback_unit_damage_on_collide" function
 	# Within the base item script so that it can be easily called from future items we create!
-	if occupant.is_alive():
-		if direction == "up":
-			for x in knockback:
-				var tile_to_check = new_tile.topTile
-				if tile_to_check and tile_to_check.occupied:
-					# Then do damage to both the currrent enemy and the unit on this tile
-					pass
-				elif tile_to_check:
-					new_tile = tile_to_check
-		elif direction == "down":
-			for x in knockback:
-				var tile_to_check = new_tile.bottomTile
-				if tile_to_check and tile_to_check.occupied:
-					# Then do damage to both the currrent enemy and the unit on this tile
-					pass
-				elif tile_to_check:
-					new_tile = tile_to_check
-		
-		occupant.moveToTile(new_tile)
+
