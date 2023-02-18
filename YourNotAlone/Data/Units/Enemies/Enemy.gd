@@ -40,7 +40,7 @@ func spawnTargets():
 			continue
 		var target = targetScene.instance()
 		target.position = tile.position
-		get_tree().root.add_child(target)
+		GameManager.gameboard.add_child(target)
 
 func isEnemy():
 	return true
@@ -58,5 +58,5 @@ func canAttackPlayer():
 
 func die():
 	playerNode.gainExperience(xp)
-	TurnManager.removeEnemy(self)
+	GameManager.removeEnemy(self)
 	.die()

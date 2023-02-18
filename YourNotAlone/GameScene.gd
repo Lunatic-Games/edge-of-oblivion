@@ -12,4 +12,13 @@ func gameOver():
 
 
 func _on_MenuButton_pressed():
-	get_tree().quit()
+	get_tree().change_scene_to(load("res://MainMenu.tscn"))
+	GameManager.stop_game()
+	get_tree().paused = false
+
+
+func _on_Restart_pressed():
+	GameManager.stop_game()
+	get_tree().paused = false
+	yield(get_tree(), "idle_frame")
+	GameManager.startGame()

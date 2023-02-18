@@ -13,15 +13,9 @@ _global_script_classes=[ {
 "class": "ItemData",
 "language": "GDScript",
 "path": "res://Item/ITEM_DATA.gd"
-}, {
-"base": "Control",
-"class": "ItemManager",
-"language": "GDScript",
-"path": "res://ItemManager.gd"
 } ]
 _global_script_class_icons={
-"ItemData": "",
-"ItemManager": ""
+"ItemData": ""
 }
 
 [application]
@@ -36,6 +30,7 @@ GameManager="*res://GameManager.gd"
 TurnManager="*res://TurnManager.gd"
 FreeUpgradeMenu="*res://FreeUpgradeMenu.tscn"
 MovementUtility="*res://MovementUtility.gd"
+ItemManager="*res://ItemManager.gd"
 
 [display]
 
