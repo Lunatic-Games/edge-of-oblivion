@@ -21,4 +21,5 @@ func _on_Restart_pressed():
 	GameManager.stop_game()
 	get_tree().paused = false
 	yield(get_tree(), "idle_frame")
+	$Canvas/GameOver.visible = true
 	GameManager.startGame()
