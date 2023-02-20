@@ -44,7 +44,7 @@ func endPlayerTurn():
 	emit_signal("playerTurnEnded")
 
 func startPlayerTurn():
-	yield(handleRoundUpdate(), "completed")
+	handleRoundUpdate()
 	currentTurnState = turnState.player
 
 func handleEnemyTurn():
@@ -55,5 +55,5 @@ func handleEnemyTurn():
 
 func handleRoundUpdate():
 	currentRound += 1
-	yield(GameManager.spawnEnemies(), "completed")
+	GameManager.spawnEnemies()
 	GameManager.new_spawn_locations()
