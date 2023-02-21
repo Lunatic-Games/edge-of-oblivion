@@ -3,8 +3,10 @@ extends Node
 signal playerTurnEnded
 
 var goblinScene = preload("res://Data/Units/Enemies/Goblin.tscn")
+var lost_ranger_scene = preload("res://Data/Units/Enemies/LostRanger.tscn")
+
 var roundSpawnData = {
-	2:[goblinScene, goblinScene],
+	2:[goblinScene, goblinScene, lost_ranger_scene],
 	5:[goblinScene],
 	9:[goblinScene],
 	15:[goblinScene, goblinScene],

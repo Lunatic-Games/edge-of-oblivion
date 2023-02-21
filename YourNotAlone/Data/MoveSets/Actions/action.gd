@@ -9,9 +9,12 @@ enum TARGETING_TYPE {
 	right
 }
 
-export (PackedScene) var indicator_scene = preload("res://Target.tscn")
+export (PackedScene) var indicator_scene = preload("res://Data/Indicators/Indicator.tscn")
 export (TARGETING_TYPE) var targeting_type = TARGETING_TYPE.random
 export (int) var damage = 1
+export (int) var min_range = 1
+export (int) var max_range = 1
+export (bool) var preferred_hitting_player = true
 
 func indicate(starting_tile) -> void:
 	var tile_to_indicate = choose_target_tile(starting_tile)
@@ -31,29 +34,32 @@ func trigger_effect():
 	pass
 
 # TODO IMPLEMENT
-# RANGE
 # OTHER TARGET TYPES
-# export (int) var preferred_range = 1
-# export (int) var min_range = 1
-# export (int) var max_range = 2
 func choose_target_tile(starting_tile):
-	var tile_to_target
-	
 	if targeting_type == TARGETING_TYPE.random:
 		pass
 	if targeting_type == TARGETING_TYPE.player_based:
 		pass
 	
-	if targeting_type == TARGETING_TYPE.up:
-		tile_to_target = starting_tile.topTile
+	var current_tile = starting_tile
+	for x in max_range:
+		if targeting_type == TARGETING_TYPE.up:
+			if current_tile.topTile:
+				current_tile = current_tile.topTile
+			
+		if targeting_type == TARGETING_TYPE.down:
+			if current_tile.bottomTile:
+				current_tile = current_tile.bottomTile
+			
+		if targeting_type == TARGETING_TYPE.left:
+			if current_tile.leftTile:
+				current_tile = current_tile.leftTile
+			
+		if targeting_type == TARGETING_TYPE.right:
+			if current_tile.rightTile:
+				current_tile = current_tile.rightTile
 		
-	if targeting_type == TARGETING_TYPE.down:
-		tile_to_target = starting_tile.bottomTile
-		
-	if targeting_type == TARGETING_TYPE.left:
-		tile_to_target = starting_tile.leftTile
-		
-	if targeting_type == TARGETING_TYPE.right:
-		tile_to_target = starting_tile.rightTile
+		if preferred_hitting_player && current_tile && current_tile.occupied && current_tile.occupied == GameManager.player:
+			break
 	
-	return tile_to_target
+	return current_tile
