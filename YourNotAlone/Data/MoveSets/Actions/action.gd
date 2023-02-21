@@ -62,4 +62,7 @@ func choose_target_tile(starting_tile):
 		if preferred_hitting_player && current_tile && current_tile.occupied && current_tile.occupied == GameManager.player:
 			break
 	
+	if current_tile == starting_tile && min_range > 0:
+		return null
+	
 	return current_tile
