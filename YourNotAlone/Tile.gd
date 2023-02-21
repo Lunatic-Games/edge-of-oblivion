@@ -4,7 +4,7 @@ var topTile
 var bottomTile
 var rightTile
 var leftTile
-var occupied
+var occupied: Occupant
 
 func getTileInDirection(direction):
 	match direction:

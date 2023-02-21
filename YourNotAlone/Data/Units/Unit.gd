@@ -1,4 +1,5 @@
-extends "res://occupant.gd"
+class_name Unit
+extends "res://Occupant.gd"
 
 var lock_movement = false
 var currentTile

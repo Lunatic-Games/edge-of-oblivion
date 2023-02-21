@@ -11,6 +11,8 @@ onready var attack_bar = $AttackBar
 onready var playerNode = get_tree().get_nodes_in_group("player")[0]
 
 func _ready():
+	pushable = true
+	damageable = true
 	update_attack_bar()
 	targetTiles = [currentTile.topTile, currentTile.bottomTile, currentTile.leftTile, currentTile.rightTile]
 
