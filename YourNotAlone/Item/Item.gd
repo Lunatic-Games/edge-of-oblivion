@@ -27,10 +27,9 @@ func triggerTimer():
 	update_cool_down_bar()
 	
 	if turnTimer <= 0:
-		yield(activateItem(), "completed")
-		end_blink()
 		turnTimer = maxTurnTimer
 		update_cool_down_bar()
+		yield(activateItem(), "completed")
 	
 	yield(get_tree(), "idle_frame")
 
@@ -52,17 +51,6 @@ func is_ready_to_use():
 	if turnTimer == 1:
 		return true
 	return false
-
-func start_blink():
-	#blink_tween.interpolate_property($Sprite, "material/shader_param/line_thickness", 0.0, 7.0, 0.6)
-	#blink_tween.start()
-	pass
-
-func end_blink():
-	#blink_tween.interpolate_property($Sprite, "material/shader_param/line_thickness", 7.0, 0.0, 0.6)
-	#blink_tween.start()
-	pass
-
 
 func spawnSlashParticle(positionToSpawn):
 	# Spawn attack slash

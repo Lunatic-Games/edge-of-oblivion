@@ -55,24 +55,36 @@ expand = true
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
-[node name="GameOver" type="Control" parent="Canvas"]
+[node name="GameOver" type="VBoxContainer" parent="Canvas"]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 429.0
+margin_top = 28.0
+margin_right = 615.0
+margin_bottom = 575.0
+alignment = 1
 
 [node name="GameOverText" type="RichTextLabel" parent="Canvas/GameOver"]
-margin_top = 301.0
-margin_right = 1025.0
-margin_bottom = 341.0
+margin_top = 242.0
+margin_right = 186.0
+margin_bottom = 257.0
 bbcode_enabled = true
 bbcode_text = "[center][shake][color=red]Game Over!"
 text = "Game Over!"
+fit_content_height = true
 
 [node name="MenuButton" type="Button" parent="Canvas/GameOver"]
-margin_left = 462.0
-margin_top = 323.0
-margin_right = 563.0
-margin_bottom = 343.0
-text = "Please reload to play again."
+margin_top = 261.0
+margin_right = 186.0
+margin_bottom = 281.0
+text = "Main Menu"
+
+[node name="Restart" type="Button" parent="Canvas/GameOver"]
+margin_top = 285.0
+margin_right = 186.0
+margin_bottom = 305.0
+text = "Try Again"
+
+[node name="GameBoard" type="Node2D" parent="." groups=["gameboard"]]
 
 [connection signal="pressed" from="Canvas/GameOver/MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="Canvas/GameOver/Restart" to="." method="_on_Restart_pressed"]

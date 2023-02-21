@@ -21,7 +21,7 @@ var levelThresholds = {
 var items = []
 
 onready var movesRemaining = moves
-onready var ItemManager = $CanvasLayer/ItemManager
+onready var item_container = $CanvasLayer/ItemContainer
 
 func _ready():
 	var startingItems = [preload("res://Item/ShortSword/ShortSword.tres")]
