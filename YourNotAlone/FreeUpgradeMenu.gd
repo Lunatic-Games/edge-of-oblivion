@@ -13,8 +13,8 @@ func reset():
 	availableCards = [
 	"res://Item/ShortSword/ShortSword.tres",
 	"res://Item/LightningBow/LightningBow.tres",
-	"res://Item/Hammer/Hammer.tres"
-]
+	"res://Item/Hammer/Hammer.tres"]
+	disableDisplay()
 
 func connectToPlayerTier(player):
 	player.connect("itemReachedMaxTier", self, "removeItemFromAvailability")
