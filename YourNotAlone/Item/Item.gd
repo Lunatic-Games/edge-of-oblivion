@@ -80,25 +80,27 @@ func spawnLightningParticle(positionToSpawn):
 	slashParticle.emitting = true
 	get_tree().root.add_child(slashParticle)
 
-func applyKnockBack(occupant, direction, knockback, collideDamage=0):
-	var new_tile = occupant.currentTile
-	if occupant.is_alive():
-		if direction == "up":
-			for x in knockback:
-				var tile_to_check = new_tile.topTile
-				if tile_to_check and tile_to_check.occupied:
-					# Then do damage to both the currrent enemy and the unit on this tile
-					pass
-				elif tile_to_check:
-					new_tile = tile_to_check
-		# Do check for left and right; bring complexity away from item implementation
-		elif direction == "down":
-			for x in knockback:
-				var tile_to_check = new_tile.bottomTile
-				if tile_to_check and tile_to_check.occupied:
-					# Then do damage to both the currrent enemy and the unit on this tile
-					pass
-				elif tile_to_check:
-					new_tile = tile_to_check
-	
-		occupant.moveToTile(new_tile)
+func applyKnockBack(target: Unit, direction: String, knockback: int, collideDamage: int = 0) -> void:
+	var new_tile = target.currentTile
+	if target.is_alive():
+		var directions = {"up": new_tile.topTile, "down": new_tile.bottomTile, "left": new_tile.leftTile, "right": new_tile.rightTile}
+		for dir in directions.keys():
+			if direction == dir:
+				for x in knockback:
+					var occupant: Occupant = null
+					var tile_to_check = directions[dir]
+					if tile_to_check:
+						occupant = tile_to_check.occupied
+						if occupant and is_instance_valid(occupant):
+							target.takeDamage(collideDamage)
+							if occupant.damageable:
+								occupant.takeDamage(collideDamage)
+							if occupant.pushable:
+								applyKnockBack(occupant, direction, 1)
+								
+								new_tile = tile_to_check
+						else:
+							new_tile = tile_to_check
+					else:
+						target.fall()
+					target.moveToTile(new_tile)

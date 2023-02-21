@@ -18,10 +18,22 @@ _global_script_classes=[ {
 "class": "ItemManager",
 "language": "GDScript",
 "path": "res://ItemManager.gd"
+}, {
+"base": "Node2D",
+"class": "Occupant",
+"language": "GDScript",
+"path": "res://Occupant.gd"
+}, {
+"base": "Node2D",
+"class": "Unit",
+"language": "GDScript",
+"path": "res://Data/Units/Unit.gd"
 } ]
 _global_script_class_icons={
 "ItemData": "",
-"ItemManager": ""
+"ItemManager": "",
+"Occupant": "",
+"Unit": ""
 }
 
 [application]

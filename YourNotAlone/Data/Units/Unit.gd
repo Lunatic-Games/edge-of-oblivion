@@ -4,6 +4,7 @@ extends "res://Occupant.gd"
 var lock_movement = false
 var currentTile
 var maxHp = 3
+var canFall = true
 
 onready var hp = maxHp
 onready var animation_player = $AnimationPlayer
@@ -33,6 +34,13 @@ func update_health_bar():
 func die():
 	currentTile.occupied = null
 	queue_free()
+
+func fall():
+	if canFall:
+		die()
+	else:
+		# Handle cases like bosses where unit can't fall
+		pass
 
 func is_alive():
 	if hp > 0:
