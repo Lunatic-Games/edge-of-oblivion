@@ -15,8 +15,6 @@ func reset():
 func handleItemsTriggering():
 	for item in managedItems:
 		yield(managedItems[item].triggerTimer(), "completed")
-		if managedItems[item].is_ready_to_use():
-			managedItems[item].start_blink()
 	
 	TurnManager.itemPhaseEnded()
 

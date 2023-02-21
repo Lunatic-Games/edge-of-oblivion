@@ -87,11 +87,9 @@ func spawnEnemies():
 	if TurnManager.currentRound in TurnManager.roundSpawnData:
 		# Spawn each unit in the spawn data
 		for enemy in TurnManager.roundSpawnData[TurnManager.currentRound]:
-			yield(spawn_enemy(enemy, spawn_locations), "completed")
-	yield(get_tree(), "idle_frame")
+			spawn_enemy(enemy, spawn_locations)
 
 func spawn_enemy(enemy, spawn_locations):
-	yield(get_tree().create_timer(0.2), "timeout")
 	var instancedEnemy = enemy.instance()
 	var occupiedTile = spawn_locations[0].currentTile
 	spawn_locations[0].destroySelf()
@@ -101,7 +99,7 @@ func spawn_enemy(enemy, spawn_locations):
 	instancedEnemy.position = occupiedTile.position
 	gameboard.add_child(instancedEnemy)
 	allEnemies.append(instancedEnemy)
-	yield(instancedEnemy.setup(), "completed")
+	instancedEnemy.setup()
 
 func removeEnemy(enemy):
 	allEnemies.remove(allEnemies.find(enemy))
