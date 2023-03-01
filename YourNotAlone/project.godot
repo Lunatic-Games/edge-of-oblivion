@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "ItemData",
 "language": "GDScript",
 "path": "res://Item/ITEM_DATA.gd"
+}, {
+"base": "Resource",
+"class": "boss_data",
+"language": "GDScript",
+"path": "res://Data/Units/Enemies/Boss/BOSS_DATA.gd"
 } ]
 _global_script_class_icons={
-"ItemData": ""
+"ItemData": "",
+"boss_data": ""
 }
 
 [application]
@@ -31,6 +37,7 @@ TurnManager="*res://TurnManager.gd"
 FreeUpgradeMenu="*res://FreeUpgradeMenu.tscn"
 MovementUtility="*res://MovementUtility.gd"
 ItemManager="*res://ItemManager.gd"
+Debug="*res://Globals/Debug.gd"
 
 [display]
 
@@ -95,6 +102,11 @@ space={
 levelUpCheat={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":49,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+spawn_enemy_debug={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":50,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

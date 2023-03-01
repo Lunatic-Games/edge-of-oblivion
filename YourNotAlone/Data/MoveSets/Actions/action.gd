@@ -33,15 +33,16 @@ func trigger(starting_tile) -> void:
 func trigger_effect():
 	pass
 
-# TODO IMPLEMENT
-# OTHER TARGET TYPES
+# TODO IMPLEMENT OTHER TARGET TYPES
 func choose_target_tile(starting_tile):
+	var current_tile = starting_tile
+	
 	if targeting_type == TARGETING_TYPE.random:
 		pass
-	if targeting_type == TARGETING_TYPE.player_based:
-		pass
 	
-	var current_tile = starting_tile
+	if targeting_type == TARGETING_TYPE.player_based:
+		current_tile = player_based_targeting(starting_tile)
+	
 	for x in max_range:
 		if targeting_type == TARGETING_TYPE.up:
 			if current_tile.topTile:
@@ -66,3 +67,7 @@ func choose_target_tile(starting_tile):
 		return null
 	
 	return current_tile
+
+# Implement per action that requires player based targeting!
+func player_based_targeting(starting_tile):
+	pass

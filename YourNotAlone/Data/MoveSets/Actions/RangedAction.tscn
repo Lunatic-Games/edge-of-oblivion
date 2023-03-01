@@ -1,9 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Data/MoveSets/Actions/Action.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Data/Indicators/RangedIndicator.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Data/MoveSets/Actions/RangedAction.gd" type="Script" id=2]
 
 [node name="RangedAction" instance=ExtResource( 1 )]
-indicator_scene = ExtResource( 2 )
-targeting_type = 2
-max_range = 3
+script = ExtResource( 2 )

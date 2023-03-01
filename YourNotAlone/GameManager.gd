@@ -15,11 +15,20 @@ var player = null
 
 onready var allTiles = []
 onready var gameboard
+onready var game
+onready var boss_overlay
+onready var boss_health_bar
+onready var boss_name
 
 func startGame():
 	gameboard = get_tree().get_nodes_in_group("gameboard")[0]
 	generateTiles()
 	spawnPlayer()
+	game = get_tree().root.get_node("GameScene")
+	print(game.name)
+	boss_overlay = game.get_node("Canvas/BossOverlay")
+	boss_health_bar = boss_overlay.get_node("BossHealthBar")
+	boss_name = boss_overlay.get_node("BossName")
 
 func stop_game():
 	GameManager.reset()
@@ -90,13 +99,16 @@ func spawnEnemies():
 			spawn_enemy(enemy, spawn_locations)
 
 func spawn_enemy(enemy, spawn_locations):
-	var instancedEnemy = enemy.instance()
 	var occupiedTile = spawn_locations[0].currentTile
 	spawn_locations[0].destroySelf()
 	spawn_locations.pop_front()
-	GameManager.occupyTile(occupiedTile, instancedEnemy)
-	instancedEnemy.currentTile = occupiedTile
-	instancedEnemy.position = occupiedTile.position
+	spawn_enemy_at_tile(enemy, occupiedTile)
+
+func spawn_enemy_at_tile(enemy, tile):
+	var instancedEnemy = enemy.instance()
+	GameManager.occupyTile(tile, instancedEnemy)
+	instancedEnemy.currentTile = tile
+	instancedEnemy.position = tile.position
 	gameboard.add_child(instancedEnemy)
 	allEnemies.append(instancedEnemy)
 	instancedEnemy.setup()
@@ -118,6 +130,13 @@ func new_spawn_locations():
 			spawn_flag.position = occupiedTile.position
 			gameboard.add_child(spawn_flag)
 			spawn_locations.append(spawn_flag)
+
+func setup_boss(boss_data):
+	boss_name.bbcode_text = "[shake]"+boss_data.name
+	boss_overlay.visible = true
+
+func boss_defeated():
+	boss_overlay.visible = false
 
 func occupyTile(tile, occupant):
 	tile.occupied = occupant

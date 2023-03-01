@@ -4,19 +4,20 @@ signal playerTurnEnded
 
 var goblinScene = preload("res://Data/Units/Enemies/Goblin.tscn")
 var lost_ranger_scene = preload("res://Data/Units/Enemies/LostRanger.tscn")
+var forgotten_king_scene = preload("res://Data/Units/Enemies/Boss/ForgottenKing.tscn")
 
 var roundSpawnData = {
-	2:[goblinScene, goblinScene, lost_ranger_scene],
+	2:[goblinScene],
 	5:[goblinScene],
 	9:[goblinScene],
-	15:[goblinScene, goblinScene],
-	19:[goblinScene, goblinScene],
+	15:[lost_ranger_scene],
+	19:[goblinScene, lost_ranger_scene],
 	23:[goblinScene, goblinScene],
-	27:[goblinScene, goblinScene],
-	31:[goblinScene, goblinScene, goblinScene],
-	35:[goblinScene, goblinScene, goblinScene],
-	38:[goblinScene, goblinScene, goblinScene],
-	42:[goblinScene, goblinScene, goblinScene, goblinScene]
+	27:[goblinScene],
+	31:[goblinScene,lost_ranger_scene],
+	35:[goblinScene, goblinScene],
+	38:[goblinScene, goblinScene],
+	42:[forgotten_king_scene]
 	}
 
 enum turnState {enemy, player}
