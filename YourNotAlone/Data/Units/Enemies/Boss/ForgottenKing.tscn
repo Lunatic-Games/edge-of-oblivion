@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Data/Units/Enemies/Boss/ForgottenKing.gd" type="Script" id=1]
+[ext_resource path="res://Data/Units/Enemies/Boss/Boss.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Data/MoveSets/Actions/SlashAction.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Data/MoveSets/Move.tscn" type="PackedScene" id=4]
+
+[node name="ForgottenKing" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+
+[node name="Move2" parent="MoveSets" index="1" instance=ExtResource( 4 )]
+
+[node name="SlashAction" parent="MoveSets/Move2" index="0" instance=ExtResource( 3 )]
+targeting_type = 2
+damage = 3
+
+[node name="SlashAction2" parent="MoveSets/Move2" index="1" instance=ExtResource( 3 )]
+targeting_type = 3
+damage = 3
+
+[node name="SlashAction3" parent="MoveSets/Move2" index="2" instance=ExtResource( 3 )]
+targeting_type = 5
+damage = 3
+
+[node name="SlashAction4" parent="MoveSets/Move2" index="3" instance=ExtResource( 3 )]
+targeting_type = 4
+damage = 3
+
+[editable path="MoveSets/Move"]

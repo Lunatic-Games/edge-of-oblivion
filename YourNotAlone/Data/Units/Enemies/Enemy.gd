@@ -12,6 +12,7 @@ onready var move_sets = $MoveSets.get_children()
 
 func _ready():
 	update_attack_bar()
+	._ready()
 
 func activate():
 	if roundsUntilReady <= 0:

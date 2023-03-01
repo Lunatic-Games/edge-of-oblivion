@@ -12,6 +12,7 @@ script = ExtResource( 3 )
 texture = ExtResource( 2 )
 
 [node name="RangedAction" parent="MoveSets/Move" index="0" instance=ExtResource( 4 )]
+targeting_type = 2
 
 [node name="RangedAction2" parent="MoveSets/Move" index="1" instance=ExtResource( 4 )]
 targeting_type = 3
