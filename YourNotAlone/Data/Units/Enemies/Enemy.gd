@@ -1,6 +1,6 @@
 extends "res://Data/Units/Unit.gd"
 
-export (PackedScene) var targetScene = preload("res://Target.tscn")
+export (PackedScene) var targetScene = preload("res://Data/Indicators/Indicator.tscn")
 var xp = 1
 var maxRoundsUntilReady = 2
 var damage = 1
@@ -26,9 +26,7 @@ func activate():
 			choose_moveset()
 
 func choose_moveset():
-	if move_sets.size() > 0:
-		chosen_move = move_sets[0]
-		chosen_move.indicate(currentTile)
+	pass
 
 func update_attack_bar():
 	tween.interpolate_property(attack_bar, "value", attack_bar.value, (1 - float(roundsUntilReady)/float(maxRoundsUntilReady)) * 100, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
