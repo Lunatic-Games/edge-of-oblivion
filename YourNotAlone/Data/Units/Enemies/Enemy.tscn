@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Data/Units/Unit.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Data/Units/Enemies/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Data/MoveSets/Move.tscn" type="PackedScene" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.427451, 0.568627, 0.611765, 1 )
@@ -8,6 +10,7 @@ bg_color = Color( 0.427451, 0.568627, 0.611765, 1 )
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="Enemy" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
 
 [node name="AttackBar" type="ProgressBar" parent="." index="5"]
 margin_left = -24.0
@@ -17,3 +20,9 @@ margin_bottom = 39.0
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 percent_visible = false
+
+[node name="MoveSets" type="Node2D" parent="." index="6"]
+
+[node name="Move" parent="MoveSets" index="0" instance=ExtResource( 3 )]
+
+[editable path="MoveSets/Move"]
