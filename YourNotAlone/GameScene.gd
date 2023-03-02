@@ -12,7 +12,7 @@ func gameOver():
 
 
 func _on_MenuButton_pressed():
-	get_tree().change_scene_to(load("res://MainMenu.tscn"))
+	GameManager.change_to_menu()
 	GameManager.stop_game()
 	get_tree().paused = false
 

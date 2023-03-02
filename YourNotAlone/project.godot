@@ -38,6 +38,7 @@ FreeUpgradeMenu="*res://FreeUpgradeMenu.tscn"
 MovementUtility="*res://MovementUtility.gd"
 ItemManager="*res://ItemManager.gd"
 Debug="*res://Globals/Debug.gd"
+AudioManager="*res://Globals/Managers/AudioManager.tscn"
 
 [display]
 
@@ -66,6 +67,10 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+mp3={
+"loop": false,
+"loop_offset": 0
 }
 
 [input]
