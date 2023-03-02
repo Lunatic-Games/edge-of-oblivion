@@ -24,7 +24,8 @@ tracks/0/keys = {
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.545098, 0.427451, 0.611765, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=5]
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.784314, 0.737255, 0.807843, 0.403922 )
 
 [node name="Unit" type="Node2D"]
 z_index = 1

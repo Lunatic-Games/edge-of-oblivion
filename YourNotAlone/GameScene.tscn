@@ -40,7 +40,8 @@ shader_param/noise = SubResource( 4 )
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.545098, 0.427451, 0.611765, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=6]
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.737255, 0.803922, 0.807843, 0.403922 )
 
 [node name="GameScene" type="Node2D"]
 pause_mode = 2
