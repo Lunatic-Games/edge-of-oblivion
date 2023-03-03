@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/All-Out-Attack.mp3-0c96639221cdbb10cb2f19e8630347e3.mp3str"
+
+[deps]
+
+source_file="res://Assets/audio/music/Boss/All-Out-Attack.mp3"
+dest_files=[ "res://.import/All-Out-Attack.mp3-0c96639221cdbb10cb2f19e8630347e3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Data/Units/Enemies/Goblin.gd" type="Script" id=1]
+[ext_resource path="res://Data/Units/Enemies/Faded.gd" type="Script" id=1]
 [ext_resource path="res://Assets/medieval-fantasy/icons/ffffff/transparent/1x1/delapouite/goblin-head.svg" type="Texture" id=2]
 [ext_resource path="res://Assets/glow_texture_2.png" type="Texture" id=3]
 [ext_resource path="res://dream_shader_material.tres" type="Material" id=4]
