@@ -2,7 +2,7 @@ extends Node
 
 signal playerTurnEnded
 
-var goblinScene = preload("res://Data/Units/Enemies/Goblin.tscn")
+var goblinScene = preload("res://Data/Units/Enemies/Faded.tscn")
 var lost_ranger_scene = preload("res://Data/Units/Enemies/LostRanger.tscn")
 var forgotten_king_scene = preload("res://Data/Units/Enemies/Boss/ForgottenKing.tscn")
 

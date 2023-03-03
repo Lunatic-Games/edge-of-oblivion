@@ -9,3 +9,7 @@ func choose_moveset():
 		else:
 			chosen_move = move_sets[0]
 			chosen_move.indicate(currentTile)
+
+func die():
+	GameManager.trigger_victory_screen()
+	.die()
