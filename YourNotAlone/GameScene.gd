@@ -10,6 +10,25 @@ func gameOver():
 	get_tree().paused = true
 	$Canvas/GameOver.visible = true
 
+func game_won():
+	get_tree().paused = true
+	$Canvas/Victory.visible = true
 
 func _on_MenuButton_pressed():
-	get_tree().quit()
+	GameManager.change_to_menu()
+	GameManager.stop_game()
+	get_tree().paused = false
+
+
+func _on_Restart_pressed():
+	GameManager.stop_game()
+	get_tree().paused = false
+	yield(get_tree(), "idle_frame")
+	$Canvas/GameOver.visible = false
+	get_tree().change_scene_to(load("res://GameScene.tscn"))
+
+
+func _on_VictoryMainMenu_pressed():
+	GameManager.change_to_menu()
+	GameManager.stop_game()
+	get_tree().paused = false

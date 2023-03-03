@@ -5,12 +5,15 @@ var lock_movement = false
 var currentTile
 var maxHp = 3
 var canFall = true
+var hp
 
-onready var hp = maxHp
 onready var animation_player = $AnimationPlayer
 onready var health_bar = $HealthBar
 onready var tween = $Tween
 onready var sprite = $Sprite
+
+func _ready():
+	hp = maxHp
 
 func setup():
 	animation_player.play("spawn")

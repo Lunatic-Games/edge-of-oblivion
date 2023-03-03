@@ -7,7 +7,14 @@ var availableCards = [
 	"res://Item/Hammer/Hammer.tres"
 ]
 var selectedCards = []
-var itemManager
+
+func reset():
+	selectedCards = []
+	availableCards = [
+	"res://Item/ShortSword/ShortSword.tres",
+	"res://Item/LightningBow/LightningBow.tres",
+	"res://Item/Hammer/Hammer.tres"]
+	disableDisplay()
 
 func connectToPlayerTier(player):
 	player.connect("itemReachedMaxTier", self, "removeItemFromAvailability")
@@ -21,9 +28,6 @@ func disableDisplay():
 		child.queue_free()
 
 func spawnUpgradeCards(cardsToSpawn):
-	if !itemManager:
-		itemManager = get_tree().get_nodes_in_group('itemManager')[0]
-	
 	display()
 	
 	for x in cardsToSpawn:
@@ -41,8 +45,8 @@ func spawnCard(pathOfResource):
 	var card = cardScene.instance()
 	var currentTier
 	
-	if resource in itemManager.managedItems:
-		currentTier = itemManager.managedItems[resource].currentTier + 1
+	if resource in ItemManager.managedItems:
+		currentTier = ItemManager.managedItems[resource].currentTier + 1
 	else:
 		currentTier = 1
 		

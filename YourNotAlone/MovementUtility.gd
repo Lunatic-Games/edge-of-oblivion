@@ -8,3 +8,6 @@ enum moveDirection {
 }
 
 var lastPlayerDirection
+
+func reset():
+	lastPlayerDirection = null

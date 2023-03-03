@@ -18,6 +18,11 @@ func getTileInDirection(direction):
 		MovementUtility.moveDirection.right:
 			return rightTile
 
+func get_tile_coords_to_tile(tile):
+	var xpos = position.x - tile.position.x
+	var ypos = position.y - tile.position.y
+	return Vector2(xpos, ypos)
+
 func getRandomEnemyOccupiedAdjacentTile():
 	var occupiedAdjacentTiles = []
 	
@@ -41,3 +46,19 @@ func getRandomEnemyOccupiedAdjacentTile():
 	
 func clearOccupant() -> void:
 	occupied = null
+
+func is_tile_n_tiles_away(tile, number, allow_adjacent = false):
+	var tile_coords = get_tile_coords_to_tile(tile)
+	var x_distance = abs(tile_coords.x)/65
+	var y_distance = abs(tile_coords.y)/65
+	
+	if allow_adjacent:
+		if min(x_distance, y_distance) <= number:
+			return true
+		else:
+			return false
+	else:
+		if (x_distance + y_distance) <= number:
+			return true
+		else:
+			return false
