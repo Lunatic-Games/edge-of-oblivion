@@ -7,7 +7,9 @@ extends "res://Item/Item.gd"
 #3
 # knock back distance is maxed, and do more damage
 
-var knockback: int = 1
+var tiered_knockback: Dictionary = {1:1, 2:1, 3:2}
+var tiered_damage: Dictionary = {1:1, 2:1, 3:2}
+var tiered_kb_damage: Dictionary = {1:0, 2:1, 3:1}
 
 func activateItem() -> void:
 	perform_attack()
@@ -24,6 +26,6 @@ func perform_attack() -> void:
 
 func attack(occupant: Occupant, direction: String) -> void:
 	spawnSlashParticle(occupant)
-	applyKnockBack(occupant, direction, knockback, 1)
-	occupant.takeDamage(item_damage)
+	applyKnockBack(occupant, direction, tiered_knockback[currentTier], tiered_kb_damage[currentTier])
+	occupant.takeDamage(tiered_damage[currentTier])
 
