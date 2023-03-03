@@ -1,4 +1,4 @@
-extends "res://occupant.gd"
+extends "res://Occupant.gd"
 
 var currentTile
 

@@ -11,6 +11,8 @@ onready var attack_bar = $AttackBar
 onready var move_sets = $MoveSets.get_children()
 
 func _ready():
+	pushable = true
+	damageable = true
 	update_attack_bar()
 	._ready()
 
