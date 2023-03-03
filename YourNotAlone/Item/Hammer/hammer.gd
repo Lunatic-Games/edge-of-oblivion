@@ -23,11 +23,7 @@ func perform_attack() -> void:
 		attack(bottom_tile.occupied, "down")
 
 func attack(occupant: Occupant, direction: String) -> void:
-	if occupant.is_class("Unit"):
-		occupant.takeDamage(item_damage)
-
 	spawnSlashParticle(occupant)
 	applyKnockBack(occupant, direction, knockback, 1)
-	#TODO Move all the code below this into a "knockback_unit_damage_on_collide" function
-	# Within the base item script so that it can be easily called from future items we create!
+	occupant.takeDamage(item_damage)
 

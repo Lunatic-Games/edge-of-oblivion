@@ -1,3 +1,4 @@
+class_name Tile
 extends Node2D
 
 var topTile
@@ -38,3 +39,5 @@ func getRandomEnemyOccupiedAdjacentTile():
 	var randomIndex = randi()%(occupiedAdjacentTiles.size())
 	return occupiedAdjacentTiles[randomIndex]
 	
+func clearOccupant() -> void:
+	occupied = null

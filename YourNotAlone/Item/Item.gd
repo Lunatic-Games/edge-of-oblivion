@@ -81,17 +81,18 @@ func spawnLightningParticle(positionToSpawn):
 	get_tree().root.add_child(slashParticle)
 
 func applyKnockBack(target: Occupant, direction: String, knockback: int, collideDamage: int = 0) -> void:
-	var new_tile = target.currentTile
+	var start_tile: Tile = target.currentTile
 	if target.is_alive():
-		var directions = {"up": new_tile.topTile, "down": new_tile.bottomTile, "left": new_tile.leftTile, "right": new_tile.rightTile}
+		var directions: Dictionary = {"up": start_tile.topTile, "down": start_tile.bottomTile, "left": start_tile.leftTile, "right": start_tile.rightTile}
 		for dir in directions.keys():
 			if direction == dir:
 				for x in knockback:
+					var new_tile: Tile = target.currentTile
 					var occupant: Occupant = null
-					var tile_to_check = directions[dir]
+					var tile_to_check: Tile = directions[dir]
 					if tile_to_check:
 						occupant = tile_to_check.occupied
-						if occupant and is_instance_valid(occupant):
+						if occupant:
 							target.takeDamage(collideDamage)
 							if occupant.damageable:
 								occupant.takeDamage(collideDamage)
@@ -103,4 +104,6 @@ func applyKnockBack(target: Occupant, direction: String, knockback: int, collide
 							new_tile = tile_to_check
 					else:
 						target.fall()
+						new_tile.clearOccupant()
 					target.moveToTile(new_tile)
+					start_tile.clearOccupant()

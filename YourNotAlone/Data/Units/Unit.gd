@@ -32,7 +32,7 @@ func update_health_bar():
 	tween.start()
 
 func die():
-	currentTile.occupied = null
+	currentTile.clearOccupant()
 	queue_free()
 
 func fall():
