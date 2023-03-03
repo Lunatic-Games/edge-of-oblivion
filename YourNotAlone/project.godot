@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Item/ITEM_DATA.gd"
 }, {
-"base": "Resource",
-"class": "boss_data",
-"language": "GDScript",
-"path": "res://Data/Units/Enemies/Boss/BOSS_DATA.gd"
-}, {
 "base": "Node2D",
 "class": "Occupant",
 "language": "GDScript",
@@ -33,13 +28,18 @@ _global_script_classes=[ {
 "class": "Unit",
 "language": "GDScript",
 "path": "res://Data/Units/Unit.gd"
+}, {
+"base": "Resource",
+"class": "boss_data",
+"language": "GDScript",
+"path": "res://Data/Units/Enemies/Boss/BOSS_DATA.gd"
 } ]
 _global_script_class_icons={
 "ItemData": "",
-"boss_data": "",
 "Occupant": "",
 "Tile": "",
-"Unit": ""
+"Unit": "",
+"boss_data": ""
 }
 
 [application]

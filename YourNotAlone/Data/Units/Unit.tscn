@@ -1,10 +1,37 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Data/Units/Enemies/Faded.gd" type="Script" id=1]
 [ext_resource path="res://Assets/medieval-fantasy/icons/ffffff/transparent/1x1/delapouite/goblin-head.svg" type="Texture" id=2]
 [ext_resource path="res://Assets/glow_texture_2.png" type="Texture" id=3]
 [ext_resource path="res://dream_shader_material.tres" type="Material" id=4]
 
+[sub_resource type="Animation" id=6]
+resource_name = "damaged"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.125, 0.125 ), Vector2( 0.085, 0.085 ), Vector2( 0.1, 0.1 ), Vector2( 0.09, 0.09 ), Vector2( 0.13, 0.13 ), Vector2( 0.125, 0.125 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -10.0, 10.0, -5.0, 5.0, -1.0, 0.0 ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "spawn"
@@ -43,6 +70,7 @@ scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/damaged = SubResource( 6 )
 anims/spawn = SubResource( 3 )
 
 [node name="HealthBar" type="ProgressBar" parent="."]
