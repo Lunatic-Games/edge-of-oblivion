@@ -24,6 +24,9 @@ func isEnemy():
 	pass
 
 func takeDamage(damageTaken):
+	if damageTaken == 0:
+		return
+	
 	hp -= damageTaken
 	update_health_bar()
 	spawn_damage_particle()
