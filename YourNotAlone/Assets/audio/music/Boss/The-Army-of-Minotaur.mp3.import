@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/The-Army-of-Minotaur.mp3-a0bfdf5c865aaec0757c28d889836242.mp3str"
+
+[deps]
+
+source_file="res://Assets/audio/music/Boss/The-Army-of-Minotaur.mp3"
+dest_files=[ "res://.import/The-Army-of-Minotaur.mp3-a0bfdf5c865aaec0757c28d889836242.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

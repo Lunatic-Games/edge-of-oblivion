@@ -21,16 +21,21 @@ onready var boss_health_bar
 onready var boss_name
 onready var victory_screen
 
+signal game_start
+signal menu_loaded
+signal boss_spawned
+signal boss_defeated
+
 func startGame():
 	gameboard = get_tree().get_nodes_in_group("gameboard")[0]
 	generateTiles()
 	spawnPlayer()
 	game = get_tree().root.get_node("GameScene")
-	print(game.name)
 	boss_overlay = game.get_node("Canvas/BossOverlay")
 	boss_health_bar = boss_overlay.get_node("BossHealthBar")
 	boss_name = boss_overlay.get_node("BossName")
 	victory_screen = game.get_node("Canvas/Victory")
+	emit_signal("game_start")
 
 func stop_game():
 	GameManager.reset()
@@ -38,6 +43,10 @@ func stop_game():
 	FreeUpgradeMenu.reset()
 	MovementUtility.reset()
 	ItemManager.reset()
+
+func change_to_menu():
+	get_tree().change_scene_to(load("res://MainMenu.tscn"))
+	emit_signal("menu_loaded")
 
 func reset():
 	for child in gameboard.get_children():
@@ -136,9 +145,11 @@ func new_spawn_locations():
 func setup_boss(boss_data):
 	boss_name.bbcode_text = "[shake]"+boss_data.name
 	boss_overlay.visible = true
+	emit_signal("boss_spawned", boss_data.boss_music)
 
 func boss_defeated():
 	boss_overlay.visible = false
+	emit_signal("boss_defeated")
 
 func trigger_victory_screen():
 	game.game_won()

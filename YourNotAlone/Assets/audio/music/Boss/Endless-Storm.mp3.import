@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Endless-Storm.mp3-40d0f549ca7e753de343788383b45790.mp3str"
+
+[deps]
+
+source_file="res://Assets/audio/music/Boss/Endless-Storm.mp3"
+dest_files=[ "res://.import/Endless-Storm.mp3-40d0f549ca7e753de343788383b45790.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
