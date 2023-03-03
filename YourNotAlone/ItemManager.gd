@@ -1,7 +1,5 @@
 extends Control
 
-class_name ItemManager
-
 var managedItems = {
 	
 }
