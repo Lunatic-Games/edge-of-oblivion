@@ -1,8 +1,10 @@
-extends "res://occupant.gd"
+class_name Unit
+extends "res://Occupant.gd"
 
 var lock_movement = false
 var currentTile
 var maxHp = 3
+var canFall = true
 var hp
 
 onready var animation_player = $AnimationPlayer
@@ -41,8 +43,15 @@ func spawn_damage_particle():
 	GameManager.gameboard.add_child(particle)
 
 func die():
-	currentTile.occupied = null
+	currentTile.clearOccupant()
 	queue_free()
+
+func fall():
+	if canFall:
+		die()
+	else:
+		# Handle cases like bosses where unit can't fall
+		pass
 
 func is_alive():
 	if hp > 0:

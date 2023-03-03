@@ -1,10 +1,11 @@
+class_name Tile
 extends Node2D
 
 var topTile
 var bottomTile
 var rightTile
 var leftTile
-var occupied
+var occupied: Occupant
 
 func getTileInDirection(direction):
 	match direction:
@@ -43,6 +44,8 @@ func getRandomEnemyOccupiedAdjacentTile():
 	var randomIndex = randi()%(occupiedAdjacentTiles.size())
 	return occupiedAdjacentTiles[randomIndex]
 	
+func clearOccupant() -> void:
+	occupied = null
 
 func is_tile_n_tiles_away(tile, number, allow_adjacent = false):
 	var tile_coords = get_tile_coords_to_tile(tile)

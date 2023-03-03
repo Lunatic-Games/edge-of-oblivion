@@ -7,13 +7,15 @@ extends "res://Item/Item.gd"
 #3
 # knock back distance is maxed, and do more damage
 
-var knockback = 2
+var tiered_knockback: Dictionary = {1:1, 2:1, 3:2}
+var tiered_damage: Dictionary = {1:1, 2:1, 3:2}
+var tiered_kb_damage: Dictionary = {1:0, 2:1, 3:1}
 
-func activateItem():
+func activateItem() -> void:
 	perform_attack()
 	yield(get_tree(), "idle_frame")
 
-func perform_attack():
+func perform_attack() -> void:
 	var top_tile = user.currentTile.topTile
 	var bottom_tile = user.currentTile.bottomTile
 	
@@ -22,29 +24,8 @@ func perform_attack():
 	elif (bottom_tile && bottom_tile.occupied && bottom_tile.occupied.isEnemy()):
 		attack(bottom_tile.occupied, "down")
 
-func attack(occupant, direction):
-	var new_tile = occupant.currentTile
+func attack(occupant: Occupant, direction: String) -> void:
 	spawnSlashParticle(occupant)
-	occupant.takeDamage(item_damage)
-	
-	#TODO Move all the code below this into a "knockback_unit_damage_on_collide" function
-	# Within the base item script so that it can be easily called from future items we create!
-	if occupant.is_alive():
-		if direction == "up":
-			for x in knockback:
-				var tile_to_check = new_tile.topTile
-				if tile_to_check and tile_to_check.occupied:
-					# Then do damage to both the currrent enemy and the unit on this tile
-					pass
-				elif tile_to_check:
-					new_tile = tile_to_check
-		elif direction == "down":
-			for x in knockback:
-				var tile_to_check = new_tile.bottomTile
-				if tile_to_check and tile_to_check.occupied:
-					# Then do damage to both the currrent enemy and the unit on this tile
-					pass
-				elif tile_to_check:
-					new_tile = tile_to_check
-		
-		occupant.moveToTile(new_tile)
+	applyKnockBack(occupant, direction, tiered_knockback[currentTier], tiered_kb_damage[currentTier])
+	occupant.takeDamage(tiered_damage[currentTier])
+
