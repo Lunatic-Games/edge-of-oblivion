@@ -19,6 +19,7 @@ onready var game
 onready var boss_overlay
 onready var boss_health_bar
 onready var boss_name
+onready var victory_screen
 
 func startGame():
 	gameboard = get_tree().get_nodes_in_group("gameboard")[0]
@@ -29,6 +30,7 @@ func startGame():
 	boss_overlay = game.get_node("Canvas/BossOverlay")
 	boss_health_bar = boss_overlay.get_node("BossHealthBar")
 	boss_name = boss_overlay.get_node("BossName")
+	victory_screen = game.get_node("Canvas/Victory")
 
 func stop_game():
 	GameManager.reset()
@@ -137,6 +139,9 @@ func setup_boss(boss_data):
 
 func boss_defeated():
 	boss_overlay.visible = false
+
+func trigger_victory_screen():
+	game.game_won()
 
 func occupyTile(tile, occupant):
 	tile.occupied = occupant

@@ -89,6 +89,70 @@ margin_right = 186.0
 margin_bottom = 305.0
 text = "Try Again"
 
+[node name="Victory" type="Panel" parent="Canvas"]
+visible = false
+self_modulate = Color( 0.360784, 0.34902, 0.364706, 0.611765 )
+margin_left = 398.0
+margin_top = 28.0
+margin_right = 648.0
+margin_bottom = 320.0
+
+[node name="Victory" type="VBoxContainer" parent="Canvas/Victory"]
+margin_left = 12.0
+margin_top = 14.0
+margin_right = 233.0
+margin_bottom = 519.0
+
+[node name="VictoryText" type="RichTextLabel" parent="Canvas/Victory/Victory"]
+margin_right = 221.0
+margin_bottom = 15.0
+bbcode_enabled = true
+bbcode_text = "[center][wave]VICTORY"
+text = "VICTORY"
+fit_content_height = true
+
+[node name="VictoryText2" type="RichTextLabel" parent="Canvas/Victory/Victory"]
+margin_top = 19.0
+margin_right = 221.0
+margin_bottom = 169.0
+bbcode_enabled = true
+bbcode_text = "[center]Thank you so much for playing.
+
+The full game will not end here... it'll have [shake]more bosses, more weapons, and hopefully, more fun.[/shake]
+
+[wave][rainbow]please for the love of all that is holy, help us out and complete this survey[/rainbow][/wave]
+*INSERT SURVEY HERE*"
+text = "Thank you so much for playing.
+
+The full game will not end here... it'll have more bosses, more weapons, and hopefully, more fun.
+
+please for the love of all that is holy, help us out and complete this survey
+*INSERT SURVEY HERE*"
+fit_content_height = true
+
+[node name="VictoryText3" type="RichTextLabel" parent="Canvas/Victory/Victory"]
+margin_top = 173.0
+margin_right = 221.0
+margin_bottom = 248.0
+bbcode_enabled = true
+bbcode_text = "
+
+
+
+[center][color=red][shake]WISHLIST ON STEAM"
+text = "
+
+
+
+WISHLIST ON STEAM"
+fit_content_height = true
+
+[node name="VictoryMainMenu" type="Button" parent="Canvas/Victory/Victory"]
+margin_top = 252.0
+margin_right = 221.0
+margin_bottom = 272.0
+text = "Main Menu"
+
 [node name="BossOverlay" type="VBoxContainer" parent="Canvas"]
 visible = false
 margin_left = 11.0
@@ -120,3 +184,4 @@ fit_content_height = true
 
 [connection signal="pressed" from="Canvas/GameOver/MenuButton" to="." method="_on_MenuButton_pressed"]
 [connection signal="pressed" from="Canvas/GameOver/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="Canvas/Victory/Victory/VictoryMainMenu" to="." method="_on_VictoryMainMenu_pressed"]
