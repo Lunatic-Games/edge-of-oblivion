@@ -64,7 +64,7 @@ func stop_boss_music():
 	queue_battle_music()
 
 func fade_out(audio_player, time_to_fade):
-	tween.interpolate_property(audio_player, "volume_db", audio_player.volume_db, -30, time_to_fade, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property(audio_player, "volume_db", audio_player.volume_db, -60, time_to_fade, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 
 func fade_in(audio_player, time_to_fade):
