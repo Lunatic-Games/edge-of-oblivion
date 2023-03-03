@@ -80,7 +80,7 @@ func spawnLightningParticle(positionToSpawn):
 	slashParticle.emitting = true
 	get_tree().root.add_child(slashParticle)
 
-func applyKnockBack(target: Unit, direction: String, knockback: int, collideDamage: int = 0) -> void:
+func applyKnockBack(target: Occupant, direction: String, knockback: int, collideDamage: int = 0) -> void:
 	var new_tile = target.currentTile
 	if target.is_alive():
 		var directions = {"up": new_tile.topTile, "down": new_tile.bottomTile, "left": new_tile.leftTile, "right": new_tile.rightTile}
