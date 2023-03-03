@@ -3,7 +3,7 @@ extends "res://Occupant.gd"
 
 var lock_movement = false
 var currentTile
-var maxHp = 3
+var max_hp = 3
 var canFall = true
 var hp
 
@@ -13,7 +13,7 @@ onready var tween = $Tween
 onready var sprite = $Sprite
 
 func _ready():
-	hp = maxHp
+	hp = max_hp
 
 func setup():
 	animation_player.play("spawn")
@@ -29,9 +29,21 @@ func takeDamage(damageTaken):
 	if hp <= 0:
 		die()
 
+func heal(heal_amount) -> int:
+	if hp < max_hp:
+		hp += heal_amount
+		update_health_bar()
+		if hp > max_hp:
+			var extra: int = hp - max_hp
+			hp = max_hp
+			return extra
+		return 0
+	else:
+		return heal_amount
+
 func update_health_bar():
-	health_bar.value = float(hp)/float(maxHp) * 100
-	tween.interpolate_property(health_bar, "value", health_bar.value, float(hp)/float(maxHp) * 100, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	health_bar.value = float(hp)/float(max_hp) * 100
+	tween.interpolate_property(health_bar, "value", health_bar.value, float(hp)/float(max_hp) * 100, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 
 func die():
