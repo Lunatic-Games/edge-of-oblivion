@@ -14,6 +14,7 @@ func _ready():
 	pushable = true
 	damageable = true
 	update_attack_bar()
+	appear_unready()
 	._ready()
 
 func activate():
@@ -21,15 +22,29 @@ func activate():
 		chosen_move.trigger(currentTile)
 		roundsUntilReady = maxRoundsUntilReady
 		update_attack_bar()
+		appear_unready()
 	else:
 		roundsUntilReady -= 1
 		update_attack_bar()
 		
 		if roundsUntilReady <= 0:
 			choose_moveset()
+			appear_ready()
 
 func choose_moveset():
 	pass
+
+func appear_ready():
+	var goal_sprite = sprite.self_modulate
+	goal_sprite.a = 1.0
+	tween.interpolate_property(sprite, "self_modulate", sprite.self_modulate, goal_sprite, 0.2)
+	tween.start()
+
+func appear_unready():
+	var goal_sprite = sprite.self_modulate
+	goal_sprite.a = 0.6
+	tween.interpolate_property(sprite, "self_modulate", sprite.self_modulate, goal_sprite, 0.2)
+	tween.start()
 
 func update_attack_bar():
 	tween.interpolate_property(attack_bar, "value", attack_bar.value, (1 - float(roundsUntilReady)/float(maxRoundsUntilReady)) * 100, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
