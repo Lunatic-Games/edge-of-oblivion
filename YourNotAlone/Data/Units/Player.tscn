@@ -12,6 +12,7 @@ current = true
 smoothing_enabled = true
 
 [node name="Sprite" parent="." index="2"]
+self_modulate = Color( 1, 1, 1, 1 )
 texture = ExtResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="6"]
