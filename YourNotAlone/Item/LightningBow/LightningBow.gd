@@ -5,11 +5,13 @@ extends "res://Item/Item.gd"
 # 2 - Attack chains 2
 # 3 - Attack chains 4
 
+var targets = []
 var chains = 1
 onready var remaining_chains = chains
 
 func activateItem():
-	yield(performAttack(), "completed")
+	targets = []
+	performAttack()
 	yield(get_tree(), "idle_frame")
 
 func performAttack():
@@ -17,7 +19,6 @@ func performAttack():
 	
 	var oneTileUp = user.currentTile.topTile
 	if !oneTileUp:
-		yield(get_tree(), "idle_frame")
 		return
 	
 	var twoTilesUp = oneTileUp.topTile
@@ -28,26 +29,34 @@ func performAttack():
 	
 	$AnimationPlayer.play("Shake")
 	
-	yield(attack(targetTile), "completed")
+	build_target_list(targetTile, true)
+	attack()
 
 
-func attack(tile):
-	spawnLightningParticle(tile)
+func build_target_list(tile, is_entry_point = false):
+	if is_entry_point:
+		if tile:
+			targets.append(tile)
+	else:
+		if tile.occupied && tile.occupied.isEnemy():
+			targets.append(tile)
 	
-	if tile.occupied && tile.occupied.isEnemy():
-		tile.occupied.takeDamage(item_damage)
-	
-	yield(get_tree().create_timer(0.4), "timeout")
 	if remaining_chains > 0:
 		var newTarget = tile.getRandomEnemyOccupiedAdjacentTile()
 		remaining_chains -= 1
 		if newTarget:
-			yield(attack(newTarget), "completed")
+			build_target_list(newTarget)
 	
 	if remaining_chains <= 0:
 		remaining_chains = chains
-	
-	yield(get_tree(), "idle_frame")
+
+func attack():
+	for target in targets:
+		spawnLightningParticle(target)
+		if target.occupied && target.occupied.isEnemy():
+			target.occupied.takeDamage(item_damage)
+		yield(get_tree().create_timer(0.2), "timeout")
+
 
 func upgradeTier() -> bool:
 	currentTier += 1

@@ -10,4 +10,7 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("spawn_enemy_debug"):
 		GameManager.spawn_enemy_at_tile(enemy_scene, GameManager.getRandomUnoccupiedTile())
-	pass
+	
+	if Input.is_action_just_pressed("level_up"):
+		FreeUpgradeMenu.spawnUpgradeCards(3)
+
