@@ -53,7 +53,7 @@ func build_target_list(tile, is_entry_point = false):
 func attack():
 	for target in targets:
 		spawnLightningParticle(target)
-		if target.occupied && target.occupied.isEnemy():
+		if is_instance_valid(target.occupied) && target.occupied.isEnemy():
 			target.occupied.takeDamage(item_damage)
 		yield(get_tree().create_timer(0.2), "timeout")
 
