@@ -9,13 +9,16 @@ var item_damage = 1
 
 onready var slashParticleScene = preload("res://SlashParticles.tscn")
 onready var cooldown_bar = $CoolDownBar
-onready var blink_tween = $BlinkTween
+onready var tween = $Tween
+onready var sprite = $Sprite
+onready var animator = $AnimationPlayer
 
 func _ready():
 	user = get_tree().get_nodes_in_group("player")[0]
+	appear_unready()
 
 func setup(data):
-	$Sprite.texture = data.sprite
+	sprite.texture = data.sprite
 	maxTurnTimer = data.max_turn_timer
 	turnTimer = maxTurnTimer
 	item_damage = data.item_damage
@@ -25,16 +28,38 @@ func triggerTimer():
 	turnTimer -= 1
 	
 	update_cool_down_bar()
+	if turnTimer == 1:
+		appear_ready()
 	
 	if turnTimer <= 0:
 		turnTimer = maxTurnTimer
 		update_cool_down_bar()
+		appear_unready()
 		yield(activateItem(), "completed")
 	
 	yield(get_tree(), "idle_frame")
 
 func update_cool_down_bar():
 	cooldown_bar.value = (1 - float(turnTimer-1)/float(maxTurnTimer-1)) * 100
+
+func appear_ready():
+	var goal_sprite = sprite.self_modulate
+	goal_sprite.a = 1.0
+	tween.interpolate_property(sprite, "self_modulate", sprite.self_modulate, goal_sprite, 0.2)
+	tween.start()
+	animator.play("ready")
+	
+
+func appear_unready():
+	var goal_sprite = sprite.self_modulate
+	goal_sprite.a = 0.4
+	tween.interpolate_property(sprite, "self_modulate", sprite.self_modulate, goal_sprite, 0.2)
+	animator.stop(true)
+	var new_pos = sprite.position
+	new_pos.y = 0
+	tween.interpolate_property(sprite, "position", sprite.position, new_pos, 0.2)
+	
+	tween.start()
 
 func upgradeTier() -> bool:
 	currentTier += 1

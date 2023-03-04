@@ -42,7 +42,7 @@ func appear_ready():
 
 func appear_unready():
 	var goal_sprite = sprite.self_modulate
-	goal_sprite.a = 0.6
+	goal_sprite.a = 0.4
 	tween.interpolate_property(sprite, "self_modulate", sprite.self_modulate, goal_sprite, 0.2)
 	tween.start()
 
