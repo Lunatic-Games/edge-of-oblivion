@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Data/Particles/HealthParticles.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Data/Particles/unused/health_particle_2_right.tres" type="Material" id=2]
+
+[node name="HealthParticles2" type="Node2D"]
+
+[node name="HealthParticlesLeft" parent="." instance=ExtResource( 1 )]
+emitting = true
+amount = 3
+one_shot = false
+
+[node name="HealthParticlesRight" parent="." instance=ExtResource( 1 )]
+emitting = true
+amount = 3
+one_shot = false
+process_material = ExtResource( 2 )

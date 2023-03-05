@@ -1,19 +1,19 @@
 extends CanvasLayer
 
-var cardScene = preload("res://Card.tscn")
-var availableCards = [
+const full_card_list: Array = [
 	"res://Item/ShortSword/ShortSword.tres",
 	"res://Item/LightningBow/LightningBow.tres",
-	"res://Item/Hammer/Hammer.tres"
+	"res://Item/Hammer/Hammer.tres",
+	"res://Item/TokenOfLove/TokenOfLove.tres"
 ]
+
+var cardScene = preload("res://Card.tscn")
+var availableCards: Array = full_card_list
 var selectedCards = []
 
 func reset():
 	selectedCards = []
-	availableCards = [
-	"res://Item/ShortSword/ShortSword.tres",
-	"res://Item/LightningBow/LightningBow.tres",
-	"res://Item/Hammer/Hammer.tres"]
+	availableCards = full_card_list
 	disableDisplay()
 
 func connectToPlayerTier(player):
