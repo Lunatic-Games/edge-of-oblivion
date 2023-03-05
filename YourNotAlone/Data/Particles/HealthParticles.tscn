@@ -5,10 +5,13 @@
 [ext_resource path="res://Assets/stars/icons/ffffff/transparent/1x1/sbed/spikes-half.svg" type="Texture" id=3]
 
 [node name="HealthParticles" type="Particles2D"]
+scale = Vector2( 0.5, 0.5 )
 emitting = false
-amount = 6
+amount = 9
+lifetime = 0.8
 one_shot = true
-explosiveness = 0.85
+explosiveness = 1.0
+randomness = 0.1
 process_material = ExtResource( 2 )
 texture = ExtResource( 3 )
 script = ExtResource( 1 )
