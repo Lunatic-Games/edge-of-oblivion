@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Data/Particles/BasicParticles.gd" type="Script" id=1]
+[ext_resource path="res://Data/Particles/health_particle.tres" type="Material" id=2]
+[ext_resource path="res://Assets/stars/icons/ffffff/transparent/1x1/sbed/spikes-half.svg" type="Texture" id=3]
+
+[node name="HealthParticles" type="Particles2D"]
+emitting = false
+amount = 6
+one_shot = true
+explosiveness = 0.85
+process_material = ExtResource( 2 )
+texture = ExtResource( 3 )
+script = ExtResource( 1 )
