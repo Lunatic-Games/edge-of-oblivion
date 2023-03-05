@@ -4,7 +4,10 @@ signal selectionMade
 
 var itemData
 
-func setup(resource, currentTier):
+onready var tween = $Tween
+onready var animator = $AnimationPlayer
+
+func setup(resource, currentTier, animate):
 	$Sprite.texture = resource.sprite
 	match currentTier:
 		1: 
@@ -15,7 +18,13 @@ func setup(resource, currentTier):
 			$UpgradeText.bbcode_text = resource.tier3Text
 		
 	itemData = resource
-	
+	if animate:
+		animator.play("spawn")
+		yield(get_tree(), "idle_frame")
+		tween.interpolate_property(self, "rect_position", rect_position + Vector2(0, -100), rect_position, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		tween.start()
+	else:
+		animator.play("setup")
 
 func _on_Background_gui_input(event):
 	if event is InputEventMouseButton && event.button_index == 1 && event.pressed:
