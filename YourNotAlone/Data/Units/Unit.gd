@@ -11,6 +11,7 @@ onready var animation_player = $AnimationPlayer
 onready var health_bar = $HealthBar
 onready var tween = $Tween
 onready var sprite = $Sprite
+onready var damaged_particle_scene = preload("res://Data/Particles/DamagedParticles.tscn")
 
 func _ready():
 	hp = max_hp
@@ -23,8 +24,13 @@ func isEnemy():
 	pass
 
 func takeDamage(damageTaken):
+	if damageTaken == 0:
+		return
+	
 	hp -= damageTaken
 	update_health_bar()
+	spawn_damage_particle()
+	animation_player.play("damaged")
 	
 	if hp <= 0:
 		die()
@@ -45,6 +51,11 @@ func update_health_bar():
 	health_bar.value = float(hp)/float(max_hp) * 100
 	tween.interpolate_property(health_bar, "value", health_bar.value, float(hp)/float(max_hp) * 100, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
+
+func spawn_damage_particle():
+	var particle = damaged_particle_scene.instance()
+	particle.global_position = self.global_position
+	GameManager.gameboard.add_child(particle)
 
 func die():
 	currentTile.clearOccupant()
