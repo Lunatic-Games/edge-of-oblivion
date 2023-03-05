@@ -14,6 +14,11 @@ onready var sprite = $Sprite
 onready var damaged_particle_scene = preload("res://Data/Particles/DamagedParticles.tscn")
 onready var health_particle_scene = preload("res://Data/Particles/HealthParticles.tscn")
 
+onready var particles: Dictionary = {
+	"damage": damaged_particle_scene,
+	"health": health_particle_scene
+}
+
 func _ready():
 	hp = max_hp
 
@@ -30,14 +35,14 @@ func takeDamage(damageTaken):
 	
 	hp -= damageTaken
 	update_health_bar()
-	spawn_damage_particle()
+	spawn_particle("damage")
 	animation_player.play("damaged")
 	
 	if hp <= 0:
 		die()
 
 func heal(heal_amount) -> int:
-	spawn_health_particle()
+	spawn_particle("health")
 	if hp < max_hp:
 		hp += heal_amount
 		update_health_bar()
@@ -54,13 +59,9 @@ func update_health_bar():
 	tween.interpolate_property(health_bar, "value", health_bar.value, float(hp)/float(max_hp) * 100, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 
-func spawn_damage_particle():
-	var particle = damaged_particle_scene.instance()
-	particle.global_position = self.global_position
-	GameManager.gameboard.add_child(particle)
-
-func spawn_health_particle():
-	var particle = health_particle_scene.instance()
+func spawn_particle(type: String):
+	var res = particles[type]
+	var particle = res.instance()
 	particle.global_position = self.global_position
 	GameManager.gameboard.add_child(particle)
 
