@@ -67,7 +67,7 @@ func upgradeTier() -> bool:
 	
 	if currentTier == 3:
 		chains = 4
-		remaining_chains = 2
+		remaining_chains = 4
 	
 	if currentTier >= maxTier:
 		return true
