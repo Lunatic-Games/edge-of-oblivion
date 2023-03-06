@@ -2,7 +2,7 @@ extends "res://Item/Item.gd"
 
 
 var damage_amount: int = 1
-var range_radius: int = 2
+var range_radius: int = 1
 
 onready var fire_particle_scene = preload("res://Data/Particles/FireParticles.tscn")
 # Tiered cooldown: 
@@ -16,7 +16,7 @@ func upgradeTier() -> bool:
 		2:
 			self.maxTurnTimer = 5
 		3:
-			self.maxTurnTimer = 4
+			range_radius = 2
 	return ret
 
 func activateItem() -> void:

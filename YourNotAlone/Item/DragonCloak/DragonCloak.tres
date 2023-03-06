@@ -8,9 +8,9 @@
 script = ExtResource( 1 )
 sprite = ExtResource( 3 )
 itemScene = ExtResource( 2 )
-tier1Text = "Deal 1 damage to everything in a 2 tile radius"
-tier2Text = "1 Damage in 2 tile radius. Faster cooldown (1 turns)"
-tier3Text = "1 Damage in 2 tile radius. Faster cooldown (1 turns)"
+tier1Text = "Deal 1 damage to everything in a 1 tile radius"
+tier2Text = "Faster cooldown (1 turn)"
+tier3Text = "Bigger radius (2 tiles total)"
 max_turn_timer = 6
 item_damage = 0
 path = ""
