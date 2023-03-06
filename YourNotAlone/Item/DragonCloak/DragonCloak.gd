@@ -3,6 +3,8 @@ extends "res://Item/Item.gd"
 
 var damage_amount: int = 1
 var range_radius: int = 2
+
+onready var fire_particle_scene = preload("res://Data/Particles/FireParticles.tscn")
 # Tiered cooldown: 
 #	1: 6
 #	2: 5
@@ -55,6 +57,7 @@ func perform_attack() -> void:
 				continue
 			#Check occupant
 			var occupant: Occupant = current_tile.occupied
+			spawn_fire_particle(current_tile.global_position)
 			if occupant:
 				if occupant.damageable and occupant != user:
 					targets.append(occupant)
@@ -87,5 +90,8 @@ func attack(targets: Array) -> void:
 	# Iterate through array and deal damage to each target
 	for target in targets:
 		target.takeDamage(damage_amount)
-		# Spawn particle effect
 
+func spawn_fire_particle(pos: Vector2) -> void:
+	var particle = fire_particle_scene.instance()
+	particle.global_position = pos
+	GameManager.gameboard.add_child(particle)
