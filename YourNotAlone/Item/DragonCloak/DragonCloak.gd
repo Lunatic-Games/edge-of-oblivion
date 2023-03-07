@@ -10,6 +10,13 @@ onready var fire_particle_scene = preload("res://Data/Particles/FireParticles.ts
 #	2: 5 round cooldown, 1 tile radius
 #	3: 5 round cooldown, 2 tile radius
 
+class ScanResult:
+	var tiles: Array
+	var occupants: Array
+	func _init(passed_tiles: Array, passed_occupants: Array) -> void:
+		tiles = passed_tiles
+		occupants = passed_occupants
+
 func upgradeTier() -> bool:
 	var ret: bool = .upgradeTier()
 	match currentTier:
@@ -24,13 +31,20 @@ func activateItem() -> void:
 	yield(get_tree(), "idle_frame")
 
 func perform_attack() -> void:
+	var scan_res: ScanResult = scan_tile_radius(user.currentTile, range_radius)
+	spawn_fire_particles(scan_res.tiles)
+	attack(scan_res.occupants)
+	$AnimationPlayer.play("Shake")
+
+func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
+	var tiles: Array = []
+	var occupants: Array = []
 	#Scan all applicable tiles for valid targets, append each into targets array
-	var targets: Array = []
-	var current_tile: Tile = user.currentTile
+	var current_tile: Tile = center_tile
 	# Navigate left
 	var left_distance: int = 0
 	var up_distance: int = 0
-	for _i in range(0, range_radius):
+	for _i in range(0, radius):
 		var next_tile: Tile = current_tile.leftTile
 		if next_tile:
 			current_tile = next_tile
@@ -38,7 +52,7 @@ func perform_attack() -> void:
 		else:
 			break
 	# Navigate up
-	for _i in range(0, range_radius):
+	for _i in range(0, radius):
 		var next_tile: Tile = current_tile.topTile
 		if next_tile:
 			current_tile = next_tile
@@ -46,17 +60,16 @@ func perform_attack() -> void:
 		else:
 			break
 	# Begin scanning by row
-	for _i in range(-up_distance, range_radius + 1):
+	for _i in range(-up_distance, radius + 1):
 		var row_width: int = 0
-		for _j in range(-left_distance,range_radius + 1):
+		for _j in range(-left_distance, radius + 1):
 			if not current_tile:
 				continue
+			tiles.append(current_tile)
 			#Check occupant
 			var occupant: Occupant = current_tile.occupied
-			spawn_fire_particle(current_tile.global_position)
 			if occupant:
-				if occupant.damageable and occupant != user:
-					targets.append(occupant)
+				occupants.append(occupant)
 			#Move to next tile
 			var next_tile: Tile = current_tile.rightTile
 			if next_tile:
@@ -76,14 +89,18 @@ func perform_attack() -> void:
 			current_tile = next_tile
 		else:
 			break
-	attack(targets)
-	$AnimationPlayer.play("Shake")
+	return ScanResult.new(tiles,occupants)
 
 func attack(targets: Array) -> void:
 	for target in targets:
-		target.takeDamage(damage_amount)
+		if target.damageable and target != user:
+			target.takeDamage(damage_amount)
 
-func spawn_fire_particle(pos: Vector2) -> void:
-	var particle: Node = fire_particle_scene.instance()
-	particle.global_position = pos
-	GameManager.gameboard.add_child(particle)
+
+
+func spawn_fire_particles(tiles: Array) -> void:
+	for t in tiles:
+		var pos: Vector2 = t.global_position
+		var particle: Node = fire_particle_scene.instance()
+		particle.global_position = pos
+		GameManager.gameboard.add_child(particle)
