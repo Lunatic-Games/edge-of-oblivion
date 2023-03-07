@@ -37,26 +37,26 @@ func handleMovement():
 	
 	if (Input.is_action_just_pressed("up")):
 		if(currentTile.topTile):
-			moveToTile(currentTile.topTile) # MovementUtility.moveDirection.up
+			move_to_tile(currentTile.topTile) # MovementUtility.moveDirection.up
 	
 	if (Input.is_action_just_pressed("down")):
 		if(currentTile.bottomTile):
-			moveToTile(currentTile.bottomTile)
+			move_to_tile(currentTile.bottomTile)
 	
 	if (Input.is_action_just_pressed("left")):
 		if(currentTile.leftTile):
-			moveToTile(currentTile.leftTile)
+			move_to_tile(currentTile.leftTile)
 	
 	if (Input.is_action_just_pressed("right")):
 		if(currentTile.rightTile):
-			moveToTile(currentTile.rightTile)
+			move_to_tile(currentTile.rightTile)
 	
 	if (Input.is_action_just_pressed("levelUpCheat")):
 		levelUp()
 
 
-func moveToTile(tile):
-	.moveToTile(tile)
+func move_to_tile(tile, move_precedence: float = 0.0) -> void:
+	.move_to_tile(tile)
 	
 	movesRemaining -= 1
 	if movesRemaining <= 0:

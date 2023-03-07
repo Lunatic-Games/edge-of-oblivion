@@ -6,6 +6,7 @@ var currentTile
 var max_hp = 3
 var canFall = true
 var hp
+var move_precedence = 0.0
 
 onready var animation_player = $AnimationPlayer
 onready var health_bar = $HealthBar
@@ -81,9 +82,17 @@ func is_alive():
 		return true
 	return false
 
-func moveToTile(tile):
+func move_to_tile(tile, move_precedence: float = 0.0) -> void:
 	if tile.occupied && tile.occupied.occupantType == tile.occupied.occupantTypes.blocking:
-		return
+		if move_precedence > tile.occupied.move_precedence:
+			var pushed_occupant = tile.occupied
+			var last_resort_tile = currentTile
+			GameManager.unoccupyTile(last_resort_tile)
+			currentTile = null
+			var tile_to_displace = get_displace_tile(tile, last_resort_tile)
+			pushed_occupant.move_to_tile(tile_to_displace)
+		else:
+			return
 	
 	if self.is_in_group("player") && tile.occupied && tile.occupied.occupantType == tile.occupied.occupantTypes.collectable:
 		tile.occupied.collect()
@@ -99,3 +108,19 @@ func moveToTile(tile):
 	tween.start()
 	yield(tween, "tween_all_completed")
 	lock_movement = false
+
+func get_displace_tile(displacees_tile: Tile, last_resort_tile: Tile) -> Tile:
+	var possible_tiles = []
+	if displacees_tile.topTile && !displacees_tile.topTile.occupied:
+		possible_tiles.append(displacees_tile.topTile)
+	if displacees_tile.bottomTile && !displacees_tile.bottomTile.occupied:
+		possible_tiles.append(displacees_tile.bottomTile)
+	if displacees_tile.leftTile && !displacees_tile.leftTile.occupied:
+		possible_tiles.append(displacees_tile.leftTile)
+	if displacees_tile.rightTile && !displacees_tile.rightTile.occupied:
+		possible_tiles.append(displacees_tile.rightTile)
+	
+	if possible_tiles.size() > 0:
+		return possible_tiles[randi()%possible_tiles.size()]
+	
+	return last_resort_tile

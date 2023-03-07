@@ -161,6 +161,9 @@ func occupyTile(tile, occupant):
 		unoccupiedTiles.remove(tileIndex)
 
 func unoccupyTile(tile):
+	if !tile:
+		return
+	
 	tile.occupied = null
 	unoccupiedTiles.append(tile)
 

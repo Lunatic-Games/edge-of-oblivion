@@ -5,20 +5,18 @@ func trigger(starting_tile):
 	if tile_to_target and tile_to_target.occupied and tile_to_target.occupied == GameManager.player:
 		var tile_coords = tile_to_target.get_tile_coords_to_tile(starting_tile)
 		if tile_coords.x > 0:
-			owner.moveToTile(tile_to_target.leftTile)
+			owner.move_to_tile(tile_to_target.leftTile, owner.move_precedence)
 		if tile_coords.x < 0:
-			owner.moveToTile(tile_to_target.rightTile)
+			owner.move_to_tile(tile_to_target.rightTile, owner.move_precedence)
 		if tile_coords.y > 0:
-			owner.moveToTile(tile_to_target.topTile)
+			owner.move_to_tile(tile_to_target.topTile, owner.move_precedence)
 		if tile_coords.y < 0:
-			owner.moveToTile(tile_to_target.bottomTile)
+			owner.move_to_tile(tile_to_target.bottomTile, owner.move_precedence)
 		
 		tile_to_target.occupied.takeDamage(damage)
-	elif tile_to_target and !tile_to_target.occupied:
-		owner.moveToTile(tile_to_target)
-	elif tile_to_target and tile_to_target.occupied:
-		# TODO Once we have a knockback system for enemies implemented allow it here!
-		pass
+	
+	elif tile_to_target:
+		owner.move_to_tile(tile_to_target, owner.move_precedence)
 
 func player_based_targeting(starting_tile):
 	var current_tile = starting_tile

@@ -13,4 +13,7 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("level_up"):
 		FreeUpgradeMenu.spawnUpgradeCards(3)
+	
+	if Input.is_action_just_pressed("full_heal"):
+		GameManager.player.heal(999)
 

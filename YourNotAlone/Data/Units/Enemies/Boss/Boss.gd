@@ -4,6 +4,7 @@ export (Resource) var boss_data
 
 func _ready():
 	max_hp = boss_data.health
+	move_precedence = 3.0
 	._ready()
 	GameManager.setup_boss(boss_data)
 
