@@ -40,10 +40,12 @@ bbcode_text = "[center][color=yellow][wave]Your starting equipment!"
 text = "Your starting equipment!"
 
 [node name="Card" parent="." instance=ExtResource( 3 )]
+modulate = Color( 1, 1, 1, 1 )
 margin_left = 126.0
 margin_top = 274.0
 margin_right = 166.0
 margin_bottom = 314.0
+script = null
 
 [node name="MenuContainer" type="VBoxContainer" parent="."]
 margin_left = 411.0
@@ -59,3 +61,5 @@ rect_min_size = Vector2( 240, 60 )
 text = "Play Game"
 
 [connection signal="pressed" from="MenuContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+
+[editable path="Card"]

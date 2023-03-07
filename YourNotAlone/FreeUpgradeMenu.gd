@@ -50,9 +50,9 @@ func spawnCard(pathOfResource):
 	else:
 		currentTier = 1
 		
-	card.setup(resource, currentTier)
 	card.connect("selectionMade", self, "disableDisplay")
 	$CardRow.add_child(card)
+	card.setup(resource, currentTier, true)
 	selectedCards.append(pathOfResource)
 	availableCards.remove(pathOfResource)
 	
