@@ -7,6 +7,8 @@ func _ready():
 	player.connect("playerDied", self, "gameOver")
 
 func gameOver():
+	yield(get_tree().create_timer(1.0), "timeout")
+	FreeUpgradeMenu.disableDisplay()
 	get_tree().paused = true
 	$Canvas/GameOver.visible = true
 

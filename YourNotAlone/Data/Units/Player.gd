@@ -22,6 +22,7 @@ var items = []
 
 onready var movesRemaining = moves
 onready var item_container = $CanvasLayer/ItemContainer
+onready var player_camera = $PlayerCamera
 
 func _ready():
 	var startingItems = [preload("res://Item/ShortSword/ShortSword.tres")]
@@ -32,7 +33,7 @@ func _physics_process(delta):
 	handleMovement()
 
 func handleMovement():
-	if !TurnManager.isPlayerTurn() or lock_movement:
+	if !TurnManager.isPlayerTurn() or lock_movement or hp <= 0:
 		return
 	
 	if (Input.is_action_just_pressed("up")):
@@ -64,6 +65,11 @@ func moveToTile(tile):
 		movesRemaining = moves
 
 func die():
+	self.remove_child(player_camera)
+	GameManager.gameboard.add_child(player_camera)
+	player_camera.set_owner(GameManager.gameboard)
+	tween.interpolate_property(player_camera, "global_position", global_position, currentTile.global_position, 1.0)
+	tween.start()
 	emit_signal("playerDied")
 	.die()
 
