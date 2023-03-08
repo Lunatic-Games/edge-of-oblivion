@@ -4,7 +4,8 @@ const full_card_list: Array = [
 	"res://Item/ShortSword/ShortSword.tres",
 	"res://Item/LightningBow/LightningBow.tres",
 	"res://Item/Hammer/Hammer.tres",
-	"res://Item/TokenOfLove/TokenOfLove.tres"
+	"res://Item/TokenOfLove/TokenOfLove.tres",
+	"res://Item/DragonCloak/DragonCloak.tres"
 ]
 
 var cardScene = preload("res://Card.tscn")
