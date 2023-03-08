@@ -1,6 +1,5 @@
 extends "res://Item/Item.gd"
 
-
 var damage_amount: int = 1
 var range_radius: int = 1
 
@@ -10,12 +9,7 @@ onready var fire_particle_scene = preload("res://Data/Particles/FireParticles.ts
 #	2: 5 round cooldown, 1 tile radius
 #	3: 5 round cooldown, 2 tile radius
 
-class ScanResult:
-	var tiles: Array
-	var occupants: Array
-	func _init(passed_tiles: Array, passed_occupants: Array) -> void:
-		tiles = passed_tiles
-		occupants = passed_occupants
+
 
 func upgradeTier() -> bool:
 	var ret: bool = .upgradeTier()
@@ -36,10 +30,19 @@ func perform_attack() -> void:
 	attack(scan_res.occupants)
 	$AnimationPlayer.play("Shake")
 
+#####
+# ScanResult and scan_tile_radius > to be moved to global script for other applications
+class ScanResult:
+	var tiles: Array
+	var occupants: Array
+	func _init(passed_tiles: Array, passed_occupants: Array) -> void:
+		tiles = passed_tiles
+		occupants = passed_occupants
+
 func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
 	var tiles: Array = []
 	var occupants: Array = []
-	#Scan all applicable tiles for valid targets, append each into targets array
+	#Scan all applicable tiles, append tile and tile occupant if any to arrays
 	var current_tile: Tile = center_tile
 	# Navigate left
 	var left_distance: int = 0
@@ -90,13 +93,12 @@ func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
 		else:
 			break
 	return ScanResult.new(tiles,occupants)
+#####
 
 func attack(targets: Array) -> void:
 	for target in targets:
 		if target.damageable and target != user:
 			target.takeDamage(damage_amount)
-
-
 
 func spawn_fire_particles(tiles: Array) -> void:
 	for t in tiles:
