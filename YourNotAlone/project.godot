@@ -57,6 +57,7 @@ MovementUtility="*res://MovementUtility.gd"
 ItemManager="*res://ItemManager.gd"
 Debug="*res://Globals/Debug.gd"
 AudioManager="*res://Globals/Managers/AudioManager.tscn"
+ItemUtil="*res://Globals/ItemUtil.gd"
 
 [display]
 
