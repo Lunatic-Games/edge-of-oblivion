@@ -51,15 +51,15 @@ func performAttack():
 	
 	var freeTileLocation = user.currentTile
 	if !landingTile.occupied or landingTile.occupied.occupantType == landingTile.occupied.occupantTypes.consumable:
-		user.moveToTile(landingTile, MovementUtility.lastPlayerDirection)
+		user.move_to_tile(landingTile, MovementUtility.lastPlayerDirection)
 	
 	else:
 		if directionTile != landingTile && directionTile.occupied:
-			directionTile.occupied.moveToTile(freeTileLocation)
+			directionTile.occupied.move_to_tile(freeTileLocation)
 			freeTileLocation = directionTile
 		
 		if landingTile.occupied:
-			landingTile.occupied.moveToTile(freeTileLocation)
+			landingTile.occupied.move_to_tile(freeTileLocation)
 	
 	$AnimationPlayer.play("Shake")
 

@@ -118,5 +118,5 @@ func applyKnockBack(target: Occupant, direction: String, knockback: int, collide
 					else:
 						target.fall()
 						new_tile.clearOccupant()
-					target.moveToTile(new_tile)
+					target.move_to_tile(new_tile)
 					start_tile.clearOccupant()
