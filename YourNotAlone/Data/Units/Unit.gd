@@ -67,6 +67,10 @@ func spawn_particle(type: String):
 
 func die():
 	currentTile.clearOccupant()
+	tween.interpolate_property(self, "global_position", global_position, global_position + Vector2(0, -25), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(self, "modulate", modulate, modulate * Color(1, 1, 1, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	yield(tween, "tween_all_completed")
 	queue_free()
 
 func fall():
