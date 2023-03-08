@@ -1,9 +1,10 @@
 extends "res://Data/Units/Unit.gd"
 
 export (PackedScene) var targetScene = preload("res://Data/Indicators/Indicator.tscn")
-var xp = 1
-var maxRoundsUntilReady = 2
-var damage = 1
+export (int) var xp = 1
+export (int) var maxRoundsUntilReady = 2
+export (int) var damage = 1
+export (int) var max_hp_override = 3
 var chosen_move
 
 onready var roundsUntilReady = maxRoundsUntilReady
@@ -11,6 +12,7 @@ onready var attack_bar = $AttackBar
 onready var move_sets = $MoveSets.get_children()
 
 func _ready():
+	max_hp = max_hp_override
 	pushable = true
 	damageable = true
 	update_attack_bar()
