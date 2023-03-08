@@ -8,6 +8,7 @@ var maxTier = 3
 var item_damage = 1
 
 onready var slashParticleScene = preload("res://SlashParticles.tscn")
+onready var lightning_particle_scene = preload("res://Data/Indicators/PlayerWeaponIndicators/LightningBowIndicator.tscn")
 onready var cooldown_bar = $CoolDownBar
 onready var tween = $Tween
 onready var sprite = $Sprite
@@ -86,12 +87,10 @@ func spawnSlashParticle(positionToSpawn):
 	slashParticle.emitting = true
 	get_tree().root.add_child(slashParticle)
 
-func spawnLightningParticle(positionToSpawn):
-	# Spawn attack slash
-	var slashParticle = slashParticleScene.instance()
-	slashParticle.position = positionToSpawn.position
-	slashParticle.emitting = true
-	get_tree().root.add_child(slashParticle)
+func spawn_lightning_particle(position_to_spawn):
+	var lightning_particle = lightning_particle_scene.instance()
+	lightning_particle.global_position = position_to_spawn
+	get_tree().root.add_child(lightning_particle)
 
 func applyKnockBack(target: Occupant, direction: String, knockback: int, collideDamage: int = 0) -> void:
 	var start_tile: Tile = target.currentTile
