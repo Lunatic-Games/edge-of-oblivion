@@ -21,6 +21,6 @@ func performAttack():
 	$AnimationPlayer.play("Shake")
 
 func attack(tile):
-	spawnSlashParticle(tile)
+	spawnSlashParticle(tile.global_position)
 	if tile.occupied && tile.occupied.isEnemy():
 		tile.occupied.takeDamage(item_damage)
