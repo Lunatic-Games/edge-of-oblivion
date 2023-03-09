@@ -8,6 +8,8 @@ var maxTier = 3
 var item_damage = 1
 
 onready var slashParticleScene = preload("res://SlashParticles.tscn")
+onready var lightning_particle_scene = preload("res://Data/Indicators/PlayerWeaponIndicators/LightningBowIndicator.tscn")
+onready var hammer_particle_scene = preload("res://Data/Indicators/PlayerWeaponIndicators/HammerIndicator.tscn")
 onready var cooldown_bar = $CoolDownBar
 onready var tween = $Tween
 onready var sprite = $Sprite
@@ -78,21 +80,25 @@ func is_ready_to_use():
 	return false
 
 func spawnSlashParticle(positionToSpawn):
-	# Spawn attack slash
 	var slashParticle = slashParticleScene.instance()
-	slashParticle.position = user.currentTile.position
-	if positionToSpawn.position < user.position:
+	slashParticle.global_position = positionToSpawn
+	if positionToSpawn.x < user.currentTile.global_position.x:
 		slashParticle.scale.x = slashParticle.scale.x * -1
-	get_tree().root.add_child(slashParticle)
+	GameManager.gameboard.add_child(slashParticle)
 
-func spawnLightningParticle(positionToSpawn):
-	# Spawn attack slash
-	var slashParticle = slashParticleScene.instance()
-	slashParticle.position = positionToSpawn.position
-	slashParticle.emitting = true
-	get_tree().root.add_child(slashParticle)
+func spawn_lightning_particle(position_to_spawn):
+	var lightning_particle = lightning_particle_scene.instance()
+	lightning_particle.global_position = position_to_spawn
+	GameManager.gameboard.add_child(lightning_particle)
 
-func applyKnockBack(target: Occupant, direction: String, knockback: int, collideDamage: int = 0) -> void:
+func spawn_hammer_indicator(position_to_spawn, should_flip):
+	var hammer_particle = hammer_particle_scene.instance()
+	hammer_particle.global_position = position_to_spawn
+	if should_flip:
+		hammer_particle.scale.y = hammer_particle.scale.y * -1
+	GameManager.gameboard.add_child(hammer_particle)
+
+func applyKnockBack(target: Occupant, direction: String, knockback: int, collideDamage: int = 0) -> bool:
 	var start_tile: Tile = target.currentTile
 	if target.is_alive():
 		var directions: Dictionary = {"up": start_tile.topTile, "down": start_tile.bottomTile, "left": start_tile.leftTile, "right": start_tile.rightTile}
@@ -109,9 +115,12 @@ func applyKnockBack(target: Occupant, direction: String, knockback: int, collide
 							if occupant.damageable:
 								occupant.takeDamage(collideDamage)
 							if occupant.pushable:
-								applyKnockBack(occupant, direction, 1)
-								
-								new_tile = tile_to_check
+								if applyKnockBack(occupant, direction, 1):
+									new_tile = tile_to_check
+								else:
+									return false
+							else:
+								return false
 						else:
 							new_tile = tile_to_check
 					else:
@@ -119,3 +128,4 @@ func applyKnockBack(target: Occupant, direction: String, knockback: int, collide
 						new_tile.clearOccupant()
 					target.move_to_tile(new_tile)
 					start_tile.clearOccupant()
+	return true

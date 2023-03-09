@@ -19,13 +19,19 @@ func perform_attack() -> void:
 	var top_tile = user.currentTile.topTile
 	var bottom_tile = user.currentTile.bottomTile
 	
-	if(top_tile && top_tile.occupied && top_tile.occupied.isEnemy()):
-		attack(top_tile.occupied, "up")
-	elif (bottom_tile && bottom_tile.occupied && bottom_tile.occupied.isEnemy()):
-		attack(bottom_tile.occupied, "down")
+	if(top_tile && top_tile.occupied):
+		attack(top_tile, "up")
+	elif (bottom_tile && bottom_tile.occupied):
+		attack(bottom_tile, "down", true)
+	elif (top_tile):
+		attack(top_tile, "up")
+	elif (bottom_tile):
+		attack(bottom_tile, "down", true)
 
-func attack(occupant: Occupant, direction: String) -> void:
-	spawnSlashParticle(occupant)
-	applyKnockBack(occupant, direction, tiered_knockback[currentTier], tiered_kb_damage[currentTier])
-	occupant.takeDamage(tiered_damage[currentTier])
+func attack(tile: Tile, direction: String, should_flip: bool = false) -> void:
+	var occupant = tile.occupied
+	spawn_hammer_indicator(tile.global_position, should_flip)
+	if occupant && occupant.isEnemy():
+		applyKnockBack(occupant, direction, tiered_knockback[currentTier], tiered_kb_damage[currentTier])
+		occupant.takeDamage(tiered_damage[currentTier])
 
