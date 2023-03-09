@@ -99,7 +99,7 @@ func spawn_hammer_indicator(position_to_spawn, should_flip):
 		hammer_particle.scale.y = hammer_particle.scale.y * -1
 	GameManager.gameboard.add_child(hammer_particle)
 
-func applyKnockBack(target: Occupant, direction: String, knockback: int, collideDamage: int = 0) -> void:
+func applyKnockBack(target: Occupant, direction: String, knockback: int, collideDamage: int = 0) -> bool:
 	var start_tile: Tile = target.currentTile
 	if target.is_alive():
 		var directions: Dictionary = {"up": start_tile.topTile, "down": start_tile.bottomTile, "left": start_tile.leftTile, "right": start_tile.rightTile}
@@ -116,9 +116,12 @@ func applyKnockBack(target: Occupant, direction: String, knockback: int, collide
 							if occupant.damageable:
 								occupant.takeDamage(collideDamage)
 							if occupant.pushable:
-								applyKnockBack(occupant, direction, 1)
-								
-								new_tile = tile_to_check
+								if applyKnockBack(occupant, direction, 1):
+									new_tile = tile_to_check
+								else:
+									return false
+							else:
+								return false
 						else:
 							new_tile = tile_to_check
 					else:
@@ -126,3 +129,4 @@ func applyKnockBack(target: Occupant, direction: String, knockback: int, collide
 						new_tile.clearOccupant()
 					target.move_to_tile(new_tile)
 					start_tile.clearOccupant()
+	return true
