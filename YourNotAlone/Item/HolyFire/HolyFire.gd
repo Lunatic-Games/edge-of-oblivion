@@ -4,11 +4,11 @@ var damage_amount: int = 1
 var bolt_count: int = 3
 var range_radius: int = 2
 
-onready var fire_particle_scene = preload("res://Data/Particles/FireParticles.tscn")
+onready var fire_particle_scene = preload("res://Data/Particles/FireParticles2.tscn")
 # Tiers: 
-#	1: 3 damage instances, 2 tile radius
-#	2: 6 damage instances, 3 tile radius
-#	3: 12 damage instances, 3 tile radius
+#	1: 3 damage instances
+#	2: 5 damage instances
+#	3: 7 damage instances
 
 
 
@@ -16,10 +16,9 @@ func upgradeTier() -> bool:
 	var ret: bool = .upgradeTier()
 	match currentTier:
 		2:
-			bolt_count = 6
-			range_radius = 3
+			bolt_count = 5
 		3:
-			bolt_count = 12
+			bolt_count = 7
 	return ret
 
 func activateItem() -> void:
@@ -39,8 +38,13 @@ func attack(targets: Array) -> void:
 func spawn_bolts(tiles: Array) -> void:
 	# Select some random tiles
 	var tiles_hit: Array = []
+	var double_hits: Array = []
 	for _i in range(0, bolt_count):
-		tiles_hit.append(randi()%tiles.size())
+		var index: int = randi()%tiles.size()
+		if index in tiles_hit:
+			double_hits.append(index)
+		else:
+			tiles_hit.append(index)
 	for hit in tiles_hit:
 		var t: Tile = tiles[hit]
 		# Rain fire
@@ -48,6 +52,11 @@ func spawn_bolts(tiles: Array) -> void:
 		var particle: Node = fire_particle_scene.instance()
 		particle.global_position = pos
 		GameManager.gameboard.add_child(particle)
+		# Use alternate particle effect if tile is hit more than once
+		if hit in double_hits:
+			particle.aux = true
+			particle.amount -= 4
+		particle.activate()
 		# Do damage
 		if t.occupied:
 			if t.occupied.damageable:

@@ -8,9 +8,9 @@
 script = ExtResource( 1 )
 sprite = ExtResource( 3 )
 itemScene = ExtResource( 2 )
-tier1Text = ""
-tier2Text = ""
-tier3Text = ""
-max_turn_timer = 6
+tier1Text = "Deals 1 damage to 3 random tiles in a 2 tile radius from the player (Tiles can be damaged more than once)"
+tier2Text = "Increases to 5 random tiles"
+tier3Text = "Increases to 7 random tiles"
+max_turn_timer = 2
 item_damage = 0
 path = ""
