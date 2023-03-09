@@ -83,7 +83,6 @@ func spawnSlashParticle(positionToSpawn):
 	slashParticle.position = user.currentTile.position
 	if positionToSpawn.position < user.position:
 		slashParticle.scale.x = slashParticle.scale.x * -1
-	slashParticle.emitting = true
 	get_tree().root.add_child(slashParticle)
 
 func spawnLightningParticle(positionToSpawn):
