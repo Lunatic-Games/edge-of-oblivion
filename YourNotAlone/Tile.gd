@@ -62,3 +62,10 @@ func is_tile_n_tiles_away(tile, number, allow_adjacent = false):
 			return true
 		else:
 			return false
+
+func get_distance_to_tile(tile:Tile, allow_adjacent:bool = false) -> int:
+	var count = 0
+	while !is_tile_n_tiles_away(tile, count, allow_adjacent):
+		count += 1
+	
+	return count
