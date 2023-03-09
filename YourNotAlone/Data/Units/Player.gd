@@ -83,7 +83,8 @@ func gainExperience(experience):
 		levelUp()
 
 func levelUp():
-	GameManager.spawnChest()
+	#GameManager.spawnChest()
+	FreeUpgradeMenu.spawnUpgradeCards(3)
 	currentLevel += 1
 	currentXp = 0
 
