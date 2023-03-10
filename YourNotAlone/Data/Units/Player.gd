@@ -42,21 +42,17 @@ func handleMovement():
 	if (Input.is_action_just_pressed("up")):
 		if(currentTile.topTile):
 			move_to_tile(currentTile.topTile) # MovementUtility.moveDirection.up
-	
-	if (Input.is_action_just_pressed("down")):
+	elif (Input.is_action_just_pressed("down")):
 		if(currentTile.bottomTile):
 			move_to_tile(currentTile.bottomTile)
-	
-	if (Input.is_action_just_pressed("left")):
+	elif (Input.is_action_just_pressed("left")):
 		if(currentTile.leftTile):
 			move_to_tile(currentTile.leftTile)
-	
-	if (Input.is_action_just_pressed("right")):
+	elif (Input.is_action_just_pressed("right")):
 		if(currentTile.rightTile):
 			move_to_tile(currentTile.rightTile)
-	
-	if (Input.is_action_just_pressed("levelUpCheat")):
-		levelUp()
+	elif(Input.is_action_just_pressed("wait")):
+		TurnManager.endPlayerTurn()
 
 
 func move_to_tile(tile, move_precedence: float = 0.0) -> void:

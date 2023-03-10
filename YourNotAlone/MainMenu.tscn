@@ -40,7 +40,6 @@ bbcode_text = "[center][color=yellow][wave]Your starting equipment!"
 text = "Your starting equipment!"
 
 [node name="Card" parent="." instance=ExtResource( 3 )]
-modulate = Color( 1, 1, 1, 1 )
 margin_left = 126.0
 margin_top = 274.0
 margin_right = 166.0

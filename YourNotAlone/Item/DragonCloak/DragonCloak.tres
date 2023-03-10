@@ -8,6 +8,7 @@
 script = ExtResource( 1 )
 sprite = ExtResource( 3 )
 itemScene = ExtResource( 2 )
+item_name = "Dragon Cloak"
 tier1Text = "Deal 1 damage to everything in a 1 tile radius"
 tier2Text = "Faster cooldown (1 turn)"
 tier3Text = "Bigger radius (2 tiles total)"
