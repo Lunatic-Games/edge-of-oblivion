@@ -11,6 +11,7 @@ onready var background = $Background
 
 func setup(resource, currentTier, animate):
 	$Sprite.texture = resource.sprite
+	$Name.bbcode_text = "[center]" + resource.item_name
 	match currentTier:
 		1: 
 			$UpgradeText.bbcode_text = resource.tier1Text

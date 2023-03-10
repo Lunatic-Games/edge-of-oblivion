@@ -4,11 +4,11 @@
 [ext_resource path="res://Item/Hammer/Hammer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/weapons/icons/ffffff/transparent/1x1/skoll/baton.svg" type="Texture" id=3]
 
-
 [resource]
 script = ExtResource( 1 )
 sprite = ExtResource( 3 )
 itemScene = ExtResource( 2 )
+item_name = "Hammer"
 tier1Text = "Attack up or down for 1. Knockback 1"
 tier2Text = "Attack up or down for 1. Knockback 1. Collide damage 1"
 tier3Text = "Attack up or down for 2. Knockback 2. Collide damage 1"
