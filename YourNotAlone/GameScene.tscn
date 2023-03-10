@@ -155,6 +155,7 @@ margin_bottom = 272.0
 text = "Main Menu"
 
 [node name="BossOverlay" type="VBoxContainer" parent="Canvas"]
+visible = false
 margin_left = 11.0
 margin_top = 11.0
 margin_right = 1012.0
