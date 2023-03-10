@@ -3,7 +3,7 @@ extends "res://Data/Units/Enemies/Enemy.gd"
 export (Resource) var boss_data
 
 func _ready():
-	max_hp = boss_data.health
+	max_hp_override = boss_data.health
 	move_precedence = 3.0
 	._ready()
 	GameManager.setup_boss(boss_data)
