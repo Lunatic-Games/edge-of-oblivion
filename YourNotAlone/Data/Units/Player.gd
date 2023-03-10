@@ -3,6 +3,7 @@ extends "res://Data/Units/Unit.gd"
 signal itemReachedMaxTier
 signal playerDied
 
+var experience_bar_update_time = 0.2
 var moves = 1
 var currentXp = 0
 var currentLevel = 1
@@ -23,6 +24,8 @@ var items = []
 onready var movesRemaining = moves
 onready var item_container = $CanvasLayer/ItemContainer
 onready var player_camera = $PlayerCamera
+onready var experience_bar = $CanvasLayer/ExperienceBar
+onready var canvas_tween = $CanvasLayer/CanvasTween
 
 func _ready():
 	var startingItems = [preload("res://Item/ShortSword/ShortSword.tres")]
@@ -81,12 +84,19 @@ func gainExperience(experience):
 	
 	if currentXp >= levelThresholds[currentLevel]:
 		levelUp()
+	else:
+		update_experience_bar()
 
 func levelUp():
-	#GameManager.spawnChest()
 	FreeUpgradeMenu.spawnUpgradeCards(3)
+	update_experience_bar()
 	currentLevel += 1
 	currentXp = 0
+	yield(get_tree().create_timer(experience_bar_update_time), "timeout")
+	experience_bar.emit_particle()
+	update_experience_bar()
+	
+	
 
 func gainItem(itemData):
 	if itemData in items:
@@ -97,3 +107,9 @@ func gainItem(itemData):
 
 func isEnemy():
 	return false
+
+func update_experience_bar() -> void:
+	experience_bar.max_value = levelThresholds[currentLevel]
+	canvas_tween.interpolate_property(experience_bar, "value", experience_bar.value, currentXp, experience_bar_update_time)
+	canvas_tween.start()
+	yield(canvas_tween, "tween_all_completed")
