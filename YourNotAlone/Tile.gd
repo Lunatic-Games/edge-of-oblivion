@@ -1,6 +1,13 @@
 class_name Tile
 extends Node2D
 
+enum TILE_DIRECTION {
+	up,
+	down,
+	left,
+	right
+}
+
 var topTile
 var bottomTile
 var rightTile
@@ -69,3 +76,17 @@ func get_distance_to_tile(tile:Tile, allow_adjacent:bool = false) -> int:
 		count += 1
 	
 	return count
+
+func get_direction_to_tile(tile) -> String:
+	var tile_coords = get_tile_coords_to_tile(tile)
+	
+	if tile_coords.y == 0 && tile_coords.x > 0:
+		return "left"
+	elif tile_coords.y == 0 && tile_coords .x < 0:
+		return "right"
+	elif tile_coords.x == 0 && tile_coords.y < 0:
+		return "down"
+	elif tile_coords.x == 0 && tile_coords.y > 0:
+		return "up"
+	
+	return ""
