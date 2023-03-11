@@ -45,12 +45,12 @@ func triggerTimer():
 		if activate_on_charge():
 			yield(get_tree(), "idle_frame")
 			return
+		print("gets here")
+		appear_ready(true)
 	if charge_style == CHARGE_STYLES.per_turn:
 		turnTimer -= 1
 		update_cool_down_bar()
 	
-	if activation_style == ACTIVATION_STYLES.on_charge:
-		appear_ready(true)
 	if turnTimer == 1:
 		appear_ready()
 	
@@ -74,10 +74,10 @@ func update_cool_down_bar():
 func appear_ready(subtle: bool = false):
 	var goal_sprite = sprite.self_modulate
 	goal_sprite.a = 1.0
-	if subtle:
-		return
 	tween.interpolate_property(sprite, "self_modulate", sprite.self_modulate, goal_sprite, 0.2)
 	tween.start()
+	if subtle:
+		return
 	animator.play("ready")
 	
 
