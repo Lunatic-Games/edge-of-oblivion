@@ -41,11 +41,15 @@ func setup(data):
 	update_cool_down_bar()
 
 func triggerTimer():
-	if charge_style.per_turn:
+	if activation_style == ACTIVATION_STYLES.on_charge:
+		if activate_on_charge():
+			yield(get_tree(), "idle_frame")
+			return
+	if charge_style == CHARGE_STYLES.per_turn:
 		turnTimer -= 1
 		update_cool_down_bar()
 	
-	if activation_style.on_charge:
+	if activation_style == ACTIVATION_STYLES.on_charge:
 		appear_ready(true)
 	if turnTimer == 1:
 		appear_ready()
@@ -53,6 +57,10 @@ func triggerTimer():
 	if turnTimer <= 0:
 		clear_timer_activate()
 	yield(get_tree(), "idle_frame")
+
+# This function is meant to be overriden by children who use on_charge activation style
+func activate_on_charge() -> bool:
+	return false
 
 func clear_timer_activate():
 	turnTimer = maxTurnTimer
