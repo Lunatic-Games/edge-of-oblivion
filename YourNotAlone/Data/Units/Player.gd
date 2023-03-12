@@ -27,6 +27,7 @@ onready var player_camera = $PlayerCamera
 onready var experience_bar = $CanvasLayer/ExperienceBar
 onready var canvas_tween = $CanvasLayer/CanvasTween
 
+
 func _ready():
 	var startingItems = [preload("res://Item/ShortSword/ShortSword.tres")]
 	for item in startingItems:
