@@ -8,9 +8,9 @@
 script = ExtResource( 1 )
 sprite = ExtResource( 3 )
 itemScene = ExtResource( 2 )
-tier1Text = ""
-tier2Text = ""
-tier3Text = ""
+tier1Text = "Trigger on Charge (% of charge) - fires charge-number tiles latest move direction (Up to 2)"
+tier2Text = "+1 Max Charges. On full charge, wider blast"
+tier3Text = "+1 Max Charges. On not full charge, lose all but 1 charge when fired"
 max_turn_timer = 3
 item_damage = 0
 path = ""
