@@ -19,15 +19,12 @@ func activate_on_charge() -> bool:
 	# Roll chance
 	if turnTimer == 1:
 		max_blast = true
+	charges = maxTurnTimer - turnTimer
 	var chance_to_activate: float = float(maxTurnTimer - turnTimer) / maxTurnTimer
 	var roll = randf()
-	#print(chance_to_activate, roll)
 	if roll < chance_to_activate:
-		#print("passed roll")
-		charges = maxTurnTimer - turnTimer
 		clear_timer_activate()
 		return true
-	#print("Failed roll")
 	return false
 	
 func upgradeTier() -> bool:
@@ -48,6 +45,9 @@ func perform_attack() -> void:
 	var tiles: Array = gather_tiles()
 	spawn_fire_particles(tiles)
 	attack(tiles)
+	if not max_blast and currentTier >= 3:
+		turnTimer -= 1
+		update_cool_down_bar()
 	max_blast = false
 	charges = 0
 	$AnimationPlayer.play("Shake")
@@ -55,10 +55,9 @@ func perform_attack() -> void:
 func gather_tiles() -> Array:
 	var tiles: Array = []
 	var current_tile: Tile = user.currentTile
-	if charges == 0:
-		print("ERROR NO CHARGES")
-	if not current_tile:
-		return []
+	assert(charges > 0, "ERROR [ARQUEBUS]: FIRED NO CHARGES")
+	#if not current_tile:
+	#	return []
 	match user.last_direction_moved:
 		"up":
 			for i in range(charges):
