@@ -45,7 +45,6 @@ func triggerTimer():
 		if activate_on_charge():
 			yield(get_tree(), "idle_frame")
 			return
-		print("gets here")
 		appear_ready(true)
 	if charge_style == CHARGE_STYLES.per_turn:
 		turnTimer -= 1

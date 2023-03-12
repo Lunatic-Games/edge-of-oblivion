@@ -19,6 +19,7 @@ var levelThresholds = {
 	10:5
 }
 var items = []
+var last_direction_moved: String = "up"
 
 onready var movesRemaining = moves
 onready var item_container = $CanvasLayer/ItemContainer
@@ -39,19 +40,20 @@ func handleMovement():
 	if (Input.is_action_just_pressed("up")):
 		if(currentTile.topTile):
 			move_to_tile(currentTile.topTile) # MovementUtility.moveDirection.up
+			last_direction_moved = "up"
 	
 	if (Input.is_action_just_pressed("down")):
 		if(currentTile.bottomTile):
 			move_to_tile(currentTile.bottomTile)
-	
+			last_direction_moved = "down"
 	if (Input.is_action_just_pressed("left")):
 		if(currentTile.leftTile):
 			move_to_tile(currentTile.leftTile)
-	
+			last_direction_moved = "left"
 	if (Input.is_action_just_pressed("right")):
 		if(currentTile.rightTile):
 			move_to_tile(currentTile.rightTile)
-	
+			last_direction_moved = "right"
 	if (Input.is_action_just_pressed("levelUpCheat")):
 		levelUp()
 
