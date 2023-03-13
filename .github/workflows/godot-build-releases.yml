@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v3.1.0
         with:
           name: windows-${{ env.EXPORT_NAME }}
-          path: build/windows
+          path: ${{ env.PROJECT_PATH }}/build/windows
           
       - name: Build for Lunix
         run: |
@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v3.1.0
         with:
           name: linux-${{ env.EXPORT_NAME }}
-          path: build/linux
+          path: ${{ env.PROJECT_PATH }}/build/linux
   
       - name: Build for HTML5
         run: |
@@ -54,4 +54,4 @@ jobs:
         uses: actions/upload-artifact@v3.1.0
         with:
           name: html5-${{ env.EXPORT_NAME }}
-          path: build/html5
+          path: ${{ env.PROJECT_PATH }}/build/html5
