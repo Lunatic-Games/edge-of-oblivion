@@ -1,0 +1,57 @@
+name: Build Release Executables
+
+on:
+  push:
+    branches: [ "master", "PK-85-github-ci" ]
+        
+env:
+  GODOT_VERSION: 3.5.1
+  EXPORT_NAME: "PuzzleKnight-${{ github.ref_name }}"
+  PROJECT_PATH: "./YourNotAlone/"
+
+jobs:
+  export:
+    name: Export from Godot
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.5.0
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          cp .github/workflows/export_presets.cfg export_presets.cfg
+      
+      - name: Build for Windows
+        run: |
+          mkdir -v -p build/windows
+          godot -v --path $PROJECT_PATH --no-window --export "Windows Desktop" build/windows/$EXPORT_NAME.exe
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: windows-${{ env.EXPORT_NAME }}
+          path: build/windows
+          
+      - name: Build for Lunix
+        run: |
+          mkdir -v -p build/linux
+          godot -v --path $PROJECT_PATH --no-window --export "Linux/X11" build/linux/$EXPORT_NAME.x86_64
+      - name: Upload Linux Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: linux-${{ env.EXPORT_NAME }}
+          path: build/linux
+  
+      - name: Build for HTML5
+        run: |
+          mkdir -v -p build/html5
+          godot -v --path $PROJECT_PATH --no-window --export "HTML5" build/html5/$EXPORT_NAME.zip
+      - name: Upload HTML5 Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: html5-${{ env.EXPORT_NAME }}
+          path: build/html5
