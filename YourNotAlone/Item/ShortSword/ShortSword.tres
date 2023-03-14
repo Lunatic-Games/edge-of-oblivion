@@ -9,9 +9,9 @@ script = ExtResource( 2 )
 sprite = ExtResource( 3 )
 itemScene = ExtResource( 1 )
 item_name = "Gladius"
-tier1Text = "[center]Every 3 rounds, attacks left for [color=ff6565]1[color] damage."
+tier1Text = "[center]Every 3 rounds, attacks left for [color=ff6565]2[color] damage."
 tier2Text = "[center]Also attacks right."
-tier3Text = "[center]Attack two rounds in a row."
+tier3Text = "[center]Do [color=ff6565]4[color] damage."
 max_turn_timer = 3
 item_damage = 2
 path = "res://Item/ShortSword/ShortSword.tres"
