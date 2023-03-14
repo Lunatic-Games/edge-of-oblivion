@@ -28,7 +28,7 @@ jobs:
       - name: Build for Windows
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/windows
-          godot -v --path $PROJECT_PATH --no-window --export "Windows Desktop Dev" build/windows/$EXPORT_NAME.exe         
+          godot -v --path $PROJECT_PATH --no-window --export-debug "Windows Desktop" build/windows/$EXPORT_NAME.exe         
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v3.1.0
         with:
@@ -37,7 +37,7 @@ jobs:
       - name: Build for Lunix
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/linux
-          godot -v --path $PROJECT_PATH --no-window --export "Linux/X11 Dev" build/linux/$EXPORT_NAME.x86_64          
+          godot -v --path $PROJECT_PATH --no-window --export-debug "Linux/X11" build/linux/$EXPORT_NAME.x86_64          
       - name: Upload Linux Artifact
         uses: actions/upload-artifact@v3.1.0
         with:
@@ -46,7 +46,7 @@ jobs:
       - name: Build for HTML5
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/html5
-          godot -v --path $PROJECT_PATH --no-window --export "HTML5 Dev" build/html5/$EXPORT_NAME.zip      
+          godot -v --path $PROJECT_PATH --no-window --export-debug "HTML5" build/html5/$EXPORT_NAME.zip      
       - name: Upload HTML5 Artifact
         uses: actions/upload-artifact@v3.1.0
         with:
