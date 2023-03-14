@@ -24,7 +24,7 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-          cp .github/workflows/export_presets.cfg ${PROJECT_PATH}/export_presets.cf     
+          cp .github/workflows/export_presets.cfg ${PROJECT_PATH}/export_presets.cfg
       - name: Build for Windows
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/windows
