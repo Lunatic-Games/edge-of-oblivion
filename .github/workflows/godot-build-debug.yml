@@ -42,14 +42,5 @@ jobs:
         uses: actions/upload-artifact@v3.1.0
         with:
           name: linux-${{ env.EXPORT_NAME }}
-          path: ${{ env.PROJECT_PATH }}/build/linux         
-      - name: Build for HTML5
-        run: |
-          mkdir -v -p ${PROJECT_PATH}/build/html5
-          godot -v --path $PROJECT_PATH --no-window --export-debug "HTML5" build/html5/$EXPORT_NAME.zip      
-      - name: Upload HTML5 Artifact
-        uses: actions/upload-artifact@v3.1.0
-        with:
-          name: html5-${{ env.EXPORT_NAME }}
-          path: ${{ env.PROJECT_PATH }}/build/html5  
+          path: ${{ env.PROJECT_PATH }}/build/linux
 
