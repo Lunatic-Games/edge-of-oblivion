@@ -1,0 +1,33 @@
+name: Testing Github API
+
+on:
+  push:
+    branches: [ "PK-85-github-ci" ]
+        
+env:
+  GODOT_VERSION: 3.5.1
+  EXPORT_NAME: "${{ github.event.repository.name }}-debug"
+  PROJECT_PATH: "./YourNotAlone"
+
+jobs:
+  export:
+    name: Export from Godot
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:latest
+    steps:
+      - name: Find Old Artifacts
+        uses: actions/github-script@v6
+        id: find-artifacts
+        with:
+          script: |
+            const res = await github.rest.actions.listArtifactsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+
+            return res.data.artifacts
+       - name: Print found artifacts
+         run: echo "${{steps.find-artifacts.outputs.result}}"
+    
+
