@@ -11,10 +11,8 @@ env:
 
 jobs:
   export:
-    name: Export from Godot
+    name: Testing Github API
     runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:latest
     steps:
       - name: Find Old Artifacts
         uses: actions/github-script@v6
@@ -27,7 +25,7 @@ jobs:
             })
 
             return res.data.artifacts
-       - name: Print found artifacts
-         run: echo "${{steps.find-artifacts.outputs.result}}"
+      - name: Print found artifacts
+        run: echo "${{steps.find-artifacts.outputs.result}}"
     
 
