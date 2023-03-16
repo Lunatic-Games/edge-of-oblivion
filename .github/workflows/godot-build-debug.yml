@@ -48,6 +48,7 @@ jobs:
   clean:
     name: Cleanup Old Artifacts
     runs-on: ubuntu-latest
+    needs: export
     steps:
       - name: Find and delete old artifacts
         uses: actions/github-script@v6
