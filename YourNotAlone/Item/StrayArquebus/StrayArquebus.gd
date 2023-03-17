@@ -1,6 +1,7 @@
 extends "res://Item/Item.gd"
 
 var damage_amount: int = 1
+var max_blast_amount: int = 2
 var max_blast: bool = false
 var charges: int = 0
 
@@ -42,7 +43,8 @@ func activateItem() -> void:
 	yield(get_tree(), "idle_frame")
 
 func perform_attack() -> void:
-	var tiles: Array = gather_tiles()
+	var scan_res: ItemUtil.ScanResult = ItemUtil.scan_in_direction(user.currentTile, user.last_direction_moved, charges)
+	var tiles: Array = scan_res.tiles
 	spawn_fire_particles(tiles)
 	attack(tiles)
 	if not max_blast and currentTier >= 3:
@@ -52,85 +54,16 @@ func perform_attack() -> void:
 	charges = 0
 	$AnimationPlayer.play("Shake")
 
-func gather_tiles() -> Array:
-	var tiles: Array = []
-	var current_tile: Tile = user.currentTile
-	assert(charges > 0, "ERROR [ARQUEBUS]: FIRED NO CHARGES")
-	#if not current_tile:
-	#	return []
-	match user.last_direction_moved:
-		"up":
-			for i in range(charges):
-				current_tile = current_tile.topTile
-				if current_tile:
-					tiles.append(current_tile)
-					if i > 0 and max_blast and currentTier >= 2:
-						var side1: Tile = current_tile.leftTile
-						var side2: Tile = current_tile.rightTile
-						if side1:
-							tiles.append(side1)
-						if side2:
-							tiles.append(side2)
-				else:
-					break
-				if not current_tile.topTile:
-					break
-		"down":
-			for i in range(charges):
-				current_tile = current_tile.bottomTile
-				if current_tile:
-					tiles.append(current_tile)
-					if i > 0 and max_blast and currentTier >= 2:
-						var side1: Tile = current_tile.leftTile
-						var side2: Tile = current_tile.rightTile
-						if side1:
-							tiles.append(side1)
-						if side2:
-							tiles.append(side2)
-				else:
-					break
-				if not current_tile.bottomTile:
-					break
-		"left":
-			for i in range(charges):
-				current_tile = current_tile.leftTile
-				if current_tile:
-					tiles.append(current_tile)
-					if i > 0 and max_blast and currentTier >= 2:
-						var side1: Tile = current_tile.topTile
-						var side2: Tile = current_tile.bottomTile
-						if side1:
-							tiles.append(side1)
-						if side2:
-							tiles.append(side2)
-				else:
-					break
-				if not current_tile.leftTile:
-					break
-		"right":
-			for i in range(charges):
-				current_tile = current_tile.rightTile
-				if current_tile:
-					tiles.append(current_tile)
-					if i > 0 and max_blast and currentTier >= 2:
-						var side1: Tile = current_tile.topTile
-						var side2: Tile = current_tile.bottomTile
-						if side1:
-							tiles.append(side1)
-						if side2:
-							tiles.append(side2)
-				else:
-					break
-				if not current_tile.rightTile:
-					break
-	return tiles
-
 func attack(tiles: Array) -> void:
 	for t in tiles:
 		var occupant: Occupant = t.occupied
 		if occupant:
 			if occupant.damageable:
-				occupant.takeDamage(damage_amount)
+				#occupant.takeDamage(damage_amount)
+				if max_blast:
+					occupant.takeDamage(max_blast_amount)
+				else:
+					occupant.takeDamage(damage_amount)
 
 func spawn_fire_particles(tiles: Array) -> void:
 	for t in tiles:
