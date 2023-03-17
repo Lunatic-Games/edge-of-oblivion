@@ -44,6 +44,11 @@ func activateItem() -> void:
 
 func perform_attack() -> void:
 	var scan_res: ItemUtil.ScanResult = ItemUtil.scan_in_direction(user.currentTile, user.last_direction_moved, charges)
+	# The below section changes non-max_blast attacks to have range 1 instead of #charges; comment out to try alternative
+	#######
+	if not max_blast:
+		scan_res = ItemUtil.scan_in_direction(user.currentTile, user.last_direction_moved, 1)
+	#######
 	var tiles: Array = scan_res.tiles
 	spawn_fire_particles(tiles)
 	attack(tiles)
@@ -59,7 +64,6 @@ func attack(tiles: Array) -> void:
 		var occupant: Occupant = t.occupied
 		if occupant:
 			if occupant.damageable:
-				#occupant.takeDamage(damage_amount)
 				if max_blast:
 					occupant.takeDamage(max_blast_amount)
 				else:
