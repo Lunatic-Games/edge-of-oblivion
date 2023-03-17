@@ -43,11 +43,12 @@ func activateItem() -> void:
 	yield(get_tree(), "idle_frame")
 
 func perform_attack() -> void:
-	var scan_res: ItemUtil.ScanResult = ItemUtil.scan_in_direction(user.currentTile, user.last_direction_moved, charges)
+	var last_direction: String = user.move_history.get_record(0).direction
+	var scan_res: ItemUtil.ScanResult = ItemUtil.scan_in_direction(user.currentTile, last_direction, charges)
 	# The below section changes non-max_blast attacks to have range 1 instead of #charges; comment out to try alternative
 	#######
 	if not max_blast:
-		scan_res = ItemUtil.scan_in_direction(user.currentTile, user.last_direction_moved, 1)
+		scan_res = ItemUtil.scan_in_direction(user.currentTile, last_direction, 1)
 	#######
 	var tiles: Array = scan_res.tiles
 	spawn_fire_particles(tiles)

@@ -14,6 +14,7 @@ onready var tween = $Tween
 onready var sprite = $Sprite
 onready var damaged_particle_scene = preload("res://Data/Particles/DamagedParticles.tscn")
 onready var health_particle_scene = preload("res://Data/Particles/HealthParticles.tscn")
+onready var move_history = MovementUtility.MoveHistory.new()
 
 onready var particles: Dictionary = {
 	"damage": damaged_particle_scene,
