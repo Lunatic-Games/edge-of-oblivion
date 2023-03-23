@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://Item/ITEM_DATA.gd" type="Script" id=1]
+[ext_resource path="res://Item/DraculasKnives/DraculasKnives.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/weapons/icons/ffffff/transparent/1x1/lorc/stiletto.svg" type="Texture" id=3]
+
+[resource]
+script = ExtResource( 1 )
+sprite = ExtResource( 3 )
+itemScene = ExtResource( 2 )
+item_name = "Draculas Knives"
+tier1Text = "Attack right for 1. Lifesteal"
+tier2Text = "Also attack range 1"
+tier3Text = "Also attack range 2"
+max_turn_timer = 4
+item_damage = 1
+path = ""

@@ -1,9 +1,5 @@
 extends "res://Item/Item.gd"
 
-# Tiers
-# 1 - Attack left space
-# 2 - Attack right space also
-# 3 - Attacks two turns in a row
 func activateItem():
 	performAttack()
 	yield(get_tree(), "idle_frame")
@@ -24,3 +20,18 @@ func attack(tile):
 	spawnSlashParticle(tile.global_position)
 	if tile.occupied && tile.occupied.isEnemy():
 		tile.occupied.takeDamage(item_damage)
+
+func upgradeTier() -> bool:
+	currentTier += 1
+	
+	if currentTier == 2:
+		maxTurnTimer = 4
+		
+	
+	if currentTier == 3:
+		item_damage = 4
+	
+	if currentTier >= maxTier:
+		return true
+	
+	return false

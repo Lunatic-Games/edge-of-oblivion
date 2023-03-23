@@ -3,6 +3,7 @@ extends "res://Data/Units/Unit.gd"
 signal itemReachedMaxTier
 signal playerDied
 
+var experience_bar_update_time = 0.2
 var moves = 1
 var currentXp = 0
 var currentLevel = 1
@@ -23,6 +24,9 @@ var items = []
 onready var movesRemaining = moves
 onready var item_container = $CanvasLayer/ItemContainer
 onready var player_camera = $PlayerCamera
+onready var experience_bar = $CanvasLayer/ExperienceBar
+onready var canvas_tween = $CanvasLayer/CanvasTween
+
 
 func _ready():
 	var startingItems = [preload("res://Item/ShortSword/ShortSword.tres")]
@@ -40,20 +44,20 @@ func handleMovement():
 		if(currentTile.topTile):
 			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.topTile, "up", "handleMovement"))
 			move_to_tile(currentTile.topTile) # MovementUtility.moveDirection.up
-	if (Input.is_action_just_pressed("down")):
+	elif (Input.is_action_just_pressed("down")):
 		if(currentTile.bottomTile):
 			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.bottomTile, "down", "handleMovement"))
 			move_to_tile(currentTile.bottomTile)
-	if (Input.is_action_just_pressed("left")):
+	elif (Input.is_action_just_pressed("left")):
 		if(currentTile.leftTile):
 			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.leftTile, "left", "handleMovement"))
 			move_to_tile(currentTile.leftTile)
-	if (Input.is_action_just_pressed("right")):
+	elif (Input.is_action_just_pressed("right")):
 		if(currentTile.rightTile):
 			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.rightTile, "right", "handleMovement"))
 			move_to_tile(currentTile.rightTile)
-	if (Input.is_action_just_pressed("levelUpCheat")):
-		levelUp()
+	elif(Input.is_action_just_pressed("wait")):
+		TurnManager.endPlayerTurn()
 
 
 func move_to_tile(tile, move_precedence: float = 0.0) -> void:
@@ -81,11 +85,19 @@ func gainExperience(experience):
 	
 	if currentXp >= levelThresholds[currentLevel]:
 		levelUp()
+	else:
+		update_experience_bar()
 
 func levelUp():
-	GameManager.spawnChest()
+	FreeUpgradeMenu.spawnUpgradeCards(3)
+	update_experience_bar()
 	currentLevel += 1
 	currentXp = 0
+	yield(get_tree().create_timer(experience_bar_update_time), "timeout")
+	experience_bar.emit_particle()
+	update_experience_bar()
+	
+	
 
 func gainItem(itemData):
 	if itemData in items:
@@ -96,3 +108,9 @@ func gainItem(itemData):
 
 func isEnemy():
 	return false
+
+func update_experience_bar() -> void:
+	experience_bar.max_value = levelThresholds[currentLevel]
+	canvas_tween.interpolate_property(experience_bar, "value", experience_bar.value, currentXp, experience_bar_update_time)
+	canvas_tween.start()
+	yield(canvas_tween, "tween_all_completed")

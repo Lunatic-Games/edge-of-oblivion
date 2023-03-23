@@ -7,7 +7,9 @@ const full_card_list: Array = [
 	"res://Item/TokenOfLove/TokenOfLove.tres",
 	"res://Item/DragonCloak/DragonCloak.tres",
 	"res://Item/HolyFire/HolyFire.tres",
-	"res://Item/StrayArquebus/StrayArquebus.tres"
+	"res://Item/StrayArquebus/StrayArquebus.tres",
+	"res://Item/Broom/Broom.tres",
+	"res://Item/DraculasKnives/DraculasKnives.tres"
 ]
 
 var cardScene = preload("res://Card.tscn")

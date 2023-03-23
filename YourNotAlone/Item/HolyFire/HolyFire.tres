@@ -8,6 +8,7 @@
 script = ExtResource( 1 )
 sprite = ExtResource( 3 )
 itemScene = ExtResource( 2 )
+item_name = "Holy Fire"
 tier1Text = "Deals 1 damage to 3 random tiles in a 2 tile radius from the player (Tiles can be damaged more than once)"
 tier2Text = "Increases to 5 random tiles"
 tier3Text = "Increases to 7 random tiles"
