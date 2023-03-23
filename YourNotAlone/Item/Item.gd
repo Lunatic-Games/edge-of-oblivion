@@ -113,7 +113,6 @@ func spawnSlashParticle(positionToSpawn):
 	slashParticle.global_position = positionToSpawn
 	if positionToSpawn.x < user.currentTile.global_position.x:
 		slashParticle.scale.x = slashParticle.scale.x * -1
-	slashParticle.emitting = true
 	GameManager.gameboard.add_child(slashParticle)
 
 func spawn_lightning_particle(position_to_spawn):

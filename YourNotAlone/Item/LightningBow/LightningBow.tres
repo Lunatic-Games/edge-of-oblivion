@@ -8,8 +8,10 @@
 script = ExtResource( 1 )
 sprite = ExtResource( 3 )
 itemScene = ExtResource( 2 )
+item_name = "Lightning Bow"
 tier1Text = "Shoot up range 1 for 1 damage. Chain 1."
 tier2Text = "Chains 2."
 tier3Text = "Chains 4."
 max_turn_timer = 3
+item_damage = 1
 path = "res://Item/LightningBow/LightningBow.tres"

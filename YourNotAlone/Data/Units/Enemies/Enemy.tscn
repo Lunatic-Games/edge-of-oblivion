@@ -5,7 +5,7 @@
 [ext_resource path="res://Data/MoveSets/Move.tscn" type="PackedScene" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.427451, 0.568627, 0.611765, 1 )
+bg_color = Color( 0.32, 0.688, 0.8, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.737255, 0.803922, 0.807843, 0.403922 )

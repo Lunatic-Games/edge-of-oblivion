@@ -27,8 +27,8 @@ margin_top = 197.0
 margin_right = 1043.0
 margin_bottom = 300.0
 bbcode_enabled = true
-bbcode_text = "[center][shake]Move with W A S D"
-text = "Move with W A S D"
+bbcode_text = "[center][shake]Move with W A S D (SPACE to stand still!)"
+text = "Move with W A S D (SPACE to stand still!)"
 
 [node name="StartingEquipmentLabel" type="RichTextLabel" parent="."]
 margin_left = -386.0
@@ -40,7 +40,6 @@ bbcode_text = "[center][color=yellow][wave]Your starting equipment!"
 text = "Your starting equipment!"
 
 [node name="Card" parent="." instance=ExtResource( 3 )]
-modulate = Color( 1, 1, 1, 1 )
 margin_left = 126.0
 margin_top = 274.0
 margin_right = 166.0

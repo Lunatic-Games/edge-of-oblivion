@@ -21,7 +21,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 3.0
 scale_curve = SubResource( 4 )
-color = Color( 0.854902, 0.388235, 0.462745, 1 )
+color = Color( 0.854902, 0.517647, 0.388235, 1 )
 
 [node name="Boss" instance=ExtResource( 2 )]
 scale = Vector2( 1.25, 1.25 )
@@ -29,7 +29,7 @@ script = ExtResource( 3 )
 boss_data = ExtResource( 5 )
 
 [node name="Sprite" parent="." index="1"]
-self_modulate = Color( 0.854902, 0.388235, 0.462745, 1 )
+self_modulate = Color( 0.854902, 0.517647, 0.388235, 1 )
 texture = ExtResource( 4 )
 
 [node name="HealthBar" parent="." index="3"]

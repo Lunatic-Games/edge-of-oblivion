@@ -16,6 +16,9 @@ export (int) var min_range = 1
 export (int) var max_range = 1
 export (bool) var preferred_hitting_player = true
 
+onready var slash_effect_scene = preload("res://SlashParticles.tscn")
+onready var arrow_effect_scene = preload("res://Data/Indicators/attack_effects/RangedAttackEffect.tscn")
+
 func indicate(starting_tile) -> void:
 	var tile_to_indicate = choose_target_tile(starting_tile)
 	
@@ -71,3 +74,39 @@ func choose_target_tile(starting_tile):
 # Implement per action that requires player based targeting!
 func player_based_targeting(starting_tile):
 	pass
+
+func spawn_slash_effect(tile: Tile) -> void:
+	var effect = slash_effect_scene.instance()
+	effect.global_position = tile.global_position
+	effect.modulate = Color("c69fa5")
+	
+	match targeting_type:
+		TARGETING_TYPE.down:
+			effect.rotation_degrees = 45
+		TARGETING_TYPE.up:
+			effect.rotation_degrees = 60
+		TARGETING_TYPE.left:
+			effect.rotation_degrees = 180
+		TARGETING_TYPE.right:
+			effect.rotation_degrees = 0
+	
+	GameManager.gameboard.add_child(effect)
+
+func spawn_arrow_effect(starting_tile: Tile, ending_tile: Tile) -> Object:
+	var effect = arrow_effect_scene.instance()
+	effect.global_position = starting_tile.global_position
+	effect.modulate = Color("c69fa5")
+	
+	match targeting_type:
+		TARGETING_TYPE.down:
+			effect.rotation_degrees = 90
+		TARGETING_TYPE.up:
+			effect.rotation_degrees = -90
+		TARGETING_TYPE.left:
+			effect.rotation_degrees = 180
+		TARGETING_TYPE.right:
+			effect.rotation_degrees = 0
+	
+	GameManager.gameboard.add_child(effect)
+	effect.setup(starting_tile, ending_tile)
+	return effect
