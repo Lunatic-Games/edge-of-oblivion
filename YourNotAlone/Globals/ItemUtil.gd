@@ -61,3 +61,36 @@ func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
 		else:
 			break
 	return ScanResult.new(tiles,occupants)
+
+func scan_in_direction(origin_tile: Tile, direction: String, count: int) -> ScanResult:
+	var tiles: Array = []
+	var occupants: Array = []
+	var current_tile: Tile = origin_tile
+	assert(count > 0, "ERROR [ItemUtil]: Can't scan " + str(count) + " tiles")
+	for _i in range(count):
+		match direction:
+			"up":
+				current_tile = current_tile.topTile
+			"down":
+				current_tile = current_tile.bottomTile
+			"left":
+				current_tile = current_tile.leftTile
+			"right":
+				current_tile = current_tile.rightTile
+		if current_tile:
+			tiles.append(current_tile)
+		else:
+			break
+		var next_tile: Tile
+		match direction:
+			"up":
+				next_tile = current_tile.topTile
+			"down":
+				next_tile = current_tile.bottomTile
+			"left":
+				next_tile = current_tile.leftTile
+			"right":
+				next_tile = current_tile.rightTile
+		if not next_tile:
+			break
+	return ScanResult.new(tiles, occupants)

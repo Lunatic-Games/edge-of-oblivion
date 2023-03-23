@@ -42,15 +42,19 @@ func handleMovement():
 	
 	if (Input.is_action_just_pressed("up")):
 		if(currentTile.topTile):
+			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.topTile, "up", "handleMovement"))
 			move_to_tile(currentTile.topTile) # MovementUtility.moveDirection.up
 	elif (Input.is_action_just_pressed("down")):
 		if(currentTile.bottomTile):
+			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.bottomTile, "down", "handleMovement"))
 			move_to_tile(currentTile.bottomTile)
 	elif (Input.is_action_just_pressed("left")):
 		if(currentTile.leftTile):
+			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.leftTile, "left", "handleMovement"))
 			move_to_tile(currentTile.leftTile)
 	elif (Input.is_action_just_pressed("right")):
 		if(currentTile.rightTile):
+			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.rightTile, "right", "handleMovement"))
 			move_to_tile(currentTile.rightTile)
 	elif(Input.is_action_just_pressed("wait")):
 		TurnManager.endPlayerTurn()

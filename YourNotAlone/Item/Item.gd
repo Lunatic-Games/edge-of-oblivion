@@ -1,11 +1,25 @@
 extends Control
 
+enum CHARGE_STYLES {
+	per_turn,
+	damage_dealt,
+	damage_taken
+}
+
+enum ACTIVATION_STYLES {
+	on_ready,
+	on_charge,
+	on_condition
+}
+
 var user
 var turnTimer
 var maxTurnTimer
 var currentTier = 0
 var maxTier = 3
 var item_damage = 1
+var charge_style = CHARGE_STYLES.per_turn
+var activation_style = ACTIVATION_STYLES.on_ready
 
 onready var slashParticleScene = preload("res://SlashParticles.tscn")
 onready var lightning_particle_scene = preload("res://Data/Indicators/PlayerWeaponIndicators/LightningBowIndicator.tscn")
@@ -27,28 +41,42 @@ func setup(data):
 	update_cool_down_bar()
 
 func triggerTimer():
-	turnTimer -= 1
+	if activation_style == ACTIVATION_STYLES.on_charge:
+		if activate_on_charge():
+			yield(get_tree(), "idle_frame")
+			return
+		appear_ready(true)
+	if charge_style == CHARGE_STYLES.per_turn:
+		turnTimer -= 1
+		update_cool_down_bar()
 	
-	update_cool_down_bar()
 	if turnTimer == 1:
 		appear_ready()
 	
 	if turnTimer <= 0:
-		turnTimer = maxTurnTimer
-		update_cool_down_bar()
-		appear_unready()
-		yield(activateItem(), "completed")
-	
+		clear_timer_activate()
 	yield(get_tree(), "idle_frame")
+
+# This function is meant to be overriden by children who use on_charge activation style
+func activate_on_charge() -> bool:
+	return false
+
+func clear_timer_activate():
+	turnTimer = maxTurnTimer
+	update_cool_down_bar()
+	appear_unready()
+	yield(activateItem(), "completed")
 
 func update_cool_down_bar():
 	cooldown_bar.value = (1 - float(turnTimer-1)/float(maxTurnTimer-1)) * 100
 
-func appear_ready():
+func appear_ready(subtle: bool = false):
 	var goal_sprite = sprite.self_modulate
 	goal_sprite.a = 1.0
 	tween.interpolate_property(sprite, "self_modulate", sprite.self_modulate, goal_sprite, 0.2)
 	tween.start()
+	if subtle:
+		return
 	animator.play("ready")
 	
 
@@ -70,8 +98,9 @@ func upgradeTier() -> bool:
 	
 	return false
 
+# This func is meant to be overriden by children
 func activateItem():
-	pass
+	print("Item not given an 'activateItem()' override.")
 
 # returns wether or not the item should be displaying that it's activatable
 func is_ready_to_use():
