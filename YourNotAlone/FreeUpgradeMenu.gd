@@ -33,6 +33,7 @@ func disableDisplay():
 		child.queue_free()
 
 func spawnUpgradeCards(cardsToSpawn):
+	availableCards.shuffle()
 	display()
 	
 	for x in cardsToSpawn:

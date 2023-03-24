@@ -32,7 +32,7 @@ func perform_attack() -> void:
 
 func attack(targets: Array) -> void:
 	for target in targets:
-		if target.damageable and target != user:
+		if is_instance_valid(target) and target.damageable and target != user:
 			target.takeDamage(damage_amount)
 
 func spawn_fire_particles(tiles: Array) -> void:

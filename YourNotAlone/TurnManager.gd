@@ -2,31 +2,38 @@ extends Node
 
 signal playerTurnEnded
 
-var goblinScene = preload("res://Data/Units/Enemies/Faded.tscn")
+var faded_scene = preload("res://Data/Units/Enemies/Faded.tscn")
 var lost_ranger_scene = preload("res://Data/Units/Enemies/LostRanger.tscn")
 var forsworn_pike_scene = preload("res://Data/Units/Enemies/ForswornPike.tscn")
 var forgotten_king_scene = preload("res://Data/Units/Enemies/Boss/ForgottenKing.tscn")
 
 var roundSpawnData = {
-	2:[goblinScene],
-	5:[goblinScene],
-	9:[goblinScene],
-	15:[lost_ranger_scene],
-	19:[goblinScene, lost_ranger_scene],
-	23:[goblinScene, goblinScene],
-	27:[goblinScene],
-	31:[goblinScene,lost_ranger_scene],
-	35:[goblinScene, goblinScene],
-	38:[goblinScene, goblinScene],
-	42:[forsworn_pike_scene],
-	46:[lost_ranger_scene, forsworn_pike_scene],
-	50: [goblinScene, goblinScene, goblinScene],
-	55: [forsworn_pike_scene],
-	60: [forsworn_pike_scene, forsworn_pike_scene],
-	65: [forgotten_king_scene],
-	70: [forsworn_pike_scene, lost_ranger_scene],
-	74: [goblinScene, forsworn_pike_scene],
-	80: [forsworn_pike_scene, forsworn_pike_scene]
+		2: [faded_scene],
+		6: [faded_scene],
+		12: [faded_scene, faded_scene],
+		20: [faded_scene],
+		26: [faded_scene],
+		34: [faded_scene, faded_scene],
+		40: [faded_scene],
+		44: [faded_scene],
+		55: [lost_ranger_scene, faded_scene],
+		65: [lost_ranger_scene, lost_ranger_scene, lost_ranger_scene],
+		75: [faded_scene, faded_scene],
+		80: [faded_scene, lost_ranger_scene],
+		85: [lost_ranger_scene, lost_ranger_scene, faded_scene],
+		90: [faded_scene],
+		100: [forsworn_pike_scene],
+		105: [forsworn_pike_scene],
+		115: [forsworn_pike_scene, forsworn_pike_scene, forsworn_pike_scene, forsworn_pike_scene],
+		125: [faded_scene, lost_ranger_scene],
+		135: [forsworn_pike_scene],
+		145: [forsworn_pike_scene, lost_ranger_scene, lost_ranger_scene],
+		150: [forgotten_king_scene],
+		152: [forsworn_pike_scene, forsworn_pike_scene, faded_scene, faded_scene, lost_ranger_scene],
+		158: [forsworn_pike_scene, lost_ranger_scene, faded_scene],
+		168: [lost_ranger_scene, lost_ranger_scene, lost_ranger_scene, forsworn_pike_scene, forsworn_pike_scene],
+		175: [forsworn_pike_scene, faded_scene, lost_ranger_scene]
+		
 	}
 
 enum turnState {enemy, player}

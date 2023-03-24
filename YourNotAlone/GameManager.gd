@@ -27,6 +27,7 @@ signal boss_spawned
 signal boss_defeated
 
 func startGame():
+	randomize()
 	gameboard = get_tree().get_nodes_in_group("gameboard")[0]
 	generateTiles()
 	spawnPlayer()
