@@ -8,9 +8,10 @@
 script = ExtResource( 1 )
 sprite = ExtResource( 3 )
 itemScene = ExtResource( 2 )
-tier1Text = "Trigger on Charge (% of charge) - fires charge-number tiles latest move direction (Up to 2)"
-tier2Text = "+1 Max Charges. On full charge, wider blast"
-tier3Text = "+1 Max Charges. On not full charge, lose all but 1 charge when fired"
+item_name = "Stray Arquebus"
+tier1Text = "[color=#FF6565]1[/color] damage, range 1. [color=#FF8E59]Chance to fire on charge.[/color] Full charge: range 2"
+tier2Text = "+1 turns to full charge. Full charge: range 3, [color=#FF6565]1[/color] bonus damage."
+tier3Text = "+1 turns to full charge. Full charge: range 4, [color=#FF6565]1[/color] bonus damage. Not full charge: 1 free charge"
 max_turn_timer = 3
 item_damage = 0
 path = ""
