@@ -12,6 +12,8 @@ enum ACTIVATION_STYLES {
 	on_condition
 }
 
+const volatile_color = Color( 1, 0.556863, 0.34902, 1 )
+
 var user
 var turnTimer
 var maxTurnTimer
@@ -52,6 +54,7 @@ func triggerTimer():
 	
 	if turnTimer == 1:
 		appear_ready()
+		sprite.modulate = Color.white
 	
 	if turnTimer <= 0:
 		clear_timer_activate()
@@ -88,7 +91,8 @@ func appear_unready():
 	var new_pos = sprite.position
 	new_pos.y = 0
 	tween.interpolate_property(sprite, "position", sprite.position, new_pos, 0.2)
-	
+	if activation_style == ACTIVATION_STYLES.on_charge:
+		sprite.modulate = volatile_color
 	tween.start()
 
 func upgradeTier() -> bool:
