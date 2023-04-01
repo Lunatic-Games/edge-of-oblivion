@@ -8,6 +8,7 @@ env:
   GODOT_VERSION: 3.5.1
   EXPORT_NAME: "${{ github.event.repository.name }}-debug"
   PROJECT_PATH: "./YourNotAlone"
+  NUM_OF_ARTIFACTS_TO_KEEP: 2
 
 jobs:
   export:
@@ -25,22 +26,54 @@ jobs:
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
           cp .github/workflows/export_presets.cfg ${PROJECT_PATH}/export_presets.cfg
-      - name: Build for Windows
+      - name: Build for windows
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/windows
           godot -v --path $PROJECT_PATH --no-window --export-debug "Windows Desktop" build/windows/$EXPORT_NAME.exe         
-      - name: Upload Windows Artifact
+      - name: Upload windows artifact
         uses: actions/upload-artifact@v3.1.0
         with:
           name: windows-${{ env.EXPORT_NAME }}
           path: ${{ env.PROJECT_PATH }}/build/windows  
-      - name: Build for Lunix
+      - name: Build for linux
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/linux
           godot -v --path $PROJECT_PATH --no-window --export-debug "Linux/X11" build/linux/$EXPORT_NAME.x86_64          
-      - name: Upload Linux Artifact
+      - name: Upload linux artifact
         uses: actions/upload-artifact@v3.1.0
         with:
           name: linux-${{ env.EXPORT_NAME }}
           path: ${{ env.PROJECT_PATH }}/build/linux
 
+  clean:
+    name: Cleanup Old Artifacts
+    runs-on: ubuntu-latest
+    needs: export
+    steps:
+      - name: Find and delete old artifacts
+        uses: actions/github-script@v6
+        id: delete-artifacts
+        with:
+          script: |
+            const res = await github.rest.actions.listArtifactsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+
+            const artifactsToDelete = res.data.artifacts
+                    .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) )
+                    .slice(0, -${{ env.NUM_OF_ARTIFACTS_TO_KEEP }})
+                    .filter(({ name }) => name.endsWith('${{ env.EXPORT_NAME }}'))
+
+            artifactsToDelete.forEach(({ id }) => {
+               github.rest.actions.deleteArtifact({
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+                 artifact_id: id,
+               })
+              })
+              
+            return artifactsToDelete
+            
+      - name: Print deleted artifacts
+        run: echo "${{steps.delete-artifacts.outputs.result}}"
