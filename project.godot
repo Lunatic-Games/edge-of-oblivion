@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="YoureNotAlone"
+config/name="Edge of Oblivion"
 run/main_scene="res://MainMenu.tscn"
 config/icon="res://icon.png"
 
