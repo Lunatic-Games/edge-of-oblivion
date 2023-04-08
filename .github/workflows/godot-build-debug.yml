@@ -8,7 +8,7 @@ env:
   GODOT_VERSION: 3.5.1
   EXPORT_NAME: "${{ github.event.repository.name }}-debug"
   PROJECT_PATH: "."
-  NUM_OF_ARTIFACTS_TO_KEEP: 2
+  NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP: 1
 
 jobs:
   set_tag:
@@ -44,16 +44,7 @@ jobs:
         uses: actions/upload-artifact@v3.1.0
         with:
           name: windows-${{ env.EXPORT_NAME }}
-          path: ${{ env.PROJECT_PATH }}/build/windows  
-      - name: Build for linux
-        run: |
-          mkdir -v -p ${PROJECT_PATH}/build/linux
-          godot -v --path $PROJECT_PATH --no-window --export-debug "Linux/X11" build/linux/$EXPORT_NAME.x86_64          
-      - name: Upload linux artifact
-        uses: actions/upload-artifact@v3.1.0
-        with:
-          name: linux-${{ env.EXPORT_NAME }}
-          path: ${{ env.PROJECT_PATH }}/build/linux
+          path: ${{ env.PROJECT_PATH }}/build/windows
 
   clean:
     name: Cleanup Old Artifacts
@@ -70,10 +61,16 @@ jobs:
               repo: context.repo.repo,
             })
 
-            const artifactsToDelete = res.data.artifacts
-                    .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) )
-                    .slice(0, -${{ env.NUM_OF_ARTIFACTS_TO_KEEP }})
+            const allArtifacts = res.data.artifacts
+                    .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) );
+
+            //console.log(JSON.stringify(allArtifacts));
+
+            const artifactsToDelete = allArtifacts
+                    .slice(0, -${{ env.NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP }})
                     .filter(({ name }) => name.endsWith('${{ env.EXPORT_NAME }}'))
+
+            //console.log(JSON.stringify(artifactsToDelete));
 
             artifactsToDelete.forEach(({ id }) => {
                github.rest.actions.deleteArtifact({
