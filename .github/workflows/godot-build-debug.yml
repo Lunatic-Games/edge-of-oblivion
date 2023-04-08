@@ -7,7 +7,7 @@ on:
 env:
   GODOT_VERSION: 3.5.1
   EXPORT_NAME: "${{ github.event.repository.name }}-debug"
-  PROJECT_PATH: "./YourNotAlone"
+  PROJECT_PATH: "."
   NUM_OF_ARTIFACTS_TO_KEEP: 2
 
 jobs:
