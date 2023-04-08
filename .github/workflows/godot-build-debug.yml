@@ -11,11 +11,20 @@ env:
   NUM_OF_ARTIFACTS_TO_KEEP: 2
 
 jobs:
+  set_tag:
+    name: Set godot-ci tag
+    runs-on: ubuntu-latest
+    outputs:
+      godot_ci_tag: ${{ steps.set_tag.outputs.tag }}
+    steps:
+      - id: set_tag
+        run: echo "tag=$GODOT_VERSION" >> $GITHUB_OUTPUT
+        
   export:
     name: Export from Godot
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:${{ env.GODOT_VERSION }}
+      image: barichello/godot-ci:${{ needs.set_tag.outputs.godot_ci_tag }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
