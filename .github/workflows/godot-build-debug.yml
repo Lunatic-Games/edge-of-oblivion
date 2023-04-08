@@ -70,10 +70,16 @@ jobs:
               repo: context.repo.repo,
             })
 
-            const artifactsToDelete = res.data.artifacts
-                    .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) )
+            const allArtifacts = res.data.artifacts
+                    .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) );
+
+            console.log(JSON.stringify(allArtifacts));
+
+            const artifactsToDelete = allArtifacts
                     .slice(0, -${{ env.NUM_OF_ARTIFACTS_TO_KEEP }})
                     .filter(({ name }) => name.endsWith('${{ env.EXPORT_NAME }}'))
+
+            console.log(JSON.stringify(allArtifacts));
 
             artifactsToDelete.forEach(({ id }) => {
                github.rest.actions.deleteArtifact({
