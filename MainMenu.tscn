@@ -22,8 +22,8 @@ margin_top = 45.0
 margin_right = 1026.0
 margin_bottom = 148.0
 bbcode_enabled = true
-bbcode_text = "[center]Puzzle Knight"
-text = "Puzzle Knight"
+bbcode_text = "[center]Edge of Oblivion"
+text = "Edge of Oblivion"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="StartPage"]
 margin_left = 17.0
