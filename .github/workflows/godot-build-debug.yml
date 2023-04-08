@@ -2,7 +2,7 @@ name: Build Debug Enabled Executables
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "PK-85-github-ci" ]
         
 env:
   GODOT_VERSION: 3.5.1
