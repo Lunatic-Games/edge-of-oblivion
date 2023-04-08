@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Duel.mp3-7acfaf4b0897cbcb19b54c5c8950158e.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/boss/Duel.mp3"
+dest_files=[ "res://.import/Duel.mp3-7acfaf4b0897cbcb19b54c5c8950158e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Assets/music/boss/Endless-Storm.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Data/Units/Enemies/Bosses/BOSS_DATA.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+health = 10
+name = "The Forgotten King"
+boss_music = ExtResource( 1 )

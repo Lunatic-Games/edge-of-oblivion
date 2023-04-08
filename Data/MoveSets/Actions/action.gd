@@ -9,15 +9,15 @@ enum TARGETING_TYPE {
 	right
 }
 
+const SLASH_EFFECT_SCENE = preload("res://Data/Particles/Attack/SlashParticles.tscn")
+const ARROW_EFFECT_SCENE = preload("res://Data/Indicators/AttackEffects/RangedAttackEffect.tscn")
+
 export (PackedScene) var indicator_scene = preload("res://Data/Indicators/Indicator.tscn")
 export (TARGETING_TYPE) var targeting_type = TARGETING_TYPE.random
 export (int) var damage = 1
 export (int) var min_range = 1
 export (int) var max_range = 1
 export (bool) var preferred_hitting_player = true
-
-onready var slash_effect_scene = preload("res://SlashParticles.tscn")
-onready var arrow_effect_scene = preload("res://Data/Indicators/attack_effects/RangedAttackEffect.tscn")
 
 func indicate(starting_tile) -> void:
 	var tile_to_indicate = choose_target_tile(starting_tile)
@@ -76,7 +76,7 @@ func player_based_targeting(starting_tile):
 	pass
 
 func spawn_slash_effect(tile: Tile) -> void:
-	var effect = slash_effect_scene.instance()
+	var effect = SLASH_EFFECT_SCENE.instance()
 	effect.global_position = tile.global_position
 	effect.modulate = Color("c69fa5")
 	
@@ -93,7 +93,7 @@ func spawn_slash_effect(tile: Tile) -> void:
 	GameManager.gameboard.add_child(effect)
 
 func spawn_arrow_effect(starting_tile: Tile, ending_tile: Tile) -> Object:
-	var effect = arrow_effect_scene.instance()
+	var effect = ARROW_EFFECT_SCENE.instance()
 	effect.global_position = starting_tile.global_position
 	effect.modulate = Color("c69fa5")
 	

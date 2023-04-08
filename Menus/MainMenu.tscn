@@ -1,0 +1,318 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/Card/Card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Menus/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://Assets/art/background/main-menu.png" type="Texture" id=3]
+
+[node name="MainMenu" type="CanvasLayer"]
+layer = 2
+script = ExtResource( 2 )
+
+[node name="MainMenuBackDrop" type="Sprite" parent="."]
+position = Vector2( 266, 125 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="StartPage" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StartPage"]
+margin_top = 45.0
+margin_right = 1026.0
+margin_bottom = 148.0
+bbcode_enabled = true
+bbcode_text = "[center]Edge of Oblivion"
+text = "Edge of Oblivion"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="StartPage"]
+margin_left = 17.0
+margin_top = 197.0
+margin_right = 1043.0
+margin_bottom = 300.0
+bbcode_enabled = true
+bbcode_text = "[center][shake]Move with W A S D (SPACE to stand still!)"
+text = "Move with W A S D (SPACE to stand still!)"
+
+[node name="StartingEquipmentLabel" type="RichTextLabel" parent="StartPage"]
+margin_left = -386.0
+margin_top = 248.0
+margin_right = 640.0
+margin_bottom = 351.0
+bbcode_enabled = true
+bbcode_text = "[center][color=yellow][wave]Your starting equipment!"
+text = "Your starting equipment!"
+
+[node name="Card" parent="StartPage" instance=ExtResource( 1 )]
+margin_left = 126.0
+margin_top = 274.0
+margin_right = 166.0
+margin_bottom = 314.0
+script = null
+
+[node name="MenuContainer" type="VBoxContainer" parent="StartPage"]
+margin_left = 411.0
+margin_top = 218.0
+margin_right = 651.0
+margin_bottom = 503.0
+custom_constants/separation = 15
+
+[node name="PlayButton" type="Button" parent="StartPage/MenuContainer"]
+margin_right = 240.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 240, 60 )
+text = "Play Game"
+
+[node name="CreditsButton" type="Button" parent="StartPage/MenuContainer"]
+margin_top = 75.0
+margin_right = 240.0
+margin_bottom = 95.0
+text = "Credits"
+
+[node name="CreditsPage" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Container" type="VBoxContainer" parent="CreditsPage"]
+margin_left = 360.0
+margin_top = 141.0
+margin_right = 720.0
+margin_bottom = 465.0
+rect_min_size = Vector2( 360, 0 )
+
+[node name="ReturnToStartPage" type="Button" parent="CreditsPage/Container"]
+margin_right = 360.0
+margin_bottom = 20.0
+text = "Return to Start Page"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CreditsPage/Container"]
+margin_top = 24.0
+margin_right = 360.0
+margin_bottom = 324.0
+rect_min_size = Vector2( 0, 300 )
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsPage/Container/ScrollContainer"]
+margin_right = 360.0
+margin_bottom = 2055.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Credit" type="RichTextLabel" parent="CreditsPage/Container/ScrollContainer/VBoxContainer"]
+margin_right = 348.0
+margin_bottom = 2055.0
+bbcode_enabled = true
+bbcode_text = "[center][color=red]Programming[/color]
+Matthias Harden
+Noah Jacobsen
+
+[color=red]Game Design[/color]
+Matthias Harden
+Noah Jacobsen
+
+[color=red]Art[/color]
+Assets licensed by CC 3.0
+From creators
+lorc
+delapouite
+skoll
+sbed
+All assets can be found at
+https://game-icons.net/
+
+[color=red]Music[/color]
+Chase by Alexander Nakarada | https://www.serpentsoundstudios.com
+Music promoted by https://www.chosic.com/free-music/all/
+Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Dragon Castle by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Dragon World by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Durandal by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Hitman by Kevin MacLeod | https://incompetech.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+Hostiles Inbound by Miguel Johnson | https://soundcloud.com/migueljohnsonmjmusic
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+The Torch Of Knowledge by Damiano Baldoni | https://soundcloud.com/damiano_baldoni
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 4.0
+https://creativecommons.org/licenses/by/4.0/
+
+All Out Attack by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Duel by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Endless Storm by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Glory Eternal by Darren Curtis | https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+Goddess Of Fate by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Hydra And Ash by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+The Army of Minotaur by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+The Phantom’s Castle by Darren Curtis | https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+Fall From Grace by Darren Curtis | https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+Lurking Evil by Darren Curtis | https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/"
+text = "Programming
+Matthias Harden
+Noah Jacobsen
+
+Game Design
+Matthias Harden
+Noah Jacobsen
+
+Art
+Assets licensed by CC 3.0
+From creators
+lorc
+delapouite
+skoll
+sbed
+All assets can be found at
+https://game-icons.net/
+
+Music
+Chase by Alexander Nakarada | https://www.serpentsoundstudios.com
+Music promoted by https://www.chosic.com/free-music/all/
+Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Dragon Castle by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Dragon World by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Durandal by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Hitman by Kevin MacLeod | https://incompetech.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+Hostiles Inbound by Miguel Johnson | https://soundcloud.com/migueljohnsonmjmusic
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+The Torch Of Knowledge by Damiano Baldoni | https://soundcloud.com/damiano_baldoni
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 4.0
+https://creativecommons.org/licenses/by/4.0/
+
+All Out Attack by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Duel by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Endless Storm by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Glory Eternal by Darren Curtis | https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+Goddess Of Fate by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Hydra And Ash by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+The Army of Minotaur by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+The Phantom’s Castle by Darren Curtis | https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+Fall From Grace by Darren Curtis | https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+Lurking Evil by Darren Curtis | https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/"
+fit_content_height = true
+
+[connection signal="pressed" from="StartPage/MenuContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="StartPage/MenuContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="CreditsPage/Container/ReturnToStartPage" to="." method="_on_ReturnToStartPage_pressed"]
+
+[editable path="StartPage/Card"]

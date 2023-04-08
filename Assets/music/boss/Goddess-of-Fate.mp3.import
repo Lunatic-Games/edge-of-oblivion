@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Goddess-of-Fate.mp3-255468c6d6361c5c72347dd6547ed5f2.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/boss/Goddess-of-Fate.mp3"
+dest_files=[ "res://.import/Goddess-of-Fate.mp3-255468c6d6361c5c72347dd6547ed5f2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

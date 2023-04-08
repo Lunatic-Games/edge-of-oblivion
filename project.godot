@@ -12,17 +12,17 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "ItemData",
 "language": "GDScript",
-"path": "res://Item/ITEM_DATA.gd"
+"path": "res://Items/ITEM_DATA.gd"
 }, {
 "base": "Node2D",
 "class": "Occupant",
 "language": "GDScript",
-"path": "res://Occupant.gd"
+"path": "res://Data/Occupant.gd"
 }, {
 "base": "Node2D",
 "class": "Tile",
 "language": "GDScript",
-"path": "res://Tile.gd"
+"path": "res://Game/Tile.gd"
 }, {
 "base": "Node2D",
 "class": "Unit",
@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "boss_data",
 "language": "GDScript",
-"path": "res://Data/Units/Enemies/Boss/BOSS_DATA.gd"
+"path": "res://Data/Units/Enemies/Bosses/BOSS_DATA.gd"
 } ]
 _global_script_class_icons={
 "ItemData": "",
@@ -45,18 +45,18 @@ _global_script_class_icons={
 [application]
 
 config/name="Edge of Oblivion"
-run/main_scene="res://MainMenu.tscn"
+run/main_scene="res://Menus/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-GameManager="*res://GameManager.gd"
-TurnManager="*res://TurnManager.gd"
-FreeUpgradeMenu="*res://FreeUpgradeMenu.tscn"
-MovementUtility="*res://MovementUtility.gd"
-ItemManager="*res://ItemManager.gd"
+GameManager="*res://Globals/Managers/GameManager.gd"
+TurnManager="*res://Globals/Managers/Turns/TurnManager.gd"
+FreeUpgradeMenu="*res://Globals/Menus/FreeUpgradeMenu.tscn"
+MovementUtility="*res://Globals/MovementUtility.gd"
+ItemManager="*res://Globals/Managers/Items/ItemManager.gd"
 Debug="*res://Globals/Debug.gd"
-AudioManager="*res://Globals/Managers/AudioManager.tscn"
+AudioManager="*res://Globals/Managers/Audio/AudioManager.tscn"
 ItemUtil="*res://Globals/ItemUtil.gd"
 
 [display]

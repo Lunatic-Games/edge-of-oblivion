@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/The-Phantoms-Castle-Midi.mp3-cc7e56f7197c3ee77bde7b881fd8868e.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/boss/The-Phantoms-Castle-Midi.mp3"
+dest_files=[ "res://.import/The-Phantoms-Castle-Midi.mp3-cc7e56f7197c3ee77bde7b881fd8868e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

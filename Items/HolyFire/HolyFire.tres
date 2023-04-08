@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://Items/ITEM_DATA.gd" type="Script" id=1]
+[ext_resource path="res://Items/HolyFire/HolyFire.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/art/icons/spikes-slashes-cracks/lorc/striking-diamonds.svg" type="Texture" id=3]
+
+
+[resource]
+script = ExtResource( 1 )
+sprite = ExtResource( 3 )
+itemScene = ExtResource( 2 )
+item_name = "Holy Fire"
+tier1Text = "Deals 1 damage to 3 random tiles in a 2 tile radius from the player (Tiles can be damaged more than once)"
+tier2Text = "Increases to 5 random tiles"
+tier3Text = "Increases to 7 random tiles"
+max_turn_timer = 2
+item_damage = 0
+path = ""

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://Items/ITEM_DATA.gd" type="Script" id=1]
+[ext_resource path="res://Items/Hammer/Hammer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/art/icons/weapons/skoll/baton.svg" type="Texture" id=3]
+
+
+[resource]
+script = ExtResource( 1 )
+sprite = ExtResource( 3 )
+itemScene = ExtResource( 2 )
+item_name = "Hammer"
+tier1Text = "Attack up or down for 1. Knockback 1"
+tier2Text = "Attack up or down for 1. Knockback 1. Collide damage 1"
+tier3Text = "Attack up or down for 2. Knockback 2. Collide damage 1"
+max_turn_timer = 3
+item_damage = 1
+path = ""

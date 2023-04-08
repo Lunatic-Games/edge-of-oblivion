@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Hostiles-Inbound.mp3-5a57cc821c759d8953a7d097d9cfbfbf.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/battle/Hostiles-Inbound.mp3"
+dest_files=[ "res://.import/Hostiles-Inbound.mp3-5a57cc821c759d8953a7d097d9cfbfbf.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

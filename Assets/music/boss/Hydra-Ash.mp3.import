@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Hydra-Ash.mp3-4acc5df486df0a82af5b301daac799bb.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/boss/Hydra-Ash.mp3"
+dest_files=[ "res://.import/Hydra-Ash.mp3-4acc5df486df0a82af5b301daac799bb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
