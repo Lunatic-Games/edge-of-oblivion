@@ -41,20 +41,14 @@ func choose_moveset():
 	pass
 
 
-func appear_ready():
-	var goal_sprite = sprite.self_modulate
-	goal_sprite.a = 1.0
-	
+func appear_ready():	
 	var tween = get_tree().create_tween()
-	tween.tween_property(sprite, "self_modulate", goal_sprite, 0.2)
+	tween.tween_property(sprite.material, "shader_parameter/modulate:a", 1.0, 0.2)
 
 
-func appear_unready():
-	var goal_sprite = sprite.self_modulate
-	goal_sprite.a = 0.4
-	
+func appear_unready():	
 	var tween = get_tree().create_tween()
-	tween.tween_property(sprite, "self_modulate", goal_sprite, 0.2)
+	tween.tween_property(sprite.material, "shader_parameter/modulate:a", 0.4, 0.2)
 
 
 func update_attack_bar():

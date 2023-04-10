@@ -1,16 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://csh5tgc5kmi6v"]
+[gd_scene load_steps=10 format=3 uid="uid://csh5tgc5kmi6v"]
 
 [ext_resource type="PackedScene" uid="uid://b81nc8buqc23p" path="res://Data/MoveSets/Actions/Slash/SlashAction.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://j6p4libx27jr" path="res://Data/MoveSets/Move.tscn" id="2"]
 [ext_resource type="Material" uid="uid://d2p8yth5vp4kr" path="res://Shaders/dream_shader_material.tres" id="3"]
+[ext_resource type="PackedScene" uid="uid://brdufu1xvat6y" path="res://Data/Indicators/Lunge/LungeIndicator.tscn" id="3_kmtfs"]
 [ext_resource type="PackedScene" uid="uid://copvhxqv6s2w8" path="res://Data/Units/Enemies/Bosses/Boss.tscn" id="4"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.gd" id="5"]
+
+[sub_resource type="Curve" id="Curve_qqqeb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.184122, 1), 0.0, 0.0, 0, 0, Vector2(0.8125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="4"]
+curve = SubResource("Curve_qqqeb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_62gbf"]
+emission_shape = 1
+emission_sphere_radius = 45.0
+particle_flag_disable_z = true
+gravity = Vector3(0, -15, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 3.0
+scale_max = 3.0
+scale_curve = SubResource("4")
+color = Color(0.937255, 0.713726, 0.627451, 1)
 
 [node name="ForgottenKing" instance=ExtResource("4")]
 script = ExtResource("5")
 
 [node name="Sprite2D" parent="." index="1"]
 material = ExtResource("3")
+
+[node name="LungeAction" parent="MoveSets/Move" index="0"]
+indicator_scene = ExtResource("3_kmtfs")
 
 [node name="Move2" parent="MoveSets" index="1" instance=ExtResource("2")]
 
@@ -29,5 +52,9 @@ damage = 3
 [node name="SlashAction4" parent="MoveSets/Move2" index="3" instance=ExtResource("1")]
 targeting_type = 4
 damage = 3
+
+[node name="GPUParticles2D" parent="." index="6"]
+process_material = SubResource("ParticleProcessMaterial_62gbf")
+local_coords = true
 
 [editable path="MoveSets/Move"]
