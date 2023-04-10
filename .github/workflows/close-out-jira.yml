@@ -1,7 +1,9 @@
 name: Close-out Jira issue
 
 on:
-  push:
+  pull_request:
+    types:
+      - "closed"
     branches:
       - "master"
 
@@ -9,6 +11,7 @@ jobs:
   parse:
     name: Parse Jira key
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     outputs:
       jira_key: ${{ steps.regex.outputs.jira_key }}
     steps:
@@ -25,6 +28,7 @@ jobs:
   update:
     name: Update Jira Issue
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     needs: parse
     steps:
       - name: Login to Jira
