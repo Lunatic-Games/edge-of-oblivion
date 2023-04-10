@@ -1,3 +1,3 @@
 # Edge of Oblivion
-**Godot version:** 3.4.4  
+**Godot version:** 4.0  
 **Platforms:** Windows, Linux
