@@ -115,17 +115,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Credit" type="RichTextLabel" parent="CreditsPage/Container/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 bbcode_enabled = true
-text = "Programming
+text = "[color=red]Programming[/color]
 Matthias Harden
 Noah Jacobsen
 
-Game Design
+[color=red]Game Design[/color]
 Matthias Harden
 Noah Jacobsen
 
-Art
+[color=red]Art[/color]
 Assets licensed by CC 3.0
 From creators
 lorc
@@ -135,7 +136,7 @@ sbed
 All assets can be found at
 https://game-icons.net/
 
-Music
+[color=red]Music[/color]
 Chase by Alexander Nakarada | https://www.serpentsoundstudios.com
 Music promoted by https://www.chosic.com/free-music/all/
 Attribution 4.0 International (CC BY 4.0)

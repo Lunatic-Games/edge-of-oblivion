@@ -4,23 +4,27 @@
 [ext_resource type="Script" path="res://Data/Particles/Attack/SlashParticles.gd" id="2"]
 
 [sub_resource type="Gradient" id="Gradient_ykyxf"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.133333, 0.305263, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_csf3l"]
 gradient = SubResource("Gradient_ykyxf")
 
 [sub_resource type="Curve" id="9"]
-_data = [Vector2(0, 0), 0.0, 1.99993, 0, 0, Vector2(0.759494, 0.490909), -0.278516, -0.278516, 0, 0, Vector2(1, 0), 0.479189, 0.0, 0, 0]
+_data = [Vector2(0, 0.336364), 0.0, 1.99993, 0, 0, Vector2(0.851266, 1), -0.278516, -0.278516, 0, 0, Vector2(1, 0.490909), 0.479189, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="10"]
 curve = SubResource("9")
 
 [sub_resource type="ParticleProcessMaterial" id="8"]
+particle_flag_disable_z = true
 spread = 20.0
 gravity = Vector3(0, 0, 0)
-initial_velocity_min = 90.0
-initial_velocity_max = 110.0
+initial_velocity_min = 9.0
+initial_velocity_max = 11.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
 scale_min = 0.13
 scale_max = 0.13
 scale_curve = SubResource("10")
@@ -32,4 +36,5 @@ amount = 1
 process_material = SubResource("8")
 texture = ExtResource("1")
 one_shot = true
+local_coords = true
 script = ExtResource("2")

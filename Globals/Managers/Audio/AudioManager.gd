@@ -67,8 +67,8 @@ func start_menu_music():
 	queue_menu_music()
 
 
-func start_boss_music(boss_music):
-	queue_boss_music(boss_music)
+func start_boss_music(boss_data):
+	queue_boss_music(boss_data.boss_music)
 
 
 func stop_boss_music():

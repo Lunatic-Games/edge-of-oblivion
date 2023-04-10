@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgi4ymythq8up"]
+[gd_scene load_steps=10 format=3 uid="uid://dgi4ymythq8up"]
 
 [ext_resource type="Script" path="res://Game/GameScene.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://ceh34ox6344m8" path="res://Assets/art/misc/blank_grey.png" id="2"]
@@ -40,6 +40,12 @@ shader = SubResource("1")
 shader_parameter/direction = Vector2(0.5, 1)
 shader_parameter/speed = 0.02
 shader_parameter/noise = SubResource("4")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vfxa"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4pmtw"]
+bg_color = Color(0.592157, 0.219608, 0.72549, 1)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1")
@@ -86,39 +92,39 @@ visible = false
 self_modulate = Color(0.360784, 0.34902, 0.364706, 0.611765)
 offset_left = 398.0
 offset_top = 28.0
-offset_right = 648.0
-offset_bottom = 320.0
+offset_right = 737.0
+offset_bottom = 405.0
 
 [node name="Victory" type="VBoxContainer" parent="Canvas/Victory"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 14.0
-offset_right = 233.0
+offset_right = 325.0
 offset_bottom = 519.0
 
 [node name="VictoryText" type="RichTextLabel" parent="Canvas/Victory/Victory"]
+custom_minimum_size = Vector2(221, 30)
 layout_mode = 2
 bbcode_enabled = true
-text = "VICTORY"
+text = "[center][wave]VICTORY"
 
 [node name="VictoryText2" type="RichTextLabel" parent="Canvas/Victory/Victory"]
+custom_minimum_size = Vector2(221, 250)
 layout_mode = 2
 bbcode_enabled = true
 text = "Thank you so much for playing.
 
 The full game will not end here... it'll have more bosses, more weapons, and hopefully, more fun.
 
-please for the love of all that is holy, help us out and complete this survey
-*INSERT SURVEY HERE*"
+[rainbow][wave]please for the love of all that is holy, help us out and complete this survey 
+[/wave][/rainbow]
+[center]*INSERT SURVEY HERE*"
 
 [node name="VictoryText3" type="RichTextLabel" parent="Canvas/Victory/Victory"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 bbcode_enabled = true
-text = "
-
-
-
-WISHLIST ON STEAM"
+text = "[color=red][shake][center]WISHLIST ON STEAM"
 
 [node name="VictoryMainMenu" type="Button" parent="Canvas/Victory/Victory"]
 layout_mode = 2
@@ -128,7 +134,7 @@ text = "Main Menu"
 visible = false
 offset_left = 11.0
 offset_top = 11.0
-offset_right = 1012.0
+offset_right = 1137.0
 offset_bottom = 51.0
 
 [node name="BossHealthBar" type="ProgressBar" parent="Canvas/BossOverlay"]
@@ -136,12 +142,16 @@ custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_5vfxa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4pmtw")
 value = 100.0
+show_percentage = false
 
 [node name="BossName" type="RichTextLabel" parent="Canvas/BossOverlay"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 bbcode_enabled = true
-text = "BOSS NAME"
+text = "[shake]BOSS NAME"
 
 [node name="GameBoard" type="Node2D" parent="." groups=["gameboard"]]
 

@@ -89,10 +89,12 @@ func player_based_targeting(_starting_tile: Tile):
 
 func spawn_slash_effect(tile: Tile) -> void:
 	var effect = SLASH_EFFECT_SCENE.instantiate()
+	GameManager.gameboard.add_child(effect)
+	
 	effect.global_position = tile.global_position
 	effect.modulate = EFFECT_MODULATE
 	
-	match TargetingType:
+	match targeting_type:
 		TargetingType.DOWN:
 			effect.rotation_degrees = 45
 		TargetingType.UP:
@@ -101,8 +103,6 @@ func spawn_slash_effect(tile: Tile) -> void:
 			effect.rotation_degrees = 180
 		TargetingType.RIGHT:
 			effect.rotation_degrees = 0
-	
-	GameManager.gameboard.add_child(effect)
 
 
 func spawn_arrow_effect(starting_tile: Tile, ending_tile: Tile) -> Object:
