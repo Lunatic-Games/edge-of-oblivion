@@ -2,6 +2,8 @@ extends Node
 
 signal player_turn_ended
 
+enum TurnState {ENEMY, PLAYER}
+
 const FADED = preload("res://Data/Units/Enemies/Faded/Faded.tscn")
 const LOST_RANGER = preload("res://Data/Units/Enemies/LostRanger/LostRanger.tscn")
 const FORSWORN_PIKE = preload("res://Data/Units/Enemies/ForswornPike/ForswornPike.tscn")
@@ -35,41 +37,49 @@ var round_spawn_data = {
 	175: [FORSWORN_PIKE, FADED, LOST_RANGER]
 }
 
-enum TurnState {ENEMY, PLAYER}
 var current_turn_state = TurnState.PLAYER
 var current_round = 0
+
 
 func initialize():
 	call_deferred("handle_round_update")
 
+
 func reset():
 	current_round = 0
 	current_turn_state = TurnState.PLAYER
+
 
 func is_player_turn():
 	if current_turn_state == TurnState.PLAYER:
 		return true
 	return false
 
+
 func item_phase_ended():
 	start_enemy_turn()
+
 
 func start_enemy_turn():
 	current_turn_state = TurnState.ENEMY
 	handle_enemy_turn()
 
+
 func end_player_turn():
 	emit_signal("player_turn_ended")
+
 
 func start_player_turn():
 	handle_round_update()
 	current_turn_state = TurnState.PLAYER
+
 
 func handle_enemy_turn():
 	for enemy in GameManager.all_enemies:
 		enemy.activate()
 	
 	start_player_turn()
+
 
 func handle_round_update():
 	current_round += 1

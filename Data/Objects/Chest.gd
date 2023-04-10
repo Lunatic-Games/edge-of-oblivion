@@ -5,13 +5,16 @@ var current_tile
 
 @onready var animator = $AnimationPlayer
 
+
 func _ready():
 	occupantType = OccupantTypes.COLLECTABLE
 	animator.play("spawn")
 
+
 func collect():
 	FreeUpgradeMenu.spawn_upgrade_cards(cardsToSpawn)
 	destroy_self()
+
 
 func destroy_self():
 	current_tile.occupied = null

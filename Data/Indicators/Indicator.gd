@@ -1,11 +1,12 @@
 extends Node2D
 
-var animator
+@onready var animator = $AnimationPlayer
+
 
 func _ready():
-	TurnManager.connect("player_turn_ended",Callable(self,"destroy_self"))
-	animator = $AnimationPlayer
+	TurnManager.player_turn_ended.connect(destroy_self)
 	animator.play("spawn")
+
 
 func destroy_self():
 	animator.play("remove")

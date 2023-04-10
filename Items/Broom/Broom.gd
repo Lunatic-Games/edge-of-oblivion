@@ -1,16 +1,14 @@
 extends "res://Items/Item.gd"
 
-var tiles
 
 func activate_item() -> void:
 	perform_attack()
 	await get_tree().process_frame
 
+
 func perform_attack():
-	tiles = []
-	
 	for x in currentTier:
-		var target = user.current_tile.getRandomEnemyOccupiedAdjacentTile()
+		var target = user.current_tile.get_random_enemy_occupied_adjacent_tile()
 		if !target || !target.occupied:
 			return
 		var enemy = target.occupied

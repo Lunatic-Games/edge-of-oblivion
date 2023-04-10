@@ -2,7 +2,6 @@ extends Node2D
 
 signal effect_complete
 
-
 var seconds_per_tile = 0.08
 
 

@@ -8,6 +8,7 @@ var item_data
 @onready var star_emitter = $WaterfallStarParticle
 @onready var background = $Background
 
+
 func setup(resource, currentTier, animate):
 	$Sprite2D.texture = resource.sprite
 	$Name.text = "[center]" + resource.item_name

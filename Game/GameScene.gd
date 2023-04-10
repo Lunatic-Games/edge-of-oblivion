@@ -1,11 +1,13 @@
 extends Node2D
 
+
 func _ready():
 	GameManager.start_game()
 	TurnManager.initialize()
 	
 	var player = get_tree().get_nodes_in_group("player")[0]
 	player.died.connect(game_over)
+
 
 func game_over():
 	await get_tree().create_timer(1.0).timeout
@@ -34,6 +36,6 @@ func _on_Restart_pressed():
 
 
 func _on_VictoryMainMenu_pressed():
-	GameManager.change_to_menu()
+	GameManager.change_to_main_menu()
 	GameManager.stop_game()
 	get_tree().paused = false

@@ -21,15 +21,19 @@ var move_precedence = 0.0
 	"health": HEALTH_PARTICLES_SCENE
 }
 
+
 func _ready():
 	hp = max_hp
+
 
 func setup():
 	animation_player.play("spawn")
 	await animation_player.animation_finished
 
+
 func is_enemy():
 	pass
+
 
 func take_damage(damageTaken):
 	if damageTaken == 0:

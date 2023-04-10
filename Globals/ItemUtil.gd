@@ -3,9 +3,11 @@ extends Node2D
 class ScanResult:
 	var tiles: Array
 	var occupants: Array
+	
 	func _init(passed_tiles: Array,passed_occupants: Array):
 		tiles = passed_tiles
 		occupants = passed_occupants
+
 
 func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
 	var tiles: Array = []

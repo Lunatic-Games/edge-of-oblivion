@@ -42,7 +42,7 @@ func build_target_list(tile, is_entry_point = false):
 			targets.append(tile)
 	
 	if remaining_chains > 0:
-		var newTarget = tile.getRandomEnemyOccupiedAdjacentTile()
+		var newTarget = tile.get_random_enemy_occupied_adjacent_tile()
 		remaining_chains -= 1
 		if newTarget:
 			build_target_list(newTarget)

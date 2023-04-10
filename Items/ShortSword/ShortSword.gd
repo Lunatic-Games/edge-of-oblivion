@@ -1,8 +1,10 @@
 extends "res://Items/Item.gd"
 
+
 func activate_item():
 	performAttack()
 	await get_tree().process_frame
+
 
 func performAttack():
 	var left_tile = user.current_tile.left_tile
@@ -16,10 +18,12 @@ func performAttack():
 	
 	$AnimationPlayer.play("Shake")
 
+
 func attack(tile):
 	spawn_slash_particle(tile.global_position)
 	if tile.occupied && tile.occupied.is_enemy():
 		tile.occupied.take_damage(item_damage)
+
 
 func upgrade_tier() -> bool:
 	currentTier += 1

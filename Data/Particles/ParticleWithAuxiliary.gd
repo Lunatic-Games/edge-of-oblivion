@@ -4,10 +4,12 @@ extends GPUParticles2D
 
 var aux: bool = false
 
+
 func activate() -> void:
 	emitting = true
 	if aux:
-		self.get_child(0).emitting = true
+		get_child(0).emitting = true
+
 
 func _process(_delta: float) -> void:
 	if emitting == false:

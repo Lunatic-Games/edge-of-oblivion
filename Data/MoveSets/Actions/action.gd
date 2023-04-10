@@ -107,10 +107,12 @@ func spawn_slash_effect(tile: Tile) -> void:
 
 func spawn_arrow_effect(starting_tile: Tile, ending_tile: Tile) -> Object:
 	var effect = ARROW_EFFECT_SCENE.instantiate()
+	GameManager.gameboard.add_child(effect)
+	
 	effect.global_position = starting_tile.global_position
 	effect.modulate = EFFECT_MODULATE
 	
-	match TargetingType:
+	match targeting_type:
 		TargetingType.DOWN:
 			effect.rotation_degrees = 90
 		TargetingType.UP:
@@ -120,6 +122,5 @@ func spawn_arrow_effect(starting_tile: Tile, ending_tile: Tile) -> Object:
 		TargetingType.RIGHT:
 			effect.rotation_degrees = 0
 	
-	GameManager.gameboard.add_child(effect)
 	effect.setup(starting_tile, ending_tile)
 	return effect

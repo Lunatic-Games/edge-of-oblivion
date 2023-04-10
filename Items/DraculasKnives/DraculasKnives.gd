@@ -1,9 +1,10 @@
 extends "res://Items/Item.gd"
 
+const ARROW_EFFECT_SCENE = preload("res://Data/Indicators/AttackEffects/RangedAttackEffect.tscn")
+
 # Attack right 1, 2, 3 spaces away
 var targets = []
 
-@onready var ARROW_EFFECT_SCENE = preload("res://Data/Indicators/AttackEffects/RangedAttackEffect.tscn")
 
 func activate_item() -> void:
 	attack_logic()

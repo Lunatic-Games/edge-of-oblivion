@@ -14,6 +14,7 @@ var right_tile
 var left_tile
 var occupied: Occupant
 
+
 func getTileInDirection(direction):
 	match direction:
 		MovementUtility.moveDirection.up:
@@ -25,12 +26,14 @@ func getTileInDirection(direction):
 		MovementUtility.moveDirection.right:
 			return right_tile
 
+
 func get_tile_coords_to_tile(tile):
 	var xpos = position.x - tile.position.x
 	var ypos = position.y - tile.position.y
 	return Vector2(xpos, ypos)
 
-func getRandomEnemyOccupiedAdjacentTile():
+
+func get_random_enemy_occupied_adjacent_tile():
 	var occupiedAdjacentTiles = []
 	
 	if top_tile && top_tile.occupied && top_tile.occupied.is_enemy():
@@ -50,9 +53,11 @@ func getRandomEnemyOccupiedAdjacentTile():
 	
 	var randomIndex = randi()%(occupiedAdjacentTiles.size())
 	return occupiedAdjacentTiles[randomIndex]
-	
+
+
 func clear_occupant() -> void:
 	occupied = null
+
 
 func is_tile_n_tiles_away(tile, number, allow_adjacent = false):
 	var tile_coords = get_tile_coords_to_tile(tile)
@@ -70,12 +75,14 @@ func is_tile_n_tiles_away(tile, number, allow_adjacent = false):
 		else:
 			return false
 
+
 func get_distance_to_tile(tile:Tile, allow_adjacent:bool = false) -> int:
 	var count = 0
 	while !is_tile_n_tiles_away(tile, count, allow_adjacent):
 		count += 1
 	
 	return count
+
 
 func get_direction_to_tile(tile) -> String:
 	var tile_coords = get_tile_coords_to_tile(tile)

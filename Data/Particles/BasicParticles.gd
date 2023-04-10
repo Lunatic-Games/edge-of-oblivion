@@ -2,7 +2,5 @@ extends GPUParticles2D
 
 func _ready() -> void:
 	emitting = true
-
-func _process(_delta: float) -> void:
-	if emitting == false:
-		queue_free()
+	await get_tree().create_timer(lifetime).timeout
+	queue_free()

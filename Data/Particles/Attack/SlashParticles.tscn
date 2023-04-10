@@ -3,15 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://cusa07e6reu40" path="res://Assets/art/icons/spikes-slashes-cracks/lorc/quick-slash.svg" id="1"]
 [ext_resource type="Script" path="res://Data/Particles/Attack/SlashParticles.gd" id="2"]
 
-[sub_resource type="Gradient" id="6"]
-offsets = PackedFloat32Array(0.00847458, 0.127119, 0.40678, 0.991525)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="Gradient" id="Gradient_ykyxf"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture2D" id="7"]
-gradient = SubResource("6")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_csf3l"]
+gradient = SubResource("Gradient_ykyxf")
 
 [sub_resource type="Curve" id="9"]
-_data = [Vector2(0, 0.333935), 0.0, 1.99993, 0, 0, Vector2(0.83277, 1), -0.278516, -0.278516, 0, 0, Vector2(1, 0.442238), 0.479189, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 1.99993, 0, 0, Vector2(0.759494, 0.490909), -0.278516, -0.278516, 0, 0, Vector2(1, 0), 0.479189, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="10"]
@@ -20,13 +19,14 @@ curve = SubResource("9")
 [sub_resource type="ParticleProcessMaterial" id="8"]
 spread = 20.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.15
-scale_max = 0.15
+initial_velocity_min = 90.0
+initial_velocity_max = 110.0
+scale_min = 0.13
+scale_max = 0.13
 scale_curve = SubResource("10")
-color_ramp = SubResource("7")
+color_ramp = SubResource("GradientTexture1D_csf3l")
 
 [node name="SlashParticles" type="GPUParticles2D"]
-scale = Vector2(0.125, 0.125)
 emitting = false
 amount = 1
 process_material = SubResource("8")
