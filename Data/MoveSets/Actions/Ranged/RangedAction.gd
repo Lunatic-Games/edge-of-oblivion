@@ -1,4 +1,4 @@
-extends "res://Data/MoveSets/Actions/action.gd"
+extends "res://Data/MoveSets/Actions/Action.gd"
 
 func trigger(starting_tile):
 	var tile_to_target = choose_target_tile(starting_tile)
@@ -9,5 +9,5 @@ func trigger(starting_tile):
 		arrow_effect = spawn_arrow_effect(starting_tile, tile_to_target)
 	
 	if tile_to_target and tile_to_target.occupied and tile_to_target.occupied == GameManager.player:
-		yield(arrow_effect, "effect_complete")
-		unit_to_target.takeDamage(damage)
+		await arrow_effect.effect_complete
+		unit_to_target.take_damage(damage)

@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-const full_card_list: Array = [
+const FULL_CARD_LIST: Array = [
 	"res://Items/ShortSword/ShortSword.tres",
 	"res://Items/LightningBow/LightningBow.tres",
 	"res://Items/Hammer/Hammer.tres",
@@ -12,17 +12,24 @@ const full_card_list: Array = [
 	"res://Items/DraculasKnives/DraculasKnives.tres"
 ]
 
-var cardScene = preload("res://UI/Card/Card.tscn")
-var availableCards: Array = full_card_list
+var CARD_SCENE = preload("res://UI/Card/Card.tscn")
+
 var selectedCards = []
+var available_cards = []
+
+func _ready() -> void:
+	for path in FULL_CARD_LIST:
+		available_cards.append(path)
 
 func reset():
 	selectedCards = []
-	availableCards = full_card_list
+	available_cards = []
+	for path in FULL_CARD_LIST:
+		available_cards.append(path)
 	disableDisplay()
 
 func connectToPlayerTier(player):
-	player.connect("itemReachedMaxTier", self, "removeItemFromAvailability")
+	player.connect("item_reached_max_tier",Callable(self,"remove_item_from_availability"))
 
 func display():
 	$CardRow.visible = true
@@ -32,36 +39,36 @@ func disableDisplay():
 	for child in $CardRow.get_children():
 		child.queue_free()
 
-func spawnUpgradeCards(cardsToSpawn):
-	availableCards.shuffle()
+func spawn_upgrade_cards(cardsToSpawn):
+	available_cards.shuffle()
 	display()
 	
 	for x in cardsToSpawn:
-		if availableCards.size() <= 0:
+		if available_cards.size() <= 0:
 			continue
 		
-		spawnCard(availableCards[0])
+		spawnCard(available_cards[0])
 	
 	for entry in selectedCards:
-		availableCards.append(entry)
+		available_cards.append(entry)
 	selectedCards = []
 
-func spawnCard(pathOfResource):
-	var resource = load(pathOfResource)
-	var card = cardScene.instance()
+func spawnCard(path_of_resource):
+	var resource = load(path_of_resource)
+	var card = CARD_SCENE.instantiate()
 	var currentTier
 	
 	if resource in ItemManager.managedItems:
 		currentTier = ItemManager.managedItems[resource].currentTier + 1
 	else:
 		currentTier = 1
-		
-	card.connect("selectionMade", self, "disableDisplay")
+	
+	card.connect("selectionMade",Callable(self,"disableDisplay"))
 	$CardRow.add_child(card)
 	card.setup(resource, currentTier, true)
-	selectedCards.append(pathOfResource)
-	availableCards.remove(pathOfResource)
+	selectedCards.append(path_of_resource)
+	available_cards.erase(path_of_resource)
 	
 
-func removeItemFromAvailability(itemData):
-	availableCards.remove(availableCards.find(itemData.path))
+func remove_item_from_availability(item_data):
+	available_cards.erase(item_data.path)

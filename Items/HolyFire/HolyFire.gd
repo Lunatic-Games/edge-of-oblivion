@@ -4,7 +4,7 @@ var damage_amount: int = 1
 var bolt_count: int = 3
 var range_radius: int = 2
 
-onready var fire_particle_scene = preload("res://Data/Particles/Fire/FireParticles2.tscn")
+@onready var fire_particle_scene = preload("res://Data/Particles/Fire/FireParticles2.tscn")
 # Tiers: 
 #	1: 3 damage instances
 #	2: 5 damage instances
@@ -12,8 +12,8 @@ onready var fire_particle_scene = preload("res://Data/Particles/Fire/FireParticl
 
 
 
-func upgradeTier() -> bool:
-	var ret: bool = .upgradeTier()
+func upgrade_tier() -> bool:
+	var ret: bool = super.upgrade_tier()
 	match currentTier:
 		2:
 			bolt_count = 5
@@ -21,19 +21,19 @@ func upgradeTier() -> bool:
 			bolt_count = 7
 	return ret
 
-func activateItem() -> void:
+func activate_item() -> void:
 	perform_attack()
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 func perform_attack() -> void:
-	var scan_res: ItemUtil.ScanResult = ItemUtil.scan_tile_radius(user.currentTile, range_radius)
+	var scan_res: ItemUtil.ScanResult = ItemUtil.scan_tile_radius(user.current_tile, range_radius)
 	spawn_bolts(scan_res.tiles)
 	$AnimationPlayer.play("Shake")
 
 func attack(targets: Array) -> void:
 	for target in targets:
 		if target.damageable and target != user:
-			target.takeDamage(damage_amount)
+			target.take_damage(damage_amount)
 
 func spawn_bolts(tiles: Array) -> void:
 	# Select some random tiles
@@ -49,7 +49,7 @@ func spawn_bolts(tiles: Array) -> void:
 		var t: Tile = tiles[hit]
 		# Rain fire
 		var pos: Vector2 = t.global_position
-		var particle: Node = fire_particle_scene.instance()
+		var particle: Node = fire_particle_scene.instantiate()
 		particle.global_position = pos
 		GameManager.gameboard.add_child(particle)
 		# Use alternate particle effect if tile is hit more than once
@@ -60,4 +60,4 @@ func spawn_bolts(tiles: Array) -> void:
 		# Do damage
 		if t.occupied:
 			if t.occupied.damageable:
-				t.occupied.takeDamage(damage_amount)
+				t.occupied.take_damage(damage_amount)

@@ -2,48 +2,48 @@ extends Control
 
 signal selectionMade
 
-var itemData
+var item_data
 
-onready var tween = $Tween
-onready var animator = $AnimationPlayer
-onready var star_emitter = $WaterfallStarParticle
-onready var background = $Background
+@onready var animator = $AnimationPlayer
+@onready var star_emitter = $WaterfallStarParticle
+@onready var background = $Background
 
 func setup(resource, currentTier, animate):
-	$Sprite.texture = resource.sprite
-	$Name.bbcode_text = "[center]" + resource.item_name
+	$Sprite2D.texture = resource.sprite
+	$Name.text = "[center]" + resource.item_name
 	match currentTier:
 		1: 
-			$UpgradeText.bbcode_text = resource.tier1Text
+			$UpgradeText.text = resource.tier1Text
 		2: 
-			$UpgradeText.bbcode_text = resource.tier2Text
+			$UpgradeText.text = resource.tier2Text
 		3: 
-			$UpgradeText.bbcode_text = resource.tier3Text
+			$UpgradeText.text = resource.tier3Text
 		
-	itemData = resource
+	item_data = resource
 	if animate:
 		animator.play("spawn")
-		yield(get_tree(), "idle_frame")
-		tween.interpolate_property(self, "rect_position", rect_position + Vector2(0, -100), rect_position, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.start()
+		await get_tree().process_frame
+		
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "position:y", -100.0, 0.5).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	else:
 		animator.play("setup")
+
 
 func _on_Background_gui_input(event):
 	if event is InputEventMouseButton && event.button_index == 1 && event.pressed:
 		var player = get_tree().get_nodes_in_group("player")[0]
-		player.gainItem(itemData)
+		player.gain_item(item_data)
 		emit_signal("selectionMade")
 
+
 func _on_Background_mouse_entered():
-	tween.interpolate_property(self, "rect_scale", rect_scale, Vector2(1.2, 1.2), 0.3)
-	tween.interpolate_property(background, "color", background.color, Color("fa262333"), 0.3)
-	tween.start()
+	var tween = get_tree().create_tween().set_parallel(true)
+	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.3)
 	star_emitter.emitting = true
 
 
 func _on_Background_mouse_exited():
-	tween.interpolate_property(self, "rect_scale", rect_scale, Vector2(1.0, 1.0), 0.3)
-	tween.interpolate_property(background, "color", background.color, Color("dc262333"), 0.3)
-	tween.start()
+	var tween = get_tree().create_tween().set_parallel(true)
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.3)
 	star_emitter.emitting = false

@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://db24hche1mwnf"]
 
-[ext_resource path="res://Data/MoveSets/Actions/Action.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Data/Indicators/Lunge/LungeIndicator.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Data/MoveSets/Actions/Lunge/LungeAction.gd" type="Script" id=3]
+[ext_resource type="PackedScene" uid="uid://du7ckgb4xvq2i" path="res://Data/MoveSets/Actions/Action.tscn" id="1"]
+[ext_resource type="Script" path="res://Data/MoveSets/Actions/Lunge/LungeAction.gd" id="3"]
 
-[node name="LungeAction" instance=ExtResource( 1 )]
-script = ExtResource( 3 )
-indicator_scene = ExtResource( 2 )
-targeting_type = 2
+[node name="LungeAction" instance=ExtResource("1")]
+script = ExtResource("3")

@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://d2p8yth5vp4kr"]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id="1"]
 code = "
 shader_type canvas_item;
 
@@ -8,27 +8,24 @@ uniform sampler2D noise;
 
 void fragment() {
 	float angle = TIME;
-	vec2 dist = vec2(.5) - UV;
+	vec2 dist = vec2(0.5) - UV;
 	float s = sin(angle);
 	float c = cos(angle);
 	mat2 m = mat2(vec2(c, -s), vec2(s, c));
 	dist *= m;
 	vec4 coord = texture(noise, dist);
-	coord.x -= .5;
-	coord.y -= .5 ;
+	coord.x -= 0.5;
+	coord.y -= 0.5 ;
 	vec4 lens_color = texture(TEXTURE, UV + coord.xy);
     COLOR = lens_color;
 }"
 
-[sub_resource type="OpenSimplexNoise" id=2]
-period = 158.6
-lacunarity = 1.7
+[sub_resource type="FastNoiseLite" id="2"]
 
-[sub_resource type="NoiseTexture" id=3]
+[sub_resource type="NoiseTexture2D" id="3"]
 seamless = true
-as_normalmap = true
-noise = SubResource( 2 )
+noise = SubResource("2")
 
 [resource]
-shader = SubResource( 1 )
-shader_param/noise = SubResource( 3 )
+shader = SubResource("1")
+shader_parameter/noise = SubResource("3")

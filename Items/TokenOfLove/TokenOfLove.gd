@@ -8,8 +8,8 @@ var heal_amount: int = 1
 #	2: 7
 #	3: 5
 
-func upgradeTier() -> bool:
-	var ret: bool = .upgradeTier()
+func upgrade_tier() -> bool:
+	var ret: bool = super.upgrade_tier()
 	match currentTier:
 		2:
 			self.maxTurnTimer = 7
@@ -17,9 +17,9 @@ func upgradeTier() -> bool:
 			self.maxTurnTimer = 5
 	return ret
 
-func activateItem() -> void:
+func activate_item() -> void:
 	perform_heal()
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 func perform_heal() -> void:
 	# Play animation

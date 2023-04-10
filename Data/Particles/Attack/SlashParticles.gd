@@ -1,8 +1,8 @@
-extends Particles2D
+extends GPUParticles2D
 
-func _ready():
+func _ready() -> void:
 	emitting = true
 
-func _physics_process(delta):
-	if !emitting:
+func _physics_process(_delta: float) -> void:
+	if emitting == false:
 		queue_free()

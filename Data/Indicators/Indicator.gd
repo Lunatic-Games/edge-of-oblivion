@@ -3,11 +3,11 @@ extends Node2D
 var animator
 
 func _ready():
-	TurnManager.connect("playerTurnEnded", self, "destroySelf")
+	TurnManager.connect("player_turn_ended",Callable(self,"destroy_self"))
 	animator = $AnimationPlayer
 	animator.play("spawn")
 
-func destroySelf():
+func destroy_self():
 	animator.play("remove")
-	yield(animator, "animation_finished")
+	await animator.animation_finished
 	queue_free()

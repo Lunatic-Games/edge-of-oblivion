@@ -7,21 +7,21 @@ extends "res://Items/Item.gd"
 
 var targets = []
 var chains = 1
-onready var remaining_chains = chains
+@onready var remaining_chains = chains
 
-func activateItem():
+func activate_item():
 	targets = []
 	performAttack()
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 func performAttack():
 	var targetTile
 	
-	var oneTileUp = user.currentTile.topTile
+	var oneTileUp = user.current_tile.top_tile
 	if !oneTileUp:
 		return
 	
-	var twoTilesUp = oneTileUp.topTile
+	var twoTilesUp = oneTileUp.top_tile
 	if twoTilesUp:
 		targetTile = twoTilesUp
 	else:
@@ -38,7 +38,7 @@ func build_target_list(tile, is_entry_point = false):
 		if tile:
 			targets.append(tile)
 	else:
-		if tile.occupied && tile.occupied.isEnemy():
+		if tile.occupied && tile.occupied.is_enemy():
 			targets.append(tile)
 	
 	if remaining_chains > 0:
@@ -53,12 +53,12 @@ func build_target_list(tile, is_entry_point = false):
 func attack():
 	for target in targets:
 		spawn_lightning_particle(target.global_position)
-		if is_instance_valid(target.occupied) && target.occupied.isEnemy():
-			target.occupied.takeDamage(item_damage)
-		yield(get_tree().create_timer(0.2), "timeout")
+		if is_instance_valid(target.occupied) && target.occupied.is_enemy():
+			target.occupied.take_damage(item_damage)
+		await get_tree().create_timer(0.2).timeout
 
 
-func upgradeTier() -> bool:
+func upgrade_tier() -> bool:
 	currentTier += 1
 	
 	if currentTier == 2:

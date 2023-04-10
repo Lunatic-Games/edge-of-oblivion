@@ -1,15 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://g0vvxd72c4mi"]
 
-[ext_resource path="res://Globals/Managers/Items/ItemManager.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://Globals/Managers/Items/ItemManager.gd" id="1"]
 
 [node name="ItemManager" type="Control" groups=["itemManager"]]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 1 )
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1")
 
 [node name="ItemContainer" type="HBoxContainer" parent="."]
-margin_left = 55.0
-margin_top = 549.0
-margin_right = 948.0
-margin_bottom = 643.0
-custom_constants/separation = 75
+layout_mode = 0
+offset_left = 55.0
+offset_top = 549.0
+offset_right = 948.0
+offset_bottom = 643.0

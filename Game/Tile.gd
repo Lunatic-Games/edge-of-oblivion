@@ -8,22 +8,22 @@ enum TILE_DIRECTION {
 	right
 }
 
-var topTile
-var bottomTile
-var rightTile
-var leftTile
+var top_tile
+var bottom_tile
+var right_tile
+var left_tile
 var occupied: Occupant
 
 func getTileInDirection(direction):
 	match direction:
 		MovementUtility.moveDirection.up:
-			return topTile
+			return top_tile
 		MovementUtility.moveDirection.down:
-			return bottomTile
+			return bottom_tile
 		MovementUtility.moveDirection.left:
-			return leftTile
+			return left_tile
 		MovementUtility.moveDirection.right:
-			return rightTile
+			return right_tile
 
 func get_tile_coords_to_tile(tile):
 	var xpos = position.x - tile.position.x
@@ -33,17 +33,17 @@ func get_tile_coords_to_tile(tile):
 func getRandomEnemyOccupiedAdjacentTile():
 	var occupiedAdjacentTiles = []
 	
-	if topTile && topTile.occupied && topTile.occupied.isEnemy():
-		occupiedAdjacentTiles.append(topTile)
+	if top_tile && top_tile.occupied && top_tile.occupied.is_enemy():
+		occupiedAdjacentTiles.append(top_tile)
 	
-	if bottomTile && bottomTile.occupied && bottomTile.occupied.isEnemy():
-		occupiedAdjacentTiles.append(bottomTile)
+	if bottom_tile && bottom_tile.occupied && bottom_tile.occupied.is_enemy():
+		occupiedAdjacentTiles.append(bottom_tile)
 	
-	if leftTile && leftTile.occupied && leftTile.occupied.isEnemy():
-		occupiedAdjacentTiles.append(leftTile)
+	if left_tile && left_tile.occupied && left_tile.occupied.is_enemy():
+		occupiedAdjacentTiles.append(left_tile)
 	
-	if rightTile && rightTile.occupied && rightTile.occupied.isEnemy():
-		occupiedAdjacentTiles.append(rightTile)
+	if right_tile && right_tile.occupied && right_tile.occupied.is_enemy():
+		occupiedAdjacentTiles.append(right_tile)
 	
 	if occupiedAdjacentTiles.size() == 0:
 		return null
@@ -51,7 +51,7 @@ func getRandomEnemyOccupiedAdjacentTile():
 	var randomIndex = randi()%(occupiedAdjacentTiles.size())
 	return occupiedAdjacentTiles[randomIndex]
 	
-func clearOccupant() -> void:
+func clear_occupant() -> void:
 	occupied = null
 
 func is_tile_n_tiles_away(tile, number, allow_adjacent = false):
@@ -90,3 +90,17 @@ func get_direction_to_tile(tile) -> String:
 		return "up"
 	
 	return ""
+
+
+func get_adjacent_tiles() -> Array:
+	return [top_tile, right_tile, bottom_tile, left_tile]
+
+
+func get_adjacent_occupied_tiles() -> Array:
+	var occupied_tiles = []
+	
+	for tile in get_adjacent_tiles():
+		if tile != null and tile.occupied:
+			occupied_tiles.append(tile)
+	
+	return occupied_tiles

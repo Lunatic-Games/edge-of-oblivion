@@ -1,20 +1,20 @@
 extends "res://Data/Occupant.gd"
 
 var cardsToSpawn = 3
-var currentTile
+var current_tile
 
-onready var animator = $AnimationPlayer
+@onready var animator = $AnimationPlayer
 
 func _ready():
-	occupantType = occupantTypes.collectable
+	occupantType = OccupantTypes.COLLECTABLE
 	animator.play("spawn")
 
 func collect():
-	FreeUpgradeMenu.spawnUpgradeCards(cardsToSpawn)
-	destroySelf()
+	FreeUpgradeMenu.spawn_upgrade_cards(cardsToSpawn)
+	destroy_self()
 
-func destroySelf():
-	currentTile.occupied = null
+func destroy_self():
+	current_tile.occupied = null
 	animator.play("remove")
-	yield(animator, "animation_finished")
+	await animator.animation_finished
 	queue_free()

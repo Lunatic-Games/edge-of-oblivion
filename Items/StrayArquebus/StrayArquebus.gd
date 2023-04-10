@@ -5,15 +5,15 @@ var max_blast_amount: int = 2
 var max_blast: bool = false
 var charges: int = 0
 
-onready var fire_particle_scene = preload("res://Data/Particles/Fire/FireParticles.tscn")
+@onready var fire_particle_scene = preload("res://Data/Particles/Fire/FireParticles.tscn")
 # Tiers: 
 #	1: 3 max charges
 #	2: 4 max charges
 #	3: 5 max charges
 
 func _ready():
-	activation_style = ACTIVATION_STYLES.on_charge
-	._ready()
+	activation_style = ActivationStyle.ON_CHARGE
+	super._ready()
 
 # Returns true if item activated
 func activate_on_charge() -> bool:
@@ -28,8 +28,8 @@ func activate_on_charge() -> bool:
 		return true
 	return false
 	
-func upgradeTier() -> bool:
-	var ret: bool = .upgradeTier()
+func upgrade_tier() -> bool:
+	var ret: bool = super.upgrade_tier()
 	match currentTier:
 		2:
 			maxTurnTimer = 4
@@ -38,15 +38,15 @@ func upgradeTier() -> bool:
 	update_cool_down_bar()
 	return ret
 
-func activateItem() -> void:
+func activate_item() -> void:
 	perform_attack()
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 func perform_attack() -> void:
 	var last_direction: String = user.move_history.get_record(0).direction
-	var scan_res: ItemUtil.ScanResult = ItemUtil.scan_in_direction(user.currentTile, last_direction, charges)
+	var scan_res: ItemUtil.ScanResult = ItemUtil.scan_in_direction(user.current_tile, last_direction, charges)
 	if not max_blast:
-		scan_res = ItemUtil.scan_in_direction(user.currentTile, last_direction, 1)
+		scan_res = ItemUtil.scan_in_direction(user.current_tile, last_direction, 1)
 	var tiles: Array = scan_res.tiles
 	spawn_fire_particles(tiles)
 	attack(tiles)
@@ -63,14 +63,14 @@ func attack(tiles: Array) -> void:
 		if occupant:
 			if occupant.damageable:
 				if max_blast:
-					occupant.takeDamage(max_blast_amount)
+					occupant.take_damage(max_blast_amount)
 				else:
-					occupant.takeDamage(damage_amount)
+					occupant.take_damage(damage_amount)
 
 func spawn_fire_particles(tiles: Array) -> void:
 	for t in tiles:
 		var pos: Vector2 = t.global_position
-		var particle: Node = fire_particle_scene.instance()
+		var particle: Node = fire_particle_scene.instantiate()
 		particle.global_position = pos
 		GameManager.gameboard.add_child(particle)
 	

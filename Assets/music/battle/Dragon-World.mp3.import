@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/Dragon-World.mp3-0a29b9f132710bc7d666e751b2a7e1e0.mp3str"
+uid="uid://b2qghufqsl7e7"
+path="res://.godot/imported/Dragon-World.mp3-0a29b9f132710bc7d666e751b2a7e1e0.mp3str"
 
 [deps]
 
 source_file="res://Assets/music/battle/Dragon-World.mp3"
-dest_files=[ "res://.import/Dragon-World.mp3-0a29b9f132710bc7d666e751b2a7e1e0.mp3str" ]
+dest_files=["res://.godot/imported/Dragon-World.mp3-0a29b9f132710bc7d666e751b2a7e1e0.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

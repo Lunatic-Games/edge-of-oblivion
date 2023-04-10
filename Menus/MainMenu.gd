@@ -2,11 +2,11 @@ extends Node
 
 const GAME_SCENE = preload("res://Game/GameScene.tscn")
 
-onready var start_page = $StartPage
-onready var credits_page = $CreditsPage
+@onready var start_page = $StartPage
+@onready var credits_page = $CreditsPage
 
 func _on_PlayButton_pressed():
-	get_tree().change_scene_to(GAME_SCENE)
+	get_tree().change_scene_to_packed(GAME_SCENE)
 
 
 func _on_CreditsButton_pressed():

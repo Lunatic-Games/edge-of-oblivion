@@ -1,110 +1,123 @@
+class_name Action
 extends Node2D
 
-enum TARGETING_TYPE {
-	random,
-	player_based,
-	up,
-	down,
-	left,
-	right
+enum TargetingType {
+	RANDOM,
+	PLAYER_BASED,
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
 }
 
 const SLASH_EFFECT_SCENE = preload("res://Data/Particles/Attack/SlashParticles.tscn")
 const ARROW_EFFECT_SCENE = preload("res://Data/Indicators/AttackEffects/RangedAttackEffect.tscn")
 
-export (PackedScene) var indicator_scene = preload("res://Data/Indicators/Indicator.tscn")
-export (TARGETING_TYPE) var targeting_type = TARGETING_TYPE.random
-export (int) var damage = 1
-export (int) var min_range = 1
-export (int) var max_range = 1
-export (bool) var preferred_hitting_player = true
+const EFFECT_MODULATE = Color("c69fa5")
+
+@export var indicator_scene: PackedScene = preload("res://Data/Indicators/Indicator.tscn")
+@export var targeting_type: TargetingType = TargetingType.RANDOM
+@export var damage: int = 1
+@export_range(0, 999, 1, "or_greater") var min_range: int = 1
+@export_range(0, 999, 1, "or_greater") var max_range: int = 1
+@export var prefer_hitting_player: bool = true
+
 
 func indicate(starting_tile) -> void:
 	var tile_to_indicate = choose_target_tile(starting_tile)
 	
 	if tile_to_indicate != null:
-		var indicator = indicator_scene.instance()
+		var indicator = indicator_scene.instantiate()
 		indicator.global_position = tile_to_indicate.global_position
 		GameManager.gameboard.add_child(indicator)
+
 
 func trigger(starting_tile) -> void:
 	var tile_to_target = choose_target_tile(starting_tile)
 	if tile_to_target and tile_to_target.occupied and tile_to_target.occupied == GameManager.player:
-		tile_to_target.occupied.takeDamage(damage)
+		tile_to_target.occupied.take_damage(damage)
+
 
 # Implement per action
 func trigger_effect():
 	pass
 
-# TODO IMPLEMENT OTHER TARGET TYPES
+
+# TODO: Implement other targeting types
 func choose_target_tile(starting_tile):
 	var current_tile = starting_tile
 	
-	if targeting_type == TARGETING_TYPE.random:
+	if targeting_type == TargetingType.RANDOM:
 		pass
 	
-	if targeting_type == TARGETING_TYPE.player_based:
+	if targeting_type == TargetingType.PLAYER_BASED:
 		current_tile = player_based_targeting(starting_tile)
 	
 	for x in max_range:
-		if targeting_type == TARGETING_TYPE.up:
-			if current_tile.topTile:
-				current_tile = current_tile.topTile
+		if targeting_type == TargetingType.UP:
+			if current_tile.top_tile:
+				current_tile = current_tile.top_tile
 			
-		if targeting_type == TARGETING_TYPE.down:
-			if current_tile.bottomTile:
-				current_tile = current_tile.bottomTile
+		if targeting_type == TargetingType.DOWN:
+			if current_tile.bottom_tile:
+				current_tile = current_tile.bottom_tile
 			
-		if targeting_type == TARGETING_TYPE.left:
-			if current_tile.leftTile:
-				current_tile = current_tile.leftTile
+		if targeting_type == TargetingType.LEFT:
+			if current_tile.left_tile:
+				current_tile = current_tile.left_tile
 			
-		if targeting_type == TARGETING_TYPE.right:
-			if current_tile.rightTile:
-				current_tile = current_tile.rightTile
+		if targeting_type == TargetingType.RIGHT:
+			if current_tile.right_tile:
+				current_tile = current_tile.right_tile
 		
-		if preferred_hitting_player && current_tile && current_tile.occupied && current_tile.occupied == GameManager.player:
+		var current_tile_has_player: bool = (current_tile and current_tile.occupied
+			and current_tile.occupied == GameManager.player)
+		
+		if prefer_hitting_player and current_tile_has_player:
 			break
 	
-	if current_tile == starting_tile && min_range > 0:
+	if current_tile == starting_tile and min_range > 0:
 		return null
 	
 	return current_tile
 
+
 # Implement per action that requires player based targeting!
-func player_based_targeting(starting_tile):
+func player_based_targeting(_starting_tile: Tile):
 	pass
 
+
 func spawn_slash_effect(tile: Tile) -> void:
-	var effect = SLASH_EFFECT_SCENE.instance()
+	var effect = SLASH_EFFECT_SCENE.instantiate()
 	effect.global_position = tile.global_position
-	effect.modulate = Color("c69fa5")
+	effect.modulate = EFFECT_MODULATE
 	
-	match targeting_type:
-		TARGETING_TYPE.down:
+	match TargetingType:
+		TargetingType.DOWN:
 			effect.rotation_degrees = 45
-		TARGETING_TYPE.up:
+		TargetingType.UP:
 			effect.rotation_degrees = 60
-		TARGETING_TYPE.left:
+		TargetingType.LEFT:
 			effect.rotation_degrees = 180
-		TARGETING_TYPE.right:
+		TargetingType.RIGHT:
 			effect.rotation_degrees = 0
 	
 	GameManager.gameboard.add_child(effect)
 
+
 func spawn_arrow_effect(starting_tile: Tile, ending_tile: Tile) -> Object:
-	var effect = ARROW_EFFECT_SCENE.instance()
+	var effect = ARROW_EFFECT_SCENE.instantiate()
 	effect.global_position = starting_tile.global_position
-	effect.modulate = Color("c69fa5")
+	effect.modulate = EFFECT_MODULATE
 	
-	match targeting_type:
-		TARGETING_TYPE.down:
+	match TargetingType:
+		TargetingType.DOWN:
 			effect.rotation_degrees = 90
-		TARGETING_TYPE.up:
+		TargetingType.UP:
 			effect.rotation_degrees = -90
-		TARGETING_TYPE.left:
+		TargetingType.LEFT:
 			effect.rotation_degrees = 180
-		TARGETING_TYPE.right:
+		TargetingType.RIGHT:
 			effect.rotation_degrees = 0
 	
 	GameManager.gameboard.add_child(effect)

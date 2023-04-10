@@ -1,27 +1,27 @@
 extends "res://Items/Item.gd"
 
-func activateItem():
+func activate_item():
 	performAttack()
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 func performAttack():
-	var leftTile = user.currentTile.leftTile
-	var rightTile = user.currentTile.rightTile
+	var left_tile = user.current_tile.left_tile
+	var right_tile = user.current_tile.right_tile
 	
-	if(leftTile):
-		attack(leftTile)
+	if(left_tile):
+		attack(left_tile)
 	
-	if (currentTier >= 2 && rightTile):
-		attack(rightTile)
+	if (currentTier >= 2 && right_tile):
+		attack(right_tile)
 	
 	$AnimationPlayer.play("Shake")
 
 func attack(tile):
-	spawnSlashParticle(tile.global_position)
-	if tile.occupied && tile.occupied.isEnemy():
-		tile.occupied.takeDamage(item_damage)
+	spawn_slash_particle(tile.global_position)
+	if tile.occupied && tile.occupied.is_enemy():
+		tile.occupied.take_damage(item_damage)
 
-func upgradeTier() -> bool:
+func upgrade_tier() -> bool:
 	currentTier += 1
 	
 	if currentTier == 2:

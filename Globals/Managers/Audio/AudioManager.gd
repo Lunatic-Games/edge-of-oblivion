@@ -23,17 +23,16 @@ var battle_music = [
 
 var current_music_state = MUSIC_STATE.menu
 
-onready var battle_player = $BattleMusicPlayer
-onready var menu_player = $MenuMusicPlayer
-onready var boss_player = $BossMusicPlayer
-onready var tween = $Tween
+@onready var battle_player = $BattleMusicPlayer
+@onready var menu_player = $MenuMusicPlayer
+@onready var boss_player = $BossMusicPlayer
 
 func _ready():
-	battle_player.connect("finished", self, "queue_battle_music")
-	GameManager.connect("game_start", self, "start_game_audio")
-	GameManager.connect("menu_loaded", self, "start_menu_music")
-	GameManager.connect("boss_spawned", self, "start_boss_music")
-	GameManager.connect("boss_defeated", self, "stop_boss_music")
+	battle_player.finished.connect(queue_battle_music)
+	GameManager.game_started.connect(start_game_audio)
+	GameManager.main_menu_loaded.connect(start_menu_music)
+	GameManager.boss_spawned.connect(start_boss_music)
+	GameManager.boss_defeated.connect(stop_boss_music)
 	start_menu_music()
 
 func queue_battle_music():
@@ -69,9 +68,9 @@ func stop_boss_music():
 	queue_battle_music()
 
 func fade_out(audio_player, time_to_fade):
-	tween.interpolate_property(audio_player, "volume_db", audio_player.volume_db, -60, time_to_fade, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(audio_player, "volume_db", -60, time_to_fade).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
 func fade_in(audio_player, time_to_fade):
-	tween.interpolate_property(audio_player, "volume_db", audio_player.volume_db, 0, time_to_fade, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(audio_player, "volume_db", 0, time_to_fade).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)

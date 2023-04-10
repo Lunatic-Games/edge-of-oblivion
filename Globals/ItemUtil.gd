@@ -3,7 +3,7 @@ extends Node2D
 class ScanResult:
 	var tiles: Array
 	var occupants: Array
-	func _init(passed_tiles: Array, passed_occupants: Array) -> void:
+	func _init(passed_tiles: Array,passed_occupants: Array):
 		tiles = passed_tiles
 		occupants = passed_occupants
 
@@ -16,7 +16,7 @@ func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
 	var left_distance: int = 0
 	var up_distance: int = 0
 	for _i in range(0, radius):
-		var next_tile: Tile = current_tile.leftTile
+		var next_tile: Tile = current_tile.left_tile
 		if next_tile:
 			current_tile = next_tile
 			left_distance += 1
@@ -24,7 +24,7 @@ func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
 			break
 	# Navigate up
 	for _i in range(0, radius):
-		var next_tile: Tile = current_tile.topTile
+		var next_tile: Tile = current_tile.top_tile
 		if next_tile:
 			current_tile = next_tile
 			up_distance += 1
@@ -42,7 +42,7 @@ func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
 			if occupant:
 				occupants.append(occupant)
 			#Move to next tile
-			var next_tile: Tile = current_tile.rightTile
+			var next_tile: Tile = current_tile.right_tile
 			if next_tile:
 				current_tile = next_tile
 				row_width += 1
@@ -50,12 +50,12 @@ func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
 				break
 		#Slide to begining of row
 		for _j in range(0, row_width):
-			var next_tile: Tile = current_tile.leftTile
+			var next_tile: Tile = current_tile.left_tile
 			if next_tile:
 				current_tile = next_tile
 			else:
 				break
-		var next_tile: Tile = current_tile.bottomTile
+		var next_tile: Tile = current_tile.bottom_tile
 		if next_tile:
 			current_tile = next_tile
 		else:
@@ -66,17 +66,17 @@ func scan_in_direction(origin_tile: Tile, direction: String, count: int) -> Scan
 	var tiles: Array = []
 	var occupants: Array = []
 	var current_tile: Tile = origin_tile
-	assert(count > 0, "ERROR [ItemUtil]: Can't scan " + str(count) + " tiles")
+	assert(count > 0) #,"ERROR [ItemUtil]: Can't scan " + str(count) + " tiles")
 	for _i in range(count):
 		match direction:
 			"up":
-				current_tile = current_tile.topTile
+				current_tile = current_tile.top_tile
 			"down":
-				current_tile = current_tile.bottomTile
+				current_tile = current_tile.bottom_tile
 			"left":
-				current_tile = current_tile.leftTile
+				current_tile = current_tile.left_tile
 			"right":
-				current_tile = current_tile.rightTile
+				current_tile = current_tile.right_tile
 		if current_tile:
 			tiles.append(current_tile)
 		else:
@@ -84,13 +84,13 @@ func scan_in_direction(origin_tile: Tile, direction: String, count: int) -> Scan
 		var next_tile: Tile
 		match direction:
 			"up":
-				next_tile = current_tile.topTile
+				next_tile = current_tile.top_tile
 			"down":
-				next_tile = current_tile.bottomTile
+				next_tile = current_tile.bottom_tile
 			"left":
-				next_tile = current_tile.leftTile
+				next_tile = current_tile.left_tile
 			"right":
-				next_tile = current_tile.rightTile
+				next_tile = current_tile.right_tile
 		if not next_tile:
 			break
 	return ScanResult.new(tiles, occupants)

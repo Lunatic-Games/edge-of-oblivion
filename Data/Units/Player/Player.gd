@@ -1,7 +1,9 @@
 extends "res://Data/Units/Unit.gd"
 
-signal itemReachedMaxTier
-signal playerDied
+signal item_reached_max_tier
+signal died
+
+const STARTING_ITEMS = [preload("res://Items/ShortSword/ShortSword.tres")]
 
 var experience_bar_update_time = 0.2
 var moves = 1
@@ -21,96 +23,99 @@ var levelThresholds = {
 }
 var items = []
 
-onready var movesRemaining = moves
-onready var item_container = $CanvasLayer/ItemContainer
-onready var player_camera = $PlayerCamera
-onready var experience_bar = $CanvasLayer/ExperienceBar
-onready var canvas_tween = $CanvasLayer/CanvasTween
+@onready var movesRemaining = moves
+@onready var item_container = $CanvasLayer/ItemContainer
+@onready var player_camera = $PlayerCamera
+@onready var experience_bar = $CanvasLayer/ExperienceBar
 
 
-func _ready():
-	var startingItems = [preload("res://Items/ShortSword/ShortSword.tres")]
-	for item in startingItems:
-		gainItem(item)
+func _ready() -> void:
+	super._ready()
+	for item in STARTING_ITEMS:
+		gain_item(item)
 
-func _physics_process(delta):
-	handleMovement()
 
-func handleMovement():
-	if !TurnManager.isPlayerTurn() or lock_movement or hp <= 0:
+func _physics_process(_delta: float) -> void:
+	handle_movement()
+
+
+func handle_movement():
+	if !TurnManager.is_player_turn() or lock_movement or hp <= 0:
 		return
 	
-	if (Input.is_action_just_pressed("up")):
-		if(currentTile.topTile):
-			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.topTile, "up", "handleMovement"))
-			move_to_tile(currentTile.topTile) # MovementUtility.moveDirection.up
-	elif (Input.is_action_just_pressed("down")):
-		if(currentTile.bottomTile):
-			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.bottomTile, "down", "handleMovement"))
-			move_to_tile(currentTile.bottomTile)
-	elif (Input.is_action_just_pressed("left")):
-		if(currentTile.leftTile):
-			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.leftTile, "left", "handleMovement"))
-			move_to_tile(currentTile.leftTile)
-	elif (Input.is_action_just_pressed("right")):
-		if(currentTile.rightTile):
-			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.rightTile, "right", "handleMovement"))
-			move_to_tile(currentTile.rightTile)
-	elif(Input.is_action_just_pressed("wait")):
-		TurnManager.endPlayerTurn()
+	if Input.is_action_just_pressed("up") and current_tile.top_tile:
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.top_tile, "up", "handle_movement"))
+		move_to_tile(current_tile.top_tile) # MovementUtility.moveDirection.up
+	elif Input.is_action_just_pressed("down") and current_tile.bottom_tile:
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.bottom_tile, "down", "handle_movement"))
+		move_to_tile(current_tile.bottom_tile)
+	elif Input.is_action_just_pressed("left") and current_tile.left_tile:
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.left_tile, "left", "handle_movement"))
+		move_to_tile(current_tile.left_tile)
+	elif Input.is_action_just_pressed("right") and current_tile.right_tile:
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.right_tile, "right", "handle_movement"))
+		move_to_tile(current_tile.right_tile)
+	elif Input.is_action_just_pressed("wait"):
+		TurnManager.end_player_turn()
 
 
-func move_to_tile(tile, move_precedence: float = 0.0) -> void:
-	.move_to_tile(tile)
+func move_to_tile(tile) -> void:
+	super.move_to_tile(tile)
 	
 	movesRemaining -= 1
 	if movesRemaining <= 0:
-		TurnManager.endPlayerTurn()
+		TurnManager.end_player_turn()
 		movesRemaining = moves
 
 func die():
+	var camera_position_before = player_camera.global_position
+	
 	self.remove_child(player_camera)
 	GameManager.gameboard.add_child(player_camera)
 	player_camera.set_owner(GameManager.gameboard)
-	tween.interpolate_property(player_camera, "global_position", global_position, currentTile.global_position, 1.0)
-	tween.start()
-	emit_signal("playerDied")
-	.die()
+	
+	player_camera.global_position = camera_position_before
+	
+	emit_signal("died")
+	super.die()
 
-func gainExperience(experience):
+func gain_experience(experience):
 	if currentLevel >= levelThresholds.size():
 		return
 	
 	currentXp += experience
 	
 	if currentXp >= levelThresholds[currentLevel]:
-		levelUp()
+		level_up()
 	else:
 		update_experience_bar()
 
-func levelUp():
-	FreeUpgradeMenu.spawnUpgradeCards(3)
+
+func level_up():
+	FreeUpgradeMenu.spawn_upgrade_cards(3)
 	update_experience_bar()
 	currentLevel += 1
 	currentXp = 0
-	yield(get_tree().create_timer(experience_bar_update_time), "timeout")
+	await get_tree().create_timer(experience_bar_update_time).timeout
 	experience_bar.emit_particle()
 	update_experience_bar()
-	
-	
 
-func gainItem(itemData):
-	if itemData in items:
-		ItemManager.upgradeItem(itemData)
+
+func gain_item(item_data):
+	if item_data in items:
+		ItemManager.upgrade_item(item_data)
 	else:
-		items.append(itemData)
-		ItemManager.addItem(itemData)
+		items.append(item_data)
+		ItemManager.add_item(item_data)
 
-func isEnemy():
+
+func is_enemy():
 	return false
+
 
 func update_experience_bar() -> void:
 	experience_bar.max_value = levelThresholds[currentLevel]
-	canvas_tween.interpolate_property(experience_bar, "value", experience_bar.value, currentXp, experience_bar_update_time)
-	canvas_tween.start()
-	yield(canvas_tween, "tween_all_completed")
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(experience_bar, "value", currentXp, experience_bar_update_time)
+	await tween.finished
