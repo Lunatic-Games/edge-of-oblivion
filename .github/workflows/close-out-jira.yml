@@ -1,7 +1,9 @@
 name: Close-out Jira issue
 
 on:
-  push:
+  pull_request:
+    types:
+      - "closed"
     branches:
       - "master"
 
@@ -9,12 +11,13 @@ jobs:
   parse:
     name: Parse Jira key
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     outputs:
       jira_key: ${{ steps.regex.outputs.jira_key }}
     steps:
       - name: Parse branch name
         id: regex
-        run: echo "${{ github.ref_name }}" | sed -r 's/([A-Z]+-[0-9]+)-.*/\1/' | cat <(echo -n "jira_key=") - >> $GITHUB_OUTPUT
+        run: echo "${{ github.event.pull_request.head.ref }}" | sed -rn 's/(refs\/heads\/)?([A-Z]+-[0-9]+)-.*/\2/p' | cat <(echo -n "jira_key=") - >> $GITHUB_OUTPUT
       - name: Check if JIRA key found
         id: check
         run: if [ $(echo "${{ steps.regex.outputs.jira_key }}" | wc -m) -gt 1 ]; then exit; else exit 1; fi;
@@ -25,6 +28,7 @@ jobs:
   update:
     name: Update Jira Issue
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     needs: parse
     steps:
       - name: Login to Jira
