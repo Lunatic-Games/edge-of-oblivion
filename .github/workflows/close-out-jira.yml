@@ -1,0 +1,40 @@
+name: Close-out Jira issue
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  parse:
+    name: Parse Jira key
+    runs-on: ubuntu-latest
+    outputs:
+      jira_key: ${{ steps.regex.outputs.jira_key }}
+    steps:
+      - name: Parse branch name
+        id: regex
+        run: echo "${{ github.ref_name }}" | sed -r 's/([A-Z]+-[0-9]+)-.*/\1/' | cat <(echo -n "jira_key=") - >> $GITHUB_OUTPUT
+      - name: Check if JIRA key found
+        id: check
+        run: if [ $(echo "${{ steps.regex.outputs.jira_key }}" | wc -m) -gt 1 ]; then exit; else exit 1; fi;
+      - name: Print found Jira key
+        id: print
+        run: echo "${{ steps.regex.outputs.jira_key }}"
+
+  update:
+    name: Update Jira Issue
+    runs-on: ubuntu-latest
+    needs: parse
+    steps:
+      - name: Login to Jira
+        uses: atlassian/gajira-login@v3
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      - name: Close out issue
+        uses: atlassian/gajira-transition@v3
+        with:
+          issue: ${{ needs.parse.outputs.jira_key }}
+          transition: "Done"
