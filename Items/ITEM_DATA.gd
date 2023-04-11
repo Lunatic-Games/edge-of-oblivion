@@ -1,6 +1,5 @@
+class_name ItemData
 extends Resource
-
-class_name item_data
 
 @export var sprite: Texture2D
 @export var item_scene: PackedScene

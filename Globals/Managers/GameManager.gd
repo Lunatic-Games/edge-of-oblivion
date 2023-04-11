@@ -5,8 +5,9 @@ signal main_menu_loaded
 signal boss_spawned
 signal boss_defeated
 
+const MAIN_MENU_SCENE = preload("res://Menus/MainMenu/MainMenu.tscn")
 const SPAWN_FLAG_SCENE = preload("res://Data/Indicators/SpawnFlag/SpawnFlag.tscn")
-const TILE_SCENE = preload("res://Game/Tile.tscn")
+const TILE_SCENE = preload("res://GameScene/Tile.tscn")
 const PLAYER_SCENE = preload("res://Data/Units/Player/Player.tscn")
 const CHEST_SCENE = preload("res://Data/Objects/Chest.tscn")
 
@@ -35,10 +36,10 @@ func start_game():
 	spawn_player()
 	
 	game = get_tree().root.get_node("GameScene")
-	boss_overlay = game.get_node("Canvas/BossOverlay")
-	boss_health_bar = boss_overlay.get_node("BossHealthBar")
-	boss_name = boss_overlay.get_node("BossName")
-	victory_screen = game.get_node("Canvas/Victory")
+	boss_overlay = game.get_node("HUD/BossOverlay")
+	boss_health_bar = boss_overlay.get_node("HealthBar")
+	boss_name = boss_overlay.get_node("Title")
+	victory_screen = game.get_node("Menus/VictoryPanel")
 	
 	game_started.emit()
 
@@ -52,7 +53,7 @@ func stop_game():
 
 
 func change_to_main_menu():
-	get_tree().change_scene_to_file("res://Menus/MainMenu.tscn")
+	get_tree().change_scene_to_packed(MAIN_MENU_SCENE)
 	main_menu_loaded.emit()
 
 
@@ -102,7 +103,7 @@ func spawn_player():
 	
 	var player_spawn_tile = all_tiles.pick_random()
 	player.current_tile = player_spawn_tile
-	player_spawn_tile.occupied = player
+	player_spawn_tile.occupant = player
 	player.position = player_spawn_tile.position
 	
 	occupy_tile(player_spawn_tile, player)
@@ -187,7 +188,7 @@ func trigger_victory_screen():
 
 
 func occupy_tile(tile, occupant):
-	tile.occupied = occupant
+	tile.occupant = occupant
 	unoccupied_tiles.erase(tile)
 
 
@@ -195,7 +196,7 @@ func unoccupy_tile(tile):
 	if tile == null:
 		return
 	
-	tile.occupied = null
+	tile.occupant = null
 	unoccupied_tiles.append(tile)
 
 

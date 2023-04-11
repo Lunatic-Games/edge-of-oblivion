@@ -21,8 +21,8 @@ func performAttack():
 
 func attack(tile):
 	spawn_slash_particle(tile.global_position)
-	if tile.occupied && tile.occupied.is_enemy():
-		tile.occupied.take_damage(item_damage)
+	if tile.occupant && tile.occupant.is_enemy():
+		tile.occupant.take_damage(item_damage)
 
 
 func upgrade_tier() -> bool:

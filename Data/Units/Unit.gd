@@ -1,19 +1,19 @@
 class_name Unit
 extends "res://Data/Occupant.gd"
 
-const DAMAGE_PARTICLES_SCENE = preload("res://Data/Particles/Damaged/DamagedParticles.tscn")
-const HEALTH_PARTICLES_SCENE = preload("res://Data/Particles/Healing/HealthParticles.tscn")
+const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Damaged/DamagedParticles.tscn")
+const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Healing/HealthParticles.tscn")
 
-var lock_movement = false
-var current_tile
-var max_hp = 3
+var lock_movement: bool = false
+var current_tile: Tile
+var max_hp: int = 3
 var canFall = true
-var hp
-var move_precedence = 0.0
+var hp: int
+var move_precedence: float = 0.0
 
-@onready var animation_player = $AnimationPlayer
-@onready var health_bar = $HealthBar
-@onready var sprite = $Sprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var health_bar: ProgressBar = $HealthBar
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var move_history = MovementUtility.MoveHistory.new()
 
 @onready var particles: Dictionary = {
@@ -95,9 +95,9 @@ func is_alive():
 	return false
 
 func move_to_tile(tile) -> void:
-	if tile.occupied && tile.occupied.occupantType == tile.occupied.OccupantTypes.BLOCKING:
-		if move_precedence > tile.occupied.move_precedence:
-			var pushed_occupant = tile.occupied
+	if tile.occupant && tile.occupant.occupant_type == tile.occupant.OccupantTypes.BLOCKING:
+		if move_precedence > tile.occupant.move_precedence:
+			var pushed_occupant = tile.occupant
 			var last_resort_tile = current_tile
 			GameManager.unoccupy_tile(last_resort_tile)
 			current_tile = null
@@ -106,8 +106,8 @@ func move_to_tile(tile) -> void:
 		else:
 			return
 	
-	if self.is_in_group("player") && tile.occupied && tile.occupied.occupantType == tile.occupied.OccupantTypes.COLLECTABLE:
-		tile.occupied.collect()
+	if self.is_in_group("player") && tile.occupant && tile.occupant.occupant_type == tile.occupant.OccupantTypes.COLLECTABLE:
+		tile.occupant.collect()
 	
 	GameManager.unoccupy_tile(current_tile)
 	GameManager.occupy_tile(tile, self)
@@ -128,13 +128,13 @@ func move_to_tile(tile) -> void:
 
 func get_displace_tile(displacees_tile: Tile, last_resort_tile: Tile) -> Tile:
 	var possible_tiles = []
-	if displacees_tile.top_tile && !displacees_tile.top_tile.occupied:
+	if displacees_tile.top_tile && !displacees_tile.top_tile.occupant:
 		possible_tiles.append(displacees_tile.top_tile)
-	if displacees_tile.bottom_tile && !displacees_tile.bottom_tile.occupied:
+	if displacees_tile.bottom_tile && !displacees_tile.bottom_tile.occupant:
 		possible_tiles.append(displacees_tile.bottom_tile)
-	if displacees_tile.left_tile && !displacees_tile.left_tile.occupied:
+	if displacees_tile.left_tile && !displacees_tile.left_tile.occupant:
 		possible_tiles.append(displacees_tile.left_tile)
-	if displacees_tile.right_tile && !displacees_tile.right_tile.occupied:
+	if displacees_tile.right_tile && !displacees_tile.right_tile.occupant:
 		possible_tiles.append(displacees_tile.right_tile)
 	
 	if possible_tiles.size() > 0:

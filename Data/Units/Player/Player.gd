@@ -1,7 +1,7 @@
+class_name Player
 extends "res://Data/Units/Unit.gd"
 
 signal item_reached_max_tier
-signal died
 
 const STARTING_ITEMS = [preload("res://Items/ShortSword/ShortSword.tres")]
 
@@ -29,13 +29,13 @@ var items = []
 @onready var experience_bar = $CanvasLayer/ExperienceBar
 
 
-func _ready() -> void:
+func _ready():
 	super._ready()
 	for item in STARTING_ITEMS:
 		gain_item(item)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(_delta: float):
 	handle_movement()
 
 
@@ -76,7 +76,7 @@ func die():
 	
 	player_camera.global_position = camera_position_before
 	
-	emit_signal("died")
+	GlobalSignals.player_died.emit(self)
 	super.die()
 
 func gain_experience(experience):
@@ -101,7 +101,7 @@ func level_up():
 	update_experience_bar()
 
 
-func gain_item(item_data):
+func gain_item(item_data: ItemData):
 	if item_data in items:
 		ItemManager.upgrade_item(item_data)
 	else:

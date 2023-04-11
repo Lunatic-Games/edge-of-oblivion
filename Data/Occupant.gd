@@ -7,7 +7,7 @@ enum OccupantTypes {
 	COMBATIVE
 }
 
-var occupantType = OccupantTypes.BLOCKING
+var occupant_type = OccupantTypes.BLOCKING
 
 var pushable: bool = false
 var damageable: bool = false

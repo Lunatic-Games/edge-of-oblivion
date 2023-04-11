@@ -12,7 +12,7 @@ var top_tile
 var bottom_tile
 var right_tile
 var left_tile
-var occupied: Occupant
+var occupant: Occupant
 
 
 func getTileInDirection(direction):
@@ -36,16 +36,16 @@ func get_tile_coords_to_tile(tile):
 func get_random_enemy_occupied_adjacent_tile():
 	var occupiedAdjacentTiles = []
 	
-	if top_tile && top_tile.occupied && top_tile.occupied.is_enemy():
+	if top_tile && top_tile.occupant && top_tile.occupant.is_enemy():
 		occupiedAdjacentTiles.append(top_tile)
 	
-	if bottom_tile && bottom_tile.occupied && bottom_tile.occupied.is_enemy():
+	if bottom_tile && bottom_tile.occupant && bottom_tile.occupant.is_enemy():
 		occupiedAdjacentTiles.append(bottom_tile)
 	
-	if left_tile && left_tile.occupied && left_tile.occupied.is_enemy():
+	if left_tile && left_tile.occupant && left_tile.occupant.is_enemy():
 		occupiedAdjacentTiles.append(left_tile)
 	
-	if right_tile && right_tile.occupied && right_tile.occupied.is_enemy():
+	if right_tile && right_tile.occupant && right_tile.occupant.is_enemy():
 		occupiedAdjacentTiles.append(right_tile)
 	
 	if occupiedAdjacentTiles.size() == 0:
@@ -56,7 +56,7 @@ func get_random_enemy_occupied_adjacent_tile():
 
 
 func clear_occupant() -> void:
-	occupied = null
+	occupant = null
 
 
 func is_tile_n_tiles_away(tile, number, allow_adjacent = false):
@@ -99,15 +99,28 @@ func get_direction_to_tile(tile) -> String:
 	return ""
 
 
-func get_adjacent_tiles() -> Array:
+func get_neighbor_from_direction_string(direction: String) -> Tile:
+	match direction:
+		"up":
+			return top_tile
+		"down":
+			return bottom_tile
+		"left":
+			return left_tile
+		"right":
+			return right_tile
+	
+	return null
+
+func get_adjacent_tiles() -> Array[Tile]:
 	return [top_tile, right_tile, bottom_tile, left_tile]
 
 
-func get_adjacent_occupied_tiles() -> Array:
-	var occupied_tiles = []
+func get_adjacent_occupied_tiles() -> Array[Tile]:
+	var occupied_tiles: Array[Tile] = []
 	
 	for tile in get_adjacent_tiles():
-		if tile != null and tile.occupied:
+		if tile != null and tile.occupant:
 			occupied_tiles.append(tile)
 	
 	return occupied_tiles

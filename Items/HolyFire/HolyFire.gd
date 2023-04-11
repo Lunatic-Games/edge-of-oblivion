@@ -63,6 +63,6 @@ func spawn_bolts(tiles: Array) -> void:
 		particle.activate()
 		
 		# Do damage
-		if t.occupied:
-			if t.occupied.damageable:
-				t.occupied.take_damage(damage_amount)
+		if t.occupant:
+			if t.occupant.damageable:
+				t.occupant.take_damage(damage_amount)

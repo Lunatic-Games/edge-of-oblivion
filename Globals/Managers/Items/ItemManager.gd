@@ -20,7 +20,7 @@ func handle_items_triggering():
 	TurnManager.item_phase_ended()
 
 
-func add_item(item_data):
+func add_item(item_data: ItemData):
 	var item = item_data.item_scene.instantiate()
 	item.currentTier = 1
 	GameManager.player.item_container.add_child(item)
@@ -28,7 +28,7 @@ func add_item(item_data):
 	item.setup(item_data)
 
 
-func upgrade_item(item_data):
+func upgrade_item(item_data: ItemData):
 	var isMaxTier = managedItems[item_data].upgrade_tier()
 	
 	if isMaxTier:

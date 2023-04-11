@@ -1,8 +1,9 @@
+class_name Card
 extends Control
 
-signal selectionMade
+signal selected
 
-var item_data
+var item_data: ItemData
 
 @onready var animator = $AnimationPlayer
 @onready var star_emitter = $WaterfallStarParticle
@@ -35,7 +36,7 @@ func _on_Background_gui_input(event):
 	if event is InputEventMouseButton && event.button_index == 1 && event.pressed:
 		var player = get_tree().get_nodes_in_group("player")[0]
 		player.gain_item(item_data)
-		emit_signal("selectionMade")
+		selected.emit()
 
 
 func _on_Background_mouse_entered():

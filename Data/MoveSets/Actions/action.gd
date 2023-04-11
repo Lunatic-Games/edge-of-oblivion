@@ -23,7 +23,7 @@ const EFFECT_MODULATE = Color("c69fa5")
 @export var prefer_hitting_player: bool = true
 
 
-func indicate(starting_tile) -> void:
+func indicate(starting_tile: Tile) -> void:
 	var tile_to_indicate = choose_target_tile(starting_tile)
 	
 	if tile_to_indicate != null:
@@ -32,20 +32,20 @@ func indicate(starting_tile) -> void:
 		GameManager.gameboard.add_child(indicator)
 
 
-func trigger(starting_tile) -> void:
+func trigger(starting_tile: Tile) -> void:
 	var tile_to_target = choose_target_tile(starting_tile)
-	if tile_to_target and tile_to_target.occupied and tile_to_target.occupied == GameManager.player:
-		tile_to_target.occupied.take_damage(damage)
+	if tile_to_target and tile_to_target.occupant and tile_to_target.occupant == GameManager.player:
+		tile_to_target.occupant.take_damage(damage)
 
 
 # Implement per action
-func trigger_effect():
+func trigger_effect() -> void:
 	pass
 
 
 # TODO: Implement other targeting types
-func choose_target_tile(starting_tile):
-	var current_tile = starting_tile
+func choose_target_tile(starting_tile: Tile) -> Tile:
+	var current_tile: Tile = starting_tile
 	
 	if targeting_type == TargetingType.RANDOM:
 		pass
@@ -70,8 +70,8 @@ func choose_target_tile(starting_tile):
 			if current_tile.right_tile:
 				current_tile = current_tile.right_tile
 		
-		var current_tile_has_player: bool = (current_tile and current_tile.occupied
-			and current_tile.occupied == GameManager.player)
+		var current_tile_has_player: bool = (current_tile and current_tile.occupant
+			and current_tile.occupant == GameManager.player)
 		
 		if prefer_hitting_player and current_tile_has_player:
 			break
@@ -83,8 +83,8 @@ func choose_target_tile(starting_tile):
 
 
 # Implement per action that requires player based targeting!
-func player_based_targeting(_starting_tile: Tile):
-	pass
+func player_based_targeting(_starting_tile: Tile) -> Tile:
+	return null
 
 
 func spawn_slash_effect(tile: Tile) -> void:

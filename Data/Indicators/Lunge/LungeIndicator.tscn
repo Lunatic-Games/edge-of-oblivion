@@ -67,7 +67,7 @@ _data = {
 
 [node name="LungeIndicator" instance=ExtResource("1")]
 
-[node name="Sprite2" type="Sprite2D" parent="." index="0"]
+[node name="BullSprite" type="Sprite2D" parent="." index="0"]
 self_modulate = Color(0.933333, 0.388235, 0.388235, 1)
 position = Vector2(4, 0)
 scale = Vector2(0.12, 0.12)

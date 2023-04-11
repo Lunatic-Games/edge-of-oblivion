@@ -1,6 +1,6 @@
 extends Node
 
-const ENEMY_SCENE = preload("res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn")
+const ENEMY_SCENE: PackedScene = preload("res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn")
 
 
 func _process(_delta: float) -> void:

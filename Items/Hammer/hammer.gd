@@ -17,12 +17,12 @@ func activate_item() -> void:
 
 
 func perform_attack() -> void:
-	var top_tile = user.current_tile.top_tile
-	var bottom_tile = user.current_tile.bottom_tile
+	var top_tile: Tile = user.current_tile.top_tile
+	var bottom_tile: Tile = user.current_tile.bottom_tile
 	
-	if(top_tile && top_tile.occupied):
+	if(top_tile && top_tile.occupant):
 		attack(top_tile, "up")
-	elif (bottom_tile && bottom_tile.occupied):
+	elif (bottom_tile && bottom_tile.occupant):
 		attack(bottom_tile, "down", true)
 	elif (top_tile):
 		attack(top_tile, "up")
@@ -31,7 +31,7 @@ func perform_attack() -> void:
 
 
 func attack(tile: Tile, direction: String, should_flip: bool = false) -> void:
-	var occupant = tile.occupied
+	var occupant = tile.occupant
 	spawn_hammer_indicator(tile.global_position, should_flip)
 	if occupant && occupant.is_enemy():
 		apply_knockback(occupant, direction, tiered_knockback[currentTier], tiered_kb_damage[currentTier])

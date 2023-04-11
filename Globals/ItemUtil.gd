@@ -1,48 +1,60 @@
 extends Node2D
 
+
 class ScanResult:
-	var tiles: Array
-	var occupants: Array
+	var tiles: Array[Tile]
+	var occupants: Array[Occupant]
 	
-	func _init(passed_tiles: Array,passed_occupants: Array):
-		tiles = passed_tiles
-		occupants = passed_occupants
+	func _init(scanned_tiles: Array[Tile], scanned_occupants: Array[Occupant]):
+		tiles = scanned_tiles
+		occupants = scanned_occupants
 
 
 func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
-	var tiles: Array = []
-	var occupants: Array = []
-	#Scan all applicable tiles, append tile and tile occupant if any to arrays
+	var tiles: Array[Tile] = []
+	var occupants: Array[Occupant] = []
 	var current_tile: Tile = center_tile
+	
+	# Scan all applicable tiles, append tile and tile occupant if any to arrays
 	# Navigate left
 	var left_distance: int = 0
-	var up_distance: int = 0
+	
 	for _i in range(0, radius):
 		var next_tile: Tile = current_tile.left_tile
+		
 		if next_tile:
 			current_tile = next_tile
 			left_distance += 1
 		else:
 			break
+	
 	# Navigate up
+	var up_distance: int = 0
+	
 	for _i in range(0, radius):
 		var next_tile: Tile = current_tile.top_tile
+		
 		if next_tile:
 			current_tile = next_tile
 			up_distance += 1
 		else:
 			break
+	
 	# Begin scanning by row
 	for _i in range(-up_distance, radius + 1):
 		var row_width: int = 0
+		
 		for _j in range(-left_distance, radius + 1):
 			if not current_tile:
 				continue
+			
 			tiles.append(current_tile)
+			
 			#Check occupant
-			var occupant: Occupant = current_tile.occupied
+			var occupant: Occupant = current_tile.occupant
 			if occupant:
 				occupants.append(occupant)
+			
 			#Move to next tile
 			var next_tile: Tile = current_tile.right_tile
 			if next_tile:
@@ -50,6 +62,7 @@ func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
 				row_width += 1
 			else:
 				break
+		
 		#Slide to begining of row
 		for _j in range(0, row_width):
 			var next_tile: Tile = current_tile.left_tile
@@ -57,42 +70,33 @@ func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
 				current_tile = next_tile
 			else:
 				break
+		
 		var next_tile: Tile = current_tile.bottom_tile
 		if next_tile:
 			current_tile = next_tile
 		else:
 			break
+	
 	return ScanResult.new(tiles,occupants)
 
+
 func scan_in_direction(origin_tile: Tile, direction: String, count: int) -> ScanResult:
-	var tiles: Array = []
-	var occupants: Array = []
-	var current_tile: Tile = origin_tile
 	assert(count > 0) #,"ERROR [ItemUtil]: Can't scan " + str(count) + " tiles")
-	for _i in range(count):
-		match direction:
-			"up":
-				current_tile = current_tile.top_tile
-			"down":
-				current_tile = current_tile.bottom_tile
-			"left":
-				current_tile = current_tile.left_tile
-			"right":
-				current_tile = current_tile.right_tile
+		
+	var tiles: Array[Tile] = []
+	var occupants: Array[Occupant] = []
+	
+	var current_tile: Tile = origin_tile
+	for _i in count:
+		current_tile = current_tile.get_neighbor_from_direction_string(direction)
+		
 		if current_tile:
 			tiles.append(current_tile)
+			
+			if current_tile.occupant != null:
+				occupants.append(current_tile.occupant)
+		
 		else:
 			break
-		var next_tile: Tile
-		match direction:
-			"up":
-				next_tile = current_tile.top_tile
-			"down":
-				next_tile = current_tile.bottom_tile
-			"left":
-				next_tile = current_tile.left_tile
-			"right":
-				next_tile = current_tile.right_tile
-		if not next_tile:
-			break
+	
 	return ScanResult.new(tiles, occupants)

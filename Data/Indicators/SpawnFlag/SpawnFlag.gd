@@ -1,25 +1,25 @@
 extends "res://Data/Occupant.gd"
 
-var current_tile
+var current_tile: Tile
 
-@onready var animator = $AnimationPlayer
+@onready var animator: AnimationPlayer = $AnimationPlayer
 
 
-func _ready():
-	occupantType = OccupantTypes.COLLECTABLE
+func _ready() -> void:
+	occupant_type = OccupantTypes.COLLECTABLE
 	animator.play("spawn")
 
 
-func collect():
-	var new_tile = GameManager.get_random_unoccupied_tile()
-	current_tile.occupied = null
+func collect() -> void:
+	var new_tile: Tile = GameManager.get_random_unoccupied_tile()
+	current_tile.occupant = null
 	current_tile = new_tile
 	position = current_tile.position
 	GameManager.occupy_tile(current_tile, self)
 
 
-func destroy_self():
-	current_tile.occupied = null
+func destroy_self() -> void:
+	current_tile.occupant = null
 	animator.play("remove")
 	await animator.animation_finished
 	queue_free()

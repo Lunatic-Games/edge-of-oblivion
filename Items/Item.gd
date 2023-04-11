@@ -159,7 +159,7 @@ func apply_knockback(target: Occupant, direction: String, knockback: int, collid
 					var occupant: Occupant = null
 					var tile_to_check: Tile = directions[dir]
 					if tile_to_check:
-						occupant = tile_to_check.occupied
+						occupant = tile_to_check.occupant
 						if occupant:
 							target.take_damage(collideDamage)
 							if occupant.damageable:

@@ -38,7 +38,7 @@ func build_target_list(tile, is_entry_point = false):
 		if tile:
 			targets.append(tile)
 	else:
-		if tile.occupied && tile.occupied.is_enemy():
+		if tile.occupant && tile.occupant.is_enemy():
 			targets.append(tile)
 	
 	if remaining_chains > 0:
@@ -53,8 +53,8 @@ func build_target_list(tile, is_entry_point = false):
 func attack():
 	for target in targets:
 		spawn_lightning_particle(target.global_position)
-		if is_instance_valid(target.occupied) && target.occupied.is_enemy():
-			target.occupied.take_damage(item_damage)
+		if is_instance_valid(target.occupant) && target.occupant.is_enemy():
+			target.occupant.take_damage(item_damage)
 		await get_tree().create_timer(0.2).timeout
 
 

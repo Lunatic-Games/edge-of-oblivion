@@ -66,7 +66,7 @@ func perform_attack() -> void:
 
 func attack(tiles: Array) -> void:
 	for t in tiles:
-		var occupant: Occupant = t.occupied
+		var occupant: Occupant = t.occupant
 		if occupant:
 			if occupant.damageable:
 				if max_blast:

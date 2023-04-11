@@ -15,7 +15,7 @@ func upgrade_tier() -> bool:
 	var ret: bool = super.upgrade_tier()
 	match currentTier:
 		2:
-			self.maxTurnTimer = 5
+			maxTurnTimer = 5
 		3:
 			range_radius = 2
 	return ret
@@ -28,9 +28,10 @@ func activate_item() -> void:
 
 func perform_attack() -> void:
 	var scan_res: ItemUtil.ScanResult = ItemUtil.scan_tile_radius(user.current_tile, range_radius)
+	
 	spawn_fire_particles(scan_res.tiles)
 	attack(scan_res.occupants)
-	$AnimationPlayer.play("Shake")
+	animator.play("Shake")
 
 
 func attack(targets: Array) -> void:
@@ -43,5 +44,6 @@ func spawn_fire_particles(tiles: Array) -> void:
 	for t in tiles:
 		var pos: Vector2 = t.global_position
 		var particle: Node = FIRE_PARTICLES_SCENE.instantiate()
+		
 		particle.global_position = pos
 		GameManager.gameboard.add_child(particle)
