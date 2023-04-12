@@ -31,6 +31,10 @@ GlobalSignals="*res://Globals/Signals.gd"
 
 window/stretch/mode="viewport"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [importer_defaults]
 
 texture={
