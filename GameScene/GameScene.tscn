@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://byoi1xsr0flfl"]
+[gd_scene load_steps=10 format=3 uid="uid://byoi1xsr0flfl"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
+[ext_resource type="Texture2D" uid="uid://ceh34ox6344m8" path="res://Assets/art/misc/blank_grey.png" id="2_jc6s1"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -58,6 +59,7 @@ show_behind_parent = true
 material = SubResource("2")
 offset_right = 1155.0
 offset_bottom = 647.0
+texture = ExtResource("2_jc6s1")
 expand_mode = 1
 
 [node name="GameBoard" type="Node2D" parent="." groups=["gameboard"]]
