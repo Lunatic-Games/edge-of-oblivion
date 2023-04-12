@@ -76,7 +76,7 @@ func clear_timer_activate():
 	turnTimer = maxTurnTimer
 	update_cool_down_bar()
 	appear_unready()
-	await activate_item().completed
+	await activate_item()
 
 
 func update_cool_down_bar():
