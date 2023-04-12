@@ -1,10 +1,8 @@
 # Godot 4+ specific ignores
-# .godot/ <-- Ignored because of weird behavior where resources weren't loading
+.godot/*
 
-# Godot-specific ignores
-.import/
-export.cfg
-export_presets.cfg
+# To fix a weird bug with Godot 4 where resources don't get loaded correctly the first time you open the project
+!.godot/imported
 
 # Imported translations (automatically generated from CSV files)
 *.translation
