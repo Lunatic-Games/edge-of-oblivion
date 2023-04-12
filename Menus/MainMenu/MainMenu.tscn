@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dte0gritlpqbs"]
+[gd_scene load_steps=6 format=3 uid="uid://dte0gritlpqbs"]
 
 [ext_resource type="Script" path="res://Menus/MainMenu/MainMenu.gd" id="1_ywv84"]
-[ext_resource type="Texture2D" uid="uid://derjoygaeaaeb" path="res://Assets/art/background/background.png" id="2_mxfcg"]
+[ext_resource type="Texture2D" uid="uid://cu76o1llaofjt" path="res://Assets/art/background/main-menu.png" id="2_pv8cn"]
 [ext_resource type="PackedScene" uid="uid://bejx6kj0p5det" path="res://UI/Card/Card.tscn" id="3_grure"]
+[ext_resource type="Texture2D" uid="uid://10qbeflnb7x0" path="res://Assets/art/icons/animals/carl-olsen/mite-alt.svg" id="4_qh5vj"]
+[ext_resource type="Texture2D" uid="uid://deosianbaa2v3" path="res://test_image.png" id="5_s5u7r"]
 
 [node name="MainMenu" type="CanvasLayer"]
 layer = 2
@@ -14,7 +16,7 @@ offset_top = -321.0
 offset_right = 2695.0
 offset_bottom = 1633.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_mxfcg")
+texture = ExtResource("2_pv8cn")
 
 [node name="StartPage" type="Control" parent="."]
 layout_mode = 3
@@ -246,15 +248,18 @@ layout_mode = 2
 text = "Return to Start Page"
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 1433.0
-offset_top = -1197.0
-offset_right = 4506.0
-offset_bottom = 757.0
-texture = ExtResource("2_mxfcg")
+offset_left = 1276.0
+offset_top = 20.0
+offset_right = 1788.0
+offset_bottom = 532.0
+texture = ExtResource("4_qh5vj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(249, 1926)
-texture = ExtResource("2_mxfcg")
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = 517.0
+offset_top = 829.0
+offset_right = 557.0
+offset_bottom = 869.0
+texture = ExtResource("5_s5u7r")
 
 [connection signal="pressed" from="StartPage/MenuContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="StartPage/MenuContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
