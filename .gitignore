@@ -1,5 +1,5 @@
 # Godot 4+ specific ignores
-.godot/
+# .godot/ <-- Ignored because of weird behavior where resources weren't loading
 
 # Godot-specific ignores
 .import/
