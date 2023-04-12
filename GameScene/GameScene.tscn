@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://byoi1xsr0flfl"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
-[ext_resource type="Texture2D" uid="uid://ceh34ox6344m8" path="res://Assets/art/misc/blank_grey.png" id="2_su17w"]
+[ext_resource type="Texture2D" uid="uid://derjoygaeaaeb" path="res://Assets/art/background/background.png" id="2_s1vms"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -59,7 +59,6 @@ show_behind_parent = true
 material = SubResource("2")
 offset_right = 1155.0
 offset_bottom = 647.0
-texture = ExtResource("2_su17w")
 expand_mode = 1
 
 [node name="GameBoard" type="Node2D" parent="." groups=["gameboard"]]
@@ -166,6 +165,13 @@ text = "Try Again"
 [node name="MainMenuButton" type="Button" parent="Menus/GameOver"]
 layout_mode = 2
 text = "Main Menu"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 2736.0
+offset_top = 128.0
+offset_right = 2776.0
+offset_bottom = 168.0
+texture = ExtResource("2_s1vms")
 
 [connection signal="pressed" from="Menus/VictoryPanel/Container/MainMenuButton" to="." method="_on_VictoryMainMenuButton_pressed"]
 [connection signal="pressed" from="Menus/GameOver/Restart" to="." method="_on_GameOverRestartButton_pressed"]
