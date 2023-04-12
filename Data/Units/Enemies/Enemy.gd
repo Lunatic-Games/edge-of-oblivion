@@ -6,7 +6,7 @@ extends "res://Data/Units/Unit.gd"
 @export_range(0, 999, 1, "or_greater") var damage: int = 1
 @export_range(-1, 999, 1, "or_greater") var max_hp_override: int = 3
 
-var chosen_move
+var chosen_move: Move
 
 @onready var rounds_until_ready = max_rounds_until_ready
 @onready var attack_bar = $AttackBar

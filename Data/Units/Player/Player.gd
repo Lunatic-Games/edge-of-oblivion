@@ -5,11 +5,11 @@ signal item_reached_max_tier
 
 const STARTING_ITEMS = [preload("res://Items/ShortSword/ShortSword.tres")]
 
-var experience_bar_update_time = 0.2
-var moves = 1
-var currentXp = 0
-var currentLevel = 1
-var levelThresholds = {
+var experience_bar_update_time: float = 0.2
+var moves: int = 1
+var current_xp: int = 0
+var current_level: int = 1
+var level_thresholds = {
 	1:1,
 	2:3,
 	3:3,
@@ -23,23 +23,23 @@ var levelThresholds = {
 }
 var items = []
 
-@onready var movesRemaining = moves
+@onready var moves_remaining = moves
 @onready var item_container = $CanvasLayer/ItemContainer
 @onready var player_camera = $PlayerCamera
 @onready var experience_bar = $CanvasLayer/ExperienceBar
 
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	for item in STARTING_ITEMS:
 		gain_item(item)
 
 
-func _physics_process(_delta: float):
+func _physics_process(_delta: float) -> void:
 	handle_movement()
 
 
-func handle_movement():
+func handle_movement() -> void:
 	if !TurnManager.is_player_turn() or lock_movement or hp <= 0:
 		return
 	
@@ -59,16 +59,17 @@ func handle_movement():
 		TurnManager.end_player_turn()
 
 
-func move_to_tile(tile) -> void:
+func move_to_tile(tile: Tile) -> void:
 	super.move_to_tile(tile)
 	
-	movesRemaining -= 1
-	if movesRemaining <= 0:
+	moves_remaining -= 1
+	if moves_remaining <= 0:
 		TurnManager.end_player_turn()
-		movesRemaining = moves
+		moves_remaining = moves
 
-func die():
-	var camera_position_before = player_camera.global_position
+
+func die() -> void:
+	var camera_position_before: Vector2 = player_camera.global_position
 	
 	self.remove_child(player_camera)
 	GameManager.gameboard.add_child(player_camera)
@@ -79,29 +80,30 @@ func die():
 	GlobalSignals.player_died.emit(self)
 	super.die()
 
-func gain_experience(experience):
-	if currentLevel >= levelThresholds.size():
+
+func gain_experience(experience: int) -> void:
+	if current_level >= level_thresholds.size():
 		return
 	
-	currentXp += experience
+	current_xp += experience
 	
-	if currentXp >= levelThresholds[currentLevel]:
+	if current_xp >= level_thresholds[current_level]:
 		level_up()
 	else:
 		update_experience_bar()
 
 
-func level_up():
+func level_up() -> void:
 	FreeUpgradeMenu.spawn_upgrade_cards(3)
 	update_experience_bar()
-	currentLevel += 1
-	currentXp = 0
+	current_level += 1
+	current_xp = 0
 	await get_tree().create_timer(experience_bar_update_time).timeout
 	experience_bar.emit_particle()
 	update_experience_bar()
 
 
-func gain_item(item_data: ItemData):
+func gain_item(item_data: ItemData) -> void:
 	if item_data in items:
 		ItemManager.upgrade_item(item_data)
 	else:
@@ -109,13 +111,13 @@ func gain_item(item_data: ItemData):
 		ItemManager.add_item(item_data)
 
 
-func is_enemy():
+func is_enemy() -> bool:
 	return false
 
 
 func update_experience_bar() -> void:
-	experience_bar.max_value = levelThresholds[currentLevel]
+	experience_bar.max_value = level_thresholds[current_level]
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property(experience_bar, "value", currentXp, experience_bar_update_time)
+	tween.tween_property(experience_bar, "value", current_xp, experience_bar_update_time)
 	await tween.finished

@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://copvhxqv6s2w8"]
+[gd_scene load_steps=12 format=3 uid="uid://copvhxqv6s2w8"]
 
 [ext_resource type="Resource" path="res://Data/Units/Enemies/Bosses/ForgottenKing/forgotten_king_data.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://beynfuvsrpfhq" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cl3rgny2d8t5b" path="res://Assets/art/icons/medieval-fantasy/lorc/crowned-skull.svg" id="3"]
-[ext_resource type="PackedScene" uid="uid://db24hche1mwnf" path="res://Data/MoveSets/Actions/Lunge/LungeAction.tscn" id="4"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Bosses/Boss.gd" id="5"]
 
 [sub_resource type="Shader" id="1"]
@@ -77,10 +76,6 @@ texture = ExtResource("3")
 
 [node name="HealthBar" parent="." index="3"]
 visible = false
-
-[node name="LungeAction" parent="MoveSets/Move" index="0" instance=ExtResource("4")]
-targeting_type = 1
-max_range = 3
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="6"]
 amount = 12

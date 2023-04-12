@@ -1,26 +1,68 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5xgjwtgcj30e"]
+[gd_scene load_steps=9 format=3 uid="uid://b5xgjwtgcj30e"]
 
 [ext_resource type="PackedScene" uid="uid://b81nc8buqc23p" path="res://Data/MoveSets/Actions/Slash/SlashAction.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://beynfuvsrpfhq" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Faded/Faded.gd" id="2_c1o6u"]
 [ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="3"]
 
+[sub_resource type="Shader" id="1"]
+code = "shader_type canvas_item;
+
+uniform float strength = 0.5f;
+uniform vec4 modulate: source_color = vec4(1.0);
+uniform sampler2D noise;
+
+void fragment() {
+	vec2 dist = vec2(0.5f) - UV;
+	float s = sin(TIME);
+	float c = cos(TIME);
+	
+	mat2 m = mat2(vec2(c, -s), vec2(s, c));
+	dist *= m;
+	
+	vec4 coord = texture(noise, 0.5f + dist);
+	coord.x -= .5;
+	coord.y -= .5;
+	
+	vec4 lens_color = texture(TEXTURE, UV + coord.xy * strength);
+	lens_color *= modulate;
+    COLOR = lens_color;
+}"
+
+[sub_resource type="FastNoiseLite" id="2"]
+frequency = 0.005
+fractal_octaves = 3
+fractal_lacunarity = 1.7
+
+[sub_resource type="NoiseTexture2D" id="3"]
+seamless = true
+as_normal_map = true
+noise = SubResource("2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vh5pt"]
+resource_local_to_scene = true
+shader = SubResource("1")
+shader_parameter/strength = 0.25
+shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
+shader_parameter/noise = SubResource("3")
+
 [node name="Faded" instance=ExtResource("2")]
 script = ExtResource("2_c1o6u")
 
 [node name="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_vh5pt")
 texture = ExtResource("3")
 
-[node name="SlashAction" parent="MoveSets/Move" index="0" instance=ExtResource("1")]
+[node name="UpSlash" parent="MoveSets/Move" index="0" instance=ExtResource("1")]
 targeting_type = 2
 
-[node name="SlashAction2" parent="MoveSets/Move" index="1" instance=ExtResource("1")]
+[node name="DownSlash" parent="MoveSets/Move" index="1" instance=ExtResource("1")]
 targeting_type = 3
 
-[node name="SlashAction3" parent="MoveSets/Move" index="2" instance=ExtResource("1")]
+[node name="LeftSlash" parent="MoveSets/Move" index="2" instance=ExtResource("1")]
 targeting_type = 4
 
-[node name="SlashAction4" parent="MoveSets/Move" index="3" instance=ExtResource("1")]
+[node name="RightSlash" parent="MoveSets/Move" index="3" instance=ExtResource("1")]
 targeting_type = 5
 
 [editable path="MoveSets/Move"]

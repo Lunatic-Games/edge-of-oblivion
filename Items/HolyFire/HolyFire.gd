@@ -1,6 +1,6 @@
 extends "res://Items/Item.gd"
 
-const FIRE_PARTICLES_SCENE = preload("res://Data/Particles/Fire/FireParticles2.tscn")
+const FIRE_PARTICLES_SCENE = preload("res://Data/Particles/Fire/FireBlastParticles.tscn")
 
 var damage_amount: int = 1
 var bolt_count: int = 3

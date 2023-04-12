@@ -103,6 +103,11 @@ bg_color = Color(0.223529, 0.478431, 0.611765, 1)
 
 [node name="Enemy" instance=ExtResource("1")]
 script = ExtResource("2")
+target_scene = null
+xp = null
+max_rounds_until_ready = null
+damage = null
+max_hp_override = null
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_0fwle")

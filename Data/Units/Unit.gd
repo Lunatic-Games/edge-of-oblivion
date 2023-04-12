@@ -14,7 +14,7 @@ var move_precedence: float = 0.0
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var move_history = MovementUtility.MoveHistory.new()
+@onready var move_history: MovementUtility.MoveHistory = MovementUtility.MoveHistory.new()
 
 @onready var particles: Dictionary = {
 	"damage": DAMAGE_PARTICLES_SCENE,
@@ -22,24 +22,24 @@ var move_precedence: float = 0.0
 }
 
 
-func _ready():
+func _ready() -> void:
 	hp = max_hp
 
 
-func setup():
+func setup() -> void:
 	animation_player.play("spawn")
 	await animation_player.animation_finished
 
 
-func is_enemy():
-	pass
+func is_enemy() -> bool:
+	return false
 
 
-func take_damage(damageTaken):
-	if damageTaken == 0:
+func take_damage(damage_taken) -> void:
+	if damage_taken == 0:
 		return
 	
-	hp -= damageTaken
+	hp -= damage_taken
 	update_health_bar()
 	spawn_particle("damage")
 	animation_player.play("damaged")
@@ -47,7 +47,8 @@ func take_damage(damageTaken):
 	if hp <= 0:
 		die()
 
-func heal(heal_amount) -> int:
+
+func heal(heal_amount: int) -> int:
 	spawn_particle("health")
 	if hp < max_hp:
 		hp += heal_amount
@@ -60,53 +61,59 @@ func heal(heal_amount) -> int:
 	else:
 		return heal_amount
 
-func update_health_bar():
-	var target_value = float(hp)/float(max_hp) * 100
+
+func update_health_bar() -> void:
+	var target_value: float = float(hp) / float(max_hp) * 100.0
 	
-	var tween = get_tree().create_tween()
+	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(health_bar, "value", target_value, 0.2).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
-func spawn_particle(type: String):
-	var res = particles[type]
-	var particle = res.instantiate()
+
+func spawn_particle(type: String) -> void:
+	var res: PackedScene = particles[type]
+	var particle: Node2D = res.instantiate()
 	particle.global_position = self.global_position
 	GameManager.gameboard.add_child(particle)
 
-func die():
+
+func die() -> void:
 	current_tile.clear_occupant()
 	
-	var tween = get_tree().create_tween().set_parallel(true)
+	var tween: Tween = get_tree().create_tween().set_parallel(true)
 	tween.tween_property(self, "global_position:y", -25.0, 0.5).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
 	tween.tween_property(self, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	
 	await tween.finished
 	queue_free()
 
-func fall():
+
+func fall() -> void:
 	if canFall:
 		die()
 	else:
 		# Handle cases like bosses where unit can't fall
 		pass
 
-func is_alive():
+
+func is_alive() -> bool:
 	if hp > 0:
 		return true
 	return false
 
+
 func move_to_tile(tile) -> void:
-	if tile.occupant && tile.occupant.occupant_type == tile.occupant.OccupantTypes.BLOCKING:
+	if tile.occupant && tile.occupant.occupant_type == tile.occupant.OccupantType.BLOCKING:
 		if move_precedence > tile.occupant.move_precedence:
-			var pushed_occupant = tile.occupant
-			var last_resort_tile = current_tile
+			var pushed_occupant: Occupant = tile.occupant
+			var last_resort_tile: Tile = current_tile
 			GameManager.unoccupy_tile(last_resort_tile)
 			current_tile = null
-			var tile_to_displace = get_displace_tile(tile, last_resort_tile)
+			var tile_to_displace: Tile = get_displace_tile(tile, last_resort_tile)
 			pushed_occupant.move_to_tile(tile_to_displace)
 		else:
 			return
 	
-	if self.is_in_group("player") && tile.occupant && tile.occupant.occupant_type == tile.occupant.OccupantTypes.COLLECTABLE:
+	if self.is_in_group("player") && tile.occupant && tile.occupant.occupant_type == tile.occupant.OccupantType.COLLECTABLE:
 		tile.occupant.collect()
 	
 	GameManager.unoccupy_tile(current_tile)
@@ -115,10 +122,10 @@ func move_to_tile(tile) -> void:
 	
 	lock_movement = true
 	
-	var base_tween = get_tree().create_tween()
+	var base_tween: Tween = get_tree().create_tween()
 	base_tween.tween_property(self, "position", tile.position, 0.20).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	
-	var offset_tween = get_tree().create_tween()
+	var offset_tween: Tween = get_tree().create_tween()
 	offset_tween.tween_property(sprite, "position:y", -15.0, 0.10).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	offset_tween.tween_property(sprite, "position:y", 15.0, 0.10).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	await offset_tween.finished
@@ -127,7 +134,7 @@ func move_to_tile(tile) -> void:
 
 
 func get_displace_tile(displacees_tile: Tile, last_resort_tile: Tile) -> Tile:
-	var possible_tiles = []
+	var possible_tiles: Array[Tile] = []
 	if displacees_tile.top_tile && !displacees_tile.top_tile.occupant:
 		possible_tiles.append(displacees_tile.top_tile)
 	if displacees_tile.bottom_tile && !displacees_tile.bottom_tile.occupant:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://hc0rr1q6tse7"]
 
-[ext_resource type="Script" path="res://Data/Particles/ParticleWithAuxiliary.gd" id="1"]
+[ext_resource type="Script" path="res://Data/Particles/ParticleWithAuxiliary.gd" id="1_drr7v"]
 
 [sub_resource type="Gradient" id="Gradient_dskt0"]
 offsets = PackedFloat32Array(0, 0.607018, 1)
@@ -61,7 +61,7 @@ scale_max = 14.0
 scale_curve = SubResource("11")
 color_ramp = SubResource("GradientTexture1D_hbxi8")
 
-[node name="FireParticles2" type="GPUParticles2D"]
+[node name="FireBlastParticles" type="GPUParticles2D"]
 emitting = false
 process_material = SubResource("16")
 one_shot = true
@@ -69,7 +69,7 @@ speed_scale = 2.0
 explosiveness = 0.8
 fract_delta = false
 local_coords = true
-script = ExtResource("1")
+script = ExtResource("1_drr7v")
 
 [node name="BlastParticles" type="GPUParticles2D" parent="."]
 emitting = false

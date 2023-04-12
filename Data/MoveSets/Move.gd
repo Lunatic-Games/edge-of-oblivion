@@ -1,3 +1,4 @@
+class_name Move
 extends Node2D
 
 

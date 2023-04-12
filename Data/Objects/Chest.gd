@@ -7,7 +7,7 @@ var current_tile: Tile
 
 
 func _ready() -> void:
-	occupant_type = OccupantTypes.COLLECTABLE
+	occupant_type = OccupantType.COLLECTABLE
 	animator.play("spawn")
 
 
