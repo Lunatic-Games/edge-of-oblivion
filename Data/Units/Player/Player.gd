@@ -7,26 +7,26 @@ const STARTING_ITEMS = [preload("res://Items/ShortSword/ShortSword.tres")]
 
 var experience_bar_update_time: float = 0.2
 var moves: int = 1
+var moves_remaining: int = moves
 var current_xp: int = 0
 var current_level: int = 1
 var level_thresholds = {
-	1:1,
-	2:3,
-	3:3,
-	4:4,
-	5:5,
-	6:5,
-	7:5,
-	8:5,
-	9:5,
-	10:5
+	1: 1,
+	2: 3,
+	3: 3,
+	4: 4,
+	5: 5,
+	6: 5,
+	7: 5,
+	8: 5,
+	9: 5,
+	10: 5
 }
-var items = []
+var items: Array[ItemData] = []
 
-@onready var moves_remaining = moves
-@onready var item_container = $CanvasLayer/ItemContainer
-@onready var player_camera = $PlayerCamera
-@onready var experience_bar = $CanvasLayer/ExperienceBar
+@onready var item_container: Container = $CanvasLayer/ItemContainer
+@onready var player_camera: Camera2D = $PlayerCamera
+@onready var experience_bar: ProgressBar = $CanvasLayer/ExperienceBar
 
 
 func _ready() -> void:
@@ -118,6 +118,6 @@ func is_enemy() -> bool:
 func update_experience_bar() -> void:
 	experience_bar.max_value = level_thresholds[current_level]
 	
-	var tween = get_tree().create_tween()
+	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(experience_bar, "value", current_xp, experience_bar_update_time)
 	await tween.finished

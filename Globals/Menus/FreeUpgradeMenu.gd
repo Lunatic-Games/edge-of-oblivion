@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-const FULL_CARD_LIST: Array = [
+const FULL_CARD_LIST: Array[String] = [
 	"res://Items/ShortSword/ShortSword.tres",
 	"res://Items/LightningBow/LightningBow.tres",
 	"res://Items/Hammer/Hammer.tres",
@@ -12,7 +12,7 @@ const FULL_CARD_LIST: Array = [
 	"res://Items/DraculasKnives/DraculasKnives.tres"
 ]
 
-var CARD_SCENE = preload("res://UI/Card/Card.tscn")
+var CARD_SCENE: PackedScene = preload("res://UI/Card/Card.tscn")
 
 var selectedCards = []
 var available_cards = []
@@ -67,8 +67,8 @@ func spawn_card(path_of_resource: String) -> void:
 	var card: Card = CARD_SCENE.instantiate()
 	var currentTier: int
 	
-	if resource in ItemManager.managedItems:
-		currentTier = ItemManager.managedItems[resource].currentTier + 1
+	if resource in ItemManager.managed_items:
+		currentTier = ItemManager.managed_items[resource].currentTier + 1
 	else:
 		currentTier = 1
 	

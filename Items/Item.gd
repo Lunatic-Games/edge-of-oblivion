@@ -1,3 +1,4 @@
+class_name Item
 extends Control
 
 enum ChargeStyle {

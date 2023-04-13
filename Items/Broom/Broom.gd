@@ -18,5 +18,5 @@ func perform_attack() -> void:
 		if direction_to_tile != "":
 			spawn_hammer_indicator(target_tile.global_position, false)
 			
-			var enemy: Unit = target_tile.occupant
+			var enemy: Enemy = target_tile.occupant
 			apply_knockback(enemy, direction_to_tile, 1, 0)

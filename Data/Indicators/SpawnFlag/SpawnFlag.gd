@@ -1,3 +1,4 @@
+class_name SpawnFlag
 extends "res://Data/Occupant.gd"
 
 var current_tile: Tile

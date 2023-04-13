@@ -1,13 +1,14 @@
+class_name Boss
 extends "res://Data/Units/Enemies/Enemy.gd"
 
-@export var boss_data: Resource
+@export var boss_data: BossData
 
 
 func _ready() -> void:
 	max_hp_override = boss_data.health
 	move_precedence = 3.0
 	super._ready()
-	GameManager.setup_boss(boss_data)
+	GlobalSignals.boss_spawned.emit(self, boss_data)
 
 
 func choose_moveset() -> void:
@@ -26,5 +27,5 @@ func update_health_bar() -> void:
 
 
 func die() -> void:
-	GameManager.boss_has_been_defeated()
+	GlobalSignals.boss_defeated.emit(self)
 	super.die()

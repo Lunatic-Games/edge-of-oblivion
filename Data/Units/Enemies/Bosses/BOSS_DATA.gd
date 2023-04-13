@@ -1,4 +1,4 @@
-class_name boss_data
+class_name BossData
 extends Resource
 
 @export_range(0, 999, 1, "or_greater") var health: int = 10

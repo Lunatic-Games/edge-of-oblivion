@@ -1,3 +1,4 @@
+class_name Enemy
 extends "res://Data/Units/Unit.gd"
 
 @export var target_scene: PackedScene = preload("res://Data/Indicators/Indicator.tscn")

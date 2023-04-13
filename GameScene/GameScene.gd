@@ -1,3 +1,4 @@
+class_name GameScene
 extends Node2D
 
 @onready var victory_menu: Control = $Menus/VictoryPanel
@@ -9,7 +10,7 @@ func _ready() -> void:
 	TurnManager.initialize()
 	
 	GlobalSignals.player_died.connect(_on_Player_died)  # Game over!
-	GlobalSignals.final_boss_defeated.connect(_on_FinalBoss_defeated)  # Game won!
+	GlobalSignals.boss_defeated.connect(_on_Boss_defeated)  # Game won!
 
 
 func _return_to_main_menu() -> void:
@@ -26,7 +27,7 @@ func _on_Player_died(_player: Player) -> void:
 	game_over_menu.show()
 
 
-func _on_FinalBoss_defeated(_boss: Unit) -> void:
+func _on_Boss_defeated(_boss: Boss) -> void:
 	get_tree().paused = true
 	victory_menu.show()
 

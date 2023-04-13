@@ -12,5 +12,5 @@ func choose_moveset() -> void:
 
 
 func die() -> void:
-	GlobalSignals.final_boss_defeated.emit(self)
+	GlobalSignals.boss_defeated.emit(self)
 	super.die()

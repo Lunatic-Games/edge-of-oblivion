@@ -33,7 +33,7 @@ func attack_logic() -> void:
 
 
 func perform_attack(tile_to_attack: Tile, offset: int) -> void:
-	var enemy: Unit = tile_to_attack.occupant
+	var enemy: Enemy = tile_to_attack.occupant
 	await get_tree().create_timer(0.12 * offset).timeout
 	
 	var effect = spawn_arrow_effect(GameManager.player.current_tile, tile_to_attack)

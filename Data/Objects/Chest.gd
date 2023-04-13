@@ -1,3 +1,4 @@
+class_name Chest
 extends "res://Data/Occupant.gd"
 
 var cardsToSpawn: int = 3

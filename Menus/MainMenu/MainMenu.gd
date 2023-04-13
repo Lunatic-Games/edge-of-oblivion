@@ -6,6 +6,10 @@ const GAME_SCENE = preload("res://GameScene/GameScene.tscn")
 @onready var credits_page: Control = $CreditsPage
 
 
+func _ready() -> void:
+	GlobalSignals.main_menu_entered.emit()
+
+
 func _on_PlayButton_pressed() -> void:
 	get_tree().change_scene_to_packed(GAME_SCENE)
 
