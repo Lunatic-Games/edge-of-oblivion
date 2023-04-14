@@ -10,7 +10,7 @@ var heal_amount: int = 1
 
 func upgrade_tier() -> bool:
 	var ret: bool = super.upgrade_tier()
-	match currentTier:
+	match current_tier:
 		2:
 			self.maxTurnTimer = 7
 		3:

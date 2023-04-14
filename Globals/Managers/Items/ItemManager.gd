@@ -22,7 +22,7 @@ func handle_items_triggering() -> void:
 
 func add_item(item_data: ItemData) -> void:
 	var item: Item = item_data.item_scene.instantiate()
-	item.currentTier = 1
+	item.current_tier = 1
 	GameManager.player.item_container.add_child(item)
 	managed_items[item_data] = item
 	item.setup(item_data)

@@ -7,7 +7,7 @@ func activate_item() -> void:
 
 
 func perform_attack() -> void:
-	for x in currentTier:
+	for x in current_tier:
 		var target_tile: Tile = user.current_tile.get_random_enemy_occupied_adjacent_tile()
 		
 		if !target_tile || !target_tile.occupant:

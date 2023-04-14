@@ -1,6 +1,6 @@
 extends "res://Items/Item.gd"
 
-const FIRE_PARTICLES_SCENE = preload("res://Data/Particles/Fire/FireParticles.tscn")
+const FIRE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Fire/FireParticles.tscn")
 
 var damage_amount: int = 1
 var range_radius: int = 1
@@ -13,7 +13,7 @@ var range_radius: int = 1
 
 func upgrade_tier() -> bool:
 	var ret: bool = super.upgrade_tier()
-	match currentTier:
+	match current_tier:
 		2:
 			maxTurnTimer = 5
 		3:

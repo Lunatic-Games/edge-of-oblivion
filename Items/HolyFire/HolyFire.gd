@@ -14,7 +14,7 @@ var range_radius: int = 2
 
 func upgrade_tier() -> bool:
 	var ret: bool = super.upgrade_tier()
-	match currentTier:
+	match current_tier:
 		2:
 			bolt_count = 5
 		3:

@@ -1,26 +1,34 @@
 extends Node
 
-enum moveDirection {
-	left,
-	right,
-	up,
-	down
+enum MoveDirection {  # If updated, make sure to also update TileDirection in Tile.gd
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+	NULL
 }
 
-var lastPlayerDirection
+enum CauseOfMove {
+	INPUT,
+	OTHER
+}
+
+var last_player_direction: MoveDirection = MoveDirection.NULL
 
 func reset():
-	lastPlayerDirection = null
+	last_player_direction = MoveDirection.NULL
+
 
 # MoveRecord
 #   To be used by Unit.gd; every time a unit moves, data about the move should be recorded
 class MoveRecord:
 	var from_tile: Tile
 	var to_tile: Tile
-	var direction: String  # Optional direction; input when applicable
-	var cause: String  # Optional cause; for identifying types of movement
+	var direction: MoveDirection  # Optional direction; input when applicable
+	var cause: CauseOfMove  # Optional cause; for identifying types of movement
 	
-	func _init(from: Tile,to: Tile,move_direction: String = "",cause_of_movement: String = ""):
+	func _init(from: Tile,to: Tile, move_direction: MoveDirection = MoveDirection.NULL,
+			cause_of_movement: CauseOfMove = CauseOfMove.OTHER):
 		from_tile = from
 		to_tile = to
 		direction = move_direction
@@ -29,7 +37,7 @@ class MoveRecord:
 
 class MoveHistory:
 	var _max_records: int
-	var _history: Array  # Oldest records are at the highest index; newest record is _history[0]
+	var _history: Array[MoveRecord]  # Oldest records are at the highest index; newest record is _history[0]
 		
 	func _init(max_records: int = 10):
 		_max_records = max_records
@@ -43,6 +51,6 @@ class MoveHistory:
 		assert(back_index < _history.size()) #,"ERROR [MovementUtility] Try subtracting 1 from index in get_record(index) call to MoveHistory")
 		return _history[back_index]
 	
-	func overwrite_record(back_index: int, new_record: MoveRecord):
+	func overwrite_record(back_index: int, new_record: MoveRecord) -> void:
 		assert(back_index < _history.size()) #,"ERROR [MovementUtility] Try subtracting 1 from index in overwrite_record(index, ...) call to MoveHistory")
 		_history[back_index] = new_record

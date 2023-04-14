@@ -1,11 +1,12 @@
 class_name Tile
 extends Node2D
 
-enum TILE_DIRECTION {
-	up,
-	down,
-	left,
-	right
+enum TileDirection {  # Maps to MovementUtility.MoveDirection, make sure to update both
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	NULL
 }
 
 var top_tile: Tile
@@ -15,15 +16,16 @@ var left_tile: Tile
 var occupant: Occupant
 
 
-func get_tile_in_direction(direction: MovementUtility.moveDirection) -> Tile:
+# Can't static type MovementUtility.MoveDirection in the method decleration :( 
+func get_tile_in_direction(direction: TileDirection) -> Tile:
 	match direction:
-		MovementUtility.moveDirection.up:
+		MovementUtility.MoveDirection.RIGHT:
 			return top_tile
-		MovementUtility.moveDirection.down:
+		MovementUtility.MoveDirection.DOWN:
 			return bottom_tile
-		MovementUtility.moveDirection.left:
+		MovementUtility.MoveDirection.LEFT:
 			return left_tile
-		MovementUtility.moveDirection.right:
+		MovementUtility.MoveDirection.RIGHT:
 			return right_tile
 	
 	return null

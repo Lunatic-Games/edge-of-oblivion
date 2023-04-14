@@ -13,7 +13,7 @@ func performAttack():
 	if(left_tile):
 		attack(left_tile)
 	
-	if (currentTier >= 2 && right_tile):
+	if (current_tier >= 2 && right_tile):
 		attack(right_tile)
 	
 	$AnimationPlayer.play("Shake")
@@ -26,16 +26,16 @@ func attack(tile):
 
 
 func upgrade_tier() -> bool:
-	currentTier += 1
+	current_tier += 1
 	
-	if currentTier == 2:
+	if current_tier == 2:
 		maxTurnTimer = 4
 		
 	
-	if currentTier == 3:
+	if current_tier == 3:
 		item_damage = 4
 	
-	if currentTier >= maxTier:
+	if current_tier >= maxTier:
 		return true
 	
 	return false

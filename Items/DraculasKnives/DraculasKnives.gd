@@ -19,11 +19,11 @@ func attack_logic() -> void:
 		target_tiles.append(starting_tile)
 		
 		var second_tile: Tile = starting_tile.right_tile
-		if currentTier >= 2 && second_tile:
+		if current_tier >= 2 && second_tile:
 			target_tiles.append(second_tile)
 		
 			var third_tile: Tile = second_tile.right_tile
-			if currentTier >= 3 && third_tile:
+			if current_tier >= 3 && third_tile:
 				target_tiles.append(third_tile)
 	
 	var count: int = 0

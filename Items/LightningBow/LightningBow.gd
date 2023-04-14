@@ -59,17 +59,17 @@ func attack():
 
 
 func upgrade_tier() -> bool:
-	currentTier += 1
+	current_tier += 1
 	
-	if currentTier == 2:
+	if current_tier == 2:
 		chains = 2
 		remaining_chains = 2
 	
-	if currentTier == 3:
+	if current_tier == 3:
 		chains = 4
 		remaining_chains = 4
 	
-	if currentTier >= maxTier:
+	if current_tier >= maxTier:
 		return true
 	
 	return false

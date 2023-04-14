@@ -24,7 +24,7 @@ var level_thresholds = {
 }
 var items: Array[ItemData] = []
 
-@onready var item_container: Container = $CanvasLayer/ItemContainer
+@onready var item_container: BoxContainer = $CanvasLayer/ItemContainer
 @onready var player_camera: Camera2D = $PlayerCamera
 @onready var experience_bar: ProgressBar = $CanvasLayer/ExperienceBar
 
@@ -44,17 +44,25 @@ func handle_movement() -> void:
 		return
 	
 	if Input.is_action_just_pressed("up") and current_tile.top_tile:
-		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.top_tile, "up", "handle_movement"))
-		move_to_tile(current_tile.top_tile) # MovementUtility.moveDirection.up
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.top_tile,
+			MovementUtility.MoveDirection.UP, MovementUtility.CauseOfMove.INPUT))
+		move_to_tile(current_tile.top_tile)
+	
 	elif Input.is_action_just_pressed("down") and current_tile.bottom_tile:
-		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.bottom_tile, "down", "handle_movement"))
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.bottom_tile,
+			MovementUtility.MoveDirection.DOWN, MovementUtility.CauseOfMove.INPUT))
 		move_to_tile(current_tile.bottom_tile)
+	
 	elif Input.is_action_just_pressed("left") and current_tile.left_tile:
-		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.left_tile, "left", "handle_movement"))
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.left_tile,
+			MovementUtility.MoveDirection.LEFT, MovementUtility.CauseOfMove.INPUT))
 		move_to_tile(current_tile.left_tile)
+	
 	elif Input.is_action_just_pressed("right") and current_tile.right_tile:
-		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.right_tile, "right", "handle_movement"))
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.right_tile,
+			MovementUtility.MoveDirection.RIGHT, MovementUtility.CauseOfMove.INPUT))
 		move_to_tile(current_tile.right_tile)
+	
 	elif Input.is_action_just_pressed("wait"):
 		TurnManager.end_player_turn()
 

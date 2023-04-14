@@ -22,7 +22,7 @@ const volatile_color = Color( 1, 0.556863, 0.34902, 1 )
 var user
 var turnTimer
 var maxTurnTimer
-var currentTier = 0
+var current_tier = 0
 var maxTier = 3
 var item_damage = 1
 var charge_style = ChargeStyle.PER_TURN
@@ -105,8 +105,8 @@ func appear_unready():
 
 
 func upgrade_tier() -> bool:
-	currentTier += 1
-	if currentTier >= maxTier:
+	current_tier += 1
+	if current_tier >= maxTier:
 		return true
 	
 	return false

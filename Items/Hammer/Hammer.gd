@@ -34,6 +34,6 @@ func attack(tile: Tile, direction: String, should_flip: bool = false) -> void:
 	var occupant = tile.occupant
 	spawn_hammer_indicator(tile.global_position, should_flip)
 	if occupant && occupant.is_enemy():
-		apply_knockback(occupant, direction, tiered_knockback[currentTier], tiered_kb_damage[currentTier])
-		occupant.take_damage(tiered_damage[currentTier])
+		apply_knockback(occupant, direction, tiered_knockback[current_tier], tiered_kb_damage[current_tier])
+		occupant.take_damage(tiered_damage[current_tier])
 

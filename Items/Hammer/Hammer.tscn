@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bon4pme0n23rj"]
+[gd_scene load_steps=3 format=3 uid="uid://der8q6fmqjfyd"]
 
 [ext_resource type="PackedScene" uid="uid://kn25ecu375m5" path="res://Items/Item.tscn" id="1"]
-[ext_resource type="Script" path="res://Items/Hammer/hammer.gd" id="2"]
+[ext_resource type="Script" path="res://Items/Hammer/Hammer.gd" id="2_ab3nd"]
 
 [node name="Hammer" instance=ExtResource("1")]
-script = ExtResource("2")
+script = ExtResource("2_ab3nd")

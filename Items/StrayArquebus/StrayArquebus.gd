@@ -34,7 +34,7 @@ func activate_on_charge() -> bool:
 
 func upgrade_tier() -> bool:
 	var ret: bool = super.upgrade_tier()
-	match currentTier:
+	match current_tier:
 		2:
 			maxTurnTimer = 4
 		3:
@@ -56,7 +56,7 @@ func perform_attack() -> void:
 	var tiles: Array = scan_res.tiles
 	spawn_fire_particles(tiles)
 	attack(tiles)
-	if not max_blast and currentTier >= 3:
+	if not max_blast and current_tier >= 3:
 		turnTimer -= 1
 		update_cool_down_bar()
 	max_blast = false

@@ -12,12 +12,12 @@ const FULL_CARD_LIST: Array[String] = [
 	"res://Items/DraculasKnives/DraculasKnives.tres"
 ]
 
-var CARD_SCENE: PackedScene = preload("res://UI/Card/Card.tscn")
+const CARD_SCENE: PackedScene = preload("res://UI/Card/Card.tscn")
 
-var selectedCards = []
-var available_cards = []
+var selected_cards: Array[String] = []
+var available_cards: Array[String] = []
 
-@onready var card_row: HBoxContainer = $CardRow
+@onready var card_row: BoxContainer = $CardRow
 
 
 func _ready() -> void:
@@ -25,15 +25,15 @@ func _ready() -> void:
 		available_cards.append(path)
 
 
-func reset():
-	selectedCards = []
+func reset() -> void:
+	selected_cards = []
 	available_cards = []
 	for path in FULL_CARD_LIST:
 		available_cards.append(path)
 	disable_display()
 
 
-func connectToPlayerTier(player: Player):
+func connectToPlayerTier(player: Player) -> void:
 	player.connect("item_reached_max_tier",Callable(self,"remove_item_from_availability"))
 
 
@@ -57,26 +57,26 @@ func spawn_upgrade_cards(number_of_cards_to_spawn: int) -> void:
 		
 		spawn_card(available_cards[0])
 	
-	for entry in selectedCards:
+	for entry in selected_cards:
 		available_cards.append(entry)
-	selectedCards = []
+	selected_cards = []
 
 
 func spawn_card(path_of_resource: String) -> void:
 	var resource: ItemData = load(path_of_resource)
 	var card: Card = CARD_SCENE.instantiate()
-	var currentTier: int
+	var current_tier: int
 	
 	if resource in ItemManager.managed_items:
-		currentTier = ItemManager.managed_items[resource].currentTier + 1
+		current_tier = ItemManager.managed_items[resource].current_tier + 1
 	else:
-		currentTier = 1
+		current_tier = 1
 	
 	card_row.add_child(card)
-	card.setup(resource, currentTier, true)
+	card.setup(resource, current_tier, true)
 	card.selected.connect(disable_display)
 	
-	selectedCards.append(path_of_resource)
+	selected_cards.append(path_of_resource)
 	available_cards.erase(path_of_resource)
 
 

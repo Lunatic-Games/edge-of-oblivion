@@ -10,10 +10,10 @@ var item_data: ItemData
 @onready var background = $Background
 
 
-func setup(resource, currentTier, animate):
+func setup(resource, current_tier, animate):
 	$Sprite2D.texture = resource.sprite
 	$Name.text = "[center]" + resource.item_name
-	match currentTier:
+	match current_tier:
 		1: 
 			$UpgradeText.text = resource.tier1Text
 		2: 

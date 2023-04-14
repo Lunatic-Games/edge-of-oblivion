@@ -191,7 +191,7 @@ func occupy_tile(tile: Tile, occupant: Occupant) -> void:
 	unoccupied_tiles.erase(tile)
 
 
-func unoccupy_tile(tile) -> void:
+func unoccupy_tile(tile: Tile) -> void:
 	if tile == null:
 		return
 	
