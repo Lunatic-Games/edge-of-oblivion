@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Data/MoveSets/Actions/Slash/SlashAction.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Data/MoveSets/Move.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Shaders/dream_shader_material.tres" type="Material" id=3]
+[ext_resource path="res://Data/Units/Enemies/Bosses/Boss.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.gd" type="Script" id=5]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.623529, 0.321569, 0.8, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.784314, 0.737255, 0.807843, 0.403922 )
+
+[node name="ForgottenKing" instance=ExtResource( 4 )]
+z_index = 1
+script = ExtResource( 5 )
+
+[node name="Sprite" parent="." index="1"]
+material = ExtResource( 3 )
+scale = Vector2( 0.125, 0.125 )
+
+[node name="HealthBar" parent="." index="3"]
+margin_left = -24.0
+margin_top = 30.0
+margin_right = 24.0
+margin_bottom = 34.0
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
+value = 100.0
+percent_visible = false
+
+[node name="Move2" parent="MoveSets" index="1" instance=ExtResource( 2 )]
+
+[node name="SlashAction" parent="MoveSets/Move2" index="0" instance=ExtResource( 1 )]
+targeting_type = 2
+damage = 3
+
+[node name="SlashAction2" parent="MoveSets/Move2" index="1" instance=ExtResource( 1 )]
+targeting_type = 3
+damage = 3
+
+[node name="SlashAction3" parent="MoveSets/Move2" index="2" instance=ExtResource( 1 )]
+targeting_type = 5
+damage = 3
+
+[node name="SlashAction4" parent="MoveSets/Move2" index="3" instance=ExtResource( 1 )]
+targeting_type = 4
+damage = 3
+
+[editable path="MoveSets/Move"]

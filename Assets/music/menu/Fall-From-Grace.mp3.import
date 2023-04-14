@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Fall-From-Grace.mp3-39024ef51880058f533cffc8a6b3f090.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/menu/Fall-From-Grace.mp3"
+dest_files=[ "res://.import/Fall-From-Grace.mp3-39024ef51880058f533cffc8a6b3f090.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

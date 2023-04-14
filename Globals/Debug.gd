@@ -1,13 +1,14 @@
 extends Node
 
-var enemy_scene = preload("res://Data/Units/Enemies/Boss/ForgottenKing.tscn")
+const ENEMY_SCENE = preload("res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn")
+
 
 func _process(delta):
 	if !OS.is_debug_build():
 		return
 	
 	if Input.is_action_just_pressed("spawn_enemy_debug"):
-		GameManager.spawn_enemy_at_tile(enemy_scene, GameManager.getRandomUnoccupiedTile())
+		GameManager.spawn_enemy_at_tile(ENEMY_SCENE, GameManager.getRandomUnoccupiedTile())
 	
 	if Input.is_action_just_pressed("level_up"):
 		FreeUpgradeMenu.spawnUpgradeCards(3)

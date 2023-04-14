@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Lurking-Evil.mp3-d7c036829c066459f342b1f0faaf8aa3.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/menu/Lurking-Evil.mp3"
+dest_files=[ "res://.import/Lurking-Evil.mp3-d7c036829c066459f342b1f0faaf8aa3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,5 +1,8 @@
 class_name Unit
-extends "res://Occupant.gd"
+extends "res://Data/Occupant.gd"
+
+const DAMAGE_PARTICLES_SCENE = preload("res://Data/Particles/Damaged/DamagedParticles.tscn")
+const HEALTH_PARTICLES_SCENE = preload("res://Data/Particles/Healing/HealthParticles.tscn")
 
 var lock_movement = false
 var currentTile
@@ -12,13 +15,11 @@ onready var animation_player = $AnimationPlayer
 onready var health_bar = $HealthBar
 onready var tween = $Tween
 onready var sprite = $Sprite
-onready var damaged_particle_scene = preload("res://Data/Particles/DamagedParticles.tscn")
-onready var health_particle_scene = preload("res://Data/Particles/HealthParticles.tscn")
 onready var move_history = MovementUtility.MoveHistory.new()
 
 onready var particles: Dictionary = {
-	"damage": damaged_particle_scene,
-	"health": health_particle_scene
+	"damage": DAMAGE_PARTICLES_SCENE,
+	"health": HEALTH_PARTICLES_SCENE
 }
 
 func _ready():

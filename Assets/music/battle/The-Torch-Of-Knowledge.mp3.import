@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/The-Torch-Of-Knowledge.mp3-b2e0d8eb6979481bcfb14b3374aad615.mp3str"
+
+[deps]
+
+source_file="res://Assets/music/battle/The-Torch-Of-Knowledge.mp3"
+dest_files=[ "res://.import/The-Torch-Of-Knowledge.mp3-b2e0d8eb6979481bcfb14b3374aad615.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
