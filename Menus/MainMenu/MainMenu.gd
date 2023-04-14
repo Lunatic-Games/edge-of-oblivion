@@ -1,6 +1,6 @@
 extends Node
 
-const GAME_SCENE = preload("res://GameScene/GameScene.tscn")
+const GAME_SCENE: PackedScene = preload("res://GameScene/GameScene.tscn")
 
 @onready var start_page: Control = $StartPage
 @onready var credits_page: Control = $CreditsPage

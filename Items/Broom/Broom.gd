@@ -13,9 +13,9 @@ func perform_attack() -> void:
 		if !target_tile || !target_tile.occupant:
 			return
 		
-		var direction_to_tile: String = user.current_tile.get_direction_to_tile(target_tile)
+		var direction_to_tile: Vector2i = user.current_tile.get_direction_to_tile(target_tile)
 		
-		if direction_to_tile != "":
+		if direction_to_tile != Vector2i.ZERO:
 			spawn_hammer_indicator(target_tile.global_position, false)
 			
 			var enemy: Enemy = target_tile.occupant

@@ -45,22 +45,22 @@ func handle_movement() -> void:
 	
 	if Input.is_action_just_pressed("up") and current_tile.top_tile:
 		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.top_tile,
-			MovementUtility.MoveDirection.UP, MovementUtility.CauseOfMove.INPUT))
+			Vector2i.UP, MovementUtility.CauseOfMove.INPUT))
 		move_to_tile(current_tile.top_tile)
 	
 	elif Input.is_action_just_pressed("down") and current_tile.bottom_tile:
 		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.bottom_tile,
-			MovementUtility.MoveDirection.DOWN, MovementUtility.CauseOfMove.INPUT))
+			Vector2i.DOWN, MovementUtility.CauseOfMove.INPUT))
 		move_to_tile(current_tile.bottom_tile)
 	
 	elif Input.is_action_just_pressed("left") and current_tile.left_tile:
 		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.left_tile,
-			MovementUtility.MoveDirection.LEFT, MovementUtility.CauseOfMove.INPUT))
+			Vector2i.LEFT, MovementUtility.CauseOfMove.INPUT))
 		move_to_tile(current_tile.left_tile)
 	
 	elif Input.is_action_just_pressed("right") and current_tile.right_tile:
 		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.right_tile,
-			MovementUtility.MoveDirection.RIGHT, MovementUtility.CauseOfMove.INPUT))
+			Vector2i.RIGHT, MovementUtility.CauseOfMove.INPUT))
 		move_to_tile(current_tile.right_tile)
 	
 	elif Input.is_action_just_pressed("wait"):

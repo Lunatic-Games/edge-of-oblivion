@@ -12,8 +12,13 @@ func _ready() -> void:
 
 
 func collect() -> void:
-	var new_tile: Tile = GameManager.get_random_unoccupied_tile()
 	current_tile.occupant = null
+	
+	var new_tile: Tile = GameManager.get_random_unoccupied_tile()
+	if new_tile == null:
+		queue_free()
+		return
+	
 	current_tile = new_tile
 	position = current_tile.position
 	GameManager.occupy_tile(current_tile, self)

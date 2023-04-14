@@ -80,7 +80,8 @@ func scan_tile_radius(center_tile: Tile, radius: int) -> ScanResult:
 	return ScanResult.new(tiles,occupants)
 
 
-func scan_in_direction(origin_tile: Tile, direction: String, count: int) -> ScanResult:
+# Expects direction to be one of Vector2i.RIGHT, UP, etc.
+func scan_in_direction(origin_tile: Tile, direction: Vector2i, count: int) -> ScanResult:
 	assert(count > 0) #,"ERROR [ItemUtil]: Can't scan " + str(count) + " tiles")
 		
 	var tiles: Array[Tile] = []
@@ -88,7 +89,7 @@ func scan_in_direction(origin_tile: Tile, direction: String, count: int) -> Scan
 	
 	var current_tile: Tile = origin_tile
 	for _i in count:
-		current_tile = current_tile.get_neighbor_from_direction_string(direction)
+		current_tile = current_tile.get_tile_in_direction(direction)
 		
 		if current_tile:
 			tiles.append(current_tile)

@@ -1,7 +1,7 @@
 class_name Chest
 extends "res://Data/Occupant.gd"
 
-var cardsToSpawn: int = 3
+var n_cards_to_spawn: int = 3
 var current_tile: Tile
 
 @onready var animator: AnimationPlayer = $AnimationPlayer
@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func collect() -> void:
-	FreeUpgradeMenu.spawn_upgrade_cards(cardsToSpawn)
+	FreeUpgradeMenu.spawn_upgrade_cards(n_cards_to_spawn)
 	destroy_self()
 
 

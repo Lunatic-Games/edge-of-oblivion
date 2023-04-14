@@ -58,8 +58,9 @@ func change_to_main_menu() -> void:
 
 
 func reset() -> void:
-	for child in gameboard.get_children():
-		child.queue_free()
+	if gameboard != null:
+		for child in gameboard.get_children():
+			child.queue_free()
 	
 	all_tiles = []
 	unoccupied_tiles = []
@@ -103,6 +104,8 @@ func spawn_player() -> void:
 	player = PLAYER_SCENE.instantiate()
 	
 	var player_spawn_tile: Tile = all_tiles.pick_random()
+	assert(player_spawn_tile != null)
+	
 	player.current_tile = player_spawn_tile
 	player_spawn_tile.occupant = player
 	player.position = player_spawn_tile.position
@@ -165,6 +168,9 @@ func calculate_spawn_location_for_next_round() -> void:
 	for _i in TurnManager.round_spawn_data[next_round].size():
 		var spawn_flag: SpawnFlag = SPAWN_FLAG_SCENE.instantiate()
 		var occupied_tile: Tile = GameManager.get_random_unoccupied_tile()
+		if occupied_tile == null:
+			# No more room to spawn
+			break
 		
 		GameManager.occupy_tile(occupied_tile, spawn_flag)
 		spawn_flag.current_tile = occupied_tile
@@ -188,7 +194,9 @@ func trigger_victory_screen() -> void:
 
 func occupy_tile(tile: Tile, occupant: Occupant) -> void:
 	tile.occupant = occupant
-	unoccupied_tiles.erase(tile)
+	
+	if occupant != null:
+		unoccupied_tiles.erase(tile)
 
 
 func unoccupy_tile(tile: Tile) -> void:
@@ -200,4 +208,7 @@ func unoccupy_tile(tile: Tile) -> void:
 
 
 func get_random_unoccupied_tile() -> Tile:
+	if unoccupied_tiles.is_empty():
+		return null
+	
 	return unoccupied_tiles.pick_random()

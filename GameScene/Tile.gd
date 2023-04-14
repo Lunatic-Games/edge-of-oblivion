@@ -1,13 +1,6 @@
 class_name Tile
 extends Node2D
 
-enum TileDirection {  # Maps to MovementUtility.MoveDirection, make sure to update both
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	NULL
-}
 
 var top_tile: Tile
 var bottom_tile: Tile
@@ -16,19 +9,34 @@ var left_tile: Tile
 var occupant: Occupant
 
 
-# Can't static type MovementUtility.MoveDirection in the method decleration :( 
-func get_tile_in_direction(direction: TileDirection) -> Tile:
+# Expects direction to be one of Vector2i.UP, RIGHT, etc.
+func get_tile_in_direction(direction: Vector2i) -> Tile:
 	match direction:
-		MovementUtility.MoveDirection.RIGHT:
+		Vector2i.UP:
 			return top_tile
-		MovementUtility.MoveDirection.DOWN:
+		Vector2i.DOWN:
 			return bottom_tile
-		MovementUtility.MoveDirection.LEFT:
+		Vector2i.LEFT:
 			return left_tile
-		MovementUtility.MoveDirection.RIGHT:
+		Vector2i.RIGHT:
 			return right_tile
 	
 	return null
+
+
+func get_direction_to_tile(tile: Tile) -> Vector2i:
+	var tile_coords: Vector2 = get_tile_coords_to_tile(tile)
+	
+	if tile_coords.y == 0 && tile_coords.x > 0:
+		return Vector2i.LEFT
+	elif tile_coords.y == 0 && tile_coords .x < 0:
+		return Vector2i.RIGHT
+	elif tile_coords.x == 0 && tile_coords.y < 0:
+		return Vector2i.DOWN
+	elif tile_coords.x == 0 && tile_coords.y > 0:
+		return Vector2i.UP
+	
+	return Vector2i.ZERO
 
 
 func get_tile_coords_to_tile(tile: Tile) -> Vector2:
@@ -53,7 +61,7 @@ func get_random_enemy_occupied_adjacent_tile() -> Tile:
 	if right_tile && right_tile.occupant && right_tile.occupant.is_enemy():
 		occupied_adjacent_tiles.append(right_tile)
 	
-	if occupied_adjacent_tiles.size() == 0:
+	if occupied_adjacent_tiles.is_empty():
 		return null
 	
 	return occupied_adjacent_tiles.pick_random()
@@ -61,6 +69,8 @@ func get_random_enemy_occupied_adjacent_tile() -> Tile:
 
 func clear_occupant() -> void:
 	occupant = null
+	if not GameManager.unoccupied_tiles.has(self):
+		GameManager.unoccupied_tiles.append(self)
 
 
 func is_tile_n_tiles_away(tile: Tile, number: int, allow_adjacent: bool = false) -> bool:
@@ -86,34 +96,6 @@ func get_distance_to_tile(tile: Tile, allow_adjacent: bool = false) -> int:
 		count += 1
 	
 	return count
-
-
-func get_direction_to_tile(tile: Tile) -> String:
-	var tile_coords: Vector2 = get_tile_coords_to_tile(tile)
-	
-	if tile_coords.y == 0 && tile_coords.x > 0:
-		return "left"
-	elif tile_coords.y == 0 && tile_coords .x < 0:
-		return "right"
-	elif tile_coords.x == 0 && tile_coords.y < 0:
-		return "down"
-	elif tile_coords.x == 0 && tile_coords.y > 0:
-		return "up"
-	
-	return ""
-
-
-func get_neighbor_from_direction_string(direction: String) -> Tile:
-	match direction:
-		"up":
-			return top_tile
-		"down":
-			return bottom_tile
-		"left":
-			return left_tile
-		"right":
-			return right_tile
-	return null
 
 
 func get_adjacent_tiles() -> Array[Tile]:

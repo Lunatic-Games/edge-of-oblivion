@@ -21,48 +21,54 @@ func upgrade_tier() -> bool:
 			bolt_count = 7
 	return ret
 
+
 func activate_item() -> void:
 	perform_attack()
 	await get_tree().process_frame
+
 
 func perform_attack() -> void:
 	var scan_res: ItemUtil.ScanResult = ItemUtil.scan_tile_radius(user.current_tile, range_radius)
 	spawn_bolts(scan_res.tiles)
 	$AnimationPlayer.play("Shake")
 
+
 func attack(targets: Array) -> void:
 	for target in targets:
 		if target.damageable and target != user:
 			target.take_damage(damage_amount)
 
+
 func spawn_bolts(tiles: Array) -> void:
+	if tiles.is_empty():
+		return
+	
 	# Select some random tiles
-	var tiles_hit: Array = []
-	var double_hits: Array = []
+	var tiles_hit: Array[Tile] = []
+	var multi_hits: Array[Tile] = []
 	
 	for _i in range(0, bolt_count):
-		var index: int = randi()%tiles.size()
-		if index in tiles_hit:
-			double_hits.append(index)
+		var tile: Tile = tiles.pick_random()
+		if tile in tiles_hit:
+			multi_hits.append(tile)
 		else:
-			tiles_hit.append(index)
+			tiles_hit.append(tile)
 	
-	for hit in tiles_hit:
-		var t: Tile = tiles[hit]
+	for tile in tiles_hit:
 		# Rain fire
-		var pos: Vector2 = t.global_position
+		var pos: Vector2 = tile.global_position
 		var particle: Node = FIRE_PARTICLES_SCENE.instantiate()
 		
 		particle.global_position = pos
 		GameManager.gameboard.add_child(particle)
 		
 		# Use alternate particle effect if tile is hit more than once
-		if hit in double_hits:
+		if tile in multi_hits:
 			particle.aux = true
 			particle.amount -= 4
 		particle.activate()
 		
 		# Do damage
-		if t.occupant:
-			if t.occupant.damageable:
-				t.occupant.take_damage(damage_amount)
+		if tile.occupant:
+			if tile.occupant.damageable:
+				tile.occupant.take_damage(damage_amount)

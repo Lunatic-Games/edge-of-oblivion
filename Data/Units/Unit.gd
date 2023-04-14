@@ -35,11 +35,11 @@ func is_enemy() -> bool:
 	return false
 
 
-func take_damage(damage_taken) -> void:
-	if damage_taken == 0:
+func take_damage(damage: int) -> void:
+	if damage == 0:
 		return
 	
-	hp -= damage_taken
+	hp -= damage
 	update_health_bar()
 	spawn_particle("damage")
 	animation_player.play("damaged")
@@ -104,7 +104,7 @@ func is_alive() -> bool:
 func move_to_tile(tile) -> void:
 	if tile.occupant && tile.occupant.occupant_type == tile.occupant.OccupantType.BLOCKING:
 		if move_precedence > tile.occupant.move_precedence:
-			var pushed_occupant: Occupant = tile.occupant
+			var pushed_occupant: Unit = tile.occupant
 			var last_resort_tile: Tile = current_tile
 			GameManager.unoccupy_tile(last_resort_tile)
 			current_tile = null
@@ -113,8 +113,9 @@ func move_to_tile(tile) -> void:
 		else:
 			return
 	
-	if self.is_in_group("player") && tile.occupant && tile.occupant.occupant_type == tile.occupant.OccupantType.COLLECTABLE:
-		tile.occupant.collect()
+	if is_in_group("player") && tile.occupant:
+		if tile.occupant.occupant_type == tile.occupant.OccupantType.COLLECTABLE:
+			tile.occupant.collect()
 	
 	GameManager.unoccupy_tile(current_tile)
 	GameManager.occupy_tile(tile, self)

@@ -5,35 +5,38 @@ extends "res://Items/Item.gd"
 # 2 - Attack chains 2
 # 3 - Attack chains 4
 
-var targets = []
-var chains = 1
-@onready var remaining_chains = chains
+var targets: Array[Tile] = []
+var chains: int = 1
 
-func activate_item():
+@onready var remaining_chains: int = chains
+
+
+func activate_item() -> void:
 	targets = []
-	performAttack()
+	perform_attack()
 	await get_tree().process_frame
 
-func performAttack():
-	var targetTile
+
+func perform_attack() -> void:
+	var target_tile: Tile
 	
-	var oneTileUp = user.current_tile.top_tile
-	if !oneTileUp:
+	var one_tile_up: Tile = user.current_tile.top_tile
+	if !one_tile_up:
 		return
 	
-	var twoTilesUp = oneTileUp.top_tile
-	if twoTilesUp:
-		targetTile = twoTilesUp
+	var two_tiles_up: Tile = one_tile_up.top_tile
+	if two_tiles_up:
+		target_tile = two_tiles_up
 	else:
-		targetTile = oneTileUp
+		target_tile = one_tile_up
 	
-	$AnimationPlayer.play("Shake")
+	animator.play("Shake")
 	
-	build_target_list(targetTile, true)
+	build_target_list(target_tile, true)
 	attack()
 
 
-func build_target_list(tile, is_entry_point = false):
+func build_target_list(tile: Tile, is_entry_point = false) -> void:
 	if is_entry_point:
 		if tile:
 			targets.append(tile)
@@ -42,15 +45,15 @@ func build_target_list(tile, is_entry_point = false):
 			targets.append(tile)
 	
 	if remaining_chains > 0:
-		var newTarget = tile.get_random_enemy_occupied_adjacent_tile()
+		var new_target: Tile = tile.get_random_enemy_occupied_adjacent_tile()
 		remaining_chains -= 1
-		if newTarget:
-			build_target_list(newTarget)
+		if new_target:
+			build_target_list(new_target)
 	
 	if remaining_chains <= 0:
 		remaining_chains = chains
 
-func attack():
+func attack() -> void:
 	for target in targets:
 		spawn_lightning_particle(target.global_position)
 		if is_instance_valid(target.occupant) && target.occupant.is_enemy():
@@ -69,7 +72,7 @@ func upgrade_tier() -> bool:
 		chains = 4
 		remaining_chains = 4
 	
-	if current_tier >= maxTier:
+	if current_tier >= max_tier:
 		return true
 	
 	return false

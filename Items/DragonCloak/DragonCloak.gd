@@ -15,7 +15,7 @@ func upgrade_tier() -> bool:
 	var ret: bool = super.upgrade_tier()
 	match current_tier:
 		2:
-			maxTurnTimer = 5
+			max_turn_timer = 5
 		3:
 			range_radius = 2
 	return ret

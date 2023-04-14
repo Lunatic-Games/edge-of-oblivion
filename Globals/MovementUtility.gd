@@ -1,22 +1,14 @@
 extends Node
 
-enum MoveDirection {  # If updated, make sure to also update TileDirection in Tile.gd
-	LEFT,
-	RIGHT,
-	UP,
-	DOWN,
-	NULL
-}
-
 enum CauseOfMove {
 	INPUT,
 	OTHER
 }
 
-var last_player_direction: MoveDirection = MoveDirection.NULL
+var last_player_direction: Vector2i = Vector2i.ZERO
 
 func reset():
-	last_player_direction = MoveDirection.NULL
+	last_player_direction = Vector2i.ZERO
 
 
 # MoveRecord
@@ -24,10 +16,10 @@ func reset():
 class MoveRecord:
 	var from_tile: Tile
 	var to_tile: Tile
-	var direction: MoveDirection  # Optional direction; input when applicable
+	var direction: Vector2i  # Optional direction; use Vector2i.RIGHT, UP, etc.
 	var cause: CauseOfMove  # Optional cause; for identifying types of movement
 	
-	func _init(from: Tile,to: Tile, move_direction: MoveDirection = MoveDirection.NULL,
+	func _init(from: Tile, to: Tile, move_direction: Vector2i = Vector2i.ZERO,
 			cause_of_movement: CauseOfMove = CauseOfMove.OTHER):
 		from_tile = from
 		to_tile = to

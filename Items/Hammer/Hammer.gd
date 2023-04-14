@@ -21,16 +21,12 @@ func perform_attack() -> void:
 	var bottom_tile: Tile = user.current_tile.bottom_tile
 	
 	if(top_tile && top_tile.occupant):
-		attack(top_tile, "up")
+		attack(top_tile, Vector2i.UP)
 	elif (bottom_tile && bottom_tile.occupant):
-		attack(bottom_tile, "down", true)
-	elif (top_tile):
-		attack(top_tile, "up")
-	elif (bottom_tile):
-		attack(bottom_tile, "down", true)
+		attack(bottom_tile, Vector2i.DOWN, true)
 
 
-func attack(tile: Tile, direction: String, should_flip: bool = false) -> void:
+func attack(tile: Tile, direction: Vector2i, should_flip: bool = false) -> void:
 	var occupant = tile.occupant
 	spawn_hammer_indicator(tile.global_position, should_flip)
 	if occupant && occupant.is_enemy():
