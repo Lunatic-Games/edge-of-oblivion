@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj6kid6bf3xox"]
+
+[ext_resource type="PackedScene" uid="uid://danaqtylavvha" path="res://LogicTree/LogicTree.tscn" id="1_7txxe"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar/UpdateProgressBar.gd" id="2_1q02u"]
+
+[node name="UpdateProgressBar" instance=ExtResource("1_7txxe")]
+script = ExtResource("2_1q02u")

@@ -15,7 +15,7 @@ func reset() -> void:
 
 func handle_items_triggering() -> void:
 	for item in managed_items:
-		await managed_items[item].trigger_timer()
+		managed_items[item].update_logic()
 	
 	TurnManager.item_phase_ended()
 

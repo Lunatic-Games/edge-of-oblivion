@@ -31,11 +31,16 @@ var activation_style = ActivationStyle.ON_READY
 @onready var cooldown_bar: ProgressBar = $CoolDownBar
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animator: AnimationPlayer = $AnimationPlayer
+@onready var logic_tree: LogicTree = $LogicTree
 
 
 func _ready() -> void:
 	user = get_tree().get_nodes_in_group("player")[0]
 	appear_unready()
+
+
+func update_logic():
+	logic_tree.evaluate([])
 
 
 func setup(data) -> void:
@@ -52,14 +57,14 @@ func trigger_timer() -> void:
 			await get_tree().process_frame
 			return
 		
-		appear_ready(true)
+		#appear_ready(true)
 	
 	if charge_style == ChargeStyle.PER_TURN:
 		turn_timer -= 1
-		update_cool_down_bar()
+		#update_cool_down_bar()
 	
 	if turn_timer == 1:
-		appear_ready()
+		#appear_ready()
 		sprite.modulate = Color.WHITE
 	
 	if turn_timer <= 0:
@@ -114,7 +119,6 @@ func upgrade_tier() -> bool:
 
 # This func is meant to be overriden by children
 func activate_item() -> void:
-	print("Item not given an 'activate_item()' override.")
 	await get_tree().process_frame
 
 

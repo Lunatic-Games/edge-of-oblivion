@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://danaqtylavvha"]
+
+[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="1_edxj3"]
+
+[node name="LogicTree" type="Node"]
+script = ExtResource("1_edxj3")

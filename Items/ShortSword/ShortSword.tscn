@@ -1,7 +1,70 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://cjxvejgc7vgps"]
 
-[ext_resource path="res://Items/Item.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Items/ShortSword/ShortSword.gd" type="Script" id=2]
+[ext_resource type="PackedScene" uid="uid://dstniyh0rksqm" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cheykj3pkirxq" path="res://LogicTree/Conditionals/EveryXCalls/EveryXCalls.tscn" id="2_pw11d"]
+[ext_resource type="PackedScene" uid="uid://bj6kid6bf3xox" path="res://LogicTree/Effects/UpdateProgressBar/UpdateProgressBar.tscn" id="3_ryxmg"]
+[ext_resource type="PackedScene" uid="uid://csqxyiftdaj43" path="res://LogicTree/Selectors/SelectAdjacent/SelectAdjacentTiles.tscn" id="4_bmljl"]
+[ext_resource type="PackedScene" uid="uid://16ewpce7mwtn" path="res://LogicTree/Conditionals/IfEveryXOneAway/IfEveryXCallsOneAway.tscn" id="4_eongj"]
+[ext_resource type="PackedScene" uid="uid://dhvqg4mqcjito" path="res://LogicTree/Effects/DamageTileOccupants/DamageTileOccupants.tscn" id="4_ygceg"]
+[ext_resource type="PackedScene" uid="uid://cw6jqmyqxsqfq" path="res://LogicTree/Effects/SpawnNode2D/SpawnNode2D.tscn" id="5_3xnud"]
+[ext_resource type="PackedScene" uid="uid://qumss1nucdfg" path="res://LogicTree/Effects/SetItemReadyAppearance/SetItemReadyAppearance.tscn" id="5_eu177"]
 
-[node name="ShortSword" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0c1r"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cxf7x"]
+bg_color = Color(0.823529, 0.435294, 0.764706, 1)
+
+[node name="ShortSword" instance=ExtResource("1")]
+
+[node name="ProgressBar" type="ProgressBar" parent="." index="3"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 64.0
+offset_right = 55.0
+offset_bottom = 68.0
+theme_override_styles/background = SubResource("StyleBoxFlat_j0c1r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cxf7x")
+show_percentage = false
+
+[node name="Every3Calls" parent="LogicTree" index="0" instance=ExtResource("2_pw11d")]
+n = 3
+
+[node name="SelectAdjacentTiles" parent="LogicTree/Every3Calls" index="0" instance=ExtResource("4_bmljl")]
+
+[node name="DamageTileOccupants" parent="LogicTree/Every3Calls/SelectAdjacentTiles" index="0" instance=ExtResource("4_ygceg")]
+
+[node name="SpawnNode2D" parent="LogicTree/Every3Calls/SelectAdjacentTiles" index="1" instance=ExtResource("5_3xnud")]
+
+[node name="SetItemReadyAppearance" parent="LogicTree/Every3Calls" index="1" node_paths=PackedStringArray("item") instance=ExtResource("5_eu177")]
+item = NodePath("../../..")
+appear_ready = false
+
+[node name="Every5Calls" parent="LogicTree" index="1" instance=ExtResource("2_pw11d")]
+n = 5
+
+[node name="SetItemReadyAppearance" parent="LogicTree/Every5Calls" index="0" node_paths=PackedStringArray("item") instance=ExtResource("5_eu177")]
+item = NodePath("../../..")
+appear_ready = false
+
+[node name="UpdateProgressBar" parent="LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls_node_for_value") instance=ExtResource("3_ryxmg")]
+full_on_n = true
+progress_bar = NodePath("../../CoolDownBar")
+every_x_calls_node_for_value = NodePath("../Every3Calls")
+
+[node name="UpdateProgressBar2" parent="LogicTree" index="3" node_paths=PackedStringArray("progress_bar", "every_x_calls_node_for_value") instance=ExtResource("3_ryxmg")]
+full_on_n = true
+progress_bar = NodePath("../../ProgressBar")
+every_x_calls_node_for_value = NodePath("../Every5Calls")
+
+[node name="IfEveryXCallsOneAway" parent="LogicTree" index="4" node_paths=PackedStringArray("every_x_calls_node") instance=ExtResource("4_eongj")]
+every_x_calls_node = NodePath("../Every3Calls")
+
+[node name="SetItemReadyAppearance" parent="LogicTree/IfEveryXCallsOneAway" index="0" node_paths=PackedStringArray("item") instance=ExtResource("5_eu177")]
+item = NodePath("../../..")
+
+[node name="IfEveryXCallsOneAway2" parent="LogicTree" index="5" node_paths=PackedStringArray("every_x_calls_node") instance=ExtResource("4_eongj")]
+every_x_calls_node = NodePath("../Every5Calls")
+
+[node name="SetItemReadyAppearance2" parent="LogicTree/IfEveryXCallsOneAway2" index="0" node_paths=PackedStringArray("item") instance=ExtResource("5_eu177")]
+item = NodePath("../../..")

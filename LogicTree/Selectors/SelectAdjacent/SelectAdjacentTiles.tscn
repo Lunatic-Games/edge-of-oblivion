@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://csqxyiftdaj43"]
+
+[ext_resource type="PackedScene" uid="uid://danaqtylavvha" path="res://LogicTree/LogicTree.tscn" id="1_iccl7"]
+[ext_resource type="Script" path="res://LogicTree/Selectors/SelectAdjacent/SelectAdjacentTiles.gd" id="2_j7nss"]
+
+[node name="SelectAdjacentTiles" instance=ExtResource("1_iccl7")]
+script = ExtResource("2_j7nss")
+directions = 0
+operation = 0

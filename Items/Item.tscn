@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://kn25ecu375m5"]
+[gd_scene load_steps=10 format=3 uid="uid://dstniyh0rksqm"]
 
 [ext_resource type="Script" path="res://Items/Item.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2"]
+[ext_resource type="PackedScene" uid="uid://danaqtylavvha" path="res://LogicTree/LogicTree.tscn" id="3_wvra1"]
 
 [sub_resource type="Animation" id="5"]
 resource_name = "Shake"
@@ -110,3 +111,5 @@ theme_override_styles/background = SubResource("StyleBoxFlat_j0c1r")
 theme_override_styles/fill = SubResource("StyleBoxFlat_i7ywe")
 value = 100.0
 show_percentage = false
+
+[node name="LogicTree" parent="." instance=ExtResource("3_wvra1")]

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhvqg4mqcjito"]
+
+[ext_resource type="PackedScene" uid="uid://danaqtylavvha" path="res://LogicTree/LogicTree.tscn" id="1_wn66d"]
+
+[node name="DamageTileOccupants" instance=ExtResource("1_wn66d")]
