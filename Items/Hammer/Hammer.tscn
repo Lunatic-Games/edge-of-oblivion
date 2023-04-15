@@ -1,8 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://der8q6fmqjfyd"]
 
-[ext_resource path="res://Items/Item.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Items/Hammer/hammer.gd" type="Script" id=2]
+[ext_resource type="PackedScene" uid="uid://kn25ecu375m5" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="Script" path="res://Items/Hammer/Hammer.gd" id="2_ab3nd"]
 
-
-[node name="Hammer" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="Hammer" instance=ExtResource("1")]
+script = ExtResource("2_ab3nd")

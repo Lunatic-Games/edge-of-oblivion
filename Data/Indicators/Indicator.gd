@@ -1,13 +1,14 @@
 extends Node2D
 
-var animator
+@onready var animator: AnimationPlayer = $AnimationPlayer
 
-func _ready():
-	TurnManager.connect("playerTurnEnded", self, "destroySelf")
-	animator = $AnimationPlayer
+
+func _ready() -> void:
+	TurnManager.player_turn_ended.connect(destroy_self)
 	animator.play("spawn")
 
-func destroySelf():
+
+func destroy_self() -> void:
 	animator.play("remove")
-	yield(animator, "animation_finished")
+	await animator.animation_finished
 	queue_free()

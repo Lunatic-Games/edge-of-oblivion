@@ -1,13 +1,13 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" script_class="item_data" load_steps=4 format=3 uid="uid://b7ul8v2f10lg4"]
 
-[ext_resource path="res://Items/ShortSword/ShortSword.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/art/icons/weapons/skoll/gladius.svg" type="Texture" id=2]
-[ext_resource path="res://Items/ITEM_DATA.gd" type="Script" id=3]
+[ext_resource type="PackedScene" path="res://Items/ShortSword/ShortSword.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2"]
+[ext_resource type="Script" path="res://Items/ITEM_DATA.gd" id="3"]
 
 [resource]
-script = ExtResource( 3 )
-sprite = ExtResource( 2 )
-itemScene = ExtResource( 1 )
+script = ExtResource("3")
+sprite = ExtResource("2")
+item_scene = ExtResource("1")
 item_name = "Gladius"
 tier1Text = "[center]Every 3 rounds, attacks left for [color=#FF6565]2[/color] damage."
 tier2Text = "[center]Also attacks right."

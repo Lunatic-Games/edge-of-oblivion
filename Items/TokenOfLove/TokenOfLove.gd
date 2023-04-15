@@ -1,6 +1,5 @@
 extends "res://Items/Item.gd"
 
-
 var heal_amount: int = 1
 
 # Tiered cooldown: 
@@ -8,22 +7,26 @@ var heal_amount: int = 1
 #	2: 7
 #	3: 5
 
-func upgradeTier() -> bool:
-	var ret: bool = .upgradeTier()
-	match currentTier:
+
+func upgrade_tier() -> bool:
+	var ret: bool = super.upgrade_tier()
+	match current_tier:
 		2:
-			self.maxTurnTimer = 7
+			self.max_turn_timer = 7
 		3:
-			self.maxTurnTimer = 5
+			self.max_turn_timer = 5
 	return ret
 
-func activateItem() -> void:
+
+func activate_item() -> void:
 	perform_heal()
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
+
 
 func perform_heal() -> void:
 	# Play animation
 	heal()
+
 
 func heal() -> void:
 	user.heal(heal_amount)

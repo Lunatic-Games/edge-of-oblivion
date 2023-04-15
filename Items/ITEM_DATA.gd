@@ -1,13 +1,12 @@
+class_name ItemData
 extends Resource
 
-class_name ItemData
-
-export (Texture) var sprite
-export (PackedScene) var itemScene
-export (String) var item_name
-export (String) var tier1Text
-export (String) var tier2Text
-export (String) var tier3Text
-export (int) var max_turn_timer = 3
-export (int) var item_damage = 1
-export (String) var path
+@export var sprite: Texture2D
+@export var item_scene: PackedScene
+@export var item_name: String
+@export var tier1Text: String
+@export var tier2Text: String
+@export var tier3Text: String
+@export_range(0, 999, 1, "or_greater") var max_turn_timer: int = 3
+@export_range(0, 999, 1, "or_greater") var item_damage: int = 1
+@export var path: String

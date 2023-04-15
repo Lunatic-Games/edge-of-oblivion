@@ -1,20 +1,24 @@
+class_name Chest
 extends "res://Data/Occupant.gd"
 
-var cardsToSpawn = 3
-var currentTile
+var n_cards_to_spawn: int = 3
+var current_tile: Tile
 
-onready var animator = $AnimationPlayer
+@onready var animator: AnimationPlayer = $AnimationPlayer
 
-func _ready():
-	occupantType = occupantTypes.collectable
+
+func _ready() -> void:
+	occupant_type = OccupantType.COLLECTABLE
 	animator.play("spawn")
 
-func collect():
-	FreeUpgradeMenu.spawnUpgradeCards(cardsToSpawn)
-	destroySelf()
 
-func destroySelf():
-	currentTile.occupied = null
+func collect() -> void:
+	FreeUpgradeMenu.spawn_upgrade_cards(n_cards_to_spawn)
+	destroy_self()
+
+
+func destroy_self() -> void:
+	current_tile.occupant = null
 	animator.play("remove")
-	yield(animator, "animation_finished")
+	await animator.animation_finished
 	queue_free()

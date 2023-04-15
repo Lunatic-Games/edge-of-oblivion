@@ -1,8 +1,6 @@
+class_name BossData
 extends Resource
 
-class_name boss_data
-
-
-export (int) var health = 10
-export (String) var name = "The Forgotten King"
-export (AudioStreamMP3) var boss_music
+@export_range(0, 999, 1, "or_greater") var health: int = 10
+@export var name: String = "BOSS NAME"
+@export var boss_music: AudioStream

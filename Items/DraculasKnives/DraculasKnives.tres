@@ -1,15 +1,14 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" script_class="item_data" load_steps=4 format=3 uid="uid://s2qvaxdrtajx"]
 
-[ext_resource path="res://Items/ITEM_DATA.gd" type="Script" id=1]
-[ext_resource path="res://Items/DraculasKnives/DraculasKnives.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/art/icons/weapons/lorc/stiletto.svg" type="Texture" id=3]
-
+[ext_resource type="Script" path="res://Items/ITEM_DATA.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Items/DraculasKnives/DraculasKnives.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://dodqj134xaf4d" path="res://Assets/art/icons/weapons/lorc/stiletto.svg" id="3"]
 
 [resource]
-script = ExtResource( 1 )
-sprite = ExtResource( 3 )
-itemScene = ExtResource( 2 )
-item_name = "Draculas Knives"
+script = ExtResource("1")
+sprite = ExtResource("3")
+item_scene = ExtResource("2")
+item_name = "Dracula's Knives"
 tier1Text = "Attack right for 1. Lifesteal"
 tier2Text = "Also attack range 1"
 tier3Text = "Also attack range 2"

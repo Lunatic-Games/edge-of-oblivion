@@ -1,22 +1,31 @@
+class_name SpawnFlag
 extends "res://Data/Occupant.gd"
 
-var currentTile
-onready var animator = $AnimationPlayer
+var current_tile: Tile
 
-func _ready():
-	occupantType = occupantTypes.collectable
+@onready var animator: AnimationPlayer = $AnimationPlayer
+
+
+func _ready() -> void:
+	occupant_type = OccupantType.COLLECTABLE
 	animator.play("spawn")
+
+
+func collect() -> void:
+	current_tile.occupant = null
 	
+	var new_tile: Tile = GameManager.get_random_unoccupied_tile()
+	if new_tile == null:
+		queue_free()
+		return
+	
+	current_tile = new_tile
+	position = current_tile.position
+	GameManager.occupy_tile(current_tile, self)
 
-func collect():
-	var new_tile = GameManager.getRandomUnoccupiedTile()
-	currentTile.occupied = null
-	currentTile = new_tile
-	position = currentTile.position
-	GameManager.occupyTile(currentTile, self)
 
-func destroySelf():
-	currentTile.occupied = null
+func destroy_self() -> void:
+	current_tile.occupant = null
 	animator.play("remove")
-	yield(animator, "animation_finished")
+	await animator.animation_finished
 	queue_free()

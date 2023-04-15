@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/The-Army-of-Minotaur.mp3-85b3fbedc12fd3138c51e9231faf7089.mp3str"
+uid="uid://bgy2n00mytert"
+path="res://.godot/imported/The-Army-of-Minotaur.mp3-85b3fbedc12fd3138c51e9231faf7089.mp3str"
 
 [deps]
 
 source_file="res://Assets/music/boss/The-Army-of-Minotaur.mp3"
-dest_files=[ "res://.import/The-Army-of-Minotaur.mp3-85b3fbedc12fd3138c51e9231faf7089.mp3str" ]
+dest_files=["res://.godot/imported/The-Army-of-Minotaur.mp3-85b3fbedc12fd3138c51e9231faf7089.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

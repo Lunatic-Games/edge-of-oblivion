@@ -1,116 +1,131 @@
+class_name Player
 extends "res://Data/Units/Unit.gd"
 
-signal itemReachedMaxTier
-signal playerDied
+signal item_reached_max_tier
 
-var experience_bar_update_time = 0.2
-var moves = 1
-var currentXp = 0
-var currentLevel = 1
-var levelThresholds = {
-	1:1,
-	2:3,
-	3:3,
-	4:4,
-	5:5,
-	6:5,
-	7:5,
-	8:5,
-	9:5,
-	10:5
+const STARTING_ITEMS = [preload("res://Items/ShortSword/ShortSword.tres")]
+
+var experience_bar_update_time: float = 0.2
+var moves: int = 1
+var moves_remaining: int = moves
+var current_xp: int = 0
+var current_level: int = 1
+var level_thresholds = {
+	1: 1,
+	2: 3,
+	3: 3,
+	4: 4,
+	5: 5,
+	6: 5,
+	7: 5,
+	8: 5,
+	9: 5,
+	10: 5
 }
-var items = []
+var items: Array[ItemData] = []
 
-onready var movesRemaining = moves
-onready var item_container = $CanvasLayer/ItemContainer
-onready var player_camera = $PlayerCamera
-onready var experience_bar = $CanvasLayer/ExperienceBar
-onready var canvas_tween = $CanvasLayer/CanvasTween
+@onready var item_container: BoxContainer = $CanvasLayer/ItemContainer
+@onready var player_camera: Camera2D = $PlayerCamera
+@onready var experience_bar: ProgressBar = $CanvasLayer/ExperienceBar
 
 
-func _ready():
-	var startingItems = [preload("res://Items/ShortSword/ShortSword.tres")]
-	for item in startingItems:
-		gainItem(item)
+func _ready() -> void:
+	super._ready()
+	for item in STARTING_ITEMS:
+		gain_item(item)
 
-func _physics_process(delta):
-	handleMovement()
 
-func handleMovement():
-	if !TurnManager.isPlayerTurn() or lock_movement or hp <= 0:
+func _physics_process(_delta: float) -> void:
+	handle_movement()
+
+
+func handle_movement() -> void:
+	if !TurnManager.is_player_turn() or lock_movement or hp <= 0:
 		return
 	
-	if (Input.is_action_just_pressed("up")):
-		if(currentTile.topTile):
-			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.topTile, "up", "handleMovement"))
-			move_to_tile(currentTile.topTile) # MovementUtility.moveDirection.up
-	elif (Input.is_action_just_pressed("down")):
-		if(currentTile.bottomTile):
-			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.bottomTile, "down", "handleMovement"))
-			move_to_tile(currentTile.bottomTile)
-	elif (Input.is_action_just_pressed("left")):
-		if(currentTile.leftTile):
-			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.leftTile, "left", "handleMovement"))
-			move_to_tile(currentTile.leftTile)
-	elif (Input.is_action_just_pressed("right")):
-		if(currentTile.rightTile):
-			move_history.record(MovementUtility.MoveRecord.new(currentTile, currentTile.rightTile, "right", "handleMovement"))
-			move_to_tile(currentTile.rightTile)
-	elif(Input.is_action_just_pressed("wait")):
-		TurnManager.endPlayerTurn()
-
-
-func move_to_tile(tile, move_precedence: float = 0.0) -> void:
-	.move_to_tile(tile)
+	if Input.is_action_just_pressed("up") and current_tile.top_tile:
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.top_tile,
+			Vector2i.UP, MovementUtility.CauseOfMove.INPUT))
+		move_to_tile(current_tile.top_tile)
 	
-	movesRemaining -= 1
-	if movesRemaining <= 0:
-		TurnManager.endPlayerTurn()
-		movesRemaining = moves
+	elif Input.is_action_just_pressed("down") and current_tile.bottom_tile:
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.bottom_tile,
+			Vector2i.DOWN, MovementUtility.CauseOfMove.INPUT))
+		move_to_tile(current_tile.bottom_tile)
+	
+	elif Input.is_action_just_pressed("left") and current_tile.left_tile:
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.left_tile,
+			Vector2i.LEFT, MovementUtility.CauseOfMove.INPUT))
+		move_to_tile(current_tile.left_tile)
+	
+	elif Input.is_action_just_pressed("right") and current_tile.right_tile:
+		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.right_tile,
+			Vector2i.RIGHT, MovementUtility.CauseOfMove.INPUT))
+		move_to_tile(current_tile.right_tile)
+	
+	elif Input.is_action_just_pressed("wait"):
+		TurnManager.end_player_turn()
 
-func die():
+
+func move_to_tile(tile: Tile) -> void:
+	super.move_to_tile(tile)
+	
+	moves_remaining -= 1
+	if moves_remaining <= 0:
+		TurnManager.end_player_turn()
+		moves_remaining = moves
+
+
+func die() -> void:
+	var camera_position_before: Vector2 = player_camera.global_position
+	
 	self.remove_child(player_camera)
 	GameManager.gameboard.add_child(player_camera)
 	player_camera.set_owner(GameManager.gameboard)
-	tween.interpolate_property(player_camera, "global_position", global_position, currentTile.global_position, 1.0)
-	tween.start()
-	emit_signal("playerDied")
-	.die()
+	
+	player_camera.global_position = camera_position_before
+	
+	GlobalSignals.player_died.emit(self)
+	super.die()
 
-func gainExperience(experience):
-	if currentLevel >= levelThresholds.size():
+
+func gain_experience(experience: int) -> void:
+	if current_level >= level_thresholds.size():
 		return
 	
-	currentXp += experience
+	current_xp += experience
 	
-	if currentXp >= levelThresholds[currentLevel]:
-		levelUp()
+	if current_xp >= level_thresholds[current_level]:
+		level_up()
 	else:
 		update_experience_bar()
 
-func levelUp():
-	FreeUpgradeMenu.spawnUpgradeCards(3)
+
+func level_up() -> void:
+	FreeUpgradeMenu.spawn_upgrade_cards(3)
 	update_experience_bar()
-	currentLevel += 1
-	currentXp = 0
-	yield(get_tree().create_timer(experience_bar_update_time), "timeout")
+	current_level += 1
+	current_xp = 0
+	await get_tree().create_timer(experience_bar_update_time).timeout
 	experience_bar.emit_particle()
 	update_experience_bar()
-	
-	
 
-func gainItem(itemData):
-	if itemData in items:
-		ItemManager.upgradeItem(itemData)
+
+func gain_item(item_data: ItemData) -> void:
+	if item_data in items:
+		ItemManager.upgrade_item(item_data)
 	else:
-		items.append(itemData)
-		ItemManager.addItem(itemData)
+		items.append(item_data)
+		ItemManager.add_item(item_data)
 
-func isEnemy():
+
+func is_enemy() -> bool:
 	return false
 
+
 func update_experience_bar() -> void:
-	experience_bar.max_value = levelThresholds[currentLevel]
-	canvas_tween.interpolate_property(experience_bar, "value", experience_bar.value, currentXp, experience_bar_update_time)
-	canvas_tween.start()
-	yield(canvas_tween, "tween_all_completed")
+	experience_bar.max_value = level_thresholds[current_level]
+	
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(experience_bar, "value", current_xp, experience_bar_update_time)
+	await tween.finished

@@ -1,46 +1,51 @@
 extends "res://Items/Item.gd"
 
+const ARROW_EFFECT_SCENE: PackedScene = preload("res://Data/Indicators/AttackEffects/RangedAttackEffect.tscn")
+
 # Attack right 1, 2, 3 spaces away
-var targets = []
 
-onready var ARROW_EFFECT_SCENE = preload("res://Data/Indicators/AttackEffects/RangedAttackEffect.tscn")
 
-func activateItem() -> void:
+func activate_item() -> void:
 	attack_logic()
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
-func attack_logic():
-	targets = []
+
+func attack_logic() -> void:
+	var target_tiles: Array[Tile] = []
 	
-	var starting_tile = user.currentTile.rightTile
+	var starting_tile: Tile = user.current_tile.right_tile
 	
 	if starting_tile:
-		targets.append(starting_tile)
+		target_tiles.append(starting_tile)
 		
-		var second_tile = starting_tile.rightTile
-		if currentTier >= 2 && second_tile:
-			targets.append(second_tile)
+		var second_tile: Tile = starting_tile.right_tile
+		if current_tier >= 2 && second_tile:
+			target_tiles.append(second_tile)
 		
-			var third_tile = second_tile.rightTile
-			if currentTier >= 3 && third_tile:
-				targets.append(third_tile)
+			var third_tile: Tile = second_tile.right_tile
+			if current_tier >= 3 && third_tile:
+				target_tiles.append(third_tile)
 	
-	var count = 0
-	for tile in targets:
+	var count: int = 0
+	for tile in target_tiles:
 		perform_attack(tile, count)
 		count +=1
 
-func perform_attack(tile_to_attack, offset) -> void:
-	var enemy = tile_to_attack.occupied
-	yield(get_tree().create_timer(0.12*offset), "timeout")
-	var effect = spawn_arrow_effect(GameManager.player.currentTile, tile_to_attack)
-	yield(effect, "effect_complete")
-	if enemy && enemy.isEnemy():
-		enemy.takeDamage(1)
+
+func perform_attack(tile_to_attack: Tile, offset: int) -> void:
+	var enemy: Enemy = tile_to_attack.occupant
+	await get_tree().create_timer(0.12 * offset).timeout
+	
+	var effect = spawn_arrow_effect(GameManager.player.current_tile, tile_to_attack)
+	await effect.effect_completed
+	
+	if enemy != null && enemy.is_enemy():
+		enemy.take_damage(1)
 		GameManager.player.heal(1)
 
+
 func spawn_arrow_effect(starting_tile: Tile, ending_tile: Tile) -> Object:
-	var effect = ARROW_EFFECT_SCENE.instance()
+	var effect = ARROW_EFFECT_SCENE.instantiate()
 	effect.global_position = starting_tile.global_position
 	effect.rotation_degrees = 0
 	

@@ -1,32 +1,35 @@
 extends Control
 
-var managedItems = {
+var managed_items: Dictionary = {
 	
 }
 
-#onready var itemContainer = $ItemContainer
 
-func _ready():
-	TurnManager.connect("playerTurnEnded", self, "handleItemsTriggering")
+func _ready() -> void:
+	TurnManager.connect("player_turn_ended",Callable(self,"handle_items_triggering"))
 
-func reset():
-	managedItems = {}
 
-func handleItemsTriggering():
-	for item in managedItems:
-		yield(managedItems[item].triggerTimer(), "completed")
+func reset() -> void:
+	managed_items = {}
+
+
+func handle_items_triggering() -> void:
+	for item in managed_items:
+		await managed_items[item].trigger_timer()
 	
-	TurnManager.itemPhaseEnded()
+	TurnManager.item_phase_ended()
 
-func addItem(item_data):
-	var item = item_data.itemScene.instance()
-	item.currentTier = 1
+
+func add_item(item_data: ItemData) -> void:
+	var item: Item = item_data.item_scene.instantiate()
+	item.current_tier = 1
 	GameManager.player.item_container.add_child(item)
-	managedItems[item_data] = item
+	managed_items[item_data] = item
 	item.setup(item_data)
 
-func upgradeItem(itemData):
-	var isMaxTier = managedItems[itemData].upgradeTier()
+
+func upgrade_item(item_data: ItemData) -> void:
+	var is_max_tier = managed_items[item_data].upgrade_tier()
 	
-	if isMaxTier:
-		FreeUpgradeMenu.removeItemFromAvailability(itemData)
+	if is_max_tier:
+		FreeUpgradeMenu.remove_item_from_availability(item_data)

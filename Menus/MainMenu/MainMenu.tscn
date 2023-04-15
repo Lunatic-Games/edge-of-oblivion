@@ -1,0 +1,252 @@
+[gd_scene load_steps=4 format=3 uid="uid://dte0gritlpqbs"]
+
+[ext_resource type="Script" path="res://Menus/MainMenu/MainMenu.gd" id="1_ywv84"]
+[ext_resource type="Texture2D" uid="uid://cu76o1llaofjt" path="res://Assets/art/background/main-menu.png" id="2_pv8cn"]
+[ext_resource type="PackedScene" uid="uid://bejx6kj0p5det" path="res://UI/Card/Card.tscn" id="3_grure"]
+
+[node name="MainMenu" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_ywv84")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = -378.0
+offset_top = -321.0
+offset_right = 2695.0
+offset_bottom = 1633.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_pv8cn")
+
+[node name="StartPage" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="StartPage"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 59.0
+offset_bottom = 131.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Edge of Oblivion"
+horizontal_alignment = 1
+
+[node name="MoveWithWASD" type="Label" parent="StartPage"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -141.0
+offset_bottom = -115.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Move with W A S D (SPACE to stand still!)"
+horizontal_alignment = 1
+
+[node name="StartingEquipment" type="VBoxContainer" parent="StartPage"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 227.0
+offset_right = 295.0
+offset_bottom = 457.0
+
+[node name="Label" type="Label" parent="StartPage/StartingEquipment"]
+layout_mode = 2
+text = "Your starting equipment!"
+
+[node name="Card" parent="StartPage/StartingEquipment" instance=ExtResource("3_grure")]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Background" parent="StartPage/StartingEquipment/Card" index="1"]
+mouse_filter = 2
+
+[node name="MenuContainer" type="VBoxContainer" parent="StartPage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -107.5
+offset_right = 120.0
+offset_bottom = 177.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayButton" type="Button" parent="StartPage/MenuContainer"]
+custom_minimum_size = Vector2(240, 60)
+layout_mode = 2
+text = "Play Game"
+
+[node name="CreditsButton" type="Button" parent="StartPage/MenuContainer"]
+layout_mode = 2
+text = "Credits"
+
+[node name="CreditsPage" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Container" type="VBoxContainer" parent="CreditsPage"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 0
+offset_left = 360.0
+offset_top = 141.0
+offset_right = 720.0
+offset_bottom = 465.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CreditsPage/Container"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsPage/Container/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Credits" type="RichTextLabel" parent="CreditsPage/Container/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+bbcode_enabled = true
+text = "[font_size=20][color=salmon]Programming[/color][/font_size]
+Matthias Harden
+Noah Jacobsen
+
+[font_size=20][color=salmon]Game Design[/color][/font_size]
+Matthias Harden
+Noah Jacobsen
+
+[font_size=20][color=salmon]Art[/color][/font_size]
+Assets licensed by CC 3.0
+From creators
+[ul]
+lorc
+delapouite
+skoll
+sbed
+[/ul]
+All assets can be found at
+https://game-icons.net/
+
+[font_size=20][color=salmon]Music[/color][/font_size]
+[i]Chase[/i] by Alexander Nakarada
+https://www.serpentsoundstudios.com
+Music promoted by https://www.chosic.com/free-music/all/
+Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+[i]Dragon Castle[/i] by Makai Symphony
+https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+[i]Dragon World[/i] by Makai Symphony
+https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+[i]Durandal[/i] by Makai Symphony
+https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+[i]Hitman[/i] by Kevin MacLeod
+https://incompetech.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+[i]Hostiles Inbound[/i] by Miguel Johnson
+https://soundcloud.com/migueljohnsonmjmusic
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+[i]The Torch Of Knowledge[/i] by Damiano Baldoni
+https://soundcloud.com/damiano_baldoni
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 4.0
+https://creativecommons.org/licenses/by/4.0/
+
+[i]All Out Attack[/i] by Makai Symphony
+https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+[i]Duel[/i] by Makai Symphony
+https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+[i]Endless Storm[/i] by Makai Symphony
+https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+[i]Glory Eternal[/i] by Darren Curtis
+https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+[i]Goddess Of Fate[/i] by Makai Symphony
+https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+[i]Hydra And Ash[/i] by Makai Symphony
+https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+[i]The Army of Minotaur[/i] by Makai Symphony
+https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+
+[i]The Phantom’s Castle[/i] by Darren Curtis
+https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+[i]Fall From Grace[/i] by Darren Curtis
+https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+[i]Lurking Evil[/i] by Darren Curtis
+https://www.darrencurtismusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/"
+
+[node name="ReturnToStartPage" type="Button" parent="CreditsPage/Container"]
+layout_mode = 2
+text = "Return to Start Page"
+
+[connection signal="pressed" from="StartPage/MenuContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="StartPage/MenuContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="CreditsPage/Container/ReturnToStartPage" to="." method="_on_ReturnToStartPage_pressed"]
+
+[editable path="StartPage/StartingEquipment/Card"]

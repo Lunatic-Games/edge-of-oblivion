@@ -1,20 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://p0e7f46xip6t"]
 
-[ext_resource path="res://Data/Units/Enemies/Enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Data/Units/Enemies/LostRanger/LostRanger.gd" type="Script" id=2]
-[ext_resource path="res://Assets/art/icons/medieval-fantasy/lorc/cowled.svg" type="Texture" id=3]
-[ext_resource path="res://Data/MoveSets/Actions/Ranged/RangedAction.tscn" type="PackedScene" id=4]
+[ext_resource type="PackedScene" uid="uid://beynfuvsrpfhq" path="res://Data/Units/Enemies/Enemy.tscn" id="1"]
+[ext_resource type="Script" path="res://Data/Units/Enemies/LostRanger/LostRanger.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cinfmdwcoldqr" path="res://Assets/art/icons/medieval-fantasy/lorc/cowled.svg" id="3"]
+[ext_resource type="PackedScene" uid="uid://cuk8dxlxcra1k" path="res://Data/MoveSets/Actions/Ranged/RangedAction.tscn" id="4"]
 
-[node name="LostRanger" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="LostRanger" instance=ExtResource("1")]
+script = ExtResource("2")
 
-[node name="Sprite" parent="." index="1"]
-texture = ExtResource( 3 )
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3")
 
-[node name="RangedAction" parent="MoveSets/Move" index="0" instance=ExtResource( 4 )]
+[node name="RangedAction" parent="MoveSets/Move" index="0" instance=ExtResource("4")]
 targeting_type = 2
 
-[node name="RangedAction2" parent="MoveSets/Move" index="1" instance=ExtResource( 4 )]
+[node name="RangedAction2" parent="MoveSets/Move" index="1" instance=ExtResource("4")]
 targeting_type = 3
 
 [editable path="MoveSets/Move"]

@@ -1,13 +1,15 @@
 extends Node
 
-signal playerTurnEnded
+signal player_turn_ended
 
-const FADED = preload("res://Data/Units/Enemies/Faded/Faded.tscn")
-const LOST_RANGER = preload("res://Data/Units/Enemies/LostRanger/LostRanger.tscn")
-const FORSWORN_PIKE = preload("res://Data/Units/Enemies/ForswornPike/ForswornPike.tscn")
-const FORGOTTEN_KING = preload("res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn")
+enum TurnState {ENEMY, PLAYER}
 
-var roundSpawnData = {
+const FADED: PackedScene = preload("res://Data/Units/Enemies/Faded/Faded.tscn")
+const LOST_RANGER: PackedScene = preload("res://Data/Units/Enemies/LostRanger/LostRanger.tscn")
+const FORSWORN_PIKE: PackedScene = preload("res://Data/Units/Enemies/ForswornPike/ForswornPike.tscn")
+const FORGOTTEN_KING: PackedScene = preload("res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn")
+
+var round_spawn_data: Dictionary = {
 	2: [FADED],
 	6: [FADED],
 	12: [FADED, FADED],
@@ -35,43 +37,51 @@ var roundSpawnData = {
 	175: [FORSWORN_PIKE, FADED, LOST_RANGER]
 }
 
-enum turnState {enemy, player}
-var currentTurnState = turnState.player
-var currentRound = 0
+var current_turn_state: TurnState = TurnState.PLAYER
+var current_round: int = 0
 
-func initialize():
-	call_deferred("handleRoundUpdate")
 
-func reset():
-	currentRound = 0
-	currentTurnState = turnState.player
+func initialize() -> void:
+	call_deferred("handle_round_update")
 
-func isPlayerTurn():
-	if currentTurnState == turnState.player:
+
+func reset() -> void:
+	current_round = 0
+	current_turn_state = TurnState.PLAYER
+
+
+func is_player_turn() -> bool:
+	if current_turn_state == TurnState.PLAYER:
 		return true
 	return false
 
-func itemPhaseEnded():
-	startEnemyTurn()
 
-func startEnemyTurn():
-	currentTurnState = turnState.enemy
-	handleEnemyTurn()
+func item_phase_ended() -> void:
+	start_enemy_turn()
 
-func endPlayerTurn():
-	emit_signal("playerTurnEnded")
 
-func startPlayerTurn():
-	handleRoundUpdate()
-	currentTurnState = turnState.player
+func start_enemy_turn() -> void:
+	current_turn_state = TurnState.ENEMY
+	handle_enemy_turn()
 
-func handleEnemyTurn():
-	for enemy in GameManager.allEnemies:
+
+func end_player_turn() -> void:
+	emit_signal("player_turn_ended")
+
+
+func start_player_turn() -> void:
+	handle_round_update()
+	current_turn_state = TurnState.PLAYER
+
+
+func handle_enemy_turn() -> void:
+	for enemy in GameManager.all_enemies:
 		enemy.activate()
 	
-	startPlayerTurn()
+	start_player_turn()
 
-func handleRoundUpdate():
-	currentRound += 1
-	GameManager.spawnEnemies()
-	GameManager.new_spawn_locations()
+
+func handle_round_update() -> void:
+	current_round += 1
+	GameManager.spawn_enemies()
+	GameManager.calculate_spawn_location_for_next_round()

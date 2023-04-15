@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/The-Torch-Of-Knowledge.mp3-b2e0d8eb6979481bcfb14b3374aad615.mp3str"
+uid="uid://ue3h6mxki1jt"
+path="res://.godot/imported/The-Torch-Of-Knowledge.mp3-b2e0d8eb6979481bcfb14b3374aad615.mp3str"
 
 [deps]
 
 source_file="res://Assets/music/battle/The-Torch-Of-Knowledge.mp3"
-dest_files=[ "res://.import/The-Torch-Of-Knowledge.mp3-b2e0d8eb6979481bcfb14b3374aad615.mp3str" ]
+dest_files=["res://.godot/imported/The-Torch-Of-Knowledge.mp3-b2e0d8eb6979481bcfb14b3374aad615.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

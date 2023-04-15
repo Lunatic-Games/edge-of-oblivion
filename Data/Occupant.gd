@@ -1,18 +1,21 @@
 class_name Occupant
 extends Node2D
 
-enum occupantTypes {
-	blocking,
-	collectable,
-	combative
+enum OccupantType {
+	BLOCKING,
+	COLLECTABLE,
+	COMBATIVE
 }
-var occupantType = occupantTypes.blocking
+
+var occupant_type: OccupantType = OccupantType.BLOCKING
 
 var pushable: bool = false
 var damageable: bool = false
 
-func collect():
+
+func collect() -> void:
 	pass
 
-func isEnemy():
+
+func is_enemy() -> bool:
 	return false
