@@ -1,5 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhvqg4mqcjito"]
+[gd_scene load_steps=3 format=3 uid="uid://bn048ryq1axih"]
 
-[ext_resource type="PackedScene" uid="uid://danaqtylavvha" path="res://LogicTree/LogicTree.tscn" id="1_wn66d"]
+[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_wn66d"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants/DamageTileOccupants.gd" id="2_emsip"]
 
 [node name="DamageTileOccupants" instance=ExtResource("1_wn66d")]
+script = ExtResource("2_emsip")

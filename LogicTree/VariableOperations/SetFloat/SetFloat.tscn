@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfq05xrak3w66"]
+
+[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_e3k8x"]
+[ext_resource type="Script" path="res://LogicTree/VariableOperations/SetFloat/SetFloat.gd" id="2_fv8gk"]
+
+[node name="SetFloat" instance=ExtResource("1_e3k8x")]
+script = ExtResource("2_fv8gk")
+value = 0.0

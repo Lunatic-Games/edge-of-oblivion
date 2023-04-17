@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://58qjvo7xxv5q"]
+
+[ext_resource type="Script" path="res://LogicTree/Variables/ItemArray/LogicTreeItemArrayVariable.gd" id="1_dfqv2"]
+
+[node name="ItemArrayVariable" type="Node"]
+script = ExtResource("1_dfqv2")

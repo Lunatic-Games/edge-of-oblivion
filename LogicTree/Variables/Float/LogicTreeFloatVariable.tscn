@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh1pdulq25ktc"]
+
+[ext_resource type="Script" path="res://LogicTree/Variables/Float/LogicTreeFloatVariable.gd" id="2_iipxd"]
+
+[node name="FloatVariable" type="Node"]
+script = ExtResource("2_iipxd")
+value = null
+reinforce_const = null

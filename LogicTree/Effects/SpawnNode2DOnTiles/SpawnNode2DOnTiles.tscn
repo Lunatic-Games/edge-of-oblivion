@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4hw2jliuu1qf"]
+
+[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_1s0eg"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles/SpawnNode2DOnTiles.gd" id="2_gt0qb"]
+
+[node name="SpawnNode2DOnTiles" instance=ExtResource("1_1s0eg")]
+script = ExtResource("2_gt0qb")
+node_to_spawn = null
+mirror_x = false
+mirror_y = false
+only_if_occupied_tile = false

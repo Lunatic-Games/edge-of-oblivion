@@ -1,8 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dstniyh0rksqm"]
+[gd_scene load_steps=14 format=3 uid="uid://ffr1hgofqc0v"]
 
 [ext_resource type="Script" path="res://Items/Item.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2"]
-[ext_resource type="PackedScene" uid="uid://danaqtylavvha" path="res://LogicTree/LogicTree.tscn" id="3_wvra1"]
+[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="3_wvra1"]
+[ext_resource type="PackedScene" uid="uid://3swuqoacjr2j" path="res://LogicTree/VariableOperations/FromItem/FromItem.tscn" id="4_ttf4g"]
+[ext_resource type="PackedScene" uid="uid://58qjvo7xxv5q" path="res://LogicTree/Variables/ItemArray/LogicTreeItemArrayVariable.tscn" id="5_0arnu"]
+[ext_resource type="PackedScene" uid="uid://eudbygjgx3pb" path="res://LogicTree/Variables/EntityArray/LogicTreeEntityArrayVariable.tscn" id="6_5d37d"]
+[ext_resource type="PackedScene" uid="uid://ckybh43nrpge3" path="res://LogicTree/Variables/TileArray/LogicTreeTileArrayVariable.tscn" id="7_d2w3n"]
 
 [sub_resource type="Animation" id="5"]
 resource_name = "Shake"
@@ -113,3 +117,19 @@ value = 100.0
 show_percentage = false
 
 [node name="LogicTree" parent="." instance=ExtResource("3_wvra1")]
+invert_recurse_condition = null
+async_wait_before_recurse_ms = null
+
+[node name="Item setup" parent="LogicTree" node_paths=PackedStringArray("input_item", "item_array", "entity_array", "tile_array") instance=ExtResource("4_ttf4g")]
+input_item = NodePath("../..")
+item_array = NodePath("../../LogicTreeVariables/This item")
+entity_array = NodePath("../../LogicTreeVariables/Item user")
+tile_array = NodePath("../../LogicTreeVariables/Item user tile")
+
+[node name="LogicTreeVariables" type="Node" parent="."]
+
+[node name="This item" parent="LogicTreeVariables" instance=ExtResource("5_0arnu")]
+
+[node name="Item user" parent="LogicTreeVariables" instance=ExtResource("6_5d37d")]
+
+[node name="Item user tile" parent="LogicTreeVariables" instance=ExtResource("7_d2w3n")]

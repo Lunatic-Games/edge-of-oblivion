@@ -5,14 +5,17 @@ extends LogicTree
 @export_range(1, 10, 1, "or_greater") var n = 1
 
 var times_evaluated: int = 0
+var met_condition: bool = false
 
 
-func evaluate(targets: Array[Node]) -> bool:
+func perform_behavior() -> void:
 	times_evaluated += 1
-	
 	if times_evaluated >= n:
-		super.evaluate(targets)
+		met_condition = true
 		times_evaluated = 0
-		return true
-	
-	return false
+	else:
+		met_condition = false
+
+
+func evaluate_condition() -> bool:
+	return met_condition

@@ -3,21 +3,18 @@ extends LogicTree
 
 @export var full_on_n: bool = true
 @export var progress_bar: ProgressBar
-@export var every_x_calls_node_for_value: EveryXCalls
+@export var every_x_calls: EveryXCalls
 
 
 func _ready() -> void:
 	assert(progress_bar != null, "Progress bar not set")
-	assert(every_x_calls_node_for_value != null, "Node not set")
+	assert(every_x_calls != null, "EveryXCalls not set")
 
 
-func evaluate(targets: Array[Node]) -> bool:
-	var times_evaluated: int = every_x_calls_node_for_value.times_evaluated
-	var out_of: int = every_x_calls_node_for_value.n
+func perform_behavior() -> void:
+	var times_evaluated: int = every_x_calls.times_evaluated
+	var out_of: int = every_x_calls.n
 	if full_on_n:
 		out_of -= 1
 	
 	progress_bar.value = progress_bar.max_value * float(times_evaluated) / float(out_of)
-	
-	super.evaluate(targets)
-	return true

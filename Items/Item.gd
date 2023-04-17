@@ -40,7 +40,7 @@ func _ready() -> void:
 
 
 func update_logic():
-	logic_tree.evaluate([])
+	logic_tree.evaluate()
 
 
 func setup(data) -> void:
@@ -96,7 +96,7 @@ func appear_ready(subtle: bool = false) -> void:
 	if subtle:
 		return
 	animator.play("ready")
-	
+
 
 func appear_unready() -> void:
 	var tween: Tween = get_tree().create_tween().set_parallel()
