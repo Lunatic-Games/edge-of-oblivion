@@ -8,18 +8,24 @@ var item_data: ItemData
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var star_emitter: GPUParticles2D = $WaterfallStarParticle
 @onready var background: Control = $Background
-
+@onready var  card_name: RichTextLabel = $CardTop/Name
+@onready var card_sprite: TextureRect = $CardTop/TextureRect
+@onready var damage_icon_text: RichTextLabel = $CardTop/BaseIcons/DamageIcon/RichTextLabel
+@onready var activation_icon_text: RichTextLabel = $CardTop/BaseIcons/ActivationIcon/RichTextLabel
+@onready var card_description: RichTextLabel = $CardBottom/CardDescription
 
 func setup(card_item_data: ItemData, current_tier: int, animate: bool = true):
-	$Sprite2D.texture = card_item_data.sprite
-	$Name.text = "[center]" + card_item_data.item_name
+	card_sprite.texture = card_item_data.sprite
+	card_name.text = "[center]" + card_item_data.item_name
+	damage_icon_text.text = str(card_item_data.item_damage)
+	activation_icon_text.text = str(card_item_data.max_turn_timer)
 	match current_tier:
 		1: 
-			$UpgradeText.text = card_item_data.tier1Text
+			card_description.text = "[center]" + card_item_data.tier1Text
 		2: 
-			$UpgradeText.text = card_item_data.tier2Text
+			card_description.text = "[center]" + card_item_data.tier2Text
 		3: 
-			$UpgradeText.text = card_item_data.tier3Text
+			card_description.text = "[center]" + card_item_data.tier3Text
 		
 	item_data = card_item_data
 	if animate:
