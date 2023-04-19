@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="item_data" load_steps=4 format=3 uid="uid://dlxam2tqu60a8"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dlxam2tqu60a8"]
 
 [ext_resource type="Script" path="res://Items/ITEM_DATA.gd" id="1"]
-[ext_resource type="PackedScene" path="res://Items/LightningBow/LightningBow.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://ca84y1jriodl6" path="res://Items/LightningBow/LightningBow.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cmuig2ge2dfux" path="res://Assets/art/icons/weapons/lorc/lightning-bow.svg" id="3"]
 
 [resource]
@@ -9,9 +9,9 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Lightning Bow"
-tier1Text = "Shoot up range 1 for 1 damage. Chain 1."
-tier2Text = "Chains 2."
-tier3Text = "Chains 4."
+tier1Text = "Attacks [color=yellow]up[/color]. [color=pink]range[color] 1. [color=pink]chain[/color] 1"
+tier2Text = "[color=pink]Chain[/color] 2."
+tier3Text = "[color=pink]Chain[/color] 4."
 max_turn_timer = 3
 item_damage = 1
 path = "res://Item/LightningBow/LightningBow.tres"
