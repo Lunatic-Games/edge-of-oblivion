@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://f3d16yy6e0du"]
+
+[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_ftwmw"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfFloat/IfFloat.gd" id="2_moa6q"]
+
+[node name="IfFloat" instance=ExtResource("1_ftwmw")]
+script = ExtResource("2_moa6q")
+comparison = 0
+value = 0.0

@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://dpyw4ma7fhftd"]
+[gd_scene load_steps=14 format=3 uid="uid://dpyw4ma7fhftd"]
 
 [ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://c06tqtujl2ylu" path="res://LogicTree/Conditionals/EveryXCalls/EveryXCalls.tscn" id="2_pw11d"]
 [ext_resource type="PackedScene" path="res://LogicTree/Effects/UpdateProgressBar/UpdateProgressBar.tscn" id="3_ryxmg"]
 [ext_resource type="PackedScene" path="res://LogicTree/Conditionals/IfEveryXOneAway/IfEveryXCallsOneAway.tscn" id="4_eongj"]
+[ext_resource type="PackedScene" path="res://LogicTree/Operations/SelectAdjacentTiles/SelectAdjacentTiles.tscn" id="4_jjhba"]
 [ext_resource type="PackedScene" uid="uid://ckpkj5yrvxg4c" path="res://LogicTree/Operations/SelectTilesInRadius/SelectTilesInRadius.tscn" id="4_qmk5i"]
+[ext_resource type="PackedScene" uid="uid://dqsox3njtemr0" path="res://LogicTree/Conditionals/IfInt/IfInt.tscn" id="5_0efrk"]
 [ext_resource type="PackedScene" uid="uid://drb760ptj8jnv" path="res://LogicTree/Effects/SetItemReadyAppearance/SetItemReadyAppearance.tscn" id="5_eu177"]
 [ext_resource type="PackedScene" uid="uid://bn048ryq1axih" path="res://LogicTree/Effects/DamageTileOccupants/DamageTileOccupants.tscn" id="7_lx13k"]
 [ext_resource type="PackedScene" uid="uid://ckybh43nrpge3" path="res://LogicTree/Variables/TileArray/LogicTreeTileArrayVariable.tscn" id="7_yncnu"]
-[ext_resource type="PackedScene" uid="uid://itv44ntlcobb" path="res://LogicTree/Conditionals/CompareItemTier/CompareItemTier.tscn" id="8_5mhcs"]
 [ext_resource type="PackedScene" uid="uid://b4hw2jliuu1qf" path="res://LogicTree/Effects/SpawnNode2DOnTiles/SpawnNode2DOnTiles.tscn" id="8_vmucm"]
 [ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="9_54oob"]
 [ext_resource type="PackedScene" path="res://LogicTree/Variables/Int/LogicTreeIntVariable.tscn" id="11_2qnlf"]
@@ -25,28 +26,28 @@ x = NodePath("../../LogicTreeVariables/Cooldown")
 item_array = NodePath("../../../LogicTreeVariables/This item")
 appear_ready = false
 
-[node name="SelectTilesInRadius" parent="LogicTree/Every 3 calls" index="1" node_paths=PackedStringArray("input_tile_array", "output_tile_array", "radius") instance=ExtResource("4_qmk5i")]
+[node name="Select left tile" parent="LogicTree/Every 3 calls" index="1" node_paths=PackedStringArray("input_tile_array", "output_tile_array") instance=ExtResource("4_jjhba")]
 input_tile_array = NodePath("../../../LogicTreeVariables/Item user tile")
 output_tile_array = NodePath("../../../LogicTreeVariables/Targeted tiles")
+primary_directions = 8
+no_duplicates_in_result = true
+
+[node name="If tier at least 2" parent="LogicTree/Every 3 calls" index="2" node_paths=PackedStringArray("input") instance=ExtResource("5_0efrk")]
+input = NodePath("../../../LogicTreeVariables/Item tier")
+value = 1
+
+[node name="SelectTilesInRadius" parent="LogicTree/Every 3 calls/If tier at least 2" index="0" node_paths=PackedStringArray("input_tile_array", "output_tile_array", "radius") instance=ExtResource("4_qmk5i")]
+input_tile_array = NodePath("../../../../LogicTreeVariables/Item user tile")
+output_tile_array = NodePath("../../../../LogicTreeVariables/Targeted tiles")
 shape = 1
-radius = NodePath("../../../LogicTreeVariables/Radius")
+radius = NodePath("../../../../LogicTreeVariables/Radius")
 include_origin_tile = false
 
-[node name="If tier at least 2" parent="LogicTree/Every 3 calls" index="2" node_paths=PackedStringArray("item_array") instance=ExtResource("8_5mhcs")]
-item_array = NodePath("../../../LogicTreeVariables/This item")
-comparison = 1
-tier = 2
-
-[node name="If tier at least 3" parent="LogicTree/Every 3 calls" index="3" node_paths=PackedStringArray("item_array") instance=ExtResource("8_5mhcs")]
-item_array = NodePath("../../../LogicTreeVariables/This item")
-comparison = 1
-tier = 3
-
-[node name="Damage occupants of targeted tiles" parent="LogicTree/Every 3 calls" index="4" node_paths=PackedStringArray("tile_array", "damage") instance=ExtResource("7_lx13k")]
+[node name="Damage occupants of targeted tiles" parent="LogicTree/Every 3 calls" index="3" node_paths=PackedStringArray("tile_array", "damage") instance=ExtResource("7_lx13k")]
 tile_array = NodePath("../../../LogicTreeVariables/Targeted tiles")
 damage = NodePath("../../../LogicTreeVariables/Damage")
 
-[node name="Spawn slash effects on targeted tiles" parent="LogicTree/Every 3 calls" index="5" node_paths=PackedStringArray("tile_array", "mirror_x_if_left_of_first_tile") instance=ExtResource("8_vmucm")]
+[node name="Spawn slash effects on targeted tiles" parent="LogicTree/Every 3 calls" index="4" node_paths=PackedStringArray("tile_array", "mirror_x_if_left_of_first_tile") instance=ExtResource("8_vmucm")]
 tile_array = NodePath("../../../LogicTreeVariables/Targeted tiles")
 node_to_spawn = ExtResource("9_54oob")
 mirror_x_if_left_of_first_tile = NodePath("../../../LogicTreeVariables/Item user tile")

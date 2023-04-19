@@ -3,6 +3,7 @@ extends LogicTree
 
 @export var input_item: Item
 @export var item_array: LogicTreeItemArrayVariable
+@export var item_tier: LogicTreeIntVariable
 @export var entity_array: LogicTreeEntityArrayVariable
 @export var tile_array: LogicTreeTileArrayVariable
 
@@ -14,6 +15,9 @@ func _ready() -> void:
 func perform_behavior() -> void:
 	if item_array != null:
 		item_array.value = [input_item]
+	
+	if item_tier != null:
+		item_tier.value = input_item.current_tier
 	
 	if entity_array != null:
 		if input_item.user != null:
