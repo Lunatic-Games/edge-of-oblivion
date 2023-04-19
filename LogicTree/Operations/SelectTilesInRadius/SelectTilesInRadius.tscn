@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckpkj5yrvxg4c"]
+
+[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_xfjcm"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius/SelectTilesInRadius.gd" id="2_rvdyy"]
+
+[node name="SelectTilesInRadius" instance=ExtResource("1_xfjcm")]
+script = ExtResource("2_rvdyy")
+shape = 0
+operation = 0
+include_origin_tile = true
+no_duplicates_in_result = true

@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func perform_behavior() -> void:
 	var times_evaluated: int = every_x_calls.times_evaluated
-	var out_of: int = every_x_calls.n
+	var out_of: int = every_x_calls.x.value
 	if full_on_n:
 		out_of -= 1
 	

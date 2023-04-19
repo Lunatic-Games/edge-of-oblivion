@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://3swuqoacjr2j"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_gpad6"]
-[ext_resource type="Script" path="res://LogicTree/VariableOperations/FromItem/FromItem.gd" id="2_oqs2m"]
+[ext_resource type="Script" path="res://LogicTree/Operations/FromItem/FromItem.gd" id="2_oqs2m"]
 
 [node name="FromItem" instance=ExtResource("1_gpad6")]
 script = ExtResource("2_oqs2m")

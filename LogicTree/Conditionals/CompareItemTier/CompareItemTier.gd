@@ -15,9 +15,9 @@ enum Check {
 }
 
 @export var item_array: LogicTreeItemArrayVariable
-@export var comparison: Comparison = 0
+@export var comparison: Comparison = Comparison.HigherThan
 @export_range(1, 10, 1, "or_greater") var tier: int
-@export var check: Check = 0
+@export var check: Check = Check.All
 
 
 func _ready() -> void:

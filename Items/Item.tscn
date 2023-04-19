@@ -1,9 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://ffr1hgofqc0v"]
+[gd_scene load_steps=14 format=3 uid="uid://5w405iveoxgi"]
 
 [ext_resource type="Script" path="res://Items/Item.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2"]
 [ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="3_wvra1"]
-[ext_resource type="PackedScene" uid="uid://3swuqoacjr2j" path="res://LogicTree/VariableOperations/FromItem/FromItem.tscn" id="4_ttf4g"]
+[ext_resource type="PackedScene" path="res://LogicTree/Operations/FromItem/FromItem.tscn" id="4_hjcda"]
 [ext_resource type="PackedScene" uid="uid://58qjvo7xxv5q" path="res://LogicTree/Variables/ItemArray/LogicTreeItemArrayVariable.tscn" id="5_0arnu"]
 [ext_resource type="PackedScene" uid="uid://eudbygjgx3pb" path="res://LogicTree/Variables/EntityArray/LogicTreeEntityArrayVariable.tscn" id="6_5d37d"]
 [ext_resource type="PackedScene" uid="uid://ckybh43nrpge3" path="res://LogicTree/Variables/TileArray/LogicTreeTileArrayVariable.tscn" id="7_d2w3n"]
@@ -120,7 +120,7 @@ show_percentage = false
 invert_recurse_condition = null
 async_wait_before_recurse_ms = null
 
-[node name="Item setup" parent="LogicTree" node_paths=PackedStringArray("input_item", "item_array", "entity_array", "tile_array") instance=ExtResource("4_ttf4g")]
+[node name="FromItem" parent="LogicTree" node_paths=PackedStringArray("input_item", "item_array", "entity_array", "tile_array") instance=ExtResource("4_hjcda")]
 input_item = NodePath("../..")
 item_array = NodePath("../../LogicTreeVariables/This item")
 entity_array = NodePath("../../LogicTreeVariables/Item user")

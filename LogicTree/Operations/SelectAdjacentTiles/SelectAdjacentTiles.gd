@@ -17,26 +17,24 @@ enum Diagonals {
 
 
 @export var input_tile_array: LogicTreeTileArrayVariable
-@export var operate_on_tile_array: LogicTreeTileArrayVariable
 @export var output_tile_array: LogicTreeTileArrayVariable
 @export_flags("🡱", "🡲", "🡳", "🡰") var primary_directions: int
 #@export_flags("🡵", "🡶", "🡷", "🡴") var diagonals: int
 @export_range(1, 10, 1, "or_greater") var primary_distance_start: int = 1
 @export_range(1, 10, 1, "or_greater") var primary_distance_length: int = 1
 @export var operation: LogicTreeSelection.Operation
+@export var no_duplicates_in_result: bool = true
 
 
 func _ready() -> void:
 	assert(input_tile_array, "Tile array variable not set")
-	if operate_on_tile_array == null:
-		operate_on_tile_array = input_tile_array
 
 
 # TODO: Support diagonals. This should look up tiles directly rather than relying on tile connections
 func perform_behavior() -> void:
 	var scanned_tiles: Array[Tile] = []
 	
-	for tile in input_tile_array.value:		
+	for tile in input_tile_array.value:
 		if primary_directions & PrimaryDirection.UP:
 			var scan_result: Array[Tile] = scan(tile, PrimaryDirection.UP)
 			scanned_tiles.append_array(scan_result)
@@ -53,9 +51,8 @@ func perform_behavior() -> void:
 			var scan_result: Array[Tile] = scan(tile, PrimaryDirection.LEFT)
 			scanned_tiles.append_array(scan_result)
 	
-	var new_tiles: Array[Tile] = LogicTreeSelection.perform_operation_on_tiles(operate_on_tile_array.value,
-		scanned_tiles, operation)
-	output_tile_array.value = new_tiles
+	output_tile_array.value = LogicTreeSelection.perform_operation_on_tiles(output_tile_array.value,
+		scanned_tiles, operation, no_duplicates_in_result)
 
 
 func scan(origin_tile: Tile, direction: PrimaryDirection) -> Array[Tile]:
