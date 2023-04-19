@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ckybh43nrpge3" path="res://LogicTree/Variables/TileArray/LogicTreeTileArrayVariable.tscn" id="7_yncnu"]
 [ext_resource type="PackedScene" uid="uid://b4hw2jliuu1qf" path="res://LogicTree/Effects/SpawnNode2DOnTiles/SpawnNode2DOnTiles.tscn" id="8_vmucm"]
 [ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="9_54oob"]
-[ext_resource type="PackedScene" path="res://LogicTree/Variables/Int/LogicTreeIntVariable.tscn" id="11_2qnlf"]
+[ext_resource type="PackedScene" uid="uid://cmbjmdv2sbmie" path="res://LogicTree/Variables/Int/LogicTreeIntVariable.tscn" id="11_2qnlf"]
 
 [node name="ShortSword" instance=ExtResource("1")]
 
@@ -62,13 +62,10 @@ item_array = NodePath("../../../LogicTreeVariables/This item")
 progress_bar = NodePath("../../CoolDownBar")
 every_x_calls = NodePath("../Every 3 calls")
 
-[node name="Targeted tiles" parent="LogicTreeVariables" index="3" instance=ExtResource("7_yncnu")]
+[node name="Targeted tiles" parent="LogicTreeVariables" index="4" instance=ExtResource("7_yncnu")]
 
-[node name="Damage" parent="LogicTreeVariables" index="4" instance=ExtResource("11_2qnlf")]
-value = 1
+[node name="Damage" parent="LogicTreeVariables" index="5" instance=ExtResource("11_2qnlf")]
 
-[node name="Radius" parent="LogicTreeVariables" index="5" instance=ExtResource("11_2qnlf")]
-value = 3
+[node name="Radius" parent="LogicTreeVariables" index="6" instance=ExtResource("11_2qnlf")]
 
-[node name="Cooldown" parent="LogicTreeVariables" index="6" instance=ExtResource("11_2qnlf")]
-value = 3
+[node name="Cooldown" parent="LogicTreeVariables" index="7" instance=ExtResource("11_2qnlf")]

@@ -1,4 +1,6 @@
 class_name LogicTreeIntVariable
 extends Node
 
-@export var value: int = 0
+@export var default_value: int = 0
+
+var value: int = default_value

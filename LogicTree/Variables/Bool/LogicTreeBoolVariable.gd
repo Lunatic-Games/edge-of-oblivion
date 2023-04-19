@@ -1,4 +1,6 @@
 class_name LogicTreeBoolVariable
 extends Node
 
-@export var value: bool = false
+@export var default_value: bool = false
+
+var value: bool = default_value
