@@ -123,7 +123,8 @@ libraries = {
 [node name="CardTop" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 180.0
-offset_bottom = 91.0
+offset_bottom = 134.0
+mouse_filter = 2
 
 [node name="Name" type="RichTextLabel" parent="CardTop"]
 layout_mode = 2
@@ -137,22 +138,27 @@ scroll_active = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 texture = ExtResource("3_ldc60")
 expand_mode = 5
 
 [node name="BaseIcons" type="GridContainer" parent="CardTop"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 10
+mouse_filter = 2
 columns = 2
 
 [node name="DamageIcon" type="HBoxContainer" parent="CardTop/BaseIcons"]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="CardTop/BaseIcons/DamageIcon"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 texture = ExtResource("4_0mk7p")
 expand_mode = 5
 
@@ -160,20 +166,24 @@ expand_mode = 5
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 text = "3"
 
 [node name="ActivationIcon" type="HBoxContainer" parent="CardTop/BaseIcons"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="CardTop/BaseIcons/ActivationIcon"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("5_ks2ii")
 expand_mode = 5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CardTop/BaseIcons/ActivationIcon"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_filter = 2
 text = "3"
 
 [node name="CardBottom" type="VBoxContainer" parent="."]
@@ -181,9 +191,11 @@ layout_mode = 0
 offset_top = 138.0
 offset_right = 180.0
 offset_bottom = 263.0
+mouse_filter = 2
 
 [node name="CardDescription" type="RichTextLabel" parent="CardBottom"]
 layout_mode = 2
+size_flags_vertical = 6
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
@@ -193,11 +205,11 @@ scroll_active = false
 
 [node name="FlavorText" type="RichTextLabel" parent="CardBottom"]
 layout_mode = 2
-size_flags_vertical = 10
+size_flags_vertical = 8
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center]A trusty weapon for a trusty night"
+text = "[center]A trusty weapon for a trusty knight"
 fit_content = true
 scroll_active = false
 
