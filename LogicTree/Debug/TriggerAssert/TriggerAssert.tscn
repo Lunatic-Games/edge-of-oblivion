@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://br0o2d52hky5r"]
+
+[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_cb3ea"]
+[ext_resource type="Script" path="res://LogicTree/Debug/TriggerAssert/TriggerAssert.gd" id="2_h33he"]
+
+[node name="TriggerAssert" instance=ExtResource("1_cb3ea")]
+script = ExtResource("2_h33he")
+message = ""

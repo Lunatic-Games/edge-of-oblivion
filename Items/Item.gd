@@ -31,7 +31,8 @@ var activation_style = ActivationStyle.ON_READY
 @onready var cooldown_bar: ProgressBar = $CoolDownBar
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animator: AnimationPlayer = $AnimationPlayer
-@onready var logic_tree: LogicTree = $LogicTree
+@onready var logic_tree: LogicTree = $LT_OnTurn
+@onready var tier_up_logic_tree: LogicTree = $LT_OnTierUp
 
 
 func _ready() -> void:
@@ -109,12 +110,15 @@ func appear_unready() -> void:
 		sprite.modulate = VOLATILE_COLOR
 
 
-func upgrade_tier() -> bool:
-	current_tier += 1
-	if current_tier >= max_tier:
-		return true
-	
-	return false
+func upgrade_tier():
+	if is_max_tier() == false:
+		current_tier += 1
+		tier_up_logic_tree.evaluate()
+
+
+func is_max_tier() -> bool:
+	assert(current_tier <= max_tier, "Current tier higher than max tier")
+	return current_tier == max_tier
 
 
 # This func is meant to be overriden by children

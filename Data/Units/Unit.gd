@@ -35,31 +35,33 @@ func is_enemy() -> bool:
 	return false
 
 
-func take_damage(damage: int) -> void:
+func take_damage(damage: int) -> int:
+	assert(damage >= 0, "Damage should be positive")
 	if damage == 0:
-		return
+		return 0
 	
-	hp -= damage
+	var hp_before: int = hp
+	hp = maxi(hp - damage, 0)
+	
 	update_health_bar()
 	spawn_particle("damage")
 	animation_player.play("damaged")
 	
-	if hp <= 0:
+	if hp == 0:
 		die()
+	
+	return hp_before - hp
 
 
 func heal(heal_amount: int) -> int:
+	assert(heal_amount >= 0, "Heal amount should be positive")
+	
+	var hp_before: int = hp
+	hp = mini(hp + heal_amount, max_hp)
+	
 	spawn_particle("health")
-	if hp < max_hp:
-		hp += heal_amount
-		update_health_bar()
-		if hp > max_hp:
-			var extra: int = hp - max_hp
-			hp = max_hp
-			return extra
-		return 0
-	else:
-		return heal_amount
+	update_health_bar()
+	return hp - hp_before
 
 
 func update_health_bar() -> void:

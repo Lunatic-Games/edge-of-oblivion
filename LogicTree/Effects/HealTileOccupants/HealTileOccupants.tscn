@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2sn6dv0ip648"]
+
+[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_xjxtq"]
+[ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants/HealTileOccupants.gd" id="2_3ag0u"]
+
+[node name="HealTileOccupants" instance=ExtResource("1_xjxtq")]
+script = ExtResource("2_3ag0u")
