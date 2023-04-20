@@ -9,7 +9,7 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Stray Arquebus"
-tier1Text = "[color=pink]Volatile[/color] [color=yellow]Attacks in the direction you move. At full charge, high damage, high range."
+tier1Text = "[color=pink]Volatile[/color] Attacks in the [color=yellow]last moved direction.[/color] At full charge, high damage, high range."
 tier2Text = "+1 turns to full charge. At full charge does more damage and has more range."
 tier3Text = "+1 turns to full charge. At full charge does more damage and has more range."
 max_turn_timer = 3
