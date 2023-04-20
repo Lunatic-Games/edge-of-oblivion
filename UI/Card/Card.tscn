@@ -1,27 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://bq6wld0vqkiw1"]
 
 [ext_resource type="Script" path="res://UI/Card/Card.gd" id="1_e71sb"]
-[ext_resource type="PackedScene" uid="uid://c8u150t7o10vg" path="res://Data/Particles/Reward/WaterfallStarParticle.tscn" id="2_182tx"]
+[ext_resource type="PackedScene" uid="uid://kgsyulhcedbf" path="res://Data/Particles/UIParticles/ray_particles.tscn" id="2_qidcr"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="3_ldc60"]
 [ext_resource type="Texture2D" uid="uid://4h6r8fmh8tbt" path="res://Assets/art/icons/stars/lorc/spiky-explosion.svg" id="4_0mk7p"]
 [ext_resource type="Texture2D" uid="uid://bf05wsrti4o0t" path="res://Assets/art/icons/buildings/caro-asercion/clock-tower.svg" id="5_ks2ii"]
-
-[sub_resource type="Gradient" id="2"]
-offsets = PackedFloat32Array(0.00862069, 0.146552, 0.840517, 1)
-colors = PackedColorArray(0.992157, 1, 0.913725, 0, 0.992157, 1, 0.913725, 0.666667, 0.992157, 1, 0.913725, 0.666667, 0.992157, 1, 0.913725, 0)
-
-[sub_resource type="GradientTexture2D" id="3"]
-gradient = SubResource("2")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ihf2q"]
-emission_shape = 3
-emission_box_extents = Vector3(60, 1, 1)
-direction = Vector3(0, -1, 0)
-gravity = Vector3(0, 20, 0)
-scale_min = 0.05
-scale_max = 0.1
-color = Color(0.835294, 1, 0.882353, 1)
-color_ramp = SubResource("3")
 
 [sub_resource type="Animation" id="Animation_ppt1s"]
 length = 0.2
@@ -83,6 +66,68 @@ _data = {
 "spawn": SubResource("1")
 }
 
+[sub_resource type="Animation" id="Animation_c7d4a"]
+resource_name = "rays_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RayParticles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RayParticles:amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_b4m40"]
+resource_name = "rays_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RayParticles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RayParticles:amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ikipp"]
+_data = {
+"rays_in": SubResource("Animation_c7d4a"),
+"rays_out": SubResource("Animation_b4m40")
+}
+
 [node name="Card" type="Control"]
 custom_minimum_size = Vector2(180, 270)
 layout_mode = 3
@@ -94,10 +139,8 @@ pivot_offset = Vector2(60, 100)
 size_flags_horizontal = 6
 script = ExtResource("1_e71sb")
 
-[node name="WaterfallStarParticle" parent="." instance=ExtResource("2_182tx")]
-position = Vector2(59.1667, 1.66667)
-emitting = false
-process_material = SubResource("ParticleProcessMaterial_ihf2q")
+[node name="RayParticles" parent="." instance=ExtResource("2_qidcr")]
+modulate = Color(1, 1, 1, 0)
 
 [node name="Border" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(190, 280)
@@ -120,14 +163,20 @@ libraries = {
 "": SubResource("AnimationLibrary_dqw2f")
 }
 
+[node name="RayAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ikipp")
+}
+
 [node name="CardTop" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 180.0
-offset_bottom = 134.0
+offset_bottom = 127.0
 mouse_filter = 2
 
 [node name="Name" type="RichTextLabel" parent="CardTop"]
 layout_mode = 2
+size_flags_vertical = 0
 mouse_filter = 2
 bbcode_enabled = true
 text = "[center]Gladius[/center]"
@@ -138,6 +187,7 @@ scroll_active = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 0
 mouse_filter = 2
 texture = ExtResource("3_ldc60")
 expand_mode = 5

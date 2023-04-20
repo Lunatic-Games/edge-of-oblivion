@@ -6,7 +6,8 @@ signal selected
 var item_data: ItemData
 
 @onready var animator: AnimationPlayer = $AnimationPlayer
-@onready var star_emitter: GPUParticles2D = $WaterfallStarParticle
+@onready var ray_animator: AnimationPlayer = $RayAnimator
+@onready var ray_emitter: GPUParticles2D = $RayParticles
 @onready var background: Control = $Background
 @onready var  card_name: RichTextLabel = $CardTop/Name
 @onready var card_sprite: TextureRect = $CardTop/TextureRect
@@ -48,10 +49,14 @@ func _on_Background_gui_input(event: InputEvent) -> void:
 func _on_Background_mouse_entered() -> void:
 	var tween: Tween = get_tree().create_tween().set_parallel(true)
 	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.3)
-	star_emitter.emitting = true
+	z_index = 1
+	ray_emitter.emitting = true
+	ray_animator.play("rays_in")
 
 
 func _on_Background_mouse_exited() -> void:
 	var tween: Tween = get_tree().create_tween().set_parallel(true)
 	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.3)
-	star_emitter.emitting = false
+	z_index = 0
+	ray_emitter.emitting = false
+	ray_animator.play("rays_out")

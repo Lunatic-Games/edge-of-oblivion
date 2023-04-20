@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://rd51un522qwj"]
+[gd_scene load_steps=3 format=3 uid="uid://rd51un522qwj"]
 
 [ext_resource type="Script" path="res://Menus/MainMenu/MainMenu.gd" id="1_ywv84"]
 [ext_resource type="Texture2D" uid="uid://cu76o1llaofjt" path="res://Assets/art/background/main-menu.png" id="2_pv8cn"]
-[ext_resource type="PackedScene" uid="uid://bq6wld0vqkiw1" path="res://UI/Card/Card.tscn" id="3_fvbkl"]
 
 [node name="MainMenu" type="CanvasLayer"]
 layer = 2
@@ -58,12 +57,6 @@ offset_bottom = 457.0
 [node name="Label" type="Label" parent="StartPage/StartingEquipment"]
 layout_mode = 2
 text = "Your starting equipment!"
-
-[node name="Card" parent="StartPage/StartingEquipment" instance=ExtResource("3_fvbkl")]
-layout_mode = 2
-
-[node name="CardDescription" parent="StartPage/StartingEquipment/Card/CardBottom" index="0"]
-text = "[center][color=yellow]Attacks left[/color] every [color=cyan]three rounds.[/color]"
 
 [node name="MenuContainer" type="VBoxContainer" parent="StartPage"]
 layout_mode = 1
@@ -246,5 +239,3 @@ text = "Return to Start Page"
 [connection signal="pressed" from="StartPage/MenuContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="StartPage/MenuContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="CreditsPage/Container/ReturnToStartPage" to="." method="_on_ReturnToStartPage_pressed"]
-
-[editable path="StartPage/StartingEquipment/Card"]
