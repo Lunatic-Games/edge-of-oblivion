@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://drb760ptj8jnv"]
-
-[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_wgabg"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetItemReadyAppearance/SetItemReadyAppearance.gd" id="2_m8fws"]
-
-[node name="SetItemReadyAppearance" instance=ExtResource("1_wgabg")]
-script = ExtResource("2_m8fws")
-appear_ready = true

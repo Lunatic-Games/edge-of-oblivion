@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqsox3njtemr0"]
-
-[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_88bhi"]
-[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt/IfInt.gd" id="2_g5rsi"]
-
-[node name="IfInt" instance=ExtResource("1_88bhi")]
-script = ExtResource("2_g5rsi")
-comparison = 0
-value = 0

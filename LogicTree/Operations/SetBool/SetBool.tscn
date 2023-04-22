@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3]
-
-[ext_resource type="Script" path="res://LogicTree/Operations/SetBool/SetBool.gd" id="1_1dpqs"]
-[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_idjo6"]
-
-[node name="SetBool" instance=ExtResource("1_idjo6")]
-script = ExtResource("1_1dpqs")
-value = false

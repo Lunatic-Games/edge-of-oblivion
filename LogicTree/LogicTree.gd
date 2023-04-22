@@ -1,3 +1,4 @@
+@icon("res://Assets/art/logic-tree/logic-tree.png")
 class_name LogicTree
 extends Node
 
@@ -22,7 +23,7 @@ func evaluate() -> void:
 		if sub_tree:
 			sub_tree.evaluate()
 		
-		var variable = child as LogicTreeVariableBase
+		var variable = child as LT_VariableBaseClass
 		if variable:
 			variable.reset_to_default()
 
