@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b74hsj7lxr33x"]
-
-[ext_resource type="Script" path="res://LogicTree/Variables/Bool/LogicTreeBoolVariable.gd" id="1_edq3j"]
-
-[node name="BoolVariable" type="Node"]
-script = ExtResource("1_edq3j")

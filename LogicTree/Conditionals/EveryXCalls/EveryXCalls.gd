@@ -1,24 +1,31 @@
-class_name EveryXCalls
+@tool
+@icon("res://Assets/art/logic-tree/if_n.png")
+class_name LogicTreeEveryXCalls
 extends LogicTree
 
 
-@export var x: LogicTreeIntVariable
+@export_range(0, 100, 1, "or_greater") var x: int
+@export var x_override: LogicTreeIntVariable
+@export var on_one_before: bool = false
 
 var times_evaluated: int = 0
 var met_condition: bool = false
 
 
-func _ready() -> void:
-	assert(x != null, "X variable not set")
-
-
 func perform_behavior() -> void:
+	if x_override != null:
+		x = x_override.value
+	
 	times_evaluated += 1
-	if times_evaluated >= x.value:
+	if on_one_before and times_evaluated >= x - 1:
 		met_condition = true
-		times_evaluated = 0
+	elif times_evaluated >= x:
+		met_condition = true
 	else:
 		met_condition = false
+	
+	if times_evaluated >= x:
+		times_evaluated = 0
 
 
 func evaluate_condition() -> bool:

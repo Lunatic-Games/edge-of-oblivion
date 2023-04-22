@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckybh43nrpge3"]
-
-[ext_resource type="Script" path="res://LogicTree/Variables/TileArray/LogicTreeTileArrayVariable.gd" id="2_mpcfa"]
-
-[node name="TileArrayVariable" type="Node"]
-script = ExtResource("2_mpcfa")

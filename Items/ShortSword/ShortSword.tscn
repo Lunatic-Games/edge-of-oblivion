@@ -1,38 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqmfpwdtdlnev"]
+[gd_scene load_steps=2 format=3 uid="uid://bqmfpwdtdlnev"]
 
 [ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://br0o2d52hky5r" path="res://LogicTree/Debug/TriggerAssert/TriggerAssert.tscn" id="3_h42h8"]
-[ext_resource type="PackedScene" uid="uid://d2sn6dv0ip648" path="res://LogicTree/Effects/HealTileOccupants/HealTileOccupants.tscn" id="3_p2yd2"]
-[ext_resource type="PackedScene" uid="uid://bvq1sn7spg4ia" path="res://LogicTree/Debug/PrintToOutput/PrintToOutput.tscn" id="4_aypth"]
-[ext_resource type="PackedScene" uid="uid://cmbjmdv2sbmie" path="res://LogicTree/Variables/Int/LogicTreeIntVariable.tscn" id="11_2qnlf"]
 
 [node name="ShortSword" instance=ExtResource("1")]
 
-[node name="PersistentLogicTreeVariables@Var Default damage" parent="." index="0" instance=ExtResource("11_2qnlf")]
-default_value = 1
-
-[node name="PersistentLogicTreeVariables@Var Default cooldown" parent="." index="1" instance=ExtResource("11_2qnlf")]
-default_value = 3
-
-[node name="PersistentLogicTreeVariables@Var Default radius" parent="." index="2" instance=ExtResource("11_2qnlf")]
-default_value = 2
-
-[node name="Sprite2D" parent="." index="3"]
+[node name="Sprite2D" parent="." index="0"]
 position = Vector2(32, 32)
-
-[node name="HealTileOccupants" parent="LT_OnTurn" index="1" node_paths=PackedStringArray("tile_array", "heal_amount", "output_total_healed") instance=ExtResource("3_p2yd2")]
-tile_array = NodePath("../Item setup/Var Item user tile")
-heal_amount = NodePath("../../LT_PersistentVariables/Heal amount")
-output_total_healed = NodePath("../../LT_PersistentVariables/Amount healed")
-
-[node name="PrintToOutput" parent="LT_OnTurn" index="2" node_paths=PackedStringArray("int_var") instance=ExtResource("4_aypth")]
-text = "Heal"
-int_var = NodePath("../../LT_PersistentVariables/Amount healed")
-
-[node name="Assert" parent="LT_OnTierUp" index="0" instance=ExtResource("3_h42h8")]
-message = "Tiered up"
-
-[node name="Heal amount" parent="LT_PersistentVariables" index="0" instance=ExtResource("11_2qnlf")]
-default_value = 99
-
-[node name="Amount healed" parent="LT_PersistentVariables" index="1" instance=ExtResource("11_2qnlf")]

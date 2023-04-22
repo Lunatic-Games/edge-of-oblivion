@@ -1,13 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://5w405iveoxgi"]
+[gd_scene load_steps=9 format=3 uid="uid://5w405iveoxgi"]
 
 [ext_resource type="Script" path="res://Items/Item.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2"]
-[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="3_wvra1"]
-[ext_resource type="PackedScene" path="res://LogicTree/Operations/FromItem/FromItem.tscn" id="4_hjcda"]
-[ext_resource type="PackedScene" uid="uid://58qjvo7xxv5q" path="res://LogicTree/Variables/ItemArray/LogicTreeItemArrayVariable.tscn" id="5_0arnu"]
-[ext_resource type="PackedScene" uid="uid://cmbjmdv2sbmie" path="res://LogicTree/Variables/Int/LogicTreeIntVariable.tscn" id="6_1fe6m"]
-[ext_resource type="PackedScene" uid="uid://eudbygjgx3pb" path="res://LogicTree/Variables/EntityArray/LogicTreeEntityArrayVariable.tscn" id="6_5d37d"]
-[ext_resource type="PackedScene" uid="uid://ckybh43nrpge3" path="res://LogicTree/Variables/TileArray/LogicTreeTileArrayVariable.tscn" id="7_d2w3n"]
 
 [sub_resource type="Animation" id="5"]
 resource_name = "Shake"
@@ -116,26 +110,3 @@ theme_override_styles/background = SubResource("StyleBoxFlat_j0c1r")
 theme_override_styles/fill = SubResource("StyleBoxFlat_i7ywe")
 value = 100.0
 show_percentage = false
-
-[node name="LT_OnTurn" parent="." instance=ExtResource("3_wvra1")]
-
-[node name="Item setup" parent="LT_OnTurn" instance=ExtResource("3_wvra1")]
-
-[node name="Var This item" parent="LT_OnTurn/Item setup" instance=ExtResource("5_0arnu")]
-
-[node name="Var Item tier" parent="LT_OnTurn/Item setup" instance=ExtResource("6_1fe6m")]
-
-[node name="Var Item user" parent="LT_OnTurn/Item setup" instance=ExtResource("6_5d37d")]
-
-[node name="Var Item user tile" parent="LT_OnTurn/Item setup" instance=ExtResource("7_d2w3n")]
-
-[node name="Load item into variables" parent="LT_OnTurn/Item setup" node_paths=PackedStringArray("input_item", "item_array", "item_tier", "entity_array", "tile_array") instance=ExtResource("4_hjcda")]
-input_item = NodePath("../../..")
-item_array = NodePath("../Var This item")
-item_tier = NodePath("../Var Item tier")
-entity_array = NodePath("../Var Item user")
-tile_array = NodePath("../Var Item user tile")
-
-[node name="LT_OnTierUp" parent="." instance=ExtResource("3_wvra1")]
-
-[node name="LT_PersistentVariables" type="Node" parent="."]

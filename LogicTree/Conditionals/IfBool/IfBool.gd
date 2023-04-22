@@ -1,3 +1,5 @@
+@icon("res://Assets/art/logic-tree/question-mark.png")
+class_name LogicTreeIfBool
 extends LogicTree
 
 
@@ -17,10 +19,6 @@ enum CompareTo {
 @export var value_override: LogicTreeBoolVariable
 
 
-func _ready() -> void:
-	assert(input != null, "Input variable not set")
-
-
 func evaluate_condition() -> bool:
 	if value_override != null:
 		if value_override.value == true:
@@ -34,4 +32,3 @@ func evaluate_condition() -> bool:
 		return comparison == Comparison.Equals
 	
 	return value == CompareTo.False
-	

@@ -1,17 +1,17 @@
+@icon("res://Assets/art/logic-tree/i.png")
 class_name LogicTreeItemArrayVariable
-extends Node
+extends LogicTreeVariableBase
 
-@export var default_value: LogicTreeItemArrayVariable
+@export var default_value: Array[Item] = []
+@export var default_value_override: LogicTreeItemArrayVariable
 
 var value: Array[Item] = []
 
 
-func _ready() -> void:
-	reset_to_default()
-
-
 func reset_to_default() -> void:
-	value = []
+	value.clear()
 	
-	if default_value != null:
-		value.append_array(default_value.value)
+	if default_value_override != null:
+		value.append_array(default_value_override.value)
+	else:
+		value.append_array(default_value)

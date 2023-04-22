@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3]
-
-[ext_resource type="PackedScene" uid="uid://dmml2yjk1rqqv" path="res://LogicTree/LogicTree.tscn" id="1_124iw"]
-[ext_resource type="Script" path="res://LogicTree/Conditionals/IfEveryXOneAway/IfEveryXCallsOneAway.gd" id="2_jw4rl"]
-
-[node name="IfEveryXCallsOneAway" instance=ExtResource("1_124iw")]
-script = ExtResource("2_jw4rl")
