@@ -1,17 +1,17 @@
 @icon("res://Assets/art/logic-tree/effects/spawn.png")
 class_name LT_SpawnNode2DOnTiles
-extends LogicTree
+extends LogicTreeEffect
 
 
 @export var tiles: LT_TileArrayVariable
-@export var node_to_spawn: PackedScene = null
+@export var node2d_to_spawn: PackedScene = null
 @export var mirror_x_if_left_of_first_tile: LT_TileArrayVariable
 @export var only_if_occupied_tile: bool = false
 
 
 func _ready() -> void:
-	assert(tiles != null, "Tiles for '" + name + "' not set")
-	assert(node_to_spawn != null, "Node to spawn for '" + name + "' not set")
+	assert(tiles != null, "Tiles not set for '" + name + "'")
+	assert(node2d_to_spawn != null, "Node to spawn not set for '" + name + "'")
 
 
 func perform_behavior() -> void:
@@ -19,7 +19,7 @@ func perform_behavior() -> void:
 		if only_if_occupied_tile and tile.occupant == null:
 			continue
 		
-		var node: Node2D = node_to_spawn.instantiate()
+		var node: Node2D = node2d_to_spawn.instantiate()
 		assert(node != null, "Failed to instaniate packed scene as a Node2D for '" + name + "'")
 		GameManager.gameboard.add_child(node)
 		

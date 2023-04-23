@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/variables/f.png")
 class_name LT_FloatVariable
-extends LT_VariableBaseClass
+extends LogicTreeVariable
 
 @export var default_value: float = 0.0
 @export var default_value_override: LT_FloatVariable

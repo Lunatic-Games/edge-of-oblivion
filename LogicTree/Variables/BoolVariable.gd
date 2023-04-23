@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/variables/b.png")
 class_name LT_BoolVariable
-extends LT_VariableBaseClass
+extends LogicTreeVariable
 
 @export var default_value: bool = false
 @export var default_value_override: LT_BoolVariable

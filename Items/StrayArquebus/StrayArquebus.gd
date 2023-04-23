@@ -32,15 +32,14 @@ func activate_on_charge() -> bool:
 	return false
 
 
-func upgrade_tier() -> bool:
-	var ret: bool = super.upgrade_tier()
+func upgrade_tier() -> void:
+	super.upgrade_tier()
 	match current_tier:
 		2:
 			max_turn_timer = 4
 		3:
 			max_turn_timer = 5
 	update_cool_down_bar()
-	return ret
 
 
 func activate_item() -> void:

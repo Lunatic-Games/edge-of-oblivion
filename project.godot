@@ -26,6 +26,7 @@ Debug="*res://Globals/Debug.gd"
 AudioManager="*res://Globals/Managers/Audio/AudioManager.tscn"
 ItemUtil="*res://Globals/ItemUtil.gd"
 GlobalSignals="*res://Globals/Signals.gd"
+GlobalLogicTreeSignals="*res://Globals/LogicTreeSignals.gd"
 
 [debug]
 

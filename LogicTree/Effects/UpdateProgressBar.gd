@@ -1,4 +1,6 @@
-extends LogicTree
+@icon("res://Assets/art/logic-tree/effects/progress-bar.png")
+class_name LT_UpdateProgressBar
+extends LogicTreeEffect
 
 
 @export var full_on_n: bool = true

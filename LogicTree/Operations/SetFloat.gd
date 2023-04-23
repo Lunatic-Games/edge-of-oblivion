@@ -1,4 +1,6 @@
-extends LogicTree
+@icon("res://Assets/art/logic-tree/operations/f.png")
+class_name LT_SetFloat
+extends LogicTreeOperation
 
 
 @export var float_variable: LT_FloatVariable
@@ -6,7 +8,7 @@ extends LogicTree
 
 
 func _ready() -> void:
-	assert(float_variable != null, "Float variable not set")
+	assert(float_variable != null, "Float variable not set for '" + name + "'")
 
 
 func perform_behavior() -> void:

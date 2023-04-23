@@ -8,8 +8,8 @@ const TILE_SCENE: PackedScene = preload("res://GameScene/Tile.tscn")
 const PLAYER_SCENE: PackedScene = preload("res://Data/Units/Player/Player.tscn")
 const CHEST_SCENE: PackedScene = preload("res://Data/Objects/Chest.tscn")
 
-var width: int = 12
-var height: int = 12
+var width: int = 6
+var height: int = 6
 var tile_spacing: int = 1
 var all_enemies: Array[Enemy] = []
 var spawn_locations: Array[SpawnFlag] = []

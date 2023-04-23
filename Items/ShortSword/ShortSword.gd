@@ -25,17 +25,9 @@ func attack(tile: Tile) -> void:
 		tile.occupant.take_damage(item_damage)
 
 
-func upgrade_tier() -> bool:
-	current_tier += 1
-	
+func upgrade_tier() -> void:
 	if current_tier == 2:
 		max_turn_timer = 4
-		
 	
 	if current_tier == 3:
 		item_damage = 4
-	
-	if current_tier >= max_tier:
-		return true
-	
-	return false

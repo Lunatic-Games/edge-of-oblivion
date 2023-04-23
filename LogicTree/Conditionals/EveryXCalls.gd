@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/conditionals/if-n.png")
 class_name LT_EveryXCalls
-extends LogicTree
+extends LogicTreeConditional
 
 
 @export_range(0, 100, 1, "or_greater") var x: int

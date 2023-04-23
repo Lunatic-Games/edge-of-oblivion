@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/variables/s.png")
 class_name LT_StringVariable
-extends LT_VariableBaseClass
+extends LogicTreeVariable
 
 @export var default_value: String = ""
 @export var default_value_override: LT_StringVariable

@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/conditionals/question-mark.png")
 class_name LT_IfFloat
-extends LogicTree
+extends LogicTreeConditional
 
 
 enum Comparison {
@@ -19,7 +19,7 @@ enum Comparison {
 
 
 func _ready() -> void:
-	assert(input != null, "Input for '" + name + "' not set")
+	assert(input != null, "Input not set for '" + name + "'")
 
 
 func evaluate_condition() -> bool:

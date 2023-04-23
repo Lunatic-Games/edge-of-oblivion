@@ -1,11 +1,13 @@
-extends LogicTree
+@icon("res://Assets/art/logic-tree/operations/toggle.png")
+class_name LT_InvertBool
+extends LogicTreeOperation
 
 
 @export var bool_variable: LT_BoolVariable
 
 
 func _ready() -> void:
-	assert(bool_variable != null, "Bool variable not set")
+	assert(bool_variable != null, "Bool variable not set for '" + name + "'")
 
 
 func perform_behavior() -> void:

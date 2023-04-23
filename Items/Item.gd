@@ -1,6 +1,9 @@
 class_name Item
 extends Control
 
+signal update_triggered
+signal tier_increased
+
 enum ChargeStyle {
 	PER_TURN,
 	DAMAGE_DEALT,
@@ -31,8 +34,6 @@ var activation_style = ActivationStyle.ON_READY
 @onready var cooldown_bar: ProgressBar = $CoolDownBar
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animator: AnimationPlayer = $AnimationPlayer
-@onready var logic_tree: LogicTree = $LT_OnTurn
-@onready var tier_up_logic_tree: LogicTree = $LT_OnTierUp
 
 
 func _ready() -> void:
@@ -40,8 +41,8 @@ func _ready() -> void:
 	appear_unready()
 
 
-func update_logic():
-	logic_tree.evaluate()
+func update():
+	update_triggered.emit()
 
 
 func setup(data) -> void:
@@ -113,7 +114,7 @@ func appear_unready() -> void:
 func upgrade_tier():
 	if is_max_tier() == false:
 		current_tier += 1
-		tier_up_logic_tree.evaluate()
+		tier_increased.emit()
 
 
 func is_max_tier() -> bool:

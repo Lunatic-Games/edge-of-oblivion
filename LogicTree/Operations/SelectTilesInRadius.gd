@@ -1,4 +1,6 @@
-extends LogicTree
+@icon("res://Assets/art/logic-tree/operations/radius.png")
+class_name LT_SelectTilesInRadius
+extends LogicTreeOperation
 
 
 enum RadiusShape {
@@ -6,34 +8,42 @@ enum RadiusShape {
 	SQUARE
 }
 
-@export var input_tile_array: LT_TileArrayVariable
-@export var output_tile_array: LT_TileArrayVariable
+@export var input_tiles: LT_TileArrayVariable
+@export var output_tiles: LT_TileArrayVariable
 @export var shape: RadiusShape
-@export var radius: LT_IntVariable
+
+@export_range(1, 10, 1, "or_greater") var radius: int = 0
+@export var radius_override: LT_IntVariable
+
 @export var operation: LogicTreeSelection.Operation
+
 @export var include_origin_tile: bool = true
 @export var no_duplicates_in_result: bool = true
 
 
 
 func _ready() -> void:
-	assert(radius != null, "Radius variable not set")
+	assert(input_tiles != null, "Input tiles not set for '" + name + "'")
+	assert(output_tiles != null, "Output tiles not set for '" + name + "'")
 
 
 func perform_behavior() -> void:
+	if radius_override != null:
+		radius = radius_override.value
+	
 	var scanned_tiles: Array[Tile] = []
 	
 	if shape == RadiusShape.DIAMOND:
-		for tile in input_tile_array.value:
+		for tile in input_tiles.value:
 			var scan_results: Array[Tile] = perform_diamond_flood_fill(tile)
 			scanned_tiles.append_array(scan_results)
 	
 	elif shape == RadiusShape.SQUARE:
-		for tile in input_tile_array.value:
+		for tile in input_tiles.value:
 			var scan_results: Array[Tile] = perform_square_flood_fill(tile)
 			scanned_tiles.append_array(scan_results)
 	
-	output_tile_array.value = LogicTreeSelection.perform_operation_on_tiles(output_tile_array.value,
+	output_tiles.value = LogicTreeSelection.perform_operation_on_tiles(output_tiles.value,
 		scanned_tiles, operation, no_duplicates_in_result)
 
 
@@ -46,7 +56,7 @@ func perform_diamond_flood_fill(start_tile: Tile) -> Array[Tile]:
 		var current: Array = stack.pop_front()
 		var tile: Tile = current[0]
 		var distance: int = current[1]
-		if tile == null or distance > radius.value or tile in found_tiles:
+		if tile == null or distance > radius or tile in found_tiles:
 			continue
 		
 		found_tiles.append(tile)
@@ -75,7 +85,7 @@ func perform_square_flood_fill(start_tile: Tile) -> Array[Tile]:
 		if tile == null:
 			continue
 		
-		var outside_radius: bool = abs(h_distance) > radius.value or abs(v_distance) > radius.value
+		var outside_radius: bool = abs(h_distance) > radius or abs(v_distance) > radius
 		if outside_radius or tile in found_tiles:
 			continue
 		

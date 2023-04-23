@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/variables/i.png")
 class_name LT_ItemArrayVariable
-extends LT_VariableBaseClass
+extends LogicTreeVariable
 
 @export var default_value: Array[Item] = []
 @export var default_value_override: LT_ItemArrayVariable

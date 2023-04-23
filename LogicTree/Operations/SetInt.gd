@@ -1,4 +1,6 @@
-extends LogicTree
+@icon("res://Assets/art/logic-tree/operations/n.png")
+class_name LT_SetInt
+extends LogicTreeOperation
 
 
 @export var int_variable: LT_IntVariable
@@ -6,7 +8,7 @@ extends LogicTree
 
 
 func _ready() -> void:
-	assert(int_variable != null, "Int variable not set")
+	assert(int_variable != null, "Int variable not set for '" + name + "'")
 
 
 func perform_behavior() -> void:

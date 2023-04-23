@@ -61,8 +61,8 @@ func attack() -> void:
 		await get_tree().create_timer(0.2).timeout
 
 
-func upgrade_tier() -> bool:
-	current_tier += 1
+func upgrade_tier() -> void:
+	super.upgrade_tier()
 	
 	if current_tier == 2:
 		chains = 2
@@ -71,8 +71,3 @@ func upgrade_tier() -> bool:
 	if current_tier == 3:
 		chains = 4
 		remaining_chains = 4
-	
-	if current_tier >= max_tier:
-		return true
-	
-	return false

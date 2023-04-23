@@ -22,10 +22,6 @@ func evaluate() -> void:
 		var sub_tree = child as LogicTree
 		if sub_tree:
 			sub_tree.evaluate()
-		
-		var variable = child as LT_VariableBaseClass
-		if variable:
-			variable.reset_to_default()
 
 
 # Can be overriden to define new behavior

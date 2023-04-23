@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/effects/damage.png")
 class_name LT_DamageTileOccupants
-extends LogicTree
+extends LogicTreeEffect
 
 
 @export var tiles: LT_TileArrayVariable
@@ -10,7 +10,7 @@ extends LogicTree
 
 
 func _ready() -> void:
-	assert(tiles != null, "Tiles for '" + name + "' not set")
+	assert(tiles != null, "Tiles not set for '" + name + "'")
 
 
 func perform_behavior() -> void:
