@@ -5,6 +5,7 @@ extends Node2D
 
 
 func _ready() -> void:
+	TurnManager.player_turn_ended.connect(destroy_self)
 	animator.play("spawn")
 
 
