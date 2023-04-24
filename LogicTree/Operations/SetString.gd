@@ -1,4 +1,4 @@
-@icon("res://Assets/art/logic-tree/operations/n.png")
+@icon("res://Assets/art/logic-tree/operations/s.png")
 class_name LT_SetString
 extends LogicTreeOperation
 
