@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://by4ucayrbtc4c"]
+[gd_scene load_steps=14 format=3 uid="uid://by4ucayrbtc4c"]
 
 [ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_ixnne"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/KnockbackTileOccupants.gd" id="9_6i4rm"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_6enu7"]
 [ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="11_l4qkb"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="12_1fu45"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SetInt.gd" id="13_qhfvy"]
 
 [node name="Broom" instance=ExtResource("1")]
 
@@ -68,3 +70,25 @@ items = NodePath("../../../This item")
 script = ExtResource("6_1tflu")
 progress_bar = NodePath("../../../CoolDownBar")
 every_x_calls = NodePath("../LT_EveryXCalls")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("12_1fu45")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="LT_SetInt" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("13_qhfvy")
+int_variable = NodePath("../../../../LT_PersistentVariables/Number of targets")
+value = 2
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("12_1fu45")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="LT_SetInt2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("13_qhfvy")
+int_variable = NodePath("../../../../LT_PersistentVariables/Number of targets")
+value = 3
