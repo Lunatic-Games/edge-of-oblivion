@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://5w405iveoxgi"]
+[gd_scene load_steps=15 format=3 uid="uid://5w405iveoxgi"]
 
 [ext_resource type="Script" path="res://Items/Item.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2"]
 [ext_resource type="Script" path="res://LogicTree/Triggers/OnItemUpdate.gd" id="3_ajd2l"]
 [ext_resource type="Script" path="res://LogicTree/Variables/ItemArrayVariable.gd" id="4_7gncm"]
-[ext_resource type="Script" path="res://LogicTree/Variables/EntityArrayVariable.gd" id="5_enme7"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_52ocb"]
 [ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="7_dnm0h"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="7_vv4vg"]
@@ -120,20 +119,16 @@ show_percentage = false
 
 [node name="LT_PersistentVariables" type="Node" parent="."]
 
-[node name="LT_OnItemUpdate" type="Node" parent="." node_paths=PackedStringArray("item", "output_item_array", "output_item_user", "output_item_user_tile", "output_item_tier", "logic_tree_on_trigger")]
+[node name="LT_OnItemUpdate" type="Node" parent="." node_paths=PackedStringArray("item", "output_item_array", "output_item_user_tile", "output_item_tier", "logic_tree_on_trigger")]
 script = ExtResource("3_ajd2l")
 item = NodePath("..")
 output_item_array = NodePath("This item")
-output_item_user = NodePath("Item user")
 output_item_user_tile = NodePath("Item user tile")
 output_item_tier = NodePath("Item tier")
 logic_tree_on_trigger = NodePath("LogicTree")
 
 [node name="This item" type="Node" parent="LT_OnItemUpdate"]
 script = ExtResource("4_7gncm")
-
-[node name="Item user" type="Node" parent="LT_OnItemUpdate"]
-script = ExtResource("5_enme7")
 
 [node name="Item user tile" type="Node" parent="LT_OnItemUpdate"]
 script = ExtResource("6_52ocb")
@@ -148,16 +143,13 @@ script = ExtResource("7_dnm0h")
 script = ExtResource("9_hnmxa")
 item = NodePath("..")
 output_item_array = NodePath("This item")
-output_item_user = NodePath("Item user")
+output_item_user = NodePath("")
 output_item_user_tile = NodePath("Item user tile")
 output_item_new_tier = NodePath("New tier")
 logic_tree_on_trigger = NodePath("LogicTree")
 
 [node name="This item" type="Node" parent="LT_OnItemTierIncrease"]
 script = ExtResource("4_7gncm")
-
-[node name="Item user" type="Node" parent="LT_OnItemTierIncrease"]
-script = ExtResource("5_enme7")
 
 [node name="Item user tile" type="Node" parent="LT_OnItemTierIncrease"]
 script = ExtResource("6_52ocb")

@@ -16,9 +16,9 @@ func perform_behavior() -> void:
 		x = x_override.value
 	
 	times_evaluated += 1
-	if on_one_before and times_evaluated >= x - 1:
+	if on_one_before and times_evaluated == x - 1:
 		met_condition = true
-	elif times_evaluated >= x:
+	elif on_one_before == false and times_evaluated >= x:
 		met_condition = true
 	else:
 		met_condition = false

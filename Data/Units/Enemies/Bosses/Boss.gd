@@ -12,9 +12,10 @@ func _ready() -> void:
 
 
 func choose_moveset() -> void:
-	if move_sets.size() > 0:
-		chosen_move = move_sets[0]
-		chosen_move.indicate(current_tile)
+	pass
+#	if move_sets.size() > 0:
+#		chosen_move = move_sets[0]
+#		chosen_move.indicate(current_tile)
 
 
 func update_health_bar() -> void:

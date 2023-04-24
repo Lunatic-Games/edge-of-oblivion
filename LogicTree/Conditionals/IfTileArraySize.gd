@@ -12,7 +12,7 @@ enum Comparison {
 	DoesNotEqual
 }
 
-@export var input: LT_ItemArrayVariable
+@export var input: LT_TileArrayVariable
 @export var comparison: Comparison
 @export var value: int = 0
 @export var value_override: LT_IntVariable

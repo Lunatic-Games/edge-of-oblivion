@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="5_drw71"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="6_ihmua"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="7_h0o3j"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="7_tc7xs"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="8_efaea"]
+[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="9_pptd1"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="11_j8p3f"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SetInt.gd" id="12_7mi6x"]
 
@@ -56,7 +56,7 @@ damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 [node name="Spawn slash effect" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="4" node_paths=PackedStringArray("tiles")]
 script = ExtResource("6_ihmua")
 tiles = NodePath("../Selected tiles")
-node2d_to_spawn = ExtResource("7_tc7xs")
+node2d_to_spawn = ExtResource("9_pptd1")
 
 [node name="Set item to appear unready" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="5" node_paths=PackedStringArray("items")]
 script = ExtResource("7_h0o3j")
@@ -72,7 +72,7 @@ on_one_before = true
 script = ExtResource("7_h0o3j")
 items = NodePath("../../../This item")
 
-[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+[node name="Update cooldown bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
 script = ExtResource("8_efaea")
 progress_bar = NodePath("../../../CoolDownBar")
 every_x_calls = NodePath("../Every 3 calls")

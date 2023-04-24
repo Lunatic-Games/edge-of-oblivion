@@ -1,9 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5xgjwtgcj30e"]
+[gd_scene load_steps=18 format=3 uid="uid://b5xgjwtgcj30e"]
 
-[ext_resource type="PackedScene" uid="uid://b81nc8buqc23p" path="res://Data/MoveSets/Actions/Slash/SlashAction.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://beynfuvsrpfhq" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
-[ext_resource type="Script" path="res://Data/Units/Enemies/Faded/Faded.gd" id="2_c1o6u"]
 [ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="3"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="3_il7bf"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="4_apclk"]
+[ext_resource type="Script" path="res://LogicTree/Effects/FreeSpawnedIndicators.gd" id="4_hgpr3"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_i4dwu"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="5_fdmwf"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="6_78cvk"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="7_5ssqa"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="7_jxn00"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="8_vtir5"]
+[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="9_g55px"]
+[ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="10_e630t"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -47,22 +56,73 @@ shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
 shader_parameter/noise = SubResource("3")
 
 [node name="Faded" instance=ExtResource("2")]
-script = ExtResource("2_c1o6u")
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_vh5pt")
 texture = ExtResource("3")
 
-[node name="UpSlash" parent="MoveSets/Move" index="0" instance=ExtResource("1")]
-targeting_type = 2
+[node name="Every 4 turns" type="Node" parent="LT_OnEnemyUpdate/LogicTree" index="0"]
+script = ExtResource("4_i4dwu")
+x = 4
 
-[node name="DownSlash" parent="MoveSets/Move" index="1" instance=ExtResource("1")]
-targeting_type = 3
+[node name="Remove indicators" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="0" node_paths=PackedStringArray("spawner")]
+script = ExtResource("4_hgpr3")
+spawner = NodePath("../../Before every 4 turns/Spawn indicators")
 
-[node name="LeftSlash" parent="MoveSets/Move" index="2" instance=ExtResource("1")]
-targeting_type = 4
+[node name="Targeted tiles" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="1"]
+script = ExtResource("5_fdmwf")
 
-[node name="RightSlash" parent="MoveSets/Move" index="3" instance=ExtResource("1")]
-targeting_type = 5
+[node name="Select adjacent tiles" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_78cvk")
+input_tiles = NodePath("../../../Enemy tile")
+output_tiles = NodePath("../Targeted tiles")
+primary_directions = 15
 
-[editable path="MoveSets/Move"]
+[node name="Select player occupied tiles" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_jxn00")
+input_tiles = NodePath("../Targeted tiles")
+output_tiles = NodePath("../Targeted tiles")
+occupant_type = 1
+
+[node name="Damage occupants" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="4" node_paths=PackedStringArray("tiles")]
+script = ExtResource("7_5ssqa")
+tiles = NodePath("../Targeted tiles")
+damage = 1
+
+[node name="Spawn slash effect" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="5" node_paths=PackedStringArray("tiles")]
+script = ExtResource("8_vtir5")
+tiles = NodePath("../Targeted tiles")
+node2d_to_spawn = ExtResource("9_g55px")
+
+[node name="Set enemy to appear unready" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="6" node_paths=PackedStringArray("enemies")]
+script = ExtResource("3_il7bf")
+enemies = NodePath("../../../This enemy")
+appear_ready = false
+
+[node name="Before every 4 turns" type="Node" parent="LT_OnEnemyUpdate/LogicTree" index="1"]
+script = ExtResource("4_i4dwu")
+x = 4
+on_one_before = true
+
+[node name="Targeted tiles" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Before every 4 turns" index="0"]
+script = ExtResource("5_fdmwf")
+
+[node name="Select adjacent tiles" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Before every 4 turns" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_78cvk")
+input_tiles = NodePath("../../../Enemy tile")
+output_tiles = NodePath("../Targeted tiles")
+primary_directions = 15
+
+[node name="Spawn indicators" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Before every 4 turns" index="2" node_paths=PackedStringArray("tiles")]
+script = ExtResource("8_vtir5")
+tiles = NodePath("../Targeted tiles")
+node2d_to_spawn = ExtResource("10_e630t")
+
+[node name="Set enemy to appear ready" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Before every 4 turns" index="3" node_paths=PackedStringArray("enemies")]
+script = ExtResource("3_il7bf")
+enemies = NodePath("../../../This enemy")
+
+[node name="Update attack bar" type="Node" parent="LT_OnEnemyUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+script = ExtResource("4_apclk")
+progress_bar = NodePath("../../../AttackBar")
+every_x_calls = NodePath("../Every 4 turns")

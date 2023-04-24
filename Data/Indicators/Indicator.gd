@@ -1,10 +1,10 @@
+class_name Indicator
 extends Node2D
 
 @onready var animator: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
-	TurnManager.player_turn_ended.connect(destroy_self)
 	animator.play("spawn")
 
 

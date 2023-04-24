@@ -6,7 +6,8 @@ extends LogicTreeEffect
 @export var tiles: LT_TileArrayVariable
 @export var node2d_to_spawn: PackedScene = null
 @export var mirror_x_if_left_of_first_tile: LT_TileArrayVariable
-@export var only_if_occupied_tile: bool = false
+
+var active_spawned_nodes: Array[Node2D] = []
 
 
 func _ready() -> void:
@@ -16,11 +17,10 @@ func _ready() -> void:
 
 func perform_behavior() -> void:
 	for tile in tiles.value:
-		if only_if_occupied_tile and tile.occupant == null:
-			continue
-		
 		var node: Node2D = node2d_to_spawn.instantiate()
 		assert(node != null, "Failed to instaniate packed scene as a Node2D for '" + name + "'")
+		node.tree_entered.connect(_on_spawned_node_tree_entered.bind(node))
+		node.tree_exited.connect(_on_spawned_node_tree_exited.bind(node))
 		GameManager.gameboard.add_child(node)
 		
 		node.global_position = tile.global_position
@@ -30,3 +30,12 @@ func perform_behavior() -> void:
 				var first_tile: Tile = reference_tiles.front()
 				if node.global_position < first_tile.global_position:
 					node.scale.x *= -1
+
+
+func _on_spawned_node_tree_entered(node: Node2D):
+	assert(active_spawned_nodes.has(node) == false, "Node should not already be in list")
+	active_spawned_nodes.append(node)
+
+
+func _on_spawned_node_tree_exited(node: Node2D):
+	active_spawned_nodes.erase(node)

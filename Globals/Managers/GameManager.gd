@@ -77,7 +77,8 @@ func generate_tiles() -> void:
 			var _tile: Tile = spawn_tile(w, h, index)
 			index += 1
 	
-	unoccupied_tiles = all_tiles
+	unoccupied_tiles = []
+	unoccupied_tiles.append_array(all_tiles)
 
 
 func spawn_tile(w: int, h: int, index: int) -> Tile:

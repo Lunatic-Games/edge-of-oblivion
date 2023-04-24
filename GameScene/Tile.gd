@@ -2,11 +2,17 @@ class_name Tile
 extends Node2D
 
 
+signal update_triggered
+
 var top_tile: Tile
 var bottom_tile: Tile
 var right_tile: Tile
 var left_tile: Tile
 var occupant: Occupant
+
+
+func update():
+	update_triggered.emit()
 
 
 # Expects direction to be one of Vector2i.UP, RIGHT, etc.

@@ -80,5 +80,3 @@ visible = false
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="6"]
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_unmfu")
-
-[editable path="MoveSets/Move"]

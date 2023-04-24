@@ -1,6 +1,8 @@
 class_name Enemy
 extends "res://Data/Units/Unit.gd"
 
+signal update_triggered
+
 @export var target_scene: PackedScene = preload("res://Data/Indicators/Indicator.tscn")
 @export_range(0, 999, 1, "or_greater") var xp: int = 1
 @export_range(0, 999, 1, "or_greater") var max_rounds_until_ready: int  = 2
@@ -11,7 +13,6 @@ var chosen_move: Move
 
 @onready var rounds_until_ready = max_rounds_until_ready
 @onready var attack_bar = $AttackBar
-@onready var move_sets = $MoveSets.get_children()
 
 
 func _ready() -> void:
@@ -23,23 +24,8 @@ func _ready() -> void:
 	super._ready()
 
 
-func activate() -> void:
-	if rounds_until_ready <= 0:
-		chosen_move.trigger(current_tile)
-		rounds_until_ready = max_rounds_until_ready
-		update_attack_bar()
-		appear_unready()
-	else:
-		rounds_until_ready -= 1
-		update_attack_bar()
-		
-		if rounds_until_ready <= 0:
-			choose_moveset()
-			appear_ready()
-
-
-func choose_moveset() -> void:
-	pass
+func update() -> void:
+	update_triggered.emit()
 
 
 func appear_ready() -> void:
