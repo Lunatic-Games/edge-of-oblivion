@@ -1,11 +1,107 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=14 format=3 uid="uid://co4ony0m1c4q0"]
 
-[ext_resource type="PackedScene" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://dodqj134xaf4d" path="res://Assets/art/icons/weapons/lorc/stiletto.svg" id="2"]
-[ext_resource type="Script" path="res://Items/DraculasKnives/DraculasKnives.gd" id="3"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_ld0hh"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_ypwwl"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_4lchr"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="6_p34qj"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_3g6ge"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="8_vavqt"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="9_x4wpv"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_7a57k"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_vjuqf"]
+[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="11_k5xdx"]
+[ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="11_wxece"]
 
 [node name="DraculasKnives" instance=ExtResource("1")]
-script = ExtResource("3")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2")
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("4_ld0hh")
+default_value = 3
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("4_ld0hh")
+default_value = 1
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_ypwwl")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
+script = ExtResource("6_4lchr")
+
+[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_3g6ge")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Targets")
+primary_directions = 2
+
+[node name="If tier 2" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input")]
+script = ExtResource("8_vavqt")
+input = NodePath("../../../Item tier")
+comparison = 1
+value = 2
+
+[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If tier 2" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_3g6ge")
+input_tiles = NodePath("../../../../Item user tile")
+output_tiles = NodePath("../../Targets")
+primary_directions = 2
+primary_distance_start = 2
+operation = 1
+
+[node name="If tier 3" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input")]
+script = ExtResource("8_vavqt")
+input = NodePath("../../../Item tier")
+comparison = 1
+value = 3
+
+[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If tier 3" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_3g6ge")
+input_tiles = NodePath("../../../../Item user tile")
+output_tiles = NodePath("../../Targets")
+primary_directions = 2
+primary_distance_start = 3
+operation = 1
+
+[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("items")]
+script = ExtResource("9_x4wpv")
+items = NodePath("../../../This item")
+appear_ready = false
+
+[node name="total damage done" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5"]
+script = ExtResource("4_ld0hh")
+
+[node name="SpawnSlash" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
+script = ExtResource("10_7a57k")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("11_k5xdx")
+
+[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("tiles", "damage_override", "output_total_damage")]
+script = ExtResource("10_vjuqf")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
+output_total_damage = NodePath("../total damage done")
+
+[node name="LT_HealTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="8" node_paths=PackedStringArray("tiles", "heal_override")]
+script = ExtResource("11_wxece")
+tiles = NodePath("../../../Item user tile")
+heal_override = NodePath("../total damage done")
+
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_ypwwl")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+on_one_before = true
+
+[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("9_x4wpv")
+items = NodePath("../../../This item")
+
+[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+script = ExtResource("6_p34qj")
+progress_bar = NodePath("../../../CoolDownBar")
+every_x_calls = NodePath("../LT_EveryXCalls")
