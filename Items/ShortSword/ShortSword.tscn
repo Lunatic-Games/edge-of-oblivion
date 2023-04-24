@@ -20,7 +20,7 @@ position = Vector2(32, 32)
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("2_cbdfh")
-default_value = 1
+default_value = 2
 
 [node name="Every 3 calls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0"]
 script = ExtResource("2_jp3by")
