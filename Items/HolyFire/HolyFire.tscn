@@ -1,11 +1,110 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=15 format=3 uid="uid://cmpxesn2rnfv4"]
 
-[ext_resource type="PackedScene" path="res://Items/Item.tscn" id="1"]
-[ext_resource type="Script" path="res://Items/HolyFire/HolyFire.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://cjk1g57odlvtu" path="res://Assets/art/icons/spikes-slashes-cracks/lorc/striking-diamonds.svg" id="3"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_wupxa"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_et11c"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="5_yvti1"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="6_bj2ot"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_t3q76"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="7_57d8c"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="8_wc336"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_1it6e"]
+[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="10_sgxhl"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="11_bfe23"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="13_q3bl2"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SetInt.gd" id="14_7vmxv"]
 
 [node name="HolyFire" instance=ExtResource("1")]
-script = ExtResource("2")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3")
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("3_wupxa")
+default_value = 2
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("3_wupxa")
+default_value = 1
+
+[node name="Radius" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("3_wupxa")
+default_value = 2
+
+[node name="Number of selections" type="Node" parent="LT_PersistentVariables" index="3"]
+script = ExtResource("3_wupxa")
+default_value = 3
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("4_et11c")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+
+[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("5_yvti1")
+items = NodePath("../../../This item")
+appear_ready = false
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1"]
+script = ExtResource("6_t3q76")
+
+[node name="LT_SelectTilesInRadius" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles", "radius_override")]
+script = ExtResource("7_57d8c")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Targets")
+shape = 1
+radius_override = NodePath("../../../../LT_PersistentVariables/Radius")
+include_origin_tile = false
+
+[node name="LT_SelectRandomTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles", "n_selections_override")]
+script = ExtResource("8_wc336")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+n_selections_override = NodePath("../../../../LT_PersistentVariables/Number of selections")
+must_be_unique = false
+
+[node name="LT_SpawnNode2DOnTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
+script = ExtResource("9_1it6e")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("10_sgxhl")
+
+[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("11_bfe23")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
+
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
+script = ExtResource("4_et11c")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+on_one_before = true
+
+[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("5_yvti1")
+items = NodePath("../../../This item")
+
+[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+script = ExtResource("6_bj2ot")
+progress_bar = NodePath("../../../CoolDownBar")
+every_x_calls = NodePath("../LT_EveryXCalls")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("13_q3bl2")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="LT_SetInt" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("14_7vmxv")
+int_variable = NodePath("../../../../LT_PersistentVariables/Number of selections")
+value = 5
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("13_q3bl2")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="LT_SetInt2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("14_7vmxv")
+int_variable = NodePath("../../../../LT_PersistentVariables/Number of selections")
+value = 7
