@@ -1,4 +1,4 @@
-@icon("res://Assets/art/logic-tree/effects/damage.png")
+@icon("res://Assets/art/logic-tree/effects/push.png")
 class_name LT_KnockbackTileOccupants
 extends LogicTreeEffect
 

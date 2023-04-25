@@ -3,7 +3,7 @@ class_name LT_EveryXCalls
 extends LogicTreeConditional
 
 
-@export_range(0, 100, 1, "or_greater") var x: int
+@export_range(1, 100, 1, "or_greater") var x: int = 1
 @export var x_override: LT_IntVariable
 @export var on_one_before: bool = false
 
