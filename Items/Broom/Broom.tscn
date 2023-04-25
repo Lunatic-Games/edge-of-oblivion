@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://by4ucayrbtc4c"]
+[gd_scene load_steps=15 format=3 uid="uid://by4ucayrbtc4c"]
 
 [ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_ixnne"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="5_kdvde"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_0abbk"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="6_1tflu"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="7_4nvp7"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_vcq01"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="8_er71j"]
 [ext_resource type="Script" path="res://LogicTree/Effects/KnockbackTileOccupants.gd" id="9_6i4rm"]
@@ -42,18 +43,24 @@ input_tiles = NodePath("../../../Item user tile")
 output_tiles = NodePath("../Targets")
 primary_directions = 15
 
-[node name="LT_SelectRandomTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles", "n_selections_override")]
+[node name="LT_SelectTilesByOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_4nvp7")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+occupant_type = 2
+
+[node name="LT_SelectRandomTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("input_tiles", "output_tiles", "n_selections_override")]
 script = ExtResource("8_er71j")
 input_tiles = NodePath("../Targets")
 output_tiles = NodePath("../Targets")
 n_selections_override = NodePath("../../../../LT_PersistentVariables/Number of targets")
 
-[node name="Knockback effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
+[node name="Knockback effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles")]
 script = ExtResource("10_6enu7")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("11_l4qkb")
 
-[node name="LT_KnockbackTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles")]
+[node name="LT_KnockbackTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
 script = ExtResource("9_6i4rm")
 tiles = NodePath("../Targets")
 
