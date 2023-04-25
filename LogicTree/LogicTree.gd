@@ -18,6 +18,11 @@ func evaluate() -> void:
 	if async_wait_before_recurse_ms > 0:
 		await get_tree().create_timer(async_wait_before_recurse_ms / 1000.0).timeout
 	
+	evaluate_child_trees()
+
+
+# Should probably not be overriden?
+func evaluate_child_trees() -> void:
 	for child in get_children():
 		var sub_tree = child as LogicTree
 		if sub_tree:

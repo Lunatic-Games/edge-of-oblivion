@@ -1,9 +1,11 @@
-@icon("res://Assets/art/logic-tree/effects/damage.png")
+@icon("res://Assets/art/logic-tree/effects/push.png")
 class_name LT_KnockbackTileOccupants
 extends LogicTreeEffect
 
 
 enum Direction {
+	AWAY_FROM_REFERENCE,
+	TOWARDS_REFERENCE,
 	UP,
 	RIGHT,
 	DOWN,
@@ -12,6 +14,7 @@ enum Direction {
 
 @export var tiles: LT_TileArrayVariable
 @export var knockback_direction: Direction
+@export var references_tiles: LT_TileArrayVariable
 @export_range(1, 10, 1, "or_greater") var distance: int = 1
 @export var distance_override: LT_IntVariable
 @export_range(0, 10, 1, "or_greater") var damage_on_collide: int = 0
@@ -43,7 +46,12 @@ func perform_behavior() -> void:
 				apply_knockback(occupant, Vector2i.DOWN, distance, damage_on_collide)
 			Direction.LEFT:
 				apply_knockback(occupant, Vector2i.LEFT, distance, damage_on_collide)
-
+			Direction.AWAY_FROM_REFERENCE:
+				var direction = _get_average_direction_to_tile(tile)
+				apply_knockback(occupant, direction, distance, damage_on_collide)
+			Direction.TOWARDS_REFERENCE:
+				var direction = -_get_average_direction_to_tile(tile)
+				apply_knockback(occupant, direction, distance, damage_on_collide)
 
 func apply_knockback(target: Occupant, direction: Vector2i, knockback: int, collideDamage: int = 0) -> bool:
 	if not target.is_alive() or knockback == 0:
@@ -84,3 +92,45 @@ func apply_knockback(target: Occupant, direction: Vector2i, knockback: int, coll
 			next_tile = current_tile.get_tile_in_direction(direction)
 	
 	return true
+
+
+func _get_average_direction_to_tile(tile: Tile) -> Vector2i:
+	assert(references_tiles != null, "Reference tiles not set for '" + name + "'")
+	
+	var total_position: Vector2 = Vector2(0, 0)
+	for ref_tile in references_tiles.value:
+		total_position += ref_tile.get_2d_distance_to_tile(tile)
+	
+	var y_dominant: bool = abs(total_position.y) > abs(total_position.x)
+	var x_dominant: bool = abs(total_position.x) > abs(total_position.y)
+	
+	if x_dominant:
+		if total_position.x > 0.0:
+			return Vector2i.RIGHT
+		if total_position.x < 0.0:
+			return Vector2i.LEFT
+	
+	if y_dominant:
+		if total_position.y > 0.0:
+			return Vector2i.DOWN
+		if total_position.y < 0.0:
+			return Vector2i.UP
+	
+	# Tied for up-right
+	if total_position.x > 0.0 and total_position.y < 0.0:
+		return [Vector2i.RIGHT, Vector2i.UP].pick_random()
+	
+	# Tied for down-right
+	if total_position.x > 0.0 and total_position.y > 0.0:
+		return [Vector2i.RIGHT, Vector2i.DOWN].pick_random()
+	
+	# Tied for down-left
+	if total_position.x < 0.0 and total_position.y > 0.0:
+		return [Vector2i.LEFT, Vector2i.DOWN].pick_random()
+	
+	# Tied for up-left
+	if total_position.x < 0.0 and total_position.y < 0.0:
+		return [Vector2i.LEFT, Vector2i.UP].pick_random()
+	
+	# No obvious direction
+	return [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT].pick_random()
