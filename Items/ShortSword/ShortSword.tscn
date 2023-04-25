@@ -35,17 +35,30 @@ input_tiles = NodePath("../../../Item user tile")
 output_tiles = NodePath("../Selected tiles")
 primary_directions = 8
 
-[node name="Spawn slash effect" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="2" node_paths=PackedStringArray("tiles")]
+[node name="If at least tier 2" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="2" node_paths=PackedStringArray("input")]
+script = ExtResource("11_j8p3f")
+input = NodePath("../../../Item tier")
+comparison = 1
+value = 2
+
+[node name="Select right tile" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls/If at least tier 2" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("4_b31br")
+input_tiles = NodePath("../../../../Item user tile")
+output_tiles = NodePath("../../Selected tiles")
+primary_directions = 2
+operation = 1
+
+[node name="Spawn slash effect" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="3" node_paths=PackedStringArray("tiles")]
 script = ExtResource("6_ihmua")
 tiles = NodePath("../Selected tiles")
 node2d_to_spawn = ExtResource("9_pptd1")
 
-[node name="Damage" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("5_drw71")
 tiles = NodePath("../Selected tiles")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="Set item to appear unready" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="4" node_paths=PackedStringArray("items")]
+[node name="Set item to appear unready" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="5" node_paths=PackedStringArray("items")]
 script = ExtResource("7_h0o3j")
 items = NodePath("../../../This item")
 appear_ready = false
