@@ -60,9 +60,10 @@ script = ExtResource("10_6enu7")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("11_l4qkb")
 
-[node name="LT_KnockbackTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
+[node name="LT_KnockbackTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles", "references_tiles")]
 script = ExtResource("9_6i4rm")
 tiles = NodePath("../Targets")
+references_tiles = NodePath("../../../Item user tile")
 
 [node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
 script = ExtResource("4_stxdh")
