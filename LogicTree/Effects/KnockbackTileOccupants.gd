@@ -125,11 +125,11 @@ func _get_average_direction_to_tile(tile: Tile) -> Vector2i:
 		return [Vector2i.RIGHT, Vector2i.DOWN].pick_random()
 	
 	# Tied for down-left
-	if total_position.x > 0.0 and total_position.y < 0.0:
+	if total_position.x < 0.0 and total_position.y > 0.0:
 		return [Vector2i.LEFT, Vector2i.DOWN].pick_random()
 	
 	# Tied for up-left
-	if total_position.x > 0.0 and total_position.y < 0.0:
+	if total_position.x < 0.0 and total_position.y < 0.0:
 		return [Vector2i.LEFT, Vector2i.UP].pick_random()
 	
 	# No obvious direction
