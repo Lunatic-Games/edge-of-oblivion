@@ -1,6 +1,7 @@
 class_name Item
 extends Control
 
+signal setup_completed
 signal update_triggered
 signal tier_increased
 
@@ -51,6 +52,7 @@ func setup(data) -> void:
 	turn_timer = max_turn_timer
 	item_damage = data.item_damage
 	update_cool_down_bar()
+	setup_completed.emit()
 
 
 func trigger_timer() -> void:

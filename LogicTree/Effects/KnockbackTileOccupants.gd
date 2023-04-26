@@ -33,7 +33,7 @@ func perform_behavior() -> void:
 		damage_on_collide = damage_on_collide_override.value
 	
 	for tile in tiles.value:
-		var occupant: Occupant = tile.occupant as Occupant
+		var occupant: Unit = tile.occupant as Unit
 		if occupant == null:
 			continue
 		
@@ -53,7 +53,7 @@ func perform_behavior() -> void:
 				var direction = -_get_average_direction_to_tile(tile)
 				apply_knockback(occupant, direction, distance, damage_on_collide)
 
-func apply_knockback(target: Occupant, direction: Vector2i, knockback: int, collideDamage: int = 0) -> bool:
+func apply_knockback(target: Unit, direction: Vector2i, knockback: int, collideDamage: int = 0) -> bool:
 	if not target.is_alive() or knockback == 0:
 		return true
 		
@@ -67,7 +67,7 @@ func apply_knockback(target: Occupant, direction: Vector2i, knockback: int, coll
 			current_tile.clear_occupant()
 			break
 			
-		var next_tile_occupant: Occupant = next_tile.occupant
+		var next_tile_occupant: Unit = next_tile.occupant
 			
 		# Try pushing into next occupant if there is one
 		if next_tile_occupant:
@@ -79,6 +79,8 @@ func apply_knockback(target: Occupant, direction: Vector2i, knockback: int, coll
 			if next_tile_occupant.pushable:
 				if apply_knockback(next_tile_occupant, direction, 1):
 					target.move_to_tile(next_tile)
+					if not target.is_alive():
+						next_tile.clear_occupant()
 					return true
 				else:
 					return false
