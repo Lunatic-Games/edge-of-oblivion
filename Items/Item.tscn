@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://5w405iveoxgi"]
+[gd_scene load_steps=16 format=3 uid="uid://5w405iveoxgi"]
 
 [ext_resource type="Script" path="res://Items/Item.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="7_dnm0h"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="7_vv4vg"]
 [ext_resource type="Script" path="res://LogicTree/Triggers/OnItemTierIncrease.gd" id="9_hnmxa"]
+[ext_resource type="Script" path="res://LogicTree/Triggers/OnItemSetupCompleted.gd" id="9_si7ro"]
 
 [sub_resource type="Animation" id="5"]
 resource_name = "Shake"
@@ -158,4 +159,20 @@ script = ExtResource("6_52ocb")
 script = ExtResource("7_vv4vg")
 
 [node name="LogicTree" type="Node" parent="LT_OnItemTierIncrease"]
+script = ExtResource("7_dnm0h")
+
+[node name="LT_OnItemSetupCompleted" type="Node" parent="." node_paths=PackedStringArray("item", "output_item_array", "output_item_user_tile", "logic_tree_on_trigger")]
+script = ExtResource("9_si7ro")
+item = NodePath("..")
+output_item_array = NodePath("This item")
+output_item_user_tile = NodePath("Item user tile")
+logic_tree_on_trigger = NodePath("LogicTree")
+
+[node name="This item" type="Node" parent="LT_OnItemSetupCompleted"]
+script = ExtResource("4_7gncm")
+
+[node name="Item user tile" type="Node" parent="LT_OnItemSetupCompleted"]
+script = ExtResource("6_52ocb")
+
+[node name="LogicTree" type="Node" parent="LT_OnItemSetupCompleted"]
 script = ExtResource("7_dnm0h")
