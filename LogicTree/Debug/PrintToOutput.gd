@@ -1,6 +1,6 @@
-@icon("res://Assets/art/logic-tree/effects/debug.png")
+@icon("res://Assets/art/logic-tree/debug/debug.png")
 class_name LT_PrintToOutput
-extends LogicTreeEffect
+extends LogicTreeDebug
 
 
 @export var text: String = ""

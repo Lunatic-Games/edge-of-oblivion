@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/operations/b.png")
 class_name LT_SetBool
-extends LogicTreeOperation
+extends LogicTreeBasicVariableOperation
 
 
 @export var bool_variable: LT_BoolVariable

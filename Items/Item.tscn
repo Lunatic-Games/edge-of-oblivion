@@ -120,9 +120,25 @@ show_percentage = false
 
 [node name="LT_PersistentVariables" type="Node" parent="."]
 
-[node name="LT_OnItemUpdate" type="Node" parent="." node_paths=PackedStringArray("item", "output_item_array", "output_item_user_tile", "output_item_tier", "logic_tree_on_trigger")]
+[node name="LT_OnItemSetupCompleted" type="Node" parent="." node_paths=PackedStringArray("item_filter", "output_item_array", "output_item_user_tile", "logic_tree_on_trigger")]
+script = ExtResource("9_si7ro")
+item_filter = NodePath("..")
+output_item_array = NodePath("This item")
+output_item_user_tile = NodePath("Item user tile")
+logic_tree_on_trigger = NodePath("LogicTree")
+
+[node name="This item" type="Node" parent="LT_OnItemSetupCompleted"]
+script = ExtResource("4_7gncm")
+
+[node name="Item user tile" type="Node" parent="LT_OnItemSetupCompleted"]
+script = ExtResource("6_52ocb")
+
+[node name="LogicTree" type="Node" parent="LT_OnItemSetupCompleted"]
+script = ExtResource("7_dnm0h")
+
+[node name="LT_OnItemUpdate" type="Node" parent="." node_paths=PackedStringArray("item_filter", "output_item_array", "output_item_user_tile", "output_item_tier", "logic_tree_on_trigger")]
 script = ExtResource("3_ajd2l")
-item = NodePath("..")
+item_filter = NodePath("..")
 output_item_array = NodePath("This item")
 output_item_user_tile = NodePath("Item user tile")
 output_item_tier = NodePath("Item tier")
@@ -140,9 +156,9 @@ script = ExtResource("7_vv4vg")
 [node name="LogicTree" type="Node" parent="LT_OnItemUpdate"]
 script = ExtResource("7_dnm0h")
 
-[node name="LT_OnItemTierIncrease" type="Node" parent="." node_paths=PackedStringArray("item", "output_item_array", "output_item_user", "output_item_user_tile", "output_item_new_tier", "logic_tree_on_trigger")]
+[node name="LT_OnItemTierIncrease" type="Node" parent="." node_paths=PackedStringArray("item_filter", "output_item_array", "output_item_user", "output_item_user_tile", "output_item_new_tier", "logic_tree_on_trigger")]
 script = ExtResource("9_hnmxa")
-item = NodePath("..")
+item_filter = NodePath("..")
 output_item_array = NodePath("This item")
 output_item_user = NodePath("")
 output_item_user_tile = NodePath("Item user tile")
@@ -159,20 +175,4 @@ script = ExtResource("6_52ocb")
 script = ExtResource("7_vv4vg")
 
 [node name="LogicTree" type="Node" parent="LT_OnItemTierIncrease"]
-script = ExtResource("7_dnm0h")
-
-[node name="LT_OnItemSetupCompleted" type="Node" parent="." node_paths=PackedStringArray("item", "output_item_array", "output_item_user_tile", "logic_tree_on_trigger")]
-script = ExtResource("9_si7ro")
-item = NodePath("..")
-output_item_array = NodePath("This item")
-output_item_user_tile = NodePath("Item user tile")
-logic_tree_on_trigger = NodePath("LogicTree")
-
-[node name="This item" type="Node" parent="LT_OnItemSetupCompleted"]
-script = ExtResource("4_7gncm")
-
-[node name="Item user tile" type="Node" parent="LT_OnItemSetupCompleted"]
-script = ExtResource("6_52ocb")
-
-[node name="LogicTree" type="Node" parent="LT_OnItemSetupCompleted"]
 script = ExtResource("7_dnm0h")

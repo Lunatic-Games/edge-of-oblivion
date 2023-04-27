@@ -8,7 +8,3 @@ extends Node
 
 func _ready() -> void:
 	assert(logic_tree_on_trigger != null, "LogicTree not set for '" + name + "'")
-
-
-func trigger() -> void:
-	logic_tree_on_trigger.evaluate()

@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/operations/i.png")
 class_name LT_ClearItemArray
-extends LogicTreeOperation
+extends LogicTreeBasicVariableOperation
 
 
 @export var item_array: LT_ItemArrayVariable

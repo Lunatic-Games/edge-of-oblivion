@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/operations/f.png")
 class_name LT_SetFloat
-extends LogicTreeOperation
+extends LogicTreeBasicVariableOperation
 
 
 enum Operation {

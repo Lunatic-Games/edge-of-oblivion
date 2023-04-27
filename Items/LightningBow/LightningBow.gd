@@ -54,11 +54,12 @@ func build_target_list(tile: Tile, is_entry_point = false) -> void:
 		remaining_chains = chains
 
 func attack() -> void:
-	for target in targets:
-		spawn_lightning_particle(target.global_position)
-		if is_instance_valid(target.occupant) && target.occupant.is_enemy():
-			target.occupant.take_damage(item_damage)
-		await get_tree().create_timer(0.2).timeout
+	pass
+#	for target in targets:
+#		spawn_lightning_particle(target.global_position)
+#		if is_instance_valid(target.occupant) && target.occupant.is_enemy():
+#			target.occupant.take_damage(item_damage)
+#		await get_tree().create_timer(0.2).timeout
 
 
 func upgrade_tier() -> void:

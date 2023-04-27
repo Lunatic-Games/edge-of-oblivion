@@ -3,7 +3,8 @@ class_name LT_OnItemUpdate
 extends LogicTreeTrigger
 
 
-@export var item: Item
+@export var item_filter: Item
+
 @export var output_item_array: LT_ItemArrayVariable
 @export var output_item_user: LT_EntityArrayVariable
 @export var output_item_user_tile: LT_TileArrayVariable
@@ -12,11 +13,16 @@ extends LogicTreeTrigger
 
 func _ready() -> void:
 	super._ready()
-	assert(item != null, "Item not set for '" + name + "'")
-	item.update_triggered.connect(trigger)
+	
+	GlobalLogicTreeSignals.item_update_triggered.connect(trigger)
 
 
-func trigger() -> void:
+func trigger(item: Item) -> void:
+	assert(item != null, "Passed item is null for '" + name + "'")
+	
+	if item_filter != null and item != item_filter:
+		return
+	
 	if output_item_array != null:
 		output_item_array.value = [item]
 	

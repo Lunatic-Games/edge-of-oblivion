@@ -12,24 +12,26 @@ var tiered_damage: Dictionary = {1:1, 2:1, 3:2}
 var tiered_kb_damage: Dictionary = {1:0, 2:1, 3:1}
 
 func activate_item() -> void:
-	perform_attack()
+	# perform_attack()
 	await get_tree().process_frame
 
 
 func perform_attack() -> void:
-	var top_tile: Tile = user.current_tile.top_tile
-	var bottom_tile: Tile = user.current_tile.bottom_tile
-	
-	if(top_tile && top_tile.occupant):
-		attack(top_tile, Vector2i.UP)
-	elif (bottom_tile && bottom_tile.occupant):
-		attack(bottom_tile, Vector2i.DOWN, true)
-
-
-func attack(tile: Tile, direction: Vector2i, should_flip: bool = false) -> void:
-	var occupant = tile.occupant
-	spawn_hammer_indicator(tile.global_position, should_flip)
-	if occupant && occupant.is_enemy():
-		apply_knockback(occupant, direction, tiered_knockback[current_tier], tiered_kb_damage[current_tier])
-		occupant.take_damage(tiered_damage[current_tier])
+	pass
+#	var top_tile: Tile = user.current_tile.top_tile
+#	var bottom_tile: Tile = user.current_tile.bottom_tile
+#
+#	if(top_tile && top_tile.occupant):
+#		attack(top_tile, Vector2i.UP)
+#	elif (bottom_tile && bottom_tile.occupant):
+#		attack(bottom_tile, Vector2i.DOWN, true)
+#
+#
+#func attack(_tile: Tile, direction: Vector2i, should_flip: bool = false) -> void:
+#	pass
+#	var occupant = tile.occupant
+#	spawn_hammer_indicator(tile.global_position, should_flip)
+#	if occupant && occupant.is_enemy():
+#		apply_knockback(occupant, direction, tiered_knockback[current_tier], tiered_kb_damage[current_tier])
+#		occupant.take_damage(tiered_damage[current_tier])
 

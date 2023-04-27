@@ -20,9 +20,10 @@ func perform_attack() -> void:
 
 
 func attack(tile: Tile) -> void:
-	spawn_slash_particle(tile.global_position)
-	if tile.occupant && tile.occupant.is_enemy():
-		tile.occupant.take_damage(item_damage)
+	pass
+#	spawn_slash_particle(tile.global_position)
+#	if tile.occupant && tile.occupant.is_enemy():
+#		tile.occupant.take_damage(item_damage)
 
 
 func upgrade_tier() -> void:
