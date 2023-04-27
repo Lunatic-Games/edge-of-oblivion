@@ -3,6 +3,7 @@ extends GPUParticles2D
 var longest_timer: float = 0.0
 
 func _ready() -> void:
+	z_index = 2
 	for child in get_children():
 		if child is GPUParticles2D:
 			child.emitting = true
