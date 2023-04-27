@@ -18,14 +18,14 @@ orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 angle_min = -95.0
 angle_max = -85.0
-scale_min = 0.26
-scale_max = 0.26
-color = Color(1, 0.972549, 0.85098, 1)
+scale_min = 0.18
+scale_max = 0.18
+color = Color(0.980392, 0.952941, 0.85098, 1)
 color_ramp = SubResource("GradientTexture1D_75vvb")
 
 [sub_resource type="Gradient" id="Gradient_yibq7"]
 offsets = PackedFloat32Array(0, 0.108808, 0.378238, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.784314, 1, 1, 1, 0.784314, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.27451, 1, 1, 1, 0.27451, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_qidjw"]
 gradient = SubResource("Gradient_yibq7")
@@ -74,7 +74,7 @@ emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_x5d51")
 texture = ExtResource("1_8j8si")
-lifetime = 0.3
+lifetime = 0.2
 one_shot = true
 
 [node name="Smoke" type="GPUParticles2D" parent="."]

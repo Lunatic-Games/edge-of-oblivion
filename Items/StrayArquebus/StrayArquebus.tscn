@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://sowt0h4s4ibl"]
+[gd_scene load_steps=18 format=3 uid="uid://sowt0h4s4ibl"]
 
 [ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://bkqt67c6onymd" path="res://Assets/art/icons/weapons/skoll/lee-enfield.svg" id="3"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="9_t7ipx"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfTileArraySize.gd" id="10_euvyl"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_l164c"]
+[ext_resource type="PackedScene" uid="uid://cf2ywj4l6msln" path="res://Data/Particles/StrayArquebus/arqueubus_hit.tscn" id="11_fbk45"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="12_4ssci"]
 [ext_resource type="Script" path="res://LogicTree/Effects/ResetEveryXCalls.gd" id="12_tcbst"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SetTileArray.gd" id="14_lgtgn"]
@@ -120,7 +121,7 @@ primary_distance_length = 3
 [node name="Attack effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("tiles")]
 script = ExtResource("8_fylrs")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("9_t7ipx")
+node2d_to_spawn = ExtResource("11_fbk45")
 
 [node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="8" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("10_l164c")
@@ -167,6 +168,10 @@ damage_override = NodePath("../../../../LT_PersistentVariables/Volatile Damage")
 [node name="LT_ResetEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="5" node_paths=PackedStringArray("every_x_calls")]
 script = ExtResource("12_tcbst")
 every_x_calls = NodePath("../../LT_EveryXCalls")
+
+[node name="LT_ResetEveryXCalls2" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="6" node_paths=PackedStringArray("every_x_calls")]
+script = ExtResource("12_tcbst")
+every_x_calls = NodePath("../../BeforeEveryXCalls")
 
 [node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="3" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
 script = ExtResource("12_4ssci")

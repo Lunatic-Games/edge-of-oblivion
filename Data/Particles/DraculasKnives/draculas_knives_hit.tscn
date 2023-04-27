@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://w3gkrcbwxvoc"]
+
+[ext_resource type="Texture2D" uid="uid://dodqj134xaf4d" path="res://Assets/art/icons/weapons/lorc/stiletto.svg" id="1_38lf2"]
+[ext_resource type="Script" path="res://Data/Particles/ParticleChildren.gd" id="1_whp8a"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_fl2iu"]
+
+[sub_resource type="Gradient" id="Gradient_cmeiv"]
+offsets = PackedFloat32Array(0, 0.165138, 0.444954, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p5334"]
+gradient = SubResource("Gradient_cmeiv")
+
+[sub_resource type="Curve" id="Curve_0m65r"]
+_data = [Vector2(0, 0.381818), 0.0, 0.0, 0, 0, Vector2(0.0763052, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8xrnh"]
+curve = SubResource("Curve_0m65r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oxdby"]
+particle_flag_disable_z = true
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 400.0
+initial_velocity_max = 400.0
+angular_velocity_curve = SubResource("CurveTexture_fl2iu")
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 3000.0
+damping_max = 3000.0
+angle_min = 40.0
+angle_max = 50.0
+scale_min = 0.08
+scale_max = 0.08
+scale_curve = SubResource("CurveTexture_8xrnh")
+color_ramp = SubResource("GradientTexture1D_p5334")
+
+[node name="DraculasKnivesHit" type="GPUParticles2D"]
+script = ExtResource("1_whp8a")
+
+[node name="Dagger" type="GPUParticles2D" parent="."]
+position = Vector2(-43, 11)
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_oxdby")
+texture = ExtResource("1_38lf2")
+one_shot = true

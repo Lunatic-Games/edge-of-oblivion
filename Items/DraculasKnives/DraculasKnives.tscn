@@ -9,9 +9,9 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_3g6ge"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="8_vavqt"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="9_x4wpv"]
+[ext_resource type="PackedScene" uid="uid://w3gkrcbwxvoc" path="res://Data/Particles/DraculasKnives/draculas_knives_hit.tscn" id="10_4wvq4"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_7a57k"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_vjuqf"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="11_k5xdx"]
 [ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="11_wxece"]
 
 [node name="DraculasKnives" instance=ExtResource("1")]
@@ -76,10 +76,10 @@ appear_ready = false
 [node name="total damage done" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5"]
 script = ExtResource("4_ld0hh")
 
-[node name="SpawnSlash" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
+[node name="Spawn hit effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
 script = ExtResource("10_7a57k")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("11_k5xdx")
+node2d_to_spawn = ExtResource("10_4wvq4")
 
 [node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("tiles", "damage_override", "output_total_damage")]
 script = ExtResource("10_vjuqf")
