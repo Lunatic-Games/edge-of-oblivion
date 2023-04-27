@@ -69,6 +69,7 @@ self_modulate = Color(0.427451, 0.568627, 0.611765, 0)
 texture = ExtResource("3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.854902, 0.517647, 0.388235, 1)
 material = ExtResource("2_n53uj")
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("2")
