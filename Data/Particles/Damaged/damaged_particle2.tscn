@@ -1,15 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://pxgd8dt1wgp"]
+[gd_scene load_steps=6 format=3 uid="uid://pxgd8dt1wgp"]
 
-[ext_resource type="Script" path="res://Data/Particles/ParticleChildren.gd" id="1_gumj2"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pwqlo"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+[ext_resource type="Script" path="res://Data/Particles/BasicParticles.gd" id="1_8acuo"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oohmi"]
-blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_rfl1e"]
 offsets = PackedFloat32Array(0, 0.0932643, 0.699482, 1)
@@ -31,16 +24,10 @@ damping_min = 300.0
 damping_max = 400.0
 scale_min = 5.0
 scale_max = 7.0
-color = Color(0.811765, 0.419608, 0.419608, 1)
+color = Color(0.811765, 0.494118, 0.494118, 1)
 color_ramp = SubResource("GradientTexture1D_s7tif")
 
-[node name="DamagedParticle2" type="GPUParticles2D"]
-emitting = false
-process_material = SubResource("ParticleProcessMaterial_pwqlo")
-one_shot = true
-script = ExtResource("1_gumj2")
-
-[node name="BloodSpray" type="GPUParticles2D" parent="."]
+[node name="BloodSpray" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_oohmi")
 emitting = false
 amount = 15
@@ -49,3 +36,4 @@ one_shot = true
 explosiveness = 1.0
 trail_enabled = true
 trail_lifetime = 0.1
+script = ExtResource("1_8acuo")
