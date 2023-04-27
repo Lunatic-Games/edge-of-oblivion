@@ -1,71 +1,44 @@
-[gd_scene load_steps=11 format=3 uid="uid://pxgd8dt1wgp"]
+[gd_scene load_steps=7 format=3 uid="uid://pxgd8dt1wgp"]
 
-[ext_resource type="Texture2D" uid="uid://c5b0b7wxjgy4j" path="res://Assets/textures/kenneys/PNG (Black background)/scratch_01.png" id="1_5m2b8"]
 [ext_resource type="Script" path="res://Data/Particles/ParticleChildren.gd" id="1_gumj2"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tt8wx"]
-blend_mode = 1
-
-[sub_resource type="Gradient" id="Gradient_osp2d"]
-offsets = PackedFloat32Array(0, 0.0983607, 0.180328, 0.336066, 0.661202, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_0agb4"]
-gradient = SubResource("Gradient_osp2d")
-
-[sub_resource type="Curve" id="Curve_27rqn"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.994962, 0.881818), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_y0xy7"]
-curve = SubResource("Curve_27rqn")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1fsax"]
-emission_shape = 3
-emission_box_extents = Vector3(10, 10, 1)
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pwqlo"]
 particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, 98, 0)
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-angle_min = -10.0
-angle_max = 10.0
-scale_min = 0.15
-scale_max = 0.2
-scale_curve = SubResource("CurveTexture_y0xy7")
-color = Color(0.811765, 0.419608, 0.419608, 1)
-color_ramp = SubResource("GradientTexture1D_0agb4")
-hue_variation_max = 0.35
-turbulence_enabled = true
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oohmi"]
 blend_mode = 1
 
+[sub_resource type="Gradient" id="Gradient_rfl1e"]
+offsets = PackedFloat32Array(0, 0.0932643, 0.699482, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s7tif"]
+gradient = SubResource("Gradient_rfl1e")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l5msn"]
 particle_flag_disable_z = true
 direction = Vector3(0, -1, 0)
-spread = 65.0
+spread = 50.0
 gravity = Vector3(0, 784, 0)
-initial_velocity_min = 800.0
-initial_velocity_max = 1200.0
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-damping_min = 1500.0
-damping_max = 2000.0
-scale_min = 10.0
-scale_max = 10.0
+damping_min = 300.0
+damping_max = 400.0
+scale_min = 5.0
+scale_max = 7.0
 color = Color(0.811765, 0.419608, 0.419608, 1)
+color_ramp = SubResource("GradientTexture1D_s7tif")
 
-[node name="DamagedParticle2" type="Node2D"]
-script = ExtResource("1_gumj2")
-
-[node name="HitEffect" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_tt8wx")
+[node name="DamagedParticle2" type="GPUParticles2D"]
 emitting = false
-amount = 1
-process_material = SubResource("ParticleProcessMaterial_1fsax")
-texture = ExtResource("1_5m2b8")
+process_material = SubResource("ParticleProcessMaterial_pwqlo")
 one_shot = true
-explosiveness = 0.9
+script = ExtResource("1_gumj2")
 
 [node name="BloodSpray" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_oohmi")
