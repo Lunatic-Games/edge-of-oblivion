@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://pjtpegdjt0lq"]
+[gd_scene load_steps=14 format=3 uid="uid://tsvak28axhp8"]
 
 [ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://dgmva12fptw4a" path="res://Assets/art/icons/clothing/delapouite/cape.svg" id="3"]
@@ -7,10 +7,10 @@
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_jhs7r"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="6_qnc6f"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="7_0prs7"]
+[ext_resource type="PackedScene" uid="uid://de0n5ydhv3wpu" path="res://Data/Particles/DragonCloak/DragonCloakOnHit.tscn" id="8_3c1t2"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="8_82cls"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="8_kvs5u"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="8_snmek"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="9_w2eu7"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="12_xi84i"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SetInt.gd" id="13_iqihv"]
 
@@ -50,7 +50,7 @@ include_origin_tile = false
 [node name="LT_SpawnNode2DOnTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("tiles")]
 script = ExtResource("8_kvs5u")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("9_w2eu7")
+node2d_to_spawn = ExtResource("8_3c1t2")
 
 [node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("8_snmek")
