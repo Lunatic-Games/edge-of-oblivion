@@ -3,12 +3,18 @@ class_name LT_DamageTileOccupants
 extends LogicTreeEffect
 
 
+enum DamageSignalCondition {
+	YES,
+	ONLY_IF_HEALTH_DECREASED,
+	NO
+}
+
 @export var tiles: LT_TileArrayVariable
 @export var damage: int
 @export var damage_override: LT_IntVariable
 @export var output_total_damage: LT_IntVariable
 
-@export var emit_damage_signal: bool = true
+@export var emit_damage_signal: DamageSignalCondition = DamageSignalCondition.YES
 
 
 func _ready() -> void:
@@ -32,9 +38,11 @@ func perform_behavior() -> void:
 			entities_killed.append(entity)
 			total_damage_dealt += amount_damaged
 			
-			if emit_damage_signal == true:
-				handle_damage_signal(amount_damaged, entity)
-				
+		if emit_damage_signal == DamageSignalCondition.YES:
+			handle_damage_signal(amount_damaged, entity)
+		elif (emit_damage_signal == DamageSignalCondition.ONLY_IF_HEALTH_DECREASED
+				and amount_damaged > 0):
+			handle_damage_signal(amount_damaged, entity)
 	
 	if output_total_damage != null:
 		output_total_damage.value = total_damage_dealt

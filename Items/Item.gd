@@ -5,8 +5,6 @@ signal update_triggered
 signal setup_completed
 signal tier_increased
 
-const VOLATILE_COLOR: Color = Color( 1, 0.556863, 0.34902, 1 )
-
 var user: Unit
 var current_tier = 0
 var max_tier = 3
@@ -32,24 +30,24 @@ func setup(data) -> void:
 	GlobalLogicTreeSignals.item_setup_completed.emit(self)
 
 
-func appear_ready(subtle: bool = false) -> void:
+func set_sprite_color(color: Color):
+	sprite.modulate = color
+
+
+func appear_ready() -> void:
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(sprite, "self_modulate:a", 1.0, 0.2)
 	
-	if subtle:
-		return
 	animator.play("ready")
 
 
-func appear_unready(appear_volatile: bool = false) -> void:
+func appear_unready() -> void:
 	var tween: Tween = get_tree().create_tween().set_parallel()
 	
 	tween.tween_property(sprite, "self_modulate:a", 0.4, 0.2)
 	animator.stop(true)
 	
 	tween.tween_property(sprite, "position:y", 32.0, 0.2)
-	if appear_volatile:
-		sprite.modulate = VOLATILE_COLOR
 
 
 func upgrade_tier():

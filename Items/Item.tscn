@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=16 format=3 uid="uid://btfetsqf4m4x0"]
 
 [ext_resource type="Script" path="res://Items/Item.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2"]
@@ -115,7 +115,6 @@ offset_right = 55.0
 offset_bottom = 61.0
 theme_override_styles/background = SubResource("StyleBoxFlat_j0c1r")
 theme_override_styles/fill = SubResource("StyleBoxFlat_i7ywe")
-value = 100.0
 show_percentage = false
 
 [node name="LT_PersistentVariables" type="Node" parent="."]

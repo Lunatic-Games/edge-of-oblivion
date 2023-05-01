@@ -1,14 +1,12 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://768wywni10mp"]
 
-[ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://Items/TokenOfLove/TokenOfLove.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://b70hyhkt17y6g" path="res://Assets/art/icons/hearts/delapouite/heart-necklace.svg" id="3"]
 [ext_resource type="Script" path="res://LogicTree/Triggers/EntityTriggers/OnEntityDamaged.gd" id="4_cufgq"]
-[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="5_fwgeq"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_fxrmd"]
 [ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="7_4tip0"]
 [ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="8_eg28p"]
-[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="9_nl5o8"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_8tk4u"]
 [ext_resource type="PackedScene" uid="uid://dm01hrvm6a3pf" path="res://Data/Particles/Fire/FireParticles.tscn" id="11_hs7ti"]
 
@@ -18,37 +16,28 @@ script = ExtResource("2")
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3")
 
-[node name="LT_OnItemDealtDamage" type="Node" parent="." index="7" node_paths=PackedStringArray("output_item_user_tile", "output_receiver_tile", "output_damage", "logic_tree_on_trigger")]
+[node name="CoolDownBar" parent="." index="2"]
+visible = false
+
+[node name="On item doing damage to enemy" type="Node" parent="." index="7" node_paths=PackedStringArray("output_source_tile", "logic_tree_on_trigger")]
 script = ExtResource("4_cufgq")
-output_item_user_tile = NodePath("User tile")
-output_receiver_tile = NodePath("Receiver tile")
-output_damage = NodePath("Damage dealt")
+source_filter = 3
+receiver_filter = 2
+output_source_tile = NodePath("User tile")
 logic_tree_on_trigger = NodePath("LogicTree")
 
-[node name="Damage dealt" type="Node" parent="LT_OnItemDealtDamage" index="0"]
-script = ExtResource("5_fwgeq")
-
-[node name="User tile" type="Node" parent="LT_OnItemDealtDamage" index="1"]
+[node name="User tile" type="Node" parent="On item doing damage to enemy" index="0"]
 script = ExtResource("6_fxrmd")
 
-[node name="Receiver tile" type="Node" parent="LT_OnItemDealtDamage" index="2"]
-script = ExtResource("6_fxrmd")
-
-[node name="LogicTree" type="Node" parent="LT_OnItemDealtDamage" index="3"]
+[node name="LogicTree" type="Node" parent="On item doing damage to enemy" index="1"]
 script = ExtResource("7_4tip0")
 
-[node name="LT_HealTileOccupants" type="Node" parent="LT_OnItemDealtDamage/LogicTree" index="0" node_paths=PackedStringArray("tiles", "heal_override")]
+[node name="Heal user" type="Node" parent="On item doing damage to enemy/LogicTree" index="0" node_paths=PackedStringArray("tiles")]
 script = ExtResource("8_eg28p")
 tiles = NodePath("../../User tile")
-heal_override = NodePath("../../Damage dealt")
+heal = 1
 
-[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemDealtDamage/LogicTree" index="1" node_paths=PackedStringArray("tiles")]
-script = ExtResource("9_nl5o8")
-tiles = NodePath("../../Receiver tile")
-damage = 1
-emit_damage_signal = false
-
-[node name="LT_SpawnNode2DOnTiles" type="Node" parent="LT_OnItemDealtDamage/LogicTree" index="2" node_paths=PackedStringArray("tiles")]
+[node name="Spawn heal particles" type="Node" parent="On item doing damage to enemy/LogicTree" index="1" node_paths=PackedStringArray("tiles")]
 script = ExtResource("10_8tk4u")
-tiles = NodePath("../../Receiver tile")
+tiles = NodePath("../../User tile")
 node2d_to_spawn = ExtResource("11_hs7ti")

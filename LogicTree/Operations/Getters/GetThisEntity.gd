@@ -1,4 +1,4 @@
-@icon("res://Assets/art/logic-tree/operations/t.png")
+@icon("res://Assets/art/logic-tree/operations/e.png")
 class_name LT_GetThisEntity
 extends LogicTreeGetterOperation
 
