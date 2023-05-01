@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/operations/s.png")
 class_name LT_SetString
-extends LogicTreeBasicVariableOperation
+extends LogicTreeSetterOperation
 
 
 @export var string_variable: LT_StringVariable

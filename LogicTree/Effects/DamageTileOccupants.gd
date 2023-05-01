@@ -7,6 +7,7 @@ extends LogicTreeEffect
 @export var damage: int
 @export var damage_override: LT_IntVariable
 @export var output_total_damage: LT_IntVariable
+
 @export var emit_damage_signal: bool = true
 
 
@@ -20,22 +21,33 @@ func perform_behavior() -> void:
 	
 	var total_damage_dealt: int = 0
 	var entities_killed: Array[Unit] = []
-	var owner_as_item = owner as Item
 	
 	for tile in tiles.value:
-		var unit: Unit = tile.occupant as Unit
-		if unit == null:
+		var entity: Unit = tile.occupant as Unit
+		if entity == null:
 			continue
 		
-		var damage_dealt = unit.take_damage(damage)
-		if damage_dealt > 0:
-			entities_killed.append(unit)
-			total_damage_dealt += damage_dealt
+		var amount_damaged = entity.take_damage(damage)
+		if amount_damaged > 0:
+			entities_killed.append(entity)
+			total_damage_dealt += amount_damaged
 			
-			if emit_damage_signal == true and owner_as_item != null:
-				var was_killing_blow: bool = not unit.is_alive()
-				GlobalLogicTreeSignals.item_dealt_damage.emit(owner_as_item, unit, damage_dealt,
-					was_killing_blow)
+			if emit_damage_signal == true:
+				handle_damage_signal(amount_damaged, entity)
+				
 	
 	if output_total_damage != null:
 		output_total_damage.value = total_damage_dealt
+
+
+func handle_damage_signal(amount_damaged: int, damaged_entity: Unit):
+	var was_killing_blow: bool = not damaged_entity.is_alive()
+	if (owner as Tile) != null:
+		GlobalLogicTreeSignals.entity_damaged.emit(null, null, owner, damaged_entity,
+			amount_damaged, was_killing_blow)
+	elif (owner as Unit) != null:
+		GlobalLogicTreeSignals.entity_damaged.emit(null, owner, null, damaged_entity, 
+		amount_damaged, was_killing_blow)
+	elif (owner as Item) != null:
+		GlobalLogicTreeSignals.entity_damaged.emit(owner, null, null, damaged_entity,
+			amount_damaged, was_killing_blow)

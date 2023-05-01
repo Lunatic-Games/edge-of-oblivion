@@ -26,6 +26,7 @@ func _ready() -> void:
 
 func update() -> void:
 	update_triggered.emit()
+	GlobalLogicTreeSignals.entity_update_triggered.emit(self)
 
 
 func appear_ready() -> void:

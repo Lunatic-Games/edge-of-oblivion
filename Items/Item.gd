@@ -1,6 +1,9 @@
 class_name Item
 extends Control
 
+signal update_triggered
+signal setup_completed
+signal tier_increased
 
 const VOLATILE_COLOR: Color = Color( 1, 0.556863, 0.34902, 1 )
 
@@ -18,12 +21,14 @@ func _ready() -> void:
 
 
 func update():
+	update_triggered.emit()
 	GlobalLogicTreeSignals.item_update_triggered.emit(self)
 
 
 func setup(data) -> void:
 	sprite.texture = data.sprite
 	
+	setup_completed.emit()
 	GlobalLogicTreeSignals.item_setup_completed.emit(self)
 
 
@@ -48,9 +53,12 @@ func appear_unready(appear_volatile: bool = false) -> void:
 
 
 func upgrade_tier():
-	if is_max_tier() == false:
-		current_tier += 1
-		GlobalLogicTreeSignals.item_tier_increased.emit(self)
+	if is_max_tier():
+		return
+	
+	current_tier += 1
+	tier_increased.emit()
+	GlobalLogicTreeSignals.item_tier_increased.emit(self)
 
 
 func is_max_tier() -> bool:

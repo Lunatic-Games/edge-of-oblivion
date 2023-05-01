@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/operations/t.png")
 class_name LT_SetTileArray
-extends LogicTreeBasicVariableOperation
+extends LogicTreeSetterOperation
 
 
 enum Operation {

@@ -1,27 +1,36 @@
-@icon("res://Assets/art/logic-tree/triggers/update.png")
-class_name LT_OnItemUpdate
-extends LogicTreeTrigger
+@icon("res://Assets/art/logic-tree/triggers/up.png")
+class_name LT_OnItemTierIncrease
+extends LogicTreeItemTrigger
 
 
-@export var item_filter: Item
+enum ItemFilter {
+	THIS_ITEM,
+	ANY_ITEM
+}
+
+@export var item_filter: ItemFilter = ItemFilter.THIS_ITEM
 
 @export var output_item_array: LT_ItemArrayVariable
 @export var output_item_user: LT_EntityArrayVariable
 @export var output_item_user_tile: LT_TileArrayVariable
-@export var output_item_tier: LT_IntVariable
+@export var output_item_new_tier: LT_IntVariable
 
 
 func _ready() -> void:
 	super._ready()
 	
-	GlobalLogicTreeSignals.item_update_triggered.connect(trigger)
+	if item_filter == ItemFilter.THIS_ITEM:
+		var this_item: Item = owner as Item
+		assert(this_item != null,
+			"Item filter set to 'this item' for '" + name + "' but 'this item' is not an item")
+		this_item.tier_increased.connect(trigger.bind(this_item))
+	
+	elif item_filter == ItemFilter.ANY_ITEM:
+		GlobalLogicTreeSignals.item_setup_completed.connect(trigger)
 
 
 func trigger(item: Item) -> void:
 	assert(item != null, "Passed item is null for '" + name + "'")
-	
-	if item_filter != null and item != item_filter:
-		return
 	
 	if output_item_array != null:
 		output_item_array.value = [item]
@@ -38,7 +47,7 @@ func trigger(item: Item) -> void:
 		else:
 			output_item_user_tile.value.clear()
 	
-	if output_item_tier != null:
-		output_item_tier.value = item.current_tier
+	if output_item_new_tier != null:
+		output_item_new_tier.value = item.current_tier
 	
 	logic_tree_on_trigger.evaluate()

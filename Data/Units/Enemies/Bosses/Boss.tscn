@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=3 uid="uid://copvhxqv6s2w8"]
+[gd_scene load_steps=11 format=3 uid="uid://copvhxqv6s2w8"]
 
-[ext_resource type="Resource" path="res://Data/Units/Enemies/Bosses/ForgottenKing/forgotten_king_data.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://beynfuvsrpfhq" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cl3rgny2d8t5b" path="res://Assets/art/icons/medieval-fantasy/lorc/crowned-skull.svg" id="3"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Bosses/Boss.gd" id="5"]
@@ -68,7 +67,7 @@ color = Color(0.937255, 0.713726, 0.627451, 1)
 [node name="Boss" instance=ExtResource("2")]
 scale = Vector2(1.25, 1.25)
 script = ExtResource("5")
-boss_data = ExtResource("1")
+boss_data = null
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_gvh8h")

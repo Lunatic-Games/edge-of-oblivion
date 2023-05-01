@@ -1,6 +1,6 @@
-@icon("res://Assets/art/logic-tree/operations/n.png")
-class_name LT_SetInt
-extends LogicTreeBasicVariableOperation
+@icon("res://Assets/art/logic-tree/operations/random.png")
+class_name LT_RandomInt
+extends LogicTreeOperation
 
 enum Operation {
 	Set,
@@ -12,8 +12,10 @@ enum Operation {
 }
 
 @export var int_variable: LT_IntVariable
-@export var value: int = 0
-@export var value_override: LT_IntVariable
+@export var min_value: int = 1
+@export var min_value_override: LT_IntVariable
+@export var max_value: int = 6
+@export var max_value_override: LT_IntVariable
 @export var operation: Operation
 
 
@@ -22,8 +24,15 @@ func _ready() -> void:
 
 
 func perform_behavior() -> void:
-	if value_override != null:
-		value = value_override.value
+	if min_value_override != null:
+		min_value = min_value_override.value
+	
+	if max_value_override != null:
+		max_value = max_value_override.value
+	
+	assert(max_value >= min_value, "Max value smaller than minimum for '" + name + "'")
+	
+	var value: int = randi_range(min_value, max_value)
 	
 	match operation:
 		Operation.Set:

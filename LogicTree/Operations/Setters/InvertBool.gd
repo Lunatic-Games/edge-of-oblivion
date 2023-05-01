@@ -1,6 +1,6 @@
 @icon("res://Assets/art/logic-tree/operations/toggle.png")
 class_name LT_InvertBool
-extends LogicTreeBasicVariableOperation
+extends LogicTreeSetterOperation
 
 
 @export var bool_variable: LT_BoolVariable
