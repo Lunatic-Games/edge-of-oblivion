@@ -3,18 +3,12 @@ class_name LT_HealTileOccupants
 extends LogicTreeEffect
 
 
-enum HealSignalCondition {
-	YES,
-	ONLY_IF_HEALTH_INCREASED,
-	NO
-}
-
 @export var tiles: LT_TileArrayVariable
 @export var heal: int
 @export var heal_override: LT_IntVariable
 @export var output_total_healed: LT_IntVariable
 
-@export var emit_heal_signal: HealSignalCondition = HealSignalCondition.YES
+@export var emit_heal_signal: bool = true
 
 
 func _ready() -> void:
@@ -35,9 +29,7 @@ func perform_behavior() -> void:
 		if amount_healed > 0:
 			total_healed += amount_healed
 		
-		if emit_heal_signal == HealSignalCondition.YES:
-			handle_heal_signal(amount_healed, unit)
-		elif emit_heal_signal == HealSignalCondition.ONLY_IF_HEALTH_INCREASED and amount_healed > 0:
+		if emit_heal_signal:
 			handle_heal_signal(amount_healed, unit)
 	
 	if output_total_healed != null:

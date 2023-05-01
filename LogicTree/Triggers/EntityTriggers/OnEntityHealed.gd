@@ -22,6 +22,7 @@ enum ReceiverType {
 
 @export var source_filter: SourceType = SourceType.ANY
 @export var receiver_filter: ReceiverType = ReceiverType.ANY
+@export var only_if_nonzero_amount: bool = true
 
 @export var output_source_item_array: LT_ItemArrayVariable
 @export var output_source_entity: LT_EntityArrayVariable
@@ -41,6 +42,9 @@ func _ready() -> void:
 
 func trigger(source_item: Item, source_entity: Unit, source_tile: Tile,
 	receiver_entity: Unit, heal_amount: int) -> void:
+	
+	if only_if_nonzero_amount and heal_amount == 0:
+		return
 	
 	if not does_match_source_filter(source_item, source_entity, source_tile):
 		return
