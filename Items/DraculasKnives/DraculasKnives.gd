@@ -1,6 +1,6 @@
 extends "res://Items/Item.gd"
 
-const ARROW_EFFECT_SCENE: PackedScene = preload("res://Data/Indicators/AttackEffects/RangedAttackEffect.tscn")
+#const ARROW_EFFECT_SCENE: PackedScene = preload("res://Data/Indicators/AttackEffects/RangedAttackEffect.tscn")
 
 # Attack right 1, 2, 3 spaces away
 
@@ -45,10 +45,11 @@ func perform_attack(tile_to_attack: Tile, offset: int) -> void:
 
 
 func spawn_arrow_effect(starting_tile: Tile, ending_tile: Tile) -> Object:
-	var effect = ARROW_EFFECT_SCENE.instantiate()
-	effect.global_position = starting_tile.global_position
-	effect.rotation_degrees = 0
-	
-	GameManager.gameboard.add_child(effect)
-	effect.setup(starting_tile, ending_tile)
-	return effect
+#	var effect = ARROW_EFFECT_SCENE.instantiate()
+#	effect.global_position = starting_tile.global_position
+#	effect.rotation_degrees = 0
+#
+#	GameManager.gameboard.add_child(effect)
+#	effect.setup(starting_tile, ending_tile)
+#	return effect
+	return null

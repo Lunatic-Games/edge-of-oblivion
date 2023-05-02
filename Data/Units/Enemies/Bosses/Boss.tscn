@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://copvhxqv6s2w8"]
 
-[ext_resource type="PackedScene" uid="uid://beynfuvsrpfhq" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cl3rgny2d8t5b" path="res://Assets/art/icons/medieval-fantasy/lorc/crowned-skull.svg" id="3"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Bosses/Boss.gd" id="5"]
 
