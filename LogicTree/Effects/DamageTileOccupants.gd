@@ -4,7 +4,7 @@ extends LogicTreeEffect
 
 
 @export var tiles: LT_TileArrayVariable
-@export var damage: int
+@export_range(0, 100, 1, "or_greater") var damage: int = 1
 @export var damage_override: LT_IntVariable
 @export var output_total_damage: LT_IntVariable
 

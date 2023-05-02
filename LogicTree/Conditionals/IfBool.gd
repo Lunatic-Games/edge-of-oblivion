@@ -35,4 +35,4 @@ func evaluate_condition() -> bool:
 	elif input.value == false and value == CompareTo.False:
 		return comparison == Comparison.Equals
 	
-	return value == CompareTo.False
+	return comparison == Comparison.DoesNotEqual

@@ -125,7 +125,9 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_r1y27")
 value = 50.0
 show_percentage = false
 
-[node name="LT_OnEntityUpdate" type="Node" parent="." index="5" node_paths=PackedStringArray("logic_tree_on_trigger")]
+[node name="LT_PersistentVariables" type="Node" parent="." index="5"]
+
+[node name="LT_OnEntityUpdate" type="Node" parent="." index="6" node_paths=PackedStringArray("logic_tree_on_trigger")]
 script = ExtResource("3_tqkrt")
 logic_tree_on_trigger = NodePath("LogicTree")
 

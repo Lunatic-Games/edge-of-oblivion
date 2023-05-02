@@ -44,7 +44,7 @@ func perform_attack(tile_to_attack: Tile, offset: int) -> void:
 		GameManager.player.heal(1)
 
 
-func spawn_arrow_effect(starting_tile: Tile, ending_tile: Tile) -> Object:
+func spawn_arrow_effect(_starting_tile: Tile, _ending_tile: Tile) -> Object:
 #	var effect = ARROW_EFFECT_SCENE.instantiate()
 #	effect.global_position = starting_tile.global_position
 #	effect.rotation_degrees = 0
