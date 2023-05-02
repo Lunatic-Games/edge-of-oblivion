@@ -26,14 +26,7 @@ func perform_behavior() -> void:
 			projectile.global_position = origin_tile.global_position
 			projectile.setup(origin_tile, target_tile, seconds_per_tile_speed)
 			
-			var offset: Vector2 = target_tile.global_position - origin_tile.global_position
-			var direction: Vector2i = LogicTreeDirectionUtility.get_direction_from_tile_offset(offset)
-			match direction:
-				Vector2i.UP:
-					projectile.rotation_degrees = -90.0
-				Vector2i.RIGHT:
-					projectile.rotation_degrees = 0.0
-				Vector2i.DOWN:
-					projectile.rotation_degrees = 90.0
-				Vector2i.LEFT:
-					projectile.rotation_degrees = 180.0
+			if rotate_to_direction:
+				var target_pos: Vector2 = target_tile.global_position
+				var origin_pos: Vector2 = origin_tile.global_position
+				projectile.rotation = origin_pos.angle_to_point(target_pos)
