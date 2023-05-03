@@ -15,6 +15,7 @@ var occupant: Occupant
 
 func update():
 	update_triggered.emit()
+	GlobalLogicTreeSignals.tile_update_triggered.emit(self)
 
 
 # Expects direction to be one of Vector2i.UP, RIGHT, etc.

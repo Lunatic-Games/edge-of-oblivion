@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://beynfuvsrpfhq"]
+[gd_scene load_steps=16 format=3 uid="uid://duyl86m61pckf"]
 
 [ext_resource type="PackedScene" uid="uid://cq6cufn4fk6s3" path="res://Data/Units/Unit.tscn" id="1"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Enemy.gd" id="2"]
-[ext_resource type="Script" path="res://LogicTree/Triggers/OnEnemyUpdate.gd" id="3_p2xt5"]
+[ext_resource type="Script" path="res://LogicTree/Triggers/EntityTriggers/OnEntityUpdate.gd" id="3_tqkrt"]
 [ext_resource type="Script" path="res://LogicTree/Variables/EntityArrayVariable.gd" id="4_ktiyx"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="4_vws5t"]
 [ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="5_fk80c"]
@@ -125,22 +125,17 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_r1y27")
 value = 50.0
 show_percentage = false
 
-[node name="LT_OnEnemyUpdate" type="Node" parent="." index="5" node_paths=PackedStringArray("enemy", "output_enemy_entity", "output_enemy_tile", "output_player_tile", "logic_tree_on_trigger")]
-script = ExtResource("3_p2xt5")
-enemy = NodePath("..")
-output_enemy_entity = NodePath("This enemy")
-output_enemy_tile = NodePath("Enemy tile")
-output_player_tile = NodePath("Player tile")
+[node name="LT_PersistentVariables" type="Node" parent="." index="5"]
+
+[node name="LT_OnEntityUpdate" type="Node" parent="." index="6" node_paths=PackedStringArray("logic_tree_on_trigger")]
+script = ExtResource("3_tqkrt")
 logic_tree_on_trigger = NodePath("LogicTree")
 
-[node name="This enemy" type="Node" parent="LT_OnEnemyUpdate" index="0"]
+[node name="This enemy" type="Node" parent="LT_OnEntityUpdate" index="0"]
 script = ExtResource("4_ktiyx")
 
-[node name="Enemy tile" type="Node" parent="LT_OnEnemyUpdate" index="1"]
+[node name="Enemy tile" type="Node" parent="LT_OnEntityUpdate" index="1"]
 script = ExtResource("4_vws5t")
 
-[node name="Player tile" type="Node" parent="LT_OnEnemyUpdate" index="2"]
-script = ExtResource("4_vws5t")
-
-[node name="LogicTree" type="Node" parent="LT_OnEnemyUpdate" index="3"]
+[node name="LogicTree" type="Node" parent="LT_OnEntityUpdate" index="2"]
 script = ExtResource("5_fk80c")

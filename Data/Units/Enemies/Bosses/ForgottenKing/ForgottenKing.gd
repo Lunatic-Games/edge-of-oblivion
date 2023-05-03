@@ -10,8 +10,3 @@ func choose_moveset() -> void:
 #		else:
 #			chosen_move = move_sets[0]
 #			chosen_move.indicate(current_tile)
-
-
-func die() -> void:
-	GlobalSignals.boss_defeated.emit(self)
-	super.die()

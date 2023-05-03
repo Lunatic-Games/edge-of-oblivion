@@ -1,7 +1,6 @@
 class_name SpawnFlag
-extends "res://Data/Occupant.gd"
+extends Occupant
 
-var current_tile: Tile
 
 @onready var animator: AnimationPlayer = $AnimationPlayer
 

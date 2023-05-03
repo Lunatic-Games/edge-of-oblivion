@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://tsvak28axhp8"]
 
-[ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://dgmva12fptw4a" path="res://Assets/art/icons/clothing/delapouite/cape.svg" id="3"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_vo51b"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_ukkjn"]
@@ -82,10 +82,8 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 2
 
-[node name="LT_SetInt" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+[node name="LT_SetInt" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0"]
 script = ExtResource("13_iqihv")
-int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
-value = 4
 
 [node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
 script = ExtResource("12_xi84i")
@@ -93,7 +91,5 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 3
 
-[node name="LT_SetInt2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+[node name="LT_SetInt2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0"]
 script = ExtResource("13_iqihv")
-int_variable = NodePath("../../../../LT_PersistentVariables/Radius")
-value = 2

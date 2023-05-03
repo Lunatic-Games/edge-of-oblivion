@@ -4,15 +4,15 @@ extends LogicTreeOperation
 
 
 enum OccupantType {
-	AnyOccupant,
-	PlayerEntity,
-	EnemyEntity,
-	NoOccupant
+	ANY_OCCUPANT,
+	PLAYER_ENTITY,
+	ENEMY_ENTITY,
+	NO_OCCUPANT
 }
 
 @export var input_tiles: LT_TileArrayVariable
 @export var output_tiles: LT_TileArrayVariable
-@export var occupant_type: OccupantType = OccupantType.AnyOccupant
+@export var occupant_type: OccupantType = OccupantType.ANY_OCCUPANT
 @export var operation: LogicTreeSelection.Operation
 @export var no_duplicates_in_result: bool = true
 
@@ -29,21 +29,21 @@ func perform_behavior() -> void:
 		var occupant = tile.occupant as Occupant
 		
 		if occupant == null:
-			if occupant_type == OccupantType.NoOccupant:
+			if occupant_type == OccupantType.NO_OCCUPANT:
 				selected_tiles.append(tile)
 			continue
 		
-		if occupant_type == OccupantType.AnyOccupant:
+		if occupant_type == OccupantType.ANY_OCCUPANT:
 			selected_tiles.append(tile)
 			continue
 		
-		if occupant_type == OccupantType.PlayerEntity:
+		if occupant_type == OccupantType.PLAYER_ENTITY:
 			var as_player: Player = occupant as Player
 			if as_player != null:
 				selected_tiles.append(tile)
 			continue
 		
-		if occupant_type == OccupantType.EnemyEntity:
+		if occupant_type == OccupantType.ENEMY_ENTITY:
 			var as_enemy: Enemy = occupant as Enemy
 			if as_enemy != null:
 				selected_tiles.append(tile)

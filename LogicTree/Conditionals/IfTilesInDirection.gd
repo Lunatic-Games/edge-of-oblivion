@@ -2,6 +2,7 @@
 class_name LT_IfTilesInDirection
 extends LogicTreeConditional
 
+
 enum Direction {
 	UP = 1,
 	RIGHT = 2,
@@ -11,12 +12,12 @@ enum Direction {
 
 enum Condition {
 	#All,
-	Average #,
+	AVERAGE #,
 	#None
 }
 
 enum Reference {
-	Average #,
+	AVERAGE #,
 	#Each
 }
 
@@ -39,10 +40,14 @@ func evaluate_condition() -> bool:
 	var average_tile_position: Vector2 = Vector2.ZERO
 	for tile in tiles.value:
 		average_tile_position += tile.global_position
+	if tiles.value.size() > 0:
+		average_tile_position /= tiles.value.size()
 	
 	var average_reference_position: Vector2 = Vector2.ZERO
 	for tile in reference_tiles.value:
 		average_reference_position += tile.global_position
+	if reference_tiles.value.size() > 0:
+		average_reference_position /= reference_tiles.value.size()
 	
 	if average_tile_position.y < average_reference_position.y and direction == Direction.UP:
 		return true

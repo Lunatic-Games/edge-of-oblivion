@@ -1,17 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://b5xgjwtgcj30e"]
+[gd_scene load_steps=7 format=3 uid="uid://b5xgjwtgcj30e"]
 
-[ext_resource type="PackedScene" uid="uid://beynfuvsrpfhq" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="3"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="3_il7bf"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="4_apclk"]
-[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_i4dwu"]
-[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="5_fdmwf"]
-[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="6_78cvk"]
-[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="7_5ssqa"]
-[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="7_jxn00"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="8_vtir5"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="9_g55px"]
-[ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="10_e630t"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -60,64 +50,6 @@ shader_parameter/noise = SubResource("3")
 material = SubResource("ShaderMaterial_vh5pt")
 texture = ExtResource("3")
 
-[node name="Every 4 turns" type="Node" parent="LT_OnEnemyUpdate/LogicTree" index="0"]
-script = ExtResource("4_i4dwu")
-x = 4
-
-[node name="Targeted tiles" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="0"]
-script = ExtResource("5_fdmwf")
-
-[node name="Select adjacent tiles" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
-script = ExtResource("6_78cvk")
-input_tiles = NodePath("../../../Enemy tile")
-output_tiles = NodePath("../Targeted tiles")
-primary_directions = 15
-
-[node name="Select player occupied tiles" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
-script = ExtResource("7_jxn00")
-input_tiles = NodePath("../Targeted tiles")
-output_tiles = NodePath("../Targeted tiles")
-occupant_type = 1
-
-[node name="Damage occupants" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="3" node_paths=PackedStringArray("tiles")]
-script = ExtResource("7_5ssqa")
-tiles = NodePath("../Targeted tiles")
-damage = 1
-
-[node name="Spawn slash effect" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="4" node_paths=PackedStringArray("tiles")]
-script = ExtResource("8_vtir5")
-tiles = NodePath("../Targeted tiles")
-node2d_to_spawn = ExtResource("9_g55px")
-
-[node name="Set enemy to appear unready" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Every 4 turns" index="5" node_paths=PackedStringArray("enemies")]
-script = ExtResource("3_il7bf")
-enemies = NodePath("../../../This enemy")
-appear_ready = false
-
-[node name="Before every 4 turns" type="Node" parent="LT_OnEnemyUpdate/LogicTree" index="1"]
-script = ExtResource("4_i4dwu")
-x = 4
-on_one_before = true
-
-[node name="Targeted tiles" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Before every 4 turns" index="0"]
-script = ExtResource("5_fdmwf")
-
-[node name="Select adjacent tiles" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Before every 4 turns" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
-script = ExtResource("6_78cvk")
-input_tiles = NodePath("../../../Enemy tile")
-output_tiles = NodePath("../Targeted tiles")
-primary_directions = 15
-
-[node name="Spawn indicators" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Before every 4 turns" index="2" node_paths=PackedStringArray("tiles")]
-script = ExtResource("8_vtir5")
-tiles = NodePath("../Targeted tiles")
-node2d_to_spawn = ExtResource("10_e630t")
-
-[node name="Set enemy to appear ready" type="Node" parent="LT_OnEnemyUpdate/LogicTree/Before every 4 turns" index="3" node_paths=PackedStringArray("enemies")]
-script = ExtResource("3_il7bf")
-enemies = NodePath("../../../This enemy")
-
-[node name="Update attack bar" type="Node" parent="LT_OnEnemyUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("4_apclk")
-progress_bar = NodePath("../../../AttackBar")
-every_x_calls = NodePath("../Every 4 turns")
+[node name="LT_OnEntityUpdate" parent="." index="6" node_paths=PackedStringArray("output_entity", "output_entity_tile")]
+output_entity = NodePath("This enemy")
+output_entity_tile = NodePath("Enemy tile")

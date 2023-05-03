@@ -4,12 +4,12 @@ extends LogicTreeConditional
 
 
 enum Comparison {
-	GreaterThan,
-	GreaterThanOrEqualTo,
-	Equals,
-	LessThanOrEqualTo,
-	LessThan,
-	DoesNotEqual
+	GREATER_THAN,
+	GREATER_THAN_OR_EQUAL_TO,
+	EQUALS,
+	LESS_THAN_OR_EQUAL_TO,
+	LESS_THAN,
+	DOES_NOT_EQUAL
 }
 
 @export var input: LT_FloatVariable
@@ -29,17 +29,17 @@ func evaluate_condition() -> bool:
 	var is_approx_equal: bool = is_equal_approx(input.value, value)
 	
 	match comparison:
-		Comparison.GreaterThan:
+		Comparison.GREATER_THAN:
 			return is_approx_equal == false and input.value > value
-		Comparison.GreaterThanOrEqualTo:
+		Comparison.GREATER_THAN_OR_EQUAL_TO:
 			return input.value > value or is_approx_equal
-		Comparison.Equals:
+		Comparison.EQUALS:
 			return is_approx_equal
-		Comparison.LessThanOrEqualTo:
+		Comparison.LESS_THAN_OR_EQUAL_TO:
 			return input.value < value or is_approx_equal
-		Comparison.LessThan:
+		Comparison.LESS_THAN:
 			return is_approx_equal == false and input.value < value
-		Comparison.DoesNotEqual:
+		Comparison.DOES_NOT_EQUAL:
 			return is_approx_equal == false
 	
 	return false

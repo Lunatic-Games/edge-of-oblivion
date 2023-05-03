@@ -2,6 +2,7 @@
 class_name LT_IntVariable
 extends LogicTreeVariable
 
+
 @export var default_value: int = 0
 @export var default_value_override: LT_IntVariable
 

@@ -2,6 +2,7 @@
 class_name LT_ItemArrayVariable
 extends LogicTreeVariable
 
+
 @export var default_value: Array[Item] = []
 @export var default_value_override: LT_ItemArrayVariable
 

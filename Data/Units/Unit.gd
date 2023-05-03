@@ -1,11 +1,10 @@
 class_name Unit
-extends "res://Data/Occupant.gd"
+extends Occupant
 
 const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Damaged/damaged_particle2.tscn")
 const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Healing/HealthParticles.tscn")
 
 var lock_movement: bool = false
-var current_tile: Tile
 var max_hp: int = 3
 var canFall = true
 var hp: int

@@ -1,75 +1,78 @@
-[gd_scene load_steps=10 format=3 uid="uid://btib0jxknyw3v"]
+[gd_scene load_steps=11 format=3 uid="uid://768wywni10mp"]
 
-[ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="Script" path="res://Items/TokenOfLove/TokenOfLove.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://b70hyhkt17y6g" path="res://Assets/art/icons/hearts/delapouite/heart-necklace.svg" id="3"]
-[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_mm1qq"]
-[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_3takm"]
-[ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="6_dfpi1"]
-[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="7_bhi0w"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="7_o1cfy"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="8_1kynv"]
-[ext_resource type="Script" path="res://LogicTree/Operations/SetInt.gd" id="8_nvfvc"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_5j58d"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_iq66l"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="5_om48k"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="6_g0orv"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="7_dhywa"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="8_3yslp"]
+[ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="8_eg28p"]
 
 [node name="TokenOfLove" instance=ExtResource("1")]
+script = ExtResource("2")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3")
 
-[node name="Cooldown Variable" type="Node" parent="LT_PersistentVariables" index="0"]
-script = ExtResource("4_mm1qq")
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("4_5j58d")
 default_value = 9
 
-[node name="Heal Amount" type="Node" parent="LT_PersistentVariables" index="1"]
-script = ExtResource("4_mm1qq")
+[node name="Heal" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("4_5j58d")
 default_value = 1
 
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
-script = ExtResource("5_3takm")
-x_override = NodePath("../../../LT_PersistentVariables/Cooldown Variable")
+script = ExtResource("5_iq66l")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 
 [node name="LT_HealTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("tiles", "heal_override")]
-script = ExtResource("6_dfpi1")
+script = ExtResource("8_eg28p")
 tiles = NodePath("../../../Item user tile")
-heal_override = NodePath("../../../../LT_PersistentVariables/Heal Amount")
+heal_override = NodePath("../../../../LT_PersistentVariables/Heal")
 
 [node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("items")]
-script = ExtResource("7_o1cfy")
+script = ExtResource("7_dhywa")
 items = NodePath("../../../This item")
 appear_ready = false
 
-[node name="LT_EveryXCalls2" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
-script = ExtResource("5_3takm")
-x = 9
-x_override = NodePath("../../../LT_PersistentVariables/Cooldown Variable")
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_iq66l")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 on_one_before = true
 
-[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls2" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("7_o1cfy")
+[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("7_dhywa")
 items = NodePath("../../../This item")
 
 [node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("8_1kynv")
+script = ExtResource("8_3yslp")
 progress_bar = NodePath("../../../CoolDownBar")
 every_x_calls = NodePath("../LT_EveryXCalls")
 
-[node name="If Tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
-script = ExtResource("7_bhi0w")
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("5_om48k")
 input = NodePath("../../New tier")
-comparison = 1
+comparison = 2
 value = 2
 
-[node name="Cooldown is 7" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If Tier 2" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("8_nvfvc")
-int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown Variable")
-value = 7
+[node name="Decrease cooldown by 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("6_g0orv")
+int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
+value = 2
+operation = 2
 
-[node name="If Tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
-script = ExtResource("7_bhi0w")
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("5_om48k")
 input = NodePath("../../New tier")
 comparison = 2
 value = 3
 
-[node name="Cooldown is 5" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If Tier 3" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("8_nvfvc")
-int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown Variable")
-value = 5
+[node name="Decrease cooldown by 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("6_g0orv")
+int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
+value = 2
+operation = 2

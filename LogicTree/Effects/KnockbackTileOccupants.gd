@@ -103,36 +103,4 @@ func _get_average_direction_to_tile(tile: Tile) -> Vector2i:
 	for ref_tile in references_tiles.value:
 		total_position += ref_tile.get_2d_distance_to_tile(tile)
 	
-	var y_dominant: bool = abs(total_position.y) > abs(total_position.x)
-	var x_dominant: bool = abs(total_position.x) > abs(total_position.y)
-	
-	if x_dominant:
-		if total_position.x > 0.0:
-			return Vector2i.RIGHT
-		if total_position.x < 0.0:
-			return Vector2i.LEFT
-	
-	if y_dominant:
-		if total_position.y > 0.0:
-			return Vector2i.DOWN
-		if total_position.y < 0.0:
-			return Vector2i.UP
-	
-	# Tied for up-right
-	if total_position.x > 0.0 and total_position.y < 0.0:
-		return [Vector2i.RIGHT, Vector2i.UP].pick_random()
-	
-	# Tied for down-right
-	if total_position.x > 0.0 and total_position.y > 0.0:
-		return [Vector2i.RIGHT, Vector2i.DOWN].pick_random()
-	
-	# Tied for down-left
-	if total_position.x < 0.0 and total_position.y > 0.0:
-		return [Vector2i.LEFT, Vector2i.DOWN].pick_random()
-	
-	# Tied for up-left
-	if total_position.x < 0.0 and total_position.y < 0.0:
-		return [Vector2i.LEFT, Vector2i.UP].pick_random()
-	
-	# No obvious direction
-	return [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT].pick_random()
+	return LogicTreeDirectionUtility.get_direction_from_tile_offset(total_position)

@@ -21,7 +21,7 @@ func evaluate() -> void:
 	evaluate_child_trees()
 
 
-# Should probably not be overriden?
+# Should not be overriden except for special cases
 func evaluate_child_trees() -> void:
 	for child in get_children():
 		var sub_tree = child as LogicTree

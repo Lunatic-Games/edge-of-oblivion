@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cq80n8j0ne7wh"]
+[gd_scene load_steps=7 format=3 uid="uid://cq80n8j0ne7wh"]
 
-[ext_resource type="PackedScene" uid="uid://beynfuvsrpfhq" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://c57vgp84qqrhc" path="res://Assets/art/icons/medieval-fantasy/delapouite/spartan-helmet.svg" id="3"]
-[ext_resource type="Script" path="res://Data/Units/Enemies/ForswornPike/ForswornPike.gd" id="4"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -46,12 +45,7 @@ shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
 shader_parameter/noise = SubResource("3")
 
 [node name="ForswornPike" instance=ExtResource("2")]
-script = ExtResource("4")
-xp = 3
-max_hp_override = 7
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_1e0he")
 texture = ExtResource("3")
-
-[editable path="MoveSets/Move"]

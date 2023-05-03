@@ -1,6 +1,6 @@
-@icon("res://Assets/art/logic-tree/effects/debug.png")
+@icon("res://Assets/art/logic-tree/debug/debug.png")
 class_name LT_TriggerAssert
-extends LogicTreeEffect
+extends LogicTreeDebug
 
 
 @export_placeholder("Assert message") var message: String = ""

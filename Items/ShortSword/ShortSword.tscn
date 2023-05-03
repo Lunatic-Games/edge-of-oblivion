@@ -1,89 +1,94 @@
-[gd_scene load_steps=13 format=3 uid="uid://bqmfpwdtdlnev"]
+[gd_scene load_steps=13 format=3 uid="uid://b13eybviq3ii7"]
 
-[ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
-[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_cbdfh"]
-[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="2_jp3by"]
+[ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_r3n8e"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="3_aepoh"]
-[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="4_b31br"]
-[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="5_drw71"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="3_hv802"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="4_ehsl6"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="4_lobvm"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="5_ytvte"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="6_ihmua"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="7_h0o3j"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="8_efaea"]
 [ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="9_pptd1"]
-[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="11_j8p3f"]
-[ext_resource type="Script" path="res://LogicTree/Operations/SetInt.gd" id="12_7mi6x"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="10_mltra"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_wrwdj"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="12_demeu"]
 
 [node name="ShortSword" instance=ExtResource("1")]
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(32, 32)
 
-[node name="Damage" type="Node" parent="LT_PersistentVariables" index="0"]
-script = ExtResource("2_cbdfh")
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("2_r3n8e")
+default_value = 3
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("2_r3n8e")
 default_value = 2
 
-[node name="Every 3 calls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0"]
-script = ExtResource("2_jp3by")
-x = 3
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("3_hv802")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 
-[node name="Selected tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="0"]
+[node name="Selected tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
 script = ExtResource("3_aepoh")
 
-[node name="Select left tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
-script = ExtResource("4_b31br")
+[node name="Select left tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("5_ytvte")
 input_tiles = NodePath("../../../Item user tile")
 output_tiles = NodePath("../Selected tiles")
-primary_directions = 8
+directions = 8
 
-[node name="If at least tier 2" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="2" node_paths=PackedStringArray("input")]
-script = ExtResource("11_j8p3f")
+[node name="If tier at least 2" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input")]
+script = ExtResource("4_ehsl6")
 input = NodePath("../../../Item tier")
 comparison = 1
 value = 2
 
-[node name="Select right tile" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls/If at least tier 2" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
-script = ExtResource("4_b31br")
+[node name="Select Right tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If tier at least 2" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("5_ytvte")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../Selected tiles")
-primary_directions = 2
+directions = 2
 operation = 1
 
-[node name="Spawn slash effect" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="3" node_paths=PackedStringArray("tiles")]
+[node name="Spawn slash effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
 script = ExtResource("6_ihmua")
 tiles = NodePath("../Selected tiles")
 node2d_to_spawn = ExtResource("9_pptd1")
 
-[node name="Damage" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
-script = ExtResource("5_drw71")
+[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("10_wrwdj")
 tiles = NodePath("../Selected tiles")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="Set item to appear unready" type="Node" parent="LT_OnItemUpdate/LogicTree/Every 3 calls" index="5" node_paths=PackedStringArray("items")]
-script = ExtResource("7_h0o3j")
+[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("items")]
+script = ExtResource("4_lobvm")
 items = NodePath("../../../This item")
 appear_ready = false
 
-[node name="Before every 3 calls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1"]
-script = ExtResource("2_jp3by")
-x = 3
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
+script = ExtResource("3_hv802")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 on_one_before = true
 
-[node name="Set item to appear ready" type="Node" parent="LT_OnItemUpdate/LogicTree/Before every 3 calls" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("7_h0o3j")
+[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("4_lobvm")
 items = NodePath("../../../This item")
 
-[node name="Update cooldown bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("8_efaea")
+[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+script = ExtResource("10_mltra")
 progress_bar = NodePath("../../../CoolDownBar")
-every_x_calls = NodePath("../Every 3 calls")
+every_x_calls = NodePath("../LT_EveryXCalls")
 
-[node name="If tier at least 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
-script = ExtResource("11_j8p3f")
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("4_ehsl6")
 input = NodePath("../../New tier")
-comparison = 1
+comparison = 2
 value = 3
 
-[node name="Set damage to 4" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier at least 3" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("12_7mi6x")
+[node name="LT_SetInt" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("12_demeu")
 int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
-value = 4
+value = 2
+operation = 1
