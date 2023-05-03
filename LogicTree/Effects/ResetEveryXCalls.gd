@@ -2,6 +2,7 @@
 class_name LT_ResetEveryXCalls
 extends LogicTreeEffect
 
+
 @export var every_x_calls: LT_EveryXCalls
 
 

@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://csh5tgc5kmi6v"]
+[gd_scene load_steps=7 format=3 uid="uid://csh5tgc5kmi6v"]
 
-[ext_resource type="PackedScene" uid="uid://j6p4libx27jr" path="res://Data/MoveSets/Move.tscn" id="2"]
+[ext_resource type="Resource" path="res://Data/Units/Enemies/Bosses/ForgottenKing/forgotten_king_data.tres" id="2_j8shd"]
 [ext_resource type="Material" uid="uid://d2p8yth5vp4kr" path="res://Shaders/dream_shader_material.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://copvhxqv6s2w8" path="res://Data/Units/Enemies/Bosses/Boss.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://db24hche1mwnf" path="res://Data/MoveSets/Actions/Lunge/LungeAction.tscn" id="4_7gi11"]
-[ext_resource type="PackedScene" uid="uid://b81nc8buqc23p" path="res://Data/MoveSets/Actions/Slash/SlashAction.tscn" id="5_l1l1j"]
 
 [sub_resource type="Curve" id="Curve_qqqeb"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.184122, 1), 0.0, 0.0, 0, 0, Vector2(0.8125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -26,39 +24,11 @@ scale_curve = SubResource("4")
 color = Color(0.937255, 0.713726, 0.627451, 1)
 
 [node name="ForgottenKing" instance=ExtResource("4")]
+boss_data = ExtResource("2_j8shd")
 
 [node name="Sprite2D" parent="." index="1"]
 material = ExtResource("3")
 
-[node name="MoveSets" type="Node2D" parent="." index="5"]
-
-[node name="Move" parent="MoveSets" index="0" instance=ExtResource("2")]
-
-[node name="LungeAction" parent="MoveSets/Move" index="0" instance=ExtResource("4_7gi11")]
-indicator_scene = null
-targeting_type = 1
-max_range = 3
-
-[node name="Move2" parent="MoveSets" index="1" instance=ExtResource("2")]
-
-[node name="UpSlash" parent="MoveSets/Move2" index="0" instance=ExtResource("5_l1l1j")]
-targeting_type = 2
-damage = 3
-
-[node name="DownSlash" parent="MoveSets/Move2" index="1" instance=ExtResource("5_l1l1j")]
-targeting_type = 3
-damage = 3
-
-[node name="LeftSlash" parent="MoveSets/Move2" index="2" instance=ExtResource("5_l1l1j")]
-targeting_type = 4
-damage = 3
-
-[node name="RightSlash" parent="MoveSets/Move2" index="3" instance=ExtResource("5_l1l1j")]
-targeting_type = 5
-damage = 3
-
-[node name="GPUParticles2D" parent="." index="7"]
+[node name="GPUParticles2D" parent="." index="6"]
 process_material = SubResource("ParticleProcessMaterial_62gbf")
 local_coords = true
-
-[editable path="MoveSets/Move"]

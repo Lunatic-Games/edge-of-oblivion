@@ -2,6 +2,7 @@
 class_name LT_TileArrayVariable
 extends LogicTreeVariable
 
+
 @export var default_value: Array[Tile] = []
 @export var default_value_override: LT_TileArrayVariable
 

@@ -2,6 +2,7 @@
 class_name LT_EntityArrayVariable
 extends LogicTreeVariable
 
+
 @export var default_value: Array[Occupant] = []
 @export var default_value_override: LT_EntityArrayVariable
 

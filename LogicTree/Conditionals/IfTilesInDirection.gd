@@ -2,6 +2,7 @@
 class_name LT_IfTilesInDirection
 extends LogicTreeConditional
 
+
 enum Direction {
 	UP = 1,
 	RIGHT = 2,
@@ -11,12 +12,12 @@ enum Direction {
 
 enum Condition {
 	#All,
-	Average #,
+	AVERAGE #,
 	#None
 }
 
 enum Reference {
-	Average #,
+	AVERAGE #,
 	#Each
 }
 

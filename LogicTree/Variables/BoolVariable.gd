@@ -2,6 +2,7 @@
 class_name LT_BoolVariable
 extends LogicTreeVariable
 
+
 @export var default_value: bool = false
 @export var default_value_override: LT_BoolVariable
 

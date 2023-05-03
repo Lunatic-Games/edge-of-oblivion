@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbwqdr8mviyql"]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="3_aepoh"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="5_ytvte"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="6_ihmua"]

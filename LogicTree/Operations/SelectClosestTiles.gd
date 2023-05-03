@@ -32,6 +32,7 @@ func perform_behavior() -> void:
 		if abs(distance_squared - closest_distance_squared) < DISTANCE_COMPARISON_EPSILON:
 			closest_tiles.append(tile)
 		elif distance_squared < closest_distance_squared:
+			closest_distance_squared = distance_squared
 			closest_tiles.clear()
 			closest_tiles.append(tile)
 	

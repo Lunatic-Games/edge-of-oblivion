@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://p0e7f46xip6t"]
+[gd_scene load_steps=7 format=3 uid="uid://p0e7f46xip6t"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="1"]
-[ext_resource type="Script" path="res://Data/Units/Enemies/LostRanger/LostRanger.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cinfmdwcoldqr" path="res://Assets/art/icons/medieval-fantasy/lorc/cowled.svg" id="3"]
 
 [sub_resource type="Shader" id="1"]
@@ -46,7 +45,6 @@ shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
 shader_parameter/noise = SubResource("3")
 
 [node name="LostRanger" instance=ExtResource("1")]
-script = ExtResource("2")
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_lovuq")

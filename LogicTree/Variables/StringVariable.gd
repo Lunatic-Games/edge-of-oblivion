@@ -2,6 +2,7 @@
 class_name LT_StringVariable
 extends LogicTreeVariable
 
+
 @export var default_value: String = ""
 @export var default_value_override: LT_StringVariable
 

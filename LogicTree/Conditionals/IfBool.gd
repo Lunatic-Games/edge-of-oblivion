@@ -4,13 +4,13 @@ extends LogicTreeConditional
 
 
 enum Comparison {
-	Equals,
-	DoesNotEqual
+	EQUALS,
+	DOES_NOT_EQUAL
 }
 
 enum CompareTo {
-	True,
-	False
+	TRUE,
+	FALSE
 }
 
 @export var input: LT_BoolVariable
@@ -26,13 +26,13 @@ func _ready() -> void:
 func evaluate_condition() -> bool:
 	if value_override != null:
 		if value_override.value == true:
-			value = CompareTo.True
+			value = CompareTo.TRUE
 		else:
-			value = CompareTo.False
+			value = CompareTo.FALSE
 	
-	if input.value == true and value == CompareTo.True:
-		return comparison == Comparison.Equals
-	elif input.value == false and value == CompareTo.False:
-		return comparison == Comparison.Equals
+	if input.value == true and value == CompareTo.TRUE:
+		return comparison == Comparison.EQUALS
+	elif input.value == false and value == CompareTo.FALSE:
+		return comparison == Comparison.EQUALS
 	
-	return comparison == Comparison.DoesNotEqual
+	return comparison == Comparison.DOES_NOT_EQUAL

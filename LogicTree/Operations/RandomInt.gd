@@ -2,13 +2,14 @@
 class_name LT_RandomInt
 extends LogicTreeOperation
 
+
 enum Operation {
-	Set,
-	Add,
-	Subtract,
-	Multiply,
-	DivideFloor,
-	DivideCeiling
+	SET,
+	ADD,
+	SUBTRACT,
+	MULTIPLY,
+	DIVIDE_FLOOR,
+	DIVIDE_CEILING
 }
 
 @export var int_variable: LT_IntVariable
@@ -35,20 +36,20 @@ func perform_behavior() -> void:
 	var value: int = randi_range(min_value, max_value)
 	
 	match operation:
-		Operation.Set:
+		Operation.SET:
 			int_variable.value = value
-		Operation.Add:
+		Operation.ADD:
 			int_variable.value += value
-		Operation.Subtract:
+		Operation.SUBTRACT:
 			int_variable.value -= value
-		Operation.Multiply:
+		Operation.MULTIPLY:
 			int_variable.value *= value
-		Operation.DivideFloor:
+		Operation.DIVIDE_FLOOR:
 			assert(value != 0.0, "Trying to divide by zero for '" + name + "'")
 			var value_as_float := float(value)
 			var current_value_as_float := float(int_variable.value)
 			int_variable.value = floori(current_value_as_float / value_as_float)
-		Operation.DivideCeiling:
+		Operation.DIVIDE_CEILING:
 			assert(value != 0.0, "Trying to divide by zero for '" + name + "'")
 			var value_as_float := float(value)
 			var current_value_as_float := float(int_variable.value)

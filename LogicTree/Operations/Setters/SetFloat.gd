@@ -4,11 +4,11 @@ extends LogicTreeSetterOperation
 
 
 enum Operation {
-	Set,
-	Add,
-	Subtract,
-	Multiply,
-	Divide
+	SET,
+	ADD,
+	SUBTRACT,
+	MULTIPLY,
+	DIVIDE
 }
 
 @export var float_variable: LT_FloatVariable
@@ -26,14 +26,14 @@ func perform_behavior() -> void:
 		value = value_override.value
 	
 	match operation:
-		Operation.Set:
+		Operation.SET:
 			float_variable.value = value
-		Operation.Add:
+		Operation.ADD:
 			float_variable.value += value
-		Operation.Subtract:
+		Operation.SUBTRACT:
 			float_variable.value -= value
-		Operation.Multiply:
+		Operation.MULTIPLY:
 			float_variable.value *= value
-		Operation.Divide:
+		Operation.DIVIDE:
 			assert(value != 0.0, "Trying to divide by zero for '" + name + "'")
 			float_variable.value /= value
