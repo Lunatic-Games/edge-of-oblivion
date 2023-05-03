@@ -1,8 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5xgjwtgcj30e"]
+[gd_scene load_steps=7 format=3 uid="uid://b5xgjwtgcj30e"]
 
-[ext_resource type="PackedScene" uid="uid://b81nc8buqc23p" path="res://Data/MoveSets/Actions/Slash/SlashAction.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://beynfuvsrpfhq" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
-[ext_resource type="Script" path="res://Data/Units/Enemies/Faded/Faded.gd" id="2_c1o6u"]
+[ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="3"]
 
 [sub_resource type="Shader" id="1"]
@@ -47,22 +45,11 @@ shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
 shader_parameter/noise = SubResource("3")
 
 [node name="Faded" instance=ExtResource("2")]
-script = ExtResource("2_c1o6u")
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_vh5pt")
 texture = ExtResource("3")
 
-[node name="UpSlash" parent="MoveSets/Move" index="0" instance=ExtResource("1")]
-targeting_type = 2
-
-[node name="DownSlash" parent="MoveSets/Move" index="1" instance=ExtResource("1")]
-targeting_type = 3
-
-[node name="LeftSlash" parent="MoveSets/Move" index="2" instance=ExtResource("1")]
-targeting_type = 4
-
-[node name="RightSlash" parent="MoveSets/Move" index="3" instance=ExtResource("1")]
-targeting_type = 5
-
-[editable path="MoveSets/Move"]
+[node name="LT_OnEntityUpdate" parent="." index="6" node_paths=PackedStringArray("output_entity", "output_entity_tile")]
+output_entity = NodePath("This enemy")
+output_entity_tile = NodePath("Enemy tile")

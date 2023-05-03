@@ -1,7 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://kn25ecu375m5"]
+[gd_scene load_steps=16 format=3 uid="uid://btfetsqf4m4x0"]
 
 [ext_resource type="Script" path="res://Items/Item.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2"]
+[ext_resource type="Script" path="res://LogicTree/Triggers/ItemTriggers/OnItemUpdate.gd" id="3_ajd2l"]
+[ext_resource type="Script" path="res://LogicTree/Variables/ItemArrayVariable.gd" id="4_7gncm"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_52ocb"]
+[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="7_dnm0h"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="7_vv4vg"]
+[ext_resource type="Script" path="res://LogicTree/Triggers/ItemTriggers/OnItemTierIncrease.gd" id="9_hnmxa"]
+[ext_resource type="Script" path="res://LogicTree/Triggers/ItemTriggers/OnItemSetupCompleted.gd" id="9_si7ro"]
 
 [sub_resource type="Animation" id="5"]
 resource_name = "Shake"
@@ -108,5 +115,60 @@ offset_right = 55.0
 offset_bottom = 61.0
 theme_override_styles/background = SubResource("StyleBoxFlat_j0c1r")
 theme_override_styles/fill = SubResource("StyleBoxFlat_i7ywe")
-value = 100.0
 show_percentage = false
+
+[node name="LT_PersistentVariables" type="Node" parent="."]
+
+[node name="LT_OnItemSetupCompleted" type="Node" parent="." node_paths=PackedStringArray("output_item_array", "output_item_user_tile", "logic_tree_on_trigger")]
+script = ExtResource("9_si7ro")
+output_item_array = NodePath("This item")
+output_item_user_tile = NodePath("Item user tile")
+logic_tree_on_trigger = NodePath("LogicTree")
+
+[node name="This item" type="Node" parent="LT_OnItemSetupCompleted"]
+script = ExtResource("4_7gncm")
+
+[node name="Item user tile" type="Node" parent="LT_OnItemSetupCompleted"]
+script = ExtResource("6_52ocb")
+
+[node name="LogicTree" type="Node" parent="LT_OnItemSetupCompleted"]
+script = ExtResource("7_dnm0h")
+
+[node name="LT_OnItemUpdate" type="Node" parent="." node_paths=PackedStringArray("output_item_array", "output_item_user_tile", "output_item_tier", "logic_tree_on_trigger")]
+script = ExtResource("3_ajd2l")
+output_item_array = NodePath("This item")
+output_item_user_tile = NodePath("Item user tile")
+output_item_tier = NodePath("Item tier")
+logic_tree_on_trigger = NodePath("LogicTree")
+
+[node name="This item" type="Node" parent="LT_OnItemUpdate"]
+script = ExtResource("4_7gncm")
+
+[node name="Item user tile" type="Node" parent="LT_OnItemUpdate"]
+script = ExtResource("6_52ocb")
+
+[node name="Item tier" type="Node" parent="LT_OnItemUpdate"]
+script = ExtResource("7_vv4vg")
+
+[node name="LogicTree" type="Node" parent="LT_OnItemUpdate"]
+script = ExtResource("7_dnm0h")
+
+[node name="LT_OnItemTierIncrease" type="Node" parent="." node_paths=PackedStringArray("output_item_array", "output_item_user", "output_item_user_tile", "output_item_new_tier", "logic_tree_on_trigger")]
+script = ExtResource("9_hnmxa")
+output_item_array = NodePath("This item")
+output_item_user = NodePath("")
+output_item_user_tile = NodePath("Item user tile")
+output_item_new_tier = NodePath("New tier")
+logic_tree_on_trigger = NodePath("LogicTree")
+
+[node name="This item" type="Node" parent="LT_OnItemTierIncrease"]
+script = ExtResource("4_7gncm")
+
+[node name="Item user tile" type="Node" parent="LT_OnItemTierIncrease"]
+script = ExtResource("6_52ocb")
+
+[node name="New tier" type="Node" parent="LT_OnItemTierIncrease"]
+script = ExtResource("7_vv4vg")
+
+[node name="LogicTree" type="Node" parent="LT_OnItemTierIncrease"]
+script = ExtResource("7_dnm0h")

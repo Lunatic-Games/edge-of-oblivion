@@ -12,14 +12,13 @@ var range_radius: int = 2
 #	3: 7 damage instances
 
 
-func upgrade_tier() -> bool:
-	var ret: bool = super.upgrade_tier()
+func upgrade_tier() -> void:
+	super.upgrade_tier()
 	match current_tier:
 		2:
 			bolt_count = 5
 		3:
 			bolt_count = 7
-	return ret
 
 
 func activate_item() -> void:

@@ -15,7 +15,7 @@ func reset() -> void:
 
 func handle_items_triggering() -> void:
 	for item in managed_items:
-		await managed_items[item].trigger_timer()
+		managed_items[item].update()
 	
 	TurnManager.item_phase_ended()
 
@@ -29,7 +29,7 @@ func add_item(item_data: ItemData) -> void:
 
 
 func upgrade_item(item_data: ItemData) -> void:
-	var is_max_tier = managed_items[item_data].upgrade_tier()
+	managed_items[item_data].upgrade_tier()
 	
-	if is_max_tier:
+	if managed_items[item_data].current_tier == managed_items[item_data].max_tier:
 		FreeUpgradeMenu.remove_item_from_availability(item_data)

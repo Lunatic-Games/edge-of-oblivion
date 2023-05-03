@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjdan1c20e1sd"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="PackedScene" uid="uid://kn25ecu375m5" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://Items/HolyFire/HolyFire.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cjk1g57odlvtu" path="res://Assets/art/icons/spikes-slashes-cracks/lorc/striking-diamonds.svg" id="3"]
 

@@ -51,12 +51,11 @@ func reset() -> void:
 
 
 func is_player_turn() -> bool:
-	if current_turn_state == TurnState.PLAYER:
-		return true
-	return false
+	return current_turn_state == TurnState.PLAYER
 
 
 func item_phase_ended() -> void:
+	update_tiles()
 	start_enemy_turn()
 
 
@@ -74,9 +73,14 @@ func start_player_turn() -> void:
 	current_turn_state = TurnState.PLAYER
 
 
+func update_tiles() -> void:
+	for tile in GameManager.all_tiles:
+		tile.update()
+
+
 func handle_enemy_turn() -> void:
 	for enemy in GameManager.all_enemies:
-		enemy.activate()
+		enemy.update()
 	
 	start_player_turn()
 
