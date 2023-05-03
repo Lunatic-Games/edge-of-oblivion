@@ -1,5 +1,5 @@
 class_name Enemy
-extends "res://Data/Units/Unit.gd"
+extends Unit
 
 signal update_triggered
 
