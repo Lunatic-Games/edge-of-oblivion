@@ -9,7 +9,7 @@
 <!--- List the changes you made --->
 *
 
-### Relevent screenshots
+### Relevant screenshots
 <!--- Provide screenshots for anything that might be helpful for reviewers. Examples include scene trees, UI, or in-game art. --->
 *
 
