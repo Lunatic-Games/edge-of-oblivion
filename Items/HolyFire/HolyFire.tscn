@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://cmpxesn2rnfv4"]
 
-[ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://cjk1g57odlvtu" path="res://Assets/art/icons/spikes-slashes-cracks/lorc/striking-diamonds.svg" id="3"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_wupxa"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_et11c"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="10_sgxhl"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="11_bfe23"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="13_q3bl2"]
-[ext_resource type="Script" path="res://LogicTree/Operations/SetInt.gd" id="14_7vmxv"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_jln8d"]
 
 [node name="HolyFire" instance=ExtResource("1")]
 
@@ -93,10 +93,11 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 2
 
-[node name="LT_SetInt" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("14_7vmxv")
+[node name="Add 2 to selections" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("14_jln8d")
 int_variable = NodePath("../../../../LT_PersistentVariables/Number of selections")
-value = 5
+value = 2
+operation = 1
 
 [node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
 script = ExtResource("13_q3bl2")
@@ -104,7 +105,8 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 3
 
-[node name="LT_SetInt2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("14_7vmxv")
+[node name="Add 2 to selections" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("14_jln8d")
 int_variable = NodePath("../../../../LT_PersistentVariables/Number of selections")
-value = 7
+value = 2
+operation = 1

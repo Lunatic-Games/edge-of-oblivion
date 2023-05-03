@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://co4ony0m1c4q0"]
 
-[ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://dodqj134xaf4d" path="res://Assets/art/icons/weapons/lorc/stiletto.svg" id="2"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_ld0hh"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_ypwwl"]
@@ -38,7 +38,7 @@ script = ExtResource("6_4lchr")
 script = ExtResource("7_3g6ge")
 input_tiles = NodePath("../../../Item user tile")
 output_tiles = NodePath("../Targets")
-primary_directions = 2
+directions = 2
 
 [node name="If tier 2" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input")]
 script = ExtResource("8_vavqt")
@@ -50,8 +50,8 @@ value = 2
 script = ExtResource("7_3g6ge")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../Targets")
-primary_directions = 2
-primary_distance_start = 2
+directions = 2
+distance_start = 2
 operation = 1
 
 [node name="If tier 3" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input")]
@@ -64,8 +64,8 @@ value = 3
 script = ExtResource("7_3g6ge")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../Targets")
-primary_directions = 2
-primary_distance_start = 3
+directions = 2
+distance_start = 3
 operation = 1
 
 [node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("items")]

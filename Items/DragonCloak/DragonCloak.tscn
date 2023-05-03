@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="8_kvs5u"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="8_snmek"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="12_xi84i"]
-[ext_resource type="Script" path="res://LogicTree/Operations/SetInt.gd" id="13_iqihv"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="13_jvyv0"]
 
 [node name="DragonCloak" instance=ExtResource("1")]
 
@@ -82,8 +82,11 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 2
 
-[node name="LT_SetInt" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0"]
-script = ExtResource("13_iqihv")
+[node name="1 shorter cd" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("13_jvyv0")
+int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
+value = 1
+operation = 2
 
 [node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
 script = ExtResource("12_xi84i")
@@ -91,5 +94,8 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 3
 
-[node name="LT_SetInt2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0"]
-script = ExtResource("13_iqihv")
+[node name="radius 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("13_jvyv0")
+int_variable = NodePath("../../../../LT_PersistentVariables/Radius")
+value = 1
+operation = 1

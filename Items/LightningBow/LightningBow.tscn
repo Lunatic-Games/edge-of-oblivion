@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://b8phiccdh0cp3"]
 
-[ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_twq0p"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_31l78"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="5_5dytl"]
@@ -16,8 +16,8 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="11_ted3p"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="12_0b0ox"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="12_40nmw"]
-[ext_resource type="Script" path="res://LogicTree/Operations/SetInt.gd" id="13_sy7g8"]
-[ext_resource type="Script" path="res://LogicTree/Operations/SetBool.gd" id="17_by5jk"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="15_1way7"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="17_58wo7"]
 
 [node name="LightningBow" instance=ExtResource("1")]
 
@@ -49,8 +49,8 @@ script = ExtResource("6_uhqm5")
 script = ExtResource("7_3tq3w")
 input_tiles = NodePath("../../../Item user tile")
 output_tiles = NodePath("../Targets")
-primary_directions = 1
-primary_distance_start = 2
+directions = 1
+distance_start = 2
 
 [node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("8_ykuaq")
@@ -81,7 +81,7 @@ script = ExtResource("10_13naf")
 script = ExtResource("7_3tq3w")
 input_tiles = NodePath("../../../Targets")
 output_tiles = NodePath("../../../Targets")
-primary_directions = 15
+directions = 15
 
 [node name="LT_SelectTilesByOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/ChainLightningEffect" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("11_ted3p")
@@ -105,7 +105,7 @@ tiles = NodePath("../../../Targets")
 damage_override = NodePath("../../../../../../LT_PersistentVariables/Damage")
 
 [node name="Decrement chain" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain" index="1" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("13_sy7g8")
+script = ExtResource("15_1way7")
 int_variable = NodePath("../../Chains left")
 value = 1
 operation = 2
@@ -116,7 +116,7 @@ input = NodePath("../../Chains left")
 comparison = 3
 
 [node name="Stop chaining" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/If chain is zero" index="0" node_paths=PackedStringArray("bool_variable")]
-script = ExtResource("17_by5jk")
+script = ExtResource("17_58wo7")
 bool_variable = NodePath("../../../Should chain")
 
 [node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
@@ -139,10 +139,11 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 2
 
-[node name="LT_SetInt" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("13_sy7g8")
+[node name="Add another chain" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("15_1way7")
 int_variable = NodePath("../../../../LT_PersistentVariables/Chain")
-value = 2
+value = 1
+operation = 1
 
 [node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
 script = ExtResource("12_40nmw")
@@ -150,7 +151,8 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 3
 
-[node name="LT_SetInt" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("13_sy7g8")
+[node name="Add 2 more chains" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("15_1way7")
 int_variable = NodePath("../../../../LT_PersistentVariables/Chain")
-value = 4
+value = 2
+operation = 1

@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://c4m6g30wltadx"]
 
-[ext_resource type="PackedScene" uid="uid://5w405iveoxgi" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://Items/Hammer/Hammer.gd" id="2_ab3nd"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_ymxun"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_c72xt"]
@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_a2ss4"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="10_k60wr"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="11_ufv1h"]
-[ext_resource type="Script" path="res://LogicTree/Operations/SetInt.gd" id="11_wjn76"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_vkbki"]
 
 [node name="Hammer" instance=ExtResource("1")]
 script = ExtResource("2_ab3nd")
@@ -50,7 +50,7 @@ script = ExtResource("6_y07cf")
 script = ExtResource("7_q11i7")
 input_tiles = NodePath("../../../Item user tile")
 output_tiles = NodePath("../Targets")
-primary_directions = 5
+directions = 5
 
 [node name="Hit effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
 script = ExtResource("8_5gg7j")
@@ -90,13 +90,13 @@ comparison = 2
 value = 2
 
 [node name="Increase knockback" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("11_wjn76")
+script = ExtResource("14_vkbki")
 int_variable = NodePath("../../../../LT_PersistentVariables/Knockback")
 value = 1
 operation = 1
 
 [node name="Increase collision damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="1" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("11_wjn76")
+script = ExtResource("14_vkbki")
 int_variable = NodePath("../../../../LT_PersistentVariables/Collision damage")
 value = 2
 operation = 1
@@ -108,13 +108,13 @@ comparison = 2
 value = 3
 
 [node name="Increase knockback" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("11_wjn76")
+script = ExtResource("14_vkbki")
 int_variable = NodePath("../../../../LT_PersistentVariables/Knockback")
 value = 1
 operation = 1
 
 [node name="Increase collision damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="1" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("11_wjn76")
+script = ExtResource("14_vkbki")
 int_variable = NodePath("../../../../LT_PersistentVariables/Collision damage")
-value = 4
+value = 2
 operation = 1
