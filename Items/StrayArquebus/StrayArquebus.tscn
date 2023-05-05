@@ -46,7 +46,7 @@ script = ExtResource("6_6sgw0")
 [node name="Last new tile" type="Node" parent="LT_PersistentVariables" index="5"]
 script = ExtResource("6_6sgw0")
 
-[node name="LT_SetTileArray" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="0" node_paths=PackedStringArray("tile_array", "array_value")]
+[node name="Set last tile stood on to current tile" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="0" node_paths=PackedStringArray("tile_array", "array_value")]
 script = ExtResource("5_cg4pl")
 tile_array = NodePath("../../../LT_PersistentVariables/Last Tile Stood On")
 array_value = NodePath("../../Item user tile")
@@ -55,7 +55,7 @@ array_value = NodePath("../../Item user tile")
 script = ExtResource("5_4r2hv")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 
-[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("items")]
+[node name="Set item ready apperance to unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("items")]
 script = ExtResource("6_63bst")
 items = NodePath("../../../This item")
 appear_ready = false
@@ -69,7 +69,7 @@ tiles = NodePath("../../../Item user tile")
 reference_tiles = NodePath("../../../../LT_PersistentVariables/Last new tile")
 direction = 8
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If last moved left" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select left 3 tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If last moved left" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("6_pdqlg")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../Targets")
@@ -82,7 +82,7 @@ tiles = NodePath("../../../Item user tile")
 reference_tiles = NodePath("../../../../LT_PersistentVariables/Last new tile")
 direction = 2
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If last moved right" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select right 3 tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If last moved right" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("6_pdqlg")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../Targets")
@@ -95,7 +95,7 @@ tiles = NodePath("../../../Item user tile")
 reference_tiles = NodePath("../../../../LT_PersistentVariables/Last new tile")
 direction = 4
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If last moved down" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select down 3 tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If last moved down" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("6_pdqlg")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../Targets")
@@ -108,19 +108,19 @@ tiles = NodePath("../../../Item user tile")
 reference_tiles = NodePath("../../../../LT_PersistentVariables/Last new tile")
 direction = 1
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If last moved up" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select top 3 tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If last moved up" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("6_pdqlg")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../Targets")
 directions = 1
 distance_length = 3
 
-[node name="Attack effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
+[node name="Spawn attack effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
 script = ExtResource("8_fylrs")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("11_fbk45")
 
-[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("10_l164c")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Full Damage")
@@ -130,7 +130,7 @@ script = ExtResource("5_4r2hv")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 on_one_before = true
 
-[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+[node name="Set item ready apperance to ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
 script = ExtResource("6_63bst")
 items = NodePath("../../../This item")
 
@@ -138,7 +138,7 @@ items = NodePath("../../../This item")
 script = ExtResource("6_vpaun")
 one_out_of_override = NodePath("../../../LT_PersistentVariables/Volatility Odds")
 
-[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="0" node_paths=PackedStringArray("items")]
+[node name="Set item ready apperance to unready" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="0" node_paths=PackedStringArray("items")]
 script = ExtResource("6_63bst")
 items = NodePath("../../../This item")
 appear_ready = false
@@ -152,7 +152,7 @@ tiles = NodePath("../../../Item user tile")
 reference_tiles = NodePath("../../../../LT_PersistentVariables/Last new tile")
 direction = 8
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers/If last moved left" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select left tile" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers/If last moved left" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("6_pdqlg")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../../LT_EveryXCalls/Targets")
@@ -164,7 +164,7 @@ tiles = NodePath("../../../Item user tile")
 reference_tiles = NodePath("../../../../LT_PersistentVariables/Last new tile")
 direction = 2
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers/If last moved right" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select right tile" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers/If last moved right" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("6_pdqlg")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../../LT_EveryXCalls/Targets")
@@ -176,7 +176,7 @@ tiles = NodePath("../../../Item user tile")
 reference_tiles = NodePath("../../../../LT_PersistentVariables/Last new tile")
 direction = 4
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers/If last moved down" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select botton tile" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers/If last moved down" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("6_pdqlg")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../../LT_EveryXCalls/Targets")
@@ -188,27 +188,27 @@ tiles = NodePath("../../../Item user tile")
 reference_tiles = NodePath("../../../../LT_PersistentVariables/Last new tile")
 direction = 1
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers/If last moved up" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select top tile" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers/If last moved up" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("6_pdqlg")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../../LT_EveryXCalls/Targets")
 directions = 1
 
-[node name="Attack effect" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="6" node_paths=PackedStringArray("tiles")]
+[node name="Spawn attack effect" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="6" node_paths=PackedStringArray("tiles")]
 script = ExtResource("8_fylrs")
 tiles = NodePath("../../LT_EveryXCalls/Targets")
 node2d_to_spawn = ExtResource("11_fbk45")
 
-[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="7" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="7" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("10_l164c")
 tiles = NodePath("../../LT_EveryXCalls/Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Volatile Damage")
 
-[node name="LT_ResetEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="8" node_paths=PackedStringArray("every_x_calls")]
+[node name="Reset every x calls" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="8" node_paths=PackedStringArray("every_x_calls")]
 script = ExtResource("12_tcbst")
 every_x_calls = NodePath("../../LT_EveryXCalls")
 
-[node name="LT_ResetEveryXCalls2" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="9" node_paths=PackedStringArray("every_x_calls")]
+[node name="Reset before every x calls" type="Node" parent="LT_OnItemUpdate/LogicTree/If volatile triggers" index="9" node_paths=PackedStringArray("every_x_calls")]
 script = ExtResource("12_tcbst")
 every_x_calls = NodePath("../../BeforeEveryXCalls")
 
@@ -223,7 +223,7 @@ script = ExtResource("5_cg4pl")
 tile_array = NodePath("../../../../LT_PersistentVariables/Last new tile")
 array_value = NodePath("../../../../LT_PersistentVariables/Last Tile Stood On")
 
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="4" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="4" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
 script = ExtResource("12_4ssci")
 progress_bar = NodePath("../../../CoolDownBar")
 every_x_calls = NodePath("../LT_EveryXCalls")

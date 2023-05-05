@@ -57,12 +57,12 @@ script = ExtResource("6_ihmua")
 tiles = NodePath("../Selected tiles")
 node2d_to_spawn = ExtResource("9_pptd1")
 
-[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("10_wrwdj")
 tiles = NodePath("../Selected tiles")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("items")]
+[node name="Set item ready apperance to unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("items")]
 script = ExtResource("4_lobvm")
 items = NodePath("../../../This item")
 appear_ready = false
@@ -72,11 +72,11 @@ script = ExtResource("3_hv802")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 on_one_before = true
 
-[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+[node name="Set item ready apperance to ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
 script = ExtResource("4_lobvm")
 items = NodePath("../../../This item")
 
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
 script = ExtResource("10_mltra")
 progress_bar = NodePath("../../../CoolDownBar")
 every_x_calls = NodePath("../LT_EveryXCalls")
@@ -87,7 +87,7 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 3
 
-[node name="LT_SetInt" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+[node name="Increase damage by 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("12_demeu")
 int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
 value = 2

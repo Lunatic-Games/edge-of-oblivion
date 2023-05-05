@@ -34,7 +34,7 @@ x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 [node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
 script = ExtResource("6_4lchr")
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select right tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("7_3g6ge")
 input_tiles = NodePath("../../../Item user tile")
 output_tiles = NodePath("../Targets")
@@ -46,7 +46,7 @@ input = NodePath("../../../Item tier")
 comparison = 1
 value = 2
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If tier 2" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select 2nd right tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If tier 2" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("7_3g6ge")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../Targets")
@@ -60,7 +60,7 @@ input = NodePath("../../../Item tier")
 comparison = 1
 value = 3
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If tier 3" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select 3rd right tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If tier 3" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("7_3g6ge")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../Targets")
@@ -68,7 +68,7 @@ directions = 2
 distance_start = 3
 operation = 1
 
-[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("items")]
+[node name="Set item appearance to unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("items")]
 script = ExtResource("9_x4wpv")
 items = NodePath("../../../This item")
 appear_ready = false
@@ -81,13 +81,13 @@ script = ExtResource("10_7a57k")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("10_4wvq4")
 
-[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("tiles", "damage_override", "output_total_damage")]
+[node name="Damage occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("tiles", "damage_override", "output_total_damage")]
 script = ExtResource("10_vjuqf")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 output_total_damage = NodePath("../total damage done")
 
-[node name="LT_HealTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="8" node_paths=PackedStringArray("tiles", "heal_override")]
+[node name="Heal player" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="8" node_paths=PackedStringArray("tiles", "heal_override")]
 script = ExtResource("11_wxece")
 tiles = NodePath("../../../Item user tile")
 heal_override = NodePath("../total damage done")
@@ -97,11 +97,11 @@ script = ExtResource("5_ypwwl")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 on_one_before = true
 
-[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+[node name="Set item appearance to ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
 script = ExtResource("9_x4wpv")
 items = NodePath("../../../This item")
 
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+[node name="Update Progress Bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
 script = ExtResource("6_p34qj")
 progress_bar = NodePath("../../../CoolDownBar")
 every_x_calls = NodePath("../LT_EveryXCalls")

@@ -37,7 +37,7 @@ default_value = 1
 script = ExtResource("4_31l78")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 
-[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("items")]
+[node name="Set item ready apperance to unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("items")]
 script = ExtResource("5_5dytl")
 items = NodePath("../../../This item")
 appear_ready = false
@@ -52,7 +52,7 @@ output_tiles = NodePath("../Targets")
 directions = 1
 distance_start = 2
 
-[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage tile occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("8_ykuaq")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
@@ -77,19 +77,19 @@ input = NodePath("../Should chain")
 [node name="ChainLightningEffect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain" index="0"]
 script = ExtResource("10_13naf")
 
-[node name="LT_SelectAdjacentTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/ChainLightningEffect" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select all adjacent tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/ChainLightningEffect" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("7_3tq3w")
 input_tiles = NodePath("../../../Targets")
 output_tiles = NodePath("../../../Targets")
 directions = 15
 
-[node name="LT_SelectTilesByOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/ChainLightningEffect" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select occupied tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/ChainLightningEffect" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("11_ted3p")
 input_tiles = NodePath("../../../Targets")
 output_tiles = NodePath("../../../Targets")
 occupant_type = 2
 
-[node name="LT_SelectRandomTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/ChainLightningEffect" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select a random tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/ChainLightningEffect" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("12_0b0ox")
 input_tiles = NodePath("../../../Targets")
 output_tiles = NodePath("../../../Targets")
@@ -99,7 +99,7 @@ script = ExtResource("9_ggmof")
 tiles = NodePath("../../../Targets")
 node2d_to_spawn = ExtResource("10_7dbts")
 
-[node name="LT_DamageTileOccupants2" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/ChainLightningEffect" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/ChainLightningEffect" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("8_ykuaq")
 tiles = NodePath("../../../Targets")
 damage_override = NodePath("../../../../../../LT_PersistentVariables/Damage")
@@ -124,11 +124,11 @@ script = ExtResource("4_31l78")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 on_one_before = true
 
-[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+[node name="Set item ready apperance to ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
 script = ExtResource("5_5dytl")
 items = NodePath("../../../This item")
 
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
 script = ExtResource("6_klx2m")
 progress_bar = NodePath("../../../CoolDownBar")
 every_x_calls = NodePath("../LT_EveryXCalls")
