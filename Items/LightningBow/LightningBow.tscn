@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_3tq3w"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="8_ykuaq"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_ggmof"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="10_7dbts"]
+[ext_resource type="PackedScene" uid="uid://3yymisgbwe7q" path="res://Data/Indicators/PlayerWeapons/LightningBow/LightningBowIndicator.tscn" id="9_mlvr2"]
 [ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="10_13naf"]
 [ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="10_chng4"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/WhileBool.gd" id="11_8vjst"]
@@ -60,7 +60,7 @@ damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 [node name="Spawn arrow effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
 script = ExtResource("9_ggmof")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("10_7dbts")
+node2d_to_spawn = ExtResource("9_mlvr2")
 
 [node name="Chains left" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("default_value_override")]
 script = ExtResource("3_twq0p")
@@ -97,7 +97,7 @@ output_tiles = NodePath("../../../Targets")
 [node name="Spawn lightning effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/ChainLightningEffect" index="3" node_paths=PackedStringArray("tiles")]
 script = ExtResource("9_ggmof")
 tiles = NodePath("../../../Targets")
-node2d_to_spawn = ExtResource("10_7dbts")
+node2d_to_spawn = ExtResource("9_mlvr2")
 
 [node name="Damage occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/ChainLightningEffect" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("8_ykuaq")

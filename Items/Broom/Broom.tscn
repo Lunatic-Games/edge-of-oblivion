@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="8_er71j"]
 [ext_resource type="Script" path="res://LogicTree/Effects/KnockbackTileOccupants.gd" id="9_6i4rm"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_6enu7"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="11_l4qkb"]
+[ext_resource type="PackedScene" uid="uid://c1c7tfhv7giod" path="res://Data/Indicators/PlayerWeapons/Hammer/HammerIndicator.tscn" id="10_myh2v"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="12_1fu45"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_bqjgb"]
 
@@ -58,7 +58,7 @@ n_selections_override = NodePath("../../../../LT_PersistentVariables/Number of t
 [node name="Visual effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles")]
 script = ExtResource("10_6enu7")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("11_l4qkb")
+node2d_to_spawn = ExtResource("10_myh2v")
 
 [node name="Knockback targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles", "references_tiles")]
 script = ExtResource("9_6i4rm")
