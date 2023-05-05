@@ -9,7 +9,7 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Lightning Bow"
-tier1Text = "Attacks [color=yellow]up[/color]. [color=pink]range[color] 1. [color=pink]chain[/color] 1"
+tier1Text = "Attacks [color=yellow]up[/color]. [color=pink]range 1. chain 1[/color]"
 tier2Text = "[color=pink]Chain[/color] 2."
 tier3Text = "[color=pink]Chain[/color] 4."
 max_turn_timer = 3

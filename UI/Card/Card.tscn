@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bq6wld0vqkiw1"]
+[gd_scene load_steps=12 format=3 uid="uid://4e8lrftlqfat"]
 
 [ext_resource type="Script" path="res://UI/Card/Card.gd" id="1_e71sb"]
-[ext_resource type="PackedScene" uid="uid://kgsyulhcedbf" path="res://Data/Particles/UIParticles/ray_particles.tscn" id="2_qidcr"]
+[ext_resource type="PackedScene" uid="uid://kgsyulhcedbf" path="res://Data/Particles/UIParticles/RayParticles.tscn" id="2_2sdpx"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="3_ldc60"]
 [ext_resource type="Texture2D" uid="uid://4h6r8fmh8tbt" path="res://Assets/art/icons/stars/lorc/spiky-explosion.svg" id="4_0mk7p"]
 [ext_resource type="Texture2D" uid="uid://bf05wsrti4o0t" path="res://Assets/art/icons/buildings/caro-asercion/clock-tower.svg" id="5_ks2ii"]
@@ -139,7 +139,7 @@ pivot_offset = Vector2(60, 100)
 size_flags_horizontal = 6
 script = ExtResource("1_e71sb")
 
-[node name="RayParticles" parent="." instance=ExtResource("2_qidcr")]
+[node name="RayParticles" parent="." instance=ExtResource("2_2sdpx")]
 modulate = Color(1, 1, 1, 0)
 
 [node name="Border" type="ColorRect" parent="."]
@@ -168,6 +168,35 @@ libraries = {
 "": SubResource("AnimationLibrary_ikipp")
 }
 
+[node name="CardBottom" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 138.0
+offset_right = 175.0
+offset_bottom = 263.0
+mouse_filter = 2
+
+[node name="CardDescription" type="RichTextLabel" parent="CardBottom"]
+layout_mode = 2
+size_flags_vertical = 6
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center]Attack left for 1 damage."
+fit_content = true
+scroll_active = false
+
+[node name="FlavorText" type="RichTextLabel" parent="CardBottom"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+bbcode_enabled = true
+text = "[center][i]\"A trusty weapon for a trusty knight.\""
+fit_content = true
+scroll_active = false
+
 [node name="CardTop" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 5.0
@@ -194,6 +223,7 @@ texture = ExtResource("3_ldc60")
 expand_mode = 5
 
 [node name="BaseIcons" type="GridContainer" parent="CardTop"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
@@ -236,35 +266,6 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 text = "3"
-
-[node name="CardBottom" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 138.0
-offset_right = 175.0
-offset_bottom = 263.0
-mouse_filter = 2
-
-[node name="CardDescription" type="RichTextLabel" parent="CardBottom"]
-layout_mode = 2
-size_flags_vertical = 6
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 12
-bbcode_enabled = true
-text = "[center]Attack left for 1 damage."
-fit_content = true
-scroll_active = false
-
-[node name="FlavorText" type="RichTextLabel" parent="CardBottom"]
-layout_mode = 2
-size_flags_vertical = 8
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 8
-theme_override_font_sizes/italics_font_size = 8
-bbcode_enabled = true
-text = "[center][i]\"A trusty weapon for a trusty knight.\""
-fit_content = true
-scroll_active = false
 
 [connection signal="gui_input" from="Border" to="." method="_on_Background_gui_input"]
 [connection signal="mouse_entered" from="Border" to="." method="_on_Background_mouse_entered"]
