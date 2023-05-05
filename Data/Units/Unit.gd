@@ -1,7 +1,7 @@
 class_name Unit
 extends Occupant
 
-const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Damaged/DamagedParticles.tscn")
+const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Damaged/damaged_particle2.tscn")
 const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Healing/HealthParticles.tscn")
 
 var lock_movement: bool = false

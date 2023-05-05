@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://768wywni10mp"]
+[gd_scene load_steps=11 format=3 uid="uid://768wywni10mp"]
 
 [ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://Items/TokenOfLove/TokenOfLove.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://b70hyhkt17y6g" path="res://Assets/art/icons/hearts/delapouite/heart-necklace.svg" id="3"]
-[ext_resource type="Script" path="res://LogicTree/Triggers/EntityTriggers/OnEntityDamaged.gd" id="4_cufgq"]
-[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_fxrmd"]
-[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="7_4tip0"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_5j58d"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_iq66l"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="5_om48k"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="6_g0orv"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="7_dhywa"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="8_3yslp"]
 [ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="8_eg28p"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_8tk4u"]
-[ext_resource type="PackedScene" uid="uid://dm01hrvm6a3pf" path="res://Data/Particles/Fire/FireParticles.tscn" id="11_hs7ti"]
 
 [node name="TokenOfLove" instance=ExtResource("1")]
 script = ExtResource("2")
@@ -16,28 +17,62 @@ script = ExtResource("2")
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3")
 
-[node name="CoolDownBar" parent="." index="2"]
-visible = false
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("4_5j58d")
+default_value = 9
 
-[node name="On item doing damage to enemy" type="Node" parent="." index="7" node_paths=PackedStringArray("output_source_tile", "logic_tree_on_trigger")]
-script = ExtResource("4_cufgq")
-source_filter = 3
-receiver_filter = 2
-output_source_tile = NodePath("User tile")
-logic_tree_on_trigger = NodePath("LogicTree")
+[node name="Heal" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("4_5j58d")
+default_value = 1
 
-[node name="User tile" type="Node" parent="On item doing damage to enemy" index="0"]
-script = ExtResource("6_fxrmd")
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_iq66l")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 
-[node name="LogicTree" type="Node" parent="On item doing damage to enemy" index="1"]
-script = ExtResource("7_4tip0")
-
-[node name="Heal user" type="Node" parent="On item doing damage to enemy/LogicTree" index="0" node_paths=PackedStringArray("tiles")]
+[node name="Heal player" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("tiles", "heal_override")]
 script = ExtResource("8_eg28p")
-tiles = NodePath("../../User tile")
-heal = 1
+tiles = NodePath("../../../Item user tile")
+heal_override = NodePath("../../../../LT_PersistentVariables/Heal")
 
-[node name="Spawn heal particles" type="Node" parent="On item doing damage to enemy/LogicTree" index="1" node_paths=PackedStringArray("tiles")]
-script = ExtResource("10_8tk4u")
-tiles = NodePath("../../User tile")
-node2d_to_spawn = ExtResource("11_hs7ti")
+[node name="Set item ready apperance to unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("items")]
+script = ExtResource("7_dhywa")
+items = NodePath("../../../This item")
+appear_ready = false
+
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_iq66l")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+on_one_before = true
+
+[node name="Set item ready apperance to ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("7_dhywa")
+items = NodePath("../../../This item")
+
+[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+script = ExtResource("8_3yslp")
+progress_bar = NodePath("../../../CoolDownBar")
+every_x_calls = NodePath("../LT_EveryXCalls")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("5_om48k")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="Decrease cooldown by 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("6_g0orv")
+int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
+value = 2
+operation = 2
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("5_om48k")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Decrease cooldown by 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("6_g0orv")
+int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
+value = 2
+operation = 2

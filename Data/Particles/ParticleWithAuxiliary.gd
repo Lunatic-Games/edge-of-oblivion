@@ -4,6 +4,8 @@ extends GPUParticles2D
 
 var aux: bool = false
 
+func _ready(): # Added for the item transition
+	activate()
 
 func activate() -> void:
 	emitting = true
