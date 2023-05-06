@@ -4,6 +4,7 @@ const GAME_SCENE: PackedScene = preload("res://GameScene/GameScene.tscn")
 
 @onready var start_page: Control = $StartPage
 @onready var credits_page: Control = $CreditsPage
+@onready var transition_player: AnimationPlayer = $TransitionAnimator
 
 
 func _ready() -> void:
@@ -22,3 +23,10 @@ func _on_CreditsButton_pressed() -> void:
 func _on_ReturnToStartPage_pressed() -> void:
 	credits_page.visible = false
 	start_page.visible = true
+
+
+func _on_PressAnything_anything_pressed() -> void:
+	if transition_player.is_playing():
+		return
+	
+	transition_player.play("anything_pressed")
