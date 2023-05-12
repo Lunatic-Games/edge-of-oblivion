@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dte0gritlpqbs"]
+[gd_scene load_steps=61 format=3 uid="uid://dte0gritlpqbs"]
 
 [ext_resource type="Script" path="res://Menus/MainMenu/MainMenu.gd" id="1_ywv84"]
 [ext_resource type="Texture2D" uid="uid://b7i4tg1ov4x4t" path="res://Assets/art/background/main-menu/background.png" id="2_o1jk3"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dii3iusm0qkd4" path="res://Assets/art/background/main-menu/blush.png" id="11_ibruy"]
 [ext_resource type="Script" path="res://Menus/MainMenu/PressAnything.gd" id="17_s65gt"]
 [ext_resource type="PackedScene" uid="uid://d1or5bodb071m" path="res://Menus/MainMenu/CreditsTitle.tscn" id="18_6o4oc"]
+[ext_resource type="PackedScene" uid="uid://bmxsykoro00b2" path="res://Menus/MainMenu/MenuButton.tscn" id="18_q3vc2"]
 [ext_resource type="PackedScene" uid="uid://c46ydrqwl63ca" path="res://Menus/MainMenu/CreditsListing.tscn" id="19_ssyei"]
 [ext_resource type="PackedScene" uid="uid://cw1flpllc28iw" path="res://Menus/MainMenu/CreditsSmallListing.tscn" id="20_viunj"]
 
@@ -387,7 +388,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [216.0]
+"values": [-360.0]
 }
 
 [sub_resource type="Animation" id="Animation_oh5uv"]
@@ -479,24 +480,6 @@ _data = {
 "breathe": SubResource("Animation_cvbuw")
 }
 
-[sub_resource type="FontVariation" id="FontVariation_kj5ma"]
-base_font = ExtResource("3_8evwy")
-spacing_glyph = 2
-
-[sub_resource type="FontVariation" id="FontVariation_q61mm"]
-base_font = ExtResource("3_8evwy")
-spacing_glyph = 2
-
-[sub_resource type="FontVariation" id="FontVariation_jdbxb"]
-base_font = ExtResource("3_8evwy")
-spacing_glyph = 2
-
-[sub_resource type="FontVariation" id="FontVariation_ktwp2"]
-base_font = ExtResource("3_8evwy")
-spacing_glyph = 2
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkl08"]
-
 [sub_resource type="FontVariation" id="FontVariation_vjx67"]
 base_font = ExtResource("3_8evwy")
 spacing_glyph = 2
@@ -506,7 +489,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ScrollContainer:scroll_vertical")
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/ScrollContainer:scroll_vertical")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -522,7 +505,7 @@ length = 30.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ScrollContainer:scroll_vertical")
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/ScrollContainer:scroll_vertical")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1435,9 +1418,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -640.0
-offset_top = 216.0
+offset_top = -360.0
 offset_right = 640.0
-offset_bottom = 936.0
+offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_lxtjt")
@@ -1510,50 +1493,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = -10
 
-[node name="PlayButton" type="Button" parent="StartPage/MenuContainer"]
-custom_minimum_size = Vector2(240, 60)
+[node name="PlayButton" parent="StartPage/MenuContainer" instance=ExtResource("18_q3vc2")]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = SubResource("FontVariation_kj5ma")
-theme_override_font_sizes/font_size = 45
 text = "PLAY"
-flat = true
 
-[node name="SettingsButton" type="Button" parent="StartPage/MenuContainer"]
-custom_minimum_size = Vector2(240, 60)
+[node name="CreditsButton" parent="StartPage/MenuContainer" instance=ExtResource("18_q3vc2")]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = SubResource("FontVariation_q61mm")
-theme_override_font_sizes/font_size = 45
-text = "SETTINGS"
-flat = true
-
-[node name="CreditsButton" type="Button" parent="StartPage/MenuContainer"]
-custom_minimum_size = Vector2(240, 60)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = SubResource("FontVariation_jdbxb")
-theme_override_font_sizes/font_size = 45
 text = "CREDITS"
-flat = true
 
-[node name="QuitButton" type="Button" parent="StartPage/MenuContainer"]
-custom_minimum_size = Vector2(240, 60)
+[node name="QuitButton" parent="StartPage/MenuContainer" instance=ExtResource("18_q3vc2")]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = SubResource("FontVariation_ktwp2")
-theme_override_font_sizes/font_size = 45
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkl08")
 text = "QUIT"
-flat = true
 
 [node name="CreditsPage" type="Control" parent="."]
 visible = false
@@ -1564,107 +1514,120 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CreditsPage"]
+[node name="MarginContainer" type="MarginContainer" parent="CreditsPage"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 50
 
-[node name="Sections" type="VBoxContainer" parent="CreditsPage/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsPage/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 165
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CreditsPage/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Sections" type="VBoxContainer" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 75
 
-[node name="Programming" type="VBoxContainer" parent="CreditsPage/ScrollContainer/Sections"]
+[node name="Programming" type="VBoxContainer" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections"]
 layout_mode = 2
 
-[node name="Title" parent="CreditsPage/ScrollContainer/Sections/Programming" instance=ExtResource("18_6o4oc")]
+[node name="Title" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Programming" instance=ExtResource("18_6o4oc")]
+use_parent_material = true
 layout_mode = 2
 text = "PROGRAMMING
 "
 
-[node name="Matthias" parent="CreditsPage/ScrollContainer/Sections/Programming" instance=ExtResource("19_ssyei")]
+[node name="Matthias" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Programming" instance=ExtResource("19_ssyei")]
+use_parent_material = true
 layout_mode = 2
 text = "MATTHIAS HARDEN"
 
-[node name="Noah" parent="CreditsPage/ScrollContainer/Sections/Programming" instance=ExtResource("19_ssyei")]
+[node name="Noah" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Programming" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "NOAH JACOBSEN"
 
-[node name="Joe" parent="CreditsPage/ScrollContainer/Sections/Programming" instance=ExtResource("19_ssyei")]
+[node name="Joe" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Programming" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "JOE ZLONICKY"
 
-[node name="GameDesign" type="VBoxContainer" parent="CreditsPage/ScrollContainer/Sections"]
+[node name="GameDesign" type="VBoxContainer" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections"]
 layout_mode = 2
 
-[node name="Title" parent="CreditsPage/ScrollContainer/Sections/GameDesign" instance=ExtResource("18_6o4oc")]
+[node name="Title" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/GameDesign" instance=ExtResource("18_6o4oc")]
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_vjx67")
 text = "GAME DESIGN"
 
-[node name="Matthias" parent="CreditsPage/ScrollContainer/Sections/GameDesign" instance=ExtResource("19_ssyei")]
+[node name="Matthias" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/GameDesign" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "MATTHIAS HARDEN"
 
-[node name="Noah" parent="CreditsPage/ScrollContainer/Sections/GameDesign" instance=ExtResource("19_ssyei")]
+[node name="Noah" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/GameDesign" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "NOAH JACOBSEN"
 
-[node name="Art" type="VBoxContainer" parent="CreditsPage/ScrollContainer/Sections"]
+[node name="Art" type="VBoxContainer" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections"]
 layout_mode = 2
 
-[node name="Title" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("18_6o4oc")]
+[node name="Title" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("18_6o4oc")]
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_vjx67")
 text = "ART"
 
-[node name="AssetsLicensed" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
+[node name="AssetsLicensed" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "ASSETS LICENSED BY CC 3.0
 FROM THE FOLLOWING CREATORS"
 
-[node name="Lorc" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
+[node name="Lorc" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "LORC"
 
-[node name="Delapouite" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
+[node name="Delapouite" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "DELAPOUITE"
 
-[node name="Skoll" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
+[node name="Skoll" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "SKOLL"
 
-[node name="Sbed" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
+[node name="Sbed" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "SBED"
 
-[node name="AllAssetsCanBeFoundAt" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("20_viunj")]
+[node name="AllAssetsCanBeFoundAt" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "ALL ASSETS CAN BE FOUND AT
 HTTPS://GAME-ICONS.NET"
 
-[node name="Music" type="VBoxContainer" parent="CreditsPage/ScrollContainer/Sections"]
+[node name="Music" type="VBoxContainer" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections"]
 layout_mode = 2
 
-[node name="Title" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("18_6o4oc")]
+[node name="Title" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("18_6o4oc")]
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_vjx67")
 text = "MUSIC
 "
 
-[node name="Chase" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="Chase" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "CHASE BY ALEXANDER NAKARADA
 WWW.SERPENTSOUNDSTUDIOS.COM
 "
 
-[node name="ChaseMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="ChaseMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL
 CREATIVE COMMONS CC BY 4.0
@@ -1672,12 +1635,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY/4.0
 
 "
 
-[node name="DragonCastle" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="DragonCastle" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "DRAGON CASTLE BY MAKAI SYMPHONY
 WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
 
-[node name="DragonCastleMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="DragonCastleMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY-SA 3.0
@@ -1685,12 +1648,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
 
 "
 
-[node name="DragonWorld" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="DragonWorld" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "DRAGON WORLD BY MAKAI SYMPHONY
 WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
 
-[node name="DragonWorldMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="DragonWorldMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY-SA 3.0
@@ -1698,12 +1661,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
 
 "
 
-[node name="Durandal" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="Durandal" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "DURANDAL BY MAKAI SYMPHONY
 WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
 
-[node name="DurandalMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="DurandalMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY-SA 3.0
@@ -1711,12 +1674,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
 
 "
 
-[node name="Hitman" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="Hitman" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "HITMAN BY KEVIN MACLEOD
 WWW.INCOMPETECH.COM"
 
-[node name="HitmanMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="HitmanMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY 3.0
@@ -1724,12 +1687,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
 
 "
 
-[node name="HostilesInbound" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="HostilesInbound" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "HOSTILES INBOUND BY MIGUEL JOHNSON
 WWW.SOUNDCLOUD.COM/MIGUELJOHNSONMJMUSIC"
 
-[node name="HostilesInboundMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="HostilesInboundMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY 3.0
@@ -1737,12 +1700,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
 
 "
 
-[node name="TorchOfKnowledge" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="TorchOfKnowledge" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "THE TORCH OF KNOWLEDGE BY DAMIANO BALDONI
 WWW.SOUNDCLOUD.COM/DAMIANO_BALDONI"
 
-[node name="TorchOfKnowledgeMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="TorchOfKnowledgeMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY 4.0
@@ -1750,12 +1713,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY/4.0/
 
 "
 
-[node name="AllOutAttack" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="AllOutAttack" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "ALL OUT ATTACK BY MAKAI SYMPHONY
 WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
 
-[node name="AllOutAttackMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="AllOutAttackMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY-SA 3.0
@@ -1763,12 +1726,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
 
 "
 
-[node name="Duel" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="Duel" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "DUEL BY MAKAI SYMPHONY
 WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
 
-[node name="DuelMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="DuelMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY-SA 3.0
@@ -1776,12 +1739,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
 
 "
 
-[node name="EndlessStorm" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="EndlessStorm" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "ENDLESS STORM BY MAKAI SYMPHONY
 WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
 
-[node name="EndlessStormMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="EndlessStormMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY-SA 3.0
@@ -1789,12 +1752,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
 
 "
 
-[node name="GloryEternal" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="GloryEternal" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "GLORY ETERNAL BY DARREN CURTIS
 WWW.DARRENCURTISMUSIC.COM"
 
-[node name="GloryEternalMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="GloryEternalMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY 3.0
@@ -1802,12 +1765,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
 
 "
 
-[node name="GoddessOfFate" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="GoddessOfFate" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "GODDESS OF FATE BY MAKAI SYMPHONY
 WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
 
-[node name="GoddessOfFateMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="GoddessOfFateMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY-SA 3.0
@@ -1815,12 +1778,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
 
 "
 
-[node name="HydraAndAsh" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="HydraAndAsh" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "HYDRA AND ASH BY MAKAI SYMPHONY
 WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
 
-[node name="HydraAndAshMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="HydraAndAshMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY-SA 3.0
@@ -1828,12 +1791,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
 
 "
 
-[node name="ArmyOfMinotaur" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="ArmyOfMinotaur" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "THE ARMY OF MINOTAUR BY MAKAI SYMPHONY
 WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
 
-[node name="ArmyOfMinotaurMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="ArmyOfMinotaurMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY-SA 3.0
@@ -1841,12 +1804,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
 
 "
 
-[node name="PhantomsCastle" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="PhantomsCastle" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "THE PHANTOM’S CASTLE BY DARREN CURTIS
 WWW.DARRENCURTISMUSIC.COM"
 
-[node name="PhantomsCastleMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="PhantomsCastleMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY 3.0
@@ -1854,12 +1817,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
 
 "
 
-[node name="FallFromGrace" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="FallFromGrace" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "FALL FROM GRACE BY DARREN CURTIS
 WWW.DARRENCURTISMUSIC.COM"
 
-[node name="FallFromGraceMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="FallFromGraceMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY 3.0
@@ -1867,12 +1830,12 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
 
 "
 
-[node name="LurkingEvil" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+[node name="LurkingEvil" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
 layout_mode = 2
 text = "LURKING EVIL BY DARREN CURTIS
 WWW.DARRENCURTISMUSIC.COM"
 
-[node name="LurkingEvilMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+[node name="LurkingEvilMore" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
 layout_mode = 2
 text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
 CREATIVE COMMONS CC BY 3.0
@@ -1880,11 +1843,19 @@ WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
 
 "
 
-[node name="ThankYou" parent="CreditsPage/ScrollContainer/Sections" instance=ExtResource("18_6o4oc")]
+[node name="ThankYou" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections" instance=ExtResource("18_6o4oc")]
 layout_mode = 2
 text = "
 
 AND THANK YOU!"
+
+[node name="ExtraSpace" type="Control" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="ReturnToMainMenuButton" parent="CreditsPage/MarginContainer/VBoxContainer" instance=ExtResource("18_q3vc2")]
+layout_mode = 2
+text = "RETURN TO MAIN MENU"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CreditsPage"]
 libraries = {
@@ -1900,3 +1871,4 @@ libraries = {
 [connection signal="pressed" from="StartPage/MenuContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="StartPage/MenuContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="StartPage/MenuContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="CreditsPage/MarginContainer/VBoxContainer/ReturnToMainMenuButton" to="." method="_on_return_to_main_menu_button_pressed"]

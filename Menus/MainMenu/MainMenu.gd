@@ -2,6 +2,7 @@ extends Node
 
 const GAME_SCENE: PackedScene = preload("res://GameScene/GameScene.tscn")
 
+@onready var title: Control = $Title
 @onready var start_page: Control = $StartPage
 @onready var credits_page: Control = $CreditsPage
 @onready var transition_player: AnimationPlayer = $TransitionAnimator
@@ -16,13 +17,14 @@ func _on_PlayButton_pressed() -> void:
 
 
 func _on_CreditsButton_pressed() -> void:
-	start_page.visible = false
-	credits_page.visible = true
+	title.hide()
+	start_page.hide()
+	credits_page.show()
 
 
 func _on_ReturnToStartPage_pressed() -> void:
-	credits_page.visible = false
-	start_page.visible = true
+	credits_page.hide()
+	start_page.show()
 
 
 func _on_PressAnything_anything_pressed() -> void:
@@ -34,3 +36,9 @@ func _on_PressAnything_anything_pressed() -> void:
 
 func _on_QuitButton_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_return_to_main_menu_button_pressed() -> void:
+	credits_page.hide()
+	title.show()
+	start_page.show()
