@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw1flpllc28iw"]
+
+[ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="1_1k7vo"]
+
+[sub_resource type="FontVariation" id="FontVariation_vjx67"]
+base_font = ExtResource("1_1k7vo")
+spacing_glyph = 2
+
+[node name="SmallCreditsListing" type="Label"]
+theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_vjx67")
+theme_override_font_sizes/font_size = 20
+text = "CREDIT"
+horizontal_alignment = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dte0gritlpqbs"]
+[gd_scene load_steps=65 format=3 uid="uid://dte0gritlpqbs"]
 
 [ext_resource type="Script" path="res://Menus/MainMenu/MainMenu.gd" id="1_ywv84"]
 [ext_resource type="Texture2D" uid="uid://b7i4tg1ov4x4t" path="res://Assets/art/background/main-menu/background.png" id="2_o1jk3"]
@@ -17,6 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://cm7g8brmspna3" path="res://Assets/art/background/main-menu/vignette.png" id="8_vfce4"]
 [ext_resource type="Texture2D" uid="uid://dii3iusm0qkd4" path="res://Assets/art/background/main-menu/blush.png" id="11_ibruy"]
 [ext_resource type="Script" path="res://Menus/MainMenu/PressAnything.gd" id="17_s65gt"]
+[ext_resource type="PackedScene" uid="uid://d1or5bodb071m" path="res://Menus/MainMenu/CreditsTitle.tscn" id="18_6o4oc"]
+[ext_resource type="PackedScene" uid="uid://c46ydrqwl63ca" path="res://Menus/MainMenu/CreditsListing.tscn" id="19_ssyei"]
+[ext_resource type="PackedScene" uid="uid://cw1flpllc28iw" path="res://Menus/MainMenu/CreditsSmallListing.tscn" id="20_viunj"]
 
 [sub_resource type="Gradient" id="Gradient_q7yy2"]
 offsets = PackedFloat32Array(0, 0.857143, 1)
@@ -27,7 +30,7 @@ gradient = SubResource("Gradient_q7yy2")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ji64s"]
 emission_shape = 3
-emission_box_extents = Vector3(960, 1, 1)
+emission_box_extents = Vector3(1920, 1, 1)
 particle_flag_disable_z = true
 direction = Vector3(0, 1, 0)
 spread = 0.0
@@ -42,9 +45,84 @@ scale_min = 0.25
 scale_max = 0.25
 color_ramp = SubResource("GradientTexture1D_csl3r")
 
+[sub_resource type="Animation" id="Animation_jk1r8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Knight/Knight:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_my3mk"]
+resource_name = "breath"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Knight/Knight:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.005), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1iulp"]
+_data = {
+"RESET": SubResource("Animation_jk1r8"),
+"breath": SubResource("Animation_my3mk")
+}
+
+[sub_resource type="Animation" id="Animation_ng7ft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Background/Knight/Knight/Blush:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c6j7w"]
+resource_name = "blush_on_and_off"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Background/Knight/Knight/Blush:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 9.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_46k0y"]
+_data = {
+"RESET": SubResource("Animation_ng7ft"),
+"blush_on_and_off": SubResource("Animation_c6j7w")
+}
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_12juc"]
 emission_shape = 3
-emission_box_extents = Vector3(960, 1, 1)
+emission_box_extents = Vector3(1920, 1, 1)
 particle_flag_disable_z = true
 direction = Vector3(0, 1, 0)
 spread = 0.0
@@ -58,6 +136,206 @@ orbit_velocity_max = 0.0
 scale_min = 0.5
 scale_max = 0.5
 color_ramp = SubResource("GradientTexture1D_csl3r")
+
+[sub_resource type="Animation" id="Animation_50y08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/FarGhosts/FarLeftGhost:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/FarGhosts/FarLeftGhost/EyeGlow:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.784314, 0.631373, 0.870588, 0.423529)]
+}
+
+[sub_resource type="Animation" id="Animation_s4fex"]
+resource_name = "up_and_down"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/FarGhosts/FarLeftGhost:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/FarGhosts/FarLeftGhost/EyeGlow:self_modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 3.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.784314, 0.631373, 0.870588, 0), Color(0.784314, 0.631373, 0.870588, 0.72549)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rt5ek"]
+_data = {
+"RESET": SubResource("Animation_50y08"),
+"up_and_down": SubResource("Animation_s4fex")
+}
+
+[sub_resource type="Animation" id="Animation_pkltf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/FarGhosts/FarRightGhost:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/FarGhosts/FarRightGhost/EyeGlow:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.784314, 0.631373, 0.870588, 0.423529)]
+}
+
+[sub_resource type="Animation" id="Animation_ybhs4"]
+resource_name = "up_and_down"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/FarGhosts/FarRightGhost:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/FarGhosts/FarRightGhost/EyeGlow:self_modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8, 3.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.784314, 0.631373, 0.870588, 0), Color(0.784314, 0.631373, 0.870588, 0.72549)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bhpo5"]
+_data = {
+"RESET": SubResource("Animation_pkltf"),
+"up_and_down": SubResource("Animation_ybhs4")
+}
+
+[sub_resource type="Animation" id="Animation_0rkf5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f2si6"]
+resource_name = "up_and_down"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7, 3.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a4nt1"]
+_data = {
+"RESET": SubResource("Animation_0rkf5"),
+"up_and_down": SubResource("Animation_f2si6")
+}
+
+[sub_resource type="Animation" id="Animation_4egu2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uc0ea"]
+resource_name = "up_and_down"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.9, 4.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xk45b"]
+_data = {
+"RESET": SubResource("Animation_4egu2"),
+"up_and_down": SubResource("Animation_uc0ea")
+}
 
 [sub_resource type="Animation" id="Animation_my7q0"]
 length = 0.001
@@ -97,317 +375,42 @@ _data = {
 "breath": SubResource("Animation_wgtrl")
 }
 
-[sub_resource type="Animation" id="Animation_50y08"]
+[sub_resource type="Animation" id="Animation_gfmre"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Background/FarLeftGhost:position")
+tracks/0/path = NodePath("Title/Container/Title:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Background/FarLeftGhost/EyeGlow:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [216.0]
 }
 
-[sub_resource type="Animation" id="Animation_s4fex"]
+[sub_resource type="Animation" id="Animation_oh5uv"]
 resource_name = "up_and_down"
 length = 5.0
-loop_mode = 1
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Background/FarLeftGhost:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1, 3.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 10)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Background/FarLeftGhost/EyeGlow:self_modulate")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1, 3.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.784314, 0.631373, 0.870588, 0), Color(0.784314, 0.631373, 0.870588, 0.72549)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rt5ek"]
-_data = {
-"RESET": SubResource("Animation_50y08"),
-"up_and_down": SubResource("Animation_s4fex")
-}
-
-[sub_resource type="Animation" id="Animation_pkltf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../FarRightGhost:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../FarRightGhost/EyeGlow:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.784314, 0.631373, 0.870588, 0.423529)]
-}
-
-[sub_resource type="Animation" id="Animation_ybhs4"]
-resource_name = "up_and_down"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../FarRightGhost:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(2, 4.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 10)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../FarRightGhost/EyeGlow:self_modulate")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.8, 3.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.784314, 0.631373, 0.870588, 0), Color(0.784314, 0.631373, 0.870588, 0.72549)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bhpo5"]
-_data = {
-"RESET": SubResource("Animation_pkltf"),
-"up_and_down": SubResource("Animation_ybhs4")
-}
-
-[sub_resource type="Animation" id="Animation_0rkf5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../FrontLeftGhost:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_f2si6"]
-resource_name = "up_and_down"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../FrontLeftGhost:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.7, 3.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 15)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a4nt1"]
-_data = {
-"RESET": SubResource("Animation_0rkf5"),
-"up_and_down": SubResource("Animation_f2si6")
-}
-
-[sub_resource type="Animation" id="Animation_4egu2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../FrontRightGhost:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_uc0ea"]
-resource_name = "up_and_down"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../FrontRightGhost:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1.9, 4.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 15)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xk45b"]
-_data = {
-"RESET": SubResource("Animation_4egu2"),
-"up_and_down": SubResource("Animation_uc0ea")
-}
-
-[sub_resource type="Animation" id="Animation_jk1r8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Knight:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_my3mk"]
-resource_name = "breath"
-length = 3.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Knight:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1.005), Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1iulp"]
-_data = {
-"RESET": SubResource("Animation_jk1r8"),
-"breath": SubResource("Animation_my3mk")
-}
-
-[sub_resource type="Animation" id="Animation_ng7ft"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Knight/Blush:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_c6j7w"]
-resource_name = "blush_on_and_off"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Knight/Blush:self_modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 9.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_46k0y"]
-_data = {
-"RESET": SubResource("Animation_ng7ft"),
-"blush_on_and_off": SubResource("Animation_c6j7w")
-}
-
-[sub_resource type="Animation" id="Animation_jbgaq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Title/Title:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(223, -280)]
-}
-
-[sub_resource type="Animation" id="Animation_8hbej"]
-resource_name = "up_and_down"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Title/Title:position")
+tracks/0/path = NodePath("Title/Container/Title:position:y")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 2.5, 5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(223, -220), Vector2(223, -215), Vector2(223, -220)]
+"values": [-360.0, -355.0, -360.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y317x"]
 _data = {
-"RESET": SubResource("Animation_jbgaq"),
-"up_and_down": SubResource("Animation_8hbej")
+"RESET": SubResource("Animation_gfmre"),
+"up_and_down": SubResource("Animation_oh5uv")
 }
 
 [sub_resource type="FontVariation" id="FontVariation_6salp"]
@@ -492,200 +495,47 @@ spacing_glyph = 2
 base_font = ExtResource("3_8evwy")
 spacing_glyph = 2
 
-[sub_resource type="Animation" id="Animation_hc8cp"]
-resource_name = "anything_pressed"
-length = 4.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkl08"]
+
+[sub_resource type="FontVariation" id="FontVariation_vjx67"]
+base_font = ExtResource("3_8evwy")
+spacing_glyph = 2
+
+[sub_resource type="Animation" id="Animation_m1mnh"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PressAnything:modulate")
+tracks/0/path = NodePath("ScrollContainer:scroll_vertical")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_7bbhf"]
+resource_name = "scroll_credits"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScrollContainer:scroll_vertical")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 30),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [0, 3918]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PressAnything:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PressAnything/Label:scale")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(0.9, 0.9), Vector2(1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/path = NodePath("Background/KnightShadow:modulate")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = false
-tracks/4/path = NodePath("Background/Shadows:modulate")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = false
-tracks/5/path = NodePath("Background/FarLeftGhost:modulate")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = false
-tracks/6/path = NodePath("Background/FarRightGhost:modulate")
-tracks/6/interp = 2
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = false
-tracks/7/path = NodePath("Background/Knight:modulate")
-tracks/7/interp = 2
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("StartPage:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("StartPage:modulate")
-tracks/9/interp = 2
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 1.5, 2.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = false
-tracks/10/path = NodePath("Background/FrontLeftGhost:modulate")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = false
-tracks/11/path = NodePath("Background/FrontRightGhost:modulate")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Background/FarAshParticles:self_modulate")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0.5, 1.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.47451)]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Background/MidDistanceAshParticles:self_modulate")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0.5, 1.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.478431)]
-}
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = false
-tracks/14/path = NodePath("Title:position")
-tracks/14/interp = 2
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0.5, 1.8, 2.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 324), Vector2(0, -25), Vector2(0, 0)]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("Background/DarkOverlay:color")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 0.505882)]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3x7b"]
+_data = {
+"RESET": SubResource("Animation_m1mnh"),
+"scroll_credits": SubResource("Animation_7bbhf")
 }
 
 [sub_resource type="Animation" id="Animation_puduo"]
@@ -693,7 +543,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PressAnything:modulate")
+tracks/0/path = NodePath("PressAnythingPage:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -705,7 +555,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PressAnything:visible")
+tracks/1/path = NodePath("PressAnythingPage:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -717,7 +567,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PressAnything/Label:scale")
+tracks/2/path = NodePath("PressAnythingPage/Label:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -729,7 +579,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Background/KnightShadow:modulate")
+tracks/3/path = NodePath("Background/FarGhosts/Shadows:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -741,7 +591,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Background/Shadows:modulate")
+tracks/4/path = NodePath("Background/FarGhosts/FarLeftGhost:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -753,7 +603,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Background/FarLeftGhost:modulate")
+tracks/5/path = NodePath("Background/FarGhosts/FarRightGhost:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -765,7 +615,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Background/FarRightGhost:modulate")
+tracks/6/path = NodePath("Background/Knight/Knight:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -777,31 +627,31 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Background/Knight:modulate")
+tracks/7/path = NodePath("StartPage:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("StartPage:visible")
+tracks/8/path = NodePath("StartPage:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("StartPage:modulate")
+tracks/9/path = NodePath("Background/FrontGhosts/FrontLeftGhost:modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -813,7 +663,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Background/FrontLeftGhost:modulate")
+tracks/10/path = NodePath("Background/FrontGhosts/FrontRightGhost:modulate")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -825,7 +675,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Background/FrontRightGhost:modulate")
+tracks/11/path = NodePath("Background/Background/FarAshParticles:self_modulate")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -837,7 +687,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Background/FarAshParticles:self_modulate")
+tracks/12/path = NodePath("Background/FarGhosts/MidDistanceAshParticles:self_modulate")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -849,38 +699,426 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Background/MidDistanceAshParticles:self_modulate")
+tracks/13/path = NodePath("Background/DarkOverlay:color")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(0, 0, 0, 0)]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
-tracks/14/enabled = false
-tracks/14/path = NodePath("Title:position")
+tracks/14/enabled = true
+tracks/14/path = NodePath("Title/Container:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 324)]
+"values": [Vector2(960, 540)]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Background/DarkOverlay:color")
+tracks/15/path = NodePath("Background/Background:scale")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 0)]
+"values": [Vector2(1, 1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Background/Knight/KnightShadow:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Background/Background:position")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Background/Knight:scale")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Background/Knight:position")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Background/FarGhosts:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Background/FrontGhosts:scale")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Background/FarGhosts:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Background/FrontGhosts:position")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hc8cp"]
+resource_name = "anything_pressed"
+length = 1.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PressAnythingPage:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PressAnythingPage:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PressAnythingPage/Label:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1.2, 1.2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/FarGhosts/Shadows:modulate")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Background/FarGhosts/FarLeftGhost:modulate")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Background/FarGhosts/FarRightGhost:modulate")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Background/Knight/Knight:modulate")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StartPage:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("StartPage:modulate")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Background/FrontGhosts/FrontLeftGhost:modulate")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Background/FrontGhosts/FrontRightGhost:modulate")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Background/Background/FarAshParticles:self_modulate")
+tracks/11/interp = 2
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.47451)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Background/FarGhosts/MidDistanceAshParticles:self_modulate")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.478431)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Title/Container:position:y")
+tracks/13/interp = 2
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.3, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [540.0, 550.0, 245.0, 255.0]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = false
+tracks/14/path = NodePath("Background/DarkOverlay:color")
+tracks/14/interp = 2
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 0.505882)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Background/Background:scale")
+tracks/15/interp = 2
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Background/Knight/KnightShadow:modulate")
+tracks/16/interp = 2
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Background/Background:position")
+tracks/17/interp = 2
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -17), Vector2(0, 48)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Background/Knight:scale")
+tracks/18/interp = 2
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Background/Knight:position")
+tracks/19/interp = 2
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -17), Vector2(0, 48)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Background/FarGhosts:scale")
+tracks/20/interp = 2
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.05, 1.05)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Background/FrontGhosts:scale")
+tracks/21/interp = 2
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.2, 1.2)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Background/FarGhosts:position")
+tracks/22/interp = 2
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -9), Vector2(0, 27)]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Background/FrontGhosts:position")
+tracks/23/interp = 2
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -36), Vector2(0, 107)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a017v"]
@@ -901,7 +1139,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="TextureRect" parent="Background"]
+[node name="Background" type="Control" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+
+[node name="Background" type="TextureRect" parent="Background/Background"]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -911,17 +1159,27 @@ grow_vertical = 2
 texture = ExtResource("2_o1jk3")
 expand_mode = 1
 
-[node name="FarAshParticles" type="GPUParticles2D" parent="Background"]
+[node name="FarAshParticles" type="GPUParticles2D" parent="Background/Background"]
 modulate = Color(1, 1, 1, 0.564706)
 position = Vector2(960, -50)
-amount = 32
+amount = 64
 process_material = SubResource("ParticleProcessMaterial_ji64s")
 texture = ExtResource("3_nogl5")
 lifetime = 7.0
 preprocess = 7.0
 
-[node name="KnightShadow" type="TextureRect" parent="Background"]
+[node name="Knight" type="Control" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+
+[node name="KnightShadow" type="TextureRect" parent="Background/Knight"]
 self_modulate = Color(0.235294, 0.235294, 0.235294, 0.862745)
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -931,57 +1189,8 @@ grow_vertical = 2
 texture = ExtResource("3_p0xax")
 expand_mode = 1
 
-[node name="Shadows" type="TextureRect" parent="Background"]
-self_modulate = Color(0.227451, 0.227451, 0.227451, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_achxf")
-expand_mode = 1
-
-[node name="FarLeftGhost" type="TextureRect" parent="Background"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_q8sfc")
-expand_mode = 1
-
-[node name="EyeGlow" type="TextureRect" parent="Background/FarLeftGhost"]
-layout_mode = 0
-offset_left = 360.0
-offset_top = 183.615
-offset_right = 498.0
-offset_bottom = 269.615
-texture = ExtResource("6_6ll8j")
-expand_mode = 1
-
-[node name="FarRightGhost" type="TextureRect" parent="Background"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_h0c5q")
-expand_mode = 1
-
-[node name="EyeGlow" type="TextureRect" parent="Background/FarRightGhost"]
-self_modulate = Color(0.784314, 0.631373, 0.870588, 0.423529)
-layout_mode = 0
-offset_left = 1244.0
-offset_top = 295.018
-offset_right = 1358.0
-offset_bottom = 368.018
-texture = ExtResource("7_pachd")
-expand_mode = 1
-
-[node name="Knight" type="TextureRect" parent="Background"]
+[node name="Knight" type="TextureRect" parent="Background/Knight"]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -992,25 +1201,143 @@ pivot_offset = Vector2(960, 1080)
 texture = ExtResource("5_rxs3r")
 expand_mode = 1
 
-[node name="Blush" type="TextureRect" parent="Background/Knight"]
+[node name="Blush" type="TextureRect" parent="Background/Knight/Knight"]
 self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 860.0
-offset_top = 281.844
-offset_right = 970.0
-offset_bottom = 391.844
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 0.261
+anchor_right = 0.505
+anchor_bottom = 0.363
+offset_left = -0.160034
+offset_top = -0.0360107
+offset_right = 0.400024
+offset_bottom = -0.196014
 texture = ExtResource("11_ibruy")
 expand_mode = 1
 
-[node name="MidDistanceAshParticles" type="GPUParticles2D" parent="Background"]
+[node name="KnightAnimator" type="AnimationPlayer" parent="Background/Knight"]
+root_node = NodePath("../../..")
+autoplay = "breath"
+libraries = {
+"": SubResource("AnimationLibrary_1iulp")
+}
+
+[node name="BlushAnimator" type="AnimationPlayer" parent="Background/Knight"]
+libraries = {
+"": SubResource("AnimationLibrary_46k0y")
+}
+
+[node name="FarGhosts" type="Control" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+
+[node name="FarLeftGhost" type="TextureRect" parent="Background/FarGhosts"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_q8sfc")
+expand_mode = 1
+
+[node name="EyeGlow" type="TextureRect" parent="Background/FarGhosts/FarLeftGhost"]
+self_modulate = Color(0.784314, 0.631373, 0.870588, 0.423529)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.188
+anchor_top = 0.171
+anchor_right = 0.26
+anchor_bottom = 0.25
+offset_left = 0.039978
+offset_top = -0.200012
+offset_right = -0.200043
+offset_bottom = 0.47998
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(69, 43)
+texture = ExtResource("6_6ll8j")
+expand_mode = 1
+
+[node name="FarRightGhost" type="TextureRect" parent="Background/FarGhosts"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_h0c5q")
+expand_mode = 1
+
+[node name="EyeGlow" type="TextureRect" parent="Background/FarGhosts/FarRightGhost"]
+self_modulate = Color(0.784314, 0.631373, 0.870588, 0.423529)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.648
+anchor_top = 0.273
+anchor_right = 0.707
+anchor_bottom = 0.341
+offset_left = -0.160034
+offset_top = 0.178009
+offset_right = 0.559937
+offset_bottom = -0.262024
+texture = ExtResource("7_pachd")
+expand_mode = 1
+
+[node name="Shadows" type="TextureRect" parent="Background/FarGhosts"]
+self_modulate = Color(0.227451, 0.227451, 0.227451, 1)
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_achxf")
+expand_mode = 1
+
+[node name="MidDistanceAshParticles" type="GPUParticles2D" parent="Background/FarGhosts"]
 modulate = Color(1, 1, 1, 0.341176)
-position = Vector2(960, -50)
+position = Vector2(960, -73)
+amount = 16
 process_material = SubResource("ParticleProcessMaterial_12juc")
 texture = ExtResource("3_nogl5")
 lifetime = 12.0
 preprocess = 12.0
 
-[node name="FrontLeftGhost" type="TextureRect" parent="Background"]
+[node name="FarLeftGhostAnimator" type="AnimationPlayer" parent="Background/FarGhosts"]
+root_node = NodePath("../../..")
+autoplay = "up_and_down"
+libraries = {
+"": SubResource("AnimationLibrary_rt5ek")
+}
+
+[node name="FarRightGhostAnimator" type="AnimationPlayer" parent="Background/FarGhosts"]
+root_node = NodePath("../../..")
+autoplay = "up_and_down"
+libraries = {
+"": SubResource("AnimationLibrary_bhpo5")
+}
+
+[node name="FrontGhosts" type="Control" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+
+[node name="FrontLeftGhost" type="TextureRect" parent="Background/FrontGhosts"]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1020,7 +1347,8 @@ grow_vertical = 2
 texture = ExtResource("6_8vk1w")
 expand_mode = 1
 
-[node name="FrontRightGhost" type="TextureRect" parent="Background"]
+[node name="FrontRightGhost" type="TextureRect" parent="Background/FrontGhosts"]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1030,16 +1358,21 @@ grow_vertical = 2
 texture = ExtResource("7_pqm31")
 expand_mode = 1
 
-[node name="BreathingTint" type="ColorRect" parent="Background"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
+[node name="FrontLeftGhostAnimator" type="AnimationPlayer" parent="Background/FrontGhosts"]
+root_node = NodePath("../FrontLeftGhost")
+autoplay = "up_and_down"
+libraries = {
+"": SubResource("AnimationLibrary_a4nt1")
+}
 
-[node name="DarkOverlay" type="ColorRect" parent="Background"]
+[node name="FrontRightAnimator" type="AnimationPlayer" parent="Background/FrontGhosts"]
+root_node = NodePath("../FrontRightGhost")
+autoplay = "up_and_down"
+libraries = {
+"": SubResource("AnimationLibrary_xk45b")
+}
+
+[node name="BreathingTint" type="ColorRect" parent="Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1059,49 +1392,20 @@ grow_vertical = 2
 texture = ExtResource("8_vfce4")
 expand_mode = 1
 
-[node name="Animators" type="Node" parent="Background"]
+[node name="DarkOverlay" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
 
-[node name="TintAnimator" type="AnimationPlayer" parent="Background/Animators"]
-root_node = NodePath("../../..")
+[node name="TintAnimator" type="AnimationPlayer" parent="Background"]
+root_node = NodePath("../..")
 autoplay = "breath"
 libraries = {
 "": SubResource("AnimationLibrary_36dis")
-}
-
-[node name="FarLeftGhostAnimator" type="AnimationPlayer" parent="Background/Animators"]
-root_node = NodePath("../../..")
-autoplay = "up_and_down"
-libraries = {
-"": SubResource("AnimationLibrary_rt5ek")
-}
-
-[node name="FarRightGhostAnimator" type="AnimationPlayer" parent="Background/Animators"]
-autoplay = "up_and_down"
-libraries = {
-"": SubResource("AnimationLibrary_bhpo5")
-}
-
-[node name="FrontLeftGhostAnimator" type="AnimationPlayer" parent="Background/Animators"]
-autoplay = "up_and_down"
-libraries = {
-"": SubResource("AnimationLibrary_a4nt1")
-}
-
-[node name="FrontRightAnimator" type="AnimationPlayer" parent="Background/Animators"]
-autoplay = "up_and_down"
-libraries = {
-"": SubResource("AnimationLibrary_xk45b")
-}
-
-[node name="KnightAnimator" type="AnimationPlayer" parent="Background/Animators"]
-autoplay = "breath"
-libraries = {
-"": SubResource("AnimationLibrary_1iulp")
-}
-
-[node name="BlushAnimator" type="AnimationPlayer" parent="Background/Animators"]
-libraries = {
-"": SubResource("AnimationLibrary_46k0y")
 }
 
 [node name="Title" type="Control" parent="."]
@@ -1109,27 +1413,44 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -324.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="TextureRect" parent="Title"]
-layout_mode = 0
-offset_left = 223.0
-offset_top = -280.0
-offset_right = 1669.0
-offset_bottom = 616.0
+[node name="Container" type="Control" parent="Title"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="TextureRect" parent="Title/Container"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = 216.0
+offset_right = 640.0
+offset_bottom = 936.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_lxtjt")
 expand_mode = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Title"]
-root_node = NodePath("../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Title/Container"]
+root_node = NodePath("../../..")
 autoplay = "up_and_down"
 libraries = {
 "": SubResource("AnimationLibrary_y317x")
 }
 
-[node name="PressAnything" type="Control" parent="."]
+[node name="PressAnythingPage" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1138,17 +1459,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("17_s65gt")
 
-[node name="Label" type="Label" parent="PressAnything"]
+[node name="Label" type="Label" parent="PressAnythingPage"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -143.0
-offset_bottom = -80.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -235.0
+offset_top = 76.5
+offset_right = 235.0
+offset_bottom = 139.5
 grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(960, 31)
+grow_vertical = 2
+pivot_offset = Vector2(235, 31)
 theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = SubResource("FontVariation_6salp")
@@ -1156,7 +1480,7 @@ theme_override_font_sizes/font_size = 45
 text = "- PRESS ANYTHING -"
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PressAnything"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PressAnythingPage"]
 autoplay = "breathe"
 libraries = {
 "": SubResource("AnimationLibrary_owq6o")
@@ -1227,172 +1551,352 @@ theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = SubResource("FontVariation_ktwp2")
 theme_override_font_sizes/font_size = 45
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkl08")
 text = "QUIT"
 flat = true
 
 [node name="CreditsPage" type="Control" parent="."]
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Container" type="VBoxContainer" parent="CreditsPage"]
-custom_minimum_size = Vector2(360, 0)
-layout_mode = 0
-offset_left = 360.0
-offset_top = 141.0
-offset_right = 720.0
-offset_bottom = 465.0
+[node name="ScrollContainer" type="ScrollContainer" parent="CreditsPage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CreditsPage/Container"]
-custom_minimum_size = Vector2(0, 300)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CreditsPage/Container/ScrollContainer"]
+[node name="Sections" type="VBoxContainer" parent="CreditsPage/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/separation = 75
 
-[node name="Credits" type="RichTextLabel" parent="CreditsPage/Container/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 250)
+[node name="Programming" type="VBoxContainer" parent="CreditsPage/ScrollContainer/Sections"]
 layout_mode = 2
-bbcode_enabled = true
-text = "[font_size=20][color=salmon]Programming[/color][/font_size]
-Matthias Harden
-Noah Jacobsen
 
-[font_size=20][color=salmon]Game Design[/color][/font_size]
-Matthias Harden
-Noah Jacobsen
-
-[font_size=20][color=salmon]Art[/color][/font_size]
-Assets licensed by CC 3.0
-From creators
-[ul]
-lorc
-delapouite
-skoll
-sbed
-[/ul]
-All assets can be found at
-https://game-icons.net/
-
-[font_size=20][color=salmon]Music[/color][/font_size]
-[i]Chase[/i] by Alexander Nakarada
-https://www.serpentsoundstudios.com
-Music promoted by https://www.chosic.com/free-music/all/
-Attribution 4.0 International (CC BY 4.0)
-https://creativecommons.org/licenses/by/4.0/
-
-[i]Dragon Castle[/i] by Makai Symphony
-https://soundcloud.com/makai-symphony
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY-SA 3.0
-https://creativecommons.org/licenses/by-sa/3.0/
-
-[i]Dragon World[/i] by Makai Symphony
-https://soundcloud.com/makai-symphony
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY-SA 3.0
-https://creativecommons.org/licenses/by-sa/3.0/
-
-[i]Durandal[/i] by Makai Symphony
-https://soundcloud.com/makai-symphony
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY-SA 3.0
-https://creativecommons.org/licenses/by-sa/3.0/
-
-[i]Hitman[/i] by Kevin MacLeod
-https://incompetech.com/
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY 3.0
-https://creativecommons.org/licenses/by/3.0/
-
-[i]Hostiles Inbound[/i] by Miguel Johnson
-https://soundcloud.com/migueljohnsonmjmusic
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY 3.0
-https://creativecommons.org/licenses/by/3.0/
-
-[i]The Torch Of Knowledge[/i] by Damiano Baldoni
-https://soundcloud.com/damiano_baldoni
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY 4.0
-https://creativecommons.org/licenses/by/4.0/
-
-[i]All Out Attack[/i] by Makai Symphony
-https://soundcloud.com/makai-symphony
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY-SA 3.0
-https://creativecommons.org/licenses/by-sa/3.0/
-
-[i]Duel[/i] by Makai Symphony
-https://soundcloud.com/makai-symphony
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY-SA 3.0
-https://creativecommons.org/licenses/by-sa/3.0/
-
-[i]Endless Storm[/i] by Makai Symphony
-https://soundcloud.com/makai-symphony
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY-SA 3.0
-https://creativecommons.org/licenses/by-sa/3.0/
-
-[i]Glory Eternal[/i] by Darren Curtis
-https://www.darrencurtismusic.com/
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY 3.0
-https://creativecommons.org/licenses/by/3.0/
-
-[i]Goddess Of Fate[/i] by Makai Symphony
-https://soundcloud.com/makai-symphony
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY-SA 3.0
-https://creativecommons.org/licenses/by-sa/3.0/
-
-[i]Hydra And Ash[/i] by Makai Symphony
-https://soundcloud.com/makai-symphony
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY-SA 3.0
-https://creativecommons.org/licenses/by-sa/3.0/
-
-[i]The Army of Minotaur[/i] by Makai Symphony
-https://soundcloud.com/makai-symphony
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY-SA 3.0
-https://creativecommons.org/licenses/by-sa/3.0/
-
-[i]The Phantom’s Castle[/i] by Darren Curtis
-https://www.darrencurtismusic.com/
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY 3.0
-https://creativecommons.org/licenses/by/3.0/
-
-[i]Fall From Grace[/i] by Darren Curtis
-https://www.darrencurtismusic.com/
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY 3.0
-https://creativecommons.org/licenses/by/3.0/
-
-[i]Lurking Evil[/i] by Darren Curtis
-https://www.darrencurtismusic.com/
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY 3.0
-https://creativecommons.org/licenses/by/3.0/"
-
-[node name="ReturnToStartPage" type="Button" parent="CreditsPage/Container"]
+[node name="Title" parent="CreditsPage/ScrollContainer/Sections/Programming" instance=ExtResource("18_6o4oc")]
 layout_mode = 2
-text = "Return to Start Page"
+text = "PROGRAMMING
+"
+
+[node name="Matthias" parent="CreditsPage/ScrollContainer/Sections/Programming" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "MATTHIAS HARDEN"
+
+[node name="Noah" parent="CreditsPage/ScrollContainer/Sections/Programming" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "NOAH JACOBSEN"
+
+[node name="Joe" parent="CreditsPage/ScrollContainer/Sections/Programming" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "JOE ZLONICKY"
+
+[node name="GameDesign" type="VBoxContainer" parent="CreditsPage/ScrollContainer/Sections"]
+layout_mode = 2
+
+[node name="Title" parent="CreditsPage/ScrollContainer/Sections/GameDesign" instance=ExtResource("18_6o4oc")]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_vjx67")
+text = "GAME DESIGN"
+
+[node name="Matthias" parent="CreditsPage/ScrollContainer/Sections/GameDesign" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "MATTHIAS HARDEN"
+
+[node name="Noah" parent="CreditsPage/ScrollContainer/Sections/GameDesign" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "NOAH JACOBSEN"
+
+[node name="Art" type="VBoxContainer" parent="CreditsPage/ScrollContainer/Sections"]
+layout_mode = 2
+
+[node name="Title" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("18_6o4oc")]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_vjx67")
+text = "ART"
+
+[node name="AssetsLicensed" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "ASSETS LICENSED BY CC 3.0
+FROM THE FOLLOWING CREATORS"
+
+[node name="Lorc" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "LORC"
+
+[node name="Delapouite" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "DELAPOUITE"
+
+[node name="Skoll" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "SKOLL"
+
+[node name="Sbed" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "SBED"
+
+[node name="AllAssetsCanBeFoundAt" parent="CreditsPage/ScrollContainer/Sections/Art" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "ALL ASSETS CAN BE FOUND AT
+HTTPS://GAME-ICONS.NET"
+
+[node name="Music" type="VBoxContainer" parent="CreditsPage/ScrollContainer/Sections"]
+layout_mode = 2
+
+[node name="Title" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("18_6o4oc")]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_vjx67")
+text = "MUSIC
+"
+
+[node name="Chase" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "CHASE BY ALEXANDER NAKARADA
+WWW.SERPENTSOUNDSTUDIOS.COM
+"
+
+[node name="ChaseMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL
+CREATIVE COMMONS CC BY 4.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/4.0
+
+"
+
+[node name="DragonCastle" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "DRAGON CASTLE BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="DragonCastleMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+
+"
+
+[node name="DragonWorld" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "DRAGON WORLD BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="DragonWorldMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+
+"
+
+[node name="Durandal" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "DURANDAL BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="DurandalMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+
+"
+
+[node name="Hitman" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "HITMAN BY KEVIN MACLEOD
+WWW.INCOMPETECH.COM"
+
+[node name="HitmanMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+
+"
+
+[node name="HostilesInbound" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "HOSTILES INBOUND BY MIGUEL JOHNSON
+WWW.SOUNDCLOUD.COM/MIGUELJOHNSONMJMUSIC"
+
+[node name="HostilesInboundMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+
+"
+
+[node name="TorchOfKnowledge" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "THE TORCH OF KNOWLEDGE BY DAMIANO BALDONI
+WWW.SOUNDCLOUD.COM/DAMIANO_BALDONI"
+
+[node name="TorchOfKnowledgeMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 4.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/4.0/
+
+"
+
+[node name="AllOutAttack" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "ALL OUT ATTACK BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="AllOutAttackMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+
+"
+
+[node name="Duel" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "DUEL BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="DuelMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+
+"
+
+[node name="EndlessStorm" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "ENDLESS STORM BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="EndlessStormMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+
+"
+
+[node name="GloryEternal" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "GLORY ETERNAL BY DARREN CURTIS
+WWW.DARRENCURTISMUSIC.COM"
+
+[node name="GloryEternalMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+
+"
+
+[node name="GoddessOfFate" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "GODDESS OF FATE BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="GoddessOfFateMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+
+"
+
+[node name="HydraAndAsh" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "HYDRA AND ASH BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="HydraAndAshMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+
+"
+
+[node name="ArmyOfMinotaur" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "THE ARMY OF MINOTAUR BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="ArmyOfMinotaurMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+
+"
+
+[node name="PhantomsCastle" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "THE PHANTOM’S CASTLE BY DARREN CURTIS
+WWW.DARRENCURTISMUSIC.COM"
+
+[node name="PhantomsCastleMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+
+"
+
+[node name="FallFromGrace" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "FALL FROM GRACE BY DARREN CURTIS
+WWW.DARRENCURTISMUSIC.COM"
+
+[node name="FallFromGraceMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+
+"
+
+[node name="LurkingEvil" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("19_ssyei")]
+layout_mode = 2
+text = "LURKING EVIL BY DARREN CURTIS
+WWW.DARRENCURTISMUSIC.COM"
+
+[node name="LurkingEvilMore" parent="CreditsPage/ScrollContainer/Sections/Music" instance=ExtResource("20_viunj")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+
+"
+
+[node name="ThankYou" parent="CreditsPage/ScrollContainer/Sections" instance=ExtResource("18_6o4oc")]
+layout_mode = 2
+text = "
+
+AND THANK YOU!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CreditsPage"]
+libraries = {
+"": SubResource("AnimationLibrary_x3x7b")
+}
 
 [node name="TransitionAnimator" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_a017v")
 }
 
-[connection signal="anything_pressed" from="PressAnything" to="." method="_on_PressAnything_anything_pressed"]
+[connection signal="anything_pressed" from="PressAnythingPage" to="." method="_on_PressAnything_anything_pressed"]
 [connection signal="pressed" from="StartPage/MenuContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="StartPage/MenuContainer/SettingsButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="StartPage/MenuContainer/CreditsButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="StartPage/MenuContainer/QuitButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="CreditsPage/Container/ReturnToStartPage" to="." method="_on_ReturnToStartPage_pressed"]
+[connection signal="pressed" from="StartPage/MenuContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="StartPage/MenuContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

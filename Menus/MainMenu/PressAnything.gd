@@ -7,7 +7,7 @@ const SECRET_STRING: String = "cutie"
 
 var progress_string: String = ""
 
-@onready var animator: AnimationPlayer = $"../Background/Animators/BlushAnimator"
+@onready var blush_animator: AnimationPlayer = $"../Background/Knight/BlushAnimator"
 
 
 func _input(event: InputEvent) -> void:
@@ -21,7 +21,7 @@ func _input(event: InputEvent) -> void:
 			progress_string += character
 			if progress_string == SECRET_STRING:
 				progress_string = ""
-				animator.play("blush_on_and_off")
+				blush_animator.play("blush_on_and_off")
 			return
 		else:
 			progress_string = ""

@@ -30,3 +30,7 @@ func _on_PressAnything_anything_pressed() -> void:
 		return
 	
 	transition_player.play("anything_pressed")
+
+
+func _on_QuitButton_pressed() -> void:
+	get_tree().quit()

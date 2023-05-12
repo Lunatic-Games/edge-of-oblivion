@@ -148,3 +148,7 @@ debug_spawn_boss={
 [physics]
 
 common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.156863, 0.152941, 0.215686, 1)
