@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://57a3ac7a6uvb"]
+
+[ext_resource type="Texture2D" uid="uid://cc7ppnjaksfsx" path="res://Assets/textures/rays.png" id="1_em54x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3kcdu"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_ckpys"]
+offsets = PackedFloat32Array(0, 0.303279, 0.70765, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_snexi"]
+gradient = SubResource("Gradient_ckpys")
+
+[sub_resource type="Curve" id="Curve_l2diu"]
+_data = [Vector2(0, 0.245455), 0.0, 0.0, 0, 0, Vector2(0.400504, 0.436364), 0.631591, 0.631591, 0, 0, Vector2(0.738035, 0.690909), 0.585258, 0.585258, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_3m50y"]
+curve = SubResource("Curve_l2diu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rpwuy"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+angular_velocity_min = 6.0
+angular_velocity_max = 6.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_3m50y")
+color = Color(0.909804, 0.827451, 0.654902, 0.156863)
+color_ramp = SubResource("GradientTexture1D_snexi")
+turbulence_enabled = true
+
+[node name="RayParticles" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_3kcdu")
+position = Vector2(90.8333, 123.333)
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_rpwuy")
+texture = ExtResource("1_em54x")
+lifetime = 4.0
