@@ -1,8 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://csh5tgc5kmi6v"]
+[gd_scene load_steps=29 format=3 uid="uid://csh5tgc5kmi6v"]
 
 [ext_resource type="Resource" path="res://Data/Units/Enemies/Bosses/ForgottenKing/forgotten_king_data.tres" id="2_j8shd"]
 [ext_resource type="Material" uid="uid://d2p8yth5vp4kr" path="res://Shaders/dream_shader_material.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://copvhxqv6s2w8" path="res://Data/Units/Enemies/Bosses/Boss.tscn" id="4"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_mjly1"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="5_lvxue"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_rpxjt"]
+[ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="6_8npp6"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="7_bjfe7"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="8_jplii"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfTileArraySize.gd" id="9_112ek"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_tcar0"]
+[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="11_5fcxx"]
+[ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="12_0wx1s"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/ClearTileArray.gd" id="12_2jrrv"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="12_r5tjo"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="13_0moc8"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="13_fpcgd"]
+[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="13_uc5pm"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Getters/GetPlayer.gd" id="14_riqun"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectClosestTiles.gd" id="15_8mgwd"]
+[ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="16_lnb0q"]
+[ext_resource type="PackedScene" uid="uid://brdufu1xvat6y" path="res://Data/Indicators/Lunge/LungeIndicator.tscn" id="17_af4dp"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfBool.gd" id="20_o47bg"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="23_0tnmu"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="24_jg810"]
 
 [sub_resource type="Curve" id="Curve_qqqeb"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.184122, 1), 0.0, 0.0, 0, 0, Vector2(0.8125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -25,10 +47,152 @@ color = Color(0.937255, 0.713726, 0.627451, 1)
 
 [node name="ForgottenKing" instance=ExtResource("4")]
 boss_data = ExtResource("2_j8shd")
+max_hp_override = 12
 
 [node name="Sprite2D" parent="." index="1"]
 material = ExtResource("3")
 
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("4_mjly1")
+default_value = 4
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("4_mjly1")
+default_value = 2
+
+[node name="Targets" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("5_lvxue")
+
+[node name="Should move" type="Node" parent="LT_PersistentVariables" index="3"]
+script = ExtResource("6_8npp6")
+
 [node name="GPUParticles2D" parent="." index="6"]
 process_material = SubResource("ParticleProcessMaterial_62gbf")
 local_coords = true
+
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_rpxjt")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+on_one_before = true
+
+[node name="Clear targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("tile_array")]
+script = ExtResource("12_2jrrv")
+tile_array = NodePath("../../../../LT_PersistentVariables/Targets")
+
+[node name="Select diamond radius 2" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_bjfe7")
+input_tiles = NodePath("../../../Enemy tile")
+output_tiles = NodePath("../../../../LT_PersistentVariables/Targets")
+radius = 2
+
+[node name="Player" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2"]
+script = ExtResource("5_lvxue")
+
+[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("8_jplii")
+input_tiles = NodePath("../../../../LT_PersistentVariables/Targets")
+output_tiles = NodePath("../Player")
+occupant_type = 1
+
+[node name="If the player was selected" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="4" node_paths=PackedStringArray("input")]
+script = ExtResource("9_112ek")
+input = NodePath("../Player")
+
+[node name="Spawn indicators on targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was selected" index="0" node_paths=PackedStringArray("tiles")]
+script = ExtResource("10_tcar0")
+tiles = NodePath("../../../../../LT_PersistentVariables/Targets")
+node2d_to_spawn = ExtResource("12_0wx1s")
+
+[node name="Should move" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was selected" index="1" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("13_0moc8")
+bool_variable = NodePath("../../../../../LT_PersistentVariables/Should move")
+value = true
+
+[node name="If the player was NOT selected" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="5" node_paths=PackedStringArray("input")]
+script = ExtResource("9_112ek")
+input = NodePath("../Player")
+comparison = 2
+
+[node name="Clear targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="0" node_paths=PackedStringArray("tile_array")]
+script = ExtResource("12_2jrrv")
+tile_array = NodePath("../../../../../LT_PersistentVariables/Targets")
+
+[node name="Should not move" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="1" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("13_0moc8")
+bool_variable = NodePath("../../../../../LT_PersistentVariables/Should move")
+
+[node name="Handle movement" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="2"]
+script = ExtResource("13_uc5pm")
+
+[node name="Grab 3 tiles away in all directions" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("13_fpcgd")
+input_tiles = NodePath("../../../../../Enemy tile")
+output_tiles = NodePath("../../../../../../LT_PersistentVariables/Targets")
+directions = 15
+distance_length = 3
+
+[node name="Player tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="1"]
+script = ExtResource("5_lvxue")
+
+[node name="LT_GetPlayer" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="2" node_paths=PackedStringArray("output_player_tile")]
+script = ExtResource("14_riqun")
+output_player_tile = NodePath("../Player tile")
+
+[node name="Closest to player" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="3" node_paths=PackedStringArray("tiles", "tiles_to_measure_to", "output_tiles")]
+script = ExtResource("15_8mgwd")
+tiles = NodePath("../../../../../../LT_PersistentVariables/Targets")
+tiles_to_measure_to = NodePath("../Player tile")
+output_tiles = NodePath("../../../../../../LT_PersistentVariables/Targets")
+
+[node name="Spawn charge indicator" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="4" node_paths=PackedStringArray("tiles")]
+script = ExtResource("10_tcar0")
+tiles = NodePath("../../../../../../LT_PersistentVariables/Targets")
+node2d_to_spawn = ExtResource("17_af4dp")
+
+[node name="Appear ready" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="6" node_paths=PackedStringArray("enemies")]
+script = ExtResource("23_0tnmu")
+enemies = NodePath("../../../This enemy")
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_rpxjt")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+
+[node name="If should move" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("20_o47bg")
+input = NodePath("../../../../LT_PersistentVariables/Should move")
+
+[node name="Move to targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/If should move" index="0" node_paths=PackedStringArray("tile", "destination_tile")]
+script = ExtResource("16_lnb0q")
+tile = NodePath("../../../../Enemy tile")
+destination_tile = NodePath("../../../../../LT_PersistentVariables/Targets")
+
+[node name="If should not move" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("20_o47bg")
+input = NodePath("../../../../LT_PersistentVariables/Should move")
+value = 1
+
+[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/If should not move" index="0" node_paths=PackedStringArray("tiles")]
+script = ExtResource("10_tcar0")
+tiles = NodePath("../../../../../LT_PersistentVariables/Targets")
+node2d_to_spawn = ExtResource("11_5fcxx")
+
+[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/If should not move" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("8_jplii")
+input_tiles = NodePath("../../../../../LT_PersistentVariables/Targets")
+output_tiles = NodePath("../../../../../LT_PersistentVariables/Targets")
+occupant_type = 1
+
+[node name="Damage player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/If should not move" index="2" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("12_r5tjo")
+tiles = NodePath("../../../../../LT_PersistentVariables/Targets")
+damage_override = NodePath("../../../../../LT_PersistentVariables/Damage")
+
+[node name="Appear unready" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("enemies")]
+script = ExtResource("23_0tnmu")
+enemies = NodePath("../../../This enemy")
+appear_ready = false
+
+[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+script = ExtResource("24_jg810")
+progress_bar = NodePath("../../../AttackBar")
+every_x_calls = NodePath("../LT_EveryXCalls")
