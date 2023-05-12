@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cc7ppnjaksfsx"
-path="res://.godot/imported/rays1_albedo.png-179c726588df3804d0807c076cbbe255.ctex"
+path="res://.godot/imported/rays.png-aba310f4563abd2ec48d0b957243f4f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/textures/rays1_albedo.png"
-dest_files=["res://.godot/imported/rays1_albedo.png-179c726588df3804d0807c076cbbe255.ctex"]
+source_file="res://Assets/textures/rays.png"
+dest_files=["res://.godot/imported/rays.png-aba310f4563abd2ec48d0b957243f4f6.ctex"]
 
 [params]
 

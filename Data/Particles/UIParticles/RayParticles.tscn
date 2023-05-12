@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://kgsyulhcedbf"]
+[gd_scene load_steps=8 format=3 uid="uid://57a3ac7a6uvb"]
 
-[ext_resource type="Texture2D" uid="uid://cc7ppnjaksfsx" path="res://Assets/textures/rays1_albedo.png" id="1_efw3a"]
+[ext_resource type="Texture2D" uid="uid://cc7ppnjaksfsx" path="res://Assets/textures/rays.png" id="1_em54x"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3kcdu"]
 blend_mode = 1
@@ -37,5 +37,5 @@ position = Vector2(90.8333, 123.333)
 emitting = false
 amount = 3
 process_material = SubResource("ParticleProcessMaterial_rpwuy")
-texture = ExtResource("1_efw3a")
+texture = ExtResource("1_em54x")
 lifetime = 4.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://4e8lrftlqfat"]
 
 [ext_resource type="Script" path="res://UI/Card/Card.gd" id="1_e71sb"]
-[ext_resource type="PackedScene" uid="uid://kgsyulhcedbf" path="res://Data/Particles/UIParticles/RayParticles.tscn" id="2_2sdpx"]
+[ext_resource type="PackedScene" uid="uid://57a3ac7a6uvb" path="res://Data/Particles/UIParticles/RayParticles.tscn" id="2_2sdpx"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="3_ldc60"]
 [ext_resource type="Texture2D" uid="uid://4h6r8fmh8tbt" path="res://Assets/art/icons/stars/lorc/spiky-explosion.svg" id="4_0mk7p"]
 [ext_resource type="Texture2D" uid="uid://bf05wsrti4o0t" path="res://Assets/art/icons/buildings/caro-asercion/clock-tower.svg" id="5_ks2ii"]
@@ -149,7 +149,7 @@ offset_left = -4.16667
 offset_top = -4.16667
 offset_right = 185.833
 offset_bottom = 275.833
-color = Color(0.690196, 0.501961, 0.666667, 1)
+color = Color(0.701961, 0.466667, 0.196078, 1)
 
 [node name="Background" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(180, 270)
