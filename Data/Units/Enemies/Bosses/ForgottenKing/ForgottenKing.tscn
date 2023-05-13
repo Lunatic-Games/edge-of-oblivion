@@ -84,6 +84,7 @@ script = ExtResource("7_bjfe7")
 input_tiles = NodePath("../../../Enemy tile")
 output_tiles = NodePath("../../../../LT_PersistentVariables/Targets")
 radius = 2
+include_origin_tile = false
 
 [node name="Player" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2"]
 script = ExtResource("5_lvxue")
@@ -103,10 +104,9 @@ script = ExtResource("10_tcar0")
 tiles = NodePath("../../../../../LT_PersistentVariables/Targets")
 node2d_to_spawn = ExtResource("12_0wx1s")
 
-[node name="Should move" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was selected" index="1" node_paths=PackedStringArray("bool_variable")]
+[node name="Should NOT move" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was selected" index="1" node_paths=PackedStringArray("bool_variable")]
 script = ExtResource("13_0moc8")
 bool_variable = NodePath("../../../../../LT_PersistentVariables/Should move")
-value = true
 
 [node name="If the player was NOT selected" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="5" node_paths=PackedStringArray("input")]
 script = ExtResource("9_112ek")
@@ -117,9 +117,10 @@ comparison = 2
 script = ExtResource("12_2jrrv")
 tile_array = NodePath("../../../../../LT_PersistentVariables/Targets")
 
-[node name="Should not move" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="1" node_paths=PackedStringArray("bool_variable")]
+[node name="Should move" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="1" node_paths=PackedStringArray("bool_variable")]
 script = ExtResource("13_0moc8")
 bool_variable = NodePath("../../../../../LT_PersistentVariables/Should move")
+value = true
 
 [node name="Handle movement" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="2"]
 script = ExtResource("13_uc5pm")
