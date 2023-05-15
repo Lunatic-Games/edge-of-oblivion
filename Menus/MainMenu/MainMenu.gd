@@ -9,6 +9,7 @@ const GAME_SCENE: PackedScene = preload("res://GameScene/GameScene.tscn")
 
 
 func _ready() -> void:
+	transition_player.play("RESET")
 	GlobalSignals.main_menu_entered.emit()
 
 

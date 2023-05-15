@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dte0gritlpqbs"]
+[gd_scene load_steps=62 format=3 uid="uid://bnhko8kc127bj"]
 
 [ext_resource type="Script" path="res://Menus/MainMenu/MainMenu.gd" id="1_ywv84"]
 [ext_resource type="Texture2D" uid="uid://b7i4tg1ov4x4t" path="res://Assets/art/background/main-menu/background.png" id="2_o1jk3"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bmxsykoro00b2" path="res://Menus/MainMenu/MenuButton.tscn" id="18_q3vc2"]
 [ext_resource type="PackedScene" uid="uid://c46ydrqwl63ca" path="res://Menus/MainMenu/CreditsListing.tscn" id="19_ssyei"]
 [ext_resource type="PackedScene" uid="uid://cw1flpllc28iw" path="res://Menus/MainMenu/CreditsSmallListing.tscn" id="20_viunj"]
+[ext_resource type="Script" path="res://Menus/MainMenu/BugFix.gd" id="22_gmv75"]
 
 [sub_resource type="Gradient" id="Gradient_q7yy2"]
 offsets = PackedFloat32Array(0, 0.857143, 1)
@@ -1322,6 +1323,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_q8sfc")
@@ -1351,6 +1354,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_h0c5q")
@@ -1421,6 +1426,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_8vk1w")
@@ -1432,6 +1439,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_pqm31")
@@ -1962,6 +1971,7 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_a017v")
 }
+script = ExtResource("22_gmv75")
 
 [connection signal="anything_pressed" from="PressAnythingPage" to="." method="_on_PressAnything_anything_pressed"]
 [connection signal="pressed" from="StartPage/MenuContainer/PlayButton" to="." method="_on_PlayButton_pressed"]

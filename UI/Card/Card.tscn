@@ -30,7 +30,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1.2, 1.2), Vector2(1.2, 1.2)]
+"values": [Vector2(1, 1), Vector2(1.2, 1.2)]
 }
 
 [sub_resource type="Animation" id="1"]
@@ -57,7 +57,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(0.9, 0.9), Vector2(1, 1)]
+"values": [Vector2(0.5, 0.5), Vector2(1.1, 1.1), Vector2(0.9, 0.9), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dqw2f"]
@@ -129,35 +129,44 @@ _data = {
 }
 
 [node name="Card" type="Control"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(180, 270)
+custom_minimum_size = Vector2(270, 360)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 120.0
-offset_bottom = 200.0
+offset_left = 27.0
+offset_top = 36.0
+offset_right = 297.0
+offset_bottom = 396.0
 scale = Vector2(1.2, 1.2)
-pivot_offset = Vector2(89, 135)
+pivot_offset = Vector2(135, 180)
 size_flags_horizontal = 6
 script = ExtResource("1_e71sb")
 
 [node name="RayParticles" parent="." instance=ExtResource("2_2sdpx")]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(89, 135)
+position = Vector2(135, 180)
 
 [node name="Border" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(190, 280)
-layout_mode = 0
-offset_left = -4.16667
-offset_top = -4.16667
-offset_right = 185.833
-offset_bottom = 275.833
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.701961, 0.466667, 0.196078, 1)
 
 [node name="Background" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(180, 270)
-layout_mode = 0
-offset_right = 120.0
-offset_bottom = 200.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.14902, 0.137255, 0.2, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -170,53 +179,27 @@ libraries = {
 "": SubResource("AnimationLibrary_ikipp")
 }
 
-[node name="CardBottom" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 138.0
-offset_right = 175.0
-offset_bottom = 263.0
-mouse_filter = 2
-
-[node name="CardDescription" type="RichTextLabel" parent="CardBottom"]
-layout_mode = 2
-size_flags_vertical = 6
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 12
-bbcode_enabled = true
-text = "[center]Attack left for 1 damage."
-fit_content = true
-scroll_active = false
-
-[node name="FlavorText" type="RichTextLabel" parent="CardBottom"]
-layout_mode = 2
-size_flags_vertical = 8
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 8
-theme_override_font_sizes/italics_font_size = 8
-bbcode_enabled = true
-text = "[center][i]\"A trusty weapon for a trusty knight.\""
-fit_content = true
-scroll_active = false
-
 [node name="CardTop" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 5.0
-offset_right = 175.0
-offset_bottom = 127.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 124.0
+grow_horizontal = 2
 mouse_filter = 2
+theme_override_constants/separation = 10
 
 [node name="Name" type="RichTextLabel" parent="CardTop"]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 35
 bbcode_enabled = true
 text = "[center]Gladius[/center]"
 fit_content = true
 scroll_active = false
 
 [node name="TextureRect" type="TextureRect" parent="CardTop"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -268,6 +251,41 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 text = "3"
+
+[node name="CardBottom" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -200.0
+offset_right = -7.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="CardDescription" type="RichTextLabel" parent="CardBottom"]
+layout_mode = 2
+size_flags_vertical = 6
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]Attack left for 1 damage."
+fit_content = true
+scroll_active = false
+
+[node name="FlavorText" type="RichTextLabel" parent="CardBottom"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+bbcode_enabled = true
+text = "[center][i]\"A trusty weapon for a trusty knight.\""
+fit_content = true
+scroll_active = false
 
 [connection signal="gui_input" from="Border" to="." method="_on_Background_gui_input"]
 [connection signal="mouse_entered" from="Border" to="." method="_on_Background_mouse_entered"]
