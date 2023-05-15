@@ -30,7 +30,7 @@ func perform_attack() -> void:
 	else:
 		target_tile = one_tile_up
 	
-	animator.play("Shake")
+	animator.play("shake")
 	
 	build_target_list(target_tile, true)
 	attack()

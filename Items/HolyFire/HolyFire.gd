@@ -30,7 +30,7 @@ func activate_item() -> void:
 func perform_attack() -> void:
 	var scan_res: ItemUtil.ScanResult = ItemUtil.scan_tile_radius(user.current_tile, range_radius)
 	spawn_bolts(scan_res.tiles)
-	$AnimationPlayer.play("Shake")
+	$AnimationPlayer.play("shake")
 
 
 func attack(targets: Array) -> void:

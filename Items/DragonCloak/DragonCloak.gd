@@ -31,7 +31,7 @@ func perform_attack() -> void:
 	
 	spawn_fire_particles(scan_res.tiles)
 	attack(scan_res.occupants)
-	animator.play("Shake")
+	animator.play("shake")
 
 
 func attack(targets: Array) -> void:

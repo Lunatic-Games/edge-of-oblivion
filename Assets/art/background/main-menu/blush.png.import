@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu76o1llaofjt"
-path="res://.godot/imported/main-menu.png-70cf149879a822107854a9e61e383cb3.ctex"
+uid="uid://dii3iusm0qkd4"
+path="res://.godot/imported/blush.png-c4c6f63bb80fab373ff921b5145beb7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/art/background/main-menu.png"
-dest_files=["res://.godot/imported/main-menu.png-70cf149879a822107854a9e61e383cb3.ctex"]
+source_file="res://Assets/art/background/main-menu/blush.png"
+dest_files=["res://.godot/imported/blush.png-c4c6f63bb80fab373ff921b5145beb7a.ctex"]
 
 [params]
 

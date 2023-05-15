@@ -29,7 +29,7 @@ var charge_style = ChargeStyle.PER_TURN
 var activation_style = ActivationStyle.ON_READY
 
 @onready var cooldown_bar: ProgressBar = $CoolDownBar
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var texture_rect: TextureRect = $Texture
 @onready var animator: AnimationPlayer = $AnimationPlayer
 
 
@@ -39,7 +39,7 @@ func _ready() -> void:
 
 
 func setup(data) -> void:
-	sprite.texture = data.sprite
+	texture_rect.texture = data.sprite
 	max_turn_timer = data.max_turn_timer
 	turn_timer = max_turn_timer
 	item_damage = data.item_damage
@@ -60,7 +60,7 @@ func trigger_timer() -> void:
 	
 	if turn_timer == 1:
 		appear_ready()
-		sprite.modulate = Color.WHITE
+		texture_rect.modulate = Color.WHITE
 	
 	if turn_timer <= 0:
 		clear_timer_activate()
@@ -86,7 +86,7 @@ func update_cool_down_bar() -> void:
 
 func appear_ready(subtle: bool = false) -> void:
 	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(sprite, "self_modulate:a", 1.0, 0.2)
+	tween.tween_property(texture_rect, "self_modulate:a", 1.0, 0.2)
 	
 	if subtle:
 		return
@@ -96,12 +96,12 @@ func appear_ready(subtle: bool = false) -> void:
 func appear_unready() -> void:
 	var tween: Tween = get_tree().create_tween().set_parallel()
 	
-	tween.tween_property(sprite, "self_modulate:a", 0.4, 0.2)
+	tween.tween_property(texture_rect, "self_modulate:a", 0.4, 0.2)
 	animator.stop(true)
 	
-	tween.tween_property(sprite, "position:y", 32.0, 0.2)
+	tween.tween_property(texture_rect, "position:y", 0.0, 0.2)
 	if activation_style == ActivationStyle.ON_CHARGE:
-		sprite.modulate = VOLATILE_COLOR
+		texture_rect.modulate = VOLATILE_COLOR
 
 
 func upgrade_tier() -> bool:
