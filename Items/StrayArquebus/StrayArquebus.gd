@@ -65,7 +65,7 @@ func perform_attack() -> void:
 	
 	max_blast = false
 	charges = 0
-	$AnimationPlayer.play("Shake")
+	$AnimationPlayer.play("shake")
 
 
 func attack(tiles: Array[Tile]) -> void:

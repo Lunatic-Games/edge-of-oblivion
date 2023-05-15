@@ -5,3 +5,7 @@
 
 [node name="Broom" instance=ExtResource("1")]
 script = ExtResource("2")
+
+[node name="Texture" parent="." index="0"]
+offset_right = 90.0
+offset_bottom = 90.0

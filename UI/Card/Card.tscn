@@ -129,18 +129,20 @@ _data = {
 }
 
 [node name="Card" type="Control"]
+modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(180, 270)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 120.0
 offset_bottom = 200.0
 scale = Vector2(1.2, 1.2)
-pivot_offset = Vector2(60, 100)
+pivot_offset = Vector2(89, 135)
 size_flags_horizontal = 6
 script = ExtResource("1_e71sb")
 
 [node name="RayParticles" parent="." instance=ExtResource("2_2sdpx")]
 modulate = Color(1, 1, 1, 0)
+position = Vector2(89, 135)
 
 [node name="Border" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(190, 280)
