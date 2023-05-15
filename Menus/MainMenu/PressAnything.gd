@@ -26,5 +26,5 @@ func _input(event: InputEvent) -> void:
 		else:
 			progress_string = ""
 	
-	if event is InputEventMouseButton and event.is_pressed():
+	if (event is InputEventKey or event is InputEventMouseButton) and event.is_pressed():
 		anything_pressed.emit()

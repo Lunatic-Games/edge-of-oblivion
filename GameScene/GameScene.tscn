@@ -70,6 +70,7 @@ expand_mode = 1
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="BossOverlay" type="MarginContainer" parent="HUD"]
+visible = false
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 104.0
