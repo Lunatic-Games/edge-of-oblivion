@@ -81,6 +81,12 @@ func add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> vo
 	_float_card_up(card, float_up_delay)
 
 
+func force_hide_display():
+	for child in card_row.get_children():
+		child.queue_free()
+	hide()
+
+
 func _float_card_up(card: Card, delay: float = 0.0) -> void:
 	card.modulate.a = 0.0
 	
@@ -143,3 +149,5 @@ func _on_card_disappeared(disappeared_card: Card) -> void:
 	
 	for child in card_row.get_children():
 		child.queue_free()
+	
+	hide()
