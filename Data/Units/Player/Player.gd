@@ -43,6 +43,9 @@ func handle_movement() -> void:
 	if !TurnManager.is_player_turn() or lock_movement or hp <= 0:
 		return
 	
+	if  FreeUpgradeMenu.is_currently_picking_item:
+		return
+	
 	if Input.is_action_just_pressed("up") and current_tile.top_tile:
 		move_history.record(MovementUtility.MoveRecord.new(current_tile, current_tile.top_tile,
 			Vector2i.UP, MovementUtility.CauseOfMove.INPUT))

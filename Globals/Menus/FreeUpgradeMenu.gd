@@ -1,6 +1,9 @@
 extends CanvasLayer
 
 
+signal picked_item  # Card picked but still animating
+signal fully_finished_picking_item  # Cards freed
+
 const ALL_ITEMS: Array[ItemData] = [
 	preload("res://Items/ShortSword/ShortSword.tres"),
 	preload("res://Items/LightningBow/LightningBow.tres"),
@@ -26,6 +29,7 @@ const CHOSEN_RISE_TIME_SECONDS: float = 1.0
 
 var available_items: Array[ItemData] = []  # Will become unavailable after reaching max tier
 var displayed_items: Array[ItemData] = []
+var is_currently_picking_item: bool = false
 
 @onready var card_row: BoxContainer = $CardRow
 
@@ -44,11 +48,21 @@ func reset() -> void:
 
 
 func spawn_upgrade_cards(number_of_cards_to_spawn: int) -> void:
-	if card_row.get_children():
+	# This is basically implementing a queue for upgrades displaying
+	while is_currently_picking_item:
+		await picked_item
+	
+	if available_items.is_empty():
 		return
+		
+	# If there is a queued upgrade we want to wait for animations to finish,
+	# but we still want to lock player movement.
+	is_currently_picking_item = true
 	
-	card_row.show()
+	if card_row.get_children():
+		await fully_finished_picking_item
 	
+	assert(available_items.size() > 0, "No available items to display :(")
 	var items_to_select_from: Array[ItemData] = []
 	items_to_select_from.append_array(available_items)
 	items_to_select_from.shuffle()
@@ -57,10 +71,10 @@ func spawn_upgrade_cards(number_of_cards_to_spawn: int) -> void:
 		if items_to_select_from.size() == 0:
 			break
 		
-		var picked_item: ItemData = items_to_select_from[0]
+		var selected_item: ItemData = items_to_select_from[0]
 		var float_up_delay = x * DISPLAY_DELAY_BETWEEN_CARDS_SECONDS
-		add_card_to_display(picked_item, float_up_delay)
-		items_to_select_from.erase(picked_item)
+		add_card_to_display(selected_item, float_up_delay)
+		items_to_select_from.erase(selected_item)
 
 
 func add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> void:
@@ -84,7 +98,6 @@ func add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> vo
 func force_hide_display():
 	for child in card_row.get_children():
 		child.queue_free()
-	hide()
 
 
 func _float_card_up(card: Card, delay: float = 0.0) -> void:
@@ -119,6 +132,9 @@ func _on_card_selected(selected_card: Card) -> void:
 			_raise_chosen_card(card)
 		else:
 			_drop_unchosen_card(card)
+	
+	is_currently_picking_item = false
+	picked_item.emit()
 
 
 func _raise_chosen_card(card: Card) -> void:
@@ -148,6 +164,6 @@ func _on_card_disappeared(disappeared_card: Card) -> void:
 		return
 	
 	for child in card_row.get_children():
-		child.queue_free()
+		child.free()
 	
-	hide()
+	fully_finished_picking_item.emit()
