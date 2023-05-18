@@ -9,9 +9,9 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Dragon Cloak"
-tier1Text = "Damages everything in a [color=yellow]radius around you.[/color]"
-tier2Text = "Faster cooldown"
-tier3Text = "Bigger radius"
+tier1Text = "Damage everything in a radius around you."
+tier2Text = "Decreased cooldown."
+tier3Text = "Increased radius."
 max_turn_timer = 6
 item_damage = 0
 path = ""

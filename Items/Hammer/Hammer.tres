@@ -9,9 +9,10 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Hammer"
-tier1Text = "[color=pink]Knockback[/color] a [color=yellow]random[/color] unit [color=yellow]above or below[/color] you. Also does damage."
-tier2Text = "If the unit collides with something, does more damage"
-tier3Text = "[color=red]Damage 2[/color], [color=pink]Knockback[/color] 2"
+tier1Text = "[color=pink]Knockback[/color] and damage a random unit above or below."
+tier2Text = "Increased damage if the unit collides with something."
+tier3Text = "Increased damage.
+Increased [color=pink]knockback[/color]."
 max_turn_timer = 3
 item_damage = 1
 path = ""

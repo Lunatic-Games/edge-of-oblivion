@@ -22,7 +22,7 @@ func _return_to_main_menu() -> void:
 func _on_Player_died(_player: Player) -> void:
 	await get_tree().create_timer(1.0).timeout
 	
-	FreeUpgradeMenu.disable_display()
+	FreeUpgradeMenu.hide_display()
 	get_tree().paused = true
 	game_over_menu.show()
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="162.03157mm"
+   height="39.134689mm"
+   viewBox="0 0 162.03157 39.134689"
+   version="1.1"
+   id="svg3921"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="banner.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview3923"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.74564394"
+     inkscape:cx="34.198628"
+     inkscape:cy="210.55626"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs3918" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-27.919696,-92.916529)">
+    <path
+       id="rect3913"
+       style="fill:#654a73;fill-opacity:1;stroke:#36283e;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 50.888893,93.916529 c -2.32796,0 -4.3041,1.435992 -5.10666,3.47214 H 34.412901 c -3.043284,0 -5.493205,2.44992 -5.493205,5.493201 v 22.63532 c 0,3.04328 2.449921,5.4932 5.493205,5.4932 h 29.911872 c 0.52381,0 1.02924,-0.0741 1.50843,-0.2098 h 86.062447 c 0.52075,0.16283 1.07526,0.25063 1.65106,0.25063 h 29.91135 c 3.04329,0 5.49321,-2.44992 5.49321,-5.49321 V 102.9227 c 0,-3.043286 -2.44992,-5.493207 -5.49321,-5.493207 H 172.9879 c -0.79215,-2.057577 -2.77831,-3.512964 -5.12165,-3.512964 z" />
+  </g>
+</svg>
