@@ -126,6 +126,7 @@ offset_right = 45.0
 offset_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(45, 45)
 size_flags_horizontal = 0
 size_flags_vertical = 4
 script = ExtResource("1")

@@ -9,10 +9,10 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Dracula's Knives"
-tier1Text = "Attack right. 
-[color=pink]Lifesteal[/color]"
+tier1Text = "Every 4 turns: Attack right. 
+[color=pink]Lifesteal[/color]."
 tier2Text = "Also [color=pink]range 1[/color]."
 tier3Text = "Also [color=pink]range 2[/color]."
+flavor_text = "Hopefully he doesn't want these back."
 max_turn_timer = 4
 item_damage = 1
-path = ""

@@ -1,115 +1,144 @@
 extends CanvasLayer
 
-const FULL_CARD_LIST: Array[String] = [
-	"res://Items/ShortSword/ShortSword.tres",
-	"res://Items/LightningBow/LightningBow.tres",
-	"res://Items/Hammer/Hammer.tres",
-	"res://Items/TokenOfLove/TokenOfLove.tres",
-	"res://Items/DragonCloak/DragonCloak.tres",
-	"res://Items/HolyFire/HolyFire.tres",
-	"res://Items/StrayArquebus/StrayArquebus.tres",
-	"res://Items/Broom/Broom.tres",
-	"res://Items/DraculasKnives/DraculasKnives.tres"
+
+const ALL_ITEMS: Array[ItemData] = [
+	preload("res://Items/ShortSword/ShortSword.tres"),
+	preload("res://Items/LightningBow/LightningBow.tres"),
+	preload("res://Items/Hammer/Hammer.tres"),
+	preload("res://Items/TokenOfLove/TokenOfLove.tres"),
+	preload("res://Items/DragonCloak/DragonCloak.tres"),
+	preload("res://Items/HolyFire/HolyFire.tres"),
+	preload("res://Items/StrayArquebus/StrayArquebus.tres"),
+	preload("res://Items/Broom/Broom.tres"),
+	preload("res://Items/DraculasKnives/DraculasKnives.tres")
 ]
 
 const CARD_SCENE: PackedScene = preload("res://UI/Card/Card.tscn")
+const DISPLAY_FLOAT_UP_DISTANCE: float = 200.0
+const DISPLAY_FLOAT_UP_TIME_SECONDS: float = 0.5
+const DISPLAY_DELAY_BETWEEN_CARDS_SECONDS: float = 0.2
 
-var selected_cards: Array[String] = []
-var available_cards: Array[String] = []
-var n_cards_waiting_to_disappear: int = 0
+const NOT_CHOSEN_DROP_DISTANCE: float = 200.0
+const NOT_CHOSEN_DROP_TIME_SECONDS: float = 0.5
+
+const CHOSEN_RISE_DISTANCE: float = 50.0
+const CHOSEN_RISE_TIME_SECONDS: float = 1.0
+
+var available_items: Array[ItemData] = []  # Will become unavailable after reaching max tier
+var displayed_items: Array[ItemData] = []
 
 @onready var card_row: BoxContainer = $CardRow
 
 
 func _ready() -> void:
-	for path in FULL_CARD_LIST:
-		available_cards.append(path)
+	for item_data in ALL_ITEMS:
+		available_items.append(item_data)
+	ItemManager.item_reached_max_tier.connect(_on_item_reached_max_tier)
 
 
 func reset() -> void:
-	selected_cards = []
-	available_cards = []
-	for path in FULL_CARD_LIST:
-		available_cards.append(path)
-	hide_display()
-
-
-func connectToPlayerTier(player: Player) -> void:
-	player.connect("item_reached_max_tier",Callable(self,"remove_item_from_availability"))
-
-
-func display() -> void:
-	card_row.show()
-
-
-func hide_display(selected_card: Card = null) -> void:
-	# Immediately disable further selections
-	for child in card_row.get_children():
-		var card: Card = child as Card
-		if card != null:
-			card.selected.disconnect(hide_display)
-	
-	# Animate selected first
-	if selected_card != null:
-		n_cards_waiting_to_disappear += 1
-		selected_card.disappeared.connect(_on_Card_disappeared)
-		selected_card.disappear(true)
-	
-	# Then animate rest
-	for child in card_row.get_children():
-		var card: Card = child as Card
-		if card != null and card != selected_card:
-			n_cards_waiting_to_disappear += 1
-			card.disappeared.connect(_on_Card_disappeared)
-			card.disappear(card == selected_card)
-			await get_tree().create_timer(0.15).timeout
+	displayed_items = []
+	available_items = []
+	for item_data in ALL_ITEMS:
+		available_items.append(item_data)
 
 
 func spawn_upgrade_cards(number_of_cards_to_spawn: int) -> void:
 	if card_row.get_children():
 		return
 	
-	available_cards.shuffle()
-	display()
+	card_row.show()
+	
+	var items_to_select_from: Array[ItemData] = []
+	items_to_select_from.append_array(available_items)
+	items_to_select_from.shuffle()
 	
 	for x in number_of_cards_to_spawn:
-		if available_cards.size() <= 0:
-			continue
+		if items_to_select_from.size() == 0:
+			break
 		
-		spawn_card(available_cards[0], x)
-	
-	for entry in selected_cards:
-		available_cards.append(entry)
-	selected_cards = []
+		var picked_item: ItemData = items_to_select_from[0]
+		var float_up_delay = x * DISPLAY_DELAY_BETWEEN_CARDS_SECONDS
+		add_card_to_display(picked_item, float_up_delay)
+		items_to_select_from.erase(picked_item)
 
 
-func spawn_card(path_of_resource: String, index: int) -> void:
-	var resource: ItemData = load(path_of_resource)
+func add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> void:
 	var card: Card = CARD_SCENE.instantiate()
-	var current_tier: int
-	
-	if resource in ItemManager.managed_items:
-		current_tier = ItemManager.managed_items[resource].current_tier + 1
-	else:
-		current_tier = 1
-	
 	card_row.add_child(card)
-	card.selected.connect(hide_display.bind(card))
 	
-	selected_cards.append(path_of_resource)
-	available_cards.erase(path_of_resource)
+	var item_tier: int
+	if item_data in ItemManager.managed_items:
+		item_tier = ItemManager.managed_items[item_data].current_tier + 1
+	else:
+		item_tier = 1
 	
-	await get_tree().create_timer(0.15 * index).timeout
-	card.setup(resource, current_tier, true)
+	card.setup(item_data, item_tier, true)
+	
+	card.selected.connect(_on_card_selected.bind(card))
+	displayed_items.append(item_data)
+	
+	_float_card_up(card, float_up_delay)
 
 
-func remove_item_from_availability(item_data: ItemData) -> void:
-	available_cards.erase(item_data.path)
+func _float_card_up(card: Card, delay: float = 0.0) -> void:
+	card.modulate.a = 0.0
+	
+	await get_tree().process_frame  # Wait till container is all set-up
+	if delay > 0.0:
+		await get_tree().create_timer(delay).timeout
+	
+	card.position.y += DISPLAY_FLOAT_UP_DISTANCE  # Move down so it can float up to the same spot
+	
+	var tween: Tween = create_tween().set_parallel(true)
+	tween.tween_property(card, "position:y", -DISPLAY_FLOAT_UP_DISTANCE, DISPLAY_FLOAT_UP_TIME_SECONDS) \
+		.as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(card, "modulate:a", 1.0, DISPLAY_FLOAT_UP_TIME_SECONDS) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 
-func _on_Card_disappeared():
-	n_cards_waiting_to_disappear -= 1
-	if n_cards_waiting_to_disappear > 0:
+func _on_item_reached_max_tier(item_data: ItemData) -> void:
+	available_items.erase(item_data)
+
+
+func _on_card_selected(selected_card: Card) -> void:
+	for child in card_row.get_children():
+		var card: Card = child as Card
+		assert(card != null, "Card row should only contain cards")
+		card.selected.disconnect(_on_card_selected)
+		
+		if card == selected_card:
+			var player: Player = get_tree().get_nodes_in_group("player")[0]
+			player.gain_item(card.held_item_data)
+			_raise_chosen_card(card)
+		else:
+			_drop_unchosen_card(card)
+
+
+func _raise_chosen_card(card: Card) -> void:
+	var tween: Tween = create_tween().set_parallel(true)
+	tween.tween_property(card, "position:y", -CHOSEN_RISE_DISTANCE, CHOSEN_RISE_TIME_SECONDS) \
+		.as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(card, "modulate:a", 0.0, CHOSEN_RISE_TIME_SECONDS) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	
+	tween.finished.connect(_on_card_disappeared.bind(card))
+
+
+func _drop_unchosen_card(card: Card) -> void:
+	var tween: Tween = create_tween().set_parallel(true)
+	tween.tween_property(card, "position:y", NOT_CHOSEN_DROP_DISTANCE, NOT_CHOSEN_DROP_TIME_SECONDS) \
+		.as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(card, "modulate:a", 0.0, NOT_CHOSEN_DROP_TIME_SECONDS) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	
+	tween.finished.connect(_on_card_disappeared.bind(card))
+
+
+func _on_card_disappeared(disappeared_card: Card) -> void:
+	displayed_items.erase(disappeared_card.held_item_data)
+	
+	if not displayed_items.is_empty():
 		return
 	
 	for child in card_row.get_children():

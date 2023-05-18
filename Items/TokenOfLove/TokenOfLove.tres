@@ -9,9 +9,9 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Token of Love"
-tier1Text = "[color=springgreen]Heal[/color] self."
-tier2Text = "Decreased cooldown."
-tier3Text = "Decreased cooldown."
+tier1Text = "Every 9 turns: [color=springgreen]Heal[/color] self."
+tier2Text = "Decreased cooldown 9->7."
+tier3Text = "Decreased cooldown 7->5."
+flavor_text = "A Valentine's gift from Chronos himself."
 max_turn_timer = 9
 item_damage = 0
-path = ""
