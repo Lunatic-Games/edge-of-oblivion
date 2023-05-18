@@ -1,45 +1,134 @@
-[gd_scene load_steps=10 format=3 uid="uid://byoi1xsr0flfl"]
+[gd_scene load_steps=18 format=3 uid="uid://byoi1xsr0flfl"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
-[ext_resource type="Texture2D" uid="uid://ceh34ox6344m8" path="res://Assets/art/misc/blank_grey.png" id="2_jc6s1"]
+[ext_resource type="Texture2D" uid="uid://bh37a154red3i" path="res://Assets/art/background/game/tree.svg" id="2_j8hty"]
+[ext_resource type="Texture2D" uid="uid://ciihbexjkmiq8" path="res://Assets/art/background/game/lantern.svg" id="3_m70pv"]
+[ext_resource type="Texture2D" uid="uid://cc7ppnjaksfsx" path="res://Assets/textures/rays.png" id="4_1qu6a"]
+[ext_resource type="Texture2D" uid="uid://co1p05da5o0d4" path="res://Assets/art/background/game/fog.svg" id="5_fux34"]
+[ext_resource type="Texture2D" uid="uid://doh64lgcym6qg" path="res://Assets/textures/circle.svg" id="6_e40rt"]
 
-[sub_resource type="Shader" id="1"]
-code = "shader_type canvas_item;
-
-uniform vec2 direction = vec2(1, 0);
-uniform float speed = 0.1;
-uniform sampler2D noise;
-
-vec4 overlay(vec4 base, vec4 blend){
-	vec4 limit = step(0.5, base);
-	return mix(2.0 * base * blend, 1.0 - 2.0 * (1.0 - base) * (1.0 - blend), limit);
+[sub_resource type="Animation" id="Animation_rpdgq"]
+resource_name = "back_and_forth"
+length = 30.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fog2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1150, -146), Vector2(1302, -146)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fog:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1263, 397), Vector2(-1073, 397)]
 }
 
-void fragment()
-{
-	// image texture
-	vec4 base = texture(TEXTURE, UV);
-	// noise texture
-	vec4 blend = texture(noise, mod(UV + ( direction * speed * TIME), vec2(1.0, 1.0)));
-	
-	COLOR = overlay(base, blend);
-}"
+[sub_resource type="Animation" id="Animation_hd3x8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fog2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-888, -146)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fog:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1263, 397)]
+}
 
-[sub_resource type="Gradient" id="Gradient_iussi"]
-colors = PackedColorArray(0, 0, 0, 1, 0.18343, 0.1794, 0.26, 1)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y73fh"]
+_data = {
+"RESET": SubResource("Animation_hd3x8"),
+"back_and_forth": SubResource("Animation_rpdgq")
+}
 
-[sub_resource type="FastNoiseLite" id="3"]
+[sub_resource type="Animation" id="Animation_npxfq"]
+resource_name = "swing"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lantern:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0349066, 0.0349066, 0.0]
+}
 
-[sub_resource type="NoiseTexture2D" id="4"]
-seamless = true
-color_ramp = SubResource("Gradient_iussi")
-noise = SubResource("3")
+[sub_resource type="Animation" id="Animation_jvhgd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lantern:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
-[sub_resource type="ShaderMaterial" id="2"]
-shader = SubResource("1")
-shader_parameter/direction = Vector2(0.5, 1)
-shader_parameter/speed = 0.02
-shader_parameter/noise = SubResource("4")
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gir6g"]
+_data = {
+"RESET": SubResource("Animation_jvhgd"),
+"swing": SubResource("Animation_npxfq")
+}
+
+[sub_resource type="Gradient" id="Gradient_lfu81"]
+offsets = PackedFloat32Array(0.00389105, 0.182879, 0.832685, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r53h0"]
+gradient = SubResource("Gradient_lfu81")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fr216"]
+emission_shape = 3
+emission_box_extents = Vector3(2000, 2000, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.05
+scale_max = 0.1
+color = Color(0.341176, 0.278431, 0.435294, 0.164706)
+color_ramp = SubResource("GradientTexture1D_r53h0")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vfxa"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
@@ -53,17 +142,91 @@ script = ExtResource("1_f3738")
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="BackgroundNoise" type="TextureRect" parent="Background"]
-modulate = Color(0.141176, 0.160784, 0.247059, 1)
-show_behind_parent = true
-material = SubResource("2")
+[node name="BackgroundFill" type="ColorRect" parent="Background"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_jc6s1")
-expand_mode = 1
+color = Color(0.152941, 0.12549, 0.192157, 1)
+
+[node name="Tree" type="Sprite2D" parent="."]
+position = Vector2(703, 277)
+scale = Vector2(1.69, 1.93836)
+texture = ExtResource("2_j8hty")
+
+[node name="Fog2" type="Sprite2D" parent="."]
+modulate = Color(0.658824, 0.533333, 0.956863, 0.0392157)
+position = Vector2(-888, -146)
+scale = Vector2(1.00547, 0.639785)
+texture = ExtResource("5_fux34")
+
+[node name="Tree2" type="Sprite2D" parent="."]
+position = Vector2(548, -214)
+scale = Vector2(1.69, 1.93836)
+texture = ExtResource("2_j8hty")
+
+[node name="Tree3" type="Sprite2D" parent="."]
+position = Vector2(-65.0001, -439)
+scale = Vector2(1.69, 1.93836)
+texture = ExtResource("2_j8hty")
+
+[node name="Fog" type="Sprite2D" parent="."]
+modulate = Color(0.658824, 0.533333, 0.956863, 0.0392157)
+position = Vector2(1263, 397)
+scale = Vector2(0.667679, 0.61828)
+texture = ExtResource("5_fux34")
+
+[node name="FogAnimator" type="AnimationPlayer" parent="."]
+autoplay = "back_and_forth"
+libraries = {
+"": SubResource("AnimationLibrary_y73fh")
+}
+
+[node name="Tree4" type="Sprite2D" parent="."]
+position = Vector2(-436, 147)
+scale = Vector2(1.69, 1.93836)
+texture = ExtResource("2_j8hty")
+
+[node name="Lantern" type="Sprite2D" parent="Tree4"]
+show_behind_parent = true
+position = Vector2(98.2249, -23.2155)
+scale = Vector2(0.330664, 0.287043)
+texture = ExtResource("3_m70pv")
+offset = Vector2(0, 132)
+
+[node name="Sprite2D" type="Sprite2D" parent="Tree4/Lantern"]
+self_modulate = Color(1, 1, 1, 0.0235294)
+position = Vector2(1.78943, 221.068)
+scale = Vector2(0.281694, 0.263226)
+texture = ExtResource("4_1qu6a")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tree4"]
+autoplay = "swing"
+libraries = {
+"": SubResource("AnimationLibrary_gir6g")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 150
+process_material = SubResource("ParticleProcessMaterial_fr216")
+texture = ExtResource("6_e40rt")
+lifetime = 4.0
+preprocess = 4.0
+
+[node name="BoardBackground2" type="ColorRect" parent="."]
+offset_left = -43.0
+offset_top = -33.0
+offset_right = 326.0
+offset_bottom = 328.0
+color = Color(0.184314, 0.141176, 0.25098, 1)
+
+[node name="BoardBackground" type="ColorRect" parent="."]
+offset_left = -33.0
+offset_top = -33.0
+offset_right = 317.0
+offset_bottom = 317.0
+color = Color(0.211765, 0.168627, 0.278431, 1)
 
 [node name="GameBoard" type="Node2D" parent="." groups=["gameboard"]]
 
