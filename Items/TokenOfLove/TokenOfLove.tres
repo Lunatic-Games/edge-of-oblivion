@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dpm30lsuugaf6"]
 
 [ext_resource type="Script" path="res://Items/ITEM_DATA.gd" id="1"]
-[ext_resource type="PackedScene" path="res://Items/TokenOfLove/TokenOfLove.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dxgujnlxx011h" path="res://Items/TokenOfLove/TokenOfLove.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b70hyhkt17y6g" path="res://Assets/art/icons/hearts/delapouite/heart-necklace.svg" id="3"]
 
 [resource]
@@ -9,9 +9,9 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Token of Love"
-tier1Text = "Heal for [color=green]1[/color]"
-tier2Text = "Cooldown -2"
-tier3Text = "Cooldown -2"
+tier1Text = "Every 9 turns: [color=springgreen]Heal[/color] self."
+tier2Text = "Decreased cooldown 9->7."
+tier3Text = "Decreased cooldown 7->5."
+flavor_text = "A Valentine's gift from Chronos himself."
 max_turn_timer = 9
 item_damage = 0
-path = ""

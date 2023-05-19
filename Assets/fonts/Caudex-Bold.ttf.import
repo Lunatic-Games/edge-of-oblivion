@@ -1,0 +1,38 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://delvnctbli24y"
+path="res://.godot/imported/Caudex-Bold.ttf-e3441a22a887aaef58acfafc755e3ac0.fontdata"
+
+[deps]
+
+source_file="res://Assets/fonts/Caudex-Bold.ttf"
+dest_files=["res://.godot/imported/Caudex-Bold.ttf-e3441a22a887aaef58acfafc755e3ac0.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=true
+multichannel_signed_distance_field=true
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0)
+}]
+language_support={}
+script_support={}
+opentype_features={}

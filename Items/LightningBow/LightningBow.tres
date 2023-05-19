@@ -9,9 +9,10 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Lightning Bow"
-tier1Text = "Attacks [color=yellow]up[/color]. [color=pink]range 1. chain 1[/color]"
-tier2Text = "[color=pink]Chain[/color] 2."
-tier3Text = "[color=pink]Chain[/color] 4."
+tier1Text = "Every 3 turns: Attack up. 
+[color=pink]Range 1[/color]. [color=cyan]Chain 1[/color]."
+tier2Text = "[color=cyan]Chain 2[/color]."
+tier3Text = "[color=cyan]Chain 4[/color] ."
+flavor_text = "Zeus wants to know your location."
 max_turn_timer = 3
 item_damage = 1
-path = "res://Item/LightningBow/LightningBow.tres"

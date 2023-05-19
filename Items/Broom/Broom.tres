@@ -9,9 +9,9 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Broom"
-tier1Text = "[color=pink]Knockback[/color] 1 [color=yellow]random adjacent[/color] enemies"
-tier2Text = "[color=pink]Knockback[/color] 2 [color=yellow]random adjacent enemies.[/color]"
-tier3Text = "[color=pink]Knockback[/color] 3 [color=yellow]random adjacent enemies.[/color]"
+tier1Text = "Every 4 turns: [color=pink]Knockback[/color] random adjacent enemy."
+tier2Text = "Increase number of affected units."
+tier3Text = "Increase number of affected units."
+flavor_text = "Trusted by witches everywhere."
 max_turn_timer = 4
 item_damage = 0
-path = ""

@@ -32,7 +32,7 @@ var items: Array[ItemData] = []
 func _ready() -> void:
 	super._ready()
 	for item in STARTING_ITEMS:
-		gain_item(item)
+		gain_item(item, false)
 
 
 func _physics_process(_delta: float) -> void:
@@ -41,6 +41,9 @@ func _physics_process(_delta: float) -> void:
 
 func handle_movement() -> void:
 	if !TurnManager.is_player_turn() or lock_movement or hp <= 0:
+		return
+	
+	if  FreeUpgradeMenu.is_currently_picking_item:
 		return
 	
 	if Input.is_action_just_pressed("up") and current_tile.top_tile:
@@ -111,12 +114,12 @@ func level_up() -> void:
 	update_experience_bar()
 
 
-func gain_item(item_data: ItemData) -> void:
+func gain_item(item_data: ItemData, animate: bool = true) -> void:
 	if item_data in items:
 		ItemManager.upgrade_item(item_data)
 	else:
 		items.append(item_data)
-		ItemManager.add_item(item_data)
+		ItemManager.add_item(item_data, animate)
 
 
 func is_enemy() -> bool:
