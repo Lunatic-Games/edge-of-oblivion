@@ -18,8 +18,8 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="13_0moc8"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="13_fpcgd"]
 [ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="13_uc5pm"]
-[ext_resource type="Script" path="res://LogicTree/Operations/Getters/GetPlayer.gd" id="14_riqun"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectClosestTiles.gd" id="15_8mgwd"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Getters/GetPlayer.gd" id="15_ytpag"]
 [ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="16_lnb0q"]
 [ext_resource type="PackedScene" uid="uid://brdufu1xvat6y" path="res://Data/Indicators/Lunge/LungeIndicator.tscn" id="17_af4dp"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfBool.gd" id="20_o47bg"]
@@ -86,18 +86,18 @@ output_tiles = NodePath("../../../../LT_PersistentVariables/Targets")
 radius = 2
 include_origin_tile = false
 
-[node name="Player" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2"]
+[node name="Player Tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2"]
 script = ExtResource("5_lvxue")
 
 [node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("8_jplii")
 input_tiles = NodePath("../../../../LT_PersistentVariables/Targets")
-output_tiles = NodePath("../Player")
+output_tiles = NodePath("../Player Tile")
 occupant_type = 1
 
 [node name="If the player was selected" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="4" node_paths=PackedStringArray("input")]
 script = ExtResource("9_112ek")
-input = NodePath("../Player")
+input = NodePath("../Player Tile")
 
 [node name="Spawn indicators on targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was selected" index="0" node_paths=PackedStringArray("tiles")]
 script = ExtResource("10_tcar0")
@@ -110,19 +110,23 @@ bool_variable = NodePath("../../../../../LT_PersistentVariables/Should move")
 
 [node name="If the player was NOT selected" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="5" node_paths=PackedStringArray("input")]
 script = ExtResource("9_112ek")
-input = NodePath("../Player")
+input = NodePath("../Player Tile")
 comparison = 2
 
 [node name="Clear targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="0" node_paths=PackedStringArray("tile_array")]
 script = ExtResource("12_2jrrv")
 tile_array = NodePath("../../../../../LT_PersistentVariables/Targets")
 
-[node name="Should move" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="1" node_paths=PackedStringArray("bool_variable")]
+[node name="LT_GetPlayer" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="1" node_paths=PackedStringArray("output_player_tile")]
+script = ExtResource("15_ytpag")
+output_player_tile = NodePath("../../Player Tile")
+
+[node name="Should move" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="2" node_paths=PackedStringArray("bool_variable")]
 script = ExtResource("13_0moc8")
 bool_variable = NodePath("../../../../../LT_PersistentVariables/Should move")
 value = true
 
-[node name="Handle movement" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="2"]
+[node name="Handle movement" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected" index="3"]
 script = ExtResource("13_uc5pm")
 
 [node name="Grab 3 tiles away in all directions" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
@@ -132,20 +136,13 @@ output_tiles = NodePath("../../../../../../LT_PersistentVariables/Targets")
 directions = 15
 distance_length = 3
 
-[node name="Player tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="1"]
-script = ExtResource("5_lvxue")
-
-[node name="LT_GetPlayer" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="2" node_paths=PackedStringArray("output_player_tile")]
-script = ExtResource("14_riqun")
-output_player_tile = NodePath("../Player tile")
-
-[node name="Closest to player" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="3" node_paths=PackedStringArray("tiles", "tiles_to_measure_to", "output_tiles")]
+[node name="Closest to player" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="1" node_paths=PackedStringArray("tiles", "tiles_to_measure_to", "output_tiles")]
 script = ExtResource("15_8mgwd")
 tiles = NodePath("../../../../../../LT_PersistentVariables/Targets")
-tiles_to_measure_to = NodePath("../Player tile")
+tiles_to_measure_to = NodePath("../../../Player Tile")
 output_tiles = NodePath("../../../../../../LT_PersistentVariables/Targets")
 
-[node name="Spawn charge indicator" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="4" node_paths=PackedStringArray("tiles")]
+[node name="Spawn charge indicator" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls/If the player was NOT selected/Handle movement" index="2" node_paths=PackedStringArray("tiles")]
 script = ExtResource("10_tcar0")
 tiles = NodePath("../../../../../../LT_PersistentVariables/Targets")
 node2d_to_spawn = ExtResource("17_af4dp")
@@ -177,7 +174,7 @@ script = ExtResource("10_tcar0")
 tiles = NodePath("../../../../../LT_PersistentVariables/Targets")
 node2d_to_spawn = ExtResource("11_5fcxx")
 
-[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/If should not move" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Try select player tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/If should not move" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("8_jplii")
 input_tiles = NodePath("../../../../../LT_PersistentVariables/Targets")
 output_tiles = NodePath("../../../../../LT_PersistentVariables/Targets")
