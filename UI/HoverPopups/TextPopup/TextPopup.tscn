@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://1rgwr4l47b25"]
+
+[ext_resource type="Script" path="res://UI/HoverPopups/TextPopup/TextPopup.gd" id="1_uuyhi"]
+[ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="2_3p534"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ed83"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yco1r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_64i5p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwdyd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j8dib"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1h1yh"]
+bg_color = Color(0.211765, 0.156863, 0.243137, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p666x"]
+bg_color = Color(0.317647, 0.235294, 0.368627, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[node name="TextPopupHover" type="Button"]
+z_index = 4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ed83")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yco1r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_64i5p")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gwdyd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_j8dib")
+script = ExtResource("1_uuyhi")
+display_string = "This is a test string, p;ease work"
+
+[node name="TranslationContainer" type="Node2D" parent="."]
+visible = false
+
+[node name="BackgroundPanel" type="PanelContainer" parent="TranslationContainer"]
+offset_right = 365.0
+offset_bottom = 46.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1h1yh")
+
+[node name="PanelContainer" type="PanelContainer" parent="TranslationContainer/BackgroundPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p666x")
+
+[node name="InfoText" type="RichTextLabel" parent="TranslationContainer/BackgroundPanel/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_3p534")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+fit_content = true
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
