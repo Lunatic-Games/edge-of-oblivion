@@ -32,26 +32,7 @@ func spawn_text_popup():
 	spawned_popup = true
 	translation_container.global_position = get_global_mouse_position() + Vector2(-10, -10)
 	translation_container.global_position -= panel.size
-	
-	"""
-	print("Screen position: ", get_screen_position())
-	print("Spawn point: ", translation_container.global_position)
-	print("Global Mouse POS: ", get_global_mouse_position())
-	
-	var left_border = get_screen_position().x - get_viewport_rect().size.x
-	var top_border = get_screen_position().y - get_viewport_rect().size.y/2
-	if translation_container.global_position.x < left_border:
-		translation_container.global_position.x = left_border
-	if translation_container.global_position.y < top_border:
-		translation_container.global_position.y = top_border
-	
-	translation_container.global_position.x = left_border
-	"""
-
-	
 	translation_container.visible = true
-	
-	
 
 func remove_text_popup():
 	spawned_popup = false
