@@ -32,6 +32,15 @@ func spawn_text_popup():
 	spawned_popup = true
 	translation_container.global_position = get_global_mouse_position() + Vector2(-10, -10)
 	translation_container.global_position -= panel.size
+	
+	var left_border = get_viewport().get_camera_2d().global_position.x - get_viewport_rect().size.x/2 + panel.size.x
+	var top_border = get_viewport().get_camera_2d().global_position.y - get_viewport_rect().size.y/3 + panel.size.y
+	
+	if translation_container.global_position.x < left_border:
+		translation_container.global_position.x = left_border
+	if translation_container.global_position.y < top_border:
+		translation_container.global_position.y = top_border
+	
 	translation_container.visible = true
 
 func remove_text_popup():
