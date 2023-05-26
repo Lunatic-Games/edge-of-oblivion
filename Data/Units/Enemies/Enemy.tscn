@@ -127,8 +127,10 @@ show_percentage = false
 
 [node name="LT_PersistentVariables" type="Node" parent="." index="5"]
 
-[node name="LT_OnEntityUpdate" type="Node" parent="." index="6" node_paths=PackedStringArray("logic_tree_on_trigger")]
+[node name="LT_OnEntityUpdate" type="Node" parent="." index="6" node_paths=PackedStringArray("output_entity", "output_entity_tile", "logic_tree_on_trigger")]
 script = ExtResource("3_tqkrt")
+output_entity = NodePath("This enemy")
+output_entity_tile = NodePath("Enemy tile")
 logic_tree_on_trigger = NodePath("LogicTree")
 
 [node name="This enemy" type="Node" parent="LT_OnEntityUpdate" index="0"]
