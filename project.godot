@@ -26,6 +26,12 @@ Debug="*res://Globals/Debug.gd"
 AudioManager="*res://Globals/Managers/Audio/AudioManager.tscn"
 ItemUtil="*res://Globals/ItemUtil.gd"
 GlobalSignals="*res://Globals/Signals.gd"
+GlobalLogicTreeSignals="*res://Globals/LogicTreeSignals.gd"
+
+[debug]
+
+gdscript/warnings/assert_always_true=0
+gdscript/warnings/assert_always_false=0
 
 [display]
 
@@ -35,6 +41,10 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor]
+
+script/templates_search_path="res://_ScriptTemplates"
 
 [filesystem]
 

@@ -2,7 +2,6 @@ class_name Chest
 extends "res://Data/Occupant.gd"
 
 var n_cards_to_spawn: int = 3
-var current_tile: Tile
 
 @onready var animator: AnimationPlayer = $AnimationPlayer
 

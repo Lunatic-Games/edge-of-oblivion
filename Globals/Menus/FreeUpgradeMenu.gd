@@ -5,15 +5,15 @@ signal picked_item  # Card picked but still animating
 signal fully_finished_picking_item  # Cards freed
 
 const ALL_ITEMS: Array[ItemData] = [
-	preload("res://Items/ShortSword/ShortSword.tres"),
-	preload("res://Items/LightningBow/LightningBow.tres"),
-	preload("res://Items/Hammer/Hammer.tres"),
-	preload("res://Items/TokenOfLove/TokenOfLove.tres"),
-	preload("res://Items/DragonCloak/DragonCloak.tres"),
-	preload("res://Items/HolyFire/HolyFire.tres"),
-	preload("res://Items/StrayArquebus/StrayArquebus.tres"),
-	preload("res://Items/Broom/Broom.tres"),
-	preload("res://Items/DraculasKnives/DraculasKnives.tres")
+	preload("res://Data/Items/ShortSword/ShortSword.tres"),
+	preload("res://Data/Items/LightningBow/LightningBow.tres"),
+	preload("res://Data/Items/Hammer/Hammer.tres"),
+	preload("res://Data/Items/TokenOfLove/TokenOfLove.tres"),
+	preload("res://Data/Items/DragonCloak/DragonCloak.tres"),
+	preload("res://Data/Items/HolyFire/HolyFire.tres"),
+	preload("res://Data/Items/StrayArquebus/StrayArquebus.tres"),
+	preload("res://Data/Items/Broom/Broom.tres"),
+	preload("res://Data/Items/DraculasKnives/DraculasKnives.tres")
 ]
 
 const CARD_SCENE: PackedScene = preload("res://UI/Card/Card.tscn")

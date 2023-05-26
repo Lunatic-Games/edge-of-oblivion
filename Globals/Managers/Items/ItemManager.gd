@@ -24,7 +24,7 @@ func reset() -> void:
 
 func handle_items_triggering() -> void:
 	for item in managed_items:
-		await managed_items[item].trigger_timer()
+		managed_items[item].update()
 	
 	TurnManager.item_phase_ended()
 
@@ -52,9 +52,9 @@ func add_item(item_data: ItemData, animate: bool = true) -> void:
 
 func upgrade_item(item_data: ItemData) -> void:
 	var item: Item = managed_items[item_data]
-	var is_max_tier = item.upgrade_tier()
+	item.upgrade_tier()
 	
-	if is_max_tier:
+	if item.is_max_tier():
 		item_reached_max_tier.emit(item_data)
 	
 	var up_tween = create_tween()

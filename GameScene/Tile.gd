@@ -2,11 +2,20 @@ class_name Tile
 extends Node2D
 
 
+signal update_triggered
+
+const TILE_SIZE: float = 65.0
+
 var top_tile: Tile
 var bottom_tile: Tile
 var right_tile: Tile
 var left_tile: Tile
 var occupant: Occupant
+
+
+func update():
+	update_triggered.emit()
+	GlobalLogicTreeSignals.tile_update_triggered.emit(self)
 
 
 # Expects direction to be one of Vector2i.UP, RIGHT, etc.
@@ -25,25 +34,22 @@ func get_tile_in_direction(direction: Vector2i) -> Tile:
 
 
 func get_direction_to_tile(tile: Tile) -> Vector2i:
-	var tile_coords: Vector2 = get_tile_coords_to_tile(tile)
+	var offset: Vector2 = get_2d_distance_to_tile(tile)
 	
-	if tile_coords.y == 0 && tile_coords.x > 0:
-		return Vector2i.LEFT
-	elif tile_coords.y == 0 && tile_coords .x < 0:
+	if offset.y == 0 && offset.x > 0:
 		return Vector2i.RIGHT
-	elif tile_coords.x == 0 && tile_coords.y < 0:
+	elif offset.y == 0 && offset.x < 0:
+		return Vector2i.LEFT
+	elif offset.x == 0 && offset.y < 0:
 		return Vector2i.DOWN
-	elif tile_coords.x == 0 && tile_coords.y > 0:
+	elif offset.x == 0 && offset.y > 0:
 		return Vector2i.UP
 	
 	return Vector2i.ZERO
 
 
-func get_tile_coords_to_tile(tile: Tile) -> Vector2:
-	# TODO: This gets the position from the passed tile to the this one, but is that's what expected?
-	var xpos = position.x - tile.position.x
-	var ypos = position.y - tile.position.y
-	return Vector2(xpos, ypos)
+func get_2d_distance_to_tile(tile: Tile) -> Vector2:
+	return tile.global_position - global_position
 
 
 func get_random_enemy_occupied_adjacent_tile() -> Tile:
@@ -74,9 +80,9 @@ func clear_occupant() -> void:
 
 
 func is_tile_n_tiles_away(tile: Tile, number: int, allow_adjacent: bool = false) -> bool:
-	var tile_coords: Vector2 = get_tile_coords_to_tile(tile)
-	var x_distance: float = abs(tile_coords.x) / 65.0
-	var y_distance: float = abs(tile_coords.y) / 65.0
+	var tile_coords: Vector2 = get_2d_distance_to_tile(tile)
+	var x_distance: float = abs(tile_coords.x) / TILE_SIZE
+	var y_distance: float = abs(tile_coords.y) / TILE_SIZE
 	
 	if allow_adjacent:
 		if min(x_distance, y_distance) <= number:
