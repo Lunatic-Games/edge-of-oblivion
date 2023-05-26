@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b7ul8v2f10lg4"]
 
-[ext_resource type="PackedScene" uid="uid://dd6ebu0agrhyp" path="res://Items/ShortSword/ShortSword.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://b13eybviq3ii7" path="res://Items/ShortSword/ShortSword.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2"]
 [ext_resource type="Script" path="res://Items/ITEM_DATA.gd" id="3"]
 

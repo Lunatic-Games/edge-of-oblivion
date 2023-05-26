@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://co4ony0m1c4q0"]
+[gd_scene load_steps=13 format=3 uid="uid://co4ony0m1c4q0"]
 
 [ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
-[ext_resource type="Texture2D" uid="uid://dodqj134xaf4d" path="res://Assets/art/icons/weapons/lorc/stiletto.svg" id="2"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_ld0hh"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_ypwwl"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_4lchr"]
@@ -15,9 +14,6 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="11_wxece"]
 
 [node name="DraculasKnives" instance=ExtResource("1")]
-
-[node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2")
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("4_ld0hh")

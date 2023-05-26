@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4m6g30wltadx"]
+[gd_scene load_steps=14 format=3 uid="uid://c4m6g30wltadx"]
 
 [ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
-[ext_resource type="Script" path="res://Items/Hammer/Hammer.gd" id="2_ab3nd"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_ymxun"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_c72xt"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="5_qpgiu"]
@@ -16,7 +15,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_vkbki"]
 
 [node name="Hammer" instance=ExtResource("1")]
-script = ExtResource("2_ab3nd")
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("3_ymxun")

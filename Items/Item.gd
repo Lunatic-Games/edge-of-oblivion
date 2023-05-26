@@ -9,13 +9,13 @@ var user: Unit
 var current_tier = 0
 var max_tier = 3
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var texture_rect: TextureRect = $Texture
 @onready var animator: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
 	user = get_tree().get_nodes_in_group("player")[0]
-	appear_unready()
+	appear_unready(false)
 
 
 func update():
@@ -24,30 +24,30 @@ func update():
 
 
 func setup(data) -> void:
-	sprite.texture = data.sprite
+	texture_rect.texture = data.sprite
 	
 	setup_completed.emit()
 	GlobalLogicTreeSignals.item_setup_completed.emit(self)
 
 
 func set_sprite_color(color: Color):
-	sprite.modulate = color
+	texture_rect.modulate = color
 
 
 func appear_ready() -> void:
 	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(sprite, "self_modulate:a", 1.0, 0.2)
+	tween.tween_property(texture_rect, "self_modulate:a", 1.0, 0.2)
 	
 	animator.play("ready")
 
 
-func appear_unready() -> void:
+func appear_unready(play_animation: bool = true) -> void:
 	var tween: Tween = get_tree().create_tween().set_parallel()
 	
-	tween.tween_property(sprite, "self_modulate:a", 0.4, 0.2)
-	animator.stop(true)
-	
-	tween.tween_property(sprite, "position:y", 32.0, 0.2)
+	tween.tween_property(texture_rect, "self_modulate:a", 0.4, 0.2)
+	if play_animation:
+		animator.play("unready")
+
 
 func upgrade_tier():
 	if is_max_tier():

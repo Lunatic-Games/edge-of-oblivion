@@ -52,12 +52,10 @@ func add_item(item_data: ItemData, animate: bool = true) -> void:
 
 func upgrade_item(item_data: ItemData) -> void:
 	var item: Item = managed_items[item_data]
-	var is_max_tier = item.upgrade_tier()
+	item.upgrade_tier()
 	
-	if is_max_tier:
-		FreeUpgradeMenu.remove_item_from_availability(item_data)
+	if item.is_max_tier():
 		item_reached_max_tier.emit(item_data)
-
 	
 	var up_tween = create_tween()
 	up_tween.tween_property(item, "scale", TIER_UP_SCALE_INCREASE, TIER_UP_SCALE_TIME_SECONDS / 2.0) \

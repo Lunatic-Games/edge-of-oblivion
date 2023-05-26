@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://tsvak28axhp8"]
+[gd_scene load_steps=13 format=3 uid="uid://tsvak28axhp8"]
 
 [ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
-[ext_resource type="Texture2D" uid="uid://dgmva12fptw4a" path="res://Assets/art/icons/clothing/delapouite/cape.svg" id="3"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_vo51b"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_ukkjn"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_jhs7r"]
@@ -15,10 +14,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="13_jvyv0"]
 
 [node name="DragonCloak" instance=ExtResource("1")]
-
-[node name="Sprite2D" parent="." index="0"]
-position = Vector2(32, 33.6196)
-texture = ExtResource("3")
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("4_vo51b")
