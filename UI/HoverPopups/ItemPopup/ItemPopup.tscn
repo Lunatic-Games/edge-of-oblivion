@@ -1,0 +1,166 @@
+[gd_scene load_steps=16 format=3 uid="uid://csppnkkol763h"]
+
+[ext_resource type="Script" path="res://UI/HoverPopups/ItemPopup/ItemPopup.gd" id="1_ywlxe"]
+[ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="2_p527v"]
+[ext_resource type="FontFile" uid="uid://br33sipyuwalp" path="res://Assets/fonts/Caudex-Italic.ttf" id="3_sbxrm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ed83"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yco1r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_64i5p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwdyd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j8dib"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knlfn"]
+bg_color = Color(0.211765, 0.156863, 0.243137, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1h1yh"]
+bg_color = Color(0.317647, 0.235294, 0.368627, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p666x"]
+bg_color = Color(0.141176, 0.133333, 0.192157, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vpws5"]
+bg_color = Color(0.141176, 0.133333, 0.192157, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="Animation" id="Animation_7w026"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TranslationContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7dslb"]
+resource_name = "fade_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TranslationContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jsww"]
+_data = {
+"fade_in": SubResource("Animation_7w026"),
+"fade_out": SubResource("Animation_7dslb")
+}
+
+[node name="ItemPopupHover" type="Button"]
+z_index = 4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ed83")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yco1r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_64i5p")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gwdyd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_j8dib")
+script = ExtResource("1_ywlxe")
+
+[node name="TranslationContainer" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+
+[node name="BorderContainer" type="PanelContainer" parent="TranslationContainer"]
+offset_right = 325.0
+offset_bottom = 66.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_knlfn")
+
+[node name="BackgroundPanel" type="PanelContainer" parent="TranslationContainer/BorderContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1h1yh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TranslationContainer/BorderContainer/BackgroundPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 15
+
+[node name="PanelContainer" type="PanelContainer" parent="TranslationContainer/BorderContainer/BackgroundPanel/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p666x")
+
+[node name="InfoText" type="RichTextLabel" parent="TranslationContainer/BorderContainer/BackgroundPanel/VBoxContainer/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_p527v")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Here is some text"
+fit_content = true
+
+[node name="PanelContainer2" type="PanelContainer" parent="TranslationContainer/BorderContainer/BackgroundPanel/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vpws5")
+
+[node name="FlavorText" type="RichTextLabel" parent="TranslationContainer/BorderContainer/BackgroundPanel/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_sbxrm")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "Here is some other text"
+fit_content = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4jsww")
+}
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

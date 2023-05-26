@@ -20,6 +20,16 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="17_58wo7"]
 
 [node name="LightningBow" instance=ExtResource("1")]
+popup_info_text = "[color=cyan]Lightning Bow[/color] Attacks up with range, then chains"
+popup_flavor_text = "Zeus had once used this bow to send lightning to the earth"
+
+[node name="ItemPopupHover" parent="." index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("3_twq0p")
