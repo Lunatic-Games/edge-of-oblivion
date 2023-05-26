@@ -19,19 +19,23 @@ func _ready() -> void:
 	popup_text.text = enemy.popup_info_text
 	popup_flavor_text.text = enemy.popup_flavor_text
 
+
 func _on_mouse_entered() -> void:
 	is_hovered = true
+
 
 func _on_mouse_exited() -> void:
 	remove_text_popup()
 	time_hovered_in_seconds = 0
 	is_hovered = false
 
+
 func _process(delta:float) -> void:
 	if is_hovered && !is_popup_spawned:
 		time_hovered_in_seconds += delta
 		if time_hovered_in_seconds >= delay_in_seconds:
 			spawn_popup()
+
 
 func spawn_popup() -> void:
 	is_popup_spawned = true
@@ -49,6 +53,7 @@ func spawn_popup() -> void:
 		translation_container.global_position.y = top_border
 	
 	animator.play("fade_in")
+
 
 func remove_text_popup() -> void:
 	is_popup_spawned = false
