@@ -16,7 +16,7 @@ func perform_attack() -> void:
 	if (current_tier >= 2 && right_tile):
 		attack(right_tile)
 	
-	$AnimationPlayer.play("Shake")
+	$AnimationPlayer.play("shake")
 
 
 func attack(tile: Tile) -> void:

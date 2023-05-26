@@ -34,8 +34,8 @@ func start_game() -> void:
 	
 	game = get_tree().root.get_node("GameScene")
 	boss_overlay = game.get_node("HUD/BossOverlay")
-	boss_health_bar = boss_overlay.get_node("HealthBar")
-	boss_name = boss_overlay.get_node("Title")
+	boss_health_bar = boss_overlay.get_node("Container/HealthBar")
+	boss_name = boss_overlay.get_node("Container/Title")
 	victory_screen = game.get_node("Menus/VictoryPanel")
 	
 	if not GlobalSignals.boss_spawned.is_connected(_on_Boss_spawned):

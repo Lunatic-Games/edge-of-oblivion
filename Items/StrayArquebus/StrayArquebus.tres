@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="item_data" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://xgqgaqehjmoj"]
 
 [ext_resource type="Script" path="res://Items/ITEM_DATA.gd" id="1"]
-[ext_resource type="PackedScene" path="res://Items/StrayArquebus/StrayArquebus.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://d27646yliok6m" path="res://Items/StrayArquebus/StrayArquebus.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://bkqt67c6onymd" path="res://Assets/art/icons/weapons/skoll/lee-enfield.svg" id="3"]
 
 [resource]
@@ -9,9 +9,10 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Stray Arquebus"
-tier1Text = "[color=#FF6565]1[/color] damage, range 1. [color=#FF8E59]Chance to fire on charge.[/color] Full charge: range 2"
-tier2Text = "+1 turns to full charge. Full charge: range 3, [color=#FF6565]1[/color] bonus damage."
-tier3Text = "+1 turns to full charge. Full charge: range 4, [color=#FF6565]1[/color] bonus damage. Not full charge: 1 free charge"
+tier1Text = "Every 3 turns: Attack in the last moved direction.
+[color=pink]Volatile:[/color] Reduced damage and range."
+tier2Text = "+1 turns to full charge."
+tier3Text = "+1 turns to full charge."
+flavor_text = "So anyways I started blasting."
 max_turn_timer = 3
 item_damage = 0
-path = ""

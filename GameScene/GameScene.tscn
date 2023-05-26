@@ -57,8 +57,11 @@ layer = -1
 modulate = Color(0.141176, 0.160784, 0.247059, 1)
 show_behind_parent = true
 material = SubResource("2")
-offset_right = 1155.0
-offset_bottom = 647.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_jc6s1")
 expand_mode = 1
 
@@ -66,15 +69,22 @@ expand_mode = 1
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="BossOverlay" type="VBoxContainer" parent="HUD"]
+[node name="BossOverlay" type="MarginContainer" parent="HUD"]
 visible = false
-offset_left = 11.0
-offset_top = 11.0
-offset_right = 1137.0
-offset_bottom = 57.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 104.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
 
-[node name="HealthBar" type="ProgressBar" parent="HUD/BossOverlay"]
-custom_minimum_size = Vector2(0, 10)
+[node name="Container" type="VBoxContainer" parent="HUD/BossOverlay"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HealthBar" type="ProgressBar" parent="HUD/BossOverlay/Container"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -83,11 +93,13 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_4pmtw")
 value = 100.0
 show_percentage = false
 
-[node name="Title" type="RichTextLabel" parent="HUD/BossOverlay"]
+[node name="Title" type="RichTextLabel" parent="HUD/BossOverlay/Container"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
 text = "[shake]BOSS NAME"
+scroll_active = false
 
 [node name="Menus" type="CanvasLayer" parent="."]
 
@@ -95,10 +107,17 @@ text = "[shake]BOSS NAME"
 process_mode = 3
 visible = false
 self_modulate = Color(0.360784, 0.34902, 0.364706, 0.611765)
-offset_left = 398.0
-offset_top = 28.0
-offset_right = 737.0
-offset_bottom = 405.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.5
+offset_top = -188.5
+offset_right = 169.5
+offset_bottom = 188.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Container" type="VBoxContainer" parent="Menus/VictoryPanel"]
 layout_mode = 0

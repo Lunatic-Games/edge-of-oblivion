@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="item_data" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://w01o8alrqi15"]
 
 [ext_resource type="Script" path="res://Items/ITEM_DATA.gd" id="1"]
-[ext_resource type="PackedScene" path="res://Items/Broom/Broom.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://duqxp81rw8082" path="res://Items/Broom/Broom.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cjhcck8v0yrqp" path="res://Assets/art/icons/buildings/lorc/fountain.svg" id="3"]
 
 [resource]
@@ -9,9 +9,9 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Broom"
-tier1Text = "Knockback 1 random adjacent enemy"
-tier2Text = "Knockback 2 random adjacent enemies"
-tier3Text = "Knockback 3 random adjacent enemies"
+tier1Text = "Every 4 turns: [color=pink]Knockback[/color] random adjacent enemy."
+tier2Text = "Increase number of affected units."
+tier3Text = "Increase number of affected units."
+flavor_text = "Trusted by witches everywhere."
 max_turn_timer = 4
 item_damage = 0
-path = ""

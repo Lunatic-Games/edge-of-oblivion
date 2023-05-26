@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="item_data" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://s2qvaxdrtajx"]
 
 [ext_resource type="Script" path="res://Items/ITEM_DATA.gd" id="1"]
-[ext_resource type="PackedScene" path="res://Items/DraculasKnives/DraculasKnives.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bh7xv67b13rxy" path="res://Items/DraculasKnives/DraculasKnives.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://dodqj134xaf4d" path="res://Assets/art/icons/weapons/lorc/stiletto.svg" id="3"]
 
 [resource]
@@ -9,9 +9,10 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Dracula's Knives"
-tier1Text = "Attack right for 1. Lifesteal"
-tier2Text = "Also attack range 1"
-tier3Text = "Also attack range 2"
+tier1Text = "Every 4 turns: Attack right. 
+[color=pink]Lifesteal[/color]."
+tier2Text = "Also [color=pink]range 1[/color]."
+tier3Text = "Also [color=pink]range 2[/color]."
+flavor_text = "Hopefully he doesn't want these back."
 max_turn_timer = 4
 item_damage = 1
-path = ""

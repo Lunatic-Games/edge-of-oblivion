@@ -49,7 +49,6 @@ func appear_unready() -> void:
 	
 	tween.tween_property(sprite, "position:y", 32.0, 0.2)
 
-
 func upgrade_tier():
 	if is_max_tier():
 		return
