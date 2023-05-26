@@ -28,9 +28,9 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.37282197"
-     inkscape:cx="33.528067"
-     inkscape:cy="364.78537"
+     inkscape:zoom="0.52724989"
+     inkscape:cx="236.13092"
+     inkscape:cy="678.99493"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="1912"
@@ -161,7 +161,7 @@
          inkscape:label="Gear" />
     </g>
     <rect
-       style="fill:#513c5e;fill-opacity:1;stroke:#36283e;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#4d4d4d;fill-opacity:1;stroke:#333333;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="rect234"
        width="212"
        height="317.5"
@@ -172,7 +172,7 @@
        rx="5.493299"
        sodipodi:insensitive="true" />
     <circle
-       style="fill:#725382;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#6b6b6b;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="path11685"
        cx="82.919083"
        cy="168.87798"
@@ -181,7 +181,7 @@
        transform="rotate(-12)" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.6389px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#4e3959;fill-opacity:1;stroke-width:0.264583"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.6389px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494949;fill-opacity:1;stroke-width:0.264583"
        id="text1129"
        transform="rotate(24,116.19804,132.66551)"
        inkscape:label="ClockMarks"
@@ -189,9 +189,9 @@
          xlink:href="#path1184"
          id="textPath1186"><tspan
            id="tspan1127"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.6389px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#4e3959;fill-opacity:1;stroke-width:0.264583">XII  I  II  III  IV  V  VI  VII  VIII  IX  X  XI</tspan></textPath></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.6389px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494949;fill-opacity:1;stroke-width:0.264583">XII  I  II  III  IV  V  VI  VII  VIII  IX  X  XI</tspan></textPath></text>
     <rect
-       style="fill:#242231;fill-opacity:1;stroke-width:1;stroke-linecap:round;stroke-linejoin:round"
+       style="fill:#292929;fill-opacity:1;stroke-width:1;stroke-linecap:round;stroke-linejoin:round"
        id="rect1676"
        width="195"
        height="50.763565"
@@ -201,7 +201,7 @@
        ry="5.4932985"
        rx="5.4932995" />
     <rect
-       style="fill:#242231;fill-opacity:1;stroke-width:0.999999;stroke-linecap:round;stroke-linejoin:round"
+       style="fill:#292929;fill-opacity:1;stroke-width:0.999999;stroke-linecap:round;stroke-linejoin:round"
        id="rect4746"
        width="195"
        height="89.906403"
@@ -211,7 +211,7 @@
        ry="5.4932985"
        inkscape:label="EffectBox" />
     <rect
-       style="fill:#242231;fill-opacity:1;stroke-width:1;stroke-linecap:round;stroke-linejoin:round"
+       style="fill:#292929;fill-opacity:1;stroke-width:1;stroke-linecap:round;stroke-linejoin:round"
        id="rect4748"
        width="194.99998"
        height="47.41618"
@@ -237,12 +237,12 @@
        r="54.983871"
        transform="rotate(-104)" />
     <path
-       style="fill:#4e3959;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#494949;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 114.61185,148.76373 13.15424,-4.51636 40.51503,6.02181 -39.46269,4.01454 z"
        id="path2140"
        inkscape:label="BigHand" />
     <path
-       style="fill:#4e3959;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#4b444e;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 115.24454,148.97275 -11.4023,-7.2006 -25.847311,-31.44958 29.771761,26.03691 z"
        id="path2142"
        inkscape:label="SmallHand" />

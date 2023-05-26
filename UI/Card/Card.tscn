@@ -17,7 +17,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Gear:rotation")
+tracks/0/path = NodePath("TopLeftBig:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -29,7 +29,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Gear2:rotation")
+tracks/1/path = NodePath("TopLeftSmall:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -41,7 +41,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Gear3:rotation")
+tracks/2/path = NodePath("TopRight:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -53,7 +53,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Gear4:rotation")
+tracks/3/path = NodePath("RightBig:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -65,7 +65,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Gear5:rotation")
+tracks/4/path = NodePath("RightSmall:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -77,7 +77,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Gear6:rotation")
+tracks/5/path = NodePath("BottomBig:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -89,7 +89,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Gear7:rotation")
+tracks/6/path = NodePath("BottomSmallLeft:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -101,7 +101,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Gear8:rotation")
+tracks/7/path = NodePath("BottomSmallRight:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -113,7 +113,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Gear9:rotation")
+tracks/8/path = NodePath("LeftBig:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -125,7 +125,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Gear10:rotation")
+tracks/9/path = NodePath("LeftSmall:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -142,7 +142,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Gear:rotation")
+tracks/0/path = NodePath("TopLeftBig:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -154,7 +154,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Gear2:rotation")
+tracks/1/path = NodePath("TopLeftSmall:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -166,7 +166,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Gear3:rotation")
+tracks/2/path = NodePath("TopRight:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -178,7 +178,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Gear4:rotation")
+tracks/3/path = NodePath("RightBig:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -190,7 +190,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Gear5:rotation")
+tracks/4/path = NodePath("RightSmall:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -202,7 +202,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Gear6:rotation")
+tracks/5/path = NodePath("BottomBig:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -214,7 +214,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Gear7:rotation")
+tracks/6/path = NodePath("BottomSmallLeft:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -226,7 +226,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Gear8:rotation")
+tracks/7/path = NodePath("BottomSmallRight:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -238,7 +238,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Gear9:rotation")
+tracks/8/path = NodePath("LeftBig:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -250,7 +250,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Gear10:rotation")
+tracks/9/path = NodePath("LeftSmall:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -348,6 +348,7 @@ size_flags_horizontal = 6
 script = ExtResource("1_e71sb")
 
 [node name="Background" type="TextureRect" parent="."]
+self_modulate = Color(0.709804, 0.709804, 0.709804, 1)
 custom_minimum_size = Vector2(422, 536)
 layout_mode = 1
 anchors_preset = 15
@@ -370,20 +371,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Gear" type="TextureRect" parent="Background/Gears"]
-modulate = Color(0.4, 0.298039, 0.45098, 1)
-layout_mode = 0
-offset_left = 12.0
-offset_top = 6.0
-offset_right = 146.0
-offset_bottom = 140.0
-pivot_offset = Vector2(67, 67)
-mouse_filter = 2
-texture = ExtResource("2_i0dep")
-expand_mode = 1
-
-[node name="Gear2" type="TextureRect" parent="Background/Gears"]
-modulate = Color(0.305882, 0.223529, 0.34902, 1)
+[node name="TopLeftSmall" type="TextureRect" parent="Background/Gears"]
+modulate = Color(0.419608, 0.329412, 0.152941, 1)
 layout_mode = 0
 offset_left = 94.0
 offset_top = 16.0
@@ -394,8 +383,20 @@ mouse_filter = 2
 texture = ExtResource("2_i0dep")
 expand_mode = 1
 
-[node name="Gear3" type="TextureRect" parent="Background/Gears"]
-modulate = Color(0.439216, 0.333333, 0.498039, 1)
+[node name="TopLeftBig" type="TextureRect" parent="Background/Gears"]
+modulate = Color(0.611765, 0.486275, 0.25098, 1)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 146.0
+offset_bottom = 140.0
+pivot_offset = Vector2(67, 67)
+mouse_filter = 2
+texture = ExtResource("2_i0dep")
+expand_mode = 1
+
+[node name="TopRight" type="TextureRect" parent="Background/Gears"]
+modulate = Color(0.611765, 0.486275, 0.25098, 1)
 layout_mode = 0
 offset_left = 318.0
 offset_top = 16.0
@@ -406,20 +407,8 @@ mouse_filter = 2
 texture = ExtResource("2_i0dep")
 expand_mode = 1
 
-[node name="Gear4" type="TextureRect" parent="Background/Gears"]
-modulate = Color(0.270588, 0.196078, 0.309804, 1)
-layout_mode = 0
-offset_left = 320.0
-offset_top = 203.0
-offset_right = 414.0
-offset_bottom = 297.0
-pivot_offset = Vector2(47, 47)
-mouse_filter = 2
-texture = ExtResource("2_i0dep")
-expand_mode = 1
-
-[node name="Gear5" type="TextureRect" parent="Background/Gears"]
-modulate = Color(0.305882, 0.223529, 0.34902, 1)
+[node name="RightSmall" type="TextureRect" parent="Background/Gears"]
+modulate = Color(0.419608, 0.329412, 0.152941, 1)
 layout_mode = 0
 offset_left = 324.0
 offset_top = 259.0
@@ -430,20 +419,20 @@ mouse_filter = 2
 texture = ExtResource("2_i0dep")
 expand_mode = 1
 
-[node name="Gear6" type="TextureRect" parent="Background/Gears"]
-modulate = Color(0.305882, 0.223529, 0.34902, 1)
+[node name="RightBig" type="TextureRect" parent="Background/Gears"]
+modulate = Color(0.611765, 0.486275, 0.25098, 1)
 layout_mode = 0
-offset_left = 166.0
-offset_top = 442.0
-offset_right = 262.0
-offset_bottom = 538.0
-pivot_offset = Vector2(48, 48)
+offset_left = 320.0
+offset_top = 203.0
+offset_right = 414.0
+offset_bottom = 297.0
+pivot_offset = Vector2(47, 47)
 mouse_filter = 2
 texture = ExtResource("2_i0dep")
 expand_mode = 1
 
-[node name="Gear7" type="TextureRect" parent="Background/Gears"]
-modulate = Color(0.372549, 0.278431, 0.423529, 1)
+[node name="BottomSmallLeft" type="TextureRect" parent="Background/Gears"]
+modulate = Color(0.419608, 0.329412, 0.152941, 1)
 layout_mode = 0
 offset_left = 130.0
 offset_top = 460.0
@@ -454,8 +443,8 @@ mouse_filter = 2
 texture = ExtResource("2_i0dep")
 expand_mode = 1
 
-[node name="Gear8" type="TextureRect" parent="Background/Gears"]
-modulate = Color(0.458824, 0.345098, 0.513726, 1)
+[node name="BottomSmallRight" type="TextureRect" parent="Background/Gears"]
+modulate = Color(0.419608, 0.329412, 0.152941, 1)
 layout_mode = 0
 offset_left = 235.0
 offset_top = 460.0
@@ -466,26 +455,38 @@ mouse_filter = 2
 texture = ExtResource("2_i0dep")
 expand_mode = 1
 
-[node name="Gear9" type="TextureRect" parent="Background/Gears"]
-modulate = Color(0.305882, 0.223529, 0.34902, 1)
+[node name="BottomBig" type="TextureRect" parent="Background/Gears"]
+modulate = Color(0.611765, 0.486275, 0.25098, 1)
 layout_mode = 0
-offset_left = -5.0
-offset_top = 273.0
-offset_right = 137.0
-offset_bottom = 415.0
-pivot_offset = Vector2(71, 71)
+offset_left = 166.0
+offset_top = 442.0
+offset_right = 262.0
+offset_bottom = 538.0
+pivot_offset = Vector2(48, 48)
 mouse_filter = 2
 texture = ExtResource("2_i0dep")
 expand_mode = 1
 
-[node name="Gear10" type="TextureRect" parent="Background/Gears"]
-modulate = Color(0.431373, 0.32549, 0.490196, 1)
+[node name="LeftSmall" type="TextureRect" parent="Background/Gears"]
+modulate = Color(0.419608, 0.329412, 0.152941, 1)
 layout_mode = 0
 offset_left = 23.0
 offset_top = 227.0
 offset_right = 115.0
 offset_bottom = 319.0
 pivot_offset = Vector2(46, 46)
+mouse_filter = 2
+texture = ExtResource("2_i0dep")
+expand_mode = 1
+
+[node name="LeftBig" type="TextureRect" parent="Background/Gears"]
+modulate = Color(0.611765, 0.486275, 0.25098, 1)
+layout_mode = 0
+offset_left = -5.0
+offset_top = 273.0
+offset_right = 137.0
+offset_bottom = 415.0
+pivot_offset = Vector2(71, 71)
 mouse_filter = 2
 texture = ExtResource("2_i0dep")
 expand_mode = 1
@@ -516,6 +517,7 @@ vertical_alignment = 1
 
 [node name="TierUpBanner" type="TextureRect" parent="Background"]
 visible = false
+self_modulate = Color(0.631373, 0.505882, 0.258824, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
