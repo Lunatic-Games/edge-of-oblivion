@@ -1,0 +1,96 @@
+[gd_scene load_steps=13 format=3 uid="uid://tsvak28axhp8"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_vo51b"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_ukkjn"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_jhs7r"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="6_qnc6f"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="7_0prs7"]
+[ext_resource type="PackedScene" uid="uid://de0n5ydhv3wpu" path="res://Data/Particles/DragonCloak/DragonCloakOnHit.tscn" id="8_3c1t2"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="8_82cls"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="8_kvs5u"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="8_snmek"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="12_xi84i"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="13_jvyv0"]
+
+[node name="DragonCloak" instance=ExtResource("1")]
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("4_vo51b")
+default_value = 5
+
+[node name="Radius" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("4_vo51b")
+default_value = 1
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("4_vo51b")
+default_value = 1
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_ukkjn")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
+script = ExtResource("6_jhs7r")
+
+[node name="Select tiles in radius" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles", "radius_override")]
+script = ExtResource("7_0prs7")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Targets")
+shape = 1
+radius_override = NodePath("../../../../LT_PersistentVariables/Radius")
+include_origin_tile = false
+
+[node name="Spawn visual effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("tiles")]
+script = ExtResource("8_kvs5u")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("8_3c1t2")
+
+[node name="Damage occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("8_snmek")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
+
+[node name="Set item appearance to unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("items")]
+script = ExtResource("8_82cls")
+items = NodePath("../../../This item")
+appear_ready = false
+
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_ukkjn")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+on_one_before = true
+
+[node name="Set item appearance to ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("8_82cls")
+items = NodePath("../../../This item")
+
+[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+script = ExtResource("6_qnc6f")
+progress_bar = NodePath("../../../CoolDownBar")
+every_x_calls = NodePath("../LT_EveryXCalls")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("12_xi84i")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="1 shorter cooldown" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("13_jvyv0")
+int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
+value = 1
+operation = 2
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("12_xi84i")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="radius 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("13_jvyv0")
+int_variable = NodePath("../../../../LT_PersistentVariables/Radius")
+value = 1
+operation = 1

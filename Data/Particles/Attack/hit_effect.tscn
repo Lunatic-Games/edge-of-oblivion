@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhfpfuij1d8h8"]
+
+[ext_resource type="Texture2D" uid="uid://cjj8sqa6nqjh5" path="res://Assets/textures/kenneys/PNG (Transparent)/scratch_01.png" id="1_u70pc"]
+[ext_resource type="Script" path="res://Data/Particles/BasicParticles.gd" id="2_lfry7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tt8wx"]
+
+[sub_resource type="Gradient" id="Gradient_osp2d"]
+offsets = PackedFloat32Array(0, 0.0777202, 0.15544, 0.694301, 0.823834, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0agb4"]
+gradient = SubResource("Gradient_osp2d")
+
+[sub_resource type="Curve" id="Curve_27rqn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.994962, 0.881818), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_y0xy7"]
+curve = SubResource("Curve_27rqn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1fsax"]
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 1)
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -10.0
+angle_max = 10.0
+scale_min = 0.15
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_y0xy7")
+color = Color(0.870588, 0.505882, 0.505882, 1)
+color_ramp = SubResource("GradientTexture1D_0agb4")
+hue_variation_max = 0.35
+turbulence_enabled = true
+
+[node name="HitEffect" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_tt8wx")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_1fsax")
+texture = ExtResource("1_u70pc")
+one_shot = true
+explosiveness = 0.9
+script = ExtResource("2_lfry7")

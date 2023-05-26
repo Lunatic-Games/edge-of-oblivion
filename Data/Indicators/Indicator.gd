@@ -1,3 +1,4 @@
+class_name Indicator
 extends Node2D
 
 @onready var animator: AnimationPlayer = $AnimationPlayer

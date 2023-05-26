@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cs8677p2ixfol"]
 
-[ext_resource type="Script" path="res://Data/Indicators/Indicator.gd" id="1"]
+[ext_resource type="Script" path="res://Data/Indicators/Indicator.gd" id="1_n4rda"]
 [ext_resource type="Texture2D" uid="uid://ds86i7x1lvcb1" path="res://Assets/art/icons/targets/sbed/select.svg" id="2"]
 
 [sub_resource type="Animation" id="2"]
@@ -66,7 +66,7 @@ _data = {
 }
 
 [node name="Indicator" type="Node2D"]
-script = ExtResource("1")
+script = ExtResource("1_n4rda")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.933333, 0.388235, 0.388235, 1)
