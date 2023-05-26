@@ -13,11 +13,9 @@ var spawned_popup: bool = false
 
 func _ready():
 	var display_string = enemy.popup_info_text
-	print("EnemyPopup: ", display_string)
 	popup_text.text = display_string
 
 func _on_mouse_entered() -> void:
-	print("EnemyPopup: ENTERED HOVER!")
 	hovered = true
 
 func _on_mouse_exited() -> void:
@@ -29,7 +27,6 @@ func _process(delta):
 	if hovered && !spawned_popup:
 		time_hovered += delta
 		if time_hovered >= delay:
-			print("EnemyPopup: SPAWN POPUP")
 			spawn_popup()
 
 func spawn_popup():
