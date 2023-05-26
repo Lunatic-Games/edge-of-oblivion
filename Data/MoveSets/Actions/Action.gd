@@ -11,7 +11,6 @@ enum TargetingType {
 }
 
 const SLASH_EFFECT_SCENE = preload("res://Data/Particles/Attack/SlashParticles.tscn")
-const ARROW_EFFECT_SCENE = preload("res://Data/Indicators/AttackEffects/RangedAttackEffect.tscn")
 
 const EFFECT_MODULATE = Color("c69fa5")
 
@@ -103,24 +102,3 @@ func spawn_slash_effect(tile: Tile) -> void:
 			effect.rotation_degrees = 180
 		TargetingType.RIGHT:
 			effect.rotation_degrees = 0
-
-
-func spawn_arrow_effect(starting_tile: Tile, ending_tile: Tile) -> Object:
-	var effect = ARROW_EFFECT_SCENE.instantiate()
-	GameManager.gameboard.add_child(effect)
-	
-	effect.global_position = starting_tile.global_position
-	effect.modulate = EFFECT_MODULATE
-	
-	match targeting_type:
-		TargetingType.DOWN:
-			effect.rotation_degrees = 90
-		TargetingType.UP:
-			effect.rotation_degrees = -90
-		TargetingType.LEFT:
-			effect.rotation_degrees = 180
-		TargetingType.RIGHT:
-			effect.rotation_degrees = 0
-	
-	effect.setup(starting_tile, ending_tile)
-	return effect

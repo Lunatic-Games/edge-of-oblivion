@@ -3,7 +3,7 @@ extends "res://Data/Units/Unit.gd"
 
 signal item_reached_max_tier
 
-const STARTING_ITEMS = [preload("res://Items/ShortSword/ShortSword.tres")]
+const STARTING_ITEMS = [preload("res://Data/Items/ShortSword/ShortSword.tres")]
 
 var experience_bar_update_time: float = 0.2
 var moves: int = 1

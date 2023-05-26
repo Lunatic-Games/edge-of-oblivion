@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://ciom03ipb83hk"]
+
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cmpxesn2rnfv4" path="res://Data/Items/HolyFire/HolyFire.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://cjk1g57odlvtu" path="res://Assets/art/icons/spikes-slashes-cracks/lorc/striking-diamonds.svg" id="3"]
+
+[resource]
+script = ExtResource("1")
+sprite = ExtResource("3")
+item_scene = ExtResource("2")
+item_name = "Holy Fire"
+tier1Text = "Every 2 turns: Damage a nearby random tile.
+[color=pink]Repeat 3[/color]."
+tier2Text = "[color=pink]Repeat 5[/color]."
+tier3Text = "[color=pink]Repeat 7[/color]."
+flavor_text = "Cleanse thy enemies with fire and flame."
+max_turn_timer = 2
+item_damage = 0

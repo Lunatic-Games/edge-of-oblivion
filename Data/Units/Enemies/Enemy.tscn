@@ -1,8 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://beynfuvsrpfhq"]
+[gd_scene load_steps=16 format=3 uid="uid://duyl86m61pckf"]
 
 [ext_resource type="PackedScene" uid="uid://cq6cufn4fk6s3" path="res://Data/Units/Unit.tscn" id="1"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Enemy.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://j6p4libx27jr" path="res://Data/MoveSets/Move.tscn" id="3"]
+[ext_resource type="Script" path="res://LogicTree/Triggers/EntityTriggers/OnEntityUpdate.gd" id="3_tqkrt"]
+[ext_resource type="Script" path="res://LogicTree/Variables/EntityArrayVariable.gd" id="4_ktiyx"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="4_vws5t"]
+[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="5_fk80c"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -103,11 +106,6 @@ bg_color = Color(0.223529, 0.478431, 0.611765, 1)
 
 [node name="Enemy" instance=ExtResource("1")]
 script = ExtResource("2")
-target_scene = null
-xp = null
-max_rounds_until_ready = null
-damage = null
-max_hp_override = null
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_0fwle")
@@ -127,8 +125,19 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_r1y27")
 value = 50.0
 show_percentage = false
 
-[node name="MoveSets" type="Node2D" parent="." index="5"]
+[node name="LT_PersistentVariables" type="Node" parent="." index="5"]
 
-[node name="Move" parent="MoveSets" index="0" instance=ExtResource("3")]
+[node name="LT_OnEntityUpdate" type="Node" parent="." index="6" node_paths=PackedStringArray("output_entity", "output_entity_tile", "logic_tree_on_trigger")]
+script = ExtResource("3_tqkrt")
+output_entity = NodePath("This enemy")
+output_entity_tile = NodePath("Enemy tile")
+logic_tree_on_trigger = NodePath("LogicTree")
 
-[editable path="MoveSets/Move"]
+[node name="This enemy" type="Node" parent="LT_OnEntityUpdate" index="0"]
+script = ExtResource("4_ktiyx")
+
+[node name="Enemy tile" type="Node" parent="LT_OnEntityUpdate" index="1"]
+script = ExtResource("4_vws5t")
+
+[node name="LogicTree" type="Node" parent="LT_OnEntityUpdate" index="2"]
+script = ExtResource("5_fk80c")
