@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://p0e7f46xip6t"]
+[gd_scene load_steps=20 format=3 uid="uid://p0e7f46xip6t"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://cinfmdwcoldqr" path="res://Assets/art/icons/medieval-fantasy/lorc/cowled.svg" id="3"]
@@ -50,47 +50,6 @@ seamless = true
 as_normal_map = true
 noise = SubResource("2")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lovuq"]
-resource_local_to_scene = true
-shader = SubResource("1")
-shader_parameter/strength = 0.25
-shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
-shader_parameter/noise = SubResource("3")
-
-[sub_resource type="Shader" id="1"]
-code = "shader_type canvas_item;
-
-uniform float strength = 0.5f;
-uniform vec4 modulate: source_color = vec4(1.0);
-uniform sampler2D noise;
-
-void fragment() {
-	vec2 dist = vec2(0.5f) - UV;
-	float s = sin(TIME);
-	float c = cos(TIME);
-	
-	mat2 m = mat2(vec2(c, -s), vec2(s, c));
-	dist *= m;
-	
-	vec4 coord = texture(noise, 0.5f + dist);
-	coord.x -= .5;
-	coord.y -= .5;
-	
-	vec4 lens_color = texture(TEXTURE, UV + coord.xy * strength);
-	lens_color *= modulate;
-    COLOR = lens_color;
-}"
-
-[sub_resource type="FastNoiseLite" id="2"]
-frequency = 0.005
-fractal_octaves = 3
-fractal_lacunarity = 1.7
-
-[sub_resource type="NoiseTexture2D" id="3"]
-seamless = true
-as_normal_map = true
-noise = SubResource("2")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bmpq0"]
 resource_local_to_scene = true
 shader = SubResource("1")
@@ -99,8 +58,10 @@ shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
 shader_parameter/noise = SubResource("3")
 
 [node name="LostRanger" instance=ExtResource("1")]
+popup_info_text = "[color=cyan]The Lost Ranger[/color] Looks for a target above and below. (range 3)"
+popup_flavor_text = "A long time ago, they'd lose themselves in the hunt. Now they are lost to it forever."
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_bmpq0")
 texture = ExtResource("3")
 

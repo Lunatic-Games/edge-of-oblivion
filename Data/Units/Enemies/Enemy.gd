@@ -3,6 +3,8 @@ extends Unit
 
 signal update_triggered
 
+@export var popup_info_text: String
+@export var popup_flavor_text: String
 @export var target_scene: PackedScene = preload("res://Data/Indicators/Indicator.tscn")
 @export_range(0, 999, 1, "or_greater") var xp: int = 1
 @export_range(0, 999, 1, "or_greater") var max_rounds_until_ready: int  = 2

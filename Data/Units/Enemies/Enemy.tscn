@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://duyl86m61pckf"]
+[gd_scene load_steps=17 format=3 uid="uid://duyl86m61pckf"]
 
 [ext_resource type="PackedScene" uid="uid://cq6cufn4fk6s3" path="res://Data/Units/Unit.tscn" id="1"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Enemy.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://bvu1bphpfddf1" path="res://UI/HoverPopups/EnemyPopup/EnemyPopup.tscn" id="3_1t0xc"]
 [ext_resource type="Script" path="res://LogicTree/Triggers/EntityTriggers/OnEntityUpdate.gd" id="3_tqkrt"]
 [ext_resource type="Script" path="res://LogicTree/Variables/EntityArrayVariable.gd" id="4_ktiyx"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="4_vws5t"]
@@ -107,15 +108,22 @@ bg_color = Color(0.223529, 0.478431, 0.611765, 1)
 [node name="Enemy" instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="EnemyPopupHover" parent="." index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("3_1t0xc")]
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+enemy = NodePath("..")
+
+[node name="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_0fwle")
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_mhx0i")
 }
 
-[node name="AttackBar" type="ProgressBar" parent="." index="4"]
+[node name="AttackBar" type="ProgressBar" parent="." index="5"]
 offset_left = -24.0
 offset_top = 35.0
 offset_right = 24.0
@@ -125,9 +133,9 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_r1y27")
 value = 50.0
 show_percentage = false
 
-[node name="LT_PersistentVariables" type="Node" parent="." index="5"]
+[node name="LT_PersistentVariables" type="Node" parent="." index="6"]
 
-[node name="LT_OnEntityUpdate" type="Node" parent="." index="6" node_paths=PackedStringArray("output_entity", "output_entity_tile", "logic_tree_on_trigger")]
+[node name="LT_OnEntityUpdate" type="Node" parent="." index="7" node_paths=PackedStringArray("output_entity", "output_entity_tile", "logic_tree_on_trigger")]
 script = ExtResource("3_tqkrt")
 output_entity = NodePath("This enemy")
 output_entity_tile = NodePath("Enemy tile")
