@@ -1,5 +1,7 @@
 extends Button
 
+const POPOUT_OFFSET = Vector2(-10, -10)
+
 @export_placeholder("Lorem ipsum dolor iset imun babab baba chug wug!") var display_string: String
 
 var delay_in_seconds: float = 0.5
@@ -15,13 +17,16 @@ var is_popup_spawned: bool = false
 func _ready() -> void:
 	popup_text.text = display_string
 
+
 func _on_mouse_entered() -> void:
 	is_hovered = true
+
 
 func _on_mouse_exited() -> void:
 	remove_text_popup()
 	time_hovered_in_seconds = 0
 	is_hovered = false
+
 
 func _process(delta:float) -> void:
 	if is_hovered && !is_popup_spawned:
@@ -29,15 +34,16 @@ func _process(delta:float) -> void:
 		if time_hovered_in_seconds >= delay_in_seconds:
 			spawn_text_popup()
 
+
 func spawn_text_popup() -> void:
 	is_popup_spawned = true
-	translation_container.global_position = get_global_mouse_position() + Vector2(-10, -10)
+	translation_container.global_position = get_global_mouse_position() + POPOUT_OFFSET
 	translation_container.global_position -= panel.size
 	
-	var camera = get_viewport().get_camera_2d()
-	var viewport_size = get_viewport_rect().size
-	var left_border = camera.global_position.x - viewport_size.x / 2 + panel.size.x
-	var top_border = camera.global_position.y - viewport_size.y / 3 + panel.size.y # We divide by 3 here since the camera is represented as a 2x3 rectangle
+	var camera: Camera2D = get_viewport().get_camera_2d()
+	var viewport_size: Vector2 = get_viewport_rect().size
+	var left_border: float = camera.global_position.x - viewport_size.x / 2 + panel.size.x
+	var top_border: float = camera.global_position.y - viewport_size.y / 3 + panel.size.y # We divide by 3 here since the camera is represented as a 2x3 rectangle
 	
 	if translation_container.global_position.x < left_border:
 		translation_container.global_position.x = left_border
@@ -45,6 +51,8 @@ func spawn_text_popup() -> void:
 		translation_container.global_position.y = top_border
 	
 	animator.play("fade_in")
+
+
 
 func remove_text_popup() -> void:
 	is_popup_spawned = false
