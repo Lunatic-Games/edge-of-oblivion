@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dpm30lsuugaf6"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c7npess6g8cti"]
 
-[ext_resource type="Script" path="res://Items/ITEM_DATA.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://768wywni10mp" path="res://Items/TokenOfLove/TokenOfLove.tscn" id="2"]
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://768wywni10mp" path="res://Data/Items/TokenOfLove/TokenOfLove.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b70hyhkt17y6g" path="res://Assets/art/icons/hearts/delapouite/heart-necklace.svg" id="3"]
 
 [resource]

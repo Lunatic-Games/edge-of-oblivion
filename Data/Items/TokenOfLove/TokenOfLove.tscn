@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://768wywni10mp"]
 
-[ext_resource type="PackedScene" uid="uid://btfetsqf4m4x0" path="res://Items/Item.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_5j58d"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_iq66l"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="5_om48k"]

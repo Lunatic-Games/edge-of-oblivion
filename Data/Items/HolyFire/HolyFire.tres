@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cg5wvbdlgyiuk"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://ciom03ipb83hk"]
 
-[ext_resource type="Script" path="res://Items/ITEM_DATA.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://cmpxesn2rnfv4" path="res://Items/HolyFire/HolyFire.tscn" id="2"]
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cmpxesn2rnfv4" path="res://Data/Items/HolyFire/HolyFire.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cjk1g57odlvtu" path="res://Assets/art/icons/spikes-slashes-cracks/lorc/striking-diamonds.svg" id="3"]
 
 [resource]
