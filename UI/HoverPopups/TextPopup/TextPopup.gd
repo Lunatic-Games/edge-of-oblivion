@@ -45,9 +45,7 @@ func spawn_text_popup() -> void:
 		translation_container.global_position.y = top_border
 	
 	animator.play("fade_in")
-	#translation_container.show()
 
 func remove_text_popup() -> void:
 	is_popup_spawned = false
 	animator.play("fade_out")
-	#translation_container.hide()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvu1bphpfddf1"]
+[gd_scene load_steps=16 format=3 uid="uid://bvu1bphpfddf1"]
 
 [ext_resource type="Script" path="res://UI/HoverPopups/EnemyPopup/EnemyPopup.gd" id="1_wvk0u"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="2_crek8"]
@@ -58,6 +58,44 @@ expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 
+[sub_resource type="Animation" id="Animation_7w026"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TranslationContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7dslb"]
+resource_name = "fade_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TranslationContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jsww"]
+_data = {
+"fade_in": SubResource("Animation_7w026"),
+"fade_out": SubResource("Animation_7dslb")
+}
+
 [node name="EnemyPopupHover" type="Button"]
 z_index = 4
 anchors_preset = 15
@@ -73,6 +111,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_j8dib")
 script = ExtResource("1_wvk0u")
 
 [node name="TranslationContainer" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
 
 [node name="BorderContainer" type="PanelContainer" parent="TranslationContainer"]
 offset_right = 325.0
@@ -117,6 +156,11 @@ theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
 text = "Here is some other text"
 fit_content = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4jsww")
+}
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
