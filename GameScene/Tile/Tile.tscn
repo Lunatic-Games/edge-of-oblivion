@@ -22,7 +22,7 @@ offset_right = 26.0
 offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.215686, 0.152941, 0.282353, 1)
+color = Color(0.188235, 0.2, 0.372549, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.380392, 0.4, 0.623529, 0.145098)
