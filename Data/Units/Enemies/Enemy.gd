@@ -22,6 +22,8 @@ func _ready() -> void:
 	update_attack_bar()
 	appear_unready()
 	super._ready()
+	
+	play_spawn_animation()
 
 
 func update() -> void:
@@ -60,5 +62,4 @@ func can_attack_player() -> bool:
 
 func die() -> void:
 	GameManager.player.gain_experience(xp)
-	GameManager.remove_enemy(self)
 	super.die()

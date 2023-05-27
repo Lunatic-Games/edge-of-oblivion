@@ -15,7 +15,7 @@ var managed_items: Dictionary = {
 
 
 func _ready() -> void:
-	TurnManager.connect("player_turn_ended",Callable(self,"handle_items_triggering"))
+	TurnManager.connect("player_turn_ended", handle_items_triggering)
 
 
 func reset() -> void:

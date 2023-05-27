@@ -42,7 +42,8 @@ var current_round: int = 0
 
 
 func initialize() -> void:
-	call_deferred("handle_round_update")
+	await GlobalSignals.game_started
+	handle_round_update()
 
 
 func reset() -> void:
@@ -74,7 +75,7 @@ func start_player_turn() -> void:
 
 
 func update_tiles() -> void:
-	for tile in GameManager.all_tiles:
+	for tile in GameManager.board.all_tiles:
 		tile.update()
 
 

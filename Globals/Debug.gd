@@ -46,6 +46,6 @@ func _process(_delta: float) -> void:
 
 
 func _spawn_enemy_scene(scene: PackedScene):
-	var tile: Tile = GameManager.get_random_unoccupied_tile()
+	var tile: Tile = GameManager.board.get_random_unoccupied_tile()
 	if tile:
-		GameManager.spawn_enemy_at_tile(scene, tile)
+		GameManager.spawn_enemy_on_tile(scene, tile)

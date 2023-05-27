@@ -1,45 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://byoi1xsr0flfl"]
+[gd_scene load_steps=5 format=3 uid="uid://xex3avr7g7oe"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
-[ext_resource type="Texture2D" uid="uid://ceh34ox6344m8" path="res://Assets/art/misc/blank_grey.png" id="2_jc6s1"]
-
-[sub_resource type="Shader" id="1"]
-code = "shader_type canvas_item;
-
-uniform vec2 direction = vec2(1, 0);
-uniform float speed = 0.1;
-uniform sampler2D noise;
-
-vec4 overlay(vec4 base, vec4 blend){
-	vec4 limit = step(0.5, base);
-	return mix(2.0 * base * blend, 1.0 - 2.0 * (1.0 - base) * (1.0 - blend), limit);
-}
-
-void fragment()
-{
-	// image texture
-	vec4 base = texture(TEXTURE, UV);
-	// noise texture
-	vec4 blend = texture(noise, mod(UV + ( direction * speed * TIME), vec2(1.0, 1.0)));
-	
-	COLOR = overlay(base, blend);
-}"
-
-[sub_resource type="Gradient" id="Gradient_iussi"]
-colors = PackedColorArray(0, 0, 0, 1, 0.18343, 0.1794, 0.26, 1)
-
-[sub_resource type="FastNoiseLite" id="3"]
-
-[sub_resource type="NoiseTexture2D" id="4"]
-seamless = true
-color_ramp = SubResource("Gradient_iussi")
-noise = SubResource("3")
-
-[sub_resource type="ShaderMaterial" id="2"]
-shader = SubResource("1")
-shader_parameter/direction = Vector2(0.5, 1)
-shader_parameter/speed = 0.02
-shader_parameter/noise = SubResource("4")
+[ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://GameScene/Board/Board.tscn" id="2_5sub4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vfxa"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
@@ -53,28 +15,27 @@ script = ExtResource("1_f3738")
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="BackgroundNoise" type="TextureRect" parent="Background"]
-modulate = Color(0.141176, 0.160784, 0.247059, 1)
-show_behind_parent = true
-material = SubResource("2")
+[node name="BackgroundFill" type="ColorRect" parent="Background"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_jc6s1")
-expand_mode = 1
+color = Color(0.101961, 0.145098, 0.262745, 1)
 
-[node name="GameBoard" type="Node2D" parent="." groups=["gameboard"]]
+[node name="Board" parent="." instance=ExtResource("2_5sub4")]
+layer_0/tile_data = PackedInt32Array(196608, 0, 65536, 196609, 0, 65536, 196610, 0, 65536, 196611, 0, 65536, 262147, 0, 65536, 262146, 0, 65536, 262145, 0, 65536, 262144, 0, 65536, 196612, 0, 65536, 262148, 0, 65536, 393216, 0, 65536, 327681, 0, 65536, 327682, 0, 65536, 327683, 0, 65536, 327684, 0, 65536, 393220, 0, 65536, 393219, 0, 65536, 393218, 0, 65536, 393217, 0, 65536, 327680, 0, 65536, 131072, 0, 65536, 131074, 0, 65536, 131073, 0, 65536, 131076, 0, 65536, 131075, 0, 65536, 458756, 0, 65536, 458755, 0, 65536, 458754, 0, 65536, 458753, 0, 65536, 458752, 0, 65536, 524288, 0, 65536, 524289, 0, 65536, 524290, 0, 65536, 524291, 0, 65536, 524292, 0, 65536, 131077, 0, 65536, 196613, 0, 65536, 262149, 0, 65536, 327685, 0, 65536, 393221, 0, 65536, 458757, 0, 65536, 524293, 0, 65536, 524294, 0, 65536, 458758, 0, 65536, 393222, 0, 65536, 327686, 0, 65536, 262150, 0, 65536, 196614, 0, 65536, 131078, 0, 65536)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="BossOverlay" type="MarginContainer" parent="HUD"]
 visible = false
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 104.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 40
@@ -82,20 +43,23 @@ theme_override_constants/margin_right = 40
 [node name="Container" type="VBoxContainer" parent="HUD/BossOverlay"]
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="HealthBar" type="ProgressBar" parent="HUD/BossOverlay/Container"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_5vfxa")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4pmtw")
 value = 100.0
 show_percentage = false
 
 [node name="Title" type="RichTextLabel" parent="HUD/BossOverlay/Container"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
 text = "[shake]BOSS NAME"

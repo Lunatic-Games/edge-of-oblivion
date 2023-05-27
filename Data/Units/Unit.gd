@@ -1,6 +1,8 @@
 class_name Unit
 extends Occupant
 
+signal died
+
 const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Damaged/damaged_particle2.tscn")
 const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Healing/HealthParticles.tscn")
 
@@ -25,9 +27,8 @@ func _ready() -> void:
 	hp = max_hp
 
 
-func setup() -> void:
+func play_spawn_animation() -> void:
 	animation_player.play("spawn")
-	await animation_player.animation_finished
 
 
 func is_enemy() -> bool:
@@ -74,11 +75,12 @@ func spawn_particle(type: String) -> void:
 	var res: PackedScene = particles[type]
 	var particle: Node2D = res.instantiate()
 	particle.global_position = self.global_position
-	GameManager.gameboard.add_child(particle)
+	GameManager.board.add_child(particle)
 
 
 func die() -> void:
-	current_tile.clear_occupant()
+	current_tile.occupant = null
+	died.emit()
 	
 	var tween: Tween = get_tree().create_tween().set_parallel(true)
 	tween.tween_property(self, "global_position:y", -25.0, 0.5).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
@@ -118,9 +120,10 @@ func move_to_tile(tile) -> void:
 		if tile.occupant.occupant_type == tile.occupant.OccupantType.COLLECTABLE:
 			tile.occupant.collect()
 	
-	GameManager.unoccupy_tile(current_tile)
-	GameManager.occupy_tile(tile, self)
+	current_tile.occupant = null
+	
 	current_tile = tile
+	current_tile.occupant = self
 	
 	lock_movement = true
 	

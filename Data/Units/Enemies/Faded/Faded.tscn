@@ -69,10 +69,6 @@ default_value = 3
 script = ExtResource("3_cmyjp")
 default_value = 1
 
-[node name="LT_OnEntityUpdate" parent="." index="6" node_paths=PackedStringArray("output_entity", "output_entity_tile")]
-output_entity = NodePath("This enemy")
-output_entity_tile = NodePath("Enemy tile")
-
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("4_tsr74")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")

@@ -1,6 +1,7 @@
 class_name GameScene
 extends Node2D
 
+@onready var board: Board = $Board
 @onready var victory_menu: Control = $Menus/VictoryPanel
 @onready var game_over_menu: Control = $Menus/GameOver
 

@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://egkjbc7yqn6n"]
+
+[ext_resource type="PackedScene" uid="uid://b2sfg7xw7h5d3" path="res://GameScene/Tile/Tile.tscn" id="1_3xbov"]
+[ext_resource type="Script" path="res://GameScene/Board/Board.gd" id="1_f1ly2"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fnbyi"]
+resource_name = "Tiles"
+scenes/1/scene = ExtResource("1_3xbov")
+
+[sub_resource type="TileSet" id="TileSet_bwk57"]
+tile_size = Vector2i(60, 60)
+sources/0 = SubResource("TileSetScenesCollectionSource_fnbyi")
+
+[node name="Board" type="TileMap" groups=["game_board"]]
+tile_set = SubResource("TileSet_bwk57")
+format = 2
+layer_0/name = "Tiles"
+script = ExtResource("1_f1ly2")
