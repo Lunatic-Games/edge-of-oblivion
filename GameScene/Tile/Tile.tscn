@@ -16,18 +16,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -26.0
-offset_top = -26.0
-offset_right = 26.0
-offset_bottom = 26.0
+offset_left = -31.0
+offset_top = -31.0
+offset_right = 31.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.188235, 0.2, 0.372549, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.380392, 0.4, 0.623529, 0.145098)
-position = Vector2(-3.57628e-07, -4.17233e-07)
-scale = Vector2(0.0976563, 0.0976563)
+position = Vector2(-1.90735e-06, 4.17233e-07)
+scale = Vector2(0.117188, 0.117187)
 texture = ExtResource("2_ep36n")
 
 [node name="LT_OnTileUpdate" type="Node" parent="." node_paths=PackedStringArray("output_tile", "output_occupant", "logic_tree_on_trigger")]
