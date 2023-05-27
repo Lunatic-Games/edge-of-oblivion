@@ -28,7 +28,7 @@ func indicate(starting_tile: Tile) -> void:
 	if tile_to_indicate != null:
 		var indicator = indicator_scene.instantiate()
 		indicator.global_position = tile_to_indicate.global_position
-		GameManager.gameboard.add_child(indicator)
+		GameManager.board.add_child(indicator)
 
 
 func trigger(starting_tile: Tile) -> void:
@@ -88,7 +88,7 @@ func player_based_targeting(_starting_tile: Tile) -> Tile:
 
 func spawn_slash_effect(tile: Tile) -> void:
 	var effect = SLASH_EFFECT_SCENE.instantiate()
-	GameManager.gameboard.add_child(effect)
+	GameManager.board.add_child(effect)
 	
 	effect.global_position = tile.global_position
 	effect.modulate = EFFECT_MODULATE

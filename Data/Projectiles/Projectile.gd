@@ -3,7 +3,7 @@ extends Node2D
 
 
 func setup(starting_tile: Tile, target_tile: Tile, seconds_per_tile_speed: float) -> void:
-	var distance: int = starting_tile.get_distance_to_tile(target_tile)
+	var distance: int = starting_tile.get_manhattan_coord_distance_to_given_tile(target_tile)
 	
 	var position_tween: Tween = get_tree().create_tween()
 	position_tween.tween_property(self, "global_position", target_tile.global_position,

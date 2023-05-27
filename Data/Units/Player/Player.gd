@@ -29,12 +29,6 @@ var items: Array[ItemData] = []
 @onready var experience_bar: ProgressBar = $CanvasLayer/ExperienceBar
 
 
-func _ready() -> void:
-	super._ready()
-	for item in STARTING_ITEMS:
-		gain_item(item, false)
-
-
 func _physics_process(_delta: float) -> void:
 	handle_movement()
 
@@ -70,6 +64,11 @@ func handle_movement() -> void:
 		TurnManager.end_player_turn()
 
 
+func add_starting_items() -> void:
+	for item in STARTING_ITEMS:
+		gain_item(item, false)
+
+
 func move_to_tile(tile: Tile) -> void:
 	super.move_to_tile(tile)
 	
@@ -83,8 +82,8 @@ func die() -> void:
 	var camera_position_before: Vector2 = player_camera.global_position
 	
 	self.remove_child(player_camera)
-	GameManager.gameboard.add_child(player_camera)
-	player_camera.set_owner(GameManager.gameboard)
+	GameManager.board.add_child(player_camera)
+	player_camera.set_owner(GameManager.board)
 	
 	player_camera.global_position = camera_position_before
 	

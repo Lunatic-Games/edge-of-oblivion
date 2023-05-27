@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://b2sfg7xw7h5d3"]
 
-[ext_resource type="Script" path="res://GameScene/Tile.gd" id="1_ipxam"]
+[ext_resource type="Script" path="res://GameScene/Tile/Tile.gd" id="1_ipxam"]
 [ext_resource type="Texture2D" uid="uid://duxnvi44asekq" path="res://Assets/art/icons/buildings/delapouite/brick-wall.svg" id="2_ep36n"]
 [ext_resource type="Script" path="res://LogicTree/Triggers/TileTriggers/OnTileUpdate.gd" id="3_f6wpu"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="4_2qhm1"]
@@ -9,12 +9,6 @@
 
 [node name="Tile" type="Node2D"]
 script = ExtResource("1_ipxam")
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-self_modulate = Color(0.286275, 0.301961, 0.494118, 0)
-position = Vector2(1.37091e-06, -4.47035e-07)
-scale = Vector2(0.109375, 0.109375)
-texture = ExtResource("2_ep36n")
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 8
