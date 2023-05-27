@@ -29,11 +29,13 @@ layer_0/tile_data = PackedInt32Array(196608, 0, 65536, 196609, 0, 65536, 196610,
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="BossOverlay" type="MarginContainer" parent="HUD"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 40
@@ -41,12 +43,14 @@ theme_override_constants/margin_right = 40
 [node name="Container" type="VBoxContainer" parent="HUD/BossOverlay"]
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="HealthBar" type="ProgressBar" parent="HUD/BossOverlay/Container"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_5vfxa")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4pmtw")
 value = 100.0
@@ -55,6 +59,7 @@ show_percentage = false
 [node name="Title" type="RichTextLabel" parent="HUD/BossOverlay/Container"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
 text = "[shake]BOSS NAME"
