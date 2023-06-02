@@ -40,7 +40,7 @@ func _ready() -> void:
 
 func queue_battle_music() -> void:
 	fade_out(menu_player, 2.0)
-	battle_player.stream = battle_music[randi()%battle_music.size()]
+	battle_player.stream = battle_music[randi() % battle_music.size()]
 	fade_in(battle_player, 1.1)
 	battle_player.play()
 
@@ -48,12 +48,12 @@ func queue_battle_music() -> void:
 func queue_menu_music() -> void:
 	fade_out(battle_player, 1.0)
 	fade_out(boss_player, 1.0)
-	menu_player.stream = menu_music[randi()%menu_music.size()]
+	menu_player.stream = menu_music[randi() % menu_music.size()]
 	fade_in(menu_player, 2.0)
 	menu_player.play()
 
 
-func queue_boss_music(boss_music) -> void:
+func queue_boss_music(boss_music: AudioStream) -> void:
 	fade_out(battle_player, 2.0)
 	boss_player.stream = boss_music
 	fade_in(boss_player, 1.0)

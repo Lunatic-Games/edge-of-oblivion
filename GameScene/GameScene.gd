@@ -1,17 +1,23 @@
 class_name GameScene
 extends Node2D
 
+
+@export var all_items: Array[ItemData]
+
 @onready var board: Board = $Board
+
+@onready var upgrade_menu: CanvasLayer = $Menus/UpgradeMenu
 @onready var victory_menu: Control = $Menus/VictoryPanel
 @onready var game_over_menu: Control = $Menus/GameOver
 
 
 func _ready() -> void:
-	GameManager.start_game()
-	TurnManager.initialize()
-	
+	upgrade_menu.setup(all_items)
 	GlobalSignals.player_died.connect(_on_Player_died)  # Game over!
 	GlobalSignals.boss_defeated.connect(_on_Boss_defeated)  # Game won!
+	
+	GameManager.start_game()
+	TurnManager.initialize()
 
 
 func _return_to_main_menu() -> void:

@@ -4,18 +4,6 @@ extends CanvasLayer
 signal picked_item  # Card picked but still animating
 signal fully_finished_picking_item  # Cards freed
 
-const ALL_ITEMS: Array[ItemData] = [
-	preload("res://Data/Items/ShortSword/ShortSword.tres"),
-	preload("res://Data/Items/LightningBow/LightningBow.tres"),
-	preload("res://Data/Items/Hammer/Hammer.tres"),
-	preload("res://Data/Items/TokenOfLove/TokenOfLove.tres"),
-	preload("res://Data/Items/DragonCloak/DragonCloak.tres"),
-	preload("res://Data/Items/HolyFire/HolyFire.tres"),
-	preload("res://Data/Items/StrayArquebus/StrayArquebus.tres"),
-	preload("res://Data/Items/Broom/Broom.tres"),
-	preload("res://Data/Items/DraculasKnives/DraculasKnives.tres")
-]
-
 const CARD_SCENE: PackedScene = preload("res://UI/Card/Card.tscn")
 const DISPLAY_FLOAT_UP_DISTANCE: float = 200.0
 const DISPLAY_FLOAT_UP_TIME_SECONDS: float = 0.5
@@ -35,10 +23,13 @@ var is_currently_picking_item: bool = false
 
 
 func _ready() -> void:
-	for item_data in ALL_ITEMS:
-		available_items.append(item_data)
 	ItemManager.item_reached_max_tier.connect(_on_item_reached_max_tier)
 	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
+
+
+func setup(all_available_items: Array[ItemData]) -> void:
+	for item_data in all_available_items:
+		available_items.append(item_data)
 
 
 func spawn_upgrade_cards(number_of_cards_to_spawn: int) -> void:
