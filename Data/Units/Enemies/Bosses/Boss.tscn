@@ -67,7 +67,9 @@ color = Color(0.937255, 0.713726, 0.627451, 1)
 [node name="Boss" instance=ExtResource("2")]
 scale = Vector2(1.25, 1.25)
 script = ExtResource("5")
-boss_data = null
+display_name = ""
+sound_track = null
+move_precedence = 3.0
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_gvh8h")

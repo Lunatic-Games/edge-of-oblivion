@@ -83,8 +83,8 @@ func fade_in(audio_player: AudioStreamPlayer, time_to_fade: float) -> void:
 	tween.tween_property(audio_player, "volume_db", 0, time_to_fade).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
 
-func _on_Boss_spawned(_boss: Boss, data: BossData) -> void:
-	queue_boss_music(data.boss_music)
+func _on_Boss_spawned(boss: Boss) -> void:
+	queue_boss_music(boss.sound_track)
 
 
 func _on_Boss_defeated(_boss: Boss) -> void:

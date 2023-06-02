@@ -6,16 +6,17 @@ signal died
 const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Damaged/damaged_particle2.tscn")
 const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Healing/HealthParticles.tscn")
 
+@export var max_hp: int = 3
+@export var move_precedence: float = 0.0
+@export var can_fall: bool = true
+
 var lock_movement: bool = false
-var max_hp: int = 3
-var canFall = true
-var hp: int
-var move_precedence: float = 0.0
+var hp: int = max_hp
+
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var move_history: MovementUtility.MoveHistory = MovementUtility.MoveHistory.new()
 
 @onready var particles: Dictionary = {
 	"damage": DAMAGE_PARTICLES_SCENE,
@@ -23,16 +24,8 @@ var move_precedence: float = 0.0
 }
 
 
-func _ready() -> void:
-	hp = max_hp
-
-
 func play_spawn_animation() -> void:
 	animation_player.play("spawn")
-
-
-func is_enemy() -> bool:
-	return false
 
 
 func take_damage(damage: int) -> int:
@@ -91,7 +84,7 @@ func die() -> void:
 
 
 func fall() -> void:
-	if canFall:
+	if can_fall:
 		die()
 	else:
 		# Handle cases like bosses where unit can't fall

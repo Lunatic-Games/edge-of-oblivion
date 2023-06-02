@@ -1,25 +1,18 @@
 class_name Boss
 extends Enemy
 
-@export var boss_data: BossData
+
+@export_placeholder("BOSS NAME") var display_name: String
+@export var sound_track: AudioStream
 
 
 func _ready() -> void:
-	max_hp_override = boss_data.health
-	move_precedence = 3.0
 	super._ready()
-	GlobalSignals.boss_spawned.emit(self, boss_data)
-
-
-func choose_moveset() -> void:
-	pass
-#	if move_sets.size() > 0:
-#		chosen_move = move_sets[0]
-#		chosen_move.indicate(current_tile)
+	GlobalSignals.boss_spawned.emit(self)
 
 
 func update_health_bar() -> void:
-	var target_value: float = float(hp) / float(max_hp) * 100.0
+	var target_value: float = float(self.hp) / float(self.max_hp) * 100.0
 
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(GameManager.boss_health_bar, "value", target_value, 0.2).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)

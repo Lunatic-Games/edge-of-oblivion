@@ -6,23 +6,16 @@ signal update_triggered
 @export var target_scene: PackedScene = preload("res://Data/Indicators/Indicator.tscn")
 @export_range(0, 999, 1, "or_greater") var xp: int = 1
 @export_range(0, 999, 1, "or_greater") var max_rounds_until_ready: int  = 2
-@export_range(0, 999, 1, "or_greater") var damage: int = 1
-@export_range(-1, 999, 1, "or_greater") var max_hp_override: int = 3
-
-var chosen_move: Move
 
 @onready var rounds_until_ready = max_rounds_until_ready
 @onready var attack_bar = $AttackBar
 
 
 func _ready() -> void:
-	max_hp = max_hp_override
 	pushable = true
 	damageable = true
 	update_attack_bar()
 	appear_unready()
-	super._ready()
-	
 	play_spawn_animation()
 
 
@@ -46,10 +39,6 @@ func update_attack_bar() -> void:
 	
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(attack_bar, "value", target_value, 0.2).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-
-
-func is_enemy() -> bool:
-	return true
 
 
 func can_attack_player() -> bool:

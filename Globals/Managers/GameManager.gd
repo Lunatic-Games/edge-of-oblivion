@@ -43,8 +43,6 @@ func start_game() -> void:
 func stop_game() -> void:
 	reset()
 	TurnManager.reset()
-	FreeUpgradeMenu.reset()
-	MovementUtility.reset()
 	ItemManager.reset()
 
 
@@ -118,8 +116,8 @@ func spawn_occupant_on_tile(occupant_scene: PackedScene, tile: Tile) -> Occupant
 	return occupant
 
 
-func _on_Boss_spawned(_boss: Boss, boss_data: BossData) -> void:
-	boss_name.text = "[shake]" + boss_data.name
+func _on_Boss_spawned(boss: Boss) -> void:
+	boss_name.text = "[shake]" + boss.display_name + "[/shake]"
 	boss_overlay.visible = true
 
 

@@ -14,7 +14,6 @@ var max_tier = 3
 
 
 func _ready() -> void:
-	user = get_tree().get_nodes_in_group("player")[0]
 	appear_unready(false)
 
 

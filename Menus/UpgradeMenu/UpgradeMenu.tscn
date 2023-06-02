@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmdisirxpay6n"]
+[gd_scene load_steps=2 format=3 uid="uid://baighpghx6fu3"]
 
-[ext_resource type="Script" path="res://Globals/Menus/FreeUpgradeMenu.gd" id="1"]
+[ext_resource type="Script" path="res://Menus/UpgradeMenu/UpgradeMenu.gd" id="1"]
 
 [node name="FreeUpgradeMenu" type="CanvasLayer"]
 script = ExtResource("1")
