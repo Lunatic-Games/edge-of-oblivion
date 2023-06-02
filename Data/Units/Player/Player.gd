@@ -3,7 +3,6 @@ extends "res://Data/Units/Unit.gd"
 
 signal item_reached_max_tier
 
-const STARTING_ITEMS = [preload("res://Data/Items/ShortSword/ShortSword.tres")]
 const LEVEL_UP_ANIMATION_TIME: float = 0.2
 
 var moves: int = 1
@@ -54,8 +53,8 @@ func handle_movement() -> void:
 
 
 func add_starting_items() -> void:
-	for item in STARTING_ITEMS:
-		gain_item(item, false)
+	var short_sword: ItemData = load("res://Data/Items/ShortSword/ShortSword.tres")
+	gain_item(short_sword, false)
 
 
 func move_to_tile(tile: Tile) -> void:
