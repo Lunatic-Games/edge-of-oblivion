@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://xex3avr7g7oe"]
+[gd_scene load_steps=6 format=3 uid="uid://xex3avr7g7oe"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
 [ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://GameScene/Board/Board.tscn" id="2_5sub4"]
+[ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://Menus/UpgradeMenu/UpgradeMenu.tscn" id="3_nr84j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vfxa"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
@@ -66,6 +67,9 @@ text = "[shake]BOSS NAME"
 scroll_active = false
 
 [node name="Menus" type="CanvasLayer" parent="."]
+
+[node name="FreeUpgradeMenu" parent="Menus" instance=ExtResource("3_nr84j")]
+visible = false
 
 [node name="VictoryPanel" type="Panel" parent="Menus"]
 process_mode = 3

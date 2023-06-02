@@ -96,6 +96,7 @@ func level_up() -> void:
 	current_level += 1
 	current_xp = 0
 	await get_tree().create_timer(LEVEL_UP_ANIMATION_TIME).timeout
+	GlobalSignals.player_levelled_up.emit(self)
 	experience_bar.emit_particle()
 	update_experience_bar()
 

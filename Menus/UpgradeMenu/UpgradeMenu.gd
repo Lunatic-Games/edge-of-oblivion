@@ -38,13 +38,7 @@ func _ready() -> void:
 	for item_data in ALL_ITEMS:
 		available_items.append(item_data)
 	ItemManager.item_reached_max_tier.connect(_on_item_reached_max_tier)
-
-
-func reset() -> void:
-	displayed_items = []
-	available_items = []
-	for item_data in ALL_ITEMS:
-		available_items.append(item_data)
+	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
 
 
 func spawn_upgrade_cards(number_of_cards_to_spawn: int) -> void:
@@ -53,6 +47,7 @@ func spawn_upgrade_cards(number_of_cards_to_spawn: int) -> void:
 		await picked_item
 	
 	if available_items.is_empty():
+		hide()
 		return
 		
 	# If there is a queued upgrade we want to wait for animations to finish,
@@ -95,9 +90,27 @@ func add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> vo
 	_float_card_up(card, float_up_delay)
 
 
-func force_hide_display():
+func force_hide_display() -> void:
 	for child in card_row.get_children():
 		child.queue_free()
+	hide()
+
+
+func _on_player_levelled_up(_player: Player) -> void:
+	show()
+	spawn_upgrade_cards(3)
+
+
+func _on_player_died(_player: Player) -> void:
+	force_hide_display()
+
+
+func _on_boss_defeated(_boss: Boss) -> void:
+	force_hide_display()
+
+
+func _on_item_reached_max_tier(item_data: ItemData) -> void:
+	available_items.erase(item_data)
 
 
 func _float_card_up(card: Card, delay: float = 0.0) -> void:
@@ -114,10 +127,6 @@ func _float_card_up(card: Card, delay: float = 0.0) -> void:
 		.as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(card, "modulate:a", 1.0, DISPLAY_FLOAT_UP_TIME_SECONDS) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-
-
-func _on_item_reached_max_tier(item_data: ItemData) -> void:
-	available_items.erase(item_data)
 
 
 func _on_card_selected(selected_card: Card) -> void:
@@ -167,3 +176,4 @@ func _on_card_disappeared(disappeared_card: Card) -> void:
 		child.free()
 	
 	fully_finished_picking_item.emit()
+	hide()
