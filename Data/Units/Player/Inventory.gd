@@ -1,7 +1,10 @@
-extends Control
+class_name Inventory
+extends HBoxContainer
 
 
-signal item_reached_max_tier(item_data: ItemData)
+signal new_item_added(item: Item, item_data: ItemData)
+signal item_upgraded(item: Item, item_data: ItemData)
+signal item_reached_max_tier(item: Item, item_data: ItemData)
 
 const ADDED_DROP_DISTANCE: float = 50.0
 const ADDED_DROP_TIME_SECONDS: float = 0.5
@@ -9,33 +12,26 @@ const TIER_UP_SCALE_INCREASE: Vector2 = Vector2(0.4, 0.4)
 const TIER_UP_SCALE_STAY_TIME_SECONDS: float = 0.3
 const TIER_UP_SCALE_TIME_SECONDS: float = 0.5
 
-var managed_items: Dictionary = {
-	
-}
+var items: Dictionary = {}  # ItemData : Item Scene
 
 
-func _ready() -> void:
-	TurnManager.connect("player_turn_ended", handle_items_triggering)
+func gain_item(item_data: ItemData, animate: bool = true) -> void:
+	if item_data in items:
+		_handle_upgrading_item(item_data, animate)
+	else:
+		_handle_new_item(item_data, animate)
 
 
-func reset() -> void:
-	managed_items = {}
-
-
-func handle_items_triggering() -> void:
-	for item in managed_items:
-		managed_items[item].update()
-	
-	TurnManager.item_phase_ended()
-
-
-func add_item(item_data: ItemData, animate: bool = true) -> void:
+func _handle_new_item(item_data: ItemData, animate: bool = true) -> void:
 	var item: Item = item_data.item_scene.instantiate()
 	item.current_tier = 1
 	item.user = GameManager.player
-	GameManager.player.item_container.add_child(item)
-	managed_items[item_data] = item
+	items[item_data] = item
+	
+	add_child(item)
 	item.setup(item_data)
+	
+	new_item_added.emit(item, item_data)
 	
 	if animate == false:
 		return
@@ -51,19 +47,25 @@ func add_item(item_data: ItemData, animate: bool = true) -> void:
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 
-func upgrade_item(item_data: ItemData) -> void:
-	var item: Item = managed_items[item_data]
+func _handle_upgrading_item(item_data: ItemData, animate: bool = true) -> void:
+	var item: Item = items[item_data]
+	assert(item, "Trying to upgrade an item that the player doesn't have.")
 	item.upgrade_tier()
 	
-	if item.is_max_tier():
-		item_reached_max_tier.emit(item_data)
+	item_upgraded.emit(item, item_data)
 	
-	var up_tween = create_tween()
+	if item.is_max_tier():
+		item_reached_max_tier.emit(item, item_data)
+	
+	if animate == false:
+		return
+	
+	var up_tween: Tween = create_tween()
 	up_tween.tween_property(item, "scale", TIER_UP_SCALE_INCREASE, TIER_UP_SCALE_TIME_SECONDS / 2.0) \
 		.as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	
 	await get_tree().create_timer(TIER_UP_SCALE_STAY_TIME_SECONDS).timeout
 	
-	var down_tween = create_tween()
+	var down_tween: Tween = create_tween()
 	down_tween.tween_property(item, "scale", -TIER_UP_SCALE_INCREASE, TIER_UP_SCALE_TIME_SECONDS / 2.0) \
 	.as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)

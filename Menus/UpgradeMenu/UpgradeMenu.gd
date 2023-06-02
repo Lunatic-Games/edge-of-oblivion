@@ -23,7 +23,8 @@ var is_currently_picking_item: bool = false
 
 
 func _ready() -> void:
-	ItemManager.item_reached_max_tier.connect(_on_item_reached_max_tier)
+	if GameManager.player:
+		GameManager.player.inventory.item_reached_max_tier.connect(_on_item_reached_max_tier)
 	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
 
 
@@ -67,11 +68,9 @@ func add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> vo
 	var card: Card = CARD_SCENE.instantiate()
 	card_row.add_child(card)
 	
-	var item_tier: int
-	if item_data in ItemManager.managed_items:
-		item_tier = ItemManager.managed_items[item_data].current_tier + 1
-	else:
-		item_tier = 1
+	var item_tier: int = 1
+	if GameManager.player and item_data in GameManager.player.inventory.items:
+		item_tier = GameManager.player.inventory.items[item_data].current_tier + 1
 	
 	card.setup(item_data, item_tier, true)
 	
@@ -100,7 +99,7 @@ func _on_boss_defeated(_boss: Boss) -> void:
 	force_hide_display()
 
 
-func _on_item_reached_max_tier(item_data: ItemData) -> void:
+func _on_item_reached_max_tier(_item: Item, item_data: ItemData) -> void:
 	available_items.erase(item_data)
 
 
@@ -127,8 +126,8 @@ func _on_card_selected(selected_card: Card) -> void:
 		card.selected.disconnect(_on_card_selected)
 		
 		if card == selected_card:
-			var player: Player = get_tree().get_nodes_in_group("player")[0]
-			player.gain_item(card.held_item_data)
+			if GameManager.player:
+				GameManager.player.inventory.gain_item(card.held_item_data)
 			_raise_chosen_card(card)
 		else:
 			_drop_unchosen_card(card)

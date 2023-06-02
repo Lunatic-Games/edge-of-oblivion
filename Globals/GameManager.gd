@@ -43,7 +43,6 @@ func start_game() -> void:
 func stop_game() -> void:
 	reset()
 	TurnManager.reset()
-	ItemManager.reset()
 
 
 func change_to_main_menu() -> void:

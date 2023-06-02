@@ -2,8 +2,6 @@ extends Node
 
 signal player_turn_ended
 
-enum TurnState {ENEMY, PLAYER}
-
 const FADED: PackedScene = preload("res://Data/Units/Enemies/Faded/Faded.tscn")
 const LOST_RANGER: PackedScene = preload("res://Data/Units/Enemies/LostRanger/LostRanger.tscn")
 const FORSWORN_PIKE: PackedScene = preload("res://Data/Units/Enemies/ForswornPike/ForswornPike.tscn")
@@ -37,56 +35,37 @@ var round_spawn_data: Dictionary = {
 	175: [FORSWORN_PIKE, FADED, LOST_RANGER]
 }
 
-var current_turn_state: TurnState = TurnState.PLAYER
 var current_round: int = 0
+
+
+func _ready() -> void:
+	GlobalSignals.player_finished_moving.connect(_on_player_finished_moving)
 
 
 func initialize() -> void:
 	await GlobalSignals.game_started
-	handle_round_update()
+	new_round()
 
 
 func reset() -> void:
 	current_round = 0
-	current_turn_state = TurnState.PLAYER
 
 
-func is_player_turn() -> bool:
-	return current_turn_state == TurnState.PLAYER
-
-
-func item_phase_ended() -> void:
-	update_tiles()
-	start_enemy_turn()
-
-
-func start_enemy_turn() -> void:
-	current_turn_state = TurnState.ENEMY
-	handle_enemy_turn()
-
-
-func end_player_turn() -> void:
-	emit_signal("player_turn_ended")
-
-
-func start_player_turn() -> void:
-	handle_round_update()
-	current_turn_state = TurnState.PLAYER
-
-
-func update_tiles() -> void:
-	for tile in GameManager.board.all_tiles:
-		tile.update()
-
-
-func handle_enemy_turn() -> void:
-	for enemy in GameManager.all_enemies:
-		enemy.update()
-	
-	start_player_turn()
-
-
-func handle_round_update() -> void:
+func new_round() -> void:
 	current_round += 1
 	GameManager.spawn_enemies()
 	GameManager.calculate_spawn_location_for_next_round()
+
+
+func _on_player_finished_moving(player: Player) -> void:
+	for item in player.inventory.items.values():
+		item.update()
+	
+	for tile in GameManager.board.all_tiles:
+		tile.update()
+	
+	for enemy in GameManager.all_enemies:
+		enemy.update()
+	
+	new_round()
+	player.new_turn()
