@@ -3,7 +3,7 @@ extends "res://Data/Units/Unit.gd"
 
 signal item_reached_max_tier
 
-const LEVEL_UP_ANIMATION_TIME: float = 0.2
+const EXPERIENCE_BAR_UPDATE_ANIMATION_TIME: float = 0.2
 
 var moves_per_turn: int = 1
 var moves_remaining: int = moves_per_turn
@@ -25,6 +25,10 @@ var level_thresholds = {
 @onready var inventory: Inventory = $CanvasLayer/Inventory
 @onready var player_camera: Camera2D = $PlayerCamera
 @onready var experience_bar: ProgressBar = $CanvasLayer/ExperienceBar
+
+
+func _ready() -> void:
+	update_experience_bar()
 
 
 func _physics_process(_delta: float) -> void:
@@ -97,12 +101,14 @@ func gain_experience(experience: int) -> void:
 
 
 func level_up() -> void:
-	update_experience_bar()
 	current_level += 1
 	current_xp = 0
 	GlobalSignals.player_levelled_up.emit(self)
 	
-	await get_tree().create_timer(LEVEL_UP_ANIMATION_TIME).timeout
+	var tween: Tween = create_tween()
+	tween.tween_property(experience_bar, "value", experience_bar.max_value,
+		EXPERIENCE_BAR_UPDATE_ANIMATION_TIME)
+	await tween.finished
 	
 	experience_bar.emit_particle()
 	update_experience_bar()
@@ -111,5 +117,9 @@ func level_up() -> void:
 func update_experience_bar() -> void:
 	experience_bar.max_value = level_thresholds[current_level]
 	
-	var tween: Tween = create_tween()
-	tween.tween_property(experience_bar, "value", current_xp, LEVEL_UP_ANIMATION_TIME)
+	if current_xp > experience_bar.value:
+		var tween: Tween = create_tween()
+		tween.tween_property(experience_bar, "value", current_xp,
+			EXPERIENCE_BAR_UPDATE_ANIMATION_TIME)
+	else:
+		experience_bar.value = current_xp
