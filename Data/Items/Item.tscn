@@ -173,7 +173,6 @@ popup_flavor_text = ""
 
 [node name="ItemPopupHover" parent="." node_paths=PackedStringArray("item") instance=ExtResource("2_28p5n")]
 custom_minimum_size = Vector2(70, 70)
-layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -183,6 +182,7 @@ offset_right = 80.0
 offset_bottom = 80.0
 grow_horizontal = 1
 grow_vertical = 1
+scale = Vector2(1.5, 1.5)
 item = NodePath("..")
 
 [node name="Texture" type="TextureRect" parent="."]
@@ -276,3 +276,5 @@ script = ExtResource("9_fnaau")
 
 [node name="LogicTree" type="Node" parent="LT_OnItemTierIncrease"]
 script = ExtResource("7_18vgj")
+
+[node name="Node" type="Node" parent="."]
