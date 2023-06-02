@@ -1,6 +1,8 @@
 extends Button
 
-const POPOUT_OFFSET = Vector2(-10, -10)
+
+const POPOUT_OFFSET: Vector2 = Vector2(-10, -10)
+const SCREEN_BORDER_PADDING: Vector2 = Vector2(32, 32)
 
 @export_placeholder("Lorem ipsum dolor iset imun babab baba chug wug!") var display_string: String
 
@@ -9,10 +11,11 @@ var time_hovered_in_seconds: float = 0.0
 var is_hovered: bool = false
 var is_popup_spawned: bool = false
 
-@onready var translation_container: Node2D = $TranslationContainer
-@onready var panel: PanelContainer = $TranslationContainer/BackgroundPanel
-@onready var popup_text: RichTextLabel = $TranslationContainer/BackgroundPanel/PanelContainer/InfoText
+@onready var popup: Control = $PopupBackgroundPanel
+@onready var panel: PanelContainer = $PopupBackgroundPanel
+@onready var popup_text: RichTextLabel = $PopupBackgroundPanel/PanelContainer/InfoText
 @onready var animator: AnimationPlayer = $AnimationPlayer
+
 
 func _ready() -> void:
 	popup_text.text = display_string
@@ -37,18 +40,19 @@ func _process(delta:float) -> void:
 
 func spawn_text_popup() -> void:
 	is_popup_spawned = true
-	translation_container.global_position = get_global_mouse_position() + POPOUT_OFFSET
-	translation_container.global_position -= panel.size
+	popup.global_position = get_global_mouse_position() - panel.size + POPOUT_OFFSET
 	
-	var camera: Camera2D = get_viewport().get_camera_2d()
-	var viewport_size: Vector2 = get_viewport_rect().size
-	var left_border: float = camera.global_position.x - viewport_size.x / 2 + panel.size.x
-	var top_border: float = camera.global_position.y - viewport_size.y / 3 + panel.size.y # We divide by 3 here since the camera is represented as a 2x3 rectangle
+	var canvas_transform: Transform2D = get_canvas_transform()
+	var canvas_origin: Vector2 = canvas_transform.get_origin()
+	var canvas_scale: Vector2 = canvas_transform.get_scale()
+	var canvas_top_left: Vector2 = (-canvas_origin / canvas_scale)
+	var left_border: float = canvas_top_left.x + SCREEN_BORDER_PADDING.x
+	var top_border: float = canvas_top_left.y + SCREEN_BORDER_PADDING.y
 	
-	if translation_container.global_position.x < left_border:
-		translation_container.global_position.x = left_border
-	if translation_container.global_position.y < top_border:
-		translation_container.global_position.y = top_border
+	if popup.global_position.x < left_border:
+		popup.global_position.x = left_border
+	if popup.global_position.y < top_border:
+		popup.global_position.y = top_border
 	
 	animator.play("fade_in")
 
