@@ -43,6 +43,9 @@ func handle_movement() -> void:
 	if moves_remaining == 0 or lock_movement or hp <= 0:
 		return
 	
+	if GameManager.game.upgrade_menu.is_currently_picking_item:
+		return
+	
 	if Input.is_action_just_pressed("up") and current_tile.top_tile:
 		handle_move_or_wait(current_tile.top_tile)
 	
