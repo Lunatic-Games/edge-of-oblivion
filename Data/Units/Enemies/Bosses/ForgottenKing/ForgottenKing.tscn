@@ -48,7 +48,6 @@ color = Color(0.937255, 0.713726, 0.627451, 1)
 [node name="ForgottenKing" instance=ExtResource("4")]
 display_name = "The Forgotten King"
 sound_track = ExtResource("2_ex11q")
-target_scene = null
 
 [node name="Sprite2D" parent="." index="1"]
 material = ExtResource("3")

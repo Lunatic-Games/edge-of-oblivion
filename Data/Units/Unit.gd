@@ -102,7 +102,6 @@ func move_to_tile(tile) -> void:
 		if move_precedence > tile.occupant.move_precedence:
 			var pushed_occupant: Unit = tile.occupant
 			var last_resort_tile: Tile = current_tile
-			GameManager.unoccupy_tile(last_resort_tile)
 			current_tile = null
 			var tile_to_displace: Tile = get_displace_tile(tile, last_resort_tile)
 			pushed_occupant.move_to_tile(tile_to_displace)
