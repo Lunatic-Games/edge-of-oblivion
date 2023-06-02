@@ -42,7 +42,7 @@ func _process(delta:float) -> void:
 
 func spawn_popup() -> void:
 	is_popup_spawned = true
-	popup.global_position = get_global_mouse_position() - panel.size*scale + POPUP_OFFSET
+	popup.global_position = get_global_mouse_position() - panel.size*panel.scale + POPUP_OFFSET
 	
 	var canvas_transform: Transform2D = get_canvas_transform()
 	var canvas_origin: Vector2 = canvas_transform.get_origin()

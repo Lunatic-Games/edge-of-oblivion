@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="2_p527v"]
 [ext_resource type="FontFile" uid="uid://br33sipyuwalp" path="res://Assets/fonts/Caudex-Italic.ttf" id="3_sbxrm"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ed83"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u277i"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yco1r"]
 
@@ -98,12 +98,13 @@ _data = {
 
 [node name="ItemPopupHover" type="Button"]
 z_index = 4
+custom_minimum_size = Vector2(80, 80)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1ed83")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u277i")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_yco1r")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_64i5p")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_gwdyd")
@@ -114,6 +115,7 @@ script = ExtResource("1_ywlxe")
 modulate = Color(1, 1, 1, 0)
 offset_right = 325.0
 offset_bottom = 66.0
+scale = Vector2(1.5, 1.5)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_knlfn")
 
