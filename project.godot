@@ -17,14 +17,10 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameManager="*res://Globals/Managers/GameManager.gd"
-TurnManager="*res://Globals/Managers/Turns/TurnManager.gd"
-FreeUpgradeMenu="*res://Globals/Menus/FreeUpgradeMenu.tscn"
-MovementUtility="*res://Globals/MovementUtility.gd"
-ItemManager="*res://Globals/Managers/Items/ItemManager.gd"
+GameManager="*res://Globals/GameManager.gd"
+TurnManager="*res://Globals/TurnManager.gd"
 Debug="*res://Globals/Debug.gd"
-AudioManager="*res://Globals/Managers/Audio/AudioManager.tscn"
-ItemUtil="*res://Globals/ItemUtil.gd"
+MusicManager="*res://Globals/MusicManager/MusicManager.tscn"
 GlobalSignals="*res://Globals/Signals.gd"
 GlobalLogicTreeSignals="*res://Globals/LogicTreeSignals.gd"
 

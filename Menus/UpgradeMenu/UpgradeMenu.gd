@@ -4,18 +4,6 @@ extends CanvasLayer
 signal picked_item  # Card picked but still animating
 signal fully_finished_picking_item  # Cards freed
 
-const ALL_ITEMS: Array[ItemData] = [
-	preload("res://Data/Items/ShortSword/ShortSword.tres"),
-	preload("res://Data/Items/LightningBow/LightningBow.tres"),
-	preload("res://Data/Items/Hammer/Hammer.tres"),
-	preload("res://Data/Items/TokenOfLove/TokenOfLove.tres"),
-	preload("res://Data/Items/DragonCloak/DragonCloak.tres"),
-	preload("res://Data/Items/HolyFire/HolyFire.tres"),
-	preload("res://Data/Items/StrayArquebus/StrayArquebus.tres"),
-	preload("res://Data/Items/Broom/Broom.tres"),
-	preload("res://Data/Items/DraculasKnives/DraculasKnives.tres")
-]
-
 const CARD_SCENE: PackedScene = preload("res://UI/Card/Card.tscn")
 const DISPLAY_FLOAT_UP_DISTANCE: float = 200.0
 const DISPLAY_FLOAT_UP_TIME_SECONDS: float = 0.5
@@ -35,15 +23,13 @@ var is_currently_picking_item: bool = false
 
 
 func _ready() -> void:
-	for item_data in ALL_ITEMS:
-		available_items.append(item_data)
-	ItemManager.item_reached_max_tier.connect(_on_item_reached_max_tier)
+	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
+	GlobalSignals.item_reached_max_tier.connect(_on_item_reached_max_tier)
+	show()
 
 
-func reset() -> void:
-	displayed_items = []
-	available_items = []
-	for item_data in ALL_ITEMS:
+func setup(all_available_items: Array[ItemData]) -> void:
+	for item_data in all_available_items:
 		available_items.append(item_data)
 
 
@@ -81,11 +67,9 @@ func add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> vo
 	var card: Card = CARD_SCENE.instantiate()
 	card_row.add_child(card)
 	
-	var item_tier: int
-	if item_data in ItemManager.managed_items:
-		item_tier = ItemManager.managed_items[item_data].current_tier + 1
-	else:
-		item_tier = 1
+	var item_tier: int = 1
+	if GameManager.player and item_data in GameManager.player.inventory.items:
+		item_tier = GameManager.player.inventory.items[item_data].current_tier + 1
 	
 	card.setup(item_data, item_tier, true)
 	
@@ -95,9 +79,25 @@ func add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> vo
 	_float_card_up(card, float_up_delay)
 
 
-func force_hide_display():
+func force_close_display() -> void:
 	for child in card_row.get_children():
 		child.queue_free()
+
+
+func _on_player_levelled_up(_player: Player) -> void:
+	spawn_upgrade_cards(3)
+
+
+func _on_player_died(_player: Player) -> void:
+	force_close_display()
+
+
+func _on_boss_defeated(_boss: Boss) -> void:
+	force_close_display()
+
+
+func _on_item_reached_max_tier(_item: Item, item_data: ItemData) -> void:
+	available_items.erase(item_data)
 
 
 func _float_card_up(card: Card, delay: float = 0.0) -> void:
@@ -116,10 +116,6 @@ func _float_card_up(card: Card, delay: float = 0.0) -> void:
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 
-func _on_item_reached_max_tier(item_data: ItemData) -> void:
-	available_items.erase(item_data)
-
-
 func _on_card_selected(selected_card: Card) -> void:
 	for child in card_row.get_children():
 		var card: Card = child as Card
@@ -127,8 +123,8 @@ func _on_card_selected(selected_card: Card) -> void:
 		card.selected.disconnect(_on_card_selected)
 		
 		if card == selected_card:
-			var player: Player = get_tree().get_nodes_in_group("player")[0]
-			player.gain_item(card.held_item_data)
+			if GameManager.player:
+				GameManager.player.inventory.gain_item(card.held_item_data)
 			_raise_chosen_card(card)
 		else:
 			_drop_unchosen_card(card)

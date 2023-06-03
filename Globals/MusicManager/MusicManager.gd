@@ -40,7 +40,7 @@ func _ready() -> void:
 
 func queue_battle_music() -> void:
 	fade_out(menu_player, 2.0)
-	battle_player.stream = battle_music[randi()%battle_music.size()]
+	battle_player.stream = battle_music[randi() % battle_music.size()]
 	fade_in(battle_player, 1.1)
 	battle_player.play()
 
@@ -48,12 +48,12 @@ func queue_battle_music() -> void:
 func queue_menu_music() -> void:
 	fade_out(battle_player, 1.0)
 	fade_out(boss_player, 1.0)
-	menu_player.stream = menu_music[randi()%menu_music.size()]
+	menu_player.stream = menu_music[randi() % menu_music.size()]
 	fade_in(menu_player, 2.0)
 	menu_player.play()
 
 
-func queue_boss_music(boss_music) -> void:
+func queue_boss_music(boss_music: AudioStream) -> void:
 	fade_out(battle_player, 2.0)
 	boss_player.stream = boss_music
 	fade_in(boss_player, 1.0)
@@ -74,17 +74,17 @@ func stop_boss_music() -> void:
 
 
 func fade_out(audio_player: AudioStreamPlayer, time_to_fade: float) -> void:
-	var tween: Tween = get_tree().create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(audio_player, "volume_db", -60, time_to_fade).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
 
 func fade_in(audio_player: AudioStreamPlayer, time_to_fade: float) -> void:
-	var tween: Tween = get_tree().create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(audio_player, "volume_db", 0, time_to_fade).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
 
-func _on_Boss_spawned(_boss: Boss, data: BossData) -> void:
-	queue_boss_music(data.boss_music)
+func _on_Boss_spawned(boss: Boss) -> void:
+	queue_boss_music(boss.sound_track)
 
 
 func _on_Boss_defeated(_boss: Boss) -> void:

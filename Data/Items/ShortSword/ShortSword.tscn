@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="3_hv802"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="4_ehsl6"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="4_lobvm"]
-[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="5_ytvte"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="5_5l6qm"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="6_ihmua"]
 [ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="9_pptd1"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="10_mltra"]
@@ -31,7 +31,7 @@ x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 script = ExtResource("3_aepoh")
 
 [node name="Select left tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
-script = ExtResource("5_ytvte")
+script = ExtResource("5_5l6qm")
 input_tiles = NodePath("../../../Item user tile")
 output_tiles = NodePath("../Selected tiles")
 directions = 8
@@ -43,7 +43,7 @@ comparison = 1
 value = 2
 
 [node name="Select Right tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/If tier at least 2" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
-script = ExtResource("5_ytvte")
+script = ExtResource("5_5l6qm")
 input_tiles = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../../Selected tiles")
 directions = 2

@@ -16,7 +16,3 @@ var damageable: bool = false
 
 func collect() -> void:
 	pass
-
-
-func is_enemy() -> bool:
-	return false

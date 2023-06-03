@@ -12,7 +12,6 @@ func _ready() -> void:
 
 
 func collect() -> void:
-	FreeUpgradeMenu.spawn_upgrade_cards(n_cards_to_spawn)
 	destroy_self()
 
 
