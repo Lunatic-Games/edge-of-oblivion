@@ -56,7 +56,7 @@ func get_random_enemy_occupied_adjacent_tile() -> Tile:
 	var occupied_adjacent_tiles = []
 	
 	for tile in get_adjacent_occupied_tiles():
-		if tile.occupant.is_enemy():
+		if tile.occupant is Enemy:
 			occupied_adjacent_tiles.append(tile)
 	
 	if occupied_adjacent_tiles.is_empty():

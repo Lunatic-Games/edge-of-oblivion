@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://db24hche1mwnf"]
-
-[ext_resource type="PackedScene" uid="uid://du7ckgb4xvq2i" path="res://Data/MoveSets/Actions/Action.tscn" id="1"]
-[ext_resource type="Script" path="res://Data/MoveSets/Actions/Lunge/LungeAction.gd" id="3"]
-
-[node name="LungeAction" instance=ExtResource("1")]
-script = ExtResource("3")

@@ -1,7 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://xex3avr7g7oe"]
+[gd_scene load_steps=15 format=3 uid="uid://xex3avr7g7oe"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
 [ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://GameScene/Board/Board.tscn" id="2_5sub4"]
+[ext_resource type="Resource" uid="uid://2yitqavrx4cc" path="res://Data/Items/Broom/Broom.tres" id="2_g3ai0"]
+[ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://Menus/UpgradeMenu/UpgradeMenu.tscn" id="3_nr84j"]
+[ext_resource type="Resource" uid="uid://c4064o7rrsy36" path="res://Data/Items/DraculasKnives/DraculasKnives.tres" id="3_sl5se"]
+[ext_resource type="Resource" uid="uid://dhbycs5j4to6b" path="res://Data/Items/DragonCloak/DragonCloak.tres" id="4_xqd5a"]
+[ext_resource type="Resource" uid="uid://bkxc4j0i03skk" path="res://Data/Items/Hammer/Hammer.tres" id="5_tcmgq"]
+[ext_resource type="Resource" uid="uid://ciom03ipb83hk" path="res://Data/Items/HolyFire/HolyFire.tres" id="6_dvni3"]
+[ext_resource type="Resource" uid="uid://ds3bgi1j8ywkc" path="res://Data/Items/LightningBow/LightningBow.tres" id="7_ubwfs"]
+[ext_resource type="Resource" uid="uid://b44nfpsd5kbd4" path="res://Data/Items/ShortSword/ShortSword.tres" id="8_qa8wr"]
+[ext_resource type="Resource" uid="uid://baj6eb61iqagw" path="res://Data/Items/StrayArquebus/StrayArquebus.tres" id="9_b3qip"]
+[ext_resource type="Resource" uid="uid://c7npess6g8cti" path="res://Data/Items/TokenOfLove/TokenOfLove.tres" id="10_cf5ej"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vfxa"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
@@ -11,6 +21,7 @@ bg_color = Color(0.592157, 0.219608, 0.72549, 1)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_f3738")
+all_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("2_g3ai0"), ExtResource("3_sl5se"), ExtResource("4_xqd5a"), ExtResource("5_tcmgq"), ExtResource("6_dvni3"), ExtResource("7_ubwfs"), ExtResource("8_qa8wr"), ExtResource("9_b3qip"), ExtResource("10_cf5ej")])
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
@@ -66,6 +77,9 @@ text = "[shake]BOSS NAME"
 scroll_active = false
 
 [node name="Menus" type="CanvasLayer" parent="."]
+
+[node name="UpgradeMenu" parent="Menus" instance=ExtResource("3_nr84j")]
+visible = false
 
 [node name="VictoryPanel" type="Panel" parent="Menus"]
 process_mode = 3
