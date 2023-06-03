@@ -8,7 +8,7 @@ resource_name = "Tiles"
 scenes/1/scene = ExtResource("1_3xbov")
 
 [sub_resource type="TileSet" id="TileSet_bwk57"]
-tile_size = Vector2i(60, 60)
+tile_size = Vector2i(70, 70)
 sources/0 = SubResource("TileSetScenesCollectionSource_fnbyi")
 
 [node name="Board" type="TileMap" groups=["game_board"]]

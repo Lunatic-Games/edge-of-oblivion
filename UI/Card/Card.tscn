@@ -348,7 +348,7 @@ size_flags_horizontal = 6
 script = ExtResource("1_e71sb")
 
 [node name="Background" type="TextureRect" parent="."]
-self_modulate = Color(0.709804, 0.709804, 0.709804, 1)
+self_modulate = Color(0.540086, 0.541615, 0.833519, 1)
 custom_minimum_size = Vector2(422, 536)
 layout_mode = 1
 anchors_preset = 15
