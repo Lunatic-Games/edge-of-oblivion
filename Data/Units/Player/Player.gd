@@ -1,7 +1,6 @@
 class_name Player
 extends "res://Data/Units/Unit.gd"
 
-signal item_reached_max_tier
 
 const EXPERIENCE_BAR_UPDATE_ANIMATION_TIME: float = 0.2
 
@@ -118,7 +117,11 @@ func level_up() -> void:
 
 
 func update_experience_bar() -> void:
-	experience_bar.max_value = level_thresholds[current_level]
+	var max_level = level_thresholds.keys().max()
+	if current_level > max_level:
+		experience_bar.max_value = level_thresholds[max_level]
+	else:
+		experience_bar.max_value = level_thresholds[current_level]
 	
 	if current_xp > experience_bar.value:
 		var tween: Tween = create_tween()

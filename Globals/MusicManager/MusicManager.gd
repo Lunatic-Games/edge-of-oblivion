@@ -74,12 +74,12 @@ func stop_boss_music() -> void:
 
 
 func fade_out(audio_player: AudioStreamPlayer, time_to_fade: float) -> void:
-	var tween: Tween = get_tree().create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(audio_player, "volume_db", -60, time_to_fade).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
 
 func fade_in(audio_player: AudioStreamPlayer, time_to_fade: float) -> void:
-	var tween: Tween = get_tree().create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(audio_player, "volume_db", 0, time_to_fade).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
 

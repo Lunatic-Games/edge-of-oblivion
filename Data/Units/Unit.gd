@@ -11,17 +11,12 @@ const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Healin
 @export var can_fall: bool = true
 
 var lock_movement: bool = false
-var hp: int = max_hp
 
+@onready var hp: int = max_hp
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var sprite: Sprite2D = $Sprite2D
-
-@onready var particles: Dictionary = {
-	"damage": DAMAGE_PARTICLES_SCENE,
-	"health": HEALTH_PARTICLES_SCENE
-}
 
 
 func play_spawn_animation() -> void:
@@ -37,7 +32,7 @@ func take_damage(damage: int) -> int:
 	hp = maxi(hp - damage, 0)
 	
 	update_health_bar()
-	spawn_particle("damage")
+	spawn_particle(DAMAGE_PARTICLES_SCENE)
 	animation_player.play("damaged")
 	
 	if hp == 0:
@@ -52,7 +47,7 @@ func heal(heal_amount: int) -> int:
 	var hp_before: int = hp
 	hp = mini(hp + heal_amount, max_hp)
 	
-	spawn_particle("health")
+	spawn_particle(HEALTH_PARTICLES_SCENE)
 	update_health_bar()
 	return hp - hp_before
 
@@ -60,13 +55,12 @@ func heal(heal_amount: int) -> int:
 func update_health_bar() -> void:
 	var target_value: float = float(hp) / float(max_hp) * 100.0
 	
-	var tween: Tween = get_tree().create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(health_bar, "value", target_value, 0.2).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
 
-func spawn_particle(type: String) -> void:
-	var res: PackedScene = particles[type]
-	var particle: Node2D = res.instantiate()
+func spawn_particle(particles_scene: PackedScene) -> void:
+	var particle: Node2D = particles_scene.instantiate()
 	particle.global_position = self.global_position
 	GameManager.board.add_child(particle)
 
@@ -75,7 +69,7 @@ func die() -> void:
 	current_tile.occupant = null
 	died.emit()
 	
-	var tween: Tween = get_tree().create_tween().set_parallel(true)
+	var tween: Tween = create_tween().set_parallel(true)
 	tween.tween_property(self, "global_position:y", -25.0, 0.5).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
 	tween.tween_property(self, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	
@@ -102,7 +96,7 @@ func move_to_tile(tile) -> void:
 		if move_precedence > tile.occupant.move_precedence:
 			var pushed_occupant: Unit = tile.occupant
 			var last_resort_tile: Tile = current_tile
-			current_tile = null
+			current_tile.occupant = null
 			var tile_to_displace: Tile = get_displace_tile(tile, last_resort_tile)
 			pushed_occupant.move_to_tile(tile_to_displace)
 		else:
@@ -119,10 +113,10 @@ func move_to_tile(tile) -> void:
 	
 	lock_movement = true
 	
-	var base_tween: Tween = get_tree().create_tween()
+	var base_tween: Tween = create_tween()
 	base_tween.tween_property(self, "position", tile.position, 0.20).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	
-	var offset_tween: Tween = get_tree().create_tween()
+	var offset_tween: Tween = create_tween()
 	offset_tween.tween_property(sprite, "position:y", -15.0, 0.10).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	offset_tween.tween_property(sprite, "position:y", 15.0, 0.10).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	await offset_tween.finished

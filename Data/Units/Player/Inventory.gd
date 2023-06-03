@@ -2,10 +2,6 @@ class_name Inventory
 extends HBoxContainer
 
 
-signal new_item_added(item: Item, item_data: ItemData)
-signal item_upgraded(item: Item, item_data: ItemData)
-signal item_reached_max_tier(item: Item, item_data: ItemData)
-
 const ADDED_DROP_DISTANCE: float = 50.0
 const ADDED_DROP_TIME_SECONDS: float = 0.5
 const TIER_UP_SCALE_INCREASE: Vector2 = Vector2(0.4, 0.4)
@@ -31,8 +27,6 @@ func _handle_new_item(item_data: ItemData, animate: bool = true) -> void:
 	add_child(item)
 	item.setup(item_data)
 	
-	new_item_added.emit(item, item_data)
-	
 	if animate == false:
 		return
 	
@@ -52,10 +46,8 @@ func _handle_upgrading_item(item_data: ItemData, animate: bool = true) -> void:
 	assert(item, "Trying to upgrade an item that the player doesn't have.")
 	item.upgrade_tier()
 	
-	item_upgraded.emit(item, item_data)
-	
 	if item.is_max_tier():
-		item_reached_max_tier.emit(item, item_data)
+		GlobalSignals.item_reached_max_tier.emit(item, item_data)
 	
 	if animate == false:
 		return

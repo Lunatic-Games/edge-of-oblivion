@@ -23,9 +23,8 @@ var is_currently_picking_item: bool = false
 
 
 func _ready() -> void:
-	if GameManager.player:
-		GameManager.player.inventory.item_reached_max_tier.connect(_on_item_reached_max_tier)
 	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
+	GlobalSignals.item_reached_max_tier.connect(_on_item_reached_max_tier)
 	show()
 
 
