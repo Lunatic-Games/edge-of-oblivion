@@ -1,17 +1,27 @@
-[gd_scene load_steps=36 format=3 uid="uid://xex3avr7g7oe"]
+[gd_scene load_steps=46 format=3 uid="uid://xex3avr7g7oe"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
 [ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://GameScene/Board/Board.tscn" id="2_5sub4"]
+[ext_resource type="Resource" uid="uid://2yitqavrx4cc" path="res://Data/Items/Broom/Broom.tres" id="2_bavx3"]
+[ext_resource type="Resource" uid="uid://c4064o7rrsy36" path="res://Data/Items/DraculasKnives/DraculasKnives.tres" id="3_2i6f3"]
 [ext_resource type="Texture2D" uid="uid://ciihbexjkmiq8" path="res://Assets/art/background/game/lantern.svg" id="3_acicj"]
 [ext_resource type="Texture2D" uid="uid://bh37a154red3i" path="res://Assets/art/background/game/tree.svg" id="3_pi3i8"]
 [ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="4_emfl5"]
+[ext_resource type="Resource" uid="uid://dhbycs5j4to6b" path="res://Data/Items/DragonCloak/DragonCloak.tres" id="4_ewp0b"]
 [ext_resource type="Texture2D" uid="uid://c11immlfgb1vh" path="res://Assets/art/background/game/grass.svg" id="4_ruk66"]
+[ext_resource type="Resource" uid="uid://bkxc4j0i03skk" path="res://Data/Items/Hammer/Hammer.tres" id="5_pva1r"]
 [ext_resource type="Texture2D" uid="uid://c6xlhl00wu8r6" path="res://Assets/art/background/game/lantern_cage.svg" id="5_vycgk"]
 [ext_resource type="Texture2D" uid="uid://cx1ga40jy1ut6" path="res://Assets/textures/glow.svg" id="6_8dq2b"]
+[ext_resource type="Resource" uid="uid://ciom03ipb83hk" path="res://Data/Items/HolyFire/HolyFire.tres" id="6_555l1"]
+[ext_resource type="Resource" uid="uid://ds3bgi1j8ywkc" path="res://Data/Items/LightningBow/LightningBow.tres" id="7_ixikr"]
 [ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="8_bg1ri"]
+[ext_resource type="Resource" uid="uid://b44nfpsd5kbd4" path="res://Data/Items/ShortSword/ShortSword.tres" id="8_hnpfi"]
+[ext_resource type="Resource" uid="uid://baj6eb61iqagw" path="res://Data/Items/StrayArquebus/StrayArquebus.tres" id="9_okxst"]
+[ext_resource type="Resource" uid="uid://c7npess6g8cti" path="res://Data/Items/TokenOfLove/TokenOfLove.tres" id="10_4tjaj"]
 [ext_resource type="Texture2D" uid="uid://dmbs1q38ekhl4" path="res://Assets/art/background/game/lantern_wrap.svg" id="10_aw3dg"]
 [ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="11_bif4v"]
 [ext_resource type="Texture2D" uid="uid://b0og73dh6y3tx" path="res://Assets/art/background/game/sword_and_spear_ribbon.svg" id="12_4bhsh"]
+[ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://Menus/UpgradeMenu/UpgradeMenu.tscn" id="13_ilrse"]
 
 [sub_resource type="Environment" id="Environment_n1myw"]
 background_mode = 3
@@ -239,6 +249,33 @@ _data = {
 "swing": SubResource("Animation_m5lf7")
 }
 
+[sub_resource type="Animation" id="Animation_lhjh6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ribbon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ribbon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_3laye"]
 resource_name = "wind"
 length = 4.0
@@ -266,33 +303,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1, 1.05), Vector2(0.952, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_lhjh6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Ribbon:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Ribbon:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w1vne"]
@@ -371,6 +381,7 @@ bg_color = Color(0.592157, 0.219608, 0.72549, 1)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_f3738")
+all_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("2_bavx3"), ExtResource("3_2i6f3"), ExtResource("4_ewp0b"), ExtResource("5_pva1r"), ExtResource("6_555l1"), ExtResource("7_ixikr"), ExtResource("8_hnpfi"), ExtResource("9_okxst"), ExtResource("10_4tjaj")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_n1myw")
@@ -812,6 +823,8 @@ text = "[shake]BOSS NAME"
 scroll_active = false
 
 [node name="Menus" type="CanvasLayer" parent="."]
+
+[node name="UpgradeMenu" parent="Menus" instance=ExtResource("13_ilrse")]
 
 [node name="VictoryPanel" type="Panel" parent="Menus"]
 process_mode = 3
