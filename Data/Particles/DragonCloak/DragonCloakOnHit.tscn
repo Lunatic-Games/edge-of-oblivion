@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://de0n5ydhv3wpu"]
 
-[ext_resource type="Texture2D" uid="uid://bh01tsk67k3yp" path="res://Assets/textures/kenneys/PNG (Transparent)/flame_01.png" id="1_tah8q"]
+[ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="1_f5wny"]
 [ext_resource type="Script" path="res://Data/Particles/BasicParticles.gd" id="2_jk2ct"]
 
 [sub_resource type="Gradient" id="Gradient_jm3tv"]
@@ -21,15 +21,17 @@ curve = SubResource("Curve_3jthx")
 emission_shape = 3
 emission_box_extents = Vector3(20, 1, 1)
 particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+flatness = 0.25
 gravity = Vector3(0, -98, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
 angular_velocity_min = -30.0
 angular_velocity_max = 30.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-angle_min = -180.0
-angle_max = 180.0
-scale_min = 0.05
-scale_max = 0.1
+scale_min = 0.1
+scale_max = 0.15
 scale_curve = SubResource("CurveTexture_tcwv0")
 color = Color(1, 0.580392, 0.580392, 1)
 color_ramp = SubResource("GradientTexture1D_4l1yg")
@@ -37,9 +39,9 @@ hue_variation_max = 0.4
 
 [node name="DragonCloakOnHit" type="GPUParticles2D"]
 emitting = false
-amount = 35
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_1w1f0")
-texture = ExtResource("1_tah8q")
+texture = ExtResource("1_f5wny")
 one_shot = true
-explosiveness = 0.2
+explosiveness = 0.7
 script = ExtResource("2_jk2ct")

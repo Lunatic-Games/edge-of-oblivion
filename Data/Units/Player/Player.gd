@@ -20,6 +20,11 @@ var level_thresholds = {
 	9: 5,
 	10: 5
 }
+var starting_items: Array[Resource] = [
+	load("res://Data/Items/Broom/Broom.tres"),
+	#load("res://Data/Items/Hammer/Hammer.tres"),
+	#load("res://Data/Items/DraculasKnives/DraculasKnives.tres")
+]
 
 @onready var inventory: Inventory = $CanvasLayer/Inventory
 @onready var player_camera: Camera2D = $PlayerCamera
@@ -62,8 +67,8 @@ func handle_movement() -> void:
 
 
 func add_starting_items() -> void:
-	var short_sword: ItemData = load("res://Data/Items/ShortSword/ShortSword.tres")
-	inventory.gain_item(short_sword, false)
+	for item_data in starting_items:
+		inventory.gain_item(item_data, false)
 
 
 func handle_move_or_wait(tile: Tile):
