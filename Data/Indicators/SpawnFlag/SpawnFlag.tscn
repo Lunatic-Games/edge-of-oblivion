@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctes73inwlf62"]
+[gd_scene load_steps=7 format=3 uid="uid://ctes73inwlf62"]
 
 [ext_resource type="Texture2D" uid="uid://cojcgawkpa4lt" path="res://Assets/art/icons/misc/lorc/spawn_flag.png" id="1"]
 [ext_resource type="Script" path="res://Data/Indicators/SpawnFlag/SpawnFlag.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://1rgwr4l47b25" path="res://UI/HoverPopups/TextPopup/TextPopup.tscn" id="3_86bp5"]
 
 [sub_resource type="Animation" id="2"]
 resource_name = "remove"
@@ -78,3 +79,10 @@ texture = ExtResource("1")
 libraries = {
 "": SubResource("AnimationLibrary_n52fm")
 }
+
+[node name="TextPopupHover" parent="." instance=ExtResource("3_86bp5")]
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+display_string = "[color=cyan]Spawn flag:[/color] an enemy will spawn here at the start of the next round."
