@@ -48,7 +48,7 @@ color = Color(0.937255, 0.713726, 0.627451, 1)
 [node name="ForgottenKing" instance=ExtResource("4")]
 display_name = "The Forgotten King"
 sound_track = ExtResource("2_ex11q")
-max_hp = 10
+max_hp = 100
 
 [node name="Sprite2D" parent="." index="1"]
 material = ExtResource("3")
@@ -59,7 +59,7 @@ default_value = 4
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("4_mjly1")
-default_value = 2
+default_value = 20
 
 [node name="Targets" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("5_lvxue")
