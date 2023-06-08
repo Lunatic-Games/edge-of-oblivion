@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cq6cufn4fk6s3"]
+[gd_scene load_steps=10 format=3 uid="uid://cq6cufn4fk6s3"]
 
+[ext_resource type="Script" path="res://Data/Units/Unit.gd" id="1_qf12u"]
 [ext_resource type="Texture2D" uid="uid://b888qfwltqjq6" path="res://Assets/art/icons/medieval-fantasy/delapouite/goblin-head.svg" id="2"]
 [ext_resource type="Material" uid="uid://d2p8yth5vp4kr" path="res://Shaders/dream_shader_material.tres" id="2_n53uj"]
 [ext_resource type="Texture2D" uid="uid://gt23vt5c7uus" path="res://Assets/art/misc/glow_texture_grey.png" id="3"]
@@ -62,6 +63,7 @@ bg_color = Color(0.603922, 0.32549, 0.858824, 1)
 
 [node name="Unit" type="Node2D"]
 z_index = 1
+script = ExtResource("1_qf12u")
 
 [node name="AttackReadySprite" type="Sprite2D" parent="."]
 visible = false

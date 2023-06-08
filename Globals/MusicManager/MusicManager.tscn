@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://craha8oall5q5"]
+
+[node name="MusicManager" type="Node"]
+
+[node name="BattleMusicPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"StandardMusic"
+
+[node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"MenuMusic"
+
+[node name="BossMusicPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"BossMusic"

@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://csh5tgc5kmi6v"]
 
-[ext_resource type="Resource" path="res://Data/Units/Enemies/Bosses/ForgottenKing/forgotten_king_data.tres" id="2_j8shd"]
+[ext_resource type="AudioStream" uid="uid://cdjl4cwolbuyc" path="res://Assets/music/boss/Endless-Storm.mp3" id="2_ex11q"]
 [ext_resource type="Material" uid="uid://d2p8yth5vp4kr" path="res://Shaders/dream_shader_material.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://copvhxqv6s2w8" path="res://Data/Units/Enemies/Bosses/Boss.tscn" id="4"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_mjly1"]
@@ -46,10 +46,11 @@ scale_curve = SubResource("4")
 color = Color(0.937255, 0.713726, 0.627451, 1)
 
 [node name="ForgottenKing" instance=ExtResource("4")]
-boss_data = ExtResource("2_j8shd")
 popup_info_text = "[color=cyan]The Forgotten King[/color] charges at the player, also has an AOE attack."
 popup_flavor_text = "Once a benevolent and loved ruler. Most closely resembles a rabbid dog now."
-max_hp_override = 12
+display_name = "The Forgotten King"
+sound_track = ExtResource("2_ex11q")
+max_hp = 10
 
 [node name="Sprite2D" parent="." index="2"]
 material = ExtResource("3")

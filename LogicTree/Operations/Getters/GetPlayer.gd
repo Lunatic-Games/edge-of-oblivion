@@ -23,5 +23,6 @@ func perform_behavior() -> void:
 	
 	if output_player_items != null:
 		output_player_items.value.clear()
-		for item in ItemManager.managed_items.values():
-			output_player_items.value.append(item)
+		if GameManager.player != null:
+			for item in GameManager.player.inventory.items.values():
+				output_player_items.value.append(item)

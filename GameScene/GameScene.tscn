@@ -1,45 +1,377 @@
-[gd_scene load_steps=10 format=3 uid="uid://byoi1xsr0flfl"]
+[gd_scene load_steps=46 format=3 uid="uid://xex3avr7g7oe"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
-[ext_resource type="Texture2D" uid="uid://ceh34ox6344m8" path="res://Assets/art/misc/blank_grey.png" id="2_jc6s1"]
+[ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://GameScene/Board/Board.tscn" id="2_5sub4"]
+[ext_resource type="Resource" uid="uid://2yitqavrx4cc" path="res://Data/Items/Broom/Broom.tres" id="2_bavx3"]
+[ext_resource type="Resource" uid="uid://c4064o7rrsy36" path="res://Data/Items/DraculasKnives/DraculasKnives.tres" id="3_2i6f3"]
+[ext_resource type="Texture2D" uid="uid://ciihbexjkmiq8" path="res://Assets/art/background/game/lantern.svg" id="3_acicj"]
+[ext_resource type="Texture2D" uid="uid://bh37a154red3i" path="res://Assets/art/background/game/tree.svg" id="3_pi3i8"]
+[ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="4_emfl5"]
+[ext_resource type="Resource" uid="uid://dhbycs5j4to6b" path="res://Data/Items/DragonCloak/DragonCloak.tres" id="4_ewp0b"]
+[ext_resource type="Texture2D" uid="uid://c11immlfgb1vh" path="res://Assets/art/background/game/grass.svg" id="4_ruk66"]
+[ext_resource type="Resource" uid="uid://bkxc4j0i03skk" path="res://Data/Items/Hammer/Hammer.tres" id="5_pva1r"]
+[ext_resource type="Texture2D" uid="uid://c6xlhl00wu8r6" path="res://Assets/art/background/game/lantern_cage.svg" id="5_vycgk"]
+[ext_resource type="Texture2D" uid="uid://cx1ga40jy1ut6" path="res://Assets/textures/glow.svg" id="6_8dq2b"]
+[ext_resource type="Resource" uid="uid://ciom03ipb83hk" path="res://Data/Items/HolyFire/HolyFire.tres" id="6_555l1"]
+[ext_resource type="Resource" uid="uid://ds3bgi1j8ywkc" path="res://Data/Items/LightningBow/LightningBow.tres" id="7_ixikr"]
+[ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="8_bg1ri"]
+[ext_resource type="Resource" uid="uid://b44nfpsd5kbd4" path="res://Data/Items/ShortSword/ShortSword.tres" id="8_hnpfi"]
+[ext_resource type="Resource" uid="uid://baj6eb61iqagw" path="res://Data/Items/StrayArquebus/StrayArquebus.tres" id="9_okxst"]
+[ext_resource type="Resource" uid="uid://c7npess6g8cti" path="res://Data/Items/TokenOfLove/TokenOfLove.tres" id="10_4tjaj"]
+[ext_resource type="Texture2D" uid="uid://dmbs1q38ekhl4" path="res://Assets/art/background/game/lantern_wrap.svg" id="10_aw3dg"]
+[ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="11_bif4v"]
+[ext_resource type="Texture2D" uid="uid://b0og73dh6y3tx" path="res://Assets/art/background/game/sword_and_spear_ribbon.svg" id="12_4bhsh"]
+[ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://Menus/UpgradeMenu/UpgradeMenu.tscn" id="13_ilrse"]
 
-[sub_resource type="Shader" id="1"]
-code = "shader_type canvas_item;
+[sub_resource type="Environment" id="Environment_n1myw"]
+background_mode = 3
+background_energy_multiplier = 2.0
+background_canvas_max_layer = 1
+tonemap_mode = 2
+tonemap_exposure = 0.8
+glow_strength = 1.5
 
-uniform vec2 direction = vec2(1, 0);
-uniform float speed = 0.1;
-uniform sampler2D noise;
+[sub_resource type="Gradient" id="Gradient_hakff"]
+offsets = PackedFloat32Array(0, 0.0894309, 0.841463, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-vec4 overlay(vec4 base, vec4 blend){
-	vec4 limit = step(0.5, base);
-	return mix(2.0 * base * blend, 1.0 - 2.0 * (1.0 - base) * (1.0 - blend), limit);
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6r7i2"]
+gradient = SubResource("Gradient_hakff")
+
+[sub_resource type="Curve" id="Curve_nn2ou"]
+_data = [Vector2(0, 0.854545), 0.0, 0.0, 0, 0, Vector2(0.537906, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.563636), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dr343"]
+curve = SubResource("Curve_nn2ou")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7khyr"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 15.0
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.1
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_dr343")
+color = Color(0.831373, 0.85098, 1, 0.407843)
+color_ramp = SubResource("GradientTexture1D_6r7i2")
+
+[sub_resource type="Animation" id="Animation_54o15"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireParticles:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.603836, 0.599868)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.28836, 0.246516)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fire:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.603836, 0.599868)]
 }
 
-void fragment()
-{
-	// image texture
-	vec4 base = texture(TEXTURE, UV);
-	// noise texture
-	vec4 blend = texture(noise, mod(UV + ( direction * speed * TIME), vec2(1.0, 1.0)));
-	
-	COLOR = overlay(base, blend);
-}"
+[sub_resource type="Animation" id="Animation_t0lyc"]
+resource_name = "fire"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireParticles:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.603836, 0.599868), Vector2(0.604, 0.7), Vector2(0.603836, 0.599868)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.28836, 0.246516), Vector2(0.288, 0.3), Vector2(0.28836, 0.246516)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light:energy")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [3.0, 3.4, 3.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fire:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.603836, 0.599868), Vector2(0.604, 0.7), Vector2(0.603836, 0.599868)]
+}
 
-[sub_resource type="Gradient" id="Gradient_iussi"]
-colors = PackedColorArray(0, 0, 0, 1, 0.18343, 0.1794, 0.26, 1)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g2rih"]
+_data = {
+"RESET": SubResource("Animation_54o15"),
+"fire": SubResource("Animation_t0lyc")
+}
 
-[sub_resource type="FastNoiseLite" id="3"]
+[sub_resource type="Animation" id="Animation_4en1h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
-[sub_resource type="NoiseTexture2D" id="4"]
-seamless = true
-color_ramp = SubResource("Gradient_iussi")
-noise = SubResource("3")
+[sub_resource type="Animation" id="Animation_8liqg"]
+resource_name = "glow"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.3), Vector2(1, 1)]
+}
 
-[sub_resource type="ShaderMaterial" id="2"]
-shader = SubResource("1")
-shader_parameter/direction = Vector2(0.5, 1)
-shader_parameter/speed = 0.02
-shader_parameter/noise = SubResource("4")
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bmgit"]
+_data = {
+"RESET": SubResource("Animation_4en1h"),
+"glow": SubResource("Animation_8liqg")
+}
+
+[sub_resource type="Animation" id="Animation_mu8sh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_m5lf7"]
+resource_name = "swing"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0, 0.0872665]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ndcf7"]
+_data = {
+"RESET": SubResource("Animation_mu8sh"),
+"swing": SubResource("Animation_m5lf7")
+}
+
+[sub_resource type="Animation" id="Animation_lhjh6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ribbon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ribbon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3laye"]
+resource_name = "wind"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ribbon:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0872665, 0.0, -0.0872665, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ribbon:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1.05), Vector2(0.952, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w1vne"]
+_data = {
+"RESET": SubResource("Animation_lhjh6"),
+"wind": SubResource("Animation_3laye")
+}
+
+[sub_resource type="Animation" id="Animation_h0p7p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ribbon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ribbon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_f1qql"]
+resource_name = "swing"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ribbon:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, 0.0, -0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ribbon:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_41u5x"]
+_data = {
+"RESET": SubResource("Animation_h0p7p"),
+"swing": SubResource("Animation_f1qql")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vfxa"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
@@ -49,32 +381,418 @@ bg_color = Color(0.592157, 0.219608, 0.72549, 1)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_f3738")
+all_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("2_bavx3"), ExtResource("3_2i6f3"), ExtResource("4_ewp0b"), ExtResource("5_pva1r"), ExtResource("6_555l1"), ExtResource("7_ixikr"), ExtResource("8_hnpfi"), ExtResource("9_okxst"), ExtResource("10_4tjaj")])
 
-[node name="Background" type="CanvasLayer" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n1myw")
+
+[node name="BackgroundFill" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="BackgroundNoise" type="TextureRect" parent="Background"]
-modulate = Color(0.141176, 0.160784, 0.247059, 1)
-show_behind_parent = true
-material = SubResource("2")
+[node name="Pit" type="ColorRect" parent="BackgroundFill"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_jc6s1")
-expand_mode = 1
+color = Color(0.0784314, 0.0784314, 0.152941, 1)
 
-[node name="GameBoard" type="Node2D" parent="." groups=["gameboard"]]
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="DropOff" type="ColorRect" parent="Ground"]
+offset_left = -102.0
+offset_top = 684.0
+offset_right = 1630.0
+offset_bottom = 1715.0
+color = Color(0.101961, 0.105882, 0.192157, 1)
+
+[node name="DropOff2" type="ColorRect" parent="Ground"]
+offset_left = -151.0
+offset_top = 272.0
+offset_right = 1581.0
+offset_bottom = 1247.0
+color = Color(0.101961, 0.105882, 0.192157, 1)
+
+[node name="Ground" type="ColorRect" parent="Ground"]
+offset_left = -573.0
+offset_top = -761.0
+offset_right = 1530.0
+offset_bottom = 1715.0
+color = Color(0.12549, 0.129412, 0.227451, 1)
+
+[node name="JutOut" type="ColorRect" parent="Ground"]
+offset_left = 1262.0
+offset_top = 520.0
+offset_right = 1499.0
+offset_bottom = 847.0
+rotation = -0.523598
+color = Color(0.12549, 0.129412, 0.227451, 1)
+
+[node name="JutOut2" type="ColorRect" parent="Ground"]
+offset_left = 1267.63
+offset_top = 21.34
+offset_right = 1504.63
+offset_bottom = 348.34
+rotation = -0.261799
+color = Color(0.12549, 0.129412, 0.227451, 1)
+
+[node name="JutOut3" type="ColorRect" parent="Ground"]
+offset_left = 1351.63
+offset_top = 209.34
+offset_right = 1588.63
+offset_bottom = 536.34
+rotation = 0.261799
+color = Color(0.12549, 0.129412, 0.227451, 1)
+
+[node name="JutOut4" type="ColorRect" parent="Ground"]
+offset_left = 124.0
+offset_top = 281.0
+offset_right = 1683.0
+offset_bottom = 778.0
+rotation = 0.261799
+color = Color(0.12549, 0.129412, 0.227451, 1)
+
+[node name="Board" parent="." instance=ExtResource("2_5sub4")]
+layer_0/tile_data = PackedInt32Array(262155, 0, 65536, 327691, 0, 65536, 262154, 0, 65536, 327690, 0, 65536, 327689, 0, 65536, 262153, 0, 65536, 262157, 0, 65536, 327693, 0, 65536, 327694, 0, 65536, 327695, 0, 65536, 262159, 0, 65536, 262158, 0, 65536, 262156, 0, 65536, 327692, 0, 65536, 393231, 0, 65536, 393230, 0, 65536, 393229, 0, 65536, 393228, 0, 65536, 393227, 0, 65536, 393226, 0, 65536, 393225, 0, 65536, 458766, 0, 65536, 458767, 0, 65536, 458765, 0, 65536, 524303, 0, 65536, 589839, 0, 65536, 655375, 0, 65536, 589838, 0, 65536, 524302, 0, 65536, 524301, 0, 65536, 524300, 0, 65536, 589835, 0, 65536, 589834, 0, 65536, 589833, 0, 65536, 524297, 0, 65536, 524298, 0, 65536, 458762, 0, 65536, 458763, 0, 65536, 458764, 0, 65536, 589836, 0, 65536, 458761, 0, 65536, 589837, 0, 65536, 655374, 0, 65536, 655373, 0, 65536, 655372, 0, 65536, 655371, 0, 65536, 524299, 0, 65536, 655370, 0, 65536, 655369, 0, 65536)
+
+[node name="BoardRamp" type="ColorRect" parent="Board"]
+show_behind_parent = true
+offset_left = 624.0
+offset_top = 274.0
+offset_right = 1126.0
+offset_bottom = 776.0
+color = Color(0.133333, 0.137255, 0.247059, 1)
+
+[node name="BoardBackground" type="ColorRect" parent="Board"]
+show_behind_parent = true
+offset_left = 630.0
+offset_top = 280.0
+offset_right = 1120.0
+offset_bottom = 770.0
+color = Color(0.160784, 0.164706, 0.290196, 1)
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Campfire" type="Node2D" parent="Decorations"]
+position = Vector2(638, 161)
+
+[node name="BackRocks" type="Node2D" parent="Decorations/Campfire"]
+modulate = Color(0.317647, 0.305882, 0.4, 1)
+
+[node name="Rocks" type="Sprite2D" parent="Decorations/Campfire/BackRocks"]
+position = Vector2(-39, -3)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+flip_h = true
+
+[node name="Fire" type="Sprite2D" parent="Decorations/Campfire"]
+self_modulate = Color(0.513726, 0.6, 1, 1)
+position = Vector2(3, 42)
+scale = Vector2(0.603836, 0.599868)
+texture = ExtResource("4_emfl5")
+offset = Vector2(0, -200)
+
+[node name="FrontRocks" type="Node2D" parent="Decorations/Campfire"]
+modulate = Color(0.317647, 0.305882, 0.4, 1)
+
+[node name="Rocks" type="Sprite2D" parent="Decorations/Campfire/FrontRocks"]
+position = Vector2(7.00012, 31)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+
+[node name="Rocks2" type="Sprite2D" parent="Decorations/Campfire/FrontRocks"]
+position = Vector2(14, 20)
+scale = Vector2(0.292155, 0.301829)
+texture = ExtResource("8_bg1ri")
+flip_h = true
+
+[node name="Light" type="PointLight2D" parent="Decorations/Campfire"]
+self_modulate = Color(0.54902, 0.415686, 0.247059, 1)
+z_index = 1
+position = Vector2(0, 24)
+scale = Vector2(0.28836, 0.246516)
+color = Color(0.584314, 0.603922, 1, 1)
+energy = 3.0
+texture = ExtResource("6_8dq2b")
+
+[node name="FireParticles" type="GPUParticles2D" parent="Decorations/Campfire"]
+position = Vector2(-2, 3)
+scale = Vector2(0.603836, 0.599868)
+process_material = SubResource("ParticleProcessMaterial_7khyr")
+texture = ExtResource("4_emfl5")
+lifetime = 2.0
+preprocess = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Decorations/Campfire"]
+autoplay = "fire"
+libraries = {
+"": SubResource("AnimationLibrary_g2rih")
+}
+
+[node name="Lantern" type="Sprite2D" parent="Decorations"]
+self_modulate = Color(0.356863, 0.329412, 0.501961, 1)
+position = Vector2(1291, 519)
+scale = Vector2(0.28836, 0.353616)
+texture = ExtResource("3_acicj")
+offset = Vector2(3, 335)
+
+[node name="Fire" type="Sprite2D" parent="Decorations/Lantern"]
+self_modulate = Color(0.521569, 0.596078, 1, 1)
+position = Vector2(1.73364, 533.443)
+texture = ExtResource("4_emfl5")
+offset = Vector2(0, -200)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Decorations/Lantern/Fire"]
+autoplay = "glow"
+libraries = {
+"": SubResource("AnimationLibrary_bmgit")
+}
+
+[node name="Cage" type="Sprite2D" parent="Decorations/Lantern"]
+self_modulate = Color(0.3725, 0.33, 0.5, 1)
+position = Vector2(1.73413, 335.488)
+texture = ExtResource("5_vycgk")
+
+[node name="Light" type="PointLight2D" parent="Decorations/Lantern"]
+self_modulate = Color(0.54902, 0.415686, 0.247059, 1)
+z_index = 1
+position = Vector2(-1.73413, 482.54)
+scale = Vector2(1, 0.697131)
+color = Color(0.580392, 0.603922, 1, 1)
+energy = 2.0
+texture = ExtResource("6_8dq2b")
+
+[node name="SwingAnimator" type="AnimationPlayer" parent="Decorations/Lantern"]
+autoplay = "swing"
+libraries = {
+"": SubResource("AnimationLibrary_ndcf7")
+}
+
+[node name="BackGrass" type="Node2D" parent="Decorations"]
+modulate = Color(0.576471, 0.486275, 0.368627, 0.756863)
+
+[node name="Grass" type="Sprite2D" parent="Decorations/BackGrass"]
+position = Vector2(481, 514)
+scale = Vector2(0.201613, 0.243902)
+texture = ExtResource("4_ruk66")
+flip_h = true
+
+[node name="Grass2" type="Sprite2D" parent="Decorations/BackGrass"]
+position = Vector2(1456, 784)
+scale = Vector2(0.201613, 0.243902)
+texture = ExtResource("4_ruk66")
+flip_h = true
+
+[node name="Grass3" type="Sprite2D" parent="Decorations/BackGrass"]
+position = Vector2(1192, 139)
+scale = Vector2(0.201613, 0.243902)
+texture = ExtResource("4_ruk66")
+flip_h = true
+
+[node name="BackRocks" type="Node2D" parent="Decorations"]
+modulate = Color(0.317647, 0.305882, 0.4, 1)
+
+[node name="Rocks" type="Sprite2D" parent="Decorations/BackRocks"]
+position = Vector2(988, 134)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+
+[node name="Trees" type="Node2D" parent="Decorations"]
+modulate = Color(0.509804, 0.392157, 0.462745, 1)
+
+[node name="Tree" type="Sprite2D" parent="Decorations/Trees"]
+position = Vector2(1465, 611)
+scale = Vector2(0.595275, 0.771465)
+texture = ExtResource("3_pi3i8")
+
+[node name="Tree2" type="Sprite2D" parent="Decorations/Trees"]
+position = Vector2(334, 342)
+scale = Vector2(0.595275, 0.771465)
+texture = ExtResource("3_pi3i8")
+flip_h = true
+
+[node name="Tree3" type="Sprite2D" parent="Decorations/Trees"]
+position = Vector2(781, 992)
+scale = Vector2(0.595275, 0.771465)
+texture = ExtResource("3_pi3i8")
+flip_h = true
+
+[node name="Tree4" type="Sprite2D" parent="Decorations/Trees"]
+position = Vector2(1174, -30.9999)
+scale = Vector2(0.595275, 0.771465)
+texture = ExtResource("3_pi3i8")
+
+[node name="Tree5" type="Sprite2D" parent="Decorations/Trees"]
+position = Vector2(226, 874)
+scale = Vector2(0.595275, 0.771465)
+texture = ExtResource("3_pi3i8")
+
+[node name="Tree6" type="Sprite2D" parent="Decorations/Trees"]
+position = Vector2(594, -190)
+scale = Vector2(0.595275, 0.771465)
+texture = ExtResource("3_pi3i8")
+
+[node name="Tree7" type="Sprite2D" parent="Decorations/Trees"]
+position = Vector2(1340, 1192)
+scale = Vector2(0.595275, 0.771465)
+texture = ExtResource("3_pi3i8")
+
+[node name="Tree8" type="Sprite2D" parent="Decorations/Trees"]
+position = Vector2(-56, 30)
+scale = Vector2(0.595275, 0.771465)
+texture = ExtResource("3_pi3i8")
+
+[node name="Tree9" type="Sprite2D" parent="Decorations/Trees"]
+position = Vector2(-150, 538)
+scale = Vector2(0.595275, 0.771465)
+texture = ExtResource("3_pi3i8")
+
+[node name="LanternWrap" type="Sprite2D" parent="Decorations"]
+self_modulate = Color(0.356863, 0.329412, 0.501961, 1)
+position = Vector2(1288, 606)
+rotation = 0.0457601
+scale = Vector2(0.28836, 0.256162)
+texture = ExtResource("10_aw3dg")
+
+[node name="Grass" type="Node2D" parent="Decorations"]
+modulate = Color(0.701961, 0.603922, 0.482353, 0.756863)
+
+[node name="Grass" type="Sprite2D" parent="Decorations/Grass"]
+position = Vector2(385, 524)
+scale = Vector2(0.201613, 0.243902)
+texture = ExtResource("4_ruk66")
+
+[node name="Grass2" type="Sprite2D" parent="Decorations/Grass"]
+position = Vector2(1333, 807)
+scale = Vector2(0.201613, 0.243902)
+texture = ExtResource("4_ruk66")
+
+[node name="Grass3" type="Sprite2D" parent="Decorations/Grass"]
+position = Vector2(1014, 148)
+scale = Vector2(0.201613, 0.243902)
+texture = ExtResource("4_ruk66")
+
+[node name="Grass4" type="Sprite2D" parent="Decorations/Grass"]
+position = Vector2(342, 533)
+scale = Vector2(0.117852, 0.160061)
+texture = ExtResource("4_ruk66")
+flip_h = true
+
+[node name="SwordAndSpear" type="Sprite2D" parent="Decorations"]
+self_modulate = Color(0.286275, 0.294118, 0.305882, 1)
+position = Vector2(490, 899)
+scale = Vector2(0.746063, 0.639734)
+texture = ExtResource("11_bif4v")
+
+[node name="Ribbon" type="Sprite2D" parent="Decorations/SwordAndSpear"]
+modulate = Color(0.368627, 0.172549, 0.215686, 1)
+position = Vector2(40.2111, -81.2837)
+texture = ExtResource("12_4bhsh")
+offset = Vector2(-40, 80)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Decorations/SwordAndSpear"]
+autoplay = "wind"
+libraries = {
+"": SubResource("AnimationLibrary_w1vne")
+}
+
+[node name="SwordAndSpear2" type="Sprite2D" parent="Decorations"]
+self_modulate = Color(0.286275, 0.294118, 0.305882, 1)
+position = Vector2(1346, 265)
+scale = Vector2(0.746063, 0.639734)
+texture = ExtResource("11_bif4v")
+flip_h = true
+
+[node name="Ribbon" type="Sprite2D" parent="Decorations/SwordAndSpear2"]
+modulate = Color(0.368627, 0.172549, 0.215686, 1)
+position = Vector2(-38.8707, -76.5943)
+texture = ExtResource("12_4bhsh")
+offset = Vector2(40, 80)
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Decorations/SwordAndSpear2"]
+autoplay = "swing"
+libraries = {
+"": SubResource("AnimationLibrary_41u5x")
+}
+
+[node name="Rocks" type="Node2D" parent="Decorations"]
+modulate = Color(0.317647, 0.305882, 0.4, 1)
+
+[node name="Rocks" type="Sprite2D" parent="Decorations/Rocks"]
+position = Vector2(434, 541)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+
+[node name="Rocks2" type="Sprite2D" parent="Decorations/Rocks"]
+position = Vector2(1352, 821)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+flip_h = true
+
+[node name="Rocks3" type="Sprite2D" parent="Decorations/Rocks"]
+position = Vector2(828, 1193)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+flip_h = true
+
+[node name="Rocks4" type="Sprite2D" parent="Decorations/Rocks"]
+position = Vector2(118, 1064)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+flip_h = true
+
+[node name="Rocks5" type="Sprite2D" parent="Decorations/Rocks"]
+position = Vector2(-131, 225)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+flip_h = true
+
+[node name="Rocks6" type="Sprite2D" parent="Decorations/Rocks"]
+position = Vector2(-206, 225)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+flip_h = true
+
+[node name="Rocks7" type="Sprite2D" parent="Decorations/Rocks"]
+position = Vector2(-245, 731)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+flip_h = true
+
+[node name="Rocks8" type="Sprite2D" parent="Decorations/Rocks"]
+position = Vector2(528, 7.62939e-06)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+flip_h = true
+
+[node name="Rocks9" type="Sprite2D" parent="Decorations/Rocks"]
+position = Vector2(1287, 1408)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+flip_h = true
+
+[node name="Rocks10" type="Sprite2D" parent="Decorations/Rocks"]
+position = Vector2(479, 952)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
+flip_h = true
+
+[node name="Rocks11" type="Sprite2D" parent="Decorations/Rocks"]
+position = Vector2(1359, 320)
+scale = Vector2(0.482405, 0.301829)
+texture = ExtResource("8_bg1ri")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="BossOverlay" type="MarginContainer" parent="HUD"]
 visible = false
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 104.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 40
@@ -82,26 +800,31 @@ theme_override_constants/margin_right = 40
 [node name="Container" type="VBoxContainer" parent="HUD/BossOverlay"]
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="HealthBar" type="ProgressBar" parent="HUD/BossOverlay/Container"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_5vfxa")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4pmtw")
 value = 100.0
 show_percentage = false
 
 [node name="Title" type="RichTextLabel" parent="HUD/BossOverlay/Container"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
 text = "[shake]BOSS NAME"
 scroll_active = false
 
 [node name="Menus" type="CanvasLayer" parent="."]
+
+[node name="UpgradeMenu" parent="Menus" instance=ExtResource("13_ilrse")]
 
 [node name="VictoryPanel" type="Panel" parent="Menus"]
 process_mode = 3
