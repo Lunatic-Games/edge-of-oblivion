@@ -27,7 +27,7 @@ default_value = 5
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("3_twq0p")
-default_value = 1
+default_value = 10
 
 [node name="Chain" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("3_twq0p")

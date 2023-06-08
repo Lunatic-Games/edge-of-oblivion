@@ -22,7 +22,7 @@ default_value = 2
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("3_wupxa")
-default_value = 1
+default_value = 10
 
 [node name="Radius" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("3_wupxa")
