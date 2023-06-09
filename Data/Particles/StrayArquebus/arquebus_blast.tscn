@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://di2idmfdpfxjn"]
 
-[ext_resource type="Texture2D" uid="uid://c0qwy704ym5hn" path="res://Assets/textures/kenneys/PNG (Transparent)/muzzle_01.png" id="1_8j8si"]
 [ext_resource type="Script" path="res://Data/Particles/ParticleChildren.gd" id="1_107tb"]
+[ext_resource type="Texture2D" uid="uid://we6f3puh381" path="res://Assets/art/icons/spikes-slashes-cracks/lorc/spiky-explosion.svg" id="2_414sn"]
 [ext_resource type="Texture2D" uid="uid://dus0cf5kw1hsi" path="res://Assets/textures/kenneys/PNG (Transparent)/smoke_08.png" id="3_f18ji"]
 
 [sub_resource type="Gradient" id="Gradient_wdeam"]
@@ -65,7 +65,6 @@ hue_variation_max = 0.01
 turbulence_noise_scale = 2.06
 
 [node name="ArquebusBlast" type="GPUParticles2D"]
-emitting = false
 script = ExtResource("1_107tb")
 
 [node name="MuzzleFlash" type="GPUParticles2D" parent="."]
@@ -73,7 +72,7 @@ position = Vector2(78, 0)
 emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_x5d51")
-texture = ExtResource("1_8j8si")
+texture = ExtResource("2_414sn")
 lifetime = 0.2
 one_shot = true
 

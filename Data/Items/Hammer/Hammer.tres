@@ -2,17 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://c4m6g30wltadx" path="res://Data/Items/Hammer/Hammer.tscn" id="1_6d6wv"]
 [ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="2_eu4ws"]
-[ext_resource type="Texture2D" uid="uid://clhlssae4h8a2" path="res://Assets/art/icons/weapons/skoll/baton.svg" id="3_8pamd"]
+[ext_resource type="Texture2D" uid="uid://cs8ppwofd3bri" path="res://Assets/art/icons/misc/lorc/flat-hammer.svg" id="3_ittkr"]
 
 [resource]
 script = ExtResource("2_eu4ws")
-sprite = ExtResource("3_8pamd")
+sprite = ExtResource("3_ittkr")
 item_scene = ExtResource("1_6d6wv")
 item_name = "Hammer"
 tier1Text = "Every 3 turns: [color=pink]Knockback[/color] and damage a random unit above or below."
 tier2Text = "Increased damage if the unit collides with something."
 tier3Text = "Increased damage.
 Increased [color=pink]knockback[/color]."
-flavor_text = "Enemies go bonk."
+flavor_text = "Affectionally called the Breaker of Bones."
 max_turn_timer = 3
 item_damage = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4m6g30wltadx"]
+[gd_scene load_steps=14 format=3 uid="uid://bgoyhgv5k423v"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_ymxun"]
@@ -7,8 +7,8 @@
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_y07cf"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_q11i7"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="8_5gg7j"]
+[ext_resource type="PackedScene" uid="uid://cr5pb3kmn70mg" path="res://Data/Particles/Hammer/HammerParticles.tscn" id="8_73rgf"]
 [ext_resource type="Script" path="res://LogicTree/Effects/KnockbackTileOccupants.gd" id="9_5ou7l"]
-[ext_resource type="PackedScene" uid="uid://c1c7tfhv7giod" path="res://Data/Indicators/PlayerWeapons/Hammer/HammerIndicator.tscn" id="9_x654q"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_a2ss4"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="10_k60wr"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="11_ufv1h"]
@@ -53,7 +53,7 @@ directions = 5
 [node name="Spawn visual effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
 script = ExtResource("8_5gg7j")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("9_x654q")
+node2d_to_spawn = ExtResource("8_73rgf")
 
 [node name="Damage occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("10_a2ss4")

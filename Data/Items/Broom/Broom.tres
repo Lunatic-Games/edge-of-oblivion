@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://by4ucayrbtc4c" path="res://Data/Items/Broom/Broom.tscn" id="2"]
-[ext_resource type="Texture2D" uid="uid://cjhcck8v0yrqp" path="res://Assets/art/icons/buildings/lorc/fountain.svg" id="3"]
+[ext_resource type="Texture2D" uid="uid://3atihuwm0dpy" path="res://Assets/art/icons/misc/delapouite/broom.svg" id="3_halkf"]
 
 [resource]
 script = ExtResource("1")
-sprite = ExtResource("3")
+sprite = ExtResource("3_halkf")
 item_scene = ExtResource("2")
 item_name = "Broom"
 tier1Text = "Every 4 turns: [color=pink]Knockback[/color] random adjacent enemy."

@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="7_57d8c"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="8_wc336"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_1it6e"]
-[ext_resource type="PackedScene" uid="uid://hc0rr1q6tse7" path="res://Data/Particles/Fire/FireBlastParticles.tscn" id="10_fbjs5"]
+[ext_resource type="PackedScene" uid="uid://g7pf6x8q4c83" path="res://Data/Particles/HolyFire/HolyFireParticles.tscn" id="9_qu703"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="11_bfe23"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="13_q3bl2"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_jln8d"]
@@ -62,7 +62,7 @@ must_be_unique = false
 [node name="Spawn visual effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
 script = ExtResource("9_1it6e")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("10_fbjs5")
+node2d_to_spawn = ExtResource("9_qu703")
 
 [node name="Damage occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("11_bfe23")

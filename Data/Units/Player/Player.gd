@@ -21,9 +21,7 @@ var level_thresholds = {
 	10: 5
 }
 var starting_items: Array[Resource] = [
-	load("res://Data/Items/Broom/Broom.tres"),
-	#load("res://Data/Items/Hammer/Hammer.tres"),
-	#load("res://Data/Items/DraculasKnives/DraculasKnives.tres")
+	load("res://Data/Items/StrayArquebus/StrayArquebus.tres")
 ]
 
 @onready var inventory: Inventory = $CanvasLayer/Inventory
