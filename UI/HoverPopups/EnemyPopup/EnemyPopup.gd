@@ -2,10 +2,10 @@ extends Button
 
 const POPUP_OFFSET = Vector2(-10, -10)
 const SCREEN_BORDER_PADDING = Vector2(32, 32)
+const DELAY_IN_SECONDS: float = 0.5
 
 @export var enemy: Enemy
 
-var delay_in_seconds: float = 0.5
 var time_hovered_in_seconds: float = 0.0
 var is_hovered: bool = false
 var is_popup_spawned: bool = false
@@ -34,7 +34,7 @@ func _on_mouse_exited() -> void:
 func _process(delta:float) -> void:
 	if is_hovered && !is_popup_spawned:
 		time_hovered_in_seconds += delta
-		if time_hovered_in_seconds >= delay_in_seconds:
+		if time_hovered_in_seconds >= DELAY_IN_SECONDS:
 			spawn_popup()
 
 

@@ -24,6 +24,7 @@ popup_info_text = "[color=cyan]Lightning Bow[/color] Attacks up with range, then
 popup_flavor_text = "Zeus had once used this bow to send lightning to the earth"
 
 [node name="ItemPopupHover" parent="." index="0"]
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_right = 8.0

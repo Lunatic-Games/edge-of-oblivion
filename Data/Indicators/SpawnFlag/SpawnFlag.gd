@@ -13,14 +13,14 @@ func _ready() -> void:
 func collect() -> void:
 	current_tile.occupant = null
 	
-	var new_tile: Tile = GameManager.get_random_unoccupied_tile()
+	var new_tile: Tile = GameManager.board.get_random_unoccupied_tile()
 	if new_tile == null:
 		queue_free()
 		return
 	
 	current_tile = new_tile
-	position = current_tile.position
-	GameManager.occupy_tile(current_tile, self)
+	current_tile.occupant = self
+	global_position = current_tile.global_position
 
 
 func destroy_self() -> void:

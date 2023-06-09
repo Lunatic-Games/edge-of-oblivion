@@ -17,7 +17,6 @@ var max_tier = 3
 
 
 func _ready() -> void:
-	user = get_tree().get_nodes_in_group("player")[0]
 	appear_unready(false)
 
 
@@ -38,14 +37,14 @@ func set_sprite_color(color: Color):
 
 
 func appear_ready() -> void:
-	var tween: Tween = get_tree().create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(texture_rect, "self_modulate:a", 1.0, 0.2)
 	
 	animator.play("ready")
 
 
 func appear_unready(play_animation: bool = true) -> void:
-	var tween: Tween = get_tree().create_tween().set_parallel()
+	var tween: Tween = create_tween().set_parallel()
 	
 	tween.tween_property(texture_rect, "self_modulate:a", 0.4, 0.2)
 	if play_animation:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cxyr57tbkwcup"]
+[gd_scene load_steps=16 format=3 uid="uid://cxyr57tbkwcup"]
 
 [ext_resource type="PackedScene" uid="uid://cq6cufn4fk6s3" path="res://Data/Units/Unit.tscn" id="1"]
 [ext_resource type="Script" path="res://Data/Units/Player/Player.gd" id="2"]
 [ext_resource type="Script" path="res://Data/Units/Player/ExperienceBar.gd" id="3"]
+[ext_resource type="Script" path="res://Data/Units/Player/Inventory.gd" id="4_er5bk"]
 [ext_resource type="Texture2D" uid="uid://bvyw2arekg3an" path="res://Assets/art/icons/medieval-fantasy/lorc/barbute.svg" id="5"]
 [ext_resource type="PackedScene" uid="uid://c8u150t7o10vg" path="res://Data/Particles/Reward/WaterfallStarParticle.tscn" id="5_r1e13"]
 
@@ -82,7 +83,7 @@ texture = ExtResource("5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="5"]
 
-[node name="ItemContainer" type="HBoxContainer" parent="CanvasLayer" index="0"]
+[node name="Inventory" type="HBoxContainer" parent="CanvasLayer" index="0"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -93,6 +94,7 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 20
 alignment = 1
+script = ExtResource("4_er5bk")
 
 [node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer" index="1"]
 anchors_preset = 7

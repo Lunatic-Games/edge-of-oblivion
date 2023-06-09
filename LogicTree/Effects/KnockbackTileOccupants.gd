@@ -64,7 +64,7 @@ func apply_knockback(target: Unit, direction: Vector2i, knockback: int, collideD
 		if next_tile == null:
 			# Fall off end of map
 			target.fall()
-			current_tile.clear_occupant()
+			current_tile.occupant = null
 			break
 			
 		var next_tile_occupant: Unit = next_tile.occupant
@@ -80,7 +80,7 @@ func apply_knockback(target: Unit, direction: Vector2i, knockback: int, collideD
 				if apply_knockback(next_tile_occupant, direction, 1):
 					target.move_to_tile(next_tile)
 					if not target.is_alive():
-						next_tile.clear_occupant()
+						next_tile.occupant = null
 					return true
 				else:
 					return false
@@ -101,6 +101,6 @@ func _get_average_direction_to_tile(tile: Tile) -> Vector2i:
 	
 	var total_position: Vector2 = Vector2(0, 0)
 	for ref_tile in references_tiles.value:
-		total_position += ref_tile.get_2d_distance_to_tile(tile)
+		total_position += ref_tile.get_world_distance_to_given_tile(tile)
 	
 	return LogicTreeDirectionUtility.get_direction_from_tile_offset(total_position)
