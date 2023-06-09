@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cq80n8j0ne7wh"]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://c57vgp84qqrhc" path="res://Assets/art/icons/medieval-fantasy/delapouite/spartan-helmet.svg" id="3"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="7_gta3c"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="8_t16fy"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_vyr0p"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="10_q4nla"]
+[ext_resource type="PackedScene" path="res://Data/Particles/Slash/SlashParticles.tscn" id="10_q4nla"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="10_x2wv3"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="13_yv5sx"]
 

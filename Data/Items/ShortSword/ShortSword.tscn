@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b13eybviq3ii7"]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_r3n8e"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="4_lobvm"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="5_5l6qm"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="6_ihmua"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="9_pptd1"]
+[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Slash/SlashParticles.tscn" id="9_pptd1"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="10_mltra"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_wrwdj"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="12_demeu"]
