@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bkxc4j0i03skk"]
 
-[ext_resource type="PackedScene" uid="uid://c4m6g30wltadx" path="res://Data/Items/Hammer/Hammer.tscn" id="1_6d6wv"]
+[ext_resource type="PackedScene" uid="uid://bgoyhgv5k423v" path="res://Data/Items/Hammer/Hammer.tscn" id="1_6d6wv"]
 [ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="2_eu4ws"]
 [ext_resource type="Texture2D" uid="uid://cs8ppwofd3bri" path="res://Assets/art/icons/misc/lorc/flat-hammer.svg" id="3_ittkr"]
 
