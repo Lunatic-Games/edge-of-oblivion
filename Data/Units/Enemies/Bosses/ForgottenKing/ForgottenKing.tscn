@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3]
+[gd_scene load_steps=29 format=3 uid="uid://j054uqo7ev21"]
 
 [ext_resource type="AudioStream" uid="uid://cdjl4cwolbuyc" path="res://Assets/music/boss/Endless-Storm.mp3" id="2_ex11q"]
 [ext_resource type="Material" uid="uid://d2p8yth5vp4kr" path="res://Shaders/dream_shader_material.tres" id="3"]

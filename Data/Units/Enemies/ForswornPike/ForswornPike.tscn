@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=18 format=3 uid="uid://cfthurngpg1ps"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://c57vgp84qqrhc" path="res://Assets/art/icons/medieval-fantasy/delapouite/spartan-helmet.svg" id="3"]
