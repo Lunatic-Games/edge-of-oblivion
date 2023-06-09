@@ -46,12 +46,19 @@ scale_curve = SubResource("4")
 color = Color(0.937255, 0.713726, 0.627451, 1)
 
 [node name="ForgottenKing" instance=ExtResource("4")]
+scale = Vector2(1, 1)
 display_name = "The Forgotten King"
 sound_track = ExtResource("2_ex11q")
+popup_info_text = "[color=cyan]The Forgotten King:[/color] charges at the player, also has an AOE attack."
+popup_flavor_text = "Once a benevolent and loved ruler. Most closely resembles a rabbid dog now."
 max_hp = 10
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 material = ExtResource("3")
+
+[node name="GPUParticles2D" parent="." index="6"]
+process_material = SubResource("ParticleProcessMaterial_62gbf")
+local_coords = true
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("4_mjly1")
@@ -66,10 +73,6 @@ script = ExtResource("5_lvxue")
 
 [node name="Should move" type="Node" parent="LT_PersistentVariables" index="3"]
 script = ExtResource("6_8npp6")
-
-[node name="GPUParticles2D" parent="." index="6"]
-process_material = SubResource("ParticleProcessMaterial_62gbf")
-local_coords = true
 
 [node name="BeforeEveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_rpxjt")

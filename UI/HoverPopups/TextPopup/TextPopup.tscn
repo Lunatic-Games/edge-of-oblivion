@@ -90,6 +90,7 @@ display_string = "This is a test string, p;ease work"
 
 [node name="PopupBackgroundPanel" type="PanelContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_right = 365.0
 offset_bottom = 46.0
 mouse_filter = 2
