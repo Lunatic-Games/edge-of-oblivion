@@ -54,6 +54,7 @@ max_hp = 10
 
 [node name="Sprite2D" parent="." index="2"]
 material = ExtResource("3")
+scale = Vector2(0.125, 0.125)
 
 [node name="GPUParticles2D" parent="." index="6"]
 process_material = SubResource("ParticleProcessMaterial_62gbf")
