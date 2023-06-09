@@ -46,10 +46,11 @@ scale_curve = SubResource("4")
 color = Color(0.937255, 0.713726, 0.627451, 1)
 
 [node name="ForgottenKing" instance=ExtResource("4")]
-popup_info_text = "[color=cyan]The Forgotten King[/color] charges at the player, also has an AOE attack."
-popup_flavor_text = "Once a benevolent and loved ruler. Most closely resembles a rabbid dog now."
+scale = Vector2(1, 1)
 display_name = "The Forgotten King"
 sound_track = ExtResource("2_ex11q")
+popup_info_text = "[color=cyan]The Forgotten King:[/color] charges at the player, also has an AOE attack."
+popup_flavor_text = "Once a benevolent and loved ruler. Most closely resembles a rabbid dog now."
 max_hp = 10
 
 [node name="Sprite2D" parent="." index="2"]
