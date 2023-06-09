@@ -10,10 +10,11 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="8_eg28p"]
 
 [node name="TokenOfLove" instance=ExtResource("1")]
-popup_info_text = "[color=cyan]Token of Love[/color] heals you"
-popup_flavor_text = "The very existence proves there was someone worth fighting for"
+popup_info_text = "[color=cyan]Token of Love:[/color] Heals you."
+popup_flavor_text = "The very existence proves there was someone worth fighting for."
 
 [node name="ItemPopupHover" parent="." index="0"]
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_right = 8.0
