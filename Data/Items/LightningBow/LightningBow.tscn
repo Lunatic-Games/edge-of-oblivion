@@ -142,7 +142,7 @@ value = 2
 [node name="Add more chain" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("15_1way7")
 int_variable = NodePath("../../../../LT_PersistentVariables/Chain")
-value = 2
+value = 3
 operation = 1
 
 [node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
