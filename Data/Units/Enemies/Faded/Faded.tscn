@@ -56,7 +56,7 @@ shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
 shader_parameter/noise = SubResource("3")
 
 [node name="Faded" instance=ExtResource("2")]
-max_hp = 30
+max_hp = 20
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_vh5pt")
