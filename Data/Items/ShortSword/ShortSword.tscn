@@ -21,7 +21,7 @@ default_value = 3
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("2_r3n8e")
-default_value = 2
+default_value = 20
 
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("3_hv802")

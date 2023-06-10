@@ -26,11 +26,11 @@ default_value = 1
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("3_ymxun")
-default_value = 1
+default_value = 10
 
 [node name="Collision damage" type="Node" parent="LT_PersistentVariables" index="3"]
 script = ExtResource("3_ymxun")
-default_value = 2
+default_value = 20
 
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("4_c72xt")
@@ -96,7 +96,7 @@ operation = 1
 [node name="Increase collision damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="1" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("14_vkbki")
 int_variable = NodePath("../../../../LT_PersistentVariables/Collision damage")
-value = 2
+value = 20
 operation = 1
 
 [node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
@@ -114,5 +114,5 @@ operation = 1
 [node name="Increase collision damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="1" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("14_vkbki")
 int_variable = NodePath("../../../../LT_PersistentVariables/Collision damage")
-value = 2
+value = 20
 operation = 1

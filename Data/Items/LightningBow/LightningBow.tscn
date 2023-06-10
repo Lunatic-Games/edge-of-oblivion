@@ -27,7 +27,7 @@ default_value = 5
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("3_twq0p")
-default_value = 1
+default_value = 15
 
 [node name="Chain" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("3_twq0p")
@@ -139,10 +139,10 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 2
 
-[node name="Add another chain" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+[node name="Add more chain" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("15_1way7")
 int_variable = NodePath("../../../../LT_PersistentVariables/Chain")
-value = 1
+value = 3
 operation = 1
 
 [node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
@@ -151,8 +151,8 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 3
 
-[node name="Add 2 more chains" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+[node name="Add more chains" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("15_1way7")
 int_variable = NodePath("../../../../LT_PersistentVariables/Chain")
-value = 2
+value = 3
 operation = 1

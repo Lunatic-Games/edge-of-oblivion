@@ -26,11 +26,11 @@ default_value = 5
 
 [node name="Full Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("3_kk2s2")
-default_value = 3
+default_value = 35
 
 [node name="Volatile Damage" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("3_kk2s2")
-default_value = 1
+default_value = 10
 
 [node name="Volatility Odds" type="Node" parent="LT_PersistentVariables" index="3"]
 script = ExtResource("3_kk2s2")

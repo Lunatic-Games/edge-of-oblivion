@@ -73,6 +73,7 @@ color_ramp = SubResource("GradientTexture2D_1ux78")
 
 [node name="Player" groups=["player"] instance=ExtResource("1")]
 script = ExtResource("2")
+max_hp = 30
 
 [node name="PlayerCamera" type="Camera2D" parent="." index="0"]
 zoom = Vector2(1.5, 1.5)
