@@ -1,0 +1,102 @@
+[gd_scene load_steps=16 format=3 uid="uid://ddky7ijt20yox"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_5mbus"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_i8qos"]
+[ext_resource type="Texture2D" uid="uid://dngoh4ieskbsy" path="res://Assets/art/icons/weapons/willdabeast/orb-wand.svg" id="2_mbh46"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfRandom.gd" id="2_yaukn"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="3_jusci"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="4_1a366"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="4_fc7ej"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="5_1gee6"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsColor.gd" id="5_2n263"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="6_aia6s"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="8_pjl56"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_a4oqx"]
+[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="10_03ycs"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="12_01vqd"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="13_pwr8a"]
+
+[node name="ArcingOrb" instance=ExtResource("1_5mbus")]
+
+[node name="Texture" parent="." index="0"]
+texture = ExtResource("2_mbh46")
+
+[node name="CoolDownBar" parent="." index="2"]
+visible = false
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("2_i8qos")
+default_value = 80
+
+[node name="Number of targets" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("2_i8qos")
+default_value = 1
+
+[node name="Set item ready" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("4_fc7ej")
+items = NodePath("../../This item")
+
+[node name="Set color" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="1" node_paths=PackedStringArray("items")]
+script = ExtResource("5_2n263")
+items = NodePath("../../This item")
+color = 3
+
+[node name="Chance to trigger" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0"]
+script = ExtResource("2_yaukn")
+one_out_of = 6
+
+[node name="Target tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance to trigger" index="0"]
+script = ExtResource("3_jusci")
+
+[node name="Select radius" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance to trigger" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("4_1a366")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Target tiles")
+shape = 1
+radius = 3
+include_origin_tile = false
+
+[node name="Select enemies" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance to trigger" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("5_1gee6")
+input_tiles = NodePath("../Target tiles")
+output_tiles = NodePath("../Target tiles")
+occupant_type = 2
+
+[node name="Select random enemy" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance to trigger" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_aia6s")
+input_tiles = NodePath("../Target tiles")
+output_tiles = NodePath("../Target tiles")
+
+[node name="Damage occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance to trigger" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("8_pjl56")
+tiles = NodePath("../Target tiles")
+damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
+
+[node name="Spawn effect" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance to trigger" index="5" node_paths=PackedStringArray("tiles")]
+script = ExtResource("9_a4oqx")
+tiles = NodePath("../Target tiles")
+node2d_to_spawn = ExtResource("10_03ycs")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("12_01vqd")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="Add targets" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("13_pwr8a")
+int_variable = NodePath("../../../../LT_PersistentVariables/Number of targets")
+value = 1
+operation = 1
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("12_01vqd")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Add damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("13_pwr8a")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 8
+operation = 1

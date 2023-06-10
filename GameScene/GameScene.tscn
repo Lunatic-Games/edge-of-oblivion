@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://xex3avr7g7oe"]
+[gd_scene load_steps=47 format=3 uid="uid://xex3avr7g7oe"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
 [ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://GameScene/Board/Board.tscn" id="2_5sub4"]
@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://c7npess6g8cti" path="res://Data/Items/TokenOfLove/TokenOfLove.tres" id="10_4tjaj"]
 [ext_resource type="Texture2D" uid="uid://dmbs1q38ekhl4" path="res://Assets/art/background/game/lantern_wrap.svg" id="10_aw3dg"]
 [ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="11_bif4v"]
+[ext_resource type="Resource" uid="uid://dhmba6khldbxi" path="res://Data/Items/ArcingOrb/ArcingOrb.tres" id="11_nciuu"]
 [ext_resource type="Texture2D" uid="uid://b0og73dh6y3tx" path="res://Assets/art/background/game/sword_and_spear_ribbon.svg" id="12_4bhsh"]
 [ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://Menus/UpgradeMenu/UpgradeMenu.tscn" id="13_ilrse"]
 
@@ -381,7 +382,7 @@ bg_color = Color(0.592157, 0.219608, 0.72549, 1)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_f3738")
-all_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("2_bavx3"), ExtResource("3_2i6f3"), ExtResource("4_ewp0b"), ExtResource("5_pva1r"), ExtResource("6_555l1"), ExtResource("7_ixikr"), ExtResource("8_hnpfi"), ExtResource("9_okxst"), ExtResource("10_4tjaj")])
+all_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("2_bavx3"), ExtResource("3_2i6f3"), ExtResource("4_ewp0b"), ExtResource("5_pva1r"), ExtResource("6_555l1"), ExtResource("7_ixikr"), ExtResource("8_hnpfi"), ExtResource("9_okxst"), ExtResource("10_4tjaj"), ExtResource("11_nciuu")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_n1myw")
