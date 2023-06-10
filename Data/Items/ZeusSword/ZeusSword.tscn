@@ -1,0 +1,296 @@
+[gd_scene load_steps=23 format=3 uid="uid://j7u3unly5uwk"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_57hos"]
+[ext_resource type="Texture2D" uid="uid://bs6l7euyxmfqr" path="res://Assets/art/icons/weapons/lorc/zeus-sword.svg" id="2_2f8e6"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_b1w0d"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfRandom.gd" id="4_k4q6f"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_7h5kw"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="5_m6me2"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="6_h4ucx"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="7_udosm"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="8_quum3"]
+[ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="9_yjwnr"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/WhileBool.gd" id="10_72peb"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="10_c4lku"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="11_o81ap"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="11_yltmr"]
+[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="11_yolur"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="12_4v4hg"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="13_c63nc"]
+[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="14_5oe71"]
+[ext_resource type="PackedScene" uid="uid://3yymisgbwe7q" path="res://Data/Indicators/PlayerWeapons/LightningBow/LightningBowIndicator.tscn" id="14_arja2"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="16_odm42"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="17_43pt7"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="18_5pfjt"]
+
+[node name="ZeusSword" instance=ExtResource("1_57hos")]
+
+[node name="Texture" parent="." index="0"]
+texture = ExtResource("2_2f8e6")
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("3_b1w0d")
+default_value = 8
+
+[node name="Main damage" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("3_b1w0d")
+default_value = 50
+
+[node name="Main chains" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("3_b1w0d")
+
+[node name="Chain damage" type="Node" parent="LT_PersistentVariables" index="3"]
+script = ExtResource("3_b1w0d")
+default_value = 15
+
+[node name="Chains" type="Node" parent="LT_PersistentVariables" index="4"]
+script = ExtResource("3_b1w0d")
+default_value = 2
+
+[node name="Chance to trigger" type="Node" parent="LT_PersistentVariables" index="5"]
+script = ExtResource("3_b1w0d")
+default_value = 6
+
+[node name="Chance for lightning" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("one_out_of_override")]
+script = ExtResource("4_k4q6f")
+one_out_of_override = NodePath("../../../LT_PersistentVariables/Chance to trigger")
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning" index="0"]
+script = ExtResource("5_m6me2")
+
+[node name="Select radius around" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_h4ucx")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Targets")
+shape = 1
+radius = 1
+include_origin_tile = false
+
+[node name="Select enemies" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_udosm")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+occupant_type = 2
+
+[node name="Select random enemy" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("8_quum3")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+
+[node name="Spawn lightning effect" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning" index="4" node_paths=PackedStringArray("tiles")]
+script = ExtResource("13_c63nc")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("14_arja2")
+
+[node name="Damage occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("12_4v4hg")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../LT_PersistentVariables/Chain damage")
+
+[node name="Chains left" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning" index="6" node_paths=PackedStringArray("default_value_override")]
+script = ExtResource("3_b1w0d")
+default_value_override = NodePath("../../../../LT_PersistentVariables/Chains")
+
+[node name="Should chain" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning" index="7"]
+script = ExtResource("9_yjwnr")
+default_value = true
+
+[node name="While should chain" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning" index="8" node_paths=PackedStringArray("input")]
+script = ExtResource("10_72peb")
+input = NodePath("../Should chain")
+
+[node name="ChainLightningEffect" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning/While should chain" index="0"]
+script = ExtResource("11_yolur")
+
+[node name="Select all adjacent tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning/While should chain/ChainLightningEffect" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("11_o81ap")
+input_tiles = NodePath("../../../Targets")
+output_tiles = NodePath("../../../Targets")
+directions = 15
+
+[node name="Select occupied tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning/While should chain/ChainLightningEffect" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_udosm")
+input_tiles = NodePath("../../../Targets")
+output_tiles = NodePath("../../../Targets")
+occupant_type = 2
+
+[node name="Select a random tile" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning/While should chain/ChainLightningEffect" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("8_quum3")
+input_tiles = NodePath("../../../Targets")
+output_tiles = NodePath("../../../Targets")
+
+[node name="Spawn lightning effect" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning/While should chain/ChainLightningEffect" index="3" node_paths=PackedStringArray("tiles")]
+script = ExtResource("13_c63nc")
+tiles = NodePath("../../../Targets")
+node2d_to_spawn = ExtResource("14_arja2")
+
+[node name="Damage occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning/While should chain/ChainLightningEffect" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("12_4v4hg")
+tiles = NodePath("../../../Targets")
+damage_override = NodePath("../../../../../../LT_PersistentVariables/Chain damage")
+
+[node name="Decrement chain" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning/While should chain" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("16_odm42")
+int_variable = NodePath("../../Chains left")
+value = 1
+operation = 2
+
+[node name="If chain is zero" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning/While should chain" index="2" node_paths=PackedStringArray("input")]
+script = ExtResource("17_43pt7")
+input = NodePath("../../Chains left")
+comparison = 3
+
+[node name="Stop chaining" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning/While should chain/If chain is zero" index="0" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("18_5pfjt")
+bool_variable = NodePath("../../../Should chain")
+
+[node name="EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_7h5kw")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+
+[node name="Item appears unready" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("10_c4lku")
+items = NodePath("../../../This item")
+appear_ready = false
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="1"]
+script = ExtResource("5_m6me2")
+
+[node name="Select adjacent tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("11_o81ap")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Targets")
+directions = 15
+
+[node name="Select enemies" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_udosm")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+
+[node name="Select random enemy" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="4" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("8_quum3")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+
+[node name="Damage target" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("12_4v4hg")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../LT_PersistentVariables/Main damage")
+
+[node name="Spawn vfx" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
+script = ExtResource("13_c63nc")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("14_5oe71")
+
+[node name="Chains left" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="7" node_paths=PackedStringArray("default_value_override")]
+script = ExtResource("3_b1w0d")
+default_value_override = NodePath("../../../../LT_PersistentVariables/Main chains")
+
+[node name="Should chain" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="8"]
+script = ExtResource("9_yjwnr")
+default_value = true
+
+[node name="While should chain" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="9" node_paths=PackedStringArray("input")]
+script = ExtResource("10_72peb")
+input = NodePath("../Should chain")
+
+[node name="ChainLightningEffect" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain" index="0"]
+script = ExtResource("11_yolur")
+
+[node name="Select all adjacent tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("11_o81ap")
+input_tiles = NodePath("../../../Targets")
+output_tiles = NodePath("../../../Targets")
+directions = 15
+
+[node name="Select occupied tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_udosm")
+input_tiles = NodePath("../../../Targets")
+output_tiles = NodePath("../../../Targets")
+occupant_type = 2
+
+[node name="Select a random tile" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("8_quum3")
+input_tiles = NodePath("../../../Targets")
+output_tiles = NodePath("../../../Targets")
+
+[node name="Spawn lightning effect" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="3" node_paths=PackedStringArray("tiles")]
+script = ExtResource("13_c63nc")
+tiles = NodePath("../../../Targets")
+node2d_to_spawn = ExtResource("14_arja2")
+
+[node name="Damage occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("12_4v4hg")
+tiles = NodePath("../../../Targets")
+damage_override = NodePath("../../../../../../LT_PersistentVariables/Main damage")
+
+[node name="Decrement chain" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("16_odm42")
+int_variable = NodePath("../../Chains left")
+value = 1
+operation = 2
+
+[node name="If chain is zero" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain" index="2" node_paths=PackedStringArray("input")]
+script = ExtResource("17_43pt7")
+input = NodePath("../../Chains left")
+comparison = 3
+
+[node name="Stop chaining" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/If chain is zero" index="0" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("18_5pfjt")
+bool_variable = NodePath("../../../Should chain")
+
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_7h5kw")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+on_one_before = true
+
+[node name="Item appears ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("10_c4lku")
+items = NodePath("../../../This item")
+
+[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="3" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+script = ExtResource("11_yltmr")
+progress_bar = NodePath("../../../CoolDownBar")
+every_x_calls = NodePath("../EveryXCalls")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("17_43pt7")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="Decrease cooldown" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("16_odm42")
+int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
+value = 2
+operation = 2
+
+[node name="Increase odds" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("16_odm42")
+int_variable = NodePath("../../../../LT_PersistentVariables/Chance to trigger")
+value = 1
+operation = 2
+
+[node name="Increase main chain" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="2" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("16_odm42")
+int_variable = NodePath("../../../../LT_PersistentVariables/Main chains")
+value = 1
+operation = 1
+
+[node name="if tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("17_43pt7")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Increase damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/if tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("16_odm42")
+int_variable = NodePath("../../../../LT_PersistentVariables/Main damage")
+value = 20
+operation = 1
+
+[node name="Increase odds" type="Node" parent="LT_OnItemTierIncrease/LogicTree/if tier 3" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("16_odm42")
+int_variable = NodePath("../../../../LT_PersistentVariables/Chance to trigger")
+value = 1
+operation = 2
