@@ -1,0 +1,171 @@
+[gd_scene load_steps=19 format=3 uid="uid://rihys2m7c1cd"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_dvm1i"]
+[ext_resource type="Texture2D" uid="uid://cmmcsx0c7vww8" path="res://Assets/art/icons/weapons/starseeker/potion-of-madness.svg" id="2_6fk1j"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_vjjpo"]
+[ext_resource type="Script" path="res://LogicTree/Triggers/EntityTriggers/OnEntityHealed.gd" id="4_2nldu"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsColor.gd" id="4_uxt3n"]
+[ext_resource type="Script" path="res://LogicTree/Variables/ItemArrayVariable.gd" id="5_1gxr0"]
+[ext_resource type="Script" path="res://LogicTree/Variables/EntityArrayVariable.gd" id="6_xs7ng"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="7_rh1ql"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="8_gxdxj"]
+[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="9_e6j72"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="9_osvus"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="10_nx4hn"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="11_sla2u"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="12_ts044"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="13_qybgt"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="14_p5ns4"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="15_3rmry"]
+[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="16_yyi21"]
+
+[node name="TaintedFlask" instance=ExtResource("1_dvm1i")]
+
+[node name="Texture" parent="." index="0"]
+texture = ExtResource("2_6fk1j")
+
+[node name="CoolDownBar" parent="." index="2"]
+visible = false
+
+[node name="One before max" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("3_vjjpo")
+default_value = 2
+
+[node name="Heals so far" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("3_vjjpo")
+
+[node name="Number of targets" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("3_vjjpo")
+default_value = 2
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="3"]
+script = ExtResource("3_vjjpo")
+default_value = 15
+
+[node name="LT_SetItemsColor" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("4_uxt3n")
+items = NodePath("../../This item")
+color = 2
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("9_osvus")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="Increase damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_gxdxj")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 15
+operation = 1
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("9_osvus")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Increase number of targtes" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_gxdxj")
+int_variable = NodePath("../../../../LT_PersistentVariables/Number of targets")
+value = 1
+operation = 1
+
+[node name="Increase damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_gxdxj")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 15
+operation = 1
+
+[node name="LT_OnEntityHealed" type="Node" parent="." index="7" node_paths=PackedStringArray("output_source_item_array", "output_source_entity", "output_source_tile", "output_receiver_entity", "output_receiver_tile", "output_heal_amount", "logic_tree_on_trigger")]
+script = ExtResource("4_2nldu")
+receiver_filter = 1
+output_source_item_array = NodePath("Source item")
+output_source_entity = NodePath("Source entity")
+output_source_tile = NodePath("Source tile")
+output_receiver_entity = NodePath("Receiver entity")
+output_receiver_tile = NodePath("Tile array")
+output_heal_amount = NodePath("Heal amount")
+logic_tree_on_trigger = NodePath("LogicTree")
+
+[node name="Source item" type="Node" parent="LT_OnEntityHealed" index="0"]
+script = ExtResource("5_1gxr0")
+
+[node name="Source entity" type="Node" parent="LT_OnEntityHealed" index="1"]
+script = ExtResource("6_xs7ng")
+
+[node name="Source tile" type="Node" parent="LT_OnEntityHealed" index="2"]
+script = ExtResource("7_rh1ql")
+
+[node name="Receiver entity" type="Node" parent="LT_OnEntityHealed" index="3"]
+script = ExtResource("6_xs7ng")
+
+[node name="Tile array" type="Node" parent="LT_OnEntityHealed" index="4"]
+script = ExtResource("7_rh1ql")
+
+[node name="Heal amount" type="Node" parent="LT_OnEntityHealed" index="5"]
+script = ExtResource("3_vjjpo")
+
+[node name="LogicTree" type="Node" parent="LT_OnEntityHealed" index="6"]
+script = ExtResource("9_e6j72")
+
+[node name="Inc heals so far" type="Node" parent="LT_OnEntityHealed/LogicTree" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_gxdxj")
+int_variable = NodePath("../../../LT_PersistentVariables/Heals so far")
+value = 1
+operation = 1
+
+[node name="If one before max heal" type="Node" parent="LT_OnEntityHealed/LogicTree" index="1" node_paths=PackedStringArray("input", "value_override")]
+script = ExtResource("9_osvus")
+input = NodePath("../../../LT_PersistentVariables/Heals so far")
+comparison = 2
+value_override = NodePath("../../../LT_PersistentVariables/One before max")
+
+[node name="Appear ready" type="Node" parent="LT_OnEntityHealed/LogicTree/If one before max heal" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("10_nx4hn")
+items = NodePath("../../../../LT_OnItemSetupCompleted/This item")
+
+[node name="If triggering" type="Node" parent="LT_OnEntityHealed/LogicTree" index="2" node_paths=PackedStringArray("input", "value_override")]
+script = ExtResource("9_osvus")
+input = NodePath("../../../LT_PersistentVariables/Heals so far")
+value_override = NodePath("../../../LT_PersistentVariables/One before max")
+
+[node name="Appear unready" type="Node" parent="LT_OnEntityHealed/LogicTree/If triggering" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("10_nx4hn")
+items = NodePath("../../../../LT_OnItemSetupCompleted/This item")
+appear_ready = false
+
+[node name="Targets" type="Node" parent="LT_OnEntityHealed/LogicTree/If triggering" index="1"]
+script = ExtResource("7_rh1ql")
+
+[node name="Select radius" type="Node" parent="LT_OnEntityHealed/LogicTree/If triggering" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("11_sla2u")
+input_tiles = NodePath("../../../../LT_OnItemUpdate/Item user tile")
+output_tiles = NodePath("../Targets")
+shape = 1
+radius = 2
+
+[node name="Select enemies" type="Node" parent="LT_OnEntityHealed/LogicTree/If triggering" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("12_ts044")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+occupant_type = 2
+
+[node name="Select random enemies" type="Node" parent="LT_OnEntityHealed/LogicTree/If triggering" index="4" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("13_qybgt")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+
+[node name="Damage" type="Node" parent="LT_OnEntityHealed/LogicTree/If triggering" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("14_p5ns4")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
+
+[node name="Spawn vfx" type="Node" parent="LT_OnEntityHealed/LogicTree/If triggering" index="6" node_paths=PackedStringArray("tiles")]
+script = ExtResource("15_3rmry")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("16_yyi21")
+
+[node name="Reset heal so far" type="Node" parent="LT_OnEntityHealed/LogicTree/If triggering" index="7" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_gxdxj")
+int_variable = NodePath("../../../../LT_PersistentVariables/Heals so far")
