@@ -9,7 +9,7 @@ script = ExtResource("1_6exb4")
 sprite = ExtResource("3_mvocm")
 item_scene = ExtResource("1_eheqk")
 item_name = "Tainted Flask"
-tier1Text = "After healing 3 times: Does damage to a random unit near you."
+tier1Text = "After healing 3 times: Does damage to 2 random units near you."
 tier2Text = "Damage 15 -> 30"
 tier3Text = "Damage 30 -> 45
 Targets 2 ->  3"

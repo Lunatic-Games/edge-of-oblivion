@@ -151,10 +151,11 @@ input_tiles = NodePath("../Targets")
 output_tiles = NodePath("../Targets")
 occupant_type = 2
 
-[node name="Select random enemies" type="Node" parent="LT_OnEntityHealed/LogicTree/If triggering" index="4" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select random enemies" type="Node" parent="LT_OnEntityHealed/LogicTree/If triggering" index="4" node_paths=PackedStringArray("input_tiles", "output_tiles", "n_selections_override")]
 script = ExtResource("13_qybgt")
 input_tiles = NodePath("../Targets")
 output_tiles = NodePath("../Targets")
+n_selections_override = NodePath("../../../../LT_PersistentVariables/Number of targets")
 
 [node name="Damage" type="Node" parent="LT_OnEntityHealed/LogicTree/If triggering" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("14_p5ns4")
