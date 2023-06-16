@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Lurking-Evil.mp3-d7c036829c066459f342b1f0faaf
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0.0
 bpm=0.0
 beat_count=0
