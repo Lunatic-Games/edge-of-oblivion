@@ -18,12 +18,14 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="13_qybgt"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="14_p5ns4"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="15_3rmry"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="16_yyi21"]
+[ext_resource type="PackedScene" uid="uid://qkw1fluis4ad" path="res://Data/Indicators/PlayerWeapons/LightningBow/TaintedFlaskIndicator.tscn" id="17_htukc"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="20_r3rdb"]
 
 [node name="TaintedFlask" instance=ExtResource("1_dvm1i")]
+popup_info_text = "[color=cyan]Tainted Flask:[/color] After healing 3 times, does damage to random nearby targets."
+popup_flavor_text = "A cursed soul in a bottle."
 
-[node name="Texture" parent="." index="0"]
+[node name="Texture" parent="." index="1"]
 texture = ExtResource("2_6fk1j")
 
 [node name="Number of targets" type="Node" parent="LT_PersistentVariables" index="0"]
@@ -42,36 +44,6 @@ default_value = 3
 script = ExtResource("4_uxt3n")
 items = NodePath("../../This item")
 color = 2
-
-[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
-script = ExtResource("9_osvus")
-input = NodePath("../../New tier")
-comparison = 2
-value = 2
-
-[node name="Increase damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("8_gxdxj")
-int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
-value = 15
-operation = 1
-
-[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
-script = ExtResource("9_osvus")
-input = NodePath("../../New tier")
-comparison = 2
-value = 3
-
-[node name="Increase number of targtes" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("8_gxdxj")
-int_variable = NodePath("../../../../LT_PersistentVariables/Number of targets")
-value = 1
-operation = 1
-
-[node name="Increase damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="1" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("8_gxdxj")
-int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
-value = 15
-operation = 1
 
 [node name="LT_OnEntityHealed" type="Node" parent="." index="7" node_paths=PackedStringArray("output_source_item_array", "output_source_entity", "output_source_tile", "output_receiver_entity", "output_receiver_tile", "output_heal_amount", "logic_tree_on_trigger")]
 script = ExtResource("4_2nldu")
@@ -144,7 +116,7 @@ damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 [node name="Spawn vfx" type="Node" parent="LT_OnEntityHealed/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
 script = ExtResource("15_3rmry")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("16_yyi21")
+node2d_to_spawn = ExtResource("17_htukc")
 
 [node name="BeforeEveryXCalls" type="Node" parent="LT_OnEntityHealed/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
 script = ExtResource("12_0kj2l")
@@ -159,3 +131,33 @@ items = NodePath("../../../../LT_OnItemSetupCompleted/This item")
 script = ExtResource("20_r3rdb")
 progress_bar = NodePath("../../../CoolDownBar")
 every_x_calls = NodePath("../LT_EveryXCalls")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("9_osvus")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="Increase damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_gxdxj")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 15
+operation = 1
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("9_osvus")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Increase number of targtes" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_gxdxj")
+int_variable = NodePath("../../../../LT_PersistentVariables/Number of targets")
+value = 1
+operation = 1
+
+[node name="Increase damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_gxdxj")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 15
+operation = 1

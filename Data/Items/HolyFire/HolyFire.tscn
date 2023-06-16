@@ -15,6 +15,18 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_jln8d"]
 
 [node name="HolyFire" instance=ExtResource("1")]
+popup_info_text = "[color=cyan]Holy Fire:[/color] Attacks a random tile, in a radius around you, multiple times."
+popup_flavor_text = "Some said they were the tears of angels. Now nobody says anything at all."
+
+[node name="ItemPopupHover" parent="." index="0"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("3_wupxa")

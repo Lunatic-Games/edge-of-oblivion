@@ -24,8 +24,10 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="18_5pfjt"]
 
 [node name="ZeusSword" instance=ExtResource("1_57hos")]
+popup_info_text = "[color=cyan]Zeus' Sword:[/color] Has a powerful strike at adjacent enemies. Also has a chance to spark and chain."
+popup_flavor_text = "It quickly went out of fashion."
 
-[node name="Texture" parent="." index="0"]
+[node name="Texture" parent="." index="1"]
 texture = ExtResource("2_2f8e6")
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]

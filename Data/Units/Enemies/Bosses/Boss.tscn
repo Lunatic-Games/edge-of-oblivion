@@ -74,6 +74,7 @@ move_precedence = 3.0
 
 [node name="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_gvh8h")
+scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3")
 
 [node name="HealthBar" parent="." index="4"]
