@@ -56,10 +56,12 @@ shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
 shader_parameter/noise = SubResource("3")
 
 [node name="ForswornPike" instance=ExtResource("2")]
+popup_info_text = "[color=cyan]Forsworn Pike:[/color] attacks in all directions range 2."
+popup_flavor_text = "It was said they would stand guard for eternity. It was true."
 xp = 2
-max_hp = 6
+max_hp = 60
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_1e0he")
 texture = ExtResource("3")
 
@@ -69,7 +71,7 @@ default_value = 5
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("3_vx7mm")
-default_value = 1
+default_value = 10
 
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("4_wro21")

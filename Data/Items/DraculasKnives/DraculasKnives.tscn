@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://mpjnpy31p08n"]
+[gd_scene load_steps=14 format=3 uid="uid://co4ony0m1c4q0"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_ld0hh"]
@@ -11,9 +11,21 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="9_x4wpv"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_7a57k"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_vjuqf"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="11_po4j4"]
 [ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="11_wxece"]
 
 [node name="DraculasKnives" instance=ExtResource("1")]
+popup_info_text = "[color=cyan]Draculas Knives:[/color] Attack right and lifetseal."
+popup_flavor_text = "Yep, they suck."
+
+[node name="ItemPopupHover" parent="." index="0"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("4_ld0hh")
@@ -21,7 +33,7 @@ default_value = 3
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("4_ld0hh")
-default_value = 1
+default_value = 10
 
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_ypwwl")
@@ -83,10 +95,20 @@ tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 output_total_damage = NodePath("../total damage done")
 
-[node name="Heal player" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="8" node_paths=PackedStringArray("tiles", "heal_override")]
+[node name="total to heal" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="8" node_paths=PackedStringArray("default_value_override")]
+script = ExtResource("4_ld0hh")
+default_value_override = NodePath("../total damage done")
+
+[node name="scale for lifesteal" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="9" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("11_po4j4")
+int_variable = NodePath("../total damage done")
+value = 5
+operation = 5
+
+[node name="Heal player" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="10" node_paths=PackedStringArray("tiles", "heal_override")]
 script = ExtResource("11_wxece")
 tiles = NodePath("../../../Item user tile")
-heal_override = NodePath("../total damage done")
+heal_override = NodePath("../total to heal")
 
 [node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_ypwwl")

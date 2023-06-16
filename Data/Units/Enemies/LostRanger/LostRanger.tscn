@@ -58,18 +58,21 @@ shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
 shader_parameter/noise = SubResource("3")
 
 [node name="LostRanger" instance=ExtResource("1")]
+popup_info_text = "[color=cyan]The Lost Ranger:[/color] Looks for a target above and below within range 3."
+popup_flavor_text = "A long time ago, they'd lose themselves in the hunt. Now they are lost to it forever."
+max_hp = 30
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_bmpq0")
 texture = ExtResource("3")
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("3_ln1e0")
-default_value = 4
+default_value = 2
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("3_ln1e0")
-default_value = 2
+default_value = 10
 
 [node name="Targets" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("6_a73v3")

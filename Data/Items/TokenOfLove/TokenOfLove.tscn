@@ -10,6 +10,17 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="8_eg28p"]
 
 [node name="TokenOfLove" instance=ExtResource("1")]
+popup_info_text = "[color=cyan]Token of Love:[/color] Heals you."
+popup_flavor_text = "The very existence proves there was someone worth fighting for."
+
+[node name="ItemPopupHover" parent="." index="0"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("4_5j58d")
@@ -17,7 +28,7 @@ default_value = 9
 
 [node name="Heal" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("4_5j58d")
-default_value = 1
+default_value = 10
 
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_iq66l")

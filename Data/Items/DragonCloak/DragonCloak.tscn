@@ -14,6 +14,17 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="13_jvyv0"]
 
 [node name="DragonCloak" instance=ExtResource("1")]
+popup_info_text = "[color=cyan]Dragon Cloak:[/color] Burns everyone in a radius around you."
+popup_flavor_text = "Once used by dragon slayers of old."
+
+[node name="ItemPopupHover" parent="." index="0"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("4_vo51b")
@@ -25,7 +36,7 @@ default_value = 1
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("4_vo51b")
-default_value = 1
+default_value = 5
 
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_ukkjn")
