@@ -20,6 +20,7 @@ func _on_main_menu_loaded() -> void:
 
 
 func _on_game_started() -> void:
+	boss_music_player.fade_out_volume()
 	main_menu_music_player.fade_out_volume()
 	battle_music_player.start_new_random_track(true)
 
