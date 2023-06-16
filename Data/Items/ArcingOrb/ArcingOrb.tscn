@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="8_pjl56"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_a4oqx"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="12_01vqd"]
-[ext_resource type="PackedScene" uid="uid://3yymisgbwe7q" path="res://Data/Indicators/PlayerWeapons/LightningBow/LightningBowIndicator.tscn" id="13_n8je4"]
+[ext_resource type="PackedScene" uid="uid://cudvgijy8nd6b" path="res://Data/Particles/LightningBow/LightningBowEffect.tscn" id="13_8b2h7"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="13_pwr8a"]
 
 [node name="ArcingOrb" instance=ExtResource("1_5mbus")]
@@ -77,7 +77,7 @@ damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 [node name="Spawn effect" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance to trigger" index="5" node_paths=PackedStringArray("tiles")]
 script = ExtResource("9_a4oqx")
 tiles = NodePath("../Target tiles")
-node2d_to_spawn = ExtResource("13_n8je4")
+node2d_to_spawn = ExtResource("13_8b2h7")
 
 [node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("12_01vqd")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b8phiccdh0cp3"]
+[gd_scene load_steps=19 format=3 uid="uid://chl3bu7jqyiqr"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_twq0p"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_3tq3w"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="8_ykuaq"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_ggmof"]
-[ext_resource type="PackedScene" uid="uid://3yymisgbwe7q" path="res://Data/Indicators/PlayerWeapons/LightningBow/LightningBowIndicator.tscn" id="9_mlvr2"]
+[ext_resource type="PackedScene" uid="uid://cudvgijy8nd6b" path="res://Data/Particles/LightningBow/LightningBowEffect.tscn" id="9_mlvr2"]
 [ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="10_13naf"]
 [ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="10_chng4"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/WhileBool.gd" id="11_8vjst"]

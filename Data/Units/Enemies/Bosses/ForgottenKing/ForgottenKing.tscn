@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://csh5tgc5kmi6v"]
+[gd_scene load_steps=29 format=3 uid="uid://j054uqo7ev21"]
 
 [ext_resource type="AudioStream" uid="uid://cdjl4cwolbuyc" path="res://Assets/music/boss/Endless-Storm.mp3" id="2_ex11q"]
 [ext_resource type="Material" uid="uid://d2p8yth5vp4kr" path="res://Shaders/dream_shader_material.tres" id="3"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="8_jplii"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfTileArraySize.gd" id="9_112ek"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_tcar0"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="11_5fcxx"]
+[ext_resource type="PackedScene" path="res://Data/Particles/Slash/SlashParticles.tscn" id="11_5fcxx"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="12_0wx1s"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/ClearTileArray.gd" id="12_2jrrv"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="12_r5tjo"]

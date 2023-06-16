@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cmpxesn2rnfv4" path="res://Data/Items/HolyFire/HolyFire.tscn" id="2"]
-[ext_resource type="Texture2D" uid="uid://cjk1g57odlvtu" path="res://Assets/art/icons/spikes-slashes-cracks/lorc/striking-diamonds.svg" id="3"]
+[ext_resource type="Texture2D" uid="uid://clkyvvfvm67qi" path="res://Assets/art/icons/misc/lorc/fire-bottle.png" id="3_d41ki"]
 
 [resource]
 script = ExtResource("1")
-sprite = ExtResource("3")
+sprite = ExtResource("3_d41ki")
 item_scene = ExtResource("2")
 item_name = "Holy Fire"
 tier1Text = "Every 2 turns: Damage a nearby random tile.

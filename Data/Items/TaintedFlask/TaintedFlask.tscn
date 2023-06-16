@@ -18,7 +18,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="13_qybgt"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="14_p5ns4"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="15_3rmry"]
-[ext_resource type="PackedScene" uid="uid://qkw1fluis4ad" path="res://Data/Indicators/PlayerWeapons/LightningBow/TaintedFlaskIndicator.tscn" id="17_htukc"]
+[ext_resource type="PackedScene" uid="uid://bhbfl04uf5012" path="res://Data/Particles/TaintedFlask/TaintedFlaskParticles.tscn" id="17_alqbd"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="20_r3rdb"]
 
 [node name="TaintedFlask" instance=ExtResource("1_dvm1i")]
@@ -116,7 +116,7 @@ damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 [node name="Spawn vfx" type="Node" parent="LT_OnEntityHealed/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
 script = ExtResource("15_3rmry")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("17_htukc")
+node2d_to_spawn = ExtResource("17_alqbd")
 
 [node name="BeforeEveryXCalls" type="Node" parent="LT_OnEntityHealed/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
 script = ExtResource("12_0kj2l")

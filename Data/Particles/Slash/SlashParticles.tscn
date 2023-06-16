@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://0pkjfb8lfv4r"]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Texture2D" uid="uid://cusa07e6reu40" path="res://Assets/art/icons/spikes-slashes-cracks/lorc/quick-slash.svg" id="1"]
-[ext_resource type="Script" path="res://Data/Particles/Attack/SlashParticles.gd" id="2"]
+[ext_resource type="Script" path="res://Data/Particles/Slash/SlashParticles.gd" id="2"]
 
 [sub_resource type="Gradient" id="Gradient_ykyxf"]
 offsets = PackedFloat32Array(0, 0.133333, 0.305263, 1)

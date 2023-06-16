@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://j7u3unly5uwk"]
+[gd_scene load_steps=22 format=3 uid="uid://j7u3unly5uwk"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_57hos"]
 [ext_resource type="Texture2D" uid="uid://bs6l7euyxmfqr" path="res://Assets/art/icons/weapons/lorc/zeus-sword.svg" id="2_2f8e6"]
@@ -12,13 +12,12 @@
 [ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="9_yjwnr"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/WhileBool.gd" id="10_72peb"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="10_c4lku"]
+[ext_resource type="PackedScene" uid="uid://cudvgijy8nd6b" path="res://Data/Particles/LightningBow/LightningBowEffect.tscn" id="10_oym8o"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="11_o81ap"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="11_yltmr"]
 [ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="11_yolur"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="12_4v4hg"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="13_c63nc"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="14_5oe71"]
-[ext_resource type="PackedScene" uid="uid://3yymisgbwe7q" path="res://Data/Indicators/PlayerWeapons/LightningBow/LightningBowIndicator.tscn" id="14_arja2"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="16_odm42"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="17_43pt7"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="18_5pfjt"]
@@ -82,7 +81,7 @@ output_tiles = NodePath("../Targets")
 [node name="Spawn lightning effect" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning" index="4" node_paths=PackedStringArray("tiles")]
 script = ExtResource("13_c63nc")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("14_arja2")
+node2d_to_spawn = ExtResource("10_oym8o")
 
 [node name="Damage occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("12_4v4hg")
@@ -124,7 +123,7 @@ output_tiles = NodePath("../../../Targets")
 [node name="Spawn lightning effect" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning/While should chain/ChainLightningEffect" index="3" node_paths=PackedStringArray("tiles")]
 script = ExtResource("13_c63nc")
 tiles = NodePath("../../../Targets")
-node2d_to_spawn = ExtResource("14_arja2")
+node2d_to_spawn = ExtResource("10_oym8o")
 
 [node name="Damage occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/Chance for lightning/While should chain/ChainLightningEffect" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("12_4v4hg")
@@ -182,7 +181,7 @@ damage_override = NodePath("../../../../LT_PersistentVariables/Main damage")
 [node name="Spawn vfx" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
 script = ExtResource("13_c63nc")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("14_5oe71")
+node2d_to_spawn = ExtResource("10_oym8o")
 
 [node name="Chains left" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="7" node_paths=PackedStringArray("default_value_override")]
 script = ExtResource("3_b1w0d")
@@ -219,7 +218,7 @@ output_tiles = NodePath("../../../Targets")
 [node name="Spawn lightning effect" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="3" node_paths=PackedStringArray("tiles")]
 script = ExtResource("13_c63nc")
 tiles = NodePath("../../../Targets")
-node2d_to_spawn = ExtResource("14_arja2")
+node2d_to_spawn = ExtResource("10_oym8o")
 
 [node name="Damage occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("12_4v4hg")
