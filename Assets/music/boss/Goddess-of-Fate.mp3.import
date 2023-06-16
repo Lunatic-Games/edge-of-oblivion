@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/Goddess-of-Fate.mp3-255468c6d6361c5c72347dd65
 
 [params]
 
-loop=true
-loop_offset=0
-bpm=0
+loop=false
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

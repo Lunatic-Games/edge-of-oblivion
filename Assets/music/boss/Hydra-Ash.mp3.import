@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/Hydra-Ash.mp3-4acc5df486df0a82af5b301daac799b
 
 [params]
 
-loop=true
-loop_offset=0
-bpm=0
+loop=false
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

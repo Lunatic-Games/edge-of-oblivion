@@ -1,12 +1,26 @@
-[gd_scene format=3 uid="uid://craha8oall5q5"]
+[gd_scene load_steps=12 format=3 uid="uid://craha8oall5q5"]
+
+[ext_resource type="PackedScene" uid="uid://cposeuotudggd" path="res://Globals/MusicManager/MusicPlayer.tscn" id="1_phqoj"]
+[ext_resource type="Script" path="res://Globals/MusicManager/MusicManager.gd" id="1_xjott"]
+[ext_resource type="AudioStream" uid="uid://dmph0eclc0lfh" path="res://Assets/music/menu/Fall-From-Grace.mp3" id="3_sv02e"]
+[ext_resource type="AudioStream" uid="uid://dwlct1qkdqn6a" path="res://Assets/music/menu/Lurking-Evil.mp3" id="4_epj0t"]
+[ext_resource type="AudioStream" uid="uid://c4cdmrj43so04" path="res://Assets/music/battle/chase.mp3" id="5_bj6pi"]
+[ext_resource type="AudioStream" uid="uid://c45kr4nrndibu" path="res://Assets/music/battle/Dragon-Castle.mp3" id="6_pj02e"]
+[ext_resource type="AudioStream" uid="uid://b2qghufqsl7e7" path="res://Assets/music/battle/Dragon-World.mp3" id="7_tf7f2"]
+[ext_resource type="AudioStream" uid="uid://tihoird5hfjp" path="res://Assets/music/battle/Durandal.mp3" id="8_i5xb2"]
+[ext_resource type="AudioStream" uid="uid://bv7eldpnet32q" path="res://Assets/music/battle/Hitman.mp3" id="9_0l01i"]
+[ext_resource type="AudioStream" uid="uid://7jbyibpwsicy" path="res://Assets/music/battle/Hostiles-Inbound.mp3" id="10_j23qm"]
+[ext_resource type="AudioStream" uid="uid://ue3h6mxki1jt" path="res://Assets/music/battle/The-Torch-Of-Knowledge.mp3" id="11_uy13v"]
 
 [node name="MusicManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_xjott")
 
-[node name="BattleMusicPlayer" type="AudioStreamPlayer" parent="."]
-bus = &"StandardMusic"
+[node name="MainMenuMusic" parent="." instance=ExtResource("1_phqoj")]
+tracks = Array[AudioStream]([ExtResource("3_sv02e"), ExtResource("4_epj0t")])
 
-[node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="."]
-bus = &"MenuMusic"
+[node name="BattleMusic" parent="." instance=ExtResource("1_phqoj")]
+tracks = Array[AudioStream]([ExtResource("5_bj6pi"), ExtResource("6_pj02e"), ExtResource("7_tf7f2"), ExtResource("8_i5xb2"), ExtResource("9_0l01i"), ExtResource("10_j23qm"), ExtResource("11_uy13v")])
 
-[node name="BossMusicPlayer" type="AudioStreamPlayer" parent="."]
-bus = &"BossMusic"
+[node name="BossMusic" parent="." instance=ExtResource("1_phqoj")]
+time_to_fade_out_seconds = 2.0
