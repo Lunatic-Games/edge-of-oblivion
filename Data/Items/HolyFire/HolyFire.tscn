@@ -22,6 +22,7 @@ popup_flavor_text = "Some said they were the tears of angels. Now nobody says an
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
+offset_left = 0.0
 offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 1

@@ -67,7 +67,7 @@ func apply_knockback(target: Unit, direction: Vector2i, knockback: int, collideD
 			current_tile.occupant = null
 			break
 			
-		var next_tile_occupant: Unit = next_tile.occupant
+		var next_tile_occupant: Unit = next_tile.occupant as Unit
 			
 		# Try pushing into next occupant if there is one
 		if next_tile_occupant:
