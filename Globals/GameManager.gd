@@ -16,17 +16,18 @@ var game: GameScene = null
 var boss_overlay: Control = null
 var boss_health_bar: ProgressBar = null
 var boss_name: RichTextLabel = null
-var victory_screen: Control = null
+
+var game_ended: bool = false
 
 
 func start_game() -> void:
+	game_ended = false
 	randomize()
 	
 	game = get_tree().root.get_node("GameScene")
 	boss_overlay = game.get_node("HUD/BossOverlay")
 	boss_health_bar = boss_overlay.get_node("Container/HealthBar")
 	boss_name = boss_overlay.get_node("Container/Title")
-	victory_screen = game.get_node("Menus/VictoryPanel")
 	
 	board = game.board
 	

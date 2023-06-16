@@ -7,8 +7,8 @@ extends Node2D
 @onready var board: Board = $Board
 
 @onready var upgrade_menu: CanvasLayer = $Menus/UpgradeMenu
-@onready var victory_menu: Control = $Menus/VictoryPanel
-@onready var game_over_menu: Control = $Menus/GameOver
+@onready var victory_screen: CanvasLayer = $Menus/VictoryScreen
+@onready var game_over_screen: CanvasLayer = $Menus/GameOverScreen
 
 
 func _ready() -> void:
@@ -27,15 +27,24 @@ func _return_to_main_menu() -> void:
 
 
 func _on_Player_died(_player: Player) -> void:
+	if GameManager.game_ended:
+		return
+	
+	GameManager.game_ended = true
 	await get_tree().create_timer(1.0).timeout
 	
-	get_tree().paused = true
-	game_over_menu.show()
+	game_over_screen.show()
 
 
 func _on_Boss_defeated(_boss: Boss) -> void:
-	get_tree().paused = true
-	victory_menu.show()
+	if GameManager.game_ended:
+		return
+	
+	GameManager.game_ended = true
+	upgrade_menu.hide()
+	await get_tree().create_timer(1.0).timeout
+	
+	victory_screen.show()
 
 
 func _on_GameOverMainMenuButton_pressed() -> void:
@@ -44,12 +53,24 @@ func _on_GameOverMainMenuButton_pressed() -> void:
 
 func _on_GameOverRestartButton_pressed() -> void:
 	GameManager.stop_game()
-	get_tree().paused = false
-	await get_tree().process_frame
-	
-	game_over_menu.hide()
 	get_tree().reload_current_scene()
 
 
-func _on_VictoryMainMenuButton_pressed() -> void:
+func _on_VictoryScreen_PlayAgainButton_pressed() -> void:
+	GameManager.stop_game()
+	get_tree().reload_current_scene()
+
+
+func _on_VictoryScreen_MainMenuButton_pressed() -> void:
+	GameManager.stop_game()
+	_return_to_main_menu()
+
+
+func _on_GameOverScreen_PlayAgainButton_pressed() -> void:
+	GameManager.stop_game()
+	get_tree().reload_current_scene()
+
+
+func _on_GameOverScreen_MainMenuButton_pressed() -> void:
+	GameManager.stop_game()
 	_return_to_main_menu()

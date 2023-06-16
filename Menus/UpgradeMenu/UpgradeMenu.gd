@@ -38,7 +38,7 @@ func spawn_upgrade_cards(number_of_cards_to_spawn: int) -> void:
 	while is_currently_picking_item:
 		await picked_item
 	
-	if available_items.is_empty():
+	if available_items.is_empty() or GameManager.game_ended:
 		return
 		
 	# If there is a queued upgrade we want to wait for animations to finish,

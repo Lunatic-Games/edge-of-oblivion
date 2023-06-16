@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://xex3avr7g7oe"]
+[gd_scene load_steps=51 format=3 uid="uid://xex3avr7g7oe"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
 [ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://GameScene/Board/Board.tscn" id="2_5sub4"]
@@ -22,6 +22,9 @@
 [ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="11_bif4v"]
 [ext_resource type="Texture2D" uid="uid://b0og73dh6y3tx" path="res://Assets/art/background/game/sword_and_spear_ribbon.svg" id="12_4bhsh"]
 [ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://Menus/UpgradeMenu/UpgradeMenu.tscn" id="13_ilrse"]
+[ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="23_8oo85"]
+[ext_resource type="FontFile" uid="uid://delvnctbli24y" path="res://Assets/fonts/Caudex-Bold.ttf" id="23_vckc6"]
+[ext_resource type="PackedScene" path="res://Menus/MainMenu/MenuButton/MenuButton.tscn" id="25_3r2ok"]
 
 [sub_resource type="Environment" id="Environment_n1myw"]
 background_mode = 3
@@ -378,6 +381,13 @@ bg_color = Color(0.215686, 0.215686, 0.215686, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4pmtw"]
 bg_color = Color(0.592157, 0.219608, 0.72549, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_ihk8i"]
+base_font = ExtResource("23_vckc6")
+spacing_glyph = 4
+
+[sub_resource type="FontVariation" id="FontVariation_4axqc"]
+base_font = ExtResource("23_8oo85")
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_f3738")
@@ -826,60 +836,73 @@ scroll_active = false
 
 [node name="UpgradeMenu" parent="Menus" instance=ExtResource("13_ilrse")]
 
-[node name="VictoryPanel" type="Panel" parent="Menus"]
-process_mode = 3
+[node name="VictoryScreen" type="CanvasLayer" parent="Menus"]
+layer = 2
 visible = false
-self_modulate = Color(0.360784, 0.34902, 0.364706, 0.611765)
+
+[node name="Background" type="ColorRect" parent="Menus/VictoryScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.356863)
+
+[node name="Container" type="VBoxContainer" parent="Menus/VictoryScreen"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -169.5
-offset_top = -188.5
-offset_right = 169.5
-offset_bottom = 188.5
+offset_left = -279.5
+offset_top = -354.5
+offset_right = 279.5
+offset_bottom = 354.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Container" type="VBoxContainer" parent="Menus/VictoryPanel"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 14.0
-offset_right = 325.0
-offset_bottom = 519.0
-
-[node name="Title" type="RichTextLabel" parent="Menus/VictoryPanel/Container"]
+[node name="Title" type="Label" parent="Menus/VictoryScreen/Container"]
 custom_minimum_size = Vector2(221, 30)
 layout_mode = 2
-bbcode_enabled = true
-text = "[center][wave]VICTORY"
+theme_override_fonts/font = SubResource("FontVariation_ihk8i")
+theme_override_font_sizes/font_size = 120
+text = "VICTORY"
+horizontal_alignment = 1
 
-[node name="Message" type="RichTextLabel" parent="Menus/VictoryPanel/Container"]
-custom_minimum_size = Vector2(221, 250)
+[node name="Message" type="RichTextLabel" parent="Menus/VictoryScreen/Container"]
+custom_minimum_size = Vector2(221, 400)
 layout_mode = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_4axqc")
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "Thank you so much for playing.
+text = "The Forgotten King has been banished from this realm... For now...
 
-The full game will not end here... it'll have more bosses, more weapons, and hopefully, more fun.
+Thank you so much for playing!
 
-[rainbow][wave]please for the love of all that is holy, help us out and complete this survey 
-[/wave][/rainbow]
-[center]*INSERT SURVEY HERE*"
+The full game will not end here... it'll have more bosses, more weapons, and hopefully, more fun. Stay tuned for updates!"
 
-[node name="WishlistText" type="RichTextLabel" parent="Menus/VictoryPanel/Container"]
-custom_minimum_size = Vector2(0, 25)
+[node name="PlayAgainButton" parent="Menus/VictoryScreen/Container" instance=ExtResource("25_3r2ok")]
 layout_mode = 2
-bbcode_enabled = true
-text = "[color=red][shake][center]WISHLIST ON STEAM"
+text = "PLAY AGAIN?"
 
-[node name="MainMenuButton" type="Button" parent="Menus/VictoryPanel/Container"]
+[node name="MainMenuButton" parent="Menus/VictoryScreen/Container" instance=ExtResource("25_3r2ok")]
 layout_mode = 2
-text = "Main Menu"
+text = "MAIN MENU"
 
-[node name="GameOver" type="VBoxContainer" parent="Menus"]
-process_mode = 3
+[node name="GameOverScreen" type="CanvasLayer" parent="Menus"]
+layer = 2
 visible = false
+
+[node name="Background" type="ColorRect" parent="Menus/GameOverScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.356863)
+
+[node name="Container" type="VBoxContainer" parent="Menus/GameOverScreen"]
+process_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -893,22 +916,23 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Title" type="RichTextLabel" parent="Menus/GameOver"]
-custom_minimum_size = Vector2(0, 40)
+[node name="Title" type="Label" parent="Menus/GameOverScreen/Container"]
+custom_minimum_size = Vector2(221, 30)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "[center]Game Over![/center]"
-scroll_active = false
+theme_override_fonts/font = SubResource("FontVariation_ihk8i")
+theme_override_font_sizes/font_size = 120
+text = "GAME OVER"
+horizontal_alignment = 1
 
-[node name="Restart" type="Button" parent="Menus/GameOver"]
+[node name="PlayAgainButton" parent="Menus/GameOverScreen/Container" instance=ExtResource("25_3r2ok")]
 layout_mode = 2
-text = "Try Again"
+text = "PLAY AGAIN?"
 
-[node name="MainMenuButton" type="Button" parent="Menus/GameOver"]
+[node name="MainMenuButton" parent="Menus/GameOverScreen/Container" instance=ExtResource("25_3r2ok")]
 layout_mode = 2
-text = "Main Menu"
+text = "MAIN MENU"
 
-[connection signal="pressed" from="Menus/VictoryPanel/Container/MainMenuButton" to="." method="_on_VictoryMainMenuButton_pressed"]
-[connection signal="pressed" from="Menus/GameOver/Restart" to="." method="_on_GameOverRestartButton_pressed"]
-[connection signal="pressed" from="Menus/GameOver/MainMenuButton" to="." method="_on_GameOverMainMenuButton_pressed"]
+[connection signal="pressed" from="Menus/VictoryScreen/Container/PlayAgainButton" to="." method="_on_VictoryScreen_PlayAgainButton_pressed"]
+[connection signal="pressed" from="Menus/VictoryScreen/Container/MainMenuButton" to="." method="_on_VictoryScreen_MainMenuButton_pressed"]
+[connection signal="pressed" from="Menus/GameOverScreen/Container/PlayAgainButton" to="." method="_on_GameOverScreen_PlayAgainButton_pressed"]
+[connection signal="pressed" from="Menus/GameOverScreen/Container/MainMenuButton" to="." method="_on_GameOverScreen_MainMenuButton_pressed"]
