@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c4064o7rrsy36"]
 
 [ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://mpjnpy31p08n" path="res://Data/Items/DraculasKnives/DraculasKnives.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://co4ony0m1c4q0" path="res://Data/Items/DraculasKnives/DraculasKnives.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://dodqj134xaf4d" path="res://Assets/art/icons/weapons/lorc/stiletto.svg" id="3"]
 
 [resource]

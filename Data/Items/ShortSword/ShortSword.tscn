@@ -21,6 +21,7 @@ popup_flavor_text = "Your most trusty blade... presumably."
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
+offset_left = 0.0
 offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 1
