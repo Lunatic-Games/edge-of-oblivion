@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dst01geftrhcn"]
+
+[ext_resource type="PackedScene" uid="uid://j7u3unly5uwk" path="res://Data/Items/ZeusSword/ZeusSword.tscn" id="1_ofelp"]
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1_qc61f"]
+[ext_resource type="Texture2D" uid="uid://bs6l7euyxmfqr" path="res://Assets/art/icons/weapons/lorc/zeus-sword.svg" id="3_atuen"]
+
+[resource]
+script = ExtResource("1_qc61f")
+sprite = ExtResource("3_atuen")
+item_scene = ExtResource("1_ofelp")
+item_name = "Zeus' Sword"
+tier1Text = "Attack a random adjacent enemy. [color=pink]Volatile[/color]: Also has a small chance to zap nearby enemies [color=cyan]Chain 2[/color].
+"
+tier2Text = " Main attack [color=cyan]Chain 1[/color], cooldown 8 -> 6.
+[color=pink]Volatile[/color] 16.6% -> 20%"
+tier3Text = "Damage 50 -> 70
+[color=pink]Volatile[/color] 20% -> 25%"
+flavor_text = "The blade of a former god. Shocking."
+max_turn_timer = 3
+item_damage = 1

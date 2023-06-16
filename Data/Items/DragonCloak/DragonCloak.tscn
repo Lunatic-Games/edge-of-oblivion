@@ -21,6 +21,7 @@ popup_flavor_text = "Once used by dragon slayers of old."
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
+offset_left = 0.0
 offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 1
@@ -28,7 +29,7 @@ grow_vertical = 1
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("4_vo51b")
-default_value = 5
+default_value = 4
 
 [node name="Radius" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("4_vo51b")
