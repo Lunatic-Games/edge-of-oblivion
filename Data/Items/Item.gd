@@ -9,6 +9,9 @@ var user: Unit
 var current_tier = 0
 var max_tier = 3
 
+@export_placeholder("This item does something") var popup_info_text
+@export_placeholder("This items lore is old") var popup_flavor_text
+
 @onready var texture_rect: TextureRect = $Texture
 @onready var animator: AnimationPlayer = $AnimationPlayer
 

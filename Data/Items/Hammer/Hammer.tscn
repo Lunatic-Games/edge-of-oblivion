@@ -15,6 +15,17 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_vkbki"]
 
 [node name="Hammer" instance=ExtResource("1")]
+popup_info_text = "[color=cyan]Hammer:[/color] Knockback enemies above an below. Has massive collision damage."
+popup_flavor_text = "Smash them."
+
+[node name="ItemPopupHover" parent="." index="0"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("3_ymxun")

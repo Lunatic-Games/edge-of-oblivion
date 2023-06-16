@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://cq6sdagc60luj"]
+[gd_scene load_steps=19 format=3 uid="uid://cq6sdagc60luj"]
 
 [ext_resource type="Script" path="res://Data/Items/Item.gd" id="1_fpqcw"]
+[ext_resource type="PackedScene" uid="uid://csppnkkol763h" path="res://UI/HoverPopups/ItemPopup/ItemPopup.tscn" id="2_28p5n"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2_rix8y"]
 [ext_resource type="Script" path="res://Data/Items/BugFix.gd" id="3_4tnbp"]
 [ext_resource type="Script" path="res://LogicTree/Triggers/ItemTriggers/OnItemSetupCompleted.gd" id="4_l35wj"]
@@ -156,16 +157,26 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -45.0
-offset_top = -45.0
-offset_right = 45.0
-offset_bottom = 45.0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -870.0
+offset_bottom = -450.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(45, 45)
 size_flags_horizontal = 0
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("1_fpqcw")
+popup_info_text = ""
+popup_flavor_text = ""
+
+[node name="ItemPopupHover" parent="." node_paths=PackedStringArray("item") instance=ExtResource("2_28p5n")]
+layout_mode = 1
+offset_left = 3.0
+offset_right = -7.0
+offset_bottom = -10.0
+item = NodePath("..")
 
 [node name="Texture" type="TextureRect" parent="."]
 modulate = Color(0.984314, 0.960784, 0.937255, 1)
@@ -176,6 +187,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(45, 45)
+mouse_filter = 2
 texture = ExtResource("2_rix8y")
 expand_mode = 1
 
@@ -197,6 +209,7 @@ offset_top = -7.0
 offset_right = 37.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_j0c1r")
 theme_override_styles/fill = SubResource("StyleBoxFlat_i7ywe")
 show_percentage = false
