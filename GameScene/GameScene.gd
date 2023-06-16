@@ -31,6 +31,7 @@ func _on_Player_died(_player: Player) -> void:
 		return
 	
 	GameManager.game_ended = true
+	upgrade_menu.hide()
 	await get_tree().create_timer(1.0).timeout
 	
 	game_over_screen.show()
