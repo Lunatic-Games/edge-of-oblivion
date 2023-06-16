@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b5xgjwtgcj30e"]
+[gd_scene load_steps=18 format=3 uid="uid://kjqcigs27uqk"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="3"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="8_rjwpp"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="9_s2xe5"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_7kfqc"]
-[ext_resource type="PackedScene" uid="uid://0pkjfb8lfv4r" path="res://Data/Particles/Attack/SlashParticles.tscn" id="11_tg5ro"]
+[ext_resource type="PackedScene" path="res://Data/Particles/Slash/SlashParticles.tscn" id="11_tg5ro"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="12_qpd6s"]
 
 [sub_resource type="Shader" id="1"]

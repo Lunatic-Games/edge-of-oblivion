@@ -3,7 +3,7 @@ extends Occupant
 
 signal died
 
-const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Damaged/damaged_particle2.tscn")
+const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Damaged/DamagedParticles.tscn")
 const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Healing/HealthParticles.tscn")
 
 @export var max_hp: int = 3
@@ -32,7 +32,7 @@ func take_damage(damage: int) -> int:
 	hp = maxi(hp - damage, 0)
 	
 	update_health_bar()
-	spawn_particle(DAMAGE_PARTICLES_SCENE)
+	spawn_particle(DAMAGE_PARTICLES_SCENE, true)
 	animation_player.play("damaged")
 	
 	if hp == 0:
@@ -44,10 +44,13 @@ func take_damage(damage: int) -> int:
 func heal(heal_amount: int) -> int:
 	assert(heal_amount >= 0, "Heal amount should be positive")
 	
+	if heal_amount == 0:
+		return 0
+	
 	var hp_before: int = hp
 	hp = mini(hp + heal_amount, max_hp)
 	
-	spawn_particle(HEALTH_PARTICLES_SCENE)
+	spawn_particle(HEALTH_PARTICLES_SCENE, true)
 	update_health_bar()
 	return hp - hp_before
 
@@ -59,9 +62,12 @@ func update_health_bar() -> void:
 	tween.tween_property(health_bar, "value", target_value, 0.2).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
 
-func spawn_particle(particles_scene: PackedScene) -> void:
+func spawn_particle(particles_scene: PackedScene, use_tile_position: bool = false) -> void:
 	var particle: Node2D = particles_scene.instantiate()
-	particle.global_position = self.global_position
+	if use_tile_position and current_tile != null:
+		particle.global_position = current_tile.global_position
+	else:
+		particle.global_position = self.global_position
 	GameManager.board.add_child(particle)
 
 
