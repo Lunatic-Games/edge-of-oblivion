@@ -29,7 +29,7 @@ grow_vertical = 1
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("4_vo51b")
-default_value = 5
+default_value = 4
 
 [node name="Radius" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("4_vo51b")
