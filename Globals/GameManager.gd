@@ -83,6 +83,9 @@ func spawn_enemy_on_tile(enemy_scene: PackedScene, tile: Tile) -> Enemy:
 	var enemy: Enemy = spawn_occupant_on_tile(enemy_scene, tile)
 	all_enemies.append(enemy)
 	enemy.died.connect(_on_enemy_died.bind(enemy))
+	var as_boss: Boss = enemy as Boss
+	if as_boss:
+		GlobalSignals.boss_spawned.emit(as_boss)
 	return enemy
 
 

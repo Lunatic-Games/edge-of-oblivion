@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8u150t7o10vg"]
+[gd_scene load_steps=5 format=3 uid="uid://nyaugobp3tns"]
 
-[ext_resource type="Texture2D" uid="uid://db3pua10byebi" path="res://Assets/art/icons/stars/delapouite/round-star.svg" id="1"]
+[ext_resource type="Texture2D" uid="uid://db3pua10byebi" path="res://Assets/art/icons/stars/delapouite/round-star.svg" id="1_ct0gv"]
 
 [sub_resource type="Gradient" id="2"]
 offsets = PackedFloat32Array(0.00862069, 0.146552, 0.840517, 1)
@@ -22,7 +22,7 @@ color_ramp = SubResource("3")
 [node name="WaterfallStarParticle" type="GPUParticles2D"]
 amount = 25
 process_material = SubResource("1")
-texture = ExtResource("1")
+texture = ExtResource("1_ct0gv")
 lifetime = 6.0
 speed_scale = 4.0
 randomness = 0.32

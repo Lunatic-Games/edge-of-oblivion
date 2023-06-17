@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=8 format=3 uid="uid://d1eqdcmq15ulc"]
 
 [ext_resource type="Texture2D" uid="uid://cusa07e6reu40" path="res://Assets/art/icons/spikes-slashes-cracks/lorc/quick-slash.svg" id="1"]
 [ext_resource type="Script" path="res://Data/Particles/Slash/SlashParticles.gd" id="2"]
@@ -17,7 +17,7 @@ point_count = 3
 [sub_resource type="CurveTexture" id="10"]
 curve = SubResource("9")
 
-[sub_resource type="ParticleProcessMaterial" id="8"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_83rjb"]
 particle_flag_disable_z = true
 spread = 20.0
 gravity = Vector3(0, 0, 0)
@@ -33,7 +33,7 @@ color_ramp = SubResource("GradientTexture1D_csf3l")
 [node name="SlashParticles" type="GPUParticles2D"]
 emitting = false
 amount = 1
-process_material = SubResource("8")
+process_material = SubResource("ParticleProcessMaterial_83rjb")
 texture = ExtResource("1")
 one_shot = true
 local_coords = true

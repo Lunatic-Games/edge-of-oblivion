@@ -6,11 +6,6 @@ extends Enemy
 @export var sound_track: AudioStream
 
 
-func _ready() -> void:
-	super._ready()
-	GlobalSignals.boss_spawned.emit(self)
-
-
 func update_health_bar() -> void:
 	var target_value: float = float(self.hp) / float(self.max_hp) * 100.0
 

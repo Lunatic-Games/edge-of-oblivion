@@ -1691,9 +1691,17 @@ layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_vjx67")
 text = "ART"
 
+[node name="Emily" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("20_r0njc")]
+layout_mode = 2
+text = "EMILY ADAM-ORO (PIXEL_DRAGON)"
+
+[node name="ExtraSpace" type="Control" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Art"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
 [node name="AssetsLicensed" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("20_r0njc")]
 layout_mode = 2
-text = "ASSETS LICENSED BY CC 3.0
+text = "GAME ASSETS LICENSED BY CC 3.0
 FROM THE FOLLOWING CREATORS"
 
 [node name="Lorc" parent="CreditsPage/MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("20_r0njc")]

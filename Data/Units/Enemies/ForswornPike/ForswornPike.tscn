@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="7_gta3c"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="8_t16fy"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_vyr0p"]
-[ext_resource type="PackedScene" path="res://Data/Particles/Slash/SlashParticles.tscn" id="10_q4nla"]
+[ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="10_q4nla"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="10_x2wv3"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="13_yv5sx"]
 

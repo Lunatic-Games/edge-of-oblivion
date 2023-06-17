@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://xex3avr7g7oe"]
+[gd_scene load_steps=48 format=3 uid="uid://xex3avr7g7oe"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
 [ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://GameScene/Board/Board.tscn" id="2_5sub4"]
@@ -23,6 +23,7 @@
 [ext_resource type="Resource" uid="uid://dst01geftrhcn" path="res://Data/Items/ZeusSword/ZeusSword.tres" id="12_030qc"]
 [ext_resource type="Resource" uid="uid://olilhse4njhm" path="res://Data/Items/TaintedFlask/TaintedFlask.tres" id="13_7qv78"]
 [ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://Menus/UpgradeMenu/UpgradeMenu.tscn" id="13_ilrse"]
+[ext_resource type="PackedScene" uid="uid://c1ordt6583753" path="res://Data/Particles/Campfire/CampfireParticles.tscn" id="16_70n8t"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="23_8oo85"]
 [ext_resource type="FontFile" uid="uid://delvnctbli24y" path="res://Assets/fonts/Caudex-Bold.ttf" id="23_vckc6"]
 [ext_resource type="PackedScene" path="res://Menus/MainMenu/MenuButton/MenuButton.tscn" id="25_3r2ok"]
@@ -34,39 +35,6 @@ background_canvas_max_layer = 1
 tonemap_mode = 2
 tonemap_exposure = 0.8
 glow_strength = 1.5
-
-[sub_resource type="Gradient" id="Gradient_hakff"]
-offsets = PackedFloat32Array(0, 0.0894309, 0.841463, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6r7i2"]
-gradient = SubResource("Gradient_hakff")
-
-[sub_resource type="Curve" id="Curve_nn2ou"]
-_data = [Vector2(0, 0.854545), 0.0, 0.0, 0, 0, Vector2(0.537906, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.563636), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_dr343"]
-curve = SubResource("Curve_nn2ou")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7khyr"]
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 1.0
-emission_ring_radius = 20.0
-emission_ring_inner_radius = 15.0
-particle_flag_disable_z = true
-direction = Vector3(0, -1, 0)
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 15.0
-initial_velocity_max = 15.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_min = 0.1
-scale_max = 0.2
-scale_curve = SubResource("CurveTexture_dr343")
-color = Color(0.831373, 0.85098, 1, 0.407843)
-color_ramp = SubResource("GradientTexture1D_6r7i2")
 
 [sub_resource type="Animation" id="Animation_54o15"]
 length = 0.001
@@ -526,13 +494,7 @@ color = Color(0.584314, 0.603922, 1, 1)
 energy = 3.0
 texture = ExtResource("6_8dq2b")
 
-[node name="FireParticles" type="GPUParticles2D" parent="Decorations/Campfire"]
-position = Vector2(-2, 3)
-scale = Vector2(0.603836, 0.599868)
-process_material = SubResource("ParticleProcessMaterial_7khyr")
-texture = ExtResource("4_emfl5")
-lifetime = 2.0
-preprocess = 1.0
+[node name="FireParticles" parent="Decorations/Campfire" instance=ExtResource("16_70n8t")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Decorations/Campfire"]
 autoplay = "fire"

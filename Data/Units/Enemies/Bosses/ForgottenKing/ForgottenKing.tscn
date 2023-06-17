@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="8_jplii"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfTileArraySize.gd" id="9_112ek"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_tcar0"]
-[ext_resource type="PackedScene" path="res://Data/Particles/Slash/SlashParticles.tscn" id="11_5fcxx"]
+[ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="11_5fcxx"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="12_0wx1s"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/ClearTileArray.gd" id="12_2jrrv"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="12_r5tjo"]
