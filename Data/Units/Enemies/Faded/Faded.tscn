@@ -60,7 +60,7 @@ popup_info_text = "[color=cyan]The Faded:[/color] attacks all adjacent tiles."
 popup_flavor_text = "Once somebody... now, barely a memory."
 max_hp = 20
 
-[node name="Sprite2D" parent="." index="2"]
+[node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_vh5pt")
 texture = ExtResource("3")
 

@@ -73,6 +73,8 @@ func get_particle_paths() -> Array[String]:
 				directory_paths_stack.push_back(current_file_path)
 			# Check for .tscn files (editor) or .tscn.remap (exported projects)
 			elif file_name.ends_with(".tscn") or file_name.ends_with(".tscn.remap"):
+				# DirAccess finEdds them as .remap but for loading to work it needs to be removed
+				current_file_path = current_file_path.trim_suffix(".remap")
 				paths.append(current_file_path)
 			
 			file_name = current_directory.get_next()

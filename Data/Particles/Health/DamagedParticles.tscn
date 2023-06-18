@@ -81,6 +81,7 @@ _data = {
 }
 
 [node name="DamagedParticles" type="GPUParticles2D"]
+z_index = 2
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_nxsrx")

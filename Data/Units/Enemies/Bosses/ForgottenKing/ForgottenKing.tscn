@@ -57,11 +57,11 @@ max_hp = 100
 [node name="AttackReadySprite" parent="." index="1"]
 texture = SubResource("CompressedTexture2D_iqxwk")
 
-[node name="Sprite2D" parent="." index="3"]
+[node name="Sprite2D" parent="." index="2"]
 material = ExtResource("3_3lidq")
 scale = Vector2(0.125, 0.125)
 
-[node name="GPUParticles2D" parent="." index="7"]
+[node name="GPUParticles2D" parent="." index="6"]
 process_material = SubResource("ParticleProcessMaterial_62gbf")
 local_coords = true
 
