@@ -2,14 +2,14 @@ extends CanvasLayer
 
 const PARTICLES_FOLDER_PATH: String = "res://Data/Particles"
 
-const MISC_PATHS = [
+const MISC_PATHS: Array[String] = [
 	"res://Data/Units/Enemies/Faded/Faded.tscn",
 	"res://Data/Units/Enemies/ForswornPike/ForswornPike.tscn",
 	"res://Data/Units/Enemies/LostRanger/LostRanger.tscn",
 	"res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn"
 ]
 
-const PLAYER_PATH = "res://Data/Units/Player/Player.tscn"  # Needs special treatment
+const PLAYER_PATH: String = "res://Data/Units/Player/Player.tscn"  # Needs special treatment
 
 func _ready() -> void:
 	# Give the time to render the screen before doing this blocking operation
