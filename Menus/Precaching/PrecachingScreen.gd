@@ -29,37 +29,17 @@ func _ready() -> void:
 	await get_tree().process_frame
 	
 	for path in PARTICLES:
-		var scene = load(path)
-		var particles = scene.instantiate()
+		var scene: PackedScene = load(path)
+		var particles: Node2D = scene.instantiate()
 		add_child(particles)
 		if "emitting" in particles:
 			particles.emitting = true
 	
 	for path in ENEMIES:
-		var scene = load(path)
-		var enemy = scene.instantiate()
+		var scene: PackedScene = load(path)
+		var enemy: Enemy = scene.instantiate()
 		add_child(enemy)
 
 	await get_tree().process_frame
 	await get_tree().process_frame
 	get_tree().change_scene_to_file("res://Menus/MainMenu/MainMenu.tscn")
-
-
-#func load_particles():
-#	var directories = [PARTICLES_FOLDER]
-#	while directories.size() > 0:
-#		var current_director_path = directories.pop_front()
-#		var current_directory = DirAccess.open(current_director_path)
-#		current_directory.list_dir_begin()
-#		var file_name = current_directory.get_next()
-#		while file_name != "":
-#			if current_directory.current_is_dir():
-#				directories.push_back(current_director_path + "/" + file_name)
-#			elif file_name.ends_with(".tscn"):
-#				var particles = load(current_director_path + "/" + file_name)
-#				if particles != null:
-#					print("Pre-caching particles at path: " + current_director_path + "/" + file_name)
-#					var particles_instance = particles.instantiate()
-#					add_child(particles_instance)
-#			file_name = current_directory.get_next()
-#		current_directory.list_dir_end()
