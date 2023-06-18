@@ -1,53 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://duyl86m61pckf"]
+[gd_scene load_steps=14 format=3 uid="uid://duyl86m61pckf"]
 
 [ext_resource type="PackedScene" uid="uid://cq6cufn4fk6s3" path="res://Data/Units/Unit.tscn" id="1"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Enemy.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bvu1bphpfddf1" path="res://UI/HoverPopups/EnemyPopup/EnemyPopup.tscn" id="3_1t0xc"]
 [ext_resource type="Script" path="res://LogicTree/Triggers/EntityTriggers/OnEntityUpdate.gd" id="3_tqkrt"]
+[ext_resource type="Material" uid="uid://dtm7co10b0rj" path="res://Shaders/enemy_material.tres" id="4_j1yv0"]
 [ext_resource type="Script" path="res://LogicTree/Variables/EntityArrayVariable.gd" id="4_ktiyx"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="4_vws5t"]
 [ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="5_fk80c"]
-
-[sub_resource type="Shader" id="1"]
-code = "shader_type canvas_item;
-
-uniform float strength = 0.5f;
-uniform vec4 modulate: source_color = vec4(1.0);
-uniform sampler2D noise;
-
-void fragment() {
-	vec2 dist = vec2(0.5f) - UV;
-	float s = sin(TIME);
-	float c = cos(TIME);
-	
-	mat2 m = mat2(vec2(c, -s), vec2(s, c));
-	dist *= m;
-	
-	vec4 coord = texture(noise, 0.5f + dist);
-	coord.x -= .5;
-	coord.y -= .5;
-	
-	vec4 lens_color = texture(TEXTURE, UV + coord.xy * strength);
-	lens_color *= modulate;
-    COLOR = lens_color;
-}"
-
-[sub_resource type="FastNoiseLite" id="2"]
-frequency = 0.005
-fractal_octaves = 3
-fractal_lacunarity = 1.7
-
-[sub_resource type="NoiseTexture2D" id="3"]
-seamless = true
-as_normal_map = true
-noise = SubResource("2")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0fwle"]
-resource_local_to_scene = true
-shader = SubResource("1")
-shader_parameter/strength = 0.25
-shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
-shader_parameter/noise = SubResource("3")
 
 [sub_resource type="Animation" id="6"]
 resource_name = "damaged"
@@ -107,6 +67,8 @@ bg_color = Color(0.223529, 0.478431, 0.611765, 1)
 
 [node name="Enemy" instance=ExtResource("1")]
 script = ExtResource("2")
+popup_info_text = ""
+popup_flavor_text = ""
 xp = 1
 
 [node name="EnemyPopupHover" parent="." index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("3_1t0xc")]
@@ -117,7 +79,7 @@ offset_bottom = 30.0
 enemy = NodePath("..")
 
 [node name="Sprite2D" parent="." index="2"]
-material = SubResource("ShaderMaterial_0fwle")
+material = ExtResource("4_j1yv0")
 
 [node name="AnimationPlayer" parent="." index="3"]
 libraries = {

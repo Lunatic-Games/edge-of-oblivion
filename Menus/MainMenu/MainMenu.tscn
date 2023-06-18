@@ -1,11 +1,11 @@
-[gd_scene load_steps=62 format=3 uid="uid://0364xgi5b6v8"]
+[gd_scene load_steps=59 format=3 uid="uid://0364xgi5b6v8"]
 
 [ext_resource type="Script" path="res://Menus/MainMenu/MainMenu.gd" id="1_ywv84"]
 [ext_resource type="Texture2D" uid="uid://b7i4tg1ov4x4t" path="res://Assets/art/background/main-menu/background.png" id="2_o1jk3"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="3_8evwy"]
+[ext_resource type="PackedScene" uid="uid://b5fy0db7djf8x" path="res://Data/Particles/UI/MainMenu/FarAshParticles.tscn" id="3_307jk"]
 [ext_resource type="Texture2D" uid="uid://dmouv3v7u7t35" path="res://Assets/art/background/main-menu/shadows.png" id="3_achxf"]
 [ext_resource type="Texture2D" uid="uid://b4gh2knbqgt8e" path="res://Assets/art/background/main-menu/title.png" id="3_lxtjt"]
-[ext_resource type="Texture2D" uid="uid://b1nn5011ukn06" path="res://Assets/art/background/main-menu/ash_particle.png" id="3_nogl5"]
 [ext_resource type="Texture2D" uid="uid://y0f1qpluh5fx" path="res://Assets/art/background/main-menu/knight_shadow.png" id="3_p0xax"]
 [ext_resource type="Texture2D" uid="uid://hfnxd11pslke" path="res://Assets/art/background/main-menu/far_left_ghost.png" id="4_q8sfc"]
 [ext_resource type="Texture2D" uid="uid://c8v4ia1846f1b" path="res://Assets/art/background/main-menu/far_right_ghost.png" id="5_h0c5q"]
@@ -16,36 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://ewf63qf447k2" path="res://Assets/art/background/main-menu/front_right_ghost.png" id="7_pqm31"]
 [ext_resource type="Texture2D" uid="uid://cm7g8brmspna3" path="res://Assets/art/background/main-menu/vignette.png" id="8_vfce4"]
 [ext_resource type="Texture2D" uid="uid://dii3iusm0qkd4" path="res://Assets/art/background/main-menu/blush.png" id="11_ibruy"]
+[ext_resource type="PackedScene" uid="uid://27otpk3nsu2b" path="res://Data/Particles/UI/MainMenu/MidDistanceAshParticles.tscn" id="12_ka7n7"]
 [ext_resource type="Script" path="res://Menus/MainMenu/PressAnything.gd" id="17_s65gt"]
 [ext_resource type="PackedScene" path="res://Menus/MainMenu/MenuButton/MenuButton.tscn" id="18_2hlo6"]
 [ext_resource type="PackedScene" uid="uid://d1or5bodb071m" path="res://Menus/MainMenu/Credits/CreditsTitle.tscn" id="19_u7ifn"]
 [ext_resource type="PackedScene" uid="uid://c46ydrqwl63ca" path="res://Menus/MainMenu/Credits/CreditsListing.tscn" id="20_r0njc"]
 [ext_resource type="PackedScene" uid="uid://cw1flpllc28iw" path="res://Menus/MainMenu/Credits/CreditsSmallListing.tscn" id="21_cjyei"]
 [ext_resource type="Script" path="res://Menus/MainMenu/BugFix.gd" id="22_gmv75"]
-
-[sub_resource type="Gradient" id="Gradient_q7yy2"]
-offsets = PackedFloat32Array(0, 0.857143, 1)
-colors = PackedColorArray(0, 0, 0, 0.521569, 0, 0, 0, 0.419608, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_csl3r"]
-gradient = SubResource("Gradient_q7yy2")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ji64s"]
-emission_shape = 3
-emission_box_extents = Vector3(1920, 1, 1)
-particle_flag_disable_z = true
-direction = Vector3(0, 1, 0)
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 90.0
-initial_velocity_max = 90.0
-angular_velocity_min = 60.0
-angular_velocity_max = 60.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_min = 0.25
-scale_max = 0.25
-color_ramp = SubResource("GradientTexture1D_csl3r")
 
 [sub_resource type="Animation" id="Animation_jk1r8"]
 length = 0.001
@@ -121,23 +98,6 @@ _data = {
 "RESET": SubResource("Animation_ng7ft"),
 "blush_on_and_off": SubResource("Animation_c6j7w")
 }
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_12juc"]
-emission_shape = 3
-emission_box_extents = Vector3(1920, 1, 1)
-particle_flag_disable_z = true
-direction = Vector3(0, 1, 0)
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 90.0
-initial_velocity_max = 90.0
-angular_velocity_min = 60.0
-angular_velocity_max = 60.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_min = 0.5
-scale_max = 0.5
-color_ramp = SubResource("GradientTexture1D_csl3r")
 
 [sub_resource type="Animation" id="Animation_50y08"]
 length = 0.001
@@ -1239,14 +1199,7 @@ grow_vertical = 2
 texture = ExtResource("2_o1jk3")
 expand_mode = 1
 
-[node name="FarAshParticles" type="GPUParticles2D" parent="Background/Background"]
-modulate = Color(1, 1, 1, 0.564706)
-position = Vector2(960, -50)
-amount = 64
-process_material = SubResource("ParticleProcessMaterial_ji64s")
-texture = ExtResource("3_nogl5")
-lifetime = 7.0
-preprocess = 7.0
+[node name="FarAshParticles" parent="Background/Background" instance=ExtResource("3_307jk")]
 
 [node name="Knight" type="Control" parent="Background"]
 layout_mode = 1
@@ -1323,8 +1276,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 3840.0
-offset_bottom = 2160.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_q8sfc")
@@ -1354,8 +1307,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 3840.0
-offset_bottom = 2160.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_h0c5q")
@@ -1388,14 +1341,7 @@ grow_vertical = 2
 texture = ExtResource("3_achxf")
 expand_mode = 1
 
-[node name="MidDistanceAshParticles" type="GPUParticles2D" parent="Background/FarGhosts"]
-modulate = Color(1, 1, 1, 0.341176)
-position = Vector2(960, -73)
-amount = 16
-process_material = SubResource("ParticleProcessMaterial_12juc")
-texture = ExtResource("3_nogl5")
-lifetime = 12.0
-preprocess = 12.0
+[node name="MidDistanceAshParticles" parent="Background/FarGhosts" instance=ExtResource("12_ka7n7")]
 
 [node name="FarLeftGhostAnimator" type="AnimationPlayer" parent="Background/FarGhosts"]
 root_node = NodePath("../../..")
@@ -1426,8 +1372,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 3840.0
-offset_bottom = 2160.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_8vk1w")
@@ -1439,8 +1385,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 3840.0
-offset_bottom = 2160.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_pqm31")
