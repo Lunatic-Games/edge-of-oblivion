@@ -9,6 +9,8 @@ const MISC_PATHS = [
 	"res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn"
 ]
 
+const PLAYER_PATH = "res://Data/Units/Player/Player.tscn"  # Needs special treatment
+
 func _ready() -> void:
 	# Give the time to render the screen before doing this blocking operation
 	await get_tree().process_frame
@@ -29,6 +31,12 @@ func _ready() -> void:
 		if "emitting" in particles:  
 			particles.emitting = true
 	
+	var player_scene: PackedScene = load(PLAYER_PATH)
+	var player: Player = player_scene.instantiate()
+	nodes.append(player)
+	add_child(player)
+	player.set_physics_process(false)  # Otherwise movement handling will crash
+	
 	var n_misc_precaching: int = 0
 	for path in MISC_PATHS:
 		var scene: PackedScene = load(path)
@@ -37,18 +45,11 @@ func _ready() -> void:
 		add_child(instance)
 		n_misc_precaching += 1
 	
-	print("Precaching {0} particles and {1} other nodes...".format(
+	print("Precaching {0} particles, the player, and {1} other nodes...".format(
 		[n_particles_precaching, n_misc_precaching]))
 	
 	# Give some time for particles to process before cleaning up
 	await get_tree().process_frame
-	await get_tree().process_frame
-	
-	for node in nodes:
-		if node and is_instance_valid(node):
-			node.queue_free()
-	
-	# Give time for particles to clean up
 	await get_tree().process_frame
 	
 	# Good to go!

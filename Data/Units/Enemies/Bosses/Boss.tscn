@@ -1,8 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://copvhxqv6s2w8"]
+[gd_scene load_steps=11 format=3 uid="uid://copvhxqv6s2w8"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cl3rgny2d8t5b" path="res://Assets/art/icons/medieval-fantasy/lorc/crowned-skull.svg" id="3"]
+[ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="3_tqwbx"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Bosses/Boss.gd" id="5"]
+
+[sub_resource type="FastNoiseLite" id="2"]
+frequency = 0.005
+fractal_octaves = 3
+fractal_lacunarity = 1.7
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a76t5"]
+seamless = true
+as_normal_map = true
+noise = SubResource("2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xclgt"]
+resource_local_to_scene = true
+shader = ExtResource("3_tqwbx")
+shader_parameter/strength = 0.25
+shader_parameter/modulate = Color(0.78, 0.62, 0.65, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
 
 [sub_resource type="Curve" id="Curve_qqqeb"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.184122, 1), 0.0, 0.0, 0, 0, Vector2(0.8125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -31,6 +49,7 @@ move_precedence = 3.0
 
 [node name="Sprite2D" parent="." index="2"]
 modulate = Color(0.854902, 0.517647, 0.388235, 1)
+material = SubResource("ShaderMaterial_xclgt")
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3")
 
