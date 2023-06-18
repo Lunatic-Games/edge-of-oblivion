@@ -2,25 +2,25 @@
 
 [ext_resource type="PackedScene" uid="uid://cposeuotudggd" path="res://Globals/MusicManager/MusicPlayer.tscn" id="1_phqoj"]
 [ext_resource type="Script" path="res://Globals/MusicManager/MusicManager.gd" id="1_xjott"]
-[ext_resource type="AudioStream" uid="uid://dmph0eclc0lfh" path="res://Assets/music/menu/Fall-From-Grace.mp3" id="3_sv02e"]
-[ext_resource type="AudioStream" uid="uid://dwlct1qkdqn6a" path="res://Assets/music/menu/Lurking-Evil.mp3" id="4_epj0t"]
-[ext_resource type="AudioStream" uid="uid://c4cdmrj43so04" path="res://Assets/music/battle/chase.mp3" id="5_bj6pi"]
-[ext_resource type="AudioStream" uid="uid://c45kr4nrndibu" path="res://Assets/music/battle/Dragon-Castle.mp3" id="6_pj02e"]
-[ext_resource type="AudioStream" uid="uid://b2qghufqsl7e7" path="res://Assets/music/battle/Dragon-World.mp3" id="7_tf7f2"]
-[ext_resource type="AudioStream" uid="uid://tihoird5hfjp" path="res://Assets/music/battle/Durandal.mp3" id="8_i5xb2"]
-[ext_resource type="AudioStream" uid="uid://bv7eldpnet32q" path="res://Assets/music/battle/Hitman.mp3" id="9_0l01i"]
-[ext_resource type="AudioStream" uid="uid://7jbyibpwsicy" path="res://Assets/music/battle/Hostiles-Inbound.mp3" id="10_j23qm"]
-[ext_resource type="AudioStream" uid="uid://ue3h6mxki1jt" path="res://Assets/music/battle/The-Torch-Of-Knowledge.mp3" id="11_uy13v"]
+[ext_resource type="AudioStream" uid="uid://d1vi4w5p5aj17" path="res://Assets/music/menu/Fall-From-Grace.ogg" id="3_bhkg3"]
+[ext_resource type="AudioStream" uid="uid://emsef7bknykp" path="res://Assets/music/menu/Lurking-Evil.ogg" id="4_lx2ev"]
+[ext_resource type="AudioStream" uid="uid://i2par5rcx0xf" path="res://Assets/music/battle/chase.ogg" id="5_syaqy"]
+[ext_resource type="AudioStream" uid="uid://d1spc60g2ky3a" path="res://Assets/music/battle/Dragon-Castle.ogg" id="6_7gjr5"]
+[ext_resource type="AudioStream" uid="uid://qlub3qpvrc1f" path="res://Assets/music/battle/Dragon-World.ogg" id="7_6rfeb"]
+[ext_resource type="AudioStream" uid="uid://cxj2o6cbfkknf" path="res://Assets/music/battle/Durandal.ogg" id="8_7i4j5"]
+[ext_resource type="AudioStream" uid="uid://ug53jvfh8qio" path="res://Assets/music/battle/Hitman.ogg" id="9_vdnnl"]
+[ext_resource type="AudioStream" uid="uid://sl2jdah3an8y" path="res://Assets/music/battle/Hostiles-Inbound.ogg" id="10_aegh8"]
+[ext_resource type="AudioStream" uid="uid://btigx31l2ew7g" path="res://Assets/music/battle/The-Torch-Of-Knowledge.ogg" id="11_x1nt5"]
 
 [node name="MusicManager" type="Node"]
 process_mode = 3
 script = ExtResource("1_xjott")
 
 [node name="MainMenuMusic" parent="." instance=ExtResource("1_phqoj")]
-tracks = Array[AudioStream]([ExtResource("3_sv02e"), ExtResource("4_epj0t")])
+tracks = Array[AudioStream]([ExtResource("3_bhkg3"), ExtResource("4_lx2ev")])
 
 [node name="BattleMusic" parent="." instance=ExtResource("1_phqoj")]
-tracks = Array[AudioStream]([ExtResource("5_bj6pi"), ExtResource("6_pj02e"), ExtResource("7_tf7f2"), ExtResource("8_i5xb2"), ExtResource("9_0l01i"), ExtResource("10_j23qm"), ExtResource("11_uy13v")])
+tracks = Array[AudioStream]([ExtResource("5_syaqy"), ExtResource("6_7gjr5"), ExtResource("7_6rfeb"), ExtResource("8_7i4j5"), ExtResource("9_vdnnl"), ExtResource("10_aegh8"), ExtResource("11_x1nt5")])
 
 [node name="BossMusic" parent="." instance=ExtResource("1_phqoj")]
 time_to_fade_out_seconds = 2.0

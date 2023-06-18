@@ -71,7 +71,8 @@ func get_particle_paths() -> Array[String]:
 			
 			if current_directory.current_is_dir():
 				directory_paths_stack.push_back(current_file_path)
-			elif file_name.ends_with(".tscn"):
+			# Check for .tscn files (editor) or .tscn.remap (exported projects)
+			elif file_name.ends_with(".tscn") or file_name.ends_with(".tscn.remap"):
 				paths.append(current_file_path)
 			
 			file_name = current_directory.get_next()

@@ -1,6 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://j054uqo7ev21"]
+[gd_scene load_steps=30 format=3 uid="uid://j054uqo7ev21"]
 
-[ext_resource type="AudioStream" uid="uid://cdjl4cwolbuyc" path="res://Assets/music/boss/Endless-Storm.mp3" id="2_ex11q"]
+[ext_resource type="AudioStream" uid="uid://8vw3rrccmokk" path="res://Assets/music/boss/Endless-Storm.ogg" id="2_dr8xp"]
 [ext_resource type="Material" uid="uid://b5ph02ufnp2l8" path="res://Shaders/boss_material.tres" id="3_3lidq"]
 [ext_resource type="PackedScene" uid="uid://copvhxqv6s2w8" path="res://Data/Units/Enemies/Bosses/Boss.tscn" id="4"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_mjly1"]
@@ -26,6 +26,8 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="23_0tnmu"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="24_jg810"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iqxwk"]
+
 [sub_resource type="Curve" id="Curve_qqqeb"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.184122, 1), 0.0, 0.0, 0, 0, Vector2(0.8125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -47,16 +49,19 @@ color = Color(0.937255, 0.713726, 0.627451, 1)
 
 [node name="ForgottenKing" instance=ExtResource("4")]
 display_name = "The Forgotten King"
-sound_track = ExtResource("2_ex11q")
+sound_track = ExtResource("2_dr8xp")
 popup_info_text = "[color=cyan]The Forgotten King:[/color] charges at the player, also has an AOE attack."
 popup_flavor_text = "Once a benevolent and loved ruler. Most closely resembles a rabbid dog now."
 max_hp = 100
 
-[node name="Sprite2D" parent="." index="2"]
+[node name="AttackReadySprite" parent="." index="1"]
+texture = SubResource("CompressedTexture2D_iqxwk")
+
+[node name="Sprite2D" parent="." index="3"]
 material = ExtResource("3_3lidq")
 scale = Vector2(0.125, 0.125)
 
-[node name="GPUParticles2D" parent="." index="6"]
+[node name="GPUParticles2D" parent="." index="7"]
 process_material = SubResource("ParticleProcessMaterial_62gbf")
 local_coords = true
 

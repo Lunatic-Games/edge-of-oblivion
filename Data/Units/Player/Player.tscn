@@ -20,11 +20,11 @@ script = ExtResource("2")
 [node name="PlayerCamera" type="Camera2D" parent="." index="0"]
 zoom = Vector2(1.5, 1.5)
 
-[node name="Sprite2D" parent="." index="2"]
+[node name="Sprite2D" parent="." index="1"]
 material = ExtResource("3_7bo40")
 texture = ExtResource("5")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="5"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
 
 [node name="Inventory" type="HBoxContainer" parent="CanvasLayer" index="0"]
 anchors_preset = 12

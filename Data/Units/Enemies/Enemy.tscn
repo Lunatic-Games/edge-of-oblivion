@@ -78,15 +78,15 @@ offset_right = 30.0
 offset_bottom = 30.0
 enemy = NodePath("..")
 
-[node name="Sprite2D" parent="." index="2"]
+[node name="Sprite2D" parent="." index="1"]
 material = ExtResource("4_j1yv0")
 
-[node name="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_mhx0i")
 }
 
-[node name="AttackBar" type="ProgressBar" parent="." index="5"]
+[node name="AttackBar" type="ProgressBar" parent="." index="4"]
 offset_left = -24.0
 offset_top = 35.0
 offset_right = 24.0
@@ -95,9 +95,9 @@ theme_override_styles/background = SubResource("StyleBoxFlat_njfde")
 theme_override_styles/fill = SubResource("StyleBoxFlat_r1y27")
 show_percentage = false
 
-[node name="LT_PersistentVariables" type="Node" parent="." index="6"]
+[node name="LT_PersistentVariables" type="Node" parent="." index="5"]
 
-[node name="LT_OnEntityUpdate" type="Node" parent="." index="7" node_paths=PackedStringArray("output_entity", "output_entity_tile", "logic_tree_on_trigger")]
+[node name="LT_OnEntityUpdate" type="Node" parent="." index="6" node_paths=PackedStringArray("output_entity", "output_entity_tile", "logic_tree_on_trigger")]
 script = ExtResource("3_tqkrt")
 output_entity = NodePath("This enemy")
 output_entity_tile = NodePath("Enemy tile")

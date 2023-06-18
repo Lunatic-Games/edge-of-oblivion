@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://copvhxqv6s2w8"]
+[gd_scene load_steps=12 format=3 uid="uid://copvhxqv6s2w8"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cl3rgny2d8t5b" path="res://Assets/art/icons/medieval-fantasy/lorc/crowned-skull.svg" id="3"]
 [ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="3_tqwbx"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Bosses/Boss.gd" id="5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iqxwk"]
 
 [sub_resource type="FastNoiseLite" id="2"]
 frequency = 0.005
@@ -46,6 +48,11 @@ script = ExtResource("5")
 display_name = ""
 sound_track = null
 move_precedence = 3.0
+
+[node name="AttackReadySprite" type="Sprite2D" parent="." index="1"]
+visible = false
+self_modulate = Color(0.427451, 0.568627, 0.611765, 0)
+texture = SubResource("CompressedTexture2D_iqxwk")
 
 [node name="Sprite2D" parent="." index="2"]
 modulate = Color(0.854902, 0.517647, 0.388235, 1)
