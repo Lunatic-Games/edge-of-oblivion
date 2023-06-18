@@ -39,7 +39,7 @@ jobs:
       - name: Build for windows
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/windows
-          godot -v --path $PROJECT_PATH --no-window --export-debug "Windows Desktop" build/windows/$EXPORT_NAME.exe         
+          godot --rendering-driver opengl3 -v --path $PROJECT_PATH --no-window --export-debug "Windows Desktop" build/windows/$EXPORT_NAME.exe         
       - name: Upload windows artifact
         uses: actions/upload-artifact@v3.1.0
         with:
