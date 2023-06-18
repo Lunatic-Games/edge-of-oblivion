@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cf2ywj4l6msln"]
+[gd_scene load_steps=16 format=3 uid="uid://cf2ywj4l6msln"]
 
-[ext_resource type="Script" path="res://Data/Particles/ParticleChildren.gd" id="1_baawq"]
-[ext_resource type="Texture2D" uid="uid://4if71vl1nf3r" path="res://Assets/art/icons/weapons/sbed/chaingun.svg" id="2_h6nqt"]
-[ext_resource type="Texture2D" uid="uid://vhwedgpr830w" path="res://Assets/art/icons/stars/lorc/beveled-star.svg" id="3_nghyi"]
+[ext_resource type="Texture2D" uid="uid://4if71vl1nf3r" path="res://Assets/art/icons/weapons/sbed/chaingun.svg" id="1_hslql"]
+[ext_resource type="Texture2D" uid="uid://vhwedgpr830w" path="res://Assets/art/icons/stars/lorc/beveled-star.svg" id="2_dgaxj"]
 
 [sub_resource type="Gradient" id="Gradient_q65fg"]
 offsets = PackedFloat32Array(0, 0.181347, 0.440415, 1)
@@ -73,16 +72,88 @@ color = Color(1, 0.937255, 0.819608, 1)
 color_ramp = SubResource("GradientTexture1D_cm26f")
 hue_variation_max = 0.25
 
-[node name="ArqueubusHit" type="GPUParticles2D"]
-emitting = false
-script = ExtResource("1_baawq")
+[sub_resource type="Animation" id="Animation_xn7pl"]
+resource_name = "emit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmokeParticle:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlastParticle:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_m0jys"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmokeParticle:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlastParticle:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nyfbr"]
+_data = {
+"RESET": SubResource("Animation_m0jys"),
+"emit": SubResource("Animation_xn7pl")
+}
+
+[node name="ArqueubusParticles" type="Node2D"]
 
 [node name="SmokeParticle" type="GPUParticles2D" parent="."]
 position = Vector2(0, 7)
 emitting = false
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_vm7ka")
-texture = ExtResource("2_h6nqt")
+texture = ExtResource("1_hslql")
 one_shot = true
 explosiveness = 1.0
 
@@ -91,7 +162,13 @@ position = Vector2(0, -14)
 emitting = false
 amount = 7
 process_material = SubResource("ParticleProcessMaterial_ga477")
-texture = ExtResource("3_nghyi")
+texture = ExtResource("2_dgaxj")
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "emit"
+libraries = {
+"": SubResource("AnimationLibrary_nyfbr")
+}

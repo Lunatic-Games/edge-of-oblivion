@@ -1,23 +1,8 @@
 extends CanvasLayer
 
-const PARTICLES = [
-	"res://Data/Particles/Campfire/CampfireParticles.tscn",
-	"res://Data/Particles/Damaged/DamagedParticles.tscn",
-	"res://Data/Particles/DraculasKnives/DraculasKnivesStab.tscn",
-	"res://Data/Particles/DragonCloak/DragonCloakOnHit.tscn",
-	"res://Data/Particles/DragonCloak/FireRingSping.tscn",
-	"res://Data/Particles/Hammer/HammerParticles.tscn",
-	"res://Data/Particles/Healing/HealthParticles.tscn",
-	"res://Data/Particles/HolyFire/HolyFireParticles.tscn",
-	"res://Data/Particles/LevelUp/LevelUpParticles.tscn",
-	"res://Data/Particles/LightningBow/LightningBowEffect.tscn",
-	"res://Data/Particles/Slash/SlashParticles.tscn",
-	"res://Data/Particles/StrayArquebus/ArquebusBlast.tscn",
-	"res://Data/Particles/TaintedFlask/TaintedFlaskParticles.tscn",
-	"res://Data/Particles/UIParticles/RayParticles.tscn",
-]
+const PARTICLES_FOLDER_PATH: String = "res://Data/Particles"
 
-const ENEMIES = [
+const MISC_PATHS = [
 	"res://Data/Units/Enemies/Faded/Faded.tscn",
 	"res://Data/Units/Enemies/ForswornPike/ForswornPike.tscn",
 	"res://Data/Units/Enemies/LostRanger/LostRanger.tscn",
@@ -25,21 +10,71 @@ const ENEMIES = [
 ]
 
 func _ready() -> void:
+	# Give the time to render the screen before doing this blocking operation
 	await get_tree().process_frame
 	await get_tree().process_frame
 	
-	for path in PARTICLES:
+	var nodes: Array[Node] = []
+	
+	var particle_paths: Array[String] = get_particle_paths()
+	var n_particles_precaching: int = 0
+	for path in particle_paths:
 		var scene: PackedScene = load(path)
 		var particles: Node2D = scene.instantiate()
+		nodes.append(particles)
 		add_child(particles)
-		if "emitting" in particles:
+		n_particles_precaching += 1
+		
+		# If the particles aren't set to emit automatically we need to force to precache it
+		if "emitting" in particles:  
 			particles.emitting = true
 	
-	for path in ENEMIES:
+	var n_misc_precaching: int = 0
+	for path in MISC_PATHS:
 		var scene: PackedScene = load(path)
-		var enemy: Enemy = scene.instantiate()
-		add_child(enemy)
-
+		var instance: Node = scene.instantiate()
+		nodes.append(instance)
+		add_child(instance)
+		n_misc_precaching += 1
+	
+	print("Precaching {0} particles and {1} other nodes...".format(
+		[n_particles_precaching, n_misc_precaching]))
+	
+	# Give some time for particles to process before cleaning up
 	await get_tree().process_frame
 	await get_tree().process_frame
+	
+	for node in nodes:
+		if node and is_instance_valid(node):
+			node.queue_free()
+	
+	# Give time for particles to clean up
+	await get_tree().process_frame
+	
+	# Good to go!
 	get_tree().change_scene_to_file("res://Menus/MainMenu/MainMenu.tscn")
+
+
+func get_particle_paths() -> Array[String]:
+	var paths: Array[String] = []
+	var directory_paths_stack: Array[String] = [PARTICLES_FOLDER_PATH]
+	
+	while directory_paths_stack.size() > 0:
+		var current_director_path: String = directory_paths_stack.pop_back()
+		var current_directory: DirAccess = DirAccess.open(current_director_path)
+		current_directory.list_dir_begin()
+		
+		var file_name: String = current_directory.get_next()
+		while file_name != "":
+			var current_file_path: String = current_director_path + "/" + file_name
+			
+			if current_directory.current_is_dir():
+				directory_paths_stack.push_back(current_file_path)
+			elif file_name.ends_with(".tscn"):
+				paths.append(current_file_path)
+			
+			file_name = current_directory.get_next()
+		
+		current_directory.list_dir_end()
+	
+	return paths

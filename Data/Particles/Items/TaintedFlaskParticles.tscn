@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://bhbfl04uf5012"]
 
-[ext_resource type="Texture2D" uid="uid://cmmcsx0c7vww8" path="res://Assets/art/icons/weapons/starseeker/potion-of-madness.svg" id="1_ksbja"]
-[ext_resource type="Texture2D" uid="uid://b4sopq3tc6tla" path="res://Assets/art/icons/stars/sbed/fireflake.svg" id="2_murn6"]
+[ext_resource type="Texture2D" uid="uid://cmmcsx0c7vww8" path="res://Assets/art/icons/weapons/starseeker/potion-of-madness.svg" id="1_uoc5i"]
+[ext_resource type="Texture2D" uid="uid://b4sopq3tc6tla" path="res://Assets/art/icons/stars/sbed/fireflake.svg" id="2_id185"]
 
 [sub_resource type="Gradient" id="Gradient_o6vwf"]
 offsets = PackedFloat32Array(0.00406504, 0.0813008, 0.223577, 0.813008, 1)
@@ -145,7 +145,7 @@ position = Vector2(0, -37)
 emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_eujmr")
-texture = ExtResource("1_ksbja")
+texture = ExtResource("1_uoc5i")
 lifetime = 0.3
 one_shot = true
 
@@ -153,7 +153,7 @@ one_shot = true
 position = Vector2(0, 23)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_k8ntj")
-texture = ExtResource("2_murn6")
+texture = ExtResource("2_id185")
 one_shot = true
 explosiveness = 1.0
 

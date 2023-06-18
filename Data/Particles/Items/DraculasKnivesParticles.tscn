@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://w3gkrcbwxvoc"]
+[gd_scene load_steps=18 format=3 uid="uid://w3gkrcbwxvoc"]
 
-[ext_resource type="Script" path="res://Data/Particles/ParticleChildren.gd" id="1_10q8w"]
-[ext_resource type="Texture2D" uid="uid://c5yn6oom8lrj7" path="res://Assets/art/icons/misc/lorc/drop.svg" id="2_8t30f"]
-[ext_resource type="Texture2D" uid="uid://dodqj134xaf4d" path="res://Assets/art/icons/weapons/lorc/stiletto.svg" id="3_jp4gg"]
+[ext_resource type="Texture2D" uid="uid://c5yn6oom8lrj7" path="res://Assets/art/icons/misc/lorc/drop.svg" id="1_1ifc3"]
+[ext_resource type="Texture2D" uid="uid://dodqj134xaf4d" path="res://Assets/art/icons/weapons/lorc/stiletto.svg" id="2_uvmdm"]
 
 [sub_resource type="Gradient" id="Gradient_cnapo"]
 offsets = PackedFloat32Array(0, 0.284553, 0.581301, 1)
@@ -83,19 +82,99 @@ scale_max = 0.08
 scale_curve = SubResource("CurveTexture_8xrnh")
 color_ramp = SubResource("GradientTexture1D_p5334")
 
-[node name="DraculasKnivesHit" type="GPUParticles2D"]
-emitting = false
-script = ExtResource("1_10q8w")
+[sub_resource type="Animation" id="Animation_vlent"]
+resource_name = "emit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VampireEffect:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dagger:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_0imbd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VampireEffect:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dagger:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1s2i2"]
+_data = {
+"RESET": SubResource("Animation_0imbd"),
+"emit": SubResource("Animation_vlent")
+}
+
+[node name="DraculasKnivesParticles" type="Node2D"]
 
 [node name="VampireEffect" type="GPUParticles2D" parent="."]
 position = Vector2(4, 14)
+emitting = false
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_1j7a5")
-texture = ExtResource("2_8t30f")
+texture = ExtResource("1_1ifc3")
 explosiveness = 1.0
 
 [node name="Dagger" type="GPUParticles2D" parent="."]
 position = Vector2(-43, 11)
+emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_vf6yt")
-texture = ExtResource("3_jp4gg")
+texture = ExtResource("2_uvmdm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "emit"
+libraries = {
+"": SubResource("AnimationLibrary_1s2i2")
+}

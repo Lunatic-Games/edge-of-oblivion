@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://4e8lrftlqfat"]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://UI/Card/Card.gd" id="1_e71sb"]
-[ext_resource type="PackedScene" uid="uid://57a3ac7a6uvb" path="res://Data/Particles/UIParticles/RayParticles.tscn" id="2_2sdpx"]
+[ext_resource type="PackedScene" uid="uid://57a3ac7a6uvb" path="res://Data/Particles/UI/RayParticles.tscn" id="2_2sdpx"]
 [ext_resource type="Texture2D" uid="uid://c24ts6sxn7ie6" path="res://Assets/art/ui/gear.svg" id="2_i0dep"]
 [ext_resource type="Texture2D" uid="uid://c37r6phkuwpml" path="res://Assets/art/ui/card.png" id="2_j47tq"]
 [ext_resource type="Texture2D" uid="uid://cylssm5o7vc0l" path="res://Assets/art/ui/banner.svg" id="3_joqxw"]

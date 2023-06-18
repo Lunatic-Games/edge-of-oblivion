@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cmpxesn2rnfv4"]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_wupxa"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="7_57d8c"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="8_wc336"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_1it6e"]
-[ext_resource type="PackedScene" uid="uid://g7pf6x8q4c83" path="res://Data/Particles/HolyFire/HolyFireParticles.tscn" id="9_qu703"]
+[ext_resource type="PackedScene" uid="uid://g7pf6x8q4c83" path="res://Data/Particles/Items/HolyFireParticles.tscn" id="9_qu703"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="11_bfe23"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="13_q3bl2"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_jln8d"]

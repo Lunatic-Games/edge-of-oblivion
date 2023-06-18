@@ -3,8 +3,8 @@ extends Occupant
 
 signal died
 
-const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Damaged/DamagedParticles.tscn")
-const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Healing/HealthParticles.tscn")
+const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Health/DamagedParticles.tscn")
+const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Health/HealParticles.tscn")
 
 @export var max_hp: int = 3
 @export var move_precedence: float = 0.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c1ordt6583753"]
 
-[ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="1_oshv4"]
+[ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="1_jos4g"]
 
 [sub_resource type="Gradient" id="Gradient_hakff"]
 offsets = PackedFloat32Array(0, 0.0894309, 0.841463, 1)
@@ -35,10 +35,10 @@ scale_curve = SubResource("CurveTexture_dr343")
 color = Color(0.831373, 0.85098, 1, 0.407843)
 color_ramp = SubResource("GradientTexture1D_6r7i2")
 
-[node name="FireParticles" type="GPUParticles2D"]
+[node name="CampfireParticles" type="GPUParticles2D"]
 position = Vector2(-2, 3)
 scale = Vector2(0.603836, 0.599868)
 process_material = SubResource("ParticleProcessMaterial_7khyr")
-texture = ExtResource("1_oshv4")
+texture = ExtResource("1_jos4g")
 lifetime = 2.0
 preprocess = 1.0

@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Data/Units/Player/ExperienceBar.gd" id="3"]
 [ext_resource type="Script" path="res://Data/Units/Player/Inventory.gd" id="4_er5bk"]
 [ext_resource type="Texture2D" uid="uid://bvyw2arekg3an" path="res://Assets/art/icons/medieval-fantasy/lorc/barbute.svg" id="5"]
-[ext_resource type="PackedScene" uid="uid://clspetko05r6t" path="res://Data/Particles/LevelUp/LevelUpParticles.tscn" id="6_h3yi4"]
+[ext_resource type="PackedScene" uid="uid://clspetko05r6t" path="res://Data/Particles/UI/LevelUpParticles.tscn" id="6_h3yi4"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -56,7 +56,6 @@ bg_color = Color(0.411765, 0.564706, 0.403922, 1)
 
 [node name="Player" groups=["player"] instance=ExtResource("1")]
 script = ExtResource("2")
-max_hp = 30
 
 [node name="PlayerCamera" type="Camera2D" parent="." index="0"]
 zoom = Vector2(1.5, 1.5)
