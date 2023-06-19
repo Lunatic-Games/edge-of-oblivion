@@ -97,8 +97,8 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 3
 
-[node name="Increase damage by 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+[node name="Increase damage by 20" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("12_demeu")
 int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
-value = 2
+value = 20
 operation = 1
