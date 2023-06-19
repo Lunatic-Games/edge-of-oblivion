@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Edge of Oblivion"
-run/main_scene="res://Menus/MainMenu/MainMenu.tscn"
+run/main_scene="res://Menus/Precaching/PrecachingScreen.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 

@@ -1,10 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://4e8lrftlqfat"]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://UI/Card/Card.gd" id="1_e71sb"]
-[ext_resource type="PackedScene" uid="uid://57a3ac7a6uvb" path="res://Data/Particles/UIParticles/RayParticles.tscn" id="2_2sdpx"]
-[ext_resource type="Texture2D" uid="uid://c24ts6sxn7ie6" path="res://Assets/art/ui/gear.svg" id="2_i0dep"]
-[ext_resource type="Texture2D" uid="uid://c37r6phkuwpml" path="res://Assets/art/ui/card.png" id="2_j47tq"]
-[ext_resource type="Texture2D" uid="uid://cylssm5o7vc0l" path="res://Assets/art/ui/banner.svg" id="3_joqxw"]
+[ext_resource type="PackedScene" uid="uid://57a3ac7a6uvb" path="res://Data/Particles/UI/RayParticles.tscn" id="2_2sdpx"]
+[ext_resource type="Texture2D" uid="uid://c24ts6sxn7ie6" path="res://Assets/art/ui/card/gear.svg" id="2_i0dep"]
+[ext_resource type="Texture2D" uid="uid://c37r6phkuwpml" path="res://Assets/art/ui/card/card.png" id="2_j47tq"]
+[ext_resource type="Texture2D" uid="uid://cylssm5o7vc0l" path="res://Assets/art/ui/card/banner.svg" id="3_joqxw"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="3_ldc60"]
 [ext_resource type="Texture2D" uid="uid://4h6r8fmh8tbt" path="res://Assets/art/icons/stars/lorc/spiky-explosion.svg" id="4_0mk7p"]
 [ext_resource type="FontFile" uid="uid://delvnctbli24y" path="res://Assets/fonts/Caudex-Bold.ttf" id="4_3x57h"]
@@ -280,18 +280,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RayParticles:amount")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
 
 [sub_resource type="Animation" id="Animation_b4m40"]
 resource_name = "rays_out"
@@ -307,18 +295,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RayParticles:amount")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ikipp"]

@@ -1,42 +1,20 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://d2p8yth5vp4kr"]
 
-[sub_resource type="Shader" id="1"]
-code = "shader_type canvas_item;
-
-uniform float strength = 0.5f;
-uniform vec4 modulate: source_color = vec4(1.0);
-uniform sampler2D noise;
-
-void fragment() {
-	vec2 dist = vec2(0.5f) - UV;
-	float s = sin(TIME);
-	float c = cos(TIME);
-	
-	mat2 m = mat2(vec2(c, -s), vec2(s, c));
-	dist *= m;
-	
-	vec4 coord = texture(noise, 0.5f + dist);
-	coord.x -= .5;
-	coord.y -= .5;
-	
-	vec4 lens_color = texture(TEXTURE, UV + coord.xy * strength);
-	lens_color *= modulate;
-    COLOR = lens_color;
-}"
+[ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="1_0hubq"]
 
 [sub_resource type="FastNoiseLite" id="2"]
 frequency = 0.005
 fractal_octaves = 3
 fractal_lacunarity = 1.7
 
-[sub_resource type="NoiseTexture2D" id="3"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a76t5"]
 seamless = true
 as_normal_map = true
 noise = SubResource("2")
 
 [resource]
 resource_local_to_scene = true
-shader = SubResource("1")
+shader = ExtResource("1_0hubq")
 shader_parameter/strength = 0.25
-shader_parameter/modulate = Color(0.854902, 0.517647, 0.388235, 1)
-shader_parameter/noise = SubResource("3")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")

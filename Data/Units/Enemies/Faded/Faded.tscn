@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="8_rjwpp"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="9_s2xe5"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_7kfqc"]
-[ext_resource type="PackedScene" path="res://Data/Particles/Slash/SlashParticles.tscn" id="11_tg5ro"]
+[ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="11_tg5ro"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="12_qpd6s"]
 
 [sub_resource type="Shader" id="1"]
@@ -60,7 +60,7 @@ popup_info_text = "[color=cyan]The Faded:[/color] attacks all adjacent tiles."
 popup_flavor_text = "Once somebody... now, barely a memory."
 max_hp = 20
 
-[node name="Sprite2D" parent="." index="2"]
+[node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_vh5pt")
 texture = ExtResource("3")
 

@@ -1,75 +1,18 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxyr57tbkwcup"]
+[gd_scene load_steps=10 format=3 uid="uid://cxyr57tbkwcup"]
 
 [ext_resource type="PackedScene" uid="uid://cq6cufn4fk6s3" path="res://Data/Units/Unit.tscn" id="1"]
 [ext_resource type="Script" path="res://Data/Units/Player/Player.gd" id="2"]
 [ext_resource type="Script" path="res://Data/Units/Player/ExperienceBar.gd" id="3"]
+[ext_resource type="Material" uid="uid://jlqg30fet2to" path="res://Shaders/player_material.tres" id="3_7bo40"]
 [ext_resource type="Script" path="res://Data/Units/Player/Inventory.gd" id="4_er5bk"]
 [ext_resource type="Texture2D" uid="uid://bvyw2arekg3an" path="res://Assets/art/icons/medieval-fantasy/lorc/barbute.svg" id="5"]
-[ext_resource type="PackedScene" uid="uid://c8u150t7o10vg" path="res://Data/Particles/Reward/WaterfallStarParticle.tscn" id="5_r1e13"]
-
-[sub_resource type="Shader" id="1"]
-code = "shader_type canvas_item;
-
-uniform float strength = 0.5f;
-uniform vec4 modulate: source_color = vec4(1.0);
-uniform sampler2D noise;
-
-void fragment() {
-	vec2 dist = vec2(0.5f) - UV;
-	float s = sin(TIME);
-	float c = cos(TIME);
-	
-	mat2 m = mat2(vec2(c, -s), vec2(s, c));
-	dist *= m;
-	
-	vec4 coord = texture(noise, 0.5f + dist);
-	coord.x -= .5;
-	coord.y -= .5;
-	
-	vec4 lens_color = texture(TEXTURE, UV + coord.xy * strength);
-	lens_color *= modulate;
-    COLOR = lens_color;
-}"
-
-[sub_resource type="FastNoiseLite" id="2"]
-frequency = 0.005
-fractal_octaves = 3
-fractal_lacunarity = 1.7
-
-[sub_resource type="NoiseTexture2D" id="3"]
-seamless = true
-as_normal_map = true
-noise = SubResource("2")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u0fm4"]
-resource_local_to_scene = true
-shader = SubResource("1")
-shader_parameter/strength = 0.25
-shader_parameter/modulate = Color(1, 1, 1, 1)
-shader_parameter/noise = SubResource("3")
+[ext_resource type="PackedScene" uid="uid://clspetko05r6t" path="res://Data/Particles/UI/LevelUpParticles.tscn" id="6_h3yi4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hm36x"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bij8g"]
 bg_color = Color(0.411765, 0.564706, 0.403922, 1)
-
-[sub_resource type="Gradient" id="Gradient_e54r2"]
-offsets = PackedFloat32Array(0.00862069, 0.146552, 0.840517, 1)
-colors = PackedColorArray(0.992157, 1, 0.913725, 0, 0.992157, 1, 0.913725, 0.666667, 0.992157, 1, 0.913725, 0.666667, 0.992157, 1, 0.913725, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1ux78"]
-gradient = SubResource("Gradient_e54r2")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_puee3"]
-emission_shape = 3
-emission_box_extents = Vector3(450, 1, 1)
-direction = Vector3(0, -1, 0)
-gravity = Vector3(0, 20, 0)
-scale_min = 0.05
-scale_max = 0.1
-color = Color(0.835294, 1, 0.882353, 1)
-color_ramp = SubResource("GradientTexture2D_1ux78")
 
 [node name="Player" groups=["player"] instance=ExtResource("1")]
 script = ExtResource("2")
@@ -78,11 +21,11 @@ max_hp = 30
 [node name="PlayerCamera" type="Camera2D" parent="." index="0"]
 zoom = Vector2(1.5, 1.5)
 
-[node name="Sprite2D" parent="." index="2"]
-material = SubResource("ShaderMaterial_u0fm4")
+[node name="Sprite2D" parent="." index="1"]
+material = ExtResource("3_7bo40")
 texture = ExtResource("5")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="5"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
 
 [node name="Inventory" type="HBoxContainer" parent="CanvasLayer" index="0"]
 anchors_preset = 12
@@ -115,8 +58,4 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_bij8g")
 show_percentage = false
 script = ExtResource("3")
 
-[node name="LevelUpParticles" parent="CanvasLayer/ExperienceBar" index="0" instance=ExtResource("5_r1e13")]
-position = Vector2(450, 3)
-emitting = false
-process_material = SubResource("ParticleProcessMaterial_puee3")
-one_shot = true
+[node name="LevelUpParticles" parent="CanvasLayer/ExperienceBar" index="0" instance=ExtResource("6_h3yi4")]

@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b5ph02ufnp2l8"]
+
+[ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="1_kf86o"]
+
+[sub_resource type="FastNoiseLite" id="2"]
+frequency = 0.005
+fractal_octaves = 3
+fractal_lacunarity = 1.7
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a76t5"]
+seamless = true
+as_normal_map = true
+noise = SubResource("2")
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_kf86o")
+shader_parameter/strength = 0.25
+shader_parameter/modulate = Color(0.85, 0.52, 0.39, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")

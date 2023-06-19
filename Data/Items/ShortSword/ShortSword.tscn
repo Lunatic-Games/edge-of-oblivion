@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="4_lobvm"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="5_5l6qm"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="6_ihmua"]
-[ext_resource type="PackedScene" path="res://Data/Particles/Slash/SlashParticles.tscn" id="8_hmr6i"]
+[ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="8_hmr6i"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="10_mltra"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_wrwdj"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="12_demeu"]
@@ -97,8 +97,8 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 3
 
-[node name="Increase damage by 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+[node name="Increase damage by 20" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("12_demeu")
 int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
-value = 2
+value = 20
 operation = 1

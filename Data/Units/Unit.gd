@@ -3,10 +3,10 @@ extends Occupant
 
 signal died
 
-const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Damaged/DamagedParticles.tscn")
-const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Healing/HealthParticles.tscn")
+const DAMAGE_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Health/DamagedParticles.tscn")
+const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Health/HealParticles.tscn")
 
-@export var max_hp: int = 3
+@export var max_hp: int = 50
 @export var move_precedence: float = 0.0
 @export var can_fall: bool = true
 
@@ -108,9 +108,10 @@ func move_to_tile(tile) -> void:
 		else:
 			return
 	
+	var collectable = null
 	if is_in_group("player") && tile.occupant:
 		if tile.occupant.occupant_type == tile.occupant.OccupantType.COLLECTABLE:
-			tile.occupant.collect()
+			collectable = tile.occupant
 	
 	current_tile.occupant = null
 	
@@ -118,6 +119,9 @@ func move_to_tile(tile) -> void:
 	current_tile.occupant = self
 	
 	lock_movement = true
+	
+	if collectable:
+		collectable.collect()
 	
 	var base_tween: Tween = create_tween()
 	base_tween.tween_property(self, "position", tile.position, 0.20).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)

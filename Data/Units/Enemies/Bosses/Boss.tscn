@@ -1,49 +1,28 @@
-[gd_scene load_steps=11 format=3 uid="uid://copvhxqv6s2w8"]
+[gd_scene load_steps=12 format=3 uid="uid://copvhxqv6s2w8"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Units/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cl3rgny2d8t5b" path="res://Assets/art/icons/medieval-fantasy/lorc/crowned-skull.svg" id="3"]
+[ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="3_tqwbx"]
 [ext_resource type="Script" path="res://Data/Units/Enemies/Bosses/Boss.gd" id="5"]
 
-[sub_resource type="Shader" id="1"]
-code = "shader_type canvas_item;
-
-uniform float strength = 0.5f;
-uniform vec4 modulate: source_color = vec4(1.0);
-uniform sampler2D noise;
-
-void fragment() {
-	vec2 dist = vec2(0.5f) - UV;
-	float s = sin(TIME);
-	float c = cos(TIME);
-	
-	mat2 m = mat2(vec2(c, -s), vec2(s, c));
-	dist *= m;
-	
-	vec4 coord = texture(noise, 0.5f + dist);
-	coord.x -= .5;
-	coord.y -= .5;
-	
-	vec4 lens_color = texture(TEXTURE, UV + coord.xy * strength);
-	lens_color *= modulate;
-    COLOR = lens_color;
-}"
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iqxwk"]
 
 [sub_resource type="FastNoiseLite" id="2"]
 frequency = 0.005
 fractal_octaves = 3
 fractal_lacunarity = 1.7
 
-[sub_resource type="NoiseTexture2D" id="3"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a76t5"]
 seamless = true
 as_normal_map = true
 noise = SubResource("2")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gvh8h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xclgt"]
 resource_local_to_scene = true
-shader = SubResource("1")
+shader = ExtResource("3_tqwbx")
 shader_parameter/strength = 0.25
-shader_parameter/modulate = Color(0.854902, 0.517647, 0.388235, 1)
-shader_parameter/noise = SubResource("3")
+shader_parameter/modulate = Color(0.78, 0.62, 0.65, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
 
 [sub_resource type="Curve" id="Curve_qqqeb"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.184122, 1), 0.0, 0.0, 0, 0, Vector2(0.8125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -68,12 +47,16 @@ color = Color(0.937255, 0.713726, 0.627451, 1)
 script = ExtResource("5")
 display_name = ""
 sound_track = null
-popup_info_text = ""
-popup_flavor_text = ""
 move_precedence = 3.0
 
+[node name="AttackReadySprite" type="Sprite2D" parent="." index="1"]
+visible = false
+self_modulate = Color(0.427451, 0.568627, 0.611765, 0)
+texture = SubResource("CompressedTexture2D_iqxwk")
+
 [node name="Sprite2D" parent="." index="2"]
-material = SubResource("ShaderMaterial_gvh8h")
+modulate = Color(0.854902, 0.517647, 0.388235, 1)
+material = SubResource("ShaderMaterial_xclgt")
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3")
 
