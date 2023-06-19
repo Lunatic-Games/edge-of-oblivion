@@ -11,10 +11,11 @@ func _ready() -> void:
 
 
 func collect() -> void:
+	var new_tile: Tile = GameManager.board.get_random_unoccupied_tile()
 	current_tile.occupant = null
 	
-	var new_tile: Tile = GameManager.board.get_random_unoccupied_tile()
 	if new_tile == null:
+		current_tile = null  # Makes the spawn flag invalid for anything trying to use it
 		queue_free()
 		return
 	

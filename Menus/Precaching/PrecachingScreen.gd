@@ -1,24 +1,17 @@
 extends CanvasLayer
 
 const PARTICLES_FOLDER_PATH: String = "res://Data/Particles"
+const UNITS_FOLDER_PATH: String = "res://Data/Units"
 
-const MISC_PATHS: Array[String] = [
-	"res://Data/Units/Enemies/Faded/Faded.tscn",
-	"res://Data/Units/Enemies/ForswornPike/ForswornPike.tscn",
-	"res://Data/Units/Enemies/LostRanger/LostRanger.tscn",
-	"res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn"
-]
-
-const PLAYER_PATH: String = "res://Data/Units/Player/Player.tscn"  # Needs special treatment
 
 func _ready() -> void:
-	# Give the time to render the screen before doing this blocking operation
+	# Give time for scene to display before precaching freezes everything, otherwise no wait screen
 	await get_tree().process_frame
 	await get_tree().process_frame
 	
 	var nodes: Array[Node] = []
 	
-	var particle_paths: Array[String] = get_particle_paths()
+	var particle_paths: Array[String] = get_all_scene_paths_under_folder(PARTICLES_FOLDER_PATH)
 	var n_particles_precaching: int = 0
 	for path in particle_paths:
 		var scene: PackedScene = load(path)
@@ -31,21 +24,18 @@ func _ready() -> void:
 		if "emitting" in particles:  
 			particles.emitting = true
 	
-	var player_scene: PackedScene = load(PLAYER_PATH)
-	var player: Player = player_scene.instantiate()
-	nodes.append(player)
-	add_child(player)
-	player.set_physics_process(false)  # Otherwise movement handling will crash
-	
+	var unit_paths: Array[String] = get_all_scene_paths_under_folder(UNITS_FOLDER_PATH)
 	var n_misc_precaching: int = 0
-	for path in MISC_PATHS:
+	for path in unit_paths:
 		var scene: PackedScene = load(path)
-		var instance: Node = scene.instantiate()
-		nodes.append(instance)
-		add_child(instance)
+		var unit: Node = scene.instantiate()
+		nodes.append(unit)
+		add_child(unit)
 		n_misc_precaching += 1
+		
+		unit.set_physics_process(false)  # Otherwise player movement handling will crash
 	
-	print("Precaching {0} particles, the player, and {1} other nodes...".format(
+	print("Precaching {0} particles and {1} units...".format(
 		[n_particles_precaching, n_misc_precaching]))
 	
 	# Give some time for particles to process before cleaning up
@@ -56,9 +46,9 @@ func _ready() -> void:
 	get_tree().change_scene_to_file("res://Menus/MainMenu/MainMenu.tscn")
 
 
-func get_particle_paths() -> Array[String]:
+func get_all_scene_paths_under_folder(folder_path: String) -> Array[String]:
 	var paths: Array[String] = []
-	var directory_paths_stack: Array[String] = [PARTICLES_FOLDER_PATH]
+	var directory_paths_stack: Array[String] = [folder_path]
 	
 	while directory_paths_stack.size() > 0:
 		var current_director_path: String = directory_paths_stack.pop_back()

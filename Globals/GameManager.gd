@@ -71,7 +71,9 @@ func spawn_enemies() -> void:
 	
 	for enemy_scene in enemies_to_spawn:
 		var spawn_flag: SpawnFlag = spawn_flags.pop_front()
-		assert(spawn_flag, "More enemies to spawn then there are spawn flags.")
+		if spawn_flag == null or spawn_flag.current_tile == null:  # Check for invalid due to failed move
+			# More enemies to spawn then there are spawn flags, map likely too small
+			break
 		spawn_flag.destroy_self()
 		
 		var _enemy: Enemy = spawn_enemy_on_tile(enemy_scene, spawn_flag.current_tile)
