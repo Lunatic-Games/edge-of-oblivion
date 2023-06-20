@@ -47,10 +47,11 @@ jobs:
           godot -v --path $PROJECT_PATH --headless --export-debug "${WINDOWS_PRESET}" build/windows/$EXPORT_NAME.exe > $EXPORT_NAME.output
       - name: Check for errors
         run: |
-          for error in ${BUILD_ERRORS[@]}; do
-            if grep -q "$error" $EXPORT_NAME.output
+          for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
+          do
+            if grep -q "${FILES[$i]}" $EXPORT_NAME.output
             then
-              echo "Found error $error in Godot build output"
+              echo "Found error ${FILES[$i]} in Godot build output"
               exit 1
             fi
           done
