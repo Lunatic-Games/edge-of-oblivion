@@ -23,11 +23,16 @@ jobs:
   export:
     name: Export from Godot
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     needs: set_tag
     container:
       image: barichello/godot-ci:${{ needs.set_tag.outputs.godot_ci_tag }}
     env:
       WINDOWS_PRESET: Windows Desktop
+      BUILD_ERRORS: > 
+        ( "ERROR: Can't open project" "ERROR: Cannot export project" )
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -42,17 +47,16 @@ jobs:
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/windows
           godot -v --path $PROJECT_PATH --headless --export-debug "${WINDOWS_PRESET}" build/windows/$EXPORT_NAME.exe | tee $EXPORT_NAME.output
-      - name: Check for possible errors
+      - name: Check for build errors
+        shell: bash
         run: |
-          if grep -q "ERROR: Can't open project" $EXPORT_NAME.output
-          then
-            echo "Found error 'ERROR: Can't open project' in Godot build output"
-            exit 1
-          elif grep -q "ERROR: Cannot export project" $EXPORT_NAME.output
-          then
-            echo "Found error 'ERROR: Cannot export project' in Godot build output"
-            exit 1  
-          fi
+          for error in ${BUILD_ERRORS[@]}; do
+            if grep -q "$error" $EXPORT_NAME.output
+            then
+              echo "Found error $error in Godot build output"
+              exit 1
+            fi
+          done
       - name: Upload windows artifact
         uses: actions/upload-artifact@v3.1.0
         with:
@@ -76,6 +80,8 @@ jobs:
 
             const allArtifacts = res.data.artifacts
                     .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) );
+
+            //console.log(JSON.stringify(allArtifacts));
 
             const artifactsToDelete = allArtifacts
                     .slice(0, -${{ env.NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP }})
