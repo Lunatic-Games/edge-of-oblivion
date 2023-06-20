@@ -32,7 +32,7 @@ jobs:
     env:
       WINDOWS_PRESET: Windows Desktop
       BUILD_ERRORS: > 
-        ( "ERROR: Can't open project" "ERROR: Cannot export project" )
+        ("ERROR: Can't open project" "ERROR: Cannot export project")
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -50,10 +50,11 @@ jobs:
       - name: Check for build errors
         shell: bash
         run: |
-          for error in ${BUILD_ERRORS[@]}; do
-            if grep -q "$error" $EXPORT_NAME.output
+          for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
+          do
+            if grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output
             then
-              echo "Found error $error in Godot build output"
+              echo "Found error ${BUILD_ERRORS[$i]} in Godot build output"
               exit 1
             fi
           done
