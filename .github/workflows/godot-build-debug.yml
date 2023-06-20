@@ -29,7 +29,7 @@ jobs:
     env:
       WINDOWS_PRESET: Windows Desktop
       BUILD_ERRORS: > 
-        ( "ERROR: Can't open project" )
+        ( "ERROR: Can't open project" "ERROR: Cannot export project" )
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -38,7 +38,7 @@ jobs:
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
           cp .github/workflows/export_presets.cfg ${PROJECT_PATH}/export_presets.cfg
       - name: Build for windows
         run: |
@@ -47,9 +47,9 @@ jobs:
       - name: Check for errors
         run: |
           for error in ${BUILD_ERRORS[@]}; do
-            if grep -q $error $EXPORT_NAME.output
+            if grep -q "$error" $EXPORT_NAME.output
             then
-              echo "Found error \"$error\" in Godot build output"
+              echo "Found error $error in Godot build output"
               exit 1
             fi
           done
