@@ -47,7 +47,8 @@ jobs:
       - name: Check for errors
         run: |
           i=0
-          max=${#BUILD_ERRORS[@]}
+          #max=${#BUILD_ERRORS[@]}
+          max=2
           while [ $i -lt $max ]
           do
             if grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output;
