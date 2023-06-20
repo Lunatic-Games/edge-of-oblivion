@@ -37,7 +37,6 @@ jobs:
           lfs: true          
       - name: Setup
         run: |
-          ls -la
           mkdir -v -p ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
           cp .github/workflows/export_presets.cfg ${PROJECT_PATH}/export_presets.cfg
@@ -47,13 +46,16 @@ jobs:
           godot -v --path $PROJECT_PATH --headless --export-debug "${WINDOWS_PRESET}" build/windows/$EXPORT_NAME.exe > $EXPORT_NAME.output
       - name: Check for errors
         run: |
-          for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++));
+          i=0
+          max=${#BUILD_ERRORS[@]}
+          while [ $i -lt $max ]
           do
             if grep -q "${FILES[$i]}" $EXPORT_NAME.output;
             then
               echo "Found error ${FILES[$i]} in Godot build output";
               exit 1;
             fi;
+            i=$(( i + 1 ))
           done
       - name: Upload windows artifact
         uses: actions/upload-artifact@v3.1.0
