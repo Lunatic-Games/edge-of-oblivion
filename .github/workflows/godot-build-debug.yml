@@ -31,8 +31,6 @@ jobs:
       image: barichello/godot-ci:${{ needs.set_tag.outputs.godot_ci_tag }}
     env:
       WINDOWS_PRESET: Windows Desktop
-      BUILD_ERRORS: > 
-        ("ERROR: Can't open project" "ERROR: Cannot export project")
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -50,6 +48,7 @@ jobs:
       - name: Check for build errors
         shell: bash
         run: |
+          BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project")
           for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
           do
             if grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output
