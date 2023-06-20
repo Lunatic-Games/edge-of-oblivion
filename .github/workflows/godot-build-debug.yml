@@ -43,19 +43,19 @@ jobs:
       - name: Build for windows
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/windows
-          godot -v --path $PROJECT_PATH --headless --export-debug "${WINDOWS_PRESET}" build/windows/$EXPORT_NAME.exe > $EXPORT_NAME.output
+          godot -v --path $PROJECT_PATH --headless --export-debug "${WINDOWS_PRESET}" build/windows/$EXPORT_NAME.exe | tee $EXPORT_NAME.output
       - name: Check for errors
         run: |
+          #!/bin/bash
           i=0
-          #max=${#BUILD_ERRORS[@]}
           max=2
           while [ $i -lt $max ]
           do
-            if grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output;
+            if ( grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output )
             then
-              echo "Found error ${BUILD_ERRORS[$i]} in Godot build output";
-              exit 1;
-            fi;
+              echo "Found error ${BUILD_ERRORS[$i]} in Godot build output"
+              exit 1
+            fi
             i=$(( i + 1 ))
           done
       - name: Upload windows artifact
