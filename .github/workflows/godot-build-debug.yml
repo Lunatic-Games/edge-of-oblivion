@@ -50,9 +50,9 @@ jobs:
           max=${#BUILD_ERRORS[@]}
           while [ $i -lt $max ]
           do
-            if grep -q "${FILES[$i]}" $EXPORT_NAME.output;
+            if grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output;
             then
-              echo "Found error ${FILES[$i]} in Godot build output";
+              echo "Found error ${BUILD_ERRORS[$i]} in Godot build output";
               exit 1;
             fi;
             i=$(( i + 1 ))
