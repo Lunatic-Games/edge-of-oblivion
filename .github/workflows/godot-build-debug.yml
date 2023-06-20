@@ -51,7 +51,7 @@ jobs:
           max=2
           while [ $i -lt $max ]
           do
-            if ( grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output )
+            if grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output
             then
               echo "Found error ${BUILD_ERRORS[$i]} in Godot build output"
               exit 1
