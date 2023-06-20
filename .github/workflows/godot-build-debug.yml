@@ -47,13 +47,13 @@ jobs:
           godot -v --path $PROJECT_PATH --headless --export-debug "${WINDOWS_PRESET}" build/windows/$EXPORT_NAME.exe > $EXPORT_NAME.output
       - name: Check for errors
         run: |
-          for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
+          for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++));
           do
-            if grep -q "${FILES[$i]}" $EXPORT_NAME.output
+            if grep -q "${FILES[$i]}" $EXPORT_NAME.output;
             then
-              echo "Found error ${FILES[$i]} in Godot build output"
-              exit 1
-            fi
+              echo "Found error ${FILES[$i]} in Godot build output";
+              exit 1;
+            fi;
           done
       - name: Upload windows artifact
         uses: actions/upload-artifact@v3.1.0
