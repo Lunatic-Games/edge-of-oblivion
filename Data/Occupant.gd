@@ -8,7 +8,7 @@ enum OccupantType {
 }
 
 var occupant_type: OccupantType = OccupantType.BLOCKING
-var current_tile: Tile = null
+var current_tile = null
 
 var pushable: bool = false
 var damageable: bool = false

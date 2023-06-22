@@ -11,14 +11,13 @@ config_version=5
 [application]
 
 config/name="Edge of Oblivion"
-run/main_scene="res://Menus/Precaching/PrecachingScreen.tscn"
+run/main_scene="res://GameScene/GameScene.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [autoload]
 
 GameManager="*res://Globals/GameManager.gd"
-TurnManager="*res://Globals/TurnManager.gd"
 Debug="*res://Globals/Debug.gd"
 MusicManager="*res://Globals/MusicManager/MusicManager.tscn"
 GlobalSignals="*res://Globals/Signals.gd"

@@ -3,6 +3,7 @@ extends Node
 
 signal game_started
 signal main_menu_entered
+signal new_round_started
 
 signal player_died(player: Player)
 signal player_levelled_up(player: Player)
