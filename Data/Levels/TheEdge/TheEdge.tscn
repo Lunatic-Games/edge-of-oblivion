@@ -1,9 +1,13 @@
-[gd_scene load_steps=30 format=3 uid="uid://bvu03ruea1xp7"]
+[gd_scene load_steps=48 format=3 uid="uid://bvu03ruea1xp7"]
 
 [ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_bddg0"]
 [ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="2_882li"]
-[ext_resource type="Script" path="res://Data/Levels/WAVE_DATA.gd" id="2_b5n78"]
+[ext_resource type="PackedScene" uid="uid://kjqcigs27uqk" path="res://Data/Units/Enemies/Faded/Faded.tscn" id="2_ig2i4"]
+[ext_resource type="Script" path="res://Data/Levels/WAVE_DATA.gd" id="2_kmxmr"]
 [ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="3_2c6o8"]
+[ext_resource type="PackedScene" uid="uid://cfthurngpg1ps" path="res://Data/Units/Enemies/ForswornPike/ForswornPike.tscn" id="3_24cjc"]
+[ext_resource type="PackedScene" uid="uid://p0e7f46xip6t" path="res://Data/Units/Enemies/LostRanger/LostRanger.tscn" id="3_jqyrw"]
+[ext_resource type="PackedScene" uid="uid://j054uqo7ev21" path="res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn" id="3_srtg5"]
 [ext_resource type="Texture2D" uid="uid://cx1ga40jy1ut6" path="res://Assets/textures/glow.svg" id="4_87uqa"]
 [ext_resource type="PackedScene" uid="uid://c1ordt6583753" path="res://Data/Particles/Decoration/CampfireParticles.tscn" id="5_6v4mp"]
 [ext_resource type="Texture2D" uid="uid://ciihbexjkmiq8" path="res://Assets/art/background/game/lantern.svg" id="6_p0m15"]
@@ -14,13 +18,125 @@
 [ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="11_gc2cx"]
 [ext_resource type="Texture2D" uid="uid://b0og73dh6y3tx" path="res://Assets/art/background/game/sword_and_spear_ribbon.svg" id="12_7x0p6"]
 
-[sub_resource type="Resource" id="Resource_wl7wk"]
-script = ExtResource("2_b5n78")
+[sub_resource type="Resource" id="Resource_hogni"]
+script = ExtResource("2_kmxmr")
 turn_wait_from_previous_wave = 1
-n_faded = 3
-n_rangers = 0
-n_pikes = 0
-boss = 0
+"# Faded" = 1
+"# LostRanger" = 0
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_nugp5"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 4
+"# Faded" = 1
+"# LostRanger" = 0
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_xue0l"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 6
+"# Faded" = 1
+"# LostRanger" = 0
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_yrdf1"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 8
+"# Faded" = 8
+"# LostRanger" = 0
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_c0ylo"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 6
+"# Faded" = 1
+"# LostRanger" = 0
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_l501d"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 8
+"# Faded" = 1
+"# LostRanger" = 0
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_0di6x"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 6
+"# Faded" = 1
+"# LostRanger" = 0
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_sekuq"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 4
+"# Faded" = 1
+"# LostRanger" = 0
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_sjvju"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 11
+"# Faded" = 5
+"# LostRanger" = 5
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_fmpu2"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 10
+"# Faded" = 1
+"# LostRanger" = 1
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_3rxs6"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 10
+"# Faded" = 2
+"# LostRanger" = 0
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_tjj5o"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 10
+"# Faded" = 1
+"# LostRanger" = 1
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_naf60"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 5
+"# Faded" = 1
+"# LostRanger" = 2
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_vmh23"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 5
+"# Faded" = 1
+"# LostRanger" = 0
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
+
+[sub_resource type="Resource" id="Resource_o8qv2"]
+script = ExtResource("2_kmxmr")
+turn_wait_from_previous_wave = 1
+"# Faded" = 0
+"# LostRanger" = 0
+"# ForswornPike" = 0
+"# ForgottenKing" = 0
 
 [sub_resource type="Animation" id="Animation_54o15"]
 length = 0.001
@@ -332,9 +448,12 @@ _data = {
 }
 
 [node name="TheEdge" instance=ExtResource("1_bddg0")]
-waves = Array[ExtResource("2_b5n78")]([SubResource("Resource_wl7wk")])
 
-[node name="BackgroundFill" type="CanvasLayer" parent="." index="0"]
+[node name="Waves" parent="." index="0"]
+enemy_scenes = Array[PackedScene]([ExtResource("2_ig2i4"), ExtResource("3_jqyrw"), ExtResource("3_24cjc"), ExtResource("3_srtg5")])
+waves = Array[ExtResource("2_kmxmr")]([SubResource("Resource_hogni"), SubResource("Resource_nugp5"), SubResource("Resource_xue0l"), SubResource("Resource_yrdf1"), SubResource("Resource_c0ylo"), SubResource("Resource_l501d"), SubResource("Resource_0di6x"), SubResource("Resource_sekuq"), SubResource("Resource_sjvju"), SubResource("Resource_fmpu2"), SubResource("Resource_3rxs6"), SubResource("Resource_tjj5o"), SubResource("Resource_naf60"), SubResource("Resource_vmh23"), SubResource("Resource_o8qv2")])
+
+[node name="BackgroundFill" type="CanvasLayer" parent="." index="1"]
 layer = -1
 
 [node name="Pit" type="ColorRect" parent="BackgroundFill" index="0"]
@@ -345,7 +464,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0784314, 0.0784314, 0.152941, 1)
 
-[node name="Ground" type="Node2D" parent="." index="1"]
+[node name="Ground" type="Node2D" parent="." index="2"]
 
 [node name="DropOff" type="ColorRect" parent="Ground" index="0"]
 offset_left = -102.0
@@ -399,25 +518,6 @@ offset_right = 1683.0
 offset_bottom = 778.0
 rotation = 0.261799
 color = Color(0.133333, 0.133333, 0.239216, 1)
-
-[node name="Board" parent="." index="2"]
-layer_0/tile_data = PackedInt32Array(262153, 0, 65536, 327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 589833, 0, 65536, 655369, 0, 65536, 655370, 0, 65536, 655371, 0, 65536, 655372, 0, 65536, 655373, 0, 65536, 655374, 0, 65536, 655375, 0, 65536, 589839, 0, 65536, 524303, 0, 65536, 458767, 0, 65536, 393231, 0, 65536, 327695, 0, 65536, 262159, 0, 65536, 262158, 0, 65536, 262157, 0, 65536, 262156, 0, 65536, 262155, 0, 65536, 262154, 0, 65536, 327690, 0, 65536, 393226, 0, 65536, 458762, 0, 65536, 524298, 0, 65536, 524299, 0, 65536, 589835, 0, 65536, 589834, 0, 65536, 393227, 0, 65536, 327691, 0, 65536, 327692, 0, 65536, 393228, 0, 65536, 458763, 0, 65536, 524300, 0, 65536, 589836, 0, 65536, 589837, 0, 65536, 589838, 0, 65536, 524301, 0, 65536, 458765, 0, 65536, 327693, 0, 65536, 327694, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 458764, 0, 65536, 393229, 0, 65536, 524302, 0, 65536)
-
-[node name="BoardRamp" type="ColorRect" parent="Board" index="0"]
-show_behind_parent = true
-offset_left = 624.0
-offset_top = 274.0
-offset_right = 1126.0
-offset_bottom = 776.0
-color = Color(0.133333, 0.137255, 0.247059, 1)
-
-[node name="BoardBackground" type="ColorRect" parent="Board" index="1"]
-show_behind_parent = true
-offset_left = 630.0
-offset_top = 280.0
-offset_right = 1120.0
-offset_bottom = 770.0
-color = Color(0.160784, 0.164706, 0.290196, 1)
 
 [node name="Decorations" type="Node2D" parent="." index="3"]
 
@@ -724,3 +824,22 @@ flip_h = true
 position = Vector2(1359, 320)
 scale = Vector2(0.482405, 0.301829)
 texture = ExtResource("2_882li")
+
+[node name="Board" parent="." index="4"]
+layer_0/tile_data = PackedInt32Array(262153, 0, 65536, 327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 589833, 0, 65536, 655369, 0, 65536, 655370, 0, 65536, 655371, 0, 65536, 655372, 0, 65536, 655373, 0, 65536, 655374, 0, 65536, 655375, 0, 65536, 589839, 0, 65536, 524303, 0, 65536, 458767, 0, 65536, 393231, 0, 65536, 327695, 0, 65536, 262159, 0, 65536, 262158, 0, 65536, 262157, 0, 65536, 262156, 0, 65536, 262155, 0, 65536, 262154, 0, 65536, 327690, 0, 65536, 393226, 0, 65536, 458762, 0, 65536, 524298, 0, 65536, 524299, 0, 65536, 589835, 0, 65536, 589834, 0, 65536, 393227, 0, 65536, 327691, 0, 65536, 327692, 0, 65536, 393228, 0, 65536, 458763, 0, 65536, 524300, 0, 65536, 589836, 0, 65536, 589837, 0, 65536, 589838, 0, 65536, 524301, 0, 65536, 458765, 0, 65536, 327693, 0, 65536, 327694, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 458764, 0, 65536, 393229, 0, 65536, 524302, 0, 65536)
+
+[node name="BoardRamp" type="ColorRect" parent="Board" index="0"]
+show_behind_parent = true
+offset_left = 624.0
+offset_top = 274.0
+offset_right = 1126.0
+offset_bottom = 776.0
+color = Color(0.133333, 0.137255, 0.247059, 1)
+
+[node name="BoardBackground" type="ColorRect" parent="Board" index="1"]
+show_behind_parent = true
+offset_left = 630.0
+offset_top = 280.0
+offset_right = 1120.0
+offset_bottom = 770.0
+color = Color(0.160784, 0.164706, 0.290196, 1)

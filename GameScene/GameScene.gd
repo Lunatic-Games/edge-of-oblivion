@@ -31,10 +31,10 @@ func _ready() -> void:
 
 func _on_new_round_started() -> void:
 	var round_i: int = turn_manager.current_round
-	var enemies_to_spawn: Array[PackedScene] = level.get_enemies_for_turn(round_i) as Array[PackedScene]
+	var enemies_to_spawn: Array[PackedScene] = level.waves.get_enemies_for_turn(round_i) as Array[PackedScene]
 	spawn_manager.spawn_enemies(enemies_to_spawn)
 
-	var n_enemies_next_turn: int = level.get_enemies_for_turn(round_i + 1).size()
+	var n_enemies_next_turn: int = level.waves.get_enemies_for_turn(round_i + 1).size()
 	spawn_manager.spawn_flags_for_next_turn(n_enemies_next_turn)
 
 
