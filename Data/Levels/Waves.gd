@@ -28,6 +28,7 @@ func calculate_spawns_for_each_turn() -> void:
 	for wave in waves:
 		i += wave.turn_wait_from_previous_wave
 		spawns_for_turn[i] = wave.get_enemy_scenes_for_wave()
+		wave.update_round_info(i)
 
 
 func set_enemy_scenes(value: Array[PackedScene]) -> void:
@@ -49,4 +50,14 @@ func set_waves(value: Array[WaveData]) -> void:
 	for i in waves.size():
 		if waves[i] == null:
 			waves[i] = WaveData.new()
-		waves[i].update_enemy_scenes(enemy_scenes)
+		
+		var wave: WaveData = waves[i]
+		wave.update_enemy_scenes(enemy_scenes)
+		
+		if !wave.turn_wait_value_changed.is_connected(_on_wave_turn_wait_value_changed):
+			wave.turn_wait_value_changed.connect(_on_wave_turn_wait_value_changed)
+	calculate_spawns_for_each_turn()
+
+
+func _on_wave_turn_wait_value_changed():
+	calculate_spawns_for_each_turn()
