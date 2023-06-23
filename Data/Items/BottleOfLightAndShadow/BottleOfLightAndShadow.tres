@@ -10,7 +10,8 @@ sprite = ExtResource("3_b64j5")
 item_scene = ExtResource("1_kxch1")
 item_name = "Bottle of Light and Shadow."
 tier1Text = "[color=pink]Alternate[/color] every 3 turns:
-Heal self; Damage self, and nearest enemy."
+  - Heal self; 
+  - Damage self, and nearest enemy."
 tier2Text = "Cooldown 3 -> 2."
 tier3Text = "Enemy damage 20 -> 40."
 flavor_text = "Essence of the sun and moon."

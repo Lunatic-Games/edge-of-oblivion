@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b5tt1gbbv75nc"]
+
+[ext_resource type="PackedScene" uid="uid://cyxmb8j8ab4g4" path="res://Data/Items/ShardOfReality/ShardOfReality.tscn" id="1_cj8e5"]
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1_rcemt"]
+[ext_resource type="Texture2D" uid="uid://bcjva1lcxwxpf" path="res://Assets/art/icons/weapons/lorc/octogonal-eye.svg" id="3_aobmk"]
+
+[resource]
+script = ExtResource("1_rcemt")
+sprite = ExtResource("3_aobmk")
+item_scene = ExtResource("1_cj8e5")
+item_name = "Shard of Reality"
+tier1Text = "Does damage to self, and units at exactly radius 2 away."
+tier2Text = "Damage 20 - 30."
+tier3Text = "Self damage 5 -> 10.
+Damage 30 -> 50."
+flavor_text = "Destruction and construction in a shard."
+max_turn_timer = 3
+item_damage = 1
