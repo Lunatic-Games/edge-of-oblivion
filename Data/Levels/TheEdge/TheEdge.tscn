@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://bvu03ruea1xp7"]
+[gd_scene load_steps=30 format=3 uid="uid://bvu03ruea1xp7"]
 
 [ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_bddg0"]
 [ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="2_882li"]
+[ext_resource type="Script" path="res://Data/Levels/WAVE_DATA.gd" id="2_b5n78"]
 [ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="3_2c6o8"]
 [ext_resource type="Texture2D" uid="uid://cx1ga40jy1ut6" path="res://Assets/textures/glow.svg" id="4_87uqa"]
 [ext_resource type="PackedScene" uid="uid://c1ordt6583753" path="res://Data/Particles/Decoration/CampfireParticles.tscn" id="5_6v4mp"]
@@ -12,6 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://dmbs1q38ekhl4" path="res://Assets/art/background/game/lantern_wrap.svg" id="10_r7e0q"]
 [ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="11_gc2cx"]
 [ext_resource type="Texture2D" uid="uid://b0og73dh6y3tx" path="res://Assets/art/background/game/sword_and_spear_ribbon.svg" id="12_7x0p6"]
+
+[sub_resource type="Resource" id="Resource_wl7wk"]
+script = ExtResource("2_b5n78")
+turn_wait_from_previous_wave = 1
+n_faded = 3
+n_rangers = 0
+n_pikes = 0
+boss = 0
 
 [sub_resource type="Animation" id="Animation_54o15"]
 length = 0.001
@@ -323,6 +332,7 @@ _data = {
 }
 
 [node name="TheEdge" instance=ExtResource("1_bddg0")]
+waves = Array[ExtResource("2_b5n78")]([SubResource("Resource_wl7wk")])
 
 [node name="BackgroundFill" type="CanvasLayer" parent="." index="0"]
 layer = -1

@@ -23,6 +23,7 @@ func _ready() -> void:
 	GameManager.new_game()
 	var player: Player = spawn_manager.spawn_player()
 	GameManager.player = player
+	player.add_starting_items()
 	
 	upgrade_menu.setup(all_items)
 	turn_manager.initialize()

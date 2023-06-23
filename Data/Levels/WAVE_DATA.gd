@@ -1,58 +1,36 @@
-@tool
 class_name WaveData
 extends Resource
 
 
-@export_range(0, 99, 1, "or_greater") var turn_wait_from_previous_wave: int = 1
+enum BossSpawn {
+	NONE,
+	FORGOTTEN_KING
+}
 
-var possible_enemies: Dictionary  # readable name : enemy packed scene
-var spawn_data: Dictionary # readable name : # to spawn
+const FADED_SCENE: PackedScene = preload("res://Data/Units/Enemies/Faded/Faded.tscn")
+const RANGER_SCENE: PackedScene = preload("res://Data/Units/Enemies/LostRanger/LostRanger.tscn")
+const PIKE_SCENE: PackedScene = preload("res://Data/Units/Enemies/ForswornPike/ForswornPike.tscn")
+const FORGOTTEN_KING_SCENE: PackedScene = preload("res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn")
 
-
-func _ready():
-	possible_enemies.clear()
-
-
-func update_possible_enemies(enemies: Array[PackedScene]):
-	possible_enemies.clear()
-	
-	for enemy_scene in enemies:
-		if enemy_scene == null:
-			continue
-		
-		var root_name: String = enemy_scene.get_state().get_node_name(0)
-		possible_enemies[root_name] = enemy_scene
-		if not spawn_data.has(root_name):
-			spawn_data[root_name] = 0
-	notify_property_list_changed()
+@export_range(1, 99, 1, "or_greater") var turn_wait_from_previous_wave: int = 1
+@export_range(0, 99) var n_faded: int
+@export_range(0, 99) var n_rangers: int
+@export_range(0, 99) var n_pikes: int
+@export var boss: BossSpawn
 
 
-func _get_property_list() -> Array:
-	var properties = []
-	for enemy_name in possible_enemies:
-		properties.append({
-			"name": "# " + enemy_name,
-			"type": TYPE_INT,
-			"usage": PROPERTY_USAGE_DEFAULT
-		})
-	return properties
+func get_enemies_for_wave() -> Array[PackedScene]:
+	var enemies: Array[PackedScene] = []
 
+	for i in n_faded:
+		enemies.append(FADED_SCENE)
+	for i in n_rangers:
+		enemies.append(RANGER_SCENE)
+	for i in n_pikes:
+		enemies.append(PIKE_SCENE)
 
-func _get(property: StringName):
-	property = property.trim_prefix("# ")
-	if spawn_data.has(property):
-		return spawn_data[property]
+	match boss:
+		BossSpawn.FORGOTTEN_KING:
+			enemies.append(FORGOTTEN_KING_SCENE)
 
-
-func _set(property: StringName, value) -> bool:
-	property = property.trim_prefix("# ")
-	if possible_enemies.has(property):
-		if value < 0:
-			print("Clearing " + str(property))
-			return false
-		
-		print("Setting " + str(property) + " to " + str(value))
-		spawn_data[property] = value
-		notify_property_list_changed()
-		return true
-	return false
+	return enemies

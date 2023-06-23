@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://clkedmwe4xw0b"]
+[gd_scene load_steps=23 format=3 uid="uid://clkedmwe4xw0b"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
 [ext_resource type="Resource" uid="uid://c4064o7rrsy36" path="res://Data/Items/DraculasKnives/DraculasKnives.tres" id="3_2i6f3"]
@@ -15,34 +15,9 @@
 [ext_resource type="Resource" uid="uid://olilhse4njhm" path="res://Data/Items/TaintedFlask/TaintedFlask.tres" id="13_7qv78"]
 [ext_resource type="Script" path="res://GameScene/SpawnManager.gd" id="13_emyde"]
 [ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://Menus/UpgradeMenu/UpgradeMenu.tscn" id="13_ilrse"]
-[ext_resource type="PackedScene" uid="uid://p0e7f46xip6t" path="res://Data/Units/Enemies/LostRanger/LostRanger.tscn" id="15_s8whf"]
-[ext_resource type="PackedScene" uid="uid://kjqcigs27uqk" path="res://Data/Units/Enemies/Faded/Faded.tscn" id="16_v2qx7"]
-[ext_resource type="PackedScene" uid="uid://j054uqo7ev21" path="res://Data/Units/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn" id="17_aao1d"]
-[ext_resource type="Script" path="res://Data/Levels/WAVE_DATA.gd" id="18_loowi"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="23_8oo85"]
 [ext_resource type="FontFile" uid="uid://delvnctbli24y" path="res://Assets/fonts/Caudex-Bold.ttf" id="23_vckc6"]
 [ext_resource type="PackedScene" path="res://Menus/MainMenu/MenuButton/MenuButton.tscn" id="25_3r2ok"]
-
-[sub_resource type="Resource" id="Resource_6gila"]
-script = ExtResource("18_loowi")
-turn_wait_from_previous_wave = 1
-"# LostRanger" = 0
-"# Faded" = 0
-"# ForgottenKing" = 0
-
-[sub_resource type="Resource" id="Resource_o3ydw"]
-script = ExtResource("18_loowi")
-turn_wait_from_previous_wave = 3
-"# LostRanger" = 0
-"# Faded" = 0
-"# ForgottenKing" = 0
-
-[sub_resource type="Resource" id="Resource_22k86"]
-script = ExtResource("18_loowi")
-turn_wait_from_previous_wave = 1
-"# LostRanger" = 0
-"# Faded" = 0
-"# ForgottenKing" = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vfxa"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
@@ -68,8 +43,6 @@ script = ExtResource("12_bdmks")
 script = ExtResource("13_emyde")
 
 [node name="TheEdge" parent="." instance=ExtResource("12_bkwp3")]
-possible_enemies = Array[PackedScene]([ExtResource("15_s8whf"), ExtResource("16_v2qx7"), ExtResource("17_aao1d")])
-waves = Array[ExtResource("18_loowi")]([SubResource("Resource_6gila"), SubResource("Resource_o3ydw"), SubResource("Resource_22k86")])
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
