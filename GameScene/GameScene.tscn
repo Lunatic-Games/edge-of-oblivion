@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://clkedmwe4xw0b"]
+[gd_scene load_steps=49 format=3 uid="uid://clkedmwe4xw0b"]
 
 [ext_resource type="Script" path="res://GameScene/GameScene.gd" id="1_f3738"]
 [ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://GameScene/Board/Board.tscn" id="2_5sub4"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="11_bif4v"]
 [ext_resource type="Resource" uid="uid://dhmba6khldbxi" path="res://Data/Items/ArcingOrb/ArcingOrb.tres" id="11_nciuu"]
 [ext_resource type="Texture2D" uid="uid://b0og73dh6y3tx" path="res://Assets/art/background/game/sword_and_spear_ribbon.svg" id="12_4bhsh"]
+[ext_resource type="Resource" uid="uid://btk8ha0wkgfgt" path="res://Data/Items/BottleOfLightAndShadow/BottleOfLightAndShadow.tres" id="12_8wkuc"]
 [ext_resource type="Resource" uid="uid://dst01geftrhcn" path="res://Data/Items/ZeusSword/ZeusSword.tres" id="12_030qc"]
 [ext_resource type="Resource" uid="uid://olilhse4njhm" path="res://Data/Items/TaintedFlask/TaintedFlask.tres" id="13_7qv78"]
 [ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://Menus/UpgradeMenu/UpgradeMenu.tscn" id="13_ilrse"]
@@ -360,7 +361,7 @@ base_font = ExtResource("23_8oo85")
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_f3738")
-all_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("3_2i6f3"), ExtResource("4_ewp0b"), ExtResource("5_pva1r"), ExtResource("6_555l1"), ExtResource("7_ixikr"), ExtResource("8_hnpfi"), ExtResource("10_4tjaj"), ExtResource("11_nciuu"), ExtResource("12_030qc"), ExtResource("13_7qv78")])
+all_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("3_2i6f3"), ExtResource("4_ewp0b"), ExtResource("5_pva1r"), ExtResource("6_555l1"), ExtResource("7_ixikr"), ExtResource("8_hnpfi"), ExtResource("10_4tjaj"), ExtResource("11_nciuu"), ExtResource("12_030qc"), ExtResource("13_7qv78"), ExtResource("12_8wkuc")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_n1myw")
