@@ -38,7 +38,7 @@ func spawn_upgrade_cards(number_of_cards_to_spawn: int) -> void:
 	while is_currently_picking_item:
 		await picked_item
 	
-	if available_items.is_empty() or GameManager.game_ended:
+	if available_items.is_empty() or GlobalGameState.game_ended:
 		return
 		
 	# If there is a queued upgrade we want to wait for animations to finish,
@@ -68,8 +68,8 @@ func add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> vo
 	card_row.add_child(card)
 	
 	var item_tier: int = 1
-	if GameManager.player and item_data in GameManager.player.inventory.items:
-		item_tier = GameManager.player.inventory.items[item_data].current_tier + 1
+	if GlobalGameState.player and item_data in GlobalGameState.player.inventory.items:
+		item_tier = GlobalGameState.player.inventory.items[item_data].current_tier + 1
 	
 	card.setup(item_data, item_tier, true)
 	
@@ -123,8 +123,8 @@ func _on_card_selected(selected_card: Card) -> void:
 		card.selected.disconnect(_on_card_selected)
 		
 		if card == selected_card:
-			if GameManager.player:
-				GameManager.player.inventory.gain_item(card.held_item_data)
+			if GlobalGameState.player:
+				GlobalGameState.player.inventory.gain_item(card.held_item_data)
 			_raise_chosen_card(card)
 		else:
 			_drop_unchosen_card(card)

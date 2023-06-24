@@ -10,19 +10,19 @@ extends LogicTreeGetterOperation
 
 func perform_behavior() -> void:
 	if output_player_entity != null:
-		if GameManager.player != null:
+		if GlobalGameState.player != null:
 			output_player_entity.value = []
 		else:
 			output_player_entity.value.clear()
 	
 	if output_player_tile != null:
-		if GameManager.player != null and GameManager.player.current_tile != null:
-			output_player_tile.value = [GameManager.player.current_tile]
+		if GlobalGameState.player != null and GlobalGameState.player.current_tile != null:
+			output_player_tile.value = [GlobalGameState.player.current_tile]
 		else:
 			output_player_tile.value.clear()
 	
 	if output_player_items != null:
 		output_player_items.value.clear()
-		if GameManager.player != null:
-			for item in GameManager.player.inventory.items.values():
+		if GlobalGameState.player != null:
+			for item in GlobalGameState.player.inventory.items.values():
 				output_player_items.value.append(item)
