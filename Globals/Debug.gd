@@ -26,8 +26,9 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("debug_kill_all_enemies"):
 		# Iterate backwards since elements are deleted as they die
-		for i in range(GameManager.all_enemies.size() - 1, -1, -1):
-			GameManager.all_enemies[i].take_damage(GameManager.all_enemies[i].max_hp)
+		var enemies: Array[Enemy] = GameManager.game.spawn_manager.spawned_enemies
+		for i in range(enemies.size() - 1, -1, -1):
+			enemies[i].take_damage(enemies[i].max_hp)
 	
 	if Input.is_action_just_pressed("debug_restart_game"):
 		GameManager.stop_game()
@@ -49,4 +50,4 @@ func _process(_delta: float) -> void:
 func _spawn_enemy_scene(scene: PackedScene):
 	var tile: Tile = GameManager.board.get_random_unoccupied_tile()
 	if tile:
-		GameManager.spawn_enemy_on_tile(scene, tile)
+		GameManager.game.spawn_manager.spawn_enemy_on_tile(scene, tile)

@@ -31,13 +31,14 @@ var starting_items: Array[Resource] = [
 
 func _ready() -> void:
 	update_experience_bar()
+	GlobalSignals.new_round_started.connect(reset_moves_remaining)
 
 
 func _physics_process(_delta: float) -> void:
 	handle_movement()
 
 
-func new_turn():
+func reset_moves_remaining():
 	moves_remaining = moves_per_turn
 
 
