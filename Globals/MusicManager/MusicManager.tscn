@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://craha8oall5q5"]
 
-[ext_resource type="PackedScene" uid="uid://cposeuotudggd" path="res://Globals/MusicManager/MusicPlayer.tscn" id="1_phqoj"]
+[ext_resource type="PackedScene" uid="uid://cposeuotudggd" path="res://Globals/MusicManager/MusicPlayer/MusicPlayer.tscn" id="1_phqoj"]
 [ext_resource type="Script" path="res://Globals/MusicManager/MusicManager.gd" id="1_xjott"]
 [ext_resource type="AudioStream" uid="uid://d1vi4w5p5aj17" path="res://Assets/music/menu/Fall-From-Grace.ogg" id="3_bhkg3"]
 [ext_resource type="AudioStream" uid="uid://emsef7bknykp" path="res://Assets/music/menu/Lurking-Evil.ogg" id="4_lx2ev"]

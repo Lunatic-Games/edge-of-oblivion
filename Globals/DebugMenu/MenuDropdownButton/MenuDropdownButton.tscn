@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://er66f71v3mir"]
+
+[ext_resource type="Script" path="res://Globals/DebugMenu/MenuDropdownButton/MenuDropdownButton.gd" id="1_vps4e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jc7li"]
+
+[node name="DebugMenuButton" type="Button"]
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.713726, 0.713726, 0.713726, 1)
+theme_override_colors/font_pressed_color = Color(0.580392, 0.580392, 0.580392, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jc7li")
+toggle_mode = true
+text = "Text"
+flat = true
+script = ExtResource("1_vps4e")
+
+[node name="Menu" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_top = 45.0
+offset_right = 40.0
+offset_bottom = 85.0
+theme_override_constants/separation = 0
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

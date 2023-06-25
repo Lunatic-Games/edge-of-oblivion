@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://8jjlwihhjf2h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upr3e"]
+bg_color = Color(0.0705882, 0.0784314, 0.203922, 1)
+border_width_left = 20
+border_width_right = 20
+border_color = Color(0, 0, 0, 0.415686)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dnwfp"]
+
+[node name="SubMenuButton" type="Button"]
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_upr3e")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dnwfp")
+text = "Text"
+alignment = 0

@@ -27,6 +27,8 @@ func _handle_new_item(item_data: ItemData, animate: bool = true) -> void:
 	add_child(item)
 	item.setup(item_data)
 	
+	GlobalSignals.item_added_to_inventory.emit(item, item_data)
+	
 	if animate == false:
 		return
 	
@@ -42,9 +44,11 @@ func _handle_new_item(item_data: ItemData, animate: bool = true) -> void:
 
 
 func _handle_upgrading_item(item_data: ItemData, animate: bool = true) -> void:
+	assert(items.has(item_data), "Trying to upgrade an item that the player doesn't have.")
+	
 	var item: Item = items[item_data]
-	assert(item, "Trying to upgrade an item that the player doesn't have.")
 	item.upgrade_tier()
+	GlobalSignals.item_increased_tier.emit(item, item_data)
 	
 	if item.is_max_tier():
 		GlobalSignals.item_reached_max_tier.emit(item, item_data)
