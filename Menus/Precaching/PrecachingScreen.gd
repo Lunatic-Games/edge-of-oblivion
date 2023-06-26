@@ -11,7 +11,7 @@ func _ready() -> void:
 	
 	var nodes: Array[Node] = []
 	
-	var particle_paths: Array[String] = Utility.get_all_files_under_folder(PARTICLES_FOLDER_PATH,
+	var particle_paths: Array[String] = FileUtility.get_all_files_under_folder(PARTICLES_FOLDER_PATH,
 		".tscn")
 	var n_particles_precaching: int = 0
 	for path in particle_paths:
@@ -25,7 +25,7 @@ func _ready() -> void:
 		if "emitting" in particles:  
 			particles.emitting = true
 	
-	var unit_paths: Array[String] = Utility.get_all_files_under_folder(UNITS_FOLDER_PATH, ".tscn")
+	var unit_paths: Array[String] = FileUtility.get_all_files_under_folder(UNITS_FOLDER_PATH, ".tscn")
 	var n_misc_precaching: int = 0
 	for path in unit_paths:
 		var scene: PackedScene = load(path)

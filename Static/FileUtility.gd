@@ -1,4 +1,4 @@
-class_name Utility
+class_name FileUtility
 extends Node
 
 
@@ -10,10 +10,10 @@ static func get_all_files_under_folder(folder_path: String, file_ending: String 
 	folder_path = folder_path.trim_suffix("/")  # Will be appended manually
 	
 	var paths: Array[String] = []
-	var directory_paths_stack: Array[String] = [folder_path]
+	var directory_paths_queue: Array[String] = [folder_path]
 	
-	while directory_paths_stack.size() > 0:
-		var current_director_path: String = directory_paths_stack.pop_back()
+	while directory_paths_queue.size() > 0:
+		var current_director_path: String = directory_paths_queue.pop_front()
 		var current_directory: DirAccess = DirAccess.open(current_director_path)
 		current_directory.list_dir_begin()
 		
@@ -22,7 +22,7 @@ static func get_all_files_under_folder(folder_path: String, file_ending: String 
 			var current_file_path: String = current_director_path + "/" + file_name
 			
 			if current_directory.current_is_dir():
-				directory_paths_stack.push_back(current_file_path)
+				directory_paths_queue.push_back(current_file_path)
 			
 			var should_append: bool = file_name.ends_with(file_ending)
 			if ignore_and_strip_remap_suffixes and file_name.ends_with(file_ending + ".remap"):

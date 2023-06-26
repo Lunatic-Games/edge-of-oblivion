@@ -1,45 +1,49 @@
 extends MenuDropdownButton
 
 
-var loaded_item_data: Dictionary = {}  # Name : loaded resource
+const ITEMS_FOLDER: String = "res://Data/Items"
+
 var item_buttons: Dictionary = {}  # Loaded resource : button 
 
 
 func setup() -> void:
-	var item_data_paths = Utility.get_all_files_under_folder("res://Data/Items", ".tres")
+	var item_data_paths = FileUtility.get_all_files_under_folder(ITEMS_FOLDER, ".tres")
 	
+	var loaded_items: Array[ItemData] = []
 	for path in item_data_paths:
-		var display_name: String = path.get_file().trim_suffix(".tres")
-		
-		loaded_item_data[display_name] = load(path)
+		loaded_items.append(load(path))
 	
-	var item_names: Array = loaded_item_data.keys()
-	item_names.sort()
-	
-	for item_name in item_names:
-		var item_data: ItemData = loaded_item_data[item_name]
+	for item_data in loaded_items:
 		var display_name: String = _get_display_name_for_item(null, item_data)
 		var button: Button = add_to_menu(display_name, _give_player_item.bind(item_data))
 		item_buttons[item_data] = button
 	
+	GlobalSignals.player_spawned.connect(_on_player_spawned)
 	GlobalSignals.item_added_to_inventory.connect(_on_item_added_to_inventory)
 	GlobalSignals.item_increased_tier.connect(_on_item_increased_tier)
 
 
-func _give_player_item(item_data: ItemData):
+func _give_player_item(item_data: ItemData) -> void:
 	if not GlobalGameState.player:
 		return
 	
 	GlobalGameState.player.inventory.gain_item(item_data)
 
 
-func _on_item_added_to_inventory(item: Item, item_data: ItemData):
+func _on_player_spawned(_player: Player) -> void:
+	for item_data in item_buttons:
+		var button: Button = item_buttons[item_data]
+		button.text = _get_display_name_for_item(null, item_data)
+		button.show()
+
+
+func _on_item_added_to_inventory(item: Item, item_data: ItemData) -> void:
 	item_buttons[item_data].text = _get_display_name_for_item(item, item_data)
 
 
-func _on_item_increased_tier(item: Item, item_data: ItemData):
+func _on_item_increased_tier(item: Item, item_data: ItemData) -> void:
 	if item.is_max_tier():
-		item_buttons[item_data].queue_free()
+		item_buttons[item_data].hide()
 		return
 	
 	item_buttons[item_data].text = _get_display_name_for_item(item, item_data)

@@ -3,6 +3,7 @@ extends Button
 
 
 const MENU_BUTTON_SCENE: PackedScene = preload("res://Globals/DebugMenu/MenuButton/DebugMenuButton.tscn")
+const SPACER_SCENE: PackedScene = preload("res://Globals/DebugMenu/MenuSpacer/MenuSpacer.tscn")
 
 @onready var menu: BoxContainer = $Menu
 
@@ -18,6 +19,12 @@ func add_to_menu(button_text: String, function: Callable) -> Button:
 	new_button.pressed.connect(function)
 	menu.add_child(new_button)
 	return new_button
+
+
+func add_spacer() -> Control:
+	var new_spacer: Control = SPACER_SCENE.instantiate()
+	menu.add_child(new_spacer)
+	return new_spacer
 
 
 func _on_toggled(is_button_pressed: bool) -> void:

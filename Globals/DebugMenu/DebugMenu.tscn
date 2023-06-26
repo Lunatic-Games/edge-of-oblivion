@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dec5mxhj85sw3"]
+[gd_scene load_steps=10 format=3 uid="uid://dec5mxhj85sw3"]
 
 [ext_resource type="Script" path="res://Globals/DebugMenu/DebugMenu.gd" id="1_m11rj"]
 [ext_resource type="PackedScene" uid="uid://er66f71v3mir" path="res://Globals/DebugMenu/MenuDropdownButton/MenuDropdownButton.tscn" id="2_1ghm6"]
-[ext_resource type="Script" path="res://Globals/DebugMenu/MenuDropdowns/SpawningDropdown.gd" id="3_6vejm"]
-[ext_resource type="Script" path="res://Globals/DebugMenu/MenuDropdowns/ItemsDropdown.gd" id="4_1loi7"]
+[ext_resource type="Script" path="res://Globals/DebugMenu/Dropdowns/SpawningDropdown.gd" id="3_r2n1k"]
+[ext_resource type="Script" path="res://Globals/DebugMenu/Dropdowns/ItemsDropdown.gd" id="4_eiryw"]
+[ext_resource type="Script" path="res://Globals/DebugMenu/Dropdowns/PlayerDropdown.gd" id="5_tk1h3"]
+[ext_resource type="Script" path="res://Globals/DebugMenu/Dropdowns/SceneDropdown.gd" id="6_2s5fk"]
+[ext_resource type="Script" path="res://Globals/DebugMenu/Dropdowns/LevelsDropdown.gd" id="7_np8t4"]
+[ext_resource type="Script" path="res://Globals/DebugMenu/Dropdowns/MiscDropdown.gd" id="7_o4g26"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68xp4"]
-bg_color = Color(0.105882, 0.117647, 0.278431, 1)
+bg_color = Color(0.0823529, 0.0901961, 0.219608, 1)
 
 [node name="DebugMenu" type="CanvasLayer"]
 layer = 100
@@ -38,9 +42,29 @@ theme_override_constants/separation = 30
 [node name="SpawnDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_1ghm6")]
 layout_mode = 2
 text = "Spawn..."
-script = ExtResource("3_6vejm")
+script = ExtResource("3_r2n1k")
 
 [node name="ItemsDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_1ghm6")]
 layout_mode = 2
 text = "Items..."
-script = ExtResource("4_1loi7")
+script = ExtResource("4_eiryw")
+
+[node name="PlayerDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_1ghm6")]
+layout_mode = 2
+text = "Player..."
+script = ExtResource("5_tk1h3")
+
+[node name="SceneDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_1ghm6")]
+layout_mode = 2
+text = "Scene..."
+script = ExtResource("6_2s5fk")
+
+[node name="LevelsDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_1ghm6")]
+layout_mode = 2
+text = "Levels..."
+script = ExtResource("7_np8t4")
+
+[node name="MiscDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_1ghm6")]
+layout_mode = 2
+text = "Misc..."
+script = ExtResource("7_o4g26")

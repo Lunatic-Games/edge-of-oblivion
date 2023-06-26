@@ -1,16 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://8jjlwihhjf2h"]
+[gd_scene load_steps=4 format=3 uid="uid://8jjlwihhjf2h"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upr3e"]
-bg_color = Color(0.0705882, 0.0784314, 0.203922, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yv717"]
+bg_color = Color(0.0588235, 0.0666667, 0.176471, 1)
 border_width_left = 20
 border_width_right = 20
-border_color = Color(0, 0, 0, 0.415686)
+border_width_bottom = 3
+border_color = Color(0.0588235, 0.0666667, 0.176471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnyse"]
+bg_color = Color(0.168627, 0.184314, 0.4, 1)
+border_width_left = 10
+border_width_right = 20
+border_width_bottom = 3
+border_color = Color(0.168627, 0.184314, 0.4, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dnwfp"]
 
 [node name="SubMenuButton" type="Button"]
 theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_upr3e")
+theme_override_styles/normal = SubResource("StyleBoxFlat_yv717")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cnyse")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dnwfp")
 text = "Text"
 alignment = 0
