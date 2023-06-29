@@ -2,7 +2,7 @@ class_name Game
 extends Node2D
 
 
-const MAIN_MENU_SCENE: PackedScene = preload("res://Menus/MainMenu/MainMenu.tscn")
+
 
 @export var level_data: LevelData
 
@@ -12,8 +12,8 @@ var level: Level
 @onready var spawn_handler: SpawnHandler = $SpawnHandler
 
 @onready var upgrade_menu: CanvasLayer = $Menus/UpgradeMenu
-@onready var victory_screen: CanvasLayer = $Menus/VictoryScreen
-@onready var game_over_screen: CanvasLayer = $Menus/GameOverScreen
+@onready var victory_menu: CanvasLayer = $Menus/VictoryMenu
+@onready var game_over_menu: CanvasLayer = $Menus/GameOverMenu
 
 
 func _ready() -> void:
@@ -47,10 +47,6 @@ func _on_new_round_started() -> void:
 	spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
 
 
-func _return_to_main_menu() -> void:
-	get_tree().change_scene_to_packed(MAIN_MENU_SCENE)
-
-
 func _on_Player_died(_player: Player) -> void:
 	if GlobalGameState.game_ended:
 		return
@@ -59,7 +55,7 @@ func _on_Player_died(_player: Player) -> void:
 	upgrade_menu.hide()
 	await get_tree().create_timer(1.0).timeout
 	
-	game_over_screen.show()
+	game_over_menu.show()
 
 
 func _on_Boss_defeated(_boss: Boss) -> void:
@@ -70,20 +66,4 @@ func _on_Boss_defeated(_boss: Boss) -> void:
 	upgrade_menu.hide()
 	await get_tree().create_timer(1.0).timeout
 	
-	victory_screen.show()
-
-
-func _on_VictoryScreen_PlayAgainButton_pressed() -> void:
-	get_tree().reload_current_scene()
-
-
-func _on_VictoryScreen_MainMenuButton_pressed() -> void:
-	_return_to_main_menu()
-
-
-func _on_GameOverScreen_PlayAgainButton_pressed() -> void:
-	get_tree().reload_current_scene()
-
-
-func _on_GameOverScreen_MainMenuButton_pressed() -> void:
-	_return_to_main_menu()
+	victory_menu.show()

@@ -22,4 +22,4 @@ func show_victory_screen():
 	
 	GlobalGameState.game_ended = true
 	GlobalGameState.game.upgrade_menu.hide()
-	GlobalGameState.game.victory_screen.show()
+	GlobalGameState.game.victory_menu.show()

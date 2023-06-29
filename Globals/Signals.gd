@@ -16,5 +16,7 @@ signal item_added_to_inventory(item: Item, item_data: ItemData)
 signal item_increased_tier(item: Item, item_data: ItemData)
 signal item_reached_max_tier(item: Item, item_data: ItemData)
 
+signal enemy_killed(enemy: Enemy)
+
 signal boss_spawned(boss: Boss)
 signal boss_defeated(boss: Boss)

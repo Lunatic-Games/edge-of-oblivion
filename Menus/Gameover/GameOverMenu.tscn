@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://dn681uoihob4j"]
+
+[ext_resource type="FontFile" uid="uid://delvnctbli24y" path="res://Assets/fonts/Caudex-Bold.ttf" id="1_3rhuj"]
+[ext_resource type="Script" path="res://Menus/Gameover/GameOverMenu.gd" id="1_ayrgk"]
+[ext_resource type="PackedScene" path="res://Menus/MainMenu/MenuButton/MenuButton.tscn" id="2_rtebt"]
+
+[sub_resource type="FontVariation" id="FontVariation_ihk8i"]
+base_font = ExtResource("1_3rhuj")
+spacing_glyph = 4
+
+[node name="GameOverMenu" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_ayrgk")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.356863)
+
+[node name="Container" type="VBoxContainer" parent="."]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -273.5
+offset_right = 93.0
+offset_bottom = 273.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="Container"]
+custom_minimum_size = Vector2(221, 30)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_ihk8i")
+theme_override_font_sizes/font_size = 120
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" parent="Container" instance=ExtResource("2_rtebt")]
+layout_mode = 2
+text = "PLAY AGAIN?"
+
+[node name="MainMenuButton" parent="Container" instance=ExtResource("2_rtebt")]
+layout_mode = 2
+text = "MAIN MENU"
+
+[connection signal="pressed" from="Container/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
+[connection signal="pressed" from="Container/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
