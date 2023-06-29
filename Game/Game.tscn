@@ -1,19 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://clkedmwe4xw0b"]
+[gd_scene load_steps=12 format=3 uid="uid://clkedmwe4xw0b"]
 
 [ext_resource type="Script" path="res://Game/Game.gd" id="1_iqcmv"]
-[ext_resource type="Resource" uid="uid://c4064o7rrsy36" path="res://Data/Items/DraculasKnives/DraculasKnives.tres" id="2_xqarq"]
-[ext_resource type="Resource" uid="uid://dhbycs5j4to6b" path="res://Data/Items/DragonCloak/DragonCloak.tres" id="3_y0dea"]
-[ext_resource type="Resource" uid="uid://bkxc4j0i03skk" path="res://Data/Items/Hammer/Hammer.tres" id="4_im0t6"]
-[ext_resource type="Resource" uid="uid://ciom03ipb83hk" path="res://Data/Items/HolyFire/HolyFire.tres" id="5_qew2g"]
-[ext_resource type="Resource" uid="uid://ds3bgi1j8ywkc" path="res://Data/Items/LightningBow/LightningBow.tres" id="6_7jb6r"]
-[ext_resource type="Resource" uid="uid://b44nfpsd5kbd4" path="res://Data/Items/ShortSword/ShortSword.tres" id="7_tnt3y"]
-[ext_resource type="Resource" uid="uid://c7npess6g8cti" path="res://Data/Items/TokenOfLove/TokenOfLove.tres" id="8_4cicd"]
-[ext_resource type="Resource" uid="uid://dhmba6khldbxi" path="res://Data/Items/ArcingOrb/ArcingOrb.tres" id="9_062os"]
-[ext_resource type="Resource" uid="uid://dst01geftrhcn" path="res://Data/Items/ZeusSword/ZeusSword.tres" id="10_eskxg"]
-[ext_resource type="Resource" uid="uid://olilhse4njhm" path="res://Data/Items/TaintedFlask/TaintedFlask.tres" id="11_au730"]
+[ext_resource type="Resource" uid="uid://bj2807sghnvk0" path="res://Data/Levels/TheEdge/TheEdge.tres" id="2_5dl06"]
 [ext_resource type="Script" path="res://Game/TurnManager/TurnManager.gd" id="12_q02uk"]
 [ext_resource type="Script" path="res://Game/SpawnHandler/SpawnHandler.gd" id="13_8agfr"]
-[ext_resource type="PackedScene" uid="uid://bvu03ruea1xp7" path="res://Data/Levels/TheEdge/TheEdge.tscn" id="14_mkwqk"]
 [ext_resource type="PackedScene" uid="uid://b78b62i3ejtqc" path="res://UI/BossOverlay/BossOverlay.tscn" id="15_agi7d"]
 [ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://Menus/UpgradeMenu/UpgradeMenu.tscn" id="15_tirfb"]
 [ext_resource type="FontFile" uid="uid://delvnctbli24y" path="res://Assets/fonts/Caudex-Bold.ttf" id="16_b5t7g"]
@@ -29,8 +19,7 @@ base_font = ExtResource("17_ol6ej")
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_iqcmv")
-level_scene = ExtResource("14_mkwqk")
-all_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("2_xqarq"), ExtResource("3_y0dea"), ExtResource("4_im0t6"), ExtResource("5_qew2g"), ExtResource("6_7jb6r"), ExtResource("7_tnt3y"), ExtResource("8_4cicd"), ExtResource("9_062os"), ExtResource("10_eskxg"), ExtResource("11_au730")])
+level_data = ExtResource("2_5dl06")
 
 [node name="TurnManager" type="Node" parent="."]
 script = ExtResource("12_q02uk")

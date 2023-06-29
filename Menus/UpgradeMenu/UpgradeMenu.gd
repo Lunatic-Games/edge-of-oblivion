@@ -25,12 +25,11 @@ var is_currently_picking_item: bool = false
 func _ready() -> void:
 	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
 	GlobalSignals.item_reached_max_tier.connect(_on_item_reached_max_tier)
-	show()
-
-
-func setup(all_available_items: Array[ItemData]) -> void:
-	for item_data in all_available_items:
+	
+	for item_data in GlobalAccount.unlocked_items:
 		available_items.append(item_data)
+	
+	show()
 
 
 func spawn_upgrade_cards(number_of_cards_to_spawn: int) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dec5mxhj85sw3"]
+[gd_scene load_steps=12 format=3 uid="uid://dec5mxhj85sw3"]
 
 [ext_resource type="Script" path="res://Globals/DebugMenu/DebugMenu.gd" id="1_m11rj"]
 [ext_resource type="PackedScene" uid="uid://er66f71v3mir" path="res://Globals/DebugMenu/MenuDropdownButton/MenuDropdownButton.tscn" id="2_1ghm6"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://Globals/DebugMenu/Dropdowns/SceneDropdown.gd" id="6_2s5fk"]
 [ext_resource type="Script" path="res://Globals/DebugMenu/Dropdowns/LevelsDropdown.gd" id="7_np8t4"]
 [ext_resource type="Script" path="res://Globals/DebugMenu/Dropdowns/MiscDropdown.gd" id="7_o4g26"]
+[ext_resource type="Script" path="res://Globals/DebugMenu/Dropdowns/AccountDropdown.gd" id="8_cac8b"]
+[ext_resource type="Script" path="res://Globals/DebugMenu/Dropdowns/SaveDropdown.gd" id="9_14ejx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68xp4"]
 bg_color = Color(0.0823529, 0.0901961, 0.219608, 1)
@@ -63,6 +65,16 @@ script = ExtResource("6_2s5fk")
 layout_mode = 2
 text = "Levels..."
 script = ExtResource("7_np8t4")
+
+[node name="AccountDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_1ghm6")]
+layout_mode = 2
+text = "Account..."
+script = ExtResource("8_cac8b")
+
+[node name="SaveDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_1ghm6")]
+layout_mode = 2
+text = "Save..."
+script = ExtResource("9_14ejx")
 
 [node name="MiscDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_1ghm6")]
 layout_mode = 2

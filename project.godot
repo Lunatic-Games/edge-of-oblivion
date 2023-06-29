@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Edge of Oblivion"
-run/main_scene="res://Game/Game.tscn"
+run/main_scene="res://Menus/Boot/BootScreen.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
@@ -20,6 +20,7 @@ config/icon="res://icon.png"
 GlobalGameState="*res://Globals/GameState.gd"
 GlobalSignals="*res://Globals/Signals.gd"
 GlobalLogicTreeSignals="*res://Globals/LogicTreeSignals.gd"
+GlobalAccount="*res://Globals/Account/Account.tscn"
 MusicManager="res://Globals/MusicManager/MusicManager.tscn"
 DebugMenu="res://Globals/DebugMenu/DebugMenu.tscn"
 

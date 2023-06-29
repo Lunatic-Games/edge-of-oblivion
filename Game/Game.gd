@@ -4,8 +4,7 @@ extends Node2D
 
 const MAIN_MENU_SCENE: PackedScene = preload("res://Menus/MainMenu/MainMenu.tscn")
 
-@export var level_scene: PackedScene
-@export var all_items: Array[ItemData]
+@export var level_data: LevelData
 
 var level: Level
 
@@ -25,7 +24,7 @@ func _ready() -> void:
 	
 	GlobalSignals.new_round_started.connect(_on_new_round_started)
 	
-	level = level_scene.instantiate()
+	level = level_data.level_scene.instantiate()
 	add_child(level)
 	move_child(level, spawn_handler.get_index() + 1)
 	await level.board.tile_generation_completed
@@ -34,7 +33,6 @@ func _ready() -> void:
 	var player: Player = spawn_handler.spawn_player()
 	player.add_starting_items()
 	
-	upgrade_menu.setup(all_items)
 	turn_manager.new_round()
 	
 	GlobalSignals.game_started.emit()

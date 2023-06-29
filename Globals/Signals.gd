@@ -1,6 +1,8 @@
 extends Node
 
 
+signal save_loaded
+
 signal game_started
 signal main_menu_entered
 signal new_round_started
