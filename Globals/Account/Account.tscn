@@ -16,12 +16,12 @@
 
 [sub_resource type="Resource" id="Resource_1qmer"]
 script = ExtResource("11_jpvjp")
-xp_cost = 100
+xp_cost = 5
 item_unlocks = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("10_460tp")])
 
 [sub_resource type="Resource" id="Resource_mac5m"]
 script = ExtResource("11_jpvjp")
-xp_cost = 100
+xp_cost = 5
 item_unlocks = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("13_dxm28"), ExtResource("12_eu5fd")])
 
 [node name="Account" type="Node"]

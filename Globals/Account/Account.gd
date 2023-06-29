@@ -16,11 +16,12 @@ func _ready() -> void:
 	unlocked_items.append_array(starting_items)
 
 
-# Returns whether the account level increased
-func gain_xp(amount: int) -> bool:
+func gain_xp(amount: int) -> AccountXPGainResult:
 	xp += amount
 	
-	var did_level_up: bool = false
+	var gain_result: AccountXPGainResult = AccountXPGainResult.new()
+	gain_result.xp_gained = amount
+	
 	var next_level_data_i: int = level - 1  # At level 1 next is level 2 data stored at index 0
 	while next_level_data_i < levelling.size():
 		var next_level_data: AccountLevelData = levelling[next_level_data_i]
@@ -31,13 +32,14 @@ func gain_xp(amount: int) -> bool:
 		level += 1
 		unlocked_items.append_array(next_level_data.item_unlocks)
 		next_level_data_i += 1
-		did_level_up = true
+		gain_result.times_levelled_up += 1
+		gain_result.items_unlocked.append_array(next_level_data.item_unlocks)
 		
 		levelled_up.emit(level)
 		if next_level_data_i >= levelling.size():
 			reached_max_level.emit(level)
 	
-	return did_level_up
+	return gain_result
 
 
 func get_items_unlocked_for_current_level() -> Array[ItemData]:
@@ -52,11 +54,20 @@ func get_items_unlocked_for_current_level() -> Array[ItemData]:
 
 # Returns -1 if there is no next level
 func get_xp_to_next_level() -> int:
+	var next_level_cost: int = get_total_xp_cost_of_next_level()
+	if next_level_cost == -1:
+		return -1
+	
+	return next_level_cost - xp
+
+
+# Returns -1 if there is no next level
+func get_total_xp_cost_of_next_level() -> int:
 	var next_level_data_i: int = level - 1
 	if next_level_data_i >= levelling.size():
 		return -1
 	
-	return levelling[next_level_data_i].xp_cost - xp
+	return levelling[next_level_data_i].xp_cost
 
 
 func get_max_level() -> int:
