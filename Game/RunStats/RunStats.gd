@@ -1,3 +1,4 @@
+class_name RunStats
 extends Node
 
 

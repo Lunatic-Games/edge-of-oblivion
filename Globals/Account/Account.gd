@@ -16,9 +16,11 @@ func _ready() -> void:
 	unlocked_items.append_array(starting_items)
 
 
-func gain_xp(amount: int) -> void:
+# Returns whether the account level increased
+func gain_xp(amount: int) -> bool:
 	xp += amount
 	
+	var did_level_up: bool = false
 	var next_level_data_i: int = level - 1  # At level 1 next is level 2 data stored at index 0
 	while next_level_data_i < levelling.size():
 		var next_level_data: AccountLevelData = levelling[next_level_data_i]
@@ -29,10 +31,13 @@ func gain_xp(amount: int) -> void:
 		level += 1
 		unlocked_items.append_array(next_level_data.item_unlocks)
 		next_level_data_i += 1
+		did_level_up = true
 		
 		levelled_up.emit(level)
 		if next_level_data_i >= levelling.size():
 			reached_max_level.emit(level)
+	
+	return did_level_up
 
 
 func get_items_unlocked_for_current_level() -> Array[ItemData]:

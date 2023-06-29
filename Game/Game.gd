@@ -10,10 +10,11 @@ var level: Level
 
 @onready var turn_manager: TurnManager = $TurnManager
 @onready var spawn_handler: SpawnHandler = $SpawnHandler
+@onready var run_stats: RunStats = $RunStats
 
-@onready var upgrade_menu: CanvasLayer = $Menus/UpgradeMenu
-@onready var victory_menu: CanvasLayer = $Menus/VictoryMenu
-@onready var game_over_menu: CanvasLayer = $Menus/GameOverMenu
+@onready var upgrade_menu: UpgradeMenu = $Menus/UpgradeMenu
+@onready var victory_menu: VictoryMenu = $Menus/VictoryMenu
+@onready var game_over_menu: GameOverMenu = $Menus/GameOverMenu
 
 
 func _ready() -> void:
@@ -55,6 +56,11 @@ func _on_Player_died(_player: Player) -> void:
 	upgrade_menu.hide()
 	await get_tree().create_timer(1.0).timeout
 	
+	var run_xp: int = run_stats.calc_xp()
+	var levelled_up: bool = GlobalAccount.gain_xp(run_xp)
+	game_over_menu.run_summary.update(run_xp, levelled_up)
+	Saving.save_to_file()
+	
 	game_over_menu.show()
 
 
@@ -65,5 +71,10 @@ func _on_Boss_defeated(_boss: Boss) -> void:
 	GlobalGameState.game_ended = true
 	upgrade_menu.hide()
 	await get_tree().create_timer(1.0).timeout
+	
+	var run_xp: int = run_stats.calc_xp()
+	var levelled_up: bool = GlobalAccount.gain_xp(run_xp)
+	victory_menu.run_summary.update(run_xp, levelled_up)
+	Saving.save_to_file()
 	
 	victory_menu.show()
