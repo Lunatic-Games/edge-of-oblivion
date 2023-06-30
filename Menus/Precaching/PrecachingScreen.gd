@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 const PARTICLES_FOLDER_PATH: String = "res://Data/Particles"
-const UNITS_FOLDER_PATH: String = "res://Data/Units"
+const UNITS_FOLDER_PATH: String = "res://Data/Occupants"
 
 
 func _ready() -> void:

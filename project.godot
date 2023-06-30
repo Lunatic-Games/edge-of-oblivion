@@ -11,17 +11,17 @@ config_version=5
 [application]
 
 config/name="Edge of Oblivion"
-run/main_scene="res://GameScene/GameScene.tscn"
+run/main_scene="res://Game/Game.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [autoload]
 
-GameManager="*res://Globals/GameManager.gd"
-Debug="*res://Globals/Debug.gd"
-MusicManager="*res://Globals/MusicManager/MusicManager.tscn"
+GlobalGameState="*res://Globals/GameState.gd"
 GlobalSignals="*res://Globals/Signals.gd"
 GlobalLogicTreeSignals="*res://Globals/LogicTreeSignals.gd"
+MusicManager="res://Globals/MusicManager/MusicManager.tscn"
+Debug="res://Globals/Debug.gd"
 
 [debug]
 

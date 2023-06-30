@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Data/Levels/Level.gd" id="1_8gsta"]
 [ext_resource type="Script" path="res://Data/Levels/Waves.gd" id="2_3i1yj"]
-[ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://GameScene/Board/Board.tscn" id="6_p140s"]
+[ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://Game/Board/Board.tscn" id="3_4g7nv"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_8gsta")
@@ -10,4 +10,4 @@ script = ExtResource("1_8gsta")
 [node name="Waves" type="Node" parent="."]
 script = ExtResource("2_3i1yj")
 
-[node name="Board" parent="." instance=ExtResource("6_p140s")]
+[node name="Board" parent="." instance=ExtResource("3_4g7nv")]

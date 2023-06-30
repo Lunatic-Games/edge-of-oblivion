@@ -1,0 +1,113 @@
+[gd_scene load_steps=14 format=3 uid="uid://duyl86m61pckf"]
+
+[ext_resource type="PackedScene" uid="uid://cq6cufn4fk6s3" path="res://Data/Occupants/Unit.tscn" id="1"]
+[ext_resource type="Script" path="res://Data/Occupants/Enemies/Enemy.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://bvu1bphpfddf1" path="res://UI/HoverPopups/EnemyPopup/EnemyPopup.tscn" id="3_1t0xc"]
+[ext_resource type="Script" path="res://LogicTree/Triggers/EntityTriggers/OnEntityUpdate.gd" id="3_tqkrt"]
+[ext_resource type="Material" uid="uid://dtm7co10b0rj" path="res://Shaders/enemy_material.tres" id="4_j1yv0"]
+[ext_resource type="Script" path="res://LogicTree/Variables/EntityArrayVariable.gd" id="4_ktiyx"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="4_vws5t"]
+[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="5_fk80c"]
+
+[sub_resource type="Animation" id="6"]
+resource_name = "damaged"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.125, 0.125), Vector2(0.085, 0.085), Vector2(0.1, 0.1), Vector2(0.09, 0.09), Vector2(0.13, 0.13), Vector2(0.125, 0.125)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -10.0, 10.0, -5.0, 5.0, -1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8ung8"]
+resource_name = "spawn"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.18, 0.18), Vector2(0.125, 0.125)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mhx0i"]
+_data = {
+"damaged": SubResource("6"),
+"spawn": SubResource("Animation_8ung8")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njfde"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1y27"]
+bg_color = Color(0.223529, 0.478431, 0.611765, 1)
+
+[node name="Enemy" instance=ExtResource("1")]
+script = ExtResource("2")
+popup_info_text = ""
+popup_flavor_text = ""
+xp = 1
+
+[node name="EnemyPopupHover" parent="." index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("3_1t0xc")]
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+enemy = NodePath("..")
+
+[node name="Sprite2D" parent="." index="1"]
+material = ExtResource("4_j1yv0")
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_mhx0i")
+}
+
+[node name="AttackBar" type="ProgressBar" parent="." index="4"]
+offset_left = -24.0
+offset_top = 35.0
+offset_right = 24.0
+offset_bottom = 39.0
+theme_override_styles/background = SubResource("StyleBoxFlat_njfde")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r1y27")
+show_percentage = false
+
+[node name="LT_PersistentVariables" type="Node" parent="." index="5"]
+
+[node name="LT_OnEntityUpdate" type="Node" parent="." index="6" node_paths=PackedStringArray("output_entity", "output_entity_tile", "logic_tree_on_trigger")]
+script = ExtResource("3_tqkrt")
+output_entity = NodePath("This enemy")
+output_entity_tile = NodePath("Enemy tile")
+logic_tree_on_trigger = NodePath("LogicTree")
+
+[node name="This enemy" type="Node" parent="LT_OnEntityUpdate" index="0"]
+script = ExtResource("4_ktiyx")
+
+[node name="Enemy tile" type="Node" parent="LT_OnEntityUpdate" index="1"]
+script = ExtResource("4_vws5t")
+
+[node name="LogicTree" type="Node" parent="LT_OnEntityUpdate" index="2"]
+script = ExtResource("5_fk80c")
