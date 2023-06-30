@@ -32,6 +32,8 @@ func _on_PressAnything_anything_pressed() -> void:
 
 
 func _on_PlayButton_pressed() -> void:
+	transition_player.play("fade_out_to_black")
+	await transition_player.animation_finished
 	get_tree().change_scene_to_packed(GAME_SCENE)
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://0364xgi5b6v8"]
+[gd_scene load_steps=56 format=3 uid="uid://0364xgi5b6v8"]
 
 [ext_resource type="Script" path="res://UI/Menus/MainMenu/MainMenu.gd" id="1_43f1y"]
 [ext_resource type="Texture2D" uid="uid://b7i4tg1ov4x4t" path="res://Assets/art/background/main-menu/background.png" id="2_o7bjx"]
@@ -837,6 +837,42 @@ tracks/32/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("FadeRect:self_modulate")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("FadeRect:visible")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("Title:visible")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_hc8cp"]
 resource_name = "anything_pressed"
@@ -1274,15 +1310,119 @@ tracks/4/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_oy7mv"]
+resource_name = "fade_out_to_black"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MenuContainer:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PressAnything:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MenuContainer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Title:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"set_menu_buttons_enabled"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FadeRect:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("FadeRect:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a017v"]
 _data = {
 "RESET": SubResource("Animation_puduo"),
 "anything_pressed": SubResource("Animation_hc8cp"),
 "fade_in_menu": SubResource("Animation_pajpu"),
-"fade_out_menu": SubResource("Animation_13bsn")
+"fade_out_menu": SubResource("Animation_13bsn"),
+"fade_out_to_black": SubResource("Animation_oy7mv")
 }
 
 [node name="MainMenu" type="CanvasLayer"]
+layer = 0
 script = ExtResource("1_43f1y")
 
 [node name="Background" type="Control" parent="."]
@@ -1645,6 +1785,10 @@ theme_override_constants/separation = -10
 layout_mode = 2
 text = "PLAY"
 
+[node name="SettingsButton" parent="MenuContainer" instance=ExtResource("19_step2")]
+layout_mode = 2
+text = "SETTINGS"
+
 [node name="CreditsButton" parent="MenuContainer" instance=ExtResource("19_step2")]
 layout_mode = 2
 text = "CREDITS"
@@ -1653,8 +1797,16 @@ text = "CREDITS"
 layout_mode = 2
 text = "QUIT"
 
+[node name="FadeRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="CreditsMenu" parent="." instance=ExtResource("20_gw22j")]
-layer = 2
 visible = false
 
 [node name="TransitionAnimator" type="AnimationPlayer" parent="."]
