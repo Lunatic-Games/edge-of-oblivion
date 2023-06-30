@@ -3,10 +3,10 @@ extends Node
 const GAME_SCENE: PackedScene = preload("res://Game/Game.tscn")
 
 @onready var title: Control = $Title
-@onready var start_page: Control = $StartPage
-@onready var credits_page: Control = $CreditsPage
+@onready var menu_container: Control = $MenuContainer
+@onready var quit_button: Button = $MenuContainer/QuitButton
+@onready var credits_menu: CanvasLayer = $CreditsMenu
 @onready var transition_player: AnimationPlayer = $TransitionAnimator
-@onready var quit_button: Button = $StartPage/MenuContainer/QuitButton
 
 
 func _ready() -> void:
@@ -17,19 +17,11 @@ func _ready() -> void:
 	GlobalSignals.main_menu_entered.emit()
 
 
-func _on_PlayButton_pressed() -> void:
-	get_tree().change_scene_to_packed(GAME_SCENE)
-
-
-func _on_CreditsButton_pressed() -> void:
-	title.hide()
-	start_page.hide()
-	credits_page.show()
-
-
-func _on_ReturnToStartPage_pressed() -> void:
-	credits_page.hide()
-	start_page.show()
+func set_menu_buttons_enabled(set_enabled: bool = true):
+	for child in menu_container.get_children():
+		var as_button: Button = child as Button
+		if as_button:
+			as_button.disabled = !set_enabled
 
 
 func _on_PressAnything_anything_pressed() -> void:
@@ -39,11 +31,19 @@ func _on_PressAnything_anything_pressed() -> void:
 	transition_player.play("anything_pressed")
 
 
+func _on_PlayButton_pressed() -> void:
+	get_tree().change_scene_to_packed(GAME_SCENE)
+
+
+func _on_CreditsButton_pressed() -> void:
+	transition_player.play("fade_out_menu")
+	await transition_player.animation_finished
+	credits_menu.fade_in()
+
+
 func _on_QuitButton_pressed() -> void:
 	get_tree().quit()
 
 
-func _on_return_to_main_menu_button_pressed() -> void:
-	credits_page.hide()
-	title.show()
-	start_page.show()
+func _on_CreditsMenu_faded_out() -> void:
+	transition_player.play("fade_in_menu")
