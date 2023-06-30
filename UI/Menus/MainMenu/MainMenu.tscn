@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://0364xgi5b6v8"]
+[gd_scene load_steps=57 format=3 uid="uid://0364xgi5b6v8"]
 
 [ext_resource type="Script" path="res://UI/Menus/MainMenu/MainMenu.gd" id="1_43f1y"]
 [ext_resource type="Texture2D" uid="uid://b7i4tg1ov4x4t" path="res://Assets/art/background/main-menu/background.png" id="2_o7bjx"]
@@ -18,8 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://b4gh2knbqgt8e" path="res://Assets/art/background/main-menu/title.png" id="16_kp720"]
 [ext_resource type="Script" path="res://UI/Menus/MainMenu/PressAnything/PressAnything.gd" id="17_jtpuf"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="18_3t1k6"]
-[ext_resource type="PackedScene" path="res://UI/Menus/MainMenu/MenuButton/MenuButton.tscn" id="19_step2"]
+[ext_resource type="PackedScene" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="19_step2"]
 [ext_resource type="PackedScene" uid="uid://brcokbmoxawv4" path="res://UI/Menus/CreditsMenu/CreditsMenu.tscn" id="20_gw22j"]
+[ext_resource type="PackedScene" uid="uid://ph4dg61vtfbr" path="res://UI/Menus/SettingsMenu/SettingsMenu.tscn" id="20_uvn8p"]
 [ext_resource type="Script" path="res://UI/Menus/MainMenu/BugFix.gd" id="23_tkk0n"]
 
 [sub_resource type="Animation" id="Animation_jk1r8"]
@@ -1166,6 +1167,72 @@ tracks/23/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_pajpu"]
+resource_name = "fade_in_menu"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MenuContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MenuContainer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Title:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"set_menu_buttons_enabled"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_13bsn"]
 resource_name = "fade_out_menu"
 length = 0.3
@@ -1240,72 +1307,6 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [false],
-"method": &"set_menu_buttons_enabled"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_pajpu"]
-resource_name = "fade_in_menu"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Title:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MenuContainer:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MenuContainer:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Title:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [true],
 "method": &"set_menu_buttons_enabled"
 }]
 }
@@ -1422,7 +1423,6 @@ _data = {
 }
 
 [node name="MainMenu" type="CanvasLayer"]
-layer = 0
 script = ExtResource("1_43f1y")
 
 [node name="Background" type="Control" parent="."]
@@ -1530,6 +1530,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_d844q")
@@ -1559,6 +1561,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_mqn73")
@@ -1622,6 +1626,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("13_66h67")
@@ -1633,6 +1639,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("14_suo5m")
@@ -1806,7 +1814,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="SettingsMenu" parent="." instance=ExtResource("20_uvn8p")]
+visible = false
+
 [node name="CreditsMenu" parent="." instance=ExtResource("20_gw22j")]
+layer = 2
 visible = false
 
 [node name="TransitionAnimator" type="AnimationPlayer" parent="."]

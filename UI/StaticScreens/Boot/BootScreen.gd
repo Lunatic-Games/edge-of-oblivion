@@ -6,14 +6,15 @@ extends CanvasLayer
 
 @export_group("Debug build")
 @export var debug_start_scene: PackedScene
-@export var debug_load_save_file: bool = false
+@export var debug_load_progress_save_file: bool = false
+@export var debug_load_settings_save_file: bool = false
 
 
 func _ready() -> void:
 	assert(default_start_scene != null, "No default start scene set")
 	
-	if !OS.is_debug_build() or debug_load_save_file:
-		Saving.load_from_file()
+	if !OS.is_debug_build() or debug_load_progress_save_file:
+		Saving.load_progress_from_file()
 	
 	if OS.is_debug_build() and debug_start_scene != null:
 		get_tree().change_scene_to_packed(debug_start_scene)

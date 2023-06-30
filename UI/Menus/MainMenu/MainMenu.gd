@@ -15,6 +15,7 @@ func _ready() -> void:
 	
 	transition_player.play("RESET")
 	GlobalSignals.main_menu_entered.emit()
+	Saving.save_user_settings_to_file()
 
 
 func set_menu_buttons_enabled(set_enabled: bool = true):

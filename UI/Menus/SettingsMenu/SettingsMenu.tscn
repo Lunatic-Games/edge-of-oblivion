@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=3 uid="uid://ph4dg61vtfbr"]
+
+[ext_resource type="PackedScene" uid="uid://iyasik6rdb1c" path="res://UI/Menus/SettingsMenu/SettingLabel/SettingLabel.tscn" id="1_h2mqc"]
+[ext_resource type="PackedScene" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="1_knej6"]
+[ext_resource type="Script" path="res://UI/Menus/SettingsMenu/VolumeButton/VolumeButton.gd" id="3_e71nh"]
+
+[node name="SettingsMenu" type="CanvasLayer"]
+layer = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -368.5
+offset_top = -214.0
+offset_right = 368.5
+offset_bottom = 214.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="MasterVolumeContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="SettingLabel" parent="VBoxContainer/MasterVolumeContainer" instance=ExtResource("1_h2mqc")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MenuButton" parent="VBoxContainer/MasterVolumeContainer" instance=ExtResource("1_knej6")]
+layout_mode = 2
+text = "100%"
+script = ExtResource("3_e71nh")
+
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SettingLabel" parent="VBoxContainer/MusicVolumeContainer" instance=ExtResource("1_h2mqc")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MUSIC VOLUME:"
+
+[node name="MenuButton" parent="VBoxContainer/MusicVolumeContainer" instance=ExtResource("1_knej6")]
+layout_mode = 2
+text = "100%"
+
+[node name="SFXVolumeContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SettingLabel" parent="VBoxContainer/SFXVolumeContainer" instance=ExtResource("1_h2mqc")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFX VOLUME:"
+
+[node name="MenuButton" parent="VBoxContainer/SFXVolumeContainer" instance=ExtResource("1_knej6")]
+layout_mode = 2
+text = "100%"
+
+[node name="ResolutionContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SettingLabel" parent="VBoxContainer/ResolutionContainer" instance=ExtResource("1_h2mqc")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RESOLUTION:"
+
+[node name="MenuButton" parent="VBoxContainer/ResolutionContainer" instance=ExtResource("1_knej6")]
+layout_mode = 2
+text = "1280x720"
+
+[node name="FullscreenContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SettingLabel" parent="VBoxContainer/FullscreenContainer" instance=ExtResource("1_h2mqc")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FULLSCREEN:"
+
+[node name="MenuButton" parent="VBoxContainer/FullscreenContainer" instance=ExtResource("1_knej6")]
+layout_mode = 2
+text = "ENABLE"
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="CancelButton" parent="VBoxContainer/ButtonContainer" instance=ExtResource("1_knej6")]
+layout_mode = 2
+text = "CANCEL"
+
+[node name="ConfirmButton" parent="VBoxContainer/ButtonContainer" instance=ExtResource("1_knej6")]
+layout_mode = 2
+text = "CONFIRM"

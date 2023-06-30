@@ -49,7 +49,7 @@ func victory():
 	
 	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
 	game_over_menu.run_summary.update(gain_result)
-	Saving.save_to_file()
+	Saving.save_progress_to_file()
 	
 	game_over_menu.show()
 
@@ -64,7 +64,7 @@ func game_over():
 	
 	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
 	victory_menu.run_summary.update(gain_result)
-	Saving.save_to_file()
+	Saving.save_progress_to_file()
 	
 	victory_menu.show()
 

@@ -7,8 +7,8 @@ func setup() -> void:
 
 
 func save_progress() -> void:
-	Saving.save_to_file()
+	Saving.save_progress_to_file()
 
 
 func load_progress() -> void:
-	Saving.load_from_file()
+	Saving.load_progress_from_file()
