@@ -6,9 +6,13 @@ const GAME_SCENE: PackedScene = preload("res://Game/Game.tscn")
 @onready var start_page: Control = $StartPage
 @onready var credits_page: Control = $CreditsPage
 @onready var transition_player: AnimationPlayer = $TransitionAnimator
+@onready var quit_button: Button = $StartPage/MenuContainer/QuitButton
 
 
 func _ready() -> void:
+	if OS.has_feature("web"):
+		quit_button.hide()  # Doesn't work in web browser
+	
 	transition_player.play("RESET")
 	GlobalSignals.main_menu_entered.emit()
 

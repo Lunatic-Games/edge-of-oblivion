@@ -42,4 +42,5 @@ func can_attack_player() -> bool:
 
 func die() -> void:
 	GlobalGameState.player.gain_experience(xp)
+	GlobalSignals.enemy_killed.emit(self)
 	super.die()

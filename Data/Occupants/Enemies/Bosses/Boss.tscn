@@ -47,6 +47,7 @@ color = Color(0.937255, 0.713726, 0.627451, 1)
 script = ExtResource("5")
 display_name = ""
 sound_track = null
+xp = 5
 move_precedence = 3.0
 
 [node name="AttackReadySprite" type="Sprite2D" parent="." index="1"]

@@ -20,6 +20,4 @@ func show_victory_screen():
 	if GlobalGameState.game == null:
 		return
 	
-	GlobalGameState.game_ended = true
-	GlobalGameState.game.upgrade_menu.hide()
-	GlobalGameState.game.victory_screen.show()
+	GlobalGameState.game._on_Boss_defeated(Boss.new())

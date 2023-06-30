@@ -11,7 +11,10 @@ func setup() -> void:
 	
 	var loaded_items: Array[ItemData] = []
 	for path in item_data_paths:
-		loaded_items.append(load(path))
+		var item_data: ItemData = load(path) as ItemData
+		if item_data == null:
+			continue
+		loaded_items.append(item_data)
 	
 	for item_data in loaded_items:
 		var display_name: String = _get_display_name_for_item(null, item_data)
