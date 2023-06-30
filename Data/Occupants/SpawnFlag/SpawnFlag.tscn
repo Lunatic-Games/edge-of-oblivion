@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cojcgawkpa4lt" path="res://Assets/art/icons/misc/lorc/spawn_flag.png" id="1"]
 [ext_resource type="Script" path="res://Data/Occupants/SpawnFlag/SpawnFlag.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://1rgwr4l47b25" path="res://UI/HoverPopups/TextPopup/TextPopup.tscn" id="3_86bp5"]
+[ext_resource type="PackedScene" uid="uid://1rgwr4l47b25" path="res://UI/Elements/HoverPopups/TextPopup/TextPopup.tscn" id="3_86bp5"]
 
 [sub_resource type="Animation" id="2"]
 resource_name = "remove"

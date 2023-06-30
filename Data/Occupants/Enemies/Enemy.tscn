@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cq6cufn4fk6s3" path="res://Data/Occupants/Unit.tscn" id="1"]
 [ext_resource type="Script" path="res://Data/Occupants/Enemies/Enemy.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://bvu1bphpfddf1" path="res://UI/HoverPopups/EnemyPopup/EnemyPopup.tscn" id="3_1t0xc"]
+[ext_resource type="PackedScene" uid="uid://bvu1bphpfddf1" path="res://UI/Elements/HoverPopups/EnemyPopup/EnemyPopup.tscn" id="3_1t0xc"]
 [ext_resource type="Script" path="res://LogicTree/Triggers/EntityTriggers/OnEntityUpdate.gd" id="3_tqkrt"]
 [ext_resource type="Material" uid="uid://dtm7co10b0rj" path="res://Shaders/enemy_material.tres" id="4_j1yv0"]
 [ext_resource type="Script" path="res://LogicTree/Variables/EntityArrayVariable.gd" id="4_ktiyx"]
