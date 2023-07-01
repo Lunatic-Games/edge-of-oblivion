@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://cq6sdagc60luj"]
 
 [ext_resource type="Script" path="res://Data/Items/Item.gd" id="1_fpqcw"]
-[ext_resource type="PackedScene" uid="uid://csppnkkol763h" path="res://UI/HoverPopups/ItemPopup/ItemPopup.tscn" id="2_28p5n"]
+[ext_resource type="PackedScene" uid="uid://csppnkkol763h" path="res://UI/Elements/HoverPopups/ItemPopup/ItemPopup.tscn" id="2_28p5n"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="2_rix8y"]
 [ext_resource type="Script" path="res://Data/Items/BugFix.gd" id="3_4tnbp"]
 [ext_resource type="Script" path="res://LogicTree/Triggers/ItemTriggers/OnItemSetupCompleted.gd" id="4_l35wj"]

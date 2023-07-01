@@ -1,0 +1,424 @@
+[gd_scene load_steps=10 format=3 uid="uid://brcokbmoxawv4"]
+
+[ext_resource type="Script" path="res://UI/Menus/CreditsMenu/CreditsMenu.gd" id="1_5eabg"]
+[ext_resource type="PackedScene" uid="uid://d1or5bodb071m" path="res://UI/Menus/CreditsMenu/CreditsTitle/CreditsTitle.tscn" id="1_l5vvn"]
+[ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="1_v408o"]
+[ext_resource type="PackedScene" uid="uid://c46ydrqwl63ca" path="res://UI/Menus/CreditsMenu/CreditsListing/CreditsListing.tscn" id="2_7bhp8"]
+[ext_resource type="PackedScene" uid="uid://cw1flpllc28iw" path="res://UI/Menus/CreditsMenu/CreditsSmallListing/CreditsSmallListing.tscn" id="3_0vm3t"]
+
+[sub_resource type="Animation" id="Animation_v0hs2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cqrd7"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_k2k4n"]
+resource_name = "fade_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_614gl"]
+_data = {
+"RESET": SubResource("Animation_v0hs2"),
+"fade_in": SubResource("Animation_cqrd7"),
+"fade_out": SubResource("Animation_k2k4n")
+}
+
+[node name="CreditsMenu" type="CanvasLayer"]
+script = ExtResource("1_5eabg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 165
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Sections" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 75
+
+[node name="Programming" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections"]
+layout_mode = 2
+
+[node name="CreditsTitle" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Programming" instance=ExtResource("1_l5vvn")]
+layout_mode = 2
+text = "Programming"
+
+[node name="Matthias" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Programming" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "Matthias Harden"
+
+[node name="Noah" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Programming" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "Noah Jacobsen"
+
+[node name="Joe" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Programming" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "Joe Zlonicky"
+
+[node name="GameDesign" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections"]
+layout_mode = 2
+
+[node name="CreditsTitle" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/GameDesign" instance=ExtResource("1_l5vvn")]
+layout_mode = 2
+text = "Game Design"
+
+[node name="Matthias" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/GameDesign" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "Matthias Harden"
+
+[node name="Noah" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/GameDesign" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "Noah Jacobsen"
+
+[node name="Art" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections"]
+layout_mode = 2
+
+[node name="CreditsTitle" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("1_l5vvn")]
+layout_mode = 2
+text = "Art"
+
+[node name="Emily" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "Emily Adam-oro (Pixel_dragon)"
+
+[node name="ExtraSpace" type="Control" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Art"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="AssetsLicensedBy" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "Game Assets Licensed By Cc 3.0
+From The Following Creators:
+Lorc
+Delapouite
+Skoll
+SBed"
+
+[node name="AllAssetsCanBeFoundAt" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "All Assets Can Be Found At
+https://game-icons.net"
+
+[node name="Music" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections"]
+layout_mode = 2
+
+[node name="CreditsTitle" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("1_l5vvn")]
+layout_mode = 2
+text = "Music"
+
+[node name="Chase" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "CHASE BY ALEXANDER NAKARADA
+WWW.SERPENTSOUNDSTUDIOS.COM
+"
+
+[node name="ChaseMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL
+CREATIVE COMMONS CC BY 4.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/4.0
+"
+
+[node name="DragonCastle" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+DRAGON CASTLE BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="DragonCastleMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+"
+
+[node name="DragonWorld" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+DRAGON WORLD BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="DragonWorldMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+"
+
+[node name="Durandal" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+DURANDAL BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="DurandalMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+"
+
+[node name="Hitman" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+HITMAN BY KEVIN MACLEOD
+WWW.INCOMPETECH.COM"
+
+[node name="HitmanMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+"
+
+[node name="HostilesInbound" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+HOSTILES INBOUND BY MIGUEL JOHNSON
+WWW.SOUNDCLOUD.COM/MIGUELJOHNSONMJMUSIC"
+
+[node name="HostilesInboundMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+"
+
+[node name="TorchOfKnowledge" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+THE TORCH OF KNOWLEDGE BY DAMIANO BALDONI
+WWW.SOUNDCLOUD.COM/DAMIANO_BALDONI"
+
+[node name="TorchOfKnowledgeMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 4.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/4.0/
+"
+
+[node name="AllOutAttack" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+ALL OUT ATTACK BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="AllOutAttackMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+"
+
+[node name="Duel" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+DUEL BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="DuelMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+"
+
+[node name="EndlessStorm" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+ENDLESS STORM BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="EndlessStormMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+"
+
+[node name="GloryEternal" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+GLORY ETERNAL BY DARREN CURTIS
+WWW.DARRENCURTISMUSIC.COM"
+
+[node name="GloryEternalMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+"
+
+[node name="GoddessOfFate" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+GODDESS OF FATE BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="GoddessOfFateMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+"
+
+[node name="HydraAndAsh" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+HYDRA AND ASH BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="HydraAndAshMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+"
+
+[node name="ArmyOfMinotaur" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+THE ARMY OF MINOTAUR BY MAKAI SYMPHONY
+WWW.SOUNDCLOUD.COM/MAKAI-SYMPHONY"
+
+[node name="ArmyOfMinotaurMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY-SA 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY-SA/3.0/
+"
+
+[node name="PhantomsCastle" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+THE PHANTOM’S CASTLE BY DARREN CURTIS
+WWW.DARRENCURTISMUSIC.COM"
+
+[node name="PhantomsCastleMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+"
+
+[node name="FallFromGrace" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+FALL FROM GRACE BY DARREN CURTIS
+WWW.DARRENCURTISMUSIC.COM"
+
+[node name="FallFromGraceMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+"
+
+[node name="LurkingEvil" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+LURKING EVIL BY DARREN CURTIS
+WWW.DARRENCURTISMUSIC.COM"
+
+[node name="LurkingEvilMore" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Music" instance=ExtResource("3_0vm3t")]
+layout_mode = 2
+text = "MUSIC PROMOTED BY WWW.CHOSIC.COM/FREE-MUSIC/ALL/
+CREATIVE COMMONS CC BY 3.0
+WWW.CREATIVECOMMONS.ORG/LICENSES/BY/3.0/
+"
+
+[node name="CreditsListing" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections" instance=ExtResource("2_7bhp8")]
+layout_mode = 2
+text = "
+And Thank You!"
+
+[node name="ExtraSpace" type="Control" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="ReturnToMainMenuButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_v408o")]
+layout_mode = 2
+text = "RETURN TO MAIN MENU"
+
+[node name="TransitionPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_614gl")
+}
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ReturnToMainMenuButton" to="." method="_on_return_to_main_menu_button_pressed"]
