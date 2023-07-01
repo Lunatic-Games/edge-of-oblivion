@@ -1,11 +1,92 @@
-[gd_scene load_steps=4 format=3 uid="uid://ph4dg61vtfbr"]
+[gd_scene load_steps=10 format=3 uid="uid://ph4dg61vtfbr"]
 
 [ext_resource type="PackedScene" uid="uid://iyasik6rdb1c" path="res://UI/Menus/SettingsMenu/SettingLabel/SettingLabel.tscn" id="1_h2mqc"]
-[ext_resource type="PackedScene" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="1_knej6"]
+[ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="1_knej6"]
+[ext_resource type="Script" path="res://UI/Menus/SettingsMenu/SettingsMenu.gd" id="1_vec6a"]
 [ext_resource type="Script" path="res://UI/Menus/SettingsMenu/VolumeButton/VolumeButton.gd" id="3_e71nh"]
+[ext_resource type="Script" path="res://UI/Menus/SettingsMenu/FullscreenButton/FullscreenButton.gd" id="4_niiln"]
+
+[sub_resource type="Animation" id="Animation_3qwo3"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_kghp6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_n8rui"]
+resource_name = "fade_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_py0vd"]
+_data = {
+"RESET": SubResource("Animation_kghp6"),
+"fade_in": SubResource("Animation_3qwo3"),
+"fade_out": SubResource("Animation_n8rui")
+}
 
 [node name="SettingsMenu" type="CanvasLayer"]
 layer = 2
+script = ExtResource("1_vec6a")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 8
@@ -14,9 +95,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -368.5
-offset_top = -214.0
+offset_top = -284.0
 offset_right = 368.5
-offset_bottom = 214.0
+offset_bottom = 284.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
@@ -30,10 +111,12 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MenuButton" parent="VBoxContainer/MasterVolumeContainer" instance=ExtResource("1_knej6")]
+[node name="VolumeButton" parent="VBoxContainer/MasterVolumeContainer" instance=ExtResource("1_knej6")]
+custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "100%"
 script = ExtResource("3_e71nh")
+audio_bus = "Master"
 
 [node name="MusicVolumeContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -43,9 +126,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "MUSIC VOLUME:"
 
-[node name="MenuButton" parent="VBoxContainer/MusicVolumeContainer" instance=ExtResource("1_knej6")]
+[node name="VolumeButton" parent="VBoxContainer/MusicVolumeContainer" instance=ExtResource("1_knej6")]
+custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "100%"
+script = ExtResource("3_e71nh")
+audio_bus = "Music"
 
 [node name="SFXVolumeContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -55,21 +141,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "SFX VOLUME:"
 
-[node name="MenuButton" parent="VBoxContainer/SFXVolumeContainer" instance=ExtResource("1_knej6")]
+[node name="VolumeButton" parent="VBoxContainer/SFXVolumeContainer" instance=ExtResource("1_knej6")]
+custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "100%"
-
-[node name="ResolutionContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="SettingLabel" parent="VBoxContainer/ResolutionContainer" instance=ExtResource("1_h2mqc")]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "RESOLUTION:"
-
-[node name="MenuButton" parent="VBoxContainer/ResolutionContainer" instance=ExtResource("1_knej6")]
-layout_mode = 2
-text = "1280x720"
+script = ExtResource("3_e71nh")
+audio_bus = "SFX"
 
 [node name="FullscreenContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -79,19 +156,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "FULLSCREEN:"
 
-[node name="MenuButton" parent="VBoxContainer/FullscreenContainer" instance=ExtResource("1_knej6")]
+[node name="FullscreenButton" parent="VBoxContainer/FullscreenContainer" instance=ExtResource("1_knej6")]
 layout_mode = 2
 text = "ENABLE"
+script = ExtResource("4_niiln")
 
-[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ExtraSpacing" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-theme_override_constants/separation = 150
-alignment = 1
 
-[node name="CancelButton" parent="VBoxContainer/ButtonContainer" instance=ExtResource("1_knej6")]
-layout_mode = 2
-text = "CANCEL"
-
-[node name="ConfirmButton" parent="VBoxContainer/ButtonContainer" instance=ExtResource("1_knej6")]
+[node name="ConfirmButton" parent="VBoxContainer" instance=ExtResource("1_knej6")]
 layout_mode = 2
 text = "CONFIRM"
+
+[node name="TransitionPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_py0vd")
+}
+
+[connection signal="pressed" from="VBoxContainer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]

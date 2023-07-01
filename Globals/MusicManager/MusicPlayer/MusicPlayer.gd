@@ -26,7 +26,7 @@ func fade_in_volume() -> void:
 		fade_out_tween = null
 	
 	fade_in_tween = create_tween()
-	fade_in_tween.tween_property(self, "volume_db", 0, time_to_fade_in_seconds).set_trans(
+	fade_in_tween.tween_property(self, "volume_db", normal_volume_db, time_to_fade_in_seconds).set_trans(
 		Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 

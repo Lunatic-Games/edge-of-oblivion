@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://0364xgi5b6v8"]
+[gd_scene load_steps=58 format=3 uid="uid://0364xgi5b6v8"]
 
 [ext_resource type="Script" path="res://UI/Menus/MainMenu/MainMenu.gd" id="1_43f1y"]
 [ext_resource type="Texture2D" uid="uid://b7i4tg1ov4x4t" path="res://Assets/art/background/main-menu/background.png" id="2_o7bjx"]
@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://b4gh2knbqgt8e" path="res://Assets/art/background/main-menu/title.png" id="16_kp720"]
 [ext_resource type="Script" path="res://UI/Menus/MainMenu/PressAnything/PressAnything.gd" id="17_jtpuf"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="18_3t1k6"]
-[ext_resource type="PackedScene" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="19_step2"]
+[ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="19_step2"]
 [ext_resource type="PackedScene" uid="uid://brcokbmoxawv4" path="res://UI/Menus/CreditsMenu/CreditsMenu.tscn" id="20_gw22j"]
 [ext_resource type="PackedScene" uid="uid://ph4dg61vtfbr" path="res://UI/Menus/SettingsMenu/SettingsMenu.tscn" id="20_uvn8p"]
 [ext_resource type="Script" path="res://UI/Menus/MainMenu/BugFix.gd" id="23_tkk0n"]
@@ -1413,10 +1413,39 @@ tracks/7/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_kktef"]
+resource_name = "fade_from_black"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeRect:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a017v"]
 _data = {
 "RESET": SubResource("Animation_puduo"),
 "anything_pressed": SubResource("Animation_hc8cp"),
+"fade_from_black": SubResource("Animation_kktef"),
 "fade_in_menu": SubResource("Animation_pajpu"),
 "fade_out_menu": SubResource("Animation_13bsn"),
 "fade_out_to_black": SubResource("Animation_oy7mv")
@@ -1829,6 +1858,8 @@ script = ExtResource("23_tkk0n")
 
 [connection signal="anything_pressed" from="PressAnything" to="." method="_on_PressAnything_anything_pressed"]
 [connection signal="pressed" from="MenuContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="MenuContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="MenuContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="MenuContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="faded_out" from="SettingsMenu" to="." method="_on_SettingsMenu_faded_out"]
 [connection signal="faded_out" from="CreditsMenu" to="." method="_on_CreditsMenu_faded_out"]

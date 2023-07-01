@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://UI/Menus/CreditsMenu/CreditsMenu.gd" id="1_5eabg"]
 [ext_resource type="PackedScene" uid="uid://d1or5bodb071m" path="res://UI/Menus/CreditsMenu/CreditsTitle/CreditsTitle.tscn" id="1_l5vvn"]
-[ext_resource type="PackedScene" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="1_v408o"]
+[ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="1_v408o"]
 [ext_resource type="PackedScene" uid="uid://c46ydrqwl63ca" path="res://UI/Menus/CreditsMenu/CreditsListing/CreditsListing.tscn" id="2_7bhp8"]
 [ext_resource type="PackedScene" uid="uid://cw1flpllc28iw" path="res://UI/Menus/CreditsMenu/CreditsSmallListing/CreditsSmallListing.tscn" id="3_0vm3t"]
 
@@ -28,7 +28,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("MarginContainer:modulate")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),

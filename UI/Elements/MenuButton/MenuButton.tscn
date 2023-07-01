@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://dtpkylmn14mi6"]
 
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="1_i4qau"]
 [ext_resource type="Script" path="res://UI/Elements/MenuButton/MenuButton.gd" id="2_uthlb"]

@@ -8,3 +8,5 @@ func _ready() -> void:
 	# RESET Animation is set to fix the incorrect sizing, so this is just calling that on opening
 	# the scene in the editor (@tool) or running the scene in-game.
 	play("RESET")
+	await animation_finished
+	play("fade_from_black")

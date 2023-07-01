@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://caxoeox15e74l"]
+[gd_scene load_steps=6 format=3 uid="uid://caxoeox15e74l"]
 
 [ext_resource type="Script" path="res://UI/StaticScreens/Boot/BootScreen.gd" id="1_1gxak"]
-[ext_resource type="PackedScene" uid="uid://clkedmwe4xw0b" path="res://Game/Game.tscn" id="2_5htq1"]
 [ext_resource type="PackedScene" uid="uid://0364xgi5b6v8" path="res://UI/Menus/MainMenu/MainMenu.tscn" id="2_se3hn"]
 [ext_resource type="PackedScene" uid="uid://ij81c1bgefo3" path="res://UI/StaticScreens/Precaching/PrecachingScreen.tscn" id="3_pp08n"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="3_qfj6g"]
@@ -14,7 +13,8 @@ spacing_space = 1
 script = ExtResource("1_1gxak")
 default_start_scene = ExtResource("2_se3hn")
 web_start_scene = ExtResource("3_pp08n")
-debug_start_scene = ExtResource("2_5htq1")
+debug_start_scene = ExtResource("2_se3hn")
+debug_load_settings_save_file = true
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15

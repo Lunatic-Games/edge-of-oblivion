@@ -15,6 +15,7 @@ var level: Level
 @onready var upgrade_menu: UpgradeMenu = $Menus/UpgradeMenu
 @onready var victory_menu: VictoryMenu = $Menus/VictoryMenu
 @onready var game_over_menu: GameOverMenu = $Menus/GameOverMenu
+@onready var pause_menu: PauseMenu = $Menus/PauseMenu
 
 
 func _ready() -> void:
@@ -37,6 +38,12 @@ func _ready() -> void:
 	turn_manager.new_round()
 	
 	GlobalSignals.game_started.emit()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause") and not _is_in_menu():
+		get_viewport().set_input_as_handled()
+		pause_menu.pause_and_fade_in()
 
 
 func victory():
@@ -84,3 +91,13 @@ func _on_Player_died(_player: Player) -> void:
 
 func _on_Boss_defeated(_boss: Boss) -> void:
 	game_over()
+
+
+func _is_in_menu() -> bool:
+	if victory_menu.visible or game_over_menu.visible or pause_menu.visible:
+		return true
+	
+	if upgrade_menu.is_currently_picking_item:
+		return true
+	
+	return false
