@@ -7,7 +7,8 @@ const FULLSCREEN_TEXT: String = "Disable"
 
 func _ready() -> void:
 	super._ready()
-	update_text()
+	_update_text()
+	get_viewport().size_changed.connect(_on_viewport_size_changed)
 
 
 func _pressed() -> void:
@@ -15,10 +16,10 @@ func _pressed() -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	update_text()
+	_update_text()
 
 
-func update_text():
+func _update_text():
 	if _is_fullscreen():
 		text = FULLSCREEN_TEXT
 	else:
@@ -27,3 +28,9 @@ func update_text():
 
 func _is_fullscreen():
 	return DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+
+
+# Viewport size changes on fullscreen changing
+# Catches any case where the window mode changes without using the button (e.g. debug overlay)
+func _on_viewport_size_changed():
+	_update_text()
