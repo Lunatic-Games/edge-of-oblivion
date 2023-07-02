@@ -6,6 +6,7 @@
 
 [node name="DebugMenuButton" type="Button"]
 size_flags_horizontal = 0
+focus_mode = 0
 theme_override_colors/font_color = Color(0.713726, 0.713726, 0.713726, 1)
 theme_override_colors/font_pressed_color = Color(0.580392, 0.580392, 0.580392, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)

@@ -3,6 +3,8 @@ class_name UpgradeMenu
 extends CanvasLayer
 
 
+@export_range(0.0, 5.0, 0.1) var delay_on_levelling_up_in_seconds: float = 0.2
+
 @export_range(1, 5, 1, "or_greater") var max_n_cards_to_spawn: int = 3:
 	set = _set_n_card_to_spawn
 @export_range(0, 10, 1, "or_greater") var inventory_limit: int = 5:
@@ -52,7 +54,7 @@ func display() -> void:
 	items_to_display.append_array(upgrades.slice(0, n_upgrades))
 	
 	if items_to_display:
-		card_display.display_items(items_to_display)
+		card_display.display_items(items_to_display, delay_on_levelling_up_in_seconds)
 		show()
 	else:
 		GlobalGameState.in_upgrade_menu = false

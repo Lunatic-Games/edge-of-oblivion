@@ -5,6 +5,7 @@
 
 [node name="UpgradeMenu" type="CanvasLayer"]
 script = ExtResource("1")
+delay_on_levelling_up_in_seconds = 0.5
 0 = 3
 1 = 3
 2 = 3
