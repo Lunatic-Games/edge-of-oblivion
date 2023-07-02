@@ -4,6 +4,7 @@ extends Node
 signal save_loaded
 
 signal game_started
+signal game_ended
 signal main_menu_entered
 signal new_round_started
 

@@ -93,6 +93,7 @@ visible = false
 [node name="Menus" type="CanvasLayer" parent="."]
 
 [node name="UpgradeMenu" parent="Menus" instance=ExtResource("15_tirfb")]
+visible = false
 
 [node name="VictoryMenu" parent="Menus" instance=ExtResource("8_4y0it")]
 visible = false

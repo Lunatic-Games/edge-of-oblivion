@@ -2,8 +2,6 @@ class_name Game
 extends Node2D
 
 
-
-
 @export var level_data: LevelData
 
 var level: Level
@@ -25,6 +23,7 @@ func _ready() -> void:
 	GlobalSignals.boss_defeated.connect(_on_Boss_defeated)  # Game won!
 	
 	GlobalSignals.new_round_started.connect(_on_new_round_started)
+	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
 	
 	level = level_data.level_scene.instantiate()
 	add_child(level)
@@ -51,7 +50,7 @@ func victory():
 		return
 	
 	GlobalGameState.game_ended = true
-	upgrade_menu.hide()
+	GlobalSignals.game_ended.emit()
 	await get_tree().create_timer(1.0).timeout
 	
 	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
@@ -66,7 +65,7 @@ func game_over():
 		return
 	
 	GlobalGameState.game_ended = true
-	upgrade_menu.hide()
+	GlobalSignals.game_ended.emit()
 	await get_tree().create_timer(1.0).timeout
 	
 	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
@@ -83,6 +82,10 @@ func _on_new_round_started() -> void:
 
 	var n_enemies_next_turn: int = level.waves.get_enemies_for_turn(round_i + 1).size()
 	spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
+
+
+func _on_player_levelled_up(_player: Player):
+	upgrade_menu.display()
 
 
 func _on_Player_died(_player: Player) -> void:

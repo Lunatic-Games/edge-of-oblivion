@@ -1,165 +1,147 @@
+@tool
 class_name UpgradeMenu
 extends CanvasLayer
 
 
-signal picked_item  # Card picked but still animating
-signal fully_finished_picking_item  # Cards freed
+@export_range(1, 5, 1, "or_greater") var max_n_cards_to_spawn: int = 3:
+	set = _set_n_card_to_spawn
+@export_range(0, 10, 1, "or_greater") var inventory_limit: int = 5:
+	set = _set_inventory_limit
 
-const CARD_SCENE: PackedScene = preload("res://UI/Elements/Card/Card.tscn")
-const DISPLAY_FLOAT_UP_DISTANCE: float = 200.0
-const DISPLAY_FLOAT_UP_TIME_SECONDS: float = 0.5
-const DISPLAY_DELAY_BETWEEN_CARDS_SECONDS: float = 0.2
+# Size of (inventory_limit + 1) and contains ints between 0 and max_n_cards_to_spawn
+var n_new_items_for_each_inventory_size = []
+var n_queued_upgrades: int = 0  # For if multiple level ups occur
 
-const NOT_CHOSEN_DROP_DISTANCE: float = 200.0
-const NOT_CHOSEN_DROP_TIME_SECONDS: float = 0.5
-
-const CHOSEN_RISE_DISTANCE: float = 50.0
-const CHOSEN_RISE_TIME_SECONDS: float = 1.0
-
-var available_items: Array[ItemData] = []  # Will become unavailable after reaching max tier
-var displayed_items: Array[ItemData] = []
-var is_currently_picking_item: bool = false
-
-@onready var card_row: BoxContainer = $CardRow
+@onready var card_display: CardDisplay = $CardDisplay
 
 
 func _ready() -> void:
-	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
-	GlobalSignals.item_reached_max_tier.connect(_on_item_reached_max_tier)
-	
-	for item_data in GlobalAccount.unlocked_items:
-		available_items.append(item_data)
-	
-	show()
-
-
-func spawn_upgrade_cards(number_of_cards_to_spawn: int) -> void:
-	# This is basically implementing a queue for upgrades displaying
-	while is_currently_picking_item:
-		await picked_item
-	
-	if available_items.is_empty() or GlobalGameState.game_ended:
+	if Engine.is_editor_hint():
 		return
-		
-	# If there is a queued upgrade we want to wait for animations to finish,
-	# but we still want to lock player movement.
-	is_currently_picking_item = true
 	
-	if card_row.get_children():
-		await fully_finished_picking_item
+	GlobalSignals.game_ended.connect(_on_game_ended)
+
+
+func display() -> void:
+	GlobalGameState.in_upgrade_menu = true
 	
-	assert(available_items.size() > 0, "No available items to display :(")
-	var items_to_select_from: Array[ItemData] = []
-	items_to_select_from.append_array(available_items)
-	items_to_select_from.shuffle()
+	if card_display.get_child_count() > 0:
+		n_queued_upgrades += 1
+		return
 	
-	for x in number_of_cards_to_spawn:
-		if items_to_select_from.size() == 0:
-			break
-		
-		var selected_item: ItemData = items_to_select_from[0]
-		var float_up_delay = x * DISPLAY_DELAY_BETWEEN_CARDS_SECONDS
-		add_card_to_display(selected_item, float_up_delay)
-		items_to_select_from.erase(selected_item)
-
-
-func add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> void:
-	var card: Card = CARD_SCENE.instantiate()
-	card_row.add_child(card)
+	var possible_items: Array[ItemData] = []
+	possible_items.append_array(GlobalAccount.unlocked_items)
+	possible_items.shuffle()
 	
-	var item_tier: int = 1
-	if GlobalGameState.player and item_data in GlobalGameState.player.inventory.items:
-		item_tier = GlobalGameState.player.inventory.items[item_data].current_tier + 1
+	var player_inventory: Inventory = GlobalGameState.player.inventory
+	var inventory_size: int = min(player_inventory.items.size(), inventory_limit)
+	var preferred_n_new_items: int = n_new_items_for_each_inventory_size[inventory_size]
 	
-	card.setup(item_data, item_tier, true)
+	var new_items: Array[ItemData] = []
+	var upgrades: Array[ItemData] = []
+	for item_data in possible_items:
+		var item: Item = player_inventory.items.get(item_data, null)
+		if item == null and new_items.size() < preferred_n_new_items:
+			new_items.append(item_data)
+		elif item != null and upgrades.size() < max_n_cards_to_spawn and not item.is_max_tier():
+			upgrades.append(item_data)
 	
-	card.selected.connect(_on_card_selected.bind(card))
-	displayed_items.append(item_data)
+	var items_to_display: Array[ItemData] = []
+	items_to_display.append_array(new_items)
+	var n_upgrades: int = max_n_cards_to_spawn - new_items.size()
+	items_to_display.append_array(upgrades.slice(0, n_upgrades))
 	
-	_float_card_up(card, float_up_delay)
+	if items_to_display:
+		card_display.display_items(items_to_display)
+		show()
+	else:
+		GlobalGameState.in_upgrade_menu = false
 
 
-func force_close_display() -> void:
-	for child in card_row.get_children():
-		child.queue_free()
+func _on_game_ended() -> void:
+	if visible:
+		GlobalGameState.in_upgrade_menu = false
+		hide()
 
 
-func _on_player_levelled_up(_player: Player) -> void:
-	spawn_upgrade_cards(3)
-
-
-func _on_player_died(_player: Player) -> void:
-	force_close_display()
-
-
-func _on_boss_defeated(_boss: Boss) -> void:
-	force_close_display()
-
-
-func _on_item_reached_max_tier(_item: Item, item_data: ItemData) -> void:
-	available_items.erase(item_data)
-
-
-func _float_card_up(card: Card, delay: float = 0.0) -> void:
-	card.modulate.a = 0.0
-	
-	await get_tree().process_frame  # Wait till container is all set-up
-	if delay > 0.0:
-		await get_tree().create_timer(delay).timeout
-	
-	card.position.y += DISPLAY_FLOAT_UP_DISTANCE  # Move down so it can float up to the same spot
-	
-	var tween: Tween = create_tween().set_parallel(true)
-	tween.tween_property(card, "position:y", -DISPLAY_FLOAT_UP_DISTANCE, DISPLAY_FLOAT_UP_TIME_SECONDS) \
-		.as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(card, "modulate:a", 1.0, DISPLAY_FLOAT_UP_TIME_SECONDS) \
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-
-
-func _on_card_selected(selected_card: Card) -> void:
-	for child in card_row.get_children():
-		var card: Card = child as Card
-		assert(card != null, "Card row should only contain cards")
-		card.selected.disconnect(_on_card_selected)
-		
-		if card == selected_card:
-			if GlobalGameState.player:
-				GlobalGameState.player.inventory.gain_item(card.held_item_data)
-			_raise_chosen_card(card)
+func _on_card_display_card_selected() -> void:
+	if n_queued_upgrades:
+		n_queued_upgrades -= 1
+		await card_display.finished_animating_selection
+		display()
+	else:
+		GlobalGameState.in_upgrade_menu = false
+		await card_display.finished_animating_selection
+		if n_queued_upgrades:
+			n_queued_upgrades -= 1
+			display()
 		else:
-			_drop_unchosen_card(card)
-	
-	is_currently_picking_item = false
-	picked_item.emit()
+			hide()
+
+func _set_n_card_to_spawn(value: int):
+	max_n_cards_to_spawn = value
+	notify_property_list_changed()
 
 
-func _raise_chosen_card(card: Card) -> void:
-	var tween: Tween = create_tween().set_parallel(true)
-	tween.tween_property(card, "position:y", -CHOSEN_RISE_DISTANCE, CHOSEN_RISE_TIME_SECONDS) \
-		.as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(card, "modulate:a", 0.0, CHOSEN_RISE_TIME_SECONDS) \
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	
-	tween.finished.connect(_on_card_disappeared.bind(card))
+func _set_inventory_limit(value: int):
+	inventory_limit = value
+	_resize_n_new_items_for_each_inventory_size()
+	notify_property_list_changed()
 
 
-func _drop_unchosen_card(card: Card) -> void:
-	var tween: Tween = create_tween().set_parallel(true)
-	tween.tween_property(card, "position:y", NOT_CHOSEN_DROP_DISTANCE, NOT_CHOSEN_DROP_TIME_SECONDS) \
-		.as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(card, "modulate:a", 0.0, NOT_CHOSEN_DROP_TIME_SECONDS) \
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+func _get_property_list() -> Array:
+	var properties: Array[Dictionary] = []
+	properties.append({
+		"name": "# of new items for inventory size",
+		"type": TYPE_NIL,
+		"usage": PROPERTY_USAGE_GROUP
+	})
 	
-	tween.finished.connect(_on_card_disappeared.bind(card))
+	for i in inventory_limit + 1:
+		var min_value: int = 0
+		var max_value: int = max_n_cards_to_spawn
+		if i == 0:
+			min_value = max_n_cards_to_spawn
+		elif i == inventory_limit:
+			max_value = 0
+		
+		properties.append({
+			"name": str(i),
+			"type": TYPE_INT,
+			"usage": PROPERTY_USAGE_DEFAULT,
+			"hint": PROPERTY_HINT_RANGE,
+			"hint_string": str(min_value) + "," + str(max_value) + ",-1"  # -1 is trick to get slider
+		})
+	return properties
 
 
-func _on_card_disappeared(disappeared_card: Card) -> void:
-	displayed_items.erase(disappeared_card.held_item_data)
+func _get(property: StringName) -> Variant:
+	if not property.is_valid_int():
+		return null
 	
-	if not displayed_items.is_empty():
-		return
+	var i: int = property.to_int()
+	return n_new_items_for_each_inventory_size[i]
+
+
+func _set(property: StringName, value: Variant) -> bool:
+	if not property.is_valid_int():
+		return false
 	
-	for child in card_row.get_children():
-		child.free()
+	# This is needed if _set_inventory_limit hasn't been called yet
+	_resize_n_new_items_for_each_inventory_size()
 	
-	fully_finished_picking_item.emit()
+	var i: int = property.to_int()
+	n_new_items_for_each_inventory_size[i] = value
+	
+	return true
+
+
+func _resize_n_new_items_for_each_inventory_size():
+	n_new_items_for_each_inventory_size.resize(inventory_limit + 1)
+	for i in n_new_items_for_each_inventory_size.size():
+		if i == 0:
+			n_new_items_for_each_inventory_size[i] = max_n_cards_to_spawn
+		elif i == n_new_items_for_each_inventory_size.size() - 1:
+			n_new_items_for_each_inventory_size[i] = 0
+		elif n_new_items_for_each_inventory_size[i] == null:
+			n_new_items_for_each_inventory_size[i] = 0
