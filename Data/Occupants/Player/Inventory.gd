@@ -4,9 +4,8 @@ extends HBoxContainer
 
 const ADDED_DROP_DISTANCE: float = 50.0
 const ADDED_DROP_TIME_SECONDS: float = 0.5
-const TIER_UP_SCALE_INCREASE: Vector2 = Vector2(0.4, 0.4)
-const TIER_UP_SCALE_STAY_TIME_SECONDS: float = 0.3
-const TIER_UP_SCALE_TIME_SECONDS: float = 0.5
+const TIER_UP_ROTATE_DEGREES: float = 10
+const TIER_UP_ROTATE_TIME_SECONDS: float = 0.5
 
 var items: Dictionary = {}  # ItemData : Item Scene
 
@@ -56,12 +55,12 @@ func _handle_upgrading_item(item_data: ItemData, animate: bool = true) -> void:
 	if animate == false:
 		return
 	
-	var up_tween: Tween = create_tween()
-	up_tween.tween_property(item, "scale", TIER_UP_SCALE_INCREASE, TIER_UP_SCALE_TIME_SECONDS / 2.0) \
-		.as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	var rotate_tween: Tween = create_tween()
+	rotate_tween.tween_property(item, "rotation_degrees", TIER_UP_ROTATE_DEGREES,
+		TIER_UP_ROTATE_TIME_SECONDS / 4.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	
-	await get_tree().create_timer(TIER_UP_SCALE_STAY_TIME_SECONDS).timeout
+	rotate_tween.tween_property(item, "rotation_degrees", -TIER_UP_ROTATE_DEGREES,
+		TIER_UP_ROTATE_TIME_SECONDS / 2.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	
-	var down_tween: Tween = create_tween()
-	down_tween.tween_property(item, "scale", -TIER_UP_SCALE_INCREASE, TIER_UP_SCALE_TIME_SECONDS / 2.0) \
-	.as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	rotate_tween.tween_property(item, "rotation_degrees", 0, 
+		TIER_UP_ROTATE_TIME_SECONDS / 4.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
