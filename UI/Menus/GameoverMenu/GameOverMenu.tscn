@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://delvnctbli24y" path="res://Assets/fonts/Caudex-Bold.ttf" id="1_3rhuj"]
 [ext_resource type="Script" path="res://UI/Menus/GameoverMenu/GameOverMenu.gd" id="1_ayrgk"]
-[ext_resource type="PackedScene" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="2_rtebt"]
+[ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="2_rtebt"]
 [ext_resource type="PackedScene" uid="uid://bosom7y11rha3" path="res://UI/Elements/RunSummary/RunSummary.tscn" id="3_1rdfv"]
 
 [sub_resource type="FontVariation" id="FontVariation_ihk8i"]
@@ -19,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.356863)
+color = Color(0, 0, 0, 0.54902)
 
 [node name="Container" type="VBoxContainer" parent="."]
 process_mode = 3

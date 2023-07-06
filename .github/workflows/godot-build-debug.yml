@@ -5,7 +5,7 @@ on:
     branches: [ "master" ]
         
 env:
-  GODOT_VERSION: 4.0.3
+  GODOT_VERSION: 4.1
   EXPORT_NAME: "${{ github.event.repository.name }}-debug"
   PROJECT_PATH: "."
   NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP: 1

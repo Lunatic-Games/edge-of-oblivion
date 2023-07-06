@@ -43,14 +43,24 @@ func display() -> void:
 	var upgrades: Array[ItemData] = []
 	for item_data in possible_items:
 		var item: Item = player_inventory.items.get(item_data, null)
-		if item == null and new_items.size() < preferred_n_new_items:
+		if item == null and new_items.size() < max_n_cards_to_spawn:
 			new_items.append(item_data)
 		elif item != null and upgrades.size() < max_n_cards_to_spawn and not item.is_max_tier():
 			upgrades.append(item_data)
 	
 	var items_to_display: Array[ItemData] = []
-	items_to_display.append_array(new_items)
-	var n_upgrades: int = max_n_cards_to_spawn - new_items.size()
+	
+	var n_new_items: int = 0
+	if inventory_size < inventory_limit:
+		# If there aren't enough upgrades to fill then try filling with more new items
+		n_new_items = max(preferred_n_new_items, max_n_cards_to_spawn - upgrades.size())
+		# Make sure it never exceeds max cards to spawn
+		n_new_items = min(n_new_items, max_n_cards_to_spawn)
+		# And lastly make sure the final n doesn't exceed the number available
+		n_new_items = min(n_new_items, new_items.size())
+		items_to_display.append_array(new_items.slice(0, n_new_items))
+	
+	var n_upgrades: int = max_n_cards_to_spawn - n_new_items
 	items_to_display.append_array(upgrades.slice(0, n_upgrades))
 	
 	if items_to_display:
