@@ -40,7 +40,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause") and not _is_in_menu():
+	if event.is_action_pressed("pause") and not pause_menu.visible:
 		get_viewport().set_input_as_handled()
 		pause_menu.pause_and_fade_in()
 
@@ -94,13 +94,3 @@ func _on_Player_died(_player: Player) -> void:
 
 func _on_Boss_defeated(_boss: Boss) -> void:
 	game_over()
-
-
-func _is_in_menu() -> bool:
-	if victory_menu.visible or game_over_menu.visible or pause_menu.visible:
-		return true
-	
-	if upgrade_menu.is_currently_picking_item:
-		return true
-	
-	return false

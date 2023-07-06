@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://craha8oall5q5"]
+[gd_scene load_steps=9 format=3 uid="uid://craha8oall5q5"]
 
 [ext_resource type="PackedScene" uid="uid://cposeuotudggd" path="res://Globals/MusicManager/MusicPlayer/MusicPlayer.tscn" id="1_phqoj"]
 [ext_resource type="Script" path="res://Globals/MusicManager/MusicManager.gd" id="1_xjott"]
@@ -8,9 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://d1spc60g2ky3a" path="res://Assets/music/battle/Dragon-Castle.ogg" id="6_7gjr5"]
 [ext_resource type="AudioStream" uid="uid://qlub3qpvrc1f" path="res://Assets/music/battle/Dragon-World.ogg" id="7_6rfeb"]
 [ext_resource type="AudioStream" uid="uid://cxj2o6cbfkknf" path="res://Assets/music/battle/Durandal.ogg" id="8_7i4j5"]
-[ext_resource type="AudioStream" uid="uid://ug53jvfh8qio" path="res://Assets/music/battle/Hitman.ogg" id="9_vdnnl"]
-[ext_resource type="AudioStream" uid="uid://sl2jdah3an8y" path="res://Assets/music/battle/Hostiles-Inbound.ogg" id="10_aegh8"]
-[ext_resource type="AudioStream" uid="uid://btigx31l2ew7g" path="res://Assets/music/battle/The-Torch-Of-Knowledge.ogg" id="11_x1nt5"]
 
 [node name="MusicManager" type="Node"]
 process_mode = 3
@@ -18,12 +15,12 @@ script = ExtResource("1_xjott")
 
 [node name="MainMenuMusic" parent="." instance=ExtResource("1_phqoj")]
 tracks = Array[AudioStream]([ExtResource("3_bhkg3"), ExtResource("4_lx2ev")])
-normal_volume_db = -38
+normal_volume_db = -30
 
 [node name="BattleMusic" parent="." instance=ExtResource("1_phqoj")]
-tracks = Array[AudioStream]([ExtResource("5_syaqy"), ExtResource("6_7gjr5"), ExtResource("7_6rfeb"), ExtResource("8_7i4j5"), ExtResource("9_vdnnl"), ExtResource("10_aegh8"), ExtResource("11_x1nt5")])
-normal_volume_db = -38
+tracks = Array[AudioStream]([ExtResource("5_syaqy"), ExtResource("6_7gjr5"), ExtResource("7_6rfeb"), ExtResource("8_7i4j5")])
+normal_volume_db = -30
 
 [node name="BossMusic" parent="." instance=ExtResource("1_phqoj")]
-normal_volume_db = -38
+normal_volume_db = -30
 time_to_fade_out_seconds = 2.0

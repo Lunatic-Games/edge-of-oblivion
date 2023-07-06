@@ -11,6 +11,9 @@ const MAIN_MENU_SCENE: PackedScene = preload("res://UI/Menus/MainMenu/MainMenu.t
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if transition_player.is_playing() or settings_menu.visible:
+		return
+	
 	if visible and event.is_action_pressed("pause"):
 		get_viewport().set_input_as_handled()
 		transition_player.play("fade_out")
