@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3]
+[gd_scene load_steps=19 format=3 uid="uid://dins546jhadrn"]
 
 [ext_resource type="Script" path="res://UI/Elements/Card/Card.gd" id="1_e71sb"]
 [ext_resource type="PackedScene" uid="uid://57a3ac7a6uvb" path="res://Data/Particles/UI/RayParticles.tscn" id="2_2sdpx"]
