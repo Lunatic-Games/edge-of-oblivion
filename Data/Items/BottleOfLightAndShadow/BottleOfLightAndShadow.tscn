@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cihw8t15k8w"]
+[gd_scene load_steps=22 format=3 uid="uid://cihw8t15k8w"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_0flwa"]
 [ext_resource type="Texture2D" uid="uid://88jskpnkcjfg" path="res://Assets/art/icons/weapons/lorc/bottle-vapors.svg" id="2_t2f6r"]
@@ -14,11 +14,10 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="10_6dcap"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="11_koe1t"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectClosestTiles.gd" id="12_kr602"]
-[ext_resource type="Script" path="res://LogicTree/Debug/PrintToOutput.gd" id="13_56bka"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="13_mru7o"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="14_u3sy7"]
-[ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="15_3lf3c"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="16_72xym"]
+[ext_resource type="PackedScene" uid="uid://d0op1tkkadxvm" path="res://Data/Particles/Items/BottleOfLightAndShadowParticles.tscn" id="17_1uerp"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="18_dlocp"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="19_wprry"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="20_8sl7k"]
@@ -107,56 +106,40 @@ shape = 1
 radius = 2
 include_origin_tile = false
 
-[node name="LT_PrintToOutput" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="3" node_paths=PackedStringArray("tile_array_var")]
-script = ExtResource("13_56bka")
-tile_array_var = NodePath("../Targets")
-
-[node name="LT_SelectTilesByOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="4" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="LT_SelectTilesByOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("11_koe1t")
 input_tiles = NodePath("../Targets")
 output_tiles = NodePath("../Targets")
 occupant_type = 2
 
-[node name="LT_PrintToOutput2" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="5" node_paths=PackedStringArray("tile_array_var")]
-script = ExtResource("13_56bka")
-tile_array_var = NodePath("../Targets")
-
-[node name="LT_SelectClosestTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="6" node_paths=PackedStringArray("tiles", "tiles_to_measure_to", "output_tiles")]
+[node name="LT_SelectClosestTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="4" node_paths=PackedStringArray("tiles", "tiles_to_measure_to", "output_tiles")]
 script = ExtResource("12_kr602")
 tiles = NodePath("../Targets")
 tiles_to_measure_to = NodePath("../../../../Item user tile")
 output_tiles = NodePath("../Targets")
 
-[node name="LT_PrintToOutput3" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="7" node_paths=PackedStringArray("tile_array_var")]
-script = ExtResource("13_56bka")
-tile_array_var = NodePath("../Targets")
-
-[node name="LT_SelectRandomTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="8" node_paths=PackedStringArray("input_tiles", "output_tiles", "n_selections_override")]
+[node name="LT_SelectRandomTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="5" node_paths=PackedStringArray("input_tiles", "output_tiles", "n_selections_override")]
 script = ExtResource("13_mru7o")
 input_tiles = NodePath("../Targets")
 output_tiles = NodePath("../Targets")
 n_selections_override = NodePath("../../../../../LT_PersistentVariables/Number of Targets")
 
-[node name="LT_PrintToOutput4" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="9" node_paths=PackedStringArray("tile_array_var")]
-script = ExtResource("13_56bka")
-tile_array_var = NodePath("../Targets")
-
-[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="10" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="6" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("8_5qn2e")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../../LT_PersistentVariables/Damage")
 
-[node name="Spawn vfx" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="11" node_paths=PackedStringArray("tiles")]
+[node name="Spawn vfx" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="7" node_paths=PackedStringArray("tiles")]
 script = ExtResource("14_u3sy7")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("15_3lf3c")
+node2d_to_spawn = ExtResource("17_1uerp")
 
-[node name="Set color to healing" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="12" node_paths=PackedStringArray("items")]
+[node name="Set color to healing" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="8" node_paths=PackedStringArray("items")]
 script = ExtResource("8_27hvh")
 items = NodePath("../../../../This item")
 color = 3
 
-[node name="Set healing mode" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="13" node_paths=PackedStringArray("bool_variable")]
+[node name="Set healing mode" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If NOT in healing mode" index="9" node_paths=PackedStringArray("bool_variable")]
 script = ExtResource("9_oomi7")
 bool_variable = NodePath("../../../../../LT_PersistentVariables/Is in healing mode")
 value = true
