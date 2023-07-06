@@ -40,7 +40,7 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-          cp .github/workflows/export_presets.cfg ${PROJECT_PATH}/export_presets.cfg
+          # cp .github/workflows/export_presets.cfg ${PROJECT_PATH}/export_presets.cfg
       - name: Build for windows
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/windows
@@ -81,13 +81,9 @@ jobs:
             const allArtifacts = res.data.artifacts
                     .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) );
 
-            //console.log(JSON.stringify(allArtifacts));
-
             const artifactsToDelete = allArtifacts
                     .slice(0, -${{ env.NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP }})
                     .filter(({ name }) => name.endsWith('${{ env.EXPORT_NAME }}'))
-
-            //console.log(JSON.stringify(artifactsToDelete));
 
             artifactsToDelete.forEach(({ id }) => {
                github.rest.actions.deleteArtifact({
