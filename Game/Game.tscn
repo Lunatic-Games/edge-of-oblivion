@@ -1,0 +1,121 @@
+[gd_scene load_steps=14 format=3 uid="uid://clkedmwe4xw0b"]
+
+[ext_resource type="Script" path="res://Game/Game.gd" id="1_iqcmv"]
+[ext_resource type="Resource" uid="uid://bj2807sghnvk0" path="res://Data/Levels/TheEdge/TheEdge.tres" id="2_5dl06"]
+[ext_resource type="Script" path="res://Game/RunStats/RunStats.gd" id="5_6lftp"]
+[ext_resource type="PackedScene" uid="uid://b78b62i3ejtqc" path="res://UI/Overlays/BossOverlay/BossOverlay.tscn" id="6_c6fvf"]
+[ext_resource type="PackedScene" uid="uid://c7dqfw38kh88k" path="res://UI/Menus/VictoryMenu/VictoryMenu.tscn" id="8_4y0it"]
+[ext_resource type="PackedScene" uid="uid://dn681uoihob4j" path="res://UI/Menus/GameoverMenu/GameOverMenu.tscn" id="9_rua7w"]
+[ext_resource type="PackedScene" uid="uid://bo2no0imyp676" path="res://UI/Menus/PauseMenu/PauseMenu.tscn" id="10_a7fxs"]
+[ext_resource type="Script" path="res://Game/TurnManager/TurnManager.gd" id="12_q02uk"]
+[ext_resource type="Script" path="res://Game/SpawnHandler/SpawnHandler.gd" id="13_8agfr"]
+[ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://UI/Menus/UpgradeMenu/UpgradeMenu.tscn" id="15_tirfb"]
+
+[sub_resource type="Animation" id="Animation_av5bu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_i6r7k"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_35cvi"]
+_data = {
+"RESET": SubResource("Animation_av5bu"),
+"fade_out": SubResource("Animation_i6r7k")
+}
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_iqcmv")
+level_data = ExtResource("2_5dl06")
+
+[node name="TurnManager" type="Node" parent="."]
+script = ExtResource("12_q02uk")
+
+[node name="SpawnHandler" type="Node" parent="."]
+script = ExtResource("13_8agfr")
+
+[node name="RunStats" type="Node" parent="."]
+script = ExtResource("5_6lftp")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="BossOverlay" parent="HUD" instance=ExtResource("6_c6fvf")]
+visible = false
+
+[node name="Menus" type="CanvasLayer" parent="."]
+
+[node name="UpgradeMenu" parent="Menus" instance=ExtResource("15_tirfb")]
+
+[node name="VictoryMenu" parent="Menus" instance=ExtResource("8_4y0it")]
+visible = false
+
+[node name="GameOverMenu" parent="Menus" instance=ExtResource("9_rua7w")]
+visible = false
+
+[node name="PauseMenu" parent="Menus" instance=ExtResource("10_a7fxs")]
+visible = false
+
+[node name="FadeOverlay" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="FadeRect" type="ColorRect" parent="FadeOverlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FadePlayer" type="AnimationPlayer" parent="FadeOverlay"]
+autoplay = "fade_out"
+libraries = {
+"": SubResource("AnimationLibrary_35cvi")
+}

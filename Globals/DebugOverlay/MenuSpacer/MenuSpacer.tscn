@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://8i28qv4armco"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rw21p"]
+bg_color = Color(0.0588235, 0.0666667, 0.176471, 1)
+border_width_left = 20
+border_width_right = 20
+border_color = Color(0.0588235, 0.0666667, 0.176471, 1)
+
+[node name="MenuSpacer" type="Button"]
+custom_minimum_size = Vector2(100, 0)
+offset_right = 100.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/disabled = SubResource("StyleBoxFlat_rw21p")
+disabled = true
+text = "─────"
+alignment = 0

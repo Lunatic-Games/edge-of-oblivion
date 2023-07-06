@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://dec5mxhj85sw3"]
+
+[ext_resource type="Script" path="res://Globals/DebugOverlay/DebugOverlay.gd" id="1_bya3d"]
+[ext_resource type="PackedScene" uid="uid://er66f71v3mir" path="res://Globals/DebugOverlay/MenuDropdownButton/MenuDropdownButton.tscn" id="2_kyr2u"]
+[ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/SpawningDropdown.gd" id="3_uoxgx"]
+[ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/ItemsDropdown.gd" id="4_mbdw0"]
+[ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/PlayerDropdown.gd" id="5_qagcx"]
+[ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/SceneDropdown.gd" id="6_x3lws"]
+[ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/LevelsDropdown.gd" id="7_cilm5"]
+[ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/AccountDropdown.gd" id="8_qgndo"]
+[ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/SaveDropdown.gd" id="9_07phx"]
+[ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/MiscDropdown.gd" id="10_d751k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68xp4"]
+bg_color = Color(0.0823529, 0.0901961, 0.219608, 1)
+
+[node name="DebugOverlay" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_bya3d")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 50)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_68xp4")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+
+[node name="Menus" type="HBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="SpawnDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
+layout_mode = 2
+text = "Spawn..."
+script = ExtResource("3_uoxgx")
+
+[node name="ItemsDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
+layout_mode = 2
+text = "Items..."
+script = ExtResource("4_mbdw0")
+
+[node name="PlayerDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
+layout_mode = 2
+text = "Player..."
+script = ExtResource("5_qagcx")
+
+[node name="SceneDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
+layout_mode = 2
+text = "Scene..."
+script = ExtResource("6_x3lws")
+
+[node name="LevelsDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
+layout_mode = 2
+text = "Levels..."
+script = ExtResource("7_cilm5")
+
+[node name="AccountDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
+layout_mode = 2
+text = "Account..."
+script = ExtResource("8_qgndo")
+
+[node name="SaveDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
+layout_mode = 2
+text = "Save..."
+script = ExtResource("9_07phx")
+
+[node name="MiscDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
+layout_mode = 2
+text = "Misc..."
+script = ExtResource("10_d751k")

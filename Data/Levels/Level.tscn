@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://v4k7ckpo5fy4"]
+
+[ext_resource type="Script" path="res://Data/Levels/Level.gd" id="1_8gsta"]
+[ext_resource type="Script" path="res://Data/Levels/Waves.gd" id="2_3i1yj"]
+[ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://Game/Board/Board.tscn" id="3_4g7nv"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_8gsta")
+
+[node name="Waves" type="Node" parent="."]
+script = ExtResource("2_3i1yj")
+
+[node name="Board" parent="." instance=ExtResource("3_4g7nv")]

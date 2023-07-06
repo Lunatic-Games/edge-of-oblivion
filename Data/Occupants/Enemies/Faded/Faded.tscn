@@ -1,0 +1,135 @@
+[gd_scene load_steps=18 format=3 uid="uid://kjqcigs27uqk"]
+
+[ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Occupants/Enemies/Enemy.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="3"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_cmyjp"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_tsr74"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="5_xupmn"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_4dnxv"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="6_obvro"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_c2kn1"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="8_rjwpp"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="9_s2xe5"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_7kfqc"]
+[ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="11_tg5ro"]
+[ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="12_qpd6s"]
+
+[sub_resource type="Shader" id="1"]
+code = "shader_type canvas_item;
+
+uniform float strength = 0.5f;
+uniform vec4 modulate: source_color = vec4(1.0);
+uniform sampler2D noise;
+
+void fragment() {
+	vec2 dist = vec2(0.5f) - UV;
+	float s = sin(TIME);
+	float c = cos(TIME);
+	
+	mat2 m = mat2(vec2(c, -s), vec2(s, c));
+	dist *= m;
+	
+	vec4 coord = texture(noise, 0.5f + dist);
+	coord.x -= .5;
+	coord.y -= .5;
+	
+	vec4 lens_color = texture(TEXTURE, UV + coord.xy * strength);
+	lens_color *= modulate;
+    COLOR = lens_color;
+}"
+
+[sub_resource type="FastNoiseLite" id="2"]
+frequency = 0.005
+fractal_octaves = 3
+fractal_lacunarity = 1.7
+
+[sub_resource type="NoiseTexture2D" id="3"]
+seamless = true
+as_normal_map = true
+noise = SubResource("2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vh5pt"]
+resource_local_to_scene = true
+shader = SubResource("1")
+shader_parameter/strength = 0.25
+shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
+shader_parameter/noise = SubResource("3")
+
+[node name="Faded" instance=ExtResource("2")]
+popup_info_text = "[color=cyan]The Faded:[/color] attacks all adjacent tiles."
+popup_flavor_text = "Once somebody... now, barely a memory."
+max_hp = 20
+
+[node name="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_vh5pt")
+texture = ExtResource("3")
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("3_cmyjp")
+default_value = 3
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("3_cmyjp")
+default_value = 10
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("4_tsr74")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+
+[node name="Set appear unready" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("enemies")]
+script = ExtResource("5_xupmn")
+enemies = NodePath("../../../This enemy")
+appear_ready = false
+
+[node name="Targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="1"]
+script = ExtResource("6_4dnxv")
+
+[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_c2kn1")
+input_tiles = NodePath("../../../Enemy tile")
+output_tiles = NodePath("../Targets")
+directions = 15
+
+[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("8_rjwpp")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+occupant_type = 1
+
+[node name="Damage player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("9_s2xe5")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
+
+[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles")]
+script = ExtResource("10_7kfqc")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("11_tg5ro")
+
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
+script = ExtResource("4_tsr74")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+on_one_before = true
+
+[node name="Set appear ready" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("enemies")]
+script = ExtResource("5_xupmn")
+enemies = NodePath("../../../This enemy")
+
+[node name="Targets to indicate" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="1"]
+script = ExtResource("6_4dnxv")
+
+[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_c2kn1")
+input_tiles = NodePath("../../../Enemy tile")
+output_tiles = NodePath("../Targets to indicate")
+directions = 15
+
+[node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
+script = ExtResource("10_7kfqc")
+tiles = NodePath("../Targets to indicate")
+node2d_to_spawn = ExtResource("12_qpd6s")
+
+[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+script = ExtResource("6_obvro")
+progress_bar = NodePath("../../../AttackBar")
+every_x_calls = NodePath("../LT_EveryXCalls")

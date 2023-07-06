@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1or5bodb071m"]
+
+[ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="1_n5hla"]
+
+[sub_resource type="FontVariation" id="FontVariation_vjx67"]
+base_font = ExtResource("1_n5hla")
+spacing_glyph = 2
+
+[node name="CreditsTitle" type="Label"]
+theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_vjx67")
+theme_override_font_sizes/font_size = 50
+text = "Title"
+horizontal_alignment = 1
+uppercase = true

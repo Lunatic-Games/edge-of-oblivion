@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://craha8oall5q5"]
 
-[ext_resource type="PackedScene" uid="uid://cposeuotudggd" path="res://Globals/MusicManager/MusicPlayer.tscn" id="1_phqoj"]
+[ext_resource type="PackedScene" uid="uid://cposeuotudggd" path="res://Globals/MusicManager/MusicPlayer/MusicPlayer.tscn" id="1_phqoj"]
 [ext_resource type="Script" path="res://Globals/MusicManager/MusicManager.gd" id="1_xjott"]
 [ext_resource type="AudioStream" uid="uid://d1vi4w5p5aj17" path="res://Assets/music/menu/Fall-From-Grace.ogg" id="3_bhkg3"]
 [ext_resource type="AudioStream" uid="uid://emsef7bknykp" path="res://Assets/music/menu/Lurking-Evil.ogg" id="4_lx2ev"]
@@ -18,9 +18,12 @@ script = ExtResource("1_xjott")
 
 [node name="MainMenuMusic" parent="." instance=ExtResource("1_phqoj")]
 tracks = Array[AudioStream]([ExtResource("3_bhkg3"), ExtResource("4_lx2ev")])
+normal_volume_db = -38
 
 [node name="BattleMusic" parent="." instance=ExtResource("1_phqoj")]
 tracks = Array[AudioStream]([ExtResource("5_syaqy"), ExtResource("6_7gjr5"), ExtResource("7_6rfeb"), ExtResource("8_7i4j5"), ExtResource("9_vdnnl"), ExtResource("10_aegh8"), ExtResource("11_x1nt5")])
+normal_volume_db = -38
 
 [node name="BossMusic" parent="." instance=ExtResource("1_phqoj")]
+normal_volume_db = -38
 time_to_fade_out_seconds = 2.0

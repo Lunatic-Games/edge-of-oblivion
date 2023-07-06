@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bofbu0n1c0uad"]
+
+[ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="1_g0ou0"]
+
+[node name="UnlockedItemTexture" type="TextureRect"]
+custom_minimum_size = Vector2(96, 96)
+texture = ExtResource("1_g0ou0")
+expand_mode = 1
