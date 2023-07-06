@@ -40,9 +40,14 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause") and not pause_menu.visible:
-		get_viewport().set_input_as_handled()
-		pause_menu.pause_and_fade_in()
+	if not event.is_action_pressed("pause"):
+		return
+	
+	if GlobalGameState.game_ended or pause_menu.visible:
+		return
+	
+	get_viewport().set_input_as_handled()
+	pause_menu.pause_and_fade_in()
 
 
 func victory():
