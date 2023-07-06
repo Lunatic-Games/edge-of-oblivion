@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="8_y2auk"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_mspdn"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="9_ojm6e"]
-[ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="10_3jf8b"]
+[ext_resource type="PackedScene" uid="uid://byxi3b2q06204" path="res://Data/Particles/Items/ShardOfRealityParticles.tscn" id="10_mnrgv"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="10_xy4ex"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="11_uhitr"]
 
@@ -75,7 +75,7 @@ damage_override = NodePath("../../../../LT_PersistentVariables/Enemy damage")
 [node name="Spawn vfx" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
 script = ExtResource("9_mspdn")
 tiles = NodePath("../Targets")
-node2d_to_spawn = ExtResource("10_3jf8b")
+node2d_to_spawn = ExtResource("10_mnrgv")
 
 [node name="Appear unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("items")]
 script = ExtResource("8_y2auk")
