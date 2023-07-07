@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="8_pjl56"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_a4oqx"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="12_01vqd"]
-[ext_resource type="PackedScene" uid="uid://cudvgijy8nd6b" path="res://Data/Particles/LightningBow/LightningBowEffect.tscn" id="13_8b2h7"]
+[ext_resource type="PackedScene" uid="uid://cudvgijy8nd6b" path="res://Data/Particles/Items/LightningBow/LightningBowEffect.tscn" id="13_8b2h7"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="13_pwr8a"]
 
 [node name="ArcingOrb" instance=ExtResource("1_5mbus")]
