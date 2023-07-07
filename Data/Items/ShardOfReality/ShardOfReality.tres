@@ -9,8 +9,8 @@ script = ExtResource("1_rcemt")
 sprite = ExtResource("3_aobmk")
 item_scene = ExtResource("1_cj8e5")
 item_name = "Shard of Reality"
-tier1Text = "Does damage to self, and units at exactly radius 2 away."
-tier2Text = "Damage 20 - 30."
+tier1Text = "Does damage to self, and units at exactly radius 2."
+tier2Text = "Damage 20 -> 30."
 tier3Text = "Self damage 5 -> 10.
 Damage 30 -> 50."
 flavor_text = "Destruction and construction in a shard."

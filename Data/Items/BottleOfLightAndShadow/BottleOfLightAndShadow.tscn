@@ -23,7 +23,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="20_8sl7k"]
 
 [node name="BottleOfLightAndShadow" instance=ExtResource("1_0flwa")]
-popup_info_text = "[color=cyan]Bottle of light and shadow:[/color] Alternates between healing, and dealing damage."
+popup_info_text = "[color=cyan]Bottle of light and shadow:[/color] Alternates between healing, and dealing damage to both a random enemy in radius 2 and self."
 popup_flavor_text = "Light and darkness have waged war for eternity."
 
 [node name="Texture" parent="." index="1"]
