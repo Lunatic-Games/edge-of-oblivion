@@ -1,0 +1,127 @@
+[gd_scene load_steps=15 format=3 uid="uid://cyxmb8j8ab4g4"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_1pb1i"]
+[ext_resource type="Texture2D" uid="uid://bcjva1lcxwxpf" path="res://Assets/art/icons/weapons/lorc/octogonal-eye.svg" id="2_6w2js"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_861ah"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="3_8pxqc"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="4_7hfrs"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="5_6h3ml"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="6_ebnvw"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="7_5gf65"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="8_y2auk"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_mspdn"]
+[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="9_ojm6e"]
+[ext_resource type="PackedScene" uid="uid://byxi3b2q06204" path="res://Data/Particles/Items/ShardOfRealityParticles.tscn" id="10_mnrgv"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="10_xy4ex"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="11_uhitr"]
+
+[node name="ShardOfReality" instance=ExtResource("1_1pb1i")]
+popup_info_text = "[color=cyan]Shard of Reality:[/color] Damage self, also damage units at exactly radius 2."
+popup_flavor_text = "Destruction and construction in a shard."
+
+[node name="Texture" parent="." index="1"]
+texture = ExtResource("2_6w2js")
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("2_861ah")
+default_value = 5
+
+[node name="Self damage" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("2_861ah")
+default_value = 5
+
+[node name="Enemy damage" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("2_861ah")
+default_value = 20
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("3_8pxqc")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+
+[node name="Damage self" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("4_7hfrs")
+tiles = NodePath("../../../Item user tile")
+damage_override = NodePath("../../../../LT_PersistentVariables/Self damage")
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1"]
+script = ExtResource("5_6h3ml")
+
+[node name="LT_SelectTilesInRadius" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_ebnvw")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Targets")
+shape = 1
+radius = 2
+
+[node name="LT_SelectTilesInRadius2" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_ebnvw")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Targets")
+shape = 1
+radius = 1
+operation = 2
+
+[node name="LT_SelectTilesByOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_5gf65")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+occupant_type = 2
+
+[node name="Damage  enemies" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("4_7hfrs")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../LT_PersistentVariables/Enemy damage")
+
+[node name="Spawn vfx" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
+script = ExtResource("9_mspdn")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("10_mnrgv")
+
+[node name="Appear unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("items")]
+script = ExtResource("8_y2auk")
+items = NodePath("../../../This item")
+appear_ready = false
+
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
+script = ExtResource("3_8pxqc")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+on_one_before = true
+
+[node name="Appear ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("8_y2auk")
+items = NodePath("../../../This item")
+
+[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+script = ExtResource("9_ojm6e")
+progress_bar = NodePath("../../../CoolDownBar")
+every_x_calls = NodePath("../LT_EveryXCalls")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("10_xy4ex")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="More damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("11_uhitr")
+int_variable = NodePath("../../../../LT_PersistentVariables/Enemy damage")
+value = 10
+operation = 1
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("10_xy4ex")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="More damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("11_uhitr")
+int_variable = NodePath("../../../../LT_PersistentVariables/Enemy damage")
+value = 20
+operation = 1
+
+[node name="More self damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("11_uhitr")
+int_variable = NodePath("../../../../LT_PersistentVariables/Self damage")
+value = 5
+operation = 1
