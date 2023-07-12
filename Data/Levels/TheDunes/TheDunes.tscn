@@ -17,7 +17,7 @@
 [sub_resource type="Resource" id="Resource_hogni"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 1
-"# Faded" = 0
+"# Faded" = 1
 "# LostRanger" = 0
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
@@ -26,7 +26,7 @@ turn_wait_from_previous_wave = 1
 [sub_resource type="Resource" id="Resource_nugp5"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 4
-"# Faded" = 0
+"# Faded" = 1
 "# LostRanger" = 0
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
@@ -35,7 +35,7 @@ turn_wait_from_previous_wave = 4
 [sub_resource type="Resource" id="Resource_xue0l"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 6
-"# Faded" = 0
+"# Faded" = 1
 "# LostRanger" = 0
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
@@ -44,7 +44,7 @@ turn_wait_from_previous_wave = 6
 [sub_resource type="Resource" id="Resource_yrdf1"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 8
-"# Faded" = 0
+"# Faded" = 8
 "# LostRanger" = 0
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
@@ -53,7 +53,7 @@ turn_wait_from_previous_wave = 8
 [sub_resource type="Resource" id="Resource_c0ylo"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 6
-"# Faded" = 0
+"# Faded" = 1
 "# LostRanger" = 0
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
@@ -62,7 +62,7 @@ turn_wait_from_previous_wave = 6
 [sub_resource type="Resource" id="Resource_l501d"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 8
-"# Faded" = 0
+"# Faded" = 1
 "# LostRanger" = 0
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
@@ -71,7 +71,7 @@ turn_wait_from_previous_wave = 8
 [sub_resource type="Resource" id="Resource_0di6x"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 6
-"# Faded" = 0
+"# Faded" = 1
 "# LostRanger" = 0
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
@@ -80,7 +80,7 @@ turn_wait_from_previous_wave = 6
 [sub_resource type="Resource" id="Resource_sekuq"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 4
-"# Faded" = 0
+"# Faded" = 1
 "# LostRanger" = 0
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
@@ -89,8 +89,8 @@ turn_wait_from_previous_wave = 4
 [sub_resource type="Resource" id="Resource_sjvju"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 11
-"# Faded" = 0
-"# LostRanger" = 0
+"# Faded" = 5
+"# LostRanger" = 5
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
 "info_ " = null
@@ -98,8 +98,8 @@ turn_wait_from_previous_wave = 11
 [sub_resource type="Resource" id="Resource_fmpu2"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 10
-"# Faded" = 0
-"# LostRanger" = 0
+"# Faded" = 1
+"# LostRanger" = 1
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
 "info_ " = null
@@ -107,7 +107,7 @@ turn_wait_from_previous_wave = 10
 [sub_resource type="Resource" id="Resource_3rxs6"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 10
-"# Faded" = 0
+"# Faded" = 2
 "# LostRanger" = 0
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
@@ -116,8 +116,8 @@ turn_wait_from_previous_wave = 10
 [sub_resource type="Resource" id="Resource_1iitl"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 5
-"# Faded" = 0
-"# LostRanger" = 0
+"# Faded" = 1
+"# LostRanger" = 1
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
 "info_ " = null
@@ -125,8 +125,8 @@ turn_wait_from_previous_wave = 5
 [sub_resource type="Resource" id="Resource_ueot7"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 5
-"# Faded" = 0
-"# LostRanger" = 0
+"# Faded" = 1
+"# LostRanger" = 2
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
 "info_ " = null
@@ -134,7 +134,7 @@ turn_wait_from_previous_wave = 5
 [sub_resource type="Resource" id="Resource_tjj5o"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 5
-"# Faded" = 0
+"# Faded" = 1
 "# LostRanger" = 0
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
@@ -145,7 +145,7 @@ script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 10
 "# Faded" = 0
 "# LostRanger" = 0
-"# ForswornPike" = 0
+"# ForswornPike" = 7
 "# ForgottenKing" = 0
 "info_ " = null
 
@@ -154,24 +154,24 @@ script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 5
 "# Faded" = 0
 "# LostRanger" = 0
-"# ForswornPike" = 0
+"# ForswornPike" = 1
 "# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_tj5io"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 10
-"# Faded" = 0
+"# Faded" = 1
 "# LostRanger" = 0
-"# ForswornPike" = 0
+"# ForswornPike" = 1
 "# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_mxj62"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 10
-"# Faded" = 0
-"# LostRanger" = 0
+"# Faded" = 1
+"# LostRanger" = 1
 "# ForswornPike" = 0
 "# ForgottenKing" = 0
 "info_ " = null
@@ -181,7 +181,7 @@ script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 10
 "# Faded" = 0
 "# LostRanger" = 0
-"# ForswornPike" = 0
+"# ForswornPike" = 1
 "# ForgottenKing" = 0
 "info_ " = null
 
@@ -189,8 +189,8 @@ turn_wait_from_previous_wave = 10
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 10
 "# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 0
+"# LostRanger" = 2
+"# ForswornPike" = 1
 "# ForgottenKing" = 0
 "info_ " = null
 
@@ -200,24 +200,24 @@ turn_wait_from_previous_wave = 5
 "# Faded" = 0
 "# LostRanger" = 0
 "# ForswornPike" = 0
-"# ForgottenKing" = 0
+"# ForgottenKing" = 1
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_jy2oq"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 2
-"# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 0
+"# Faded" = 2
+"# LostRanger" = 1
+"# ForswornPike" = 2
 "# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_3wx36"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 6
-"# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 0
+"# Faded" = 1
+"# LostRanger" = 1
+"# ForswornPike" = 1
 "# ForgottenKing" = 0
 "info_ " = null
 
@@ -225,17 +225,17 @@ turn_wait_from_previous_wave = 6
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 10
 "# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 0
+"# LostRanger" = 3
+"# ForswornPike" = 2
 "# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_qhio4"]
 script = ExtResource("6_ojwcy")
 turn_wait_from_previous_wave = 7
-"# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 0
+"# Faded" = 1
+"# LostRanger" = 1
+"# ForswornPike" = 1
 "# ForgottenKing" = 0
 "info_ " = null
 
