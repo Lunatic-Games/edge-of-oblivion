@@ -1,0 +1,206 @@
+[gd_scene load_steps=7 format=3 uid="uid://c21tsme1w6uqc"]
+
+[ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="1_185um"]
+[ext_resource type="Script" path="res://UI/Menus/MemoriesMenu/MemoriesMenu.gd" id="1_hytkw"]
+
+[sub_resource type="Animation" id="Animation_tkxve"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopArea:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Content:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7ar6e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopArea:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Content:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2bt5k"]
+resource_name = "fade_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopArea:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Content:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h03no"]
+_data = {
+"RESET": SubResource("Animation_7ar6e"),
+"fade_in": SubResource("Animation_tkxve"),
+"fade_out": SubResource("Animation_2bt5k")
+}
+
+[node name="MemoriesMenu" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_hytkw")
+
+[node name="TopArea" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 58.0
+offset_bottom = 145.0
+grow_horizontal = 2
+
+[node name="BackButton" parent="TopArea" instance=ExtResource("1_185um")]
+layout_mode = 1
+offset_left = 99.0
+offset_right = 211.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 35
+text = "BACK"
+
+[node name="TopButtons" type="HBoxContainer" parent="TopArea"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 54.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 120
+alignment = 1
+
+[node name="AccountButton" parent="TopArea/TopButtons" instance=ExtResource("1_185um")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "ACCOUNT"
+
+[node name="ItemsButton" parent="TopArea/TopButtons" instance=ExtResource("1_185um")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "ITEMS"
+
+[node name="CharactersButton" parent="TopArea/TopButtons" instance=ExtResource("1_185um")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "CHARACTERS"
+
+[node name="EnemiesButton" parent="TopArea/TopButtons" instance=ExtResource("1_185um")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "ENEMIES"
+
+[node name="Content" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 167.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Content"]
+offset_left = 81.0
+offset_top = 24.0
+offset_right = 1817.0
+offset_bottom = 278.0
+color = Color(0, 0, 0, 0.47451)
+
+[node name="ColorRect2" type="ColorRect" parent="Content"]
+offset_left = 81.0
+offset_top = 314.0
+offset_right = 1817.0
+offset_bottom = 568.0
+color = Color(0, 0, 0, 0.47451)
+
+[node name="ColorRect3" type="ColorRect" parent="Content"]
+offset_left = 81.0
+offset_top = 611.0
+offset_right = 1817.0
+offset_bottom = 865.0
+color = Color(0, 0, 0, 0.47451)
+
+[node name="TransitionPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h03no")
+}
+
+[connection signal="pressed" from="TopArea/BackButton" to="." method="_on_back_button_pressed"]
