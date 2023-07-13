@@ -5,7 +5,7 @@
 [node name="BasicTile" instance=ExtResource("1_2ac1y")]
 
 [node name="Background" parent="." index="0"]
-color = Color(0.603922, 0.458824, 0.345098, 1)
+color = Color(0.407843, 0.298039, 0.215686, 1)
 
 [node name="Sprite2D" parent="." index="1"]
-self_modulate = Color(0.909804, 0.74902, 0.607843, 0.14902)
+self_modulate = Color(0.85098, 0.647059, 0.458824, 0.14902)
