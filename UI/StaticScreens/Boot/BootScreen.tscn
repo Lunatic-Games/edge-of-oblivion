@@ -14,6 +14,7 @@ script = ExtResource("1_1gxak")
 default_start_scene = ExtResource("2_se3hn")
 web_start_scene = ExtResource("3_pp08n")
 debug_start_scene = ExtResource("2_se3hn")
+debug_load_progress_save_file = true
 debug_load_settings_save_file = true
 
 [node name="Background" type="ColorRect" parent="."]

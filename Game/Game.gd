@@ -36,7 +36,7 @@ func _ready() -> void:
 	
 	turn_manager.new_round()
 	
-	GlobalSignals.game_started.emit()
+	GlobalSignals.run_started.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -55,7 +55,7 @@ func victory():
 		return
 	
 	GlobalGameState.game_ended = true
-	GlobalSignals.game_ended.emit()
+	GlobalSignals.run_ended.emit(true)
 	await get_tree().create_timer(1.0).timeout
 	
 	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
@@ -70,7 +70,7 @@ func game_over():
 		return
 	
 	GlobalGameState.game_ended = true
-	GlobalSignals.game_ended.emit()
+	GlobalSignals.run_ended.emit(false)
 	await get_tree().create_timer(1.0).timeout
 	
 	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
@@ -90,12 +90,13 @@ func _on_new_round_started() -> void:
 
 
 func _on_player_levelled_up(_player: Player):
-	upgrade_menu.display()
+	if GlobalGameState.game_ended == false:
+		upgrade_menu.display()
 
 
 func _on_Player_died(_player: Player) -> void:
-	victory()
+	game_over()
 
 
 func _on_Boss_defeated(_boss: Boss) -> void:
-	game_over()
+	victory()

@@ -24,8 +24,11 @@ static func save_progress_to_file():
 	var save_data: Dictionary = {
 		"unlocked_items": unlocked_item_data_paths,
 		"account_level": GlobalAccount.level,
-		"account_xp": GlobalAccount.xp
+		"account_xp": GlobalAccount.xp,
+		"account_stats": JSON.stringify(GlobalAccountStatTracker.stats)
 	}
+	
+	print(save_data)
 	
 	f.store_line(str(SAVE_PROGRESS_VERSION))
 	f.store_line(JSON.stringify(save_data))
@@ -51,6 +54,11 @@ static func load_progress_from_file():
 	
 	GlobalAccount.level = dict.get("account_level", 1)
 	GlobalAccount.xp = dict.get("account_xp", 0)
+	var saved_stats = JSON.parse_string(dict.get("account_stats", ""))
+	if saved_stats:
+		for key in saved_stats:
+			if GlobalAccountStatTracker.stats.has(key):
+				GlobalAccountStatTracker.stats[key] = saved_stats[key]
 	
 	var unlocked_item_data_paths: Array = dict.get("unlocked_items", []) as Array
 	for item_data_path in unlocked_item_data_paths:

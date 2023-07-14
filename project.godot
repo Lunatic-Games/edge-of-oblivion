@@ -23,6 +23,7 @@ GlobalLogicTreeSignals="*res://Globals/LogicTreeSignals.gd"
 GlobalAccount="*res://Globals/Account/Account.tscn"
 GlobalMusicManager="res://Globals/MusicManager/MusicManager.tscn"
 GlobalDebugOverlay="res://Globals/DebugOverlay/DebugOverlay.tscn"
+GlobalAccountStatTracker="*res://Globals/Account/AccountStatTracker.gd"
 
 [debug]
 
