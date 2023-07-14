@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtpkylmn14mi6"]
+[gd_scene load_steps=7 format=3 uid="uid://dtpkylmn14mi6"]
 
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="1_i4qau"]
 [ext_resource type="Script" path="res://UI/Elements/MenuButton/MenuButton.gd" id="2_uthlb"]
@@ -6,6 +6,8 @@
 [sub_resource type="FontVariation" id="FontVariation_kj5ma"]
 base_font = ExtResource("1_i4qau")
 spacing_glyph = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sv2u8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tl0wd"]
 
@@ -16,10 +18,12 @@ spacing_glyph = -17
 [node name="MenuButton" type="Button"]
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = SubResource("FontVariation_kj5ma")
 theme_override_font_sizes/font_size = 45
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_sv2u8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tl0wd")
 text = "BUTTON"
 flat = true

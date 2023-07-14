@@ -21,7 +21,7 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	GlobalSignals.game_ended.connect(_on_game_ended)
+	GlobalSignals.run_ended.connect(_on_run_ended)
 
 
 func display() -> void:
@@ -70,7 +70,7 @@ func display() -> void:
 		GlobalGameState.in_upgrade_menu = false
 
 
-func _on_game_ended() -> void:
+func _on_run_ended(_is_victory: bool) -> void:
 	if visible:
 		GlobalGameState.in_upgrade_menu = false
 		hide()

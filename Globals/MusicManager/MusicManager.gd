@@ -8,7 +8,7 @@ extends Node
 
 func _ready() -> void:
 	GlobalSignals.main_menu_entered.connect(_on_main_menu_loaded)
-	GlobalSignals.game_started.connect(_on_game_started)
+	GlobalSignals.run_started.connect(_on_run_started)
 	GlobalSignals.boss_spawned.connect(_on_boss_spawned)
 	GlobalSignals.boss_defeated.connect(_on_boss_defeated)
 
@@ -19,7 +19,7 @@ func _on_main_menu_loaded() -> void:
 	main_menu_music_player.start_new_random_track(true)
 
 
-func _on_game_started() -> void:
+func _on_run_started() -> void:
 	boss_music_player.fade_out_volume()
 	main_menu_music_player.fade_out_volume()
 	battle_music_player.start_new_random_track(true)

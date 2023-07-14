@@ -5,6 +5,7 @@ const GAME_SCENE: PackedScene = preload("res://Game/Game.tscn")
 @onready var title: Control = $Title
 @onready var menu_container: Control = $MenuContainer
 @onready var quit_button: Button = $MenuContainer/QuitButton
+@onready var memories_menu: MemoriesMenu = $MemoriesMenu
 @onready var settings_menu: CanvasLayer = $SettingsMenu
 @onready var credits_menu: CanvasLayer = $CreditsMenu
 @onready var transition_player: AnimationPlayer = $TransitionAnimator
@@ -39,6 +40,12 @@ func _on_PlayButton_pressed() -> void:
 	get_tree().change_scene_to_packed(GAME_SCENE)
 
 
+func _on_memories_button_pressed() -> void:
+	transition_player.play("fade_out_menu")
+	await transition_player.animation_finished
+	memories_menu.fade_in()
+
+
 func _on_SettingsButton_pressed() -> void:
 	transition_player.play("fade_out_menu")
 	await transition_player.animation_finished
@@ -53,6 +60,10 @@ func _on_CreditsButton_pressed() -> void:
 
 func _on_QuitButton_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_memories_menu_faded_out() -> void:
+	transition_player.play("fade_in_menu")
 
 
 func _on_CreditsMenu_faded_out() -> void:

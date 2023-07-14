@@ -95,6 +95,12 @@ func die() -> void:
 	super.die()
 
 
+func heal(heal_amount: int) -> int:
+	var amount_healed: int = super.heal(heal_amount)
+	GlobalSignals.player_healed.emit(self, amount_healed)
+	return amount_healed
+
+
 func gain_experience(experience: int) -> void:
 	if current_level >= level_thresholds.size():
 		return

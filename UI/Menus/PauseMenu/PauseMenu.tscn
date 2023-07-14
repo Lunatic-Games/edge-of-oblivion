@@ -490,7 +490,7 @@ layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_5jie1")
 theme_override_font_sizes/font_size = 42
 text = "ARE YOU SURE YOU WANT TO RETURN
-TO THE MAIN MENU? ALL PROGRESS WILL BE LOST."
+TO THE MAIN MENU? RUN PROGRESS WILL BE LOST."
 horizontal_alignment = 1
 vertical_alignment = 1
 
