@@ -140,9 +140,7 @@ theme_override_constants/separation = 100
 
 [node name="TopArea" type="MarginContainer" parent="Sections"]
 layout_mode = 2
-theme_override_constants/margin_left = 60
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 60
+theme_override_constants/margin_top = 50
 
 [node name="SectionButtons" type="HBoxContainer" parent="Sections/TopArea"]
 layout_mode = 2
