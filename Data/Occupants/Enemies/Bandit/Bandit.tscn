@@ -39,6 +39,8 @@ shader_parameter/modulate = Color(0.78, 0.62, 0.65, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
 
 [node name="Bandit" instance=ExtResource("1_p0l3s")]
+popup_info_text = "[color=cyan]Bandit:[/color] attacks all directions range 3, then moves towards the player."
+popup_flavor_text = "The rooten tootenist baddy of the Dunes."
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_id2o4")
