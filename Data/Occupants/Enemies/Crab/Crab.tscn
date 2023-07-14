@@ -39,8 +39,8 @@ shader_parameter/modulate = Color(0.78, 0.62, 0.65, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
 
 [node name="Crab" instance=ExtResource("1_ymlt4")]
-popup_info_text = "[color=cyan]River Crabs:[/color] attacks all adjacent tiles, then moves towards the player."
-popup_flavor_text = "Child of the mud and piercing claws."
+popup_info_text = "[color=cyan]River Crab:[/color] attacks all adjacent tiles, then moves towards the player."
+popup_flavor_text = "Child of the mud, with piercing claws."
 max_hp = 30
 
 [node name="Sprite2D" parent="." index="1"]
