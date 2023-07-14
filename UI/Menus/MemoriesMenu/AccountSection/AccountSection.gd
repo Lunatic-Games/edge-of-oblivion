@@ -13,6 +13,15 @@ const STAT_LABEL_SCENE: PackedScene = preload("res://UI/Menus/MemoriesMenu/Accou
 
 func _ready() -> void:
 	account_level_label.text = str(GlobalAccount.level)
+	if GlobalAccount.is_max_level():
+		account_level_bar.value = account_level_bar.max_value
+		account_level_bar_label.text = "MAX LEVEL"
+	else:
+		var xp: int = GlobalAccount.xp
+		var out_of: int = GlobalAccount.get_total_xp_cost_of_next_level()
+		var ratio: float = float(xp) / float(out_of)
+		account_level_bar.value = ratio * account_level_bar.max_value
+		account_level_bar_label.text = str(xp) + "XP / " + str(out_of) + "XP"
 	
 	var enemies_killed: int = GlobalAccountStatTracker.stats["enemies_killed"]
 	var self_heals: int = GlobalAccountStatTracker.stats["self_heals"]
