@@ -39,7 +39,7 @@ shader_parameter/modulate = Color(0.78, 0.62, 0.65, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
 
 [node name="Farmer" instance=ExtResource("1_cawjn")]
-popup_info_text = "[color=cyan]River Farmer:[/color] Moves towards the player, then attacks."
+popup_info_text = "[color=cyan]River Farmer:[/color] attacks all adjacent tiles, then moves towards the player."
 popup_flavor_text = "An eternity of tangling with the river crabs has left them nimble."
 
 [node name="Sprite2D" parent="." index="1"]
@@ -87,42 +87,42 @@ script = ExtResource("11_vslyq")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("12_c0sij")
 
-[node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="1"]
+[node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="6"]
 script = ExtResource("13_70rnc")
 
-[node name="Players tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/Handle Move Logic" index="0"]
+[node name="Players tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="0"]
 script = ExtResource("7_77asq")
 
-[node name="LT_GetPlayer" type="Node" parent="LT_OnEntityUpdate/LogicTree/Handle Move Logic" index="1" node_paths=PackedStringArray("output_player_tile")]
+[node name="LT_GetPlayer" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="1" node_paths=PackedStringArray("output_player_tile")]
 script = ExtResource("14_nrbot")
 output_player_tile = NodePath("../Players tile")
 
-[node name="Tile to move to" type="Node" parent="LT_OnEntityUpdate/LogicTree/Handle Move Logic" index="2"]
+[node name="Tile to move to" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="2"]
 script = ExtResource("7_77asq")
 
-[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/Handle Move Logic" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("15_r8km7")
-input_tiles = NodePath("../../../Enemy tile")
+input_tiles = NodePath("../../../../Enemy tile")
 output_tiles = NodePath("../Tile to move to")
 directions = 15
 
-[node name="Select closest to player" type="Node" parent="LT_OnEntityUpdate/LogicTree/Handle Move Logic" index="4" node_paths=PackedStringArray("tiles", "tiles_to_measure_to", "output_tiles")]
+[node name="Select closest to player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="4" node_paths=PackedStringArray("tiles", "tiles_to_measure_to", "output_tiles")]
 script = ExtResource("16_cdply")
 tiles = NodePath("../Tile to move to")
 tiles_to_measure_to = NodePath("../Players tile")
 output_tiles = NodePath("../Tile to move to")
 
-[node name="Select random tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/Handle Move Logic" index="5" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select random tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="5" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("17_n5n26")
 input_tiles = NodePath("../Tile to move to")
 output_tiles = NodePath("../Tile to move to")
 
-[node name="Move to tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/Handle Move Logic" index="6" node_paths=PackedStringArray("tile", "destination_tile")]
+[node name="Move to tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="6" node_paths=PackedStringArray("tile", "destination_tile")]
 script = ExtResource("18_0ahyp")
-tile = NodePath("../../../Enemy tile")
+tile = NodePath("../../../../Enemy tile")
 destination_tile = NodePath("../Tile to move to")
 
-[node name="BeforeEveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="2" node_paths=PackedStringArray("x_override")]
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_rw1qq")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 on_one_before = true
@@ -145,7 +145,7 @@ script = ExtResource("11_vslyq")
 tiles = NodePath("../Targets to indicate")
 node2d_to_spawn = ExtResource("19_attu2")
 
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="3" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
+[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
 script = ExtResource("20_g4i3f")
 progress_bar = NodePath("../../../AttackBar")
 every_x_calls = NodePath("../LT_EveryXCalls")
