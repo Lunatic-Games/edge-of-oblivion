@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyk0g1utdvhen"]
+
+[ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="1_nbtem"]
+
+[sub_resource type="FontVariation" id="FontVariation_4axqc"]
+base_font = ExtResource("1_nbtem")
+
+[node name="StatLabel" type="Label"]
+theme_override_fonts/font = SubResource("FontVariation_4axqc")
+theme_override_font_sizes/font_size = 24
+text = "Enemies killed: -1"
