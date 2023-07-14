@@ -39,7 +39,7 @@ shader_parameter/modulate = Color(0.78, 0.62, 0.65, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
 
 [node name="Farmer" instance=ExtResource("1_cawjn")]
-popup_info_text = "[color=cyan]River Farmer:[/color] attacks all adjacent tiles, then moves towards the player."
+popup_info_text = "[color=cyan]River Farmer:[/color] attacks all adjacent tiles, stronger up and down, then moves towards the player."
 popup_flavor_text = "An eternity of tangling with the river crabs has left them nimble."
 
 [node name="Sprite2D" parent="." index="1"]
@@ -140,7 +140,15 @@ input_tiles = NodePath("../../../Enemy tile")
 output_tiles = NodePath("../Targets to indicate")
 directions = 15
 
-[node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
+[node name="Select a bit further up and down" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("15_r8km7")
+input_tiles = NodePath("../../../Enemy tile")
+output_tiles = NodePath("../Targets to indicate")
+directions = 5
+distance_length = 2
+operation = 1
+
+[node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
 script = ExtResource("11_vslyq")
 tiles = NodePath("../Targets to indicate")
 node2d_to_spawn = ExtResource("19_attu2")
