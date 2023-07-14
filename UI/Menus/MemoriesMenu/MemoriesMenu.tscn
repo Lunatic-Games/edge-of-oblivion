@@ -144,49 +144,35 @@ theme_override_constants/margin_left = 60
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 60
 
-[node name="UISections" type="HBoxContainer" parent="Sections/TopArea"]
-layout_mode = 2
-theme_override_constants/separation = 50
-alignment = 1
-
-[node name="LeftButtons" type="HBoxContainer" parent="Sections/TopArea/UISections"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="BackButton" parent="Sections/TopArea/UISections/LeftButtons" instance=ExtResource("1_185um")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "BACK"
-
-[node name="SectionButtons" type="HBoxContainer" parent="Sections/TopArea/UISections"]
+[node name="SectionButtons" type="HBoxContainer" parent="Sections/TopArea"]
 layout_mode = 2
 theme_override_constants/separation = 120
 alignment = 1
 
-[node name="AccountButton" parent="Sections/TopArea/UISections/SectionButtons" instance=ExtResource("1_185um")]
+[node name="BackButton" parent="Sections/TopArea/SectionButtons" instance=ExtResource("1_185um")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "< BACK"
+
+[node name="AccountButton" parent="Sections/TopArea/SectionButtons" instance=ExtResource("1_185um")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "ACCOUNT"
 
-[node name="ItemsButton" parent="Sections/TopArea/UISections/SectionButtons" instance=ExtResource("1_185um")]
+[node name="ItemsButton" parent="Sections/TopArea/SectionButtons" instance=ExtResource("1_185um")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "ITEMS"
 
-[node name="CharactersButton" parent="Sections/TopArea/UISections/SectionButtons" instance=ExtResource("1_185um")]
+[node name="CharactersButton" parent="Sections/TopArea/SectionButtons" instance=ExtResource("1_185um")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "CHARACTERS"
 
-[node name="EnemiesButton" parent="Sections/TopArea/UISections/SectionButtons" instance=ExtResource("1_185um")]
+[node name="EnemiesButton" parent="Sections/TopArea/SectionButtons" instance=ExtResource("1_185um")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "ENEMIES"
-
-[node name="RightButtons" type="HBoxContainer" parent="Sections/TopArea/UISections"]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="Content" type="Control" parent="Sections"]
 layout_mode = 2
@@ -200,4 +186,4 @@ libraries = {
 "": SubResource("AnimationLibrary_h03no")
 }
 
-[connection signal="pressed" from="Sections/TopArea/UISections/LeftButtons/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Sections/TopArea/SectionButtons/BackButton" to="." method="_on_back_button_pressed"]
