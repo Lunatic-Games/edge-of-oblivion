@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://egkjbc7yqn6n"]
+[gd_scene load_steps=7 format=3 uid="uid://egkjbc7yqn6n"]
 
 [ext_resource type="Script" path="res://Game/Board/Board.gd" id="1_f1ly2"]
 [ext_resource type="PackedScene" uid="uid://cn73gwmkfjtn5" path="res://Data/Tiles/BasicTiles/BasicBlueTile.tscn" id="1_vf7bm"]
 [ext_resource type="PackedScene" uid="uid://d1uegyumr60hd" path="res://Data/Tiles/BasicTiles/BasicRedTile.tscn" id="2_1u003"]
+[ext_resource type="PackedScene" uid="uid://djcqhpxjroxca" path="res://Data/Tiles/BasicTiles/BasicSandyTile.tscn" id="3_hova3"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fnbyi"]
 resource_name = "Tiles"
 scenes/1/scene = ExtResource("1_vf7bm")
 scenes/2/scene = ExtResource("2_1u003")
+scenes/3/scene = ExtResource("3_hova3")
 
 [sub_resource type="TileSet" id="TileSet_bwk57"]
 tile_size = Vector2i(70, 70)

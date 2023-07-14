@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://djcqhpxjroxca"]
+
+[ext_resource type="PackedScene" uid="uid://b2sfg7xw7h5d3" path="res://Data/Tiles/Tile.tscn" id="1_2ac1y"]
+
+[node name="BasicTile" instance=ExtResource("1_2ac1y")]
+
+[node name="Background" parent="." index="0"]
+color = Color(0.407843, 0.298039, 0.215686, 1)
+
+[node name="Sprite2D" parent="." index="1"]
+self_modulate = Color(0.85098, 0.647059, 0.458824, 0.14902)
