@@ -35,7 +35,7 @@ jobs:
     env:
       WINDOWS_PRESET: Windows Desktop
     steps:
-      - name: Cache built game
+      - name: Check for already built game
         id: check-cache
         uses: actions/cache@v3.3.1
         env:
@@ -97,12 +97,12 @@ jobs:
         env:
           cache-name: cache-built-${{ github.event.repository.name }}
         with:
-          path: build
+          path: ${{ env.PROJECT_PATH }}/build
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
           fail-on-cache-miss: true
           
       - name: Test cache find
-        run: ls -la build/
+        run: ls -la "$PROJECT_PATH/build"
           
  #     - uses: game-ci/steam-deploy@v3
  #       with:
