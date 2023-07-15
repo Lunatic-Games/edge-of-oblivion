@@ -6,7 +6,7 @@ on:
       buildDescription:
         description: Build Description
         required: false
-        default: ${{ github.sha }}
+        default: 'A generic build'
 
 env:
   GODOT_VERSION: 4.1
@@ -109,6 +109,6 @@ jobs:
  #         username: ${{ secrets.STEAM_USERNAME }}          
  #         configVdf: ${{ secrets.STEAM_CONFIG_VDF}}          
  #         appId: 1354590
- #         buildDescription: ${{ github.sha }}
+ #         buildDescription: ${{ github.event.inputs.buildDescription }}
  #         rootPath: build
  #         depot1Path: windows
