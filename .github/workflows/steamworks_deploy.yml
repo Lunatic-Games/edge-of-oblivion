@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: Cache game
         id: check-cache
-        uses: actions/cache@v3.0.6
+        uses: actions/cache@v3.3.1
         env:
           cache-name: cache-built-${{ github.event.repository.name }}
         with:
@@ -83,7 +83,7 @@ jobs:
     needs: export
     steps:
       - name: Retrieve from cache
-        uses: actions/cache@v3.0.6
+        uses: actions/cache@v3.3.1
         env:
           cache-name: cache-built-${{ github.event.repository.name }}
         with:
@@ -92,7 +92,7 @@ jobs:
           fail-on-cache-miss: true
           
       - name: Test cache find
-        run: ls -la "$PROJECT_PATH/build"
+        run: find "$PROJECT_PATH/build" -maxdepth 1 -type d -exec ls -la
           
  #     - uses: game-ci/steam-deploy@v3
  #       with:
