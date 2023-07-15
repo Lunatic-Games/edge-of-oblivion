@@ -87,7 +87,7 @@ jobs:
           path: build
           
       - name: Test cache find
-        run: find build/ -maxdepth 1 -type d -exec ls -la
+        run: find . -maxdepth 2
           
  #     - uses: game-ci/steam-deploy@v3
  #       with:
