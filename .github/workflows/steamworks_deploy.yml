@@ -102,7 +102,7 @@ jobs:
           fail-on-cache-miss: true
           
       - name: Test cache find
-        run: ll build
+        run: ls -la build/
           
  #     - uses: game-ci/steam-deploy@v3
  #       with:
