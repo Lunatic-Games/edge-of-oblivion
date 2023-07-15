@@ -1,0 +1,114 @@
+name: Build and Deploy to Steam
+
+on:
+  workflow_dispatch:
+    inputs:
+      buildDescription:
+        description: Build Description
+        required: false
+        default: ${{ github.sha }}
+
+env:
+  GODOT_VERSION: 4.1
+  EXPORT_NAME: "${{ github.event.repository.name }}"
+  PROJECT_PATH: "."
+
+jobs:
+  set_tag:
+    name: Set godot-ci tag
+    runs-on: ubuntu-latest
+    outputs:
+      godot_ci_tag: ${{ steps.set_tag.outputs.tag }}
+    steps:
+      - id: set_tag
+        run: echo "tag=$GODOT_VERSION" >> $GITHUB_OUTPUT
+        
+  export:
+    name: Export from Godot
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    needs: set_tag
+    container:
+      image: barichello/godot-ci:${{ needs.set_tag.outputs.godot_ci_tag }}
+    env:
+      WINDOWS_PRESET: Windows Desktop
+    steps:
+      - name: Cache built game
+        id: check-cache
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-built-${{ github.event.repository.name }}
+        with:
+          path: ${{ env.PROJECT_PATH }}/build
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
+          lookup-only: true
+          
+      - name: Checkout
+        if: steps.check-cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v3
+        with:
+          lfs: true     
+          
+      - name: Setup
+        if: steps.check-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          # cp .github/workflows/export_presets.cfg ${PROJECT_PATH}/export_presets.cfg
+          
+      - name: Build for windows
+        if: steps.check-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -v -p ${PROJECT_PATH}/build/windows
+          godot -v --path $PROJECT_PATH --headless --export "${WINDOWS_PRESET}" build/windows/$EXPORT_NAME.exe | tee $EXPORT_NAME.output
+          
+      - name: Check for build errors
+        if: steps.check-cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project")
+          for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
+          do
+            if grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output
+            then
+              echo "Found error ${BUILD_ERRORS[$i]} in Godot build output"
+              exit 1
+            fi
+          done
+          
+      - name: Cache built game
+        if: steps.check-cache.outputs.cache-hit != 'true'
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-built-${{ github.event.repository.name }}
+        with:
+          path: ${{ env.PROJECT_PATH }}/build
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
+          
+  deploy:
+    name: Deploy to Steam
+    runs-on: ubuntu-latest
+    needs: export
+    steps:
+      - name: Retrieve from cache
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-built-${{ github.event.repository.name }}
+        with:
+          path: build
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
+          fail-on-cache-miss: true
+          
+      - name: Test cache find
+        run: ll build
+          
+ #     - uses: game-ci/steam-deploy@v3
+ #       with:
+ #         username: ${{ secrets.STEAM_USERNAME }}          
+ #         configVdf: ${{ secrets.STEAM_CONFIG_VDF}}          
+ #         appId: 1354590
+ #         buildDescription: ${{ github.sha }}
+ #         rootPath: build
+ #         depot1Path: windows
