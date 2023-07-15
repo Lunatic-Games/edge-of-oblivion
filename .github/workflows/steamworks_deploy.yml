@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: Cache built game
         id: check-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3.3.1
         env:
           cache-name: cache-built-${{ github.event.repository.name }}
         with:
@@ -80,7 +80,7 @@ jobs:
           
       - name: Cache built game
         if: steps.check-cache.outputs.cache-hit != 'true'
-        uses: actions/cache@v2
+        uses: actions/cache@v3.3.1
         env:
           cache-name: cache-built-${{ github.event.repository.name }}
         with:
@@ -93,7 +93,7 @@ jobs:
     needs: export
     steps:
       - name: Retrieve from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3.3.1
         env:
           cache-name: cache-built-${{ github.event.repository.name }}
         with:
