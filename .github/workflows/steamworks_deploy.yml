@@ -35,7 +35,7 @@ jobs:
     env:
       WINDOWS_PRESET: Windows Desktop
     steps:
-      - name: Check for already built game
+      - name: Cache game
         id: check-cache
         uses: actions/cache@v3.0.6
         env:
@@ -43,7 +43,6 @@ jobs:
         with:
           path: ${{ env.PROJECT_PATH }}/build
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
-          lookup-only: true
           
       - name: Checkout
         if: steps.check-cache.outputs.cache-hit != 'true'
@@ -77,15 +76,6 @@ jobs:
               exit 1
             fi
           done
-          
-      - name: Cache built game
-        if: steps.check-cache.outputs.cache-hit != 'true'
-        uses: actions/cache@v3.0.6
-        env:
-          cache-name: cache-built-${{ github.event.repository.name }}
-        with:
-          path: ${{ env.PROJECT_PATH }}/build
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
           
   deploy:
     name: Deploy to Steam
