@@ -97,11 +97,9 @@ jobs:
             godot_command+=(--export-release)
           fi
           
-          godot_command+=($PRESET $PROJECT_PATH/build/windows/$EXPORT_NAME.exe)
-          "${godot_command[@]}" 2>&1 | tee "$PROJECT_PATH/$EXPORT_NAME.output"
-      - name: Test for output file
-        run: cat $PROJECT_PATH/$EXPORT_NAME.output    
-      - name: Check for build errors
+          godot_command+=("$PRESET" $PROJECT_PATH/build/windows/$EXPORT_NAME.exe)
+          "${godot_command[@]}" 2>&1 | tee "$PROJECT_PATH/$EXPORT_NAME.output"  
+      - name: Check for errors
         shell: bash
         run: |
           BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project" "ERROR: Invalid export preset name")
@@ -171,9 +169,9 @@ jobs:
             godot_command+=(--export-release)
           fi
           
-          godot_command+=($PRESET $PROJECT_PATH/build/linux/$EXPORT_NAME.zip)
+          godot_command+=("$PRESET" $PROJECT_PATH/build/linux/$EXPORT_NAME.zip)
           "${godot_command[@]}" 2>&1 | tee "$PROJECT_PATH/$EXPORT_NAME.output"
-      - name: Check for build errors
+      - name: Check for errors
         shell: bash
         run: |
           BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project" "ERROR: Invalid export preset name")
