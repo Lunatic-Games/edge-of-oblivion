@@ -89,7 +89,7 @@ jobs:
     env:
       PLATFORM: ${{ matrix.platform }}
       BINARY_EXT: ${{ (matrix.platform == 'windows' && '.exe') || (matrix.platform == 'linux' && '.zip') || '.zip' }}
-      PRESET: ${{ inputs.${{ matrix.platform }}_preset }}
+      PRESET: ${{ inputs.format('{0}_preset', matrix.platform) }}
       DEBUG: ${{ inputs.debug }}
     steps:
       - name: Checkout
