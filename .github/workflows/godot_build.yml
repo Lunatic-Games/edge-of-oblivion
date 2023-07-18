@@ -69,7 +69,7 @@ jobs:
     container:
       image: barichello/godot-ci:${{ needs.set_tag.outputs.godot_ci_tag }}
     env:
-      WINDOWS_PRESET: ${{ inputs.windows_preset }}
+      PRESET: ${{ inputs.windows_preset }}
       DEBUG: ${{ inputs.debug }}
     steps:
       - name: Checkout
@@ -84,7 +84,7 @@ jobs:
           then 
             mv $PROJECT_PATH/$EXPORT_PRESETS_PATH/export_presets.cfg $PROJECT_PATH/export_presets.cfg;
           fi
-      - name: Build for windows
+      - name: Build
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/windows
           godot_command=(godot -v --path $PROJECT_PATH --headless)
@@ -94,12 +94,12 @@ jobs:
           else 
             godot_command+=(--export-release); 
           fi
-          godot_command+=($PROJECT_PATH/build/windows/$EXPORT_NAME.exe)
+          godot_command+=($PRESET $PROJECT_PATH/build/windows/$EXPORT_NAME.exe)
           "${godot_command[@]}" | tee $EXPORT_NAME.output
       - name: Check for build errors
         shell: bash
         run: |
-          BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project")
+          BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project" "ERROR: Invalid export preset name")
           for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
           do
             if grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output
@@ -140,7 +140,7 @@ jobs:
           then 
             mv $PROJECT_PATH/$EXPORT_PRESETS_PATH/export_presets.cfg $PROJECT_PATH/export_presets.cfg;
           fi
-      - name: Build for windows
+      - name: Build
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/linux
           godot_command=(godot -v --path $PROJECT_PATH --headless)
@@ -150,12 +150,12 @@ jobs:
           else 
             godot_command+=(--export-release); 
           fi
-          godot_command+=($PROJECT_PATH/build/windows/$EXPORT_NAME.exe)
+          godot_command+=($PRESET $PROJECT_PATH/build/linux/$EXPORT_NAME.zip)
           "${godot_command[@]}" | tee $EXPORT_NAME.output
       - name: Check for build errors
         shell: bash
         run: |
-          BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project")
+          BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project" "ERROR: Invalid export preset name")
           for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
           do
             if grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output
