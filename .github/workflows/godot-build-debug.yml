@@ -8,8 +8,8 @@ env:
   NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP: 1
 
 jobs:
-  export:
-    name: Build Executables
+  build:
+    name: Build game
     uses: bigdavisc/edge-of-oblivion/.github/workflows/godot_build.yml@master
     with:
       debug: true
@@ -23,11 +23,11 @@ jobs:
       export_presets_path: '.'
       
   clean:
-    name: Cleanup Old Artifacts
+    name: Cleanup old artifacts
     runs-on: ubuntu-latest
     permissions: 
       actions: write
-    needs: export
+    needs: build
     steps:
       - name: Find and delete old artifacts
         uses: actions/github-script@v6
