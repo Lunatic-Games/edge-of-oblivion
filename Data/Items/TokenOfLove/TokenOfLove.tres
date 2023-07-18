@@ -13,9 +13,9 @@ popup_item_name_color = "royalblue"
 flavor_text = "Proof of someone worth fighting for."
 max_tier = 3
 use_tier_1_text_for_popup_texts = false
-card_text_1 = "Every 9 turns: [color=springgreen]Heal[/color] self."
+card_text_1 = "Every 9 turns: [heal]Heal[/heal] self."
 card_text_2 = "Decreased cooldown 9->7."
 card_text_3 = "Decreased cooldown 7->5."
-popup_text_1 = "[color=springgreen]Heal[/color] self."
-popup_text_2 = "[color=springgreen]Heal[/color] self."
-popup_text_3 = "[color=springgreen]Heal[/color] self."
+popup_text_1 = "[heal]Heal[/heal] self."
+popup_text_2 = "[heal]Heal[/heal] self."
+popup_text_3 = "[heal]Heal[/heal] self."

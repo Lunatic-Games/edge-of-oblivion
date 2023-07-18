@@ -13,6 +13,6 @@ popup_item_name_color = "royalblue"
 flavor_text = "Affectionally called the Breaker of Bones."
 max_tier = 3
 use_tier_1_text_for_popup_texts = true
-card_text_1 = "Knockback enemies above and below. Has massive collision damage."
+card_text_1 = "[knockback]Knockback[/knockback] enemies above and below. Has massive collision damage."
 card_text_2 = "Increased collision damage."
 card_text_3 = "Increased damage."

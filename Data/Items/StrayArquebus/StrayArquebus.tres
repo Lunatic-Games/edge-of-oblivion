@@ -14,6 +14,6 @@ flavor_text = "So anyways I started blasting."
 max_tier = 3
 use_tier_1_text_for_popup_texts = true
 card_text_1 = "Every 3 turns: Attack in the last moved direction.
-[color=pink]Volatile:[/color] Reduced damage and range."
-card_text_2 = "Decreased volatility: 1/6 -> 1/8."
-card_text_3 = "Decreased volatility: 1/8 -> 1/10."
+[volatile]Volatile:[/volatile] Reduced damage and range."
+card_text_2 = "Decreased [volatile]volatile chance:[/volatile]  1/6 -> 1/8."
+card_text_3 = "Decreased [volatile]volatile chance:[/volatile] 1/8 -> 1/10."

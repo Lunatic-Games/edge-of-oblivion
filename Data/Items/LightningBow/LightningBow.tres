@@ -15,8 +15,8 @@ max_tier = 3
 use_tier_1_text_for_popup_texts = false
 card_text_1 = "Every 3 turns: Attack up.
 [color=pink]Range 1[/color]. [color=cyan]Chain 1[/color]."
-card_text_2 = "[color=cyan]Chain 1->4[/color]."
-card_text_3 = "[color=cyan]Chain 4->7[/color]."
-popup_text_1 = "Attack up. [color=pink]Range 2[/color]. [color=cyan]Chain 1[/color]."
-popup_text_2 = "Attack up. [color=pink]Range 2[/color]. [color=cyan]Chain 4[/color]."
-popup_text_3 = "Attack up. [color=pink]Range 2[/color]. [color=cyan]Chain 7[/color]."
+card_text_2 = "[chain]Chain 1->4[/chain]."
+card_text_3 = "[chain]Chain 4->7[/chain]."
+popup_text_1 = "Attack up. [range]Range 2[/range]. [chain]Chain 1[/chain]."
+popup_text_2 = "Attack up. [range]Range 2[/range]. [chain]Chain 4[/chain]."
+popup_text_3 = "Attack up. [range]Range 2[/range]. [chain]Chain 7[/chain]."

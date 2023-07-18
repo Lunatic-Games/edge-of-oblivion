@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dins546jhadrn"]
+[gd_scene load_steps=27 format=3 uid="uid://dins546jhadrn"]
 
 [ext_resource type="Script" path="res://UI/Elements/Card/Card.gd" id="1_e71sb"]
 [ext_resource type="PackedScene" uid="uid://57a3ac7a6uvb" path="res://Data/Particles/UI/RayParticles.tscn" id="2_2sdpx"]
@@ -9,6 +9,11 @@
 [ext_resource type="FontFile" uid="uid://delvnctbli24y" path="res://Assets/fonts/Caudex-Bold.ttf" id="4_3x57h"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="4_wr4ni"]
 [ext_resource type="FontFile" uid="uid://br33sipyuwalp" path="res://Assets/fonts/Caudex-Italic.ttf" id="8_n0urd"]
+[ext_resource type="Script" path="res://UI/BBCode/Chain.gd" id="8_xpjyb"]
+[ext_resource type="Script" path="res://UI/BBCode/Heal.gd" id="9_3a2tb"]
+[ext_resource type="Script" path="res://UI/BBCode/Knockback.gd" id="10_x5h6o"]
+[ext_resource type="Script" path="res://UI/BBCode/Lifesteal.gd" id="11_83f2t"]
+[ext_resource type="Script" path="res://UI/BBCode/Volatile.gd" id="12_8k5ex"]
 
 [sub_resource type="Animation" id="Animation_ufg8h"]
 length = 0.001
@@ -263,6 +268,21 @@ _data = {
 "RESET": SubResource("Animation_ufg8h"),
 "rotate": SubResource("Animation_pxmge")
 }
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_lxmt4"]
+script = ExtResource("8_xpjyb")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_daufr"]
+script = ExtResource("9_3a2tb")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_ffsmv"]
+script = ExtResource("10_x5h6o")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_ntfrd"]
+script = ExtResource("11_83f2t")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_4n6q6"]
+script = ExtResource("12_8k5ex")
 
 [sub_resource type="Animation" id="Animation_c7d4a"]
 resource_name = "rays_in"
@@ -565,6 +585,7 @@ bbcode_enabled = true
 text = "Attack left for 1 damage."
 fit_content = true
 scroll_active = false
+custom_effects = [SubResource("RichTextEffect_lxmt4"), SubResource("RichTextEffect_daufr"), SubResource("RichTextEffect_ffsmv"), SubResource("RichTextEffect_ntfrd"), SubResource("RichTextEffect_4n6q6")]
 
 [node name="FlavorText" type="Label" parent="Background/BottomText"]
 layout_mode = 2
