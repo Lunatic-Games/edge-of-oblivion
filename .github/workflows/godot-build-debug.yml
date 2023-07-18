@@ -42,7 +42,7 @@ jobs:
 
             const artifactsToDelete = allArtifacts
                     .slice(0, -${{ env.NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP }})
-                    .filter(({ name }) => name.contains('${{ github.event.repository.name }}-debug'))
+                    .filter(({ name }) => name.includes('${{ github.event.repository.name }}-debug'))
 
             artifactsToDelete.forEach(({ id }) => {
                github.rest.actions.deleteArtifact({
