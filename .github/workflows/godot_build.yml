@@ -74,7 +74,6 @@ jobs:
   export:
     name: Export for ${{ matrix.platform }}
     runs-on: ubuntu-latest
-    if: inputs.windows
     strategy:
       matrix:
         platform: ${{ fromJSON(needs.set_matrix.outputs.matrix) }}
@@ -130,7 +129,7 @@ jobs:
             exit 1
           fi  
           
-          if [ $(cat hw.txt | wc -l) -gt 0 ]
+          if [ $(cat "$PROJECT_PATH/$EXPORT_NAME.output" | wc -l) -lt 1 ]
           then
             echo "No data found in Godot build output"
             exit 1
