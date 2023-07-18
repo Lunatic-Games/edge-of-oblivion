@@ -10,7 +10,7 @@ env:
 
 jobs:
   export:
-    uses: bigdavisc//edge-of-oblivion/.github/workflows/godot_build.yml@master
+    uses: bigdavisc/edge-of-oblivion/.github/workflows/godot_build.yml@master
     with:
       debug: true
       godot_version: ${{ env.GODOT_VERSION }}
