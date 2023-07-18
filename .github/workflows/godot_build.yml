@@ -80,6 +80,7 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          
           if [ ! -f "$PROJECT_PATH/$EXPORT_PRESETS_PATH/export_presets.cfg" ]
           then 
             mv $PROJECT_PATH/$EXPORT_PRESETS_PATH/export_presets.cfg $PROJECT_PATH/export_presets.cfg
@@ -88,30 +89,35 @@ jobs:
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/windows
           godot_command=(godot -v --path $PROJECT_PATH --headless)
-          if $DEBUG == 'true';
+          
+          if $DEBUG == 'true'
           then
             godot_command+=(--export-debug)
           else 
-            godot_command+=(--export-release);
+            godot_command+=(--export-release)
           fi
+          
           godot_command+=($PRESET $PROJECT_PATH/build/windows/$EXPORT_NAME.exe)
-          "${godot_command[@]} | tee $PROJECT_PATH/$EXPORT_NAME.output"
+          tee <("${godot_command[@]}") $PROJECT_PATH/$EXPORT_NAME.output
       - name: Test for output file
         run: cat $PROJECT_PATH/$EXPORT_NAME.output    
       - name: Check for build errors
         shell: bash
         run: |
           BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project" "ERROR: Invalid export preset name")
+          
           if [ ! -f "$PROJECT_PATH/$EXPORT_NAME.output" ]
           then
             echo "No output file found"
             exit 1
           fi  
+          
           if wc -l "$PROJECT_PATH/$EXPORT_NAME.output" < 2
           then
             echo "No data found in Godot build output"
             exit 1
           fi  
+          
           for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
           do
             if grep -q "${BUILD_ERRORS[$i]}" $PROJECT_PATH/$EXPORT_NAME.output
@@ -148,6 +154,7 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          
           if [ ! -f "$PROJECT_PATH/$EXPORT_PRESETS_PATH/export_presets.cfg" ]
           then 
             mv $PROJECT_PATH/$EXPORT_PRESETS_PATH/export_presets.cfg $PROJECT_PATH/export_presets.cfg
@@ -156,28 +163,33 @@ jobs:
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/linux
           godot_command=(godot -v --path $PROJECT_PATH --headless)
+          
           if $DEBUG == 'true'
           then
             godot_command+=(--export-debug)
           else 
             godot_command+=(--export-release)
           fi
+          
           godot_command+=($PRESET $PROJECT_PATH/build/linux/$EXPORT_NAME.zip)
-          "${godot_command[@]} | tee $PROJECT_PATH/$EXPORT_NAME.output"
+          tee <("${godot_command[@]}") $PROJECT_PATH/$EXPORT_NAME.output
       - name: Check for build errors
         shell: bash
         run: |
           BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project" "ERROR: Invalid export preset name")
+          
           if [ ! -f "$PROJECT_PATH/$EXPORT_NAME.output" ]
           then
             echo "No output file found"
             exit 1
           fi 
+          
           if wc -l "$PROJECT_PATH/$EXPORT_NAME.output" < 2
           then
             echo "No data found in Godot build output"
             exit 1
           fi  
+          
           for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
           do
             if grep -q "${BUILD_ERRORS[$i]}" $PROJECT_PATH/$EXPORT_NAME.output
