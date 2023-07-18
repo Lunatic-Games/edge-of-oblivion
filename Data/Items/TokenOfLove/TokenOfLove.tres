@@ -10,7 +10,7 @@ sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Token of Love"
 popup_item_name_color = "royalblue"
-flavor_text = "The very existence proves there was someone worth fighting for."
+flavor_text = "Proof of someone worth fighting for."
 max_tier = 3
 use_tier_1_text_for_popup_texts = false
 card_text_1 = "Every 9 turns: [color=springgreen]Heal[/color] self."

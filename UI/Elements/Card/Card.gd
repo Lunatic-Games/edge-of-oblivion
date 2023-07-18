@@ -23,15 +23,9 @@ func setup(item_data: ItemData, item_tier: int, hover: bool = true):
 	card_name.text = item_data.item_name
 	item_sprite.texture = item_data.sprite
 	
-	match item_tier:
-		1: 
-			card_description.text = item_data.tier1Text
-		2: 
-			card_description.text = item_data.tier2Text
-			tier_up_banner.show()
-		3: 
-			card_description.text = item_data.tier3Text
-			tier_up_banner.show()
+	card_description.text = item_data.get_card_text(item_tier)
+	if item_tier > 1:
+		tier_up_banner.show()
 	
 	flavor_text.text = item_data.flavor_text
 	
