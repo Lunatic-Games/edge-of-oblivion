@@ -96,6 +96,8 @@ jobs:
           fi
           godot_command+=($PRESET $PROJECT_PATH/build/windows/$EXPORT_NAME.exe)
           "${godot_command[@]} | tee $PROJECT_PATH/$EXPORT_NAME.output"
+      - name: Test for output file
+        run: echo $PROJECT_PATH/$EXPORT_NAME.output    
       - name: Check for build errors
         shell: bash
         run: |
