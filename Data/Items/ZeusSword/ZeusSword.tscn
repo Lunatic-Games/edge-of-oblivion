@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="9_yjwnr"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/WhileBool.gd" id="10_72peb"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="10_c4lku"]
-[ext_resource type="PackedScene" uid="uid://cudvgijy8nd6b" path="res://Data/Particles/LightningBow/LightningBowEffect.tscn" id="10_oym8o"]
+[ext_resource type="PackedScene" uid="uid://cudvgijy8nd6b" path="res://Data/Particles/Items/LightningBow/LightningBowEffect.tscn" id="10_oym8o"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="11_o81ap"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="11_yltmr"]
 [ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="11_yolur"]
@@ -23,8 +23,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="18_5pfjt"]
 
 [node name="ZeusSword" instance=ExtResource("1_57hos")]
-popup_info_text = "[color=cyan]Zeus' Sword:[/color] Has a powerful strike at adjacent enemies. Also has a chance to spark and chain."
-popup_flavor_text = "It quickly went out of fashion."
 
 [node name="Texture" parent="." index="1"]
 texture = ExtResource("2_2f8e6")

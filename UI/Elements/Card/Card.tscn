@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dins546jhadrn"]
+[gd_scene load_steps=17 format=3 uid="uid://dins546jhadrn"]
 
 [ext_resource type="Script" path="res://UI/Elements/Card/Card.gd" id="1_e71sb"]
 [ext_resource type="PackedScene" uid="uid://57a3ac7a6uvb" path="res://Data/Particles/UI/RayParticles.tscn" id="2_2sdpx"]
@@ -6,10 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://c37r6phkuwpml" path="res://Assets/art/ui/card/card.png" id="2_j47tq"]
 [ext_resource type="Texture2D" uid="uid://cylssm5o7vc0l" path="res://Assets/art/ui/card/banner.svg" id="3_joqxw"]
 [ext_resource type="Texture2D" uid="uid://eaurrytwh8ts" path="res://Assets/art/icons/weapons/skoll/gladius.svg" id="3_ldc60"]
-[ext_resource type="Texture2D" uid="uid://4h6r8fmh8tbt" path="res://Assets/art/icons/stars/lorc/spiky-explosion.svg" id="4_0mk7p"]
 [ext_resource type="FontFile" uid="uid://delvnctbli24y" path="res://Assets/fonts/Caudex-Bold.ttf" id="4_3x57h"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="4_wr4ni"]
-[ext_resource type="Texture2D" uid="uid://bf05wsrti4o0t" path="res://Assets/art/icons/buildings/caro-asercion/clock-tower.svg" id="5_ks2ii"]
 [ext_resource type="FontFile" uid="uid://br33sipyuwalp" path="res://Assets/fonts/Caudex-Italic.ttf" id="8_n0urd"]
 
 [sub_resource type="Animation" id="Animation_ufg8h"]
@@ -588,55 +586,6 @@ preprocess = 4.0
 libraries = {
 "": SubResource("AnimationLibrary_ikipp")
 }
-
-[node name="Icons" type="GridContainer" parent="."]
-visible = false
-layout_mode = 2
-offset_left = 145.0
-offset_top = 448.0
-offset_right = 285.0
-offset_bottom = 480.0
-size_flags_horizontal = 4
-size_flags_vertical = 10
-mouse_filter = 2
-columns = 2
-
-[node name="DamageIcon" type="HBoxContainer" parent="Icons"]
-layout_mode = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="Icons/DamageIcon"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-texture = ExtResource("4_0mk7p")
-expand_mode = 5
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Icons/DamageIcon"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-text = "3"
-
-[node name="ActivationIcon" type="HBoxContainer" parent="Icons"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="Icons/ActivationIcon"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("5_ks2ii")
-expand_mode = 5
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Icons/ActivationIcon"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-mouse_filter = 2
-text = "3"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1

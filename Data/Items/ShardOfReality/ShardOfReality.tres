@@ -9,10 +9,10 @@ script = ExtResource("1_rcemt")
 sprite = ExtResource("3_aobmk")
 item_scene = ExtResource("1_cj8e5")
 item_name = "Shard of Reality"
-tier1Text = "Does damage to self, and units at exactly radius 2."
-tier2Text = "Damage 20 -> 30."
-tier3Text = "Self damage 5 -> 10.
-Damage 30 -> 50."
-flavor_text = "Destruction and construction in a shard."
-max_turn_timer = 3
-item_damage = 1
+popup_item_name_color = "royalblue"
+flavor_text = "Destruction and construction in one package."
+max_tier = 3
+use_tier_1_text_for_popup_texts = true
+card_text_1 = "Damages self and enemies at range 2."
+card_text_2 = "Damage 20 -> 30."
+card_text_3 = "Self damage 5 -> 10."

@@ -14,8 +14,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="12_demeu"]
 
 [node name="ShortSword" instance=ExtResource("1")]
-popup_info_text = "[color=cyan]Shortsword:[/color] attacks left. Can be upgraded to attack right."
-popup_flavor_text = "Your most trusty blade... presumably."
 
 [node name="ItemPopupHover" parent="." index="0"]
 anchors_preset = 0

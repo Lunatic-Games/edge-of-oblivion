@@ -16,18 +16,12 @@ var hover_tween: Tween = null
 @onready var card_description: RichTextLabel = $Background/BottomText/Description
 @onready var flavor_text: Label = $Background/BottomText/FlavorText
 
-@onready var damage_icon_text: RichTextLabel = $Icons/DamageIcon/RichTextLabel
-@onready var activation_icon_text: RichTextLabel = $Icons/ActivationIcon/RichTextLabel
-
 
 func setup(item_data: ItemData, item_tier: int, hover: bool = true):
 	held_item_data = item_data
 	
 	card_name.text = item_data.item_name
 	item_sprite.texture = item_data.sprite
-	
-	damage_icon_text.text = str(item_data.item_damage)
-	activation_icon_text.text = str(item_data.max_turn_timer)
 	
 	match item_tier:
 		1: 

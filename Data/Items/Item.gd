@@ -5,12 +5,9 @@ signal update_triggered
 signal setup_completed
 signal tier_increased
 
-var user: Unit
-var current_tier = 0
-var max_tier = 3
-
-@export_placeholder("This item does something") var popup_info_text
-@export_placeholder("This items lore is old") var popup_flavor_text
+var data: ItemData = null
+var user: Unit = null
+var current_tier: int = 0
 
 @onready var texture_rect: TextureRect = $Texture
 @onready var animator: AnimationPlayer = $AnimationPlayer
@@ -25,7 +22,8 @@ func update():
 	GlobalLogicTreeSignals.item_update_triggered.emit(self)
 
 
-func setup(data) -> void:
+func setup(item_data: ItemData) -> void:
+	data = item_data
 	texture_rect.texture = data.sprite
 	
 	setup_completed.emit()
@@ -61,5 +59,5 @@ func upgrade_tier():
 
 
 func is_max_tier() -> bool:
-	assert(current_tier <= max_tier, "Current tier higher than max tier")
-	return current_tier == max_tier
+	assert(current_tier <= data.max_tier, "Current tier higher than max tier")
+	return current_tier == data.max_tier

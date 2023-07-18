@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://2yitqavrx4cc"]
 
 [ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1"]
-[ext_resource type="PackedScene" path="res://Data/Items/Broom/Broom.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c7hli08icqjh3" path="res://Data/Items/Broom/Broom.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://3atihuwm0dpy" path="res://Assets/art/icons/misc/delapouite/broom.svg" id="3_halkf"]
 
 [resource]
@@ -9,9 +9,10 @@ script = ExtResource("1")
 sprite = ExtResource("3_halkf")
 item_scene = ExtResource("2")
 item_name = "Broom"
-tier1Text = "Every 4 turns: [color=pink]Knockback[/color] random adjacent enemy."
-tier2Text = "Increase number of affected units."
-tier3Text = "Increase number of affected units."
+popup_item_name_color = "royalblue"
 flavor_text = "Trusted by witches everywhere."
-max_turn_timer = 4
-item_damage = 0
+max_tier = 3
+use_tier_1_text_for_popup_texts = true
+card_text_1 = "Knocks away a random adjacent enemy."
+card_text_2 = "Increase number of affected units."
+card_text_3 = "Increase number of affected units."

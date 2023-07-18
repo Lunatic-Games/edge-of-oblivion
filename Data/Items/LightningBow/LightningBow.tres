@@ -9,10 +9,14 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Lightning Bow"
-tier1Text = "Every 3 turns: Attack up. 
-[color=pink]Range 1[/color]. [color=cyan]Chain 1[/color]."
-tier2Text = "[color=cyan]Chain 4[/color]."
-tier3Text = "[color=cyan]Chain 7[/color] ."
-flavor_text = "Zeus wants to know your location."
-max_turn_timer = 3
-item_damage = 1
+popup_item_name_color = "cyan"
+flavor_text = "A Zeus and Artemis collaboration. "
+max_tier = 3
+use_tier_1_text_for_popup_texts = false
+card_text_1 = "Every 3 turns: Attack up.
+[color=pink]Range 2[/color]. [color=cyan]Chain 1[/color]."
+card_text_2 = "[color=cyan]Chain 1->4[/color]."
+card_text_3 = "[color=cyan]Chain 4->7[/color]."
+popup_text_1 = "Attack up. [color=pink]Range 2[/color]. [color=cyan]Chain 1[/color]."
+popup_text_2 = "Attack up. [color=pink]Range 2[/color]. [color=cyan]Chain 4[/color]."
+popup_text_3 = "Attack up. [color=pink]Range 2[/color]. [color=cyan]Chain 7[/color]."

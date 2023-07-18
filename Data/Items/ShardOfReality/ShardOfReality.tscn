@@ -16,8 +16,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="11_uhitr"]
 
 [node name="ShardOfReality" instance=ExtResource("1_1pb1i")]
-popup_info_text = "[color=cyan]Shard of Reality:[/color] Damage self, also damage units at exactly radius 2."
-popup_flavor_text = "Destruction and construction in a shard."
 
 [node name="Texture" parent="." index="1"]
 texture = ExtResource("2_6w2js")

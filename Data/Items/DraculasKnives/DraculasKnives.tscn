@@ -17,8 +17,6 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="11_wxece"]
 
 [node name="DraculasKnives" instance=ExtResource("1")]
-popup_info_text = "[color=cyan]Draculas Knives:[/color] Attack right and lifetseal."
-popup_flavor_text = "Yep, they suck."
 
 [node name="ItemPopupHover" parent="." index="0"]
 anchors_preset = 0

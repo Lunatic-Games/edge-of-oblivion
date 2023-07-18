@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=21 format=3 uid="uid://cchv0jq2ufru4"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_dvm1i"]
 [ext_resource type="Texture2D" uid="uid://cmmcsx0c7vww8" path="res://Assets/art/icons/weapons/starseeker/potion-of-madness.svg" id="2_6fk1j"]
@@ -22,8 +22,6 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="20_r3rdb"]
 
 [node name="TaintedFlask" instance=ExtResource("1_dvm1i")]
-popup_info_text = "[color=cyan]Tainted Flask:[/color] After healing 3 times, does damage to random nearby targets."
-popup_flavor_text = "A cursed soul in a bottle."
 
 [node name="Texture" parent="." index="1"]
 texture = ExtResource("2_6fk1j")
