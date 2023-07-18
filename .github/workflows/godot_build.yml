@@ -100,12 +100,12 @@ jobs:
         shell: bash
         run: |
           BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project" "ERROR: Invalid export preset name")
-          if [ ! -f $PROJECT_PATH/$EXPORT_NAME.output ]
+          if [ ! -f "$PROJECT_PATH/$EXPORT_NAME.output" ]
           then
             echo "No output file found"
             exit 1
           fi  
-          if wc -l $PROJECT_PATH/$EXPORT_NAME.output < 2
+          if wc -l "$PROJECT_PATH/$EXPORT_NAME.output" < 2
           then
             echo "No data found in Godot build output"
             exit 1
@@ -166,12 +166,12 @@ jobs:
         shell: bash
         run: |
           BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project" "ERROR: Invalid export preset name")
-          if [ ! -f $PROJECT_PATH/$EXPORT_NAME.output ]
+          if [ ! -f "$PROJECT_PATH/$EXPORT_NAME.output" ]
           then
             echo "No output file found"
             exit 1
           fi 
-          if wc -l $PROJECT_PATH/$EXPORT_NAME.output < 2
+          if wc -l "$PROJECT_PATH/$EXPORT_NAME.output" < 2
           then
             echo "No data found in Godot build output"
             exit 1
