@@ -80,12 +80,18 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-          mv $PROJECT_PATH/$EXPORT_PRESETS_PATH/export_presets.cfg $PROJECT_PATH
+          if ! test -f "$PROJECT_PATH/$EXPORT_PRESETS_PATH/export_presets.cfg";
+          then 
+            mv $PROJECT_PATH/$EXPORT_PRESETS_PATH/export_presets.cfg $PROJECT_PATH;
+          fi;
       - name: Build for windows
         run: |
           mkdir -v -p ${PROJECT_PATH}/build/windows
           godot_command=(godot -v --path $PROJECT_PATH --headless)
-          if $DEBUG == 'true'; then godot_command+=(--export-debug); else godot_command+=(--export-release); fi;
+          if $DEBUG == 'true'; 
+          then
+            godot_command+=(--export-debug); else godot_command+=(--export-release); 
+          fi;
           godot_command+=($PROJECT_PATH/build/windows/$EXPORT_NAME.exe | tee $EXPORT_NAME.output)
           "${godot_command[@]}"
       - name: Check for build errors
