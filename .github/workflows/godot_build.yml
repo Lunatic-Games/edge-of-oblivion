@@ -88,7 +88,7 @@ jobs:
       image: barichello/godot-ci:${{ needs.set_tag.outputs.godot_ci_tag }}
     env:
       PLATFORM: ${{ matrix.platform }}
-      BINARY_EXT: ${{ (matrix.platform == 'windows' && '.exe') || (matrix.platform == 'linux' && '.zip') || '.zip' }}
+      BINARY_EXT: ${{ (matrix.platform == 'windows' && 'exe') || (matrix.platform == 'linux' && 'zip') || 'zip' }}
       PRESET: ${{ inputs[format('{0}_preset', matrix.platform)] }}
       DEBUG: ${{ inputs.debug }}
     steps:
