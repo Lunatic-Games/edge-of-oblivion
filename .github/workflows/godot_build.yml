@@ -44,7 +44,7 @@ on:
         
 env:
   GODOT_VERSION: ${{ inputs.godot_version }}
-  EXPORT_NAME: ${{ export_name }}${{ inputs.debug && '-debug' || '' }}
+  EXPORT_NAME: ${{ inputs.export_name }}${{ inputs.debug && '-debug' || '' }}
   PROJECT_PATH: ${{ inputs.project_path }}
   EXPORT_PRESETS_PATH: ${{ inputs.export_presets_path }}
 
