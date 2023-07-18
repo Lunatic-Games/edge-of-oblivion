@@ -5,7 +5,6 @@ on:
     branches: [ "master" ]
         
 env:
-  GODOT_VERSION: 4.1
   NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP: 1
 
 jobs:
@@ -13,7 +12,7 @@ jobs:
     uses: bigdavisc/edge-of-oblivion/.github/workflows/godot_build.yml@master
     with:
       debug: true
-      godot_version: ${{ env.GODOT_VERSION }}
+      godot_version: "4.1"
       export_name: ${{ github.event.repository.name }}
       windows: true
       windows_preset: Windows Desktop
