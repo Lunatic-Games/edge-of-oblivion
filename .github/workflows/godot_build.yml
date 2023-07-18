@@ -69,8 +69,17 @@ jobs:
         run: echo "platform=windows" >> $GITHUB_OUTPUT
       - id: linux
         if: inputs.linux
-        run: echo "platform=linux" >> $GITHUB_OUTPUT    
-        
+        run: echo "platform=linux" >> $GITHUB_OUTPUT
+  
+  test:
+    needs: 
+      - set_matrix
+    runs-on: ubuntu-latest
+    env:
+      TEST: ${{ needs.set_matrix.output.matrix }}
+    steps:
+      - run: echo $TEST
+
   export:
     name: Export for ${{ matrix.platform }}
     runs-on: ubuntu-latest
