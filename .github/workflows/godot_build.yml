@@ -61,7 +61,7 @@ jobs:
   windows_export:
     name: Export for Windows
     runs-on: ubuntu-latest
-    if: windows
+    if: inputs.windows
     defaults:
       run:
         shell: bash
@@ -109,7 +109,7 @@ jobs:
   linux_export:
     name: Export for Linux
     runs-on: ubuntu-latest
-    if: linux
+    if: inputs.linux
     defaults:
       run:
         shell: bash
