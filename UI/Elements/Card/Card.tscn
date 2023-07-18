@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dins546jhadrn"]
+[gd_scene load_steps=29 format=3 uid="uid://dins546jhadrn"]
 
 [ext_resource type="Script" path="res://UI/Elements/Card/Card.gd" id="1_e71sb"]
 [ext_resource type="PackedScene" uid="uid://57a3ac7a6uvb" path="res://Data/Particles/UI/RayParticles.tscn" id="2_2sdpx"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://UI/BBCode/Knockback.gd" id="10_x5h6o"]
 [ext_resource type="Script" path="res://UI/BBCode/Lifesteal.gd" id="11_83f2t"]
 [ext_resource type="Script" path="res://UI/BBCode/Volatile.gd" id="12_8k5ex"]
+[ext_resource type="Script" path="res://UI/BBCode/Range.gd" id="13_f5qhd"]
 
 [sub_resource type="Animation" id="Animation_ufg8h"]
 length = 0.001
@@ -283,6 +284,9 @@ script = ExtResource("11_83f2t")
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_4n6q6"]
 script = ExtResource("12_8k5ex")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_5103v"]
+script = ExtResource("13_f5qhd")
 
 [sub_resource type="Animation" id="Animation_c7d4a"]
 resource_name = "rays_in"
@@ -585,7 +589,7 @@ bbcode_enabled = true
 text = "Attack left for 1 damage."
 fit_content = true
 scroll_active = false
-custom_effects = [SubResource("RichTextEffect_lxmt4"), SubResource("RichTextEffect_daufr"), SubResource("RichTextEffect_ffsmv"), SubResource("RichTextEffect_ntfrd"), SubResource("RichTextEffect_4n6q6")]
+custom_effects = [SubResource("RichTextEffect_lxmt4"), SubResource("RichTextEffect_daufr"), SubResource("RichTextEffect_ffsmv"), SubResource("RichTextEffect_ntfrd"), SubResource("RichTextEffect_4n6q6"), SubResource("RichTextEffect_5103v")]
 
 [node name="FlavorText" type="Label" parent="Background/BottomText"]
 layout_mode = 2
