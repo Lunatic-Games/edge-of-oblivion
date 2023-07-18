@@ -77,7 +77,7 @@ jobs:
     if: inputs.windows
     strategy:
       matrix:
-        platform: ${{ fromJSON(jobs.set_matrix.output.matrix) }}
+        platform: ${{ fromJSON(needs.set_matrix.output.matrix) }}
     defaults:
       run:
         shell: bash
