@@ -95,7 +95,7 @@ jobs:
             godot_command+=(--export-release);
           fi
           godot_command+=($PRESET $PROJECT_PATH/build/windows/$EXPORT_NAME.exe)
-          "${godot_command[@]}" | tee $PROJECT_PATH/$EXPORT_NAME.output
+          "${godot_command[@]} | tee $PROJECT_PATH/$EXPORT_NAME.output"
       - name: Check for build errors
         shell: bash
         run: |
@@ -161,7 +161,7 @@ jobs:
             godot_command+=(--export-release)
           fi
           godot_command+=($PRESET $PROJECT_PATH/build/linux/$EXPORT_NAME.zip)
-          "${godot_command[@]}" | tee $PROJECT_PATH/$EXPORT_NAME.output
+          "${godot_command[@]} | tee $PROJECT_PATH/$EXPORT_NAME.output"
       - name: Check for build errors
         shell: bash
         run: |
