@@ -9,6 +9,7 @@ env:
 
 jobs:
   export:
+    name: Build Executables
     uses: bigdavisc/edge-of-oblivion/.github/workflows/godot_build.yml@master
     with:
       debug: true
@@ -16,7 +17,8 @@ jobs:
       export_name: ${{ github.event.repository.name }}
       windows: true
       windows_preset: Windows Desktop
-      linux: false
+      linux: true
+      linux_preset: Linux/X11
       project_path: '.'
       export_presets_path: '.'
       
