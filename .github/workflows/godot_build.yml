@@ -110,7 +110,7 @@ jobs:
             exit 1
           fi  
           
-          if wc -l "$PROJECT_PATH/$EXPORT_NAME.output" < 2
+          if [ $(cat hw.txt | wc -l) -gt 0 ]
           then
             echo "No data found in Godot build output"
             exit 1
@@ -182,7 +182,7 @@ jobs:
             exit 1
           fi 
           
-          if wc -l "$PROJECT_PATH/$EXPORT_NAME.output" < 2
+          if [ $(cat hw.txt | wc -l) -gt 0 ]
           then
             echo "No data found in Godot build output"
             exit 1
