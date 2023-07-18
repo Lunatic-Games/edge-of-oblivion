@@ -23,6 +23,8 @@ jobs:
   clean:
     name: Cleanup Old Artifacts
     runs-on: ubuntu-latest
+    permissions: 
+      actions: write
     needs: export
     steps:
       - name: Find and delete old artifacts
