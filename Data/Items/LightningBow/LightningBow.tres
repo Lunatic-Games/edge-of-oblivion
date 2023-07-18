@@ -14,7 +14,7 @@ flavor_text = "A Zeus and Artemis collaboration. "
 max_tier = 3
 use_tier_1_text_for_popup_texts = false
 card_text_1 = "Every 3 turns: Attack up.
-[color=pink]Range 2[/color]. [color=cyan]Chain 1[/color]."
+[color=pink]Range 1[/color]. [color=cyan]Chain 1[/color]."
 card_text_2 = "[color=cyan]Chain 1->4[/color]."
 card_text_3 = "[color=cyan]Chain 4->7[/color]."
 popup_text_1 = "Attack up. [color=pink]Range 2[/color]. [color=cyan]Chain 1[/color]."
