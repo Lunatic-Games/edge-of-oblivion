@@ -6,63 +6,21 @@ on:
         
 env:
   GODOT_VERSION: 4.1
-  EXPORT_NAME: "${{ github.event.repository.name }}-debug"
-  PROJECT_PATH: "."
   NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP: 1
 
 jobs:
-  set_tag:
-    name: Set godot-ci tag
-    runs-on: ubuntu-latest
-    outputs:
-      godot_ci_tag: ${{ steps.set_tag.outputs.tag }}
-    steps:
-      - id: set_tag
-        run: echo "tag=$GODOT_VERSION" >> $GITHUB_OUTPUT
-        
   export:
-    name: Export from Godot
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-    needs: set_tag
-    container:
-      image: barichello/godot-ci:${{ needs.set_tag.outputs.godot_ci_tag }}
-    env:
-      WINDOWS_PRESET: Windows Desktop
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          lfs: true          
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-          # cp .github/workflows/export_presets.cfg ${PROJECT_PATH}/export_presets.cfg
-      - name: Build for windows
-        run: |
-          mkdir -v -p ${PROJECT_PATH}/build/windows
-          godot -v --path $PROJECT_PATH --headless --export-debug "${WINDOWS_PRESET}" build/windows/$EXPORT_NAME.exe | tee $EXPORT_NAME.output
-      - name: Check for build errors
-        shell: bash
-        run: |
-          BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project")
-          for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
-          do
-            if grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output
-            then
-              echo "Found error ${BUILD_ERRORS[$i]} in Godot build output"
-              exit 1
-            fi
-          done
-      - name: Upload windows artifact
-        uses: actions/upload-artifact@v3.1.0
-        with:
-          name: windows-${{ env.EXPORT_NAME }}
-          path: ${{ env.PROJECT_PATH }}/build/windows
-
+    uses: bigdavisc//edge-of-oblivion/.github/workflows/godot_build.yml@master
+    with:
+      debug: true
+      godot_version: ${{ env.GODOT_VERSION }}
+      export_name: ${{ github.event.repository.name }}
+      windows: true
+      windows_preset: Windows Desktop
+      linux: false
+      project_path: '.'
+      export_presets_path: '.'
+      
   clean:
     name: Cleanup Old Artifacts
     runs-on: ubuntu-latest
