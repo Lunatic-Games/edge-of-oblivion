@@ -3,7 +3,7 @@ name: Artifact Cleanup
 on:
   workflow_call:
     inputs:
-      search:
+      name_contains:
         type: string
         required: true
       number_to_keep:
@@ -16,64 +16,39 @@ on:
         default: false
 
 jobs:
-  clean:
+  delete:
     name: Delete old artifacts
     runs-on: ubuntu-latest
     permissions: 
       actions: write
     steps:
-      - name: Find artifacts
+      - name: Delete
         uses: actions/github-script@v6
-        id: delete-artifacts
+        id: delete
         with:
           script: |
             const res = await github.rest.actions.listArtifactsForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-            })
-
-            const allArtifacts = res.data.artifacts
-                    .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) );
-
-            const artifactsToDelete = allArtifacts
-                    .slice(0, -${{ env.NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP }})
-                    .filter(({ name }) => name.includes('${{ github.event.repository.name }}-debug'))
-
-            artifactsToDelete.forEach(({ id }) => {
-               github.rest.actions.deleteArtifact({
-                 owner: context.repo.owner,
-                 repo: context.repo.repo,
-                 artifact_id: id,
-               })
-              })
-              
-            return artifactsToDelete
-      - name: Find artifacts
-        uses: actions/github-script@v6
-        id: delete-artifacts
-        with:
-          script: |
-            const res = await github.rest.actions.listArtifactsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
-
-            const allArtifacts = res.data.artifacts
-                    .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) );
-
-            const artifactsToDelete = allArtifacts
-                    .slice(0, -${{ env.NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP }})
-                    .filter(({ name }) => name.includes('${{ github.event.repository.name }}-debug'))
-
-            artifactsToDelete.forEach(({ id }) => {
-               github.rest.actions.deleteArtifact({
-                 owner: context.repo.owner,
-                 repo: context.repo.repo,
-                 artifact_id: id,
-               })
-              })
-              
-            return artifactsToDelete      
+            });
             
-      - name: Print deleted artifacts
-        run: echo "${{steps.delete-artifacts.outputs.result}}"
+            const toDelete = res.data.artifacts
+                            .filter(({ name }) => name.includes('${{ inputs.name_contains }}')) // Filter to our search criteria
+                            .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) ) // Sort in descending order by CREATED_AT
+                            .slice(0, -${{ inputs.number_to_keep }}); // Remove all but the last X
+                            
+            // If dry_run is set, don't actually delete them
+            if ( !${{ inputs.dry_run }} ) {
+              toDelete.forEach(({ id }) => {
+                 github.rest.actions.deleteArtifact({
+                   owner: context.repo.owner,
+                   repo: context.repo.repo,
+                   artifact_id: id,
+                 })
+                });
+              }
+              
+              return toDelete;
+            
+      - name: Print deleted
+        run: echo "${{ steps.delete.outputs.result }}"
