@@ -82,7 +82,7 @@ func game_over():
 
 func _on_new_round_started() -> void:
 	var round_i: int = turn_manager.current_round
-	var enemies_to_spawn: Array[PackedScene] = level.waves.get_enemies_for_turn(round_i) as Array[PackedScene]
+	var enemies_to_spawn: Array[EnemyData] = level.waves.get_enemies_for_turn(round_i)
 	spawn_handler.spawn_enemies(enemies_to_spawn)
 
 	var n_enemies_next_turn: int = level.waves.get_enemies_for_turn(round_i + 1).size()
@@ -98,5 +98,5 @@ func _on_Player_died(_player: Player) -> void:
 	game_over()
 
 
-func _on_Boss_defeated(_boss: Boss) -> void:
+func _on_Boss_defeated(_boss: Enemy) -> void:
 	victory()

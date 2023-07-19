@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://b5fnasmirlmnw"]
+
+[ext_resource type="PackedScene" uid="uid://cfthurngpg1ps" path="res://Data/Occupants/Enemies/ForswornPike/ForswornPike.tscn" id="1_jhw05"]
+[ext_resource type="Script" path="res://Data/Occupants/Enemies/ENEMY_DATA.gd" id="1_typwb"]
+[ext_resource type="Texture2D" uid="uid://c57vgp84qqrhc" path="res://Assets/art/icons/medieval-fantasy/delapouite/spartan-helmet.svg" id="2_r44l5"]
+
+[resource]
+script = ExtResource("1_typwb")
+enemy_name = "Forsworn Pike"
+sprite = ExtResource("2_r44l5")
+enemy_scene = ExtResource("1_jhw05")
+xp_value = 5
+is_boss = false

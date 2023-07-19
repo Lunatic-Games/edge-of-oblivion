@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://b8gshcc47p1wa"]
+
+[ext_resource type="Script" path="res://Data/Occupants/Enemies/ENEMY_DATA.gd" id="1_5osmk"]
+[ext_resource type="PackedScene" uid="uid://p0e7f46xip6t" path="res://Data/Occupants/Enemies/LostRanger/LostRanger.tscn" id="1_kssl7"]
+[ext_resource type="Texture2D" uid="uid://cinfmdwcoldqr" path="res://Assets/art/icons/medieval-fantasy/lorc/cowled.svg" id="3_ualsu"]
+
+[resource]
+script = ExtResource("1_5osmk")
+enemy_name = "Lost Ranger"
+sprite = ExtResource("3_ualsu")
+enemy_scene = ExtResource("1_kssl7")
+xp_value = 5
+is_boss = false

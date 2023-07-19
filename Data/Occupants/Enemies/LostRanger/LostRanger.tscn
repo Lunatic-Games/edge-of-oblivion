@@ -58,8 +58,6 @@ shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
 shader_parameter/noise = SubResource("3")
 
 [node name="LostRanger" instance=ExtResource("1")]
-popup_info_text = "[color=cyan]The Lost Ranger:[/color] Looks for a target above and below within range 3."
-popup_flavor_text = "A long time ago, they'd lose themselves in the hunt. Now they are lost to it forever."
 max_hp = 30
 
 [node name="Sprite2D" parent="." index="1"]

@@ -20,5 +20,5 @@ signal item_reached_max_tier(item: Item, item_data: ItemData)
 
 signal enemy_killed(enemy: Enemy)
 
-signal boss_spawned(boss: Boss)
-signal boss_defeated(boss: Boss)
+signal boss_spawned(boss: Enemy)
+signal boss_defeated(boss: Enemy)

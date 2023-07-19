@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://dm131pcfxjehd"]
+
+[ext_resource type="PackedScene" uid="uid://kjqcigs27uqk" path="res://Data/Occupants/Enemies/Faded/Faded.tscn" id="1_kqjbf"]
+[ext_resource type="Script" path="res://Data/Occupants/Enemies/ENEMY_DATA.gd" id="1_xgof1"]
+[ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="2_h1kir"]
+
+[resource]
+script = ExtResource("1_xgof1")
+enemy_name = "Faded"
+sprite = ExtResource("2_h1kir")
+enemy_scene = ExtResource("1_kqjbf")
+xp_value = 5
+is_boss = false

@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func _on_enemy_killed(enemy: Enemy):
 	n_enemies_killed += 1
-	if enemy is Boss:
+	if enemy.data.is_boss:
 		n_bosses_killed += 1
 	
 	xp_gained += enemy.xp
