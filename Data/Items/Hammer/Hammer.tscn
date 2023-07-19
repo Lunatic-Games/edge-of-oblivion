@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=14 format=3 uid="uid://dwngnw61blh85"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_ymxun"]
@@ -15,8 +15,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_vkbki"]
 
 [node name="Hammer" instance=ExtResource("1")]
-popup_info_text = "[color=cyan]Hammer:[/color] Knockback enemies above an below. Has massive collision damage."
-popup_flavor_text = "Smash them."
 
 [node name="ItemPopupHover" parent="." index="0"]
 anchors_preset = 0

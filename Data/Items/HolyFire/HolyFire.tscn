@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=14 format=3 uid="uid://kpd53idc81ta"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_wupxa"]
@@ -15,8 +15,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_jln8d"]
 
 [node name="HolyFire" instance=ExtResource("1")]
-popup_info_text = "[color=cyan]Holy Fire:[/color] Attacks a random tile, in a radius around you, multiple times."
-popup_flavor_text = "Some said they were the tears of angels. Now nobody says anything at all."
 
 [node name="ItemPopupHover" parent="." index="0"]
 anchors_preset = 0

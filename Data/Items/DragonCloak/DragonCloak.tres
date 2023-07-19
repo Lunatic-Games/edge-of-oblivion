@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dhbycs5j4to6b"]
 
 [ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1"]
-[ext_resource type="PackedScene" path="res://Data/Items/DragonCloak/DragonCloak.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://ny3y4d842sjl" path="res://Data/Items/DragonCloak/DragonCloak.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://dgmva12fptw4a" path="res://Assets/art/icons/clothing/delapouite/cape.svg" id="3"]
 
 [resource]
@@ -9,9 +9,13 @@ script = ExtResource("1")
 sprite = ExtResource("3")
 item_scene = ExtResource("2")
 item_name = "Dragon Cloak"
-tier1Text = "Every 6 turns: Damage everything in a radius around you."
-tier2Text = "Decreased cooldown 6->5."
-tier3Text = "Increased radius 1->2."
-flavor_text = "Made from free-range dragonscales!"
-max_turn_timer = 6
-item_damage = 0
+popup_item_name_color = "red"
+flavor_text = "Once used by dragon slayers of old."
+max_tier = 3
+use_tier_1_text_for_popup_texts = false
+card_text_1 = "Every 6 turns: Burn everything in radius 1."
+card_text_2 = "Decreased cooldown 6->5."
+card_text_3 = "Increased radius 1->2."
+popup_text_1 = "Burn everything in radius 1."
+popup_text_2 = "Burn everything in radius 1."
+popup_text_3 = "Burn everything in radius 2."

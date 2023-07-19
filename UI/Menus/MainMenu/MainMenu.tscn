@@ -24,81 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://ph4dg61vtfbr" path="res://UI/Menus/SettingsMenu/SettingsMenu.tscn" id="20_uvn8p"]
 [ext_resource type="PackedScene" uid="uid://c21tsme1w6uqc" path="res://UI/Menus/MemoriesMenu/MemoriesMenu.tscn" id="21_e2dqv"]
 
-[sub_resource type="Animation" id="Animation_jk1r8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background/Knight/Knight:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_my3mk"]
-resource_name = "breath"
-length = 3.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background/Knight/Knight:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1.005), Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1iulp"]
-_data = {
-"RESET": SubResource("Animation_jk1r8"),
-"breath": SubResource("Animation_my3mk")
-}
-
-[sub_resource type="Animation" id="Animation_ng7ft"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../Background/Knight/Knight/Blush:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_c6j7w"]
-resource_name = "blush_on_and_off"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../Background/Knight/Knight/Blush:self_modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 9.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_46k0y"]
-_data = {
-"RESET": SubResource("Animation_ng7ft"),
-"blush_on_and_off": SubResource("Animation_c6j7w")
-}
-
 [sub_resource type="Animation" id="Animation_50y08"]
 length = 0.001
 tracks/0/type = "value"
@@ -173,6 +98,81 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_pkltf"),
 "up_and_down": SubResource("Animation_ybhs4")
+}
+
+[sub_resource type="Animation" id="Animation_jk1r8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Knight/Knight:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_my3mk"]
+resource_name = "breath"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Knight/Knight:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.005), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1iulp"]
+_data = {
+"RESET": SubResource("Animation_jk1r8"),
+"breath": SubResource("Animation_my3mk")
+}
+
+[sub_resource type="Animation" id="Animation_ng7ft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Knight/Blush:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c6j7w"]
+resource_name = "blush_on_and_off"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Knight/Blush:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 9.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_46k0y"]
+_data = {
+"RESET": SubResource("Animation_ng7ft"),
+"blush_on_and_off": SubResource("Animation_c6j7w")
 }
 
 [sub_resource type="Animation" id="Animation_my7q0"]
@@ -1148,66 +1148,6 @@ expand_mode = 1
 
 [node name="FarAshParticles" parent="Background/Background" instance=ExtResource("3_8dln8")]
 
-[node name="Knight" type="Control" parent="Background"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(960, 540)
-
-[node name="KnightShadow" type="TextureRect" parent="Background/Knight"]
-self_modulate = Color(0.235294, 0.235294, 0.235294, 0.862745)
-custom_minimum_size = Vector2(1920, 1080)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_g761k")
-expand_mode = 1
-
-[node name="Knight" type="TextureRect" parent="Background/Knight"]
-custom_minimum_size = Vector2(1920, 1080)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(960, 1080)
-texture = ExtResource("5_2b06w")
-expand_mode = 1
-
-[node name="Blush" type="TextureRect" parent="Background/Knight/Knight"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.448
-anchor_top = 0.261
-anchor_right = 0.505
-anchor_bottom = 0.363
-offset_left = -0.160034
-offset_top = -0.0360107
-offset_right = 0.400024
-offset_bottom = -0.196014
-texture = ExtResource("6_qo7oj")
-expand_mode = 1
-
-[node name="KnightAnimator" type="AnimationPlayer" parent="Background/Knight"]
-root_node = NodePath("../../..")
-autoplay = "breath"
-libraries = {
-"": SubResource("AnimationLibrary_1iulp")
-}
-
-[node name="BlushAnimator" type="AnimationPlayer" parent="Background/Knight"]
-libraries = {
-"": SubResource("AnimationLibrary_46k0y")
-}
-
 [node name="FarGhosts" type="Control" parent="Background"]
 layout_mode = 1
 anchors_preset = 15
@@ -1304,6 +1244,66 @@ root_node = NodePath("../../..")
 autoplay = "up_and_down"
 libraries = {
 "": SubResource("AnimationLibrary_bhpo5")
+}
+
+[node name="Knight" type="Control" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+
+[node name="KnightShadow" type="TextureRect" parent="Background/Knight"]
+self_modulate = Color(0.235294, 0.235294, 0.235294, 0.862745)
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_g761k")
+expand_mode = 1
+
+[node name="Knight" type="TextureRect" parent="Background/Knight"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 1080)
+texture = ExtResource("5_2b06w")
+expand_mode = 1
+
+[node name="Blush" type="TextureRect" parent="Background/Knight/Knight"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 0.261
+anchor_right = 0.505
+anchor_bottom = 0.363
+offset_left = -0.160034
+offset_top = -0.0360107
+offset_right = 0.400024
+offset_bottom = -0.196014
+texture = ExtResource("6_qo7oj")
+expand_mode = 1
+
+[node name="KnightAnimator" type="AnimationPlayer" parent="Background/Knight"]
+root_node = NodePath("../../..")
+autoplay = "breath"
+libraries = {
+"": SubResource("AnimationLibrary_1iulp")
+}
+
+[node name="BlushAnimator" type="AnimationPlayer" parent="Background/Knight"]
+libraries = {
+"": SubResource("AnimationLibrary_46k0y")
 }
 
 [node name="FrontGhosts" type="Control" parent="Background"]

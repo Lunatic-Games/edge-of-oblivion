@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://ny3y4d842sjl"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_vo51b"]
@@ -14,8 +14,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="13_jvyv0"]
 
 [node name="DragonCloak" instance=ExtResource("1")]
-popup_info_text = "[color=cyan]Dragon Cloak:[/color] Burns everyone in a radius around you."
-popup_flavor_text = "Once used by dragon slayers of old."
 
 [node name="ItemPopupHover" parent="." index="0"]
 anchors_preset = 0

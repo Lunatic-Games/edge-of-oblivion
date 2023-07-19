@@ -28,8 +28,6 @@ static func save_progress_to_file():
 		"account_stats": JSON.stringify(GlobalAccountStatTracker.stats)
 	}
 	
-	print(save_data)
-	
 	f.store_line(str(SAVE_PROGRESS_VERSION))
 	f.store_line(JSON.stringify(save_data))
 

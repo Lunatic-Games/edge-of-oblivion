@@ -8,12 +8,11 @@
 script = ExtResource("1_3bpkx")
 sprite = ExtResource("3_b64j5")
 item_scene = ExtResource("1_kxch1")
-item_name = "Bottle of Light and Shadow."
-tier1Text = "[color=pink]Alternate[/color] every 3 turns:
-  - Heal self; 
-  - Damage self, and nearest enemy in radius 2."
-tier2Text = "Cooldown 3 -> 2."
-tier3Text = "Enemy damage 20 -> 40."
-flavor_text = "Essence of the sun and moon."
-max_turn_timer = 3
-item_damage = 1
+item_name = "Bottle of Light and Shadow"
+popup_item_name_color = "royalblue"
+flavor_text = "Light and darkness have waged war for eternity."
+max_tier = 3
+use_tier_1_text_for_popup_texts = true
+card_text_1 = "Alternates between healing, and dealing damage to self and a random enemy in radius 2."
+card_text_2 = "Cooldown 3 -> 2."
+card_text_3 = "Enemy damage 20 -> 40."
