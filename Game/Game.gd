@@ -25,7 +25,6 @@ func _ready() -> void:
 	GlobalSignals.new_round_started.connect(_on_new_round_started)
 	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
 	
-	print(level_data)
 	level = level_data.level_scene.instantiate()
 	level.setup(level_data)
 	add_child(level)
