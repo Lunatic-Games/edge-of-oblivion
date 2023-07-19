@@ -1,0 +1,79 @@
+name: Artifact Cleanup
+
+on:
+  workflow_call:
+    inputs:
+      search:
+        type: string
+        required: true
+      number_to_keep:
+        type: number
+        required: false
+        default: 1
+      dry_run:
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  clean:
+    name: Delete old artifacts
+    runs-on: ubuntu-latest
+    permissions: 
+      actions: write
+    steps:
+      - name: Find artifacts
+        uses: actions/github-script@v6
+        id: delete-artifacts
+        with:
+          script: |
+            const res = await github.rest.actions.listArtifactsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+
+            const allArtifacts = res.data.artifacts
+                    .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) );
+
+            const artifactsToDelete = allArtifacts
+                    .slice(0, -${{ env.NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP }})
+                    .filter(({ name }) => name.includes('${{ github.event.repository.name }}-debug'))
+
+            artifactsToDelete.forEach(({ id }) => {
+               github.rest.actions.deleteArtifact({
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+                 artifact_id: id,
+               })
+              })
+              
+            return artifactsToDelete
+      - name: Find artifacts
+        uses: actions/github-script@v6
+        id: delete-artifacts
+        with:
+          script: |
+            const res = await github.rest.actions.listArtifactsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+
+            const allArtifacts = res.data.artifacts
+                    .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) );
+
+            const artifactsToDelete = allArtifacts
+                    .slice(0, -${{ env.NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP }})
+                    .filter(({ name }) => name.includes('${{ github.event.repository.name }}-debug'))
+
+            artifactsToDelete.forEach(({ id }) => {
+               github.rest.actions.deleteArtifact({
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+                 artifact_id: id,
+               })
+              })
+              
+            return artifactsToDelete      
+            
+      - name: Print deleted artifacts
+        run: echo "${{steps.delete-artifacts.outputs.result}}"
