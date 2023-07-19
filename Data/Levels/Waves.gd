@@ -1,6 +1,6 @@
 @tool
 class_name LevelWaves
-extends Node
+extends Resource
 
 
 @export var enemies: Array[EnemyData]:

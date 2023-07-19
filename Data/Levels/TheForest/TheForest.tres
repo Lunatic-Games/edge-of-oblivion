@@ -1,9 +1,246 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://d1tqh8fbckgnb"]
+[gd_resource type="Resource" script_class="LevelData" load_steps=35 format=3 uid="uid://d1tqh8fbckgnb"]
 
 [ext_resource type="PackedScene" uid="uid://dm5qvaa1qimwq" path="res://Data/Levels/TheForest/TheForest.tscn" id="1_dpvau"]
 [ext_resource type="Script" path="res://Data/Levels/LEVEL_DATA.gd" id="1_v0seb"]
+[ext_resource type="Resource" uid="uid://dm131pcfxjehd" path="res://Data/Occupants/Enemies/Faded/Faded.tres" id="3_a8v28"]
+[ext_resource type="Script" path="res://Data/Levels/Waves.gd" id="3_nuihj"]
+[ext_resource type="Resource" uid="uid://b8gshcc47p1wa" path="res://Data/Occupants/Enemies/LostRanger/LostRanger.tres" id="4_wytec"]
+[ext_resource type="Resource" uid="uid://b5fnasmirlmnw" path="res://Data/Occupants/Enemies/ForswornPike/ForswornPike.tres" id="5_pt6db"]
+[ext_resource type="Resource" uid="uid://earl3h2iw0gr" path="res://Data/Occupants/Enemies/Bosses/ForgottenKing/ForgottenKing.tres" id="6_1fydw"]
+[ext_resource type="Script" path="res://Data/Levels/WAVE_DATA.gd" id="8_61pbj"]
+
+[sub_resource type="Resource" id="Resource_vfppd"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 1
+"# Faded" = 1
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_orqwi"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 4
+"# Faded" = 1
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_mvudk"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 6
+"# Faded" = 1
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_240vp"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 8
+"# Faded" = 8
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_o6xvv"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 6
+"# Faded" = 1
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_phtss"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 8
+"# Faded" = 1
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_v1jrc"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 6
+"# Faded" = 1
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_hmwn0"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 4
+"# Faded" = 1
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_jrvde"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 11
+"# Faded" = 5
+"# Lost Ranger" = 5
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_kmcjo"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 10
+"# Faded" = 1
+"# Lost Ranger" = 1
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_gnroh"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 10
+"# Faded" = 2
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_bqgbq"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 5
+"# Faded" = 1
+"# Lost Ranger" = 1
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_i4dua"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 5
+"# Faded" = 1
+"# Lost Ranger" = 2
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_3vr65"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 5
+"# Faded" = 1
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_itntv"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 10
+"# Faded" = 0
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 7
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_4iv44"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 5
+"# Faded" = 0
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 1
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_1sdpy"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 10
+"# Faded" = 1
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 1
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_51agc"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 10
+"# Faded" = 1
+"# Lost Ranger" = 1
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_n1enb"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 10
+"# Faded" = 0
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 1
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_dmv60"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 10
+"# Faded" = 0
+"# Lost Ranger" = 2
+"# Forsworn Pike" = 1
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_hknc0"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 5
+"# Faded" = 0
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 1
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_njp3j"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 2
+"# Faded" = 0
+"# Lost Ranger" = 2
+"# Forsworn Pike" = 1
+"# Forgotten King" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_8dtcv"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 6
+"# Faded" = 1
+"# Lost Ranger" = 1
+"# Forsworn Pike" = 1
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_qjyuv"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 10
+"# Faded" = 0
+"# Lost Ranger" = 3
+"# Forsworn Pike" = 2
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_2d0ny"]
+script = ExtResource("8_61pbj")
+turn_wait_from_previous_wave = 7
+"# Faded" = 1
+"# Lost Ranger" = 1
+"# Forsworn Pike" = 1
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_qvdtb"]
+script = ExtResource("3_nuihj")
+enemies = Array[Resource("res://Data/Occupants/Enemies/ENEMY_DATA.gd")]([ExtResource("3_a8v28"), ExtResource("4_wytec"), ExtResource("5_pt6db"), ExtResource("6_1fydw")])
+waves = Array[ExtResource("8_61pbj")]([SubResource("Resource_vfppd"), SubResource("Resource_orqwi"), SubResource("Resource_mvudk"), SubResource("Resource_240vp"), SubResource("Resource_o6xvv"), SubResource("Resource_phtss"), SubResource("Resource_v1jrc"), SubResource("Resource_hmwn0"), SubResource("Resource_jrvde"), SubResource("Resource_kmcjo"), SubResource("Resource_gnroh"), SubResource("Resource_bqgbq"), SubResource("Resource_i4dua"), SubResource("Resource_3vr65"), SubResource("Resource_itntv"), SubResource("Resource_4iv44"), SubResource("Resource_1sdpy"), SubResource("Resource_51agc"), SubResource("Resource_n1enb"), SubResource("Resource_dmv60"), SubResource("Resource_hknc0"), SubResource("Resource_njp3j"), SubResource("Resource_8dtcv"), SubResource("Resource_qjyuv"), SubResource("Resource_2d0ny")])
 
 [resource]
 script = ExtResource("1_v0seb")
 level_name = "The Forest"
 level_scene = ExtResource("1_dpvau")
+wave_data = SubResource("Resource_qvdtb")
