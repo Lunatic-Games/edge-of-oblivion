@@ -3,9 +3,6 @@ name: Build Debug Executables
 on:
   push:
     branches: [ "master" ]
-        
-env:
-  NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP: 1
 
 jobs:
   build:
