@@ -10,7 +10,7 @@ env:
 jobs:
   build:
     name: Build game
-    uses: ./.github/workflows/pluggable/godot_build.yml
+    uses: ./.github/workflows/plug_godot_build.yml
     with:
       debug: true
       godot_version: "4.1"
@@ -24,7 +24,7 @@ jobs:
       
   purge:
     name: Purge old artifacts
-    uses: ./.github/workflows/pluggable/artifact_cleanup.yml
+    uses: ./.github/workflows/plug_artifact_cleanup.yml
     needs: build
     with:
       name_contains: ${{ github.event.repository.name }}-debug
