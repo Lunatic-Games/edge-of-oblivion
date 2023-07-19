@@ -324,21 +324,7 @@ _data = {
 
 [node name="TheEdge" instance=ExtResource("1_bddg0")]
 
-[node name="Board" parent="." index="0"]
-layer_0/tile_data = PackedInt32Array(262153, 0, 65536, 327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 589833, 0, 65536, 655369, 0, 65536, 655370, 0, 65536, 655371, 0, 65536, 655372, 0, 65536, 655373, 0, 65536, 655374, 0, 65536, 655375, 0, 65536, 589839, 0, 65536, 589838, 0, 65536, 589837, 0, 65536, 589836, 0, 65536, 589835, 0, 65536, 589834, 0, 65536, 524298, 0, 65536, 458762, 0, 65536, 393226, 0, 65536, 393227, 0, 65536, 327691, 0, 65536, 327690, 0, 65536, 262154, 0, 65536, 262155, 0, 65536, 458763, 0, 65536, 524299, 0, 65536, 524300, 0, 65536, 458764, 0, 65536, 393228, 0, 65536, 327693, 0, 65536, 393229, 0, 65536, 458765, 0, 65536, 524301, 0, 65536, 524302, 0, 65536, 524303, 0, 65536, 458767, 0, 65536, 393231, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 327695, 0, 65536, 262159, 0, 65536, 262158, 0, 65536, 262157, 0, 65536, 262156, 0, 65536, 327692, 0, 65536, 327694, 0, 65536)
-
-[node name="BackgroundFill" type="CanvasLayer" parent="." index="1"]
-layer = -1
-
-[node name="Pit" type="ColorRect" parent="BackgroundFill" index="0"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0784314, 0.0784314, 0.152941, 1)
-
-[node name="Ground" type="Node2D" parent="." index="2"]
+[node name="Ground" type="Node2D" parent="." index="0"]
 
 [node name="DropOff" type="ColorRect" parent="Ground" index="0"]
 offset_left = -102.0
@@ -393,7 +379,7 @@ offset_bottom = 778.0
 rotation = 0.261799
 color = Color(0.133333, 0.133333, 0.239216, 1)
 
-[node name="BoardBackground" type="Node2D" parent="." index="3"]
+[node name="BoardBackground" type="Node2D" parent="." index="1"]
 
 [node name="BoardRamp" type="ColorRect" parent="BoardBackground" index="0"]
 offset_left = 624.0
@@ -408,6 +394,20 @@ offset_top = 280.0
 offset_right = 1120.0
 offset_bottom = 770.0
 color = Color(0.160784, 0.164706, 0.290196, 1)
+
+[node name="Board" parent="." index="2"]
+layer_0/tile_data = PackedInt32Array(262153, 0, 65536, 327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 589833, 0, 65536, 655369, 0, 65536, 655370, 0, 65536, 655371, 0, 65536, 655372, 0, 65536, 655373, 0, 65536, 655374, 0, 65536, 655375, 0, 65536, 589839, 0, 65536, 589838, 0, 65536, 589837, 0, 65536, 589836, 0, 65536, 589835, 0, 65536, 589834, 0, 65536, 524298, 0, 65536, 458762, 0, 65536, 393226, 0, 65536, 393227, 0, 65536, 327691, 0, 65536, 327690, 0, 65536, 262154, 0, 65536, 262155, 0, 65536, 458763, 0, 65536, 524299, 0, 65536, 524300, 0, 65536, 458764, 0, 65536, 393228, 0, 65536, 327693, 0, 65536, 393229, 0, 65536, 458765, 0, 65536, 524301, 0, 65536, 524302, 0, 65536, 524303, 0, 65536, 458767, 0, 65536, 393231, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 327695, 0, 65536, 262159, 0, 65536, 262158, 0, 65536, 262157, 0, 65536, 262156, 0, 65536, 327692, 0, 65536, 327694, 0, 65536)
+
+[node name="BackgroundFill" type="CanvasLayer" parent="." index="3"]
+layer = -1
+
+[node name="Pit" type="ColorRect" parent="BackgroundFill" index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0784314, 0.0784314, 0.152941, 1)
 
 [node name="Decorations" type="Node2D" parent="." index="4"]
 

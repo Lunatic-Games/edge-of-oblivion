@@ -84,10 +84,10 @@ func game_over():
 
 func _on_new_round_started() -> void:
 	var round_i: int = turn_manager.current_round
-	var enemies_to_spawn: Array[EnemyData] = level.data.waves.get_enemies_for_turn(round_i)
+	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_turn(round_i)
 	spawn_handler.spawn_enemies(enemies_to_spawn)
 
-	var n_enemies_next_turn: int = level.data.waves.get_enemies_for_turn(round_i + 1).size()
+	var n_enemies_next_turn: int = level.data.level_waves.get_enemies_for_turn(round_i + 1).size()
 	spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
 
 
