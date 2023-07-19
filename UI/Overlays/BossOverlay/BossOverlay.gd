@@ -13,13 +13,13 @@ func _ready() -> void:
 	GlobalSignals.boss_spawned.connect(_on_boss_spawned)
 
 
-func _on_boss_spawned(boss: Boss) -> void:
-	title.text = "[shake]" + boss.display_name + "[/shake]"
+func _on_boss_spawned(boss: Enemy) -> void:
+	title.text = "[shake]" + boss.data.enemy_name + "[/shake]"
 	boss.health_changed.connect(_on_boss_health_changed.bind(boss))
 	show()
 
 
-func _on_boss_health_changed(boss: Boss) -> void:
+func _on_boss_health_changed(boss: Enemy) -> void:
 	if health_bar_tween:
 		health_bar_tween.kill()
 	

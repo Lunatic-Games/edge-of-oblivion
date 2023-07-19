@@ -38,8 +38,6 @@ shader_parameter/modulate = Color(0.78, 0.62, 0.65, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
 
 [node name="Cobra" instance=ExtResource("1_hekwp")]
-popup_info_text = "[color=cyan]Dune Cobra:[/color] attacks all adjacent tiles, then moves towards the player."
-popup_flavor_text = "Was once the most venomous bite in the sand dunes."
 max_hp = 30
 
 [node name="Sprite2D" parent="." index="1"]

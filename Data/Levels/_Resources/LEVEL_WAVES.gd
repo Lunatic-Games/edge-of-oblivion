@@ -1,10 +1,10 @@
 @tool
 class_name LevelWaves
-extends Node
+extends Resource
 
 
-@export var enemy_scenes: Array[PackedScene]:
-	set = set_enemy_scenes
+@export var enemies: Array[EnemyData]:
+	set = set_enemies
 @export var waves: Array[WaveData]:
 	set = set_waves
 
@@ -15,10 +15,10 @@ func _ready() -> void:
 	calculate_spawns_for_each_turn()
 
 
-func get_enemies_for_turn(turn: int) -> Array[PackedScene]:
-	var enemies: Array[PackedScene] = []
-	enemies = spawns_for_turn.get(turn, enemies)
-	return enemies
+func get_enemies_for_turn(turn: int) -> Array[EnemyData]:
+	var enemies_for_turn: Array[EnemyData] = []
+	enemies_for_turn = spawns_for_turn.get(turn, enemies_for_turn)
+	return enemies_for_turn
 
 
 func calculate_spawns_for_each_turn() -> void:
@@ -27,22 +27,22 @@ func calculate_spawns_for_each_turn() -> void:
 	var i: int = 1  # Start after the first turn
 	for wave in waves:
 		i += wave.turn_wait_from_previous_wave
-		spawns_for_turn[i] = wave.get_enemy_scenes_for_wave()
+		spawns_for_turn[i] = wave.get_enemies_for_wave()
 		wave.update_round_info(i)
 
 
-func set_enemy_scenes(value: Array[PackedScene]) -> void:
-	var unique_scenes: Array[PackedScene] = []
+func set_enemies(value: Array[EnemyData]) -> void:
+	var unique_scenes: Array[EnemyData] = []
 	for scene in value:
 		if unique_scenes.has(scene) == false:
 			unique_scenes.append(scene)
 	
-	enemy_scenes = []
-	enemy_scenes.append_array(unique_scenes)
+	enemies = []
+	enemies.append_array(unique_scenes)
 	
 	for wave in waves:
 		if wave:
-			wave.update_enemy_scenes(enemy_scenes)
+			wave.update_enemies(enemies)
 
 
 func set_waves(value: Array[WaveData]) -> void:
@@ -52,7 +52,7 @@ func set_waves(value: Array[WaveData]) -> void:
 			waves[i] = WaveData.new()
 		
 		var wave: WaveData = waves[i]
-		wave.update_enemy_scenes(enemy_scenes)
+		wave.update_available_enemies(enemies)
 		
 		if !wave.turn_wait_value_changed.is_connected(_on_wave_turn_wait_value_changed):
 			wave.turn_wait_value_changed.connect(_on_wave_turn_wait_value_changed)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://b8dgko60uwttb"]
+
+[ext_resource type="PackedScene" uid="uid://dkibhs2bt0a1j" path="res://Data/Occupants/Enemies/Crab/Crab.tscn" id="1_23ots"]
+[ext_resource type="Script" path="res://Data/Occupants/Enemies/ENEMY_DATA.gd" id="1_u5b0d"]
+[ext_resource type="Texture2D" uid="uid://kv83wimtaroh" path="res://Assets/art/icons/animals/lorc/crab.svg" id="3_bow18"]
+
+[resource]
+script = ExtResource("1_u5b0d")
+enemy_name = "Crab"
+sprite = ExtResource("3_bow18")
+enemy_scene = ExtResource("1_23ots")
+xp_value = 1
+is_boss = false
+popup_text = "Attacks all adjacent tiles, then moves towards the player."
+flavor_text = "Child of the mud, with piercing claws."

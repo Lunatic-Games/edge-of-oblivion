@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk6wanig00prf"]
+
+[sub_resource type="Curve" id="Curve_jyhys"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.184122, 1), 0.0, 0.0, 0, 0, Vector2(0.8125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_kpr1f"]
+curve = SubResource("Curve_jyhys")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g6eca"]
+emission_shape = 1
+emission_sphere_radius = 45.0
+particle_flag_disable_z = true
+gravity = Vector3(0, -15, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 3.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_kpr1f")
+color = Color(0.937255, 0.713726, 0.627451, 1)
+
+[node name="ForgottenKingParticles" type="GPUParticles2D"]
+process_material = SubResource("ParticleProcessMaterial_g6eca")

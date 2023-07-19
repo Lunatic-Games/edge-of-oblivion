@@ -26,6 +26,7 @@ func _ready() -> void:
 	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
 	
 	level = level_data.level_scene.instantiate()
+	level.setup(level_data)
 	add_child(level)
 	move_child(level, spawn_handler.get_index() + 1)
 	await level.board.tile_generation_completed
@@ -82,10 +83,10 @@ func game_over():
 
 func _on_new_round_started() -> void:
 	var round_i: int = turn_manager.current_round
-	var enemies_to_spawn: Array[PackedScene] = level.waves.get_enemies_for_turn(round_i) as Array[PackedScene]
+	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_turn(round_i)
 	spawn_handler.spawn_enemies(enemies_to_spawn)
 
-	var n_enemies_next_turn: int = level.waves.get_enemies_for_turn(round_i + 1).size()
+	var n_enemies_next_turn: int = level.data.level_waves.get_enemies_for_turn(round_i + 1).size()
 	spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
 
 
@@ -98,5 +99,5 @@ func _on_Player_died(_player: Player) -> void:
 	game_over()
 
 
-func _on_Boss_defeated(_boss: Boss) -> void:
+func _on_Boss_defeated(_boss: Enemy) -> void:
 	victory()

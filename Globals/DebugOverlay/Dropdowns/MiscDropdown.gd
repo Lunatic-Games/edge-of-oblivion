@@ -21,7 +21,7 @@ func show_victory_screen():
 	if GlobalGameState.game == null:
 		return
 	
-	GlobalGameState.game._on_Boss_defeated(Boss.new())
+	GlobalGameState.game._on_Boss_defeated(Enemy.new())
 
 
 func toggle_fullscreen():

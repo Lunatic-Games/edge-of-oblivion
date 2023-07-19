@@ -15,26 +15,33 @@ func spawn_player() -> Player:
 	return spawn_occupant_on_tile(PLAYER_SCENE, spawn_tile)
 
 
-func spawn_enemies(enemies: Array[PackedScene]) -> void:
-	for enemy_scene in enemies:
+func spawn_enemies(enemies: Array[EnemyData]) -> void:
+	for enemy_data in enemies:
 		var spawn_flag: SpawnFlag = spawn_flags.pop_front()
 		if spawn_flag == null or spawn_flag.current_tile == null:  # Check for invalid due to failed move
 			# More enemies to spawn then there are spawn flags, map likely too small
 			break
 		spawn_flag.destroy_self()
 		
-		var _enemy: Enemy = spawn_enemy_on_tile(enemy_scene, spawn_flag.current_tile)
+		var _enemy: Enemy = spawn_enemy_on_tile(enemy_data, spawn_flag.current_tile)
 	
 	assert(spawn_flags.is_empty(), "More spawn flags than enemies to spawn for this round.")
 
 
-func spawn_enemy_on_tile(enemy_scene: PackedScene, tile: Tile) -> Enemy:
-	var enemy: Enemy = spawn_occupant_on_tile(enemy_scene, tile)
+func spawn_enemy_on_tile(enemy_data: EnemyData, tile: Tile) -> Enemy:
+	var enemy: Enemy = enemy_data.enemy_scene.instantiate()
+	enemy.setup(enemy_data)
+	
+	GlobalGameState.board.add_child(enemy)
+	
+	tile.occupant = enemy
+	enemy.current_tile = tile
+	enemy.global_position = tile.global_position
+	
 	spawned_enemies.append(enemy)
 	enemy.died.connect(_on_enemy_died.bind(enemy))
-	var as_boss: Boss = enemy as Boss
-	if as_boss:
-		GlobalSignals.boss_spawned.emit(as_boss)
+	if enemy.data.is_boss:
+		GlobalSignals.boss_spawned.emit(enemy)
 	return enemy
 
 

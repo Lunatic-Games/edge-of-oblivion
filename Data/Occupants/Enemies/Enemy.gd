@@ -1,11 +1,10 @@
 class_name Enemy
 extends Unit
 
+
 signal update_triggered
 
-@export var popup_info_text: String
-@export var popup_flavor_text: String
-@export_range(0, 999, 1, "or_greater") var xp: int = 1
+var data: EnemyData = null
 
 @onready var attack_bar = $AttackBar
 
@@ -15,6 +14,10 @@ func _ready() -> void:
 	damageable = true
 	appear_unready()
 	play_spawn_animation()
+
+
+func setup(enemy_data: EnemyData) -> void:
+	data = enemy_data
 
 
 func update() -> void:
@@ -32,15 +35,9 @@ func appear_unready() -> void:
 	tween.tween_property(sprite.material, "shader_parameter/modulate:a", 0.4, 0.2)
 
 
-func can_attack_player() -> bool:
-	for tile in current_tile.get_adjacent_occupied_tiles():
-		if tile.occupant == GlobalGameState.player:
-			return true
-	
-	return false
-
-
 func die() -> void:
-	GlobalGameState.player.gain_experience(xp)
+	GlobalGameState.player.gain_experience(data.xp_value)
 	GlobalSignals.enemy_killed.emit(self)
+	if data.is_boss:
+		GlobalSignals.boss_defeated.emit(self)
 	super.die()

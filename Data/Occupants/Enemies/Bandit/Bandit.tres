@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://c81qrucfi1yy0"]
+
+[ext_resource type="PackedScene" uid="uid://33utax8lsyid" path="res://Data/Occupants/Enemies/Bandit/Bandit.tscn" id="1_fs4ph"]
+[ext_resource type="Script" path="res://Data/Occupants/Enemies/ENEMY_DATA.gd" id="1_t86qc"]
+[ext_resource type="Texture2D" uid="uid://ktl4jkcycks" path="res://Assets/art/icons/enemies/Delapouite/bandit.svg" id="3_5qa7y"]
+
+[resource]
+script = ExtResource("1_t86qc")
+enemy_name = "Bandit"
+sprite = ExtResource("3_5qa7y")
+enemy_scene = ExtResource("1_fs4ph")
+xp_value = 1
+is_boss = false
+popup_text = "Attacks all directions range 3, then moves towards the player."
+flavor_text = "The rooten tootenist baddy of the Dunes."
