@@ -29,7 +29,15 @@ func spawn_enemies(enemies: Array[EnemyData]) -> void:
 
 
 func spawn_enemy_on_tile(enemy_data: EnemyData, tile: Tile) -> Enemy:
-	var enemy: Enemy = spawn_occupant_on_tile(enemy_data.enemy_scene, tile)
+	var enemy: Enemy = enemy_data.enemy_scene.instantiate()
+	enemy.setup(enemy_data)
+	
+	GlobalGameState.board.add_child(enemy)
+	
+	tile.occupant = enemy
+	enemy.current_tile = tile
+	enemy.global_position = tile.global_position
+	
 	spawned_enemies.append(enemy)
 	enemy.died.connect(_on_enemy_died.bind(enemy))
 	if enemy.data.is_boss:

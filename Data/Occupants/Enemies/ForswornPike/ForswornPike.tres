@@ -11,3 +11,5 @@ sprite = ExtResource("2_r44l5")
 enemy_scene = ExtResource("1_jhw05")
 xp_value = 5
 is_boss = false
+popup_text = "Attacks in all directions range 2."
+flavor_text = "It was said they would stand guard for eternity. It was true."

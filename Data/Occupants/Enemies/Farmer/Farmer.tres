@@ -11,3 +11,5 @@ sprite = ExtResource("3_qhlnc")
 enemy_scene = ExtResource("1_byqy0")
 xp_value = 5
 is_boss = false
+popup_text = "Attacks all adjacent tiles, stronger up and down, then moves towards the player."
+flavor_text = "An eternity of tangling with the river crabs has left them nimble."

@@ -11,3 +11,5 @@ sprite = ExtResource("3_5qa7y")
 enemy_scene = ExtResource("1_fs4ph")
 xp_value = 5
 is_boss = false
+popup_text = "Attacks all directions range 3, then moves towards the player."
+flavor_text = "The rooten tootenist baddy of the Dunes."

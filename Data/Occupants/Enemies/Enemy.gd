@@ -16,6 +16,10 @@ func _ready() -> void:
 	play_spawn_animation()
 
 
+func setup(enemy_data: EnemyData) -> void:
+	data = enemy_data
+
+
 func update() -> void:
 	update_triggered.emit()
 	GlobalLogicTreeSignals.entity_update_triggered.emit(self)

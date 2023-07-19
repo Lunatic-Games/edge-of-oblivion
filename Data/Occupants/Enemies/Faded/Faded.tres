@@ -11,3 +11,5 @@ sprite = ExtResource("2_h1kir")
 enemy_scene = ExtResource("1_kqjbf")
 xp_value = 5
 is_boss = false
+popup_text = "Attacks all adjacent tiles."
+flavor_text = "Once somebody... now, barely a memory."

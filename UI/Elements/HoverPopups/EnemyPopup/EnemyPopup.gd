@@ -16,9 +16,10 @@ var is_popup_spawned: bool = false
 @onready var popup_flavor_text: RichTextLabel = $PopupBorderContainer/BackgroundPanel/VBoxContainer/PanelContainer2/FlavorText
 @onready var animator: AnimationPlayer = $AnimationPlayer
 
+
 func _ready() -> void:
-	popup_text.text = enemy.popup_info_text
-	popup_flavor_text.text = enemy.popup_flavor_text
+	popup_text.text = enemy.data.get_full_popup_text()
+	popup_flavor_text.text = enemy.data.flavor_text
 
 
 func _on_mouse_entered() -> void:

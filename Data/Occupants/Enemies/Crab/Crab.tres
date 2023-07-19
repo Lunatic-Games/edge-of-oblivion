@@ -11,3 +11,5 @@ sprite = ExtResource("3_bow18")
 enemy_scene = ExtResource("1_23ots")
 xp_value = 5
 is_boss = false
+popup_text = "Attacks all adjacent tiles, then moves towards the player."
+flavor_text = "Child of the mud, with piercing claws."

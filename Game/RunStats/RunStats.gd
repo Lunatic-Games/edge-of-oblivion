@@ -16,4 +16,4 @@ func _on_enemy_killed(enemy: Enemy):
 	if enemy.data.is_boss:
 		n_bosses_killed += 1
 	
-	xp_gained += enemy.xp
+	xp_gained += enemy.data.xp_value
