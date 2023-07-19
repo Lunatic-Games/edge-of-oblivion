@@ -1,0 +1,30 @@
+name: Build Debug Executables
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    name: Build game
+    uses: ./.github/workflows/plug_godot_build.yml
+    with:
+      debug: true
+      godot_version: "4.1"
+      export_name: ${{ github.event.repository.name }}
+      windows: true
+      windows_preset: Windows Desktop
+      linux: true
+      linux_preset: Linux/X11
+      project_path: '.'
+      export_presets_path: '.'
+      
+  purge:
+    name: Purge old artifacts
+    uses: ./.github/workflows/plug_artifact_cleanup.yml
+    needs: build
+    permissions: 
+      actions: write
+    with:
+      name_contains: ${{ github.event.repository.name }}-debug
+      number_to_keep: 2 # Since we are generating both a Windows and Linux

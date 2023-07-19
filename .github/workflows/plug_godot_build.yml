@@ -1,0 +1,150 @@
+name: Godot Build
+
+on:
+  workflow_call:
+    inputs:
+      debug:
+        type: boolean
+        required: false
+        default: true
+      godot_version:
+        type: string
+        required: true 
+      export_name:
+        type: string
+        required: true 
+        description: The name of the exported binary (appended with '-debug' if debug is set to true)
+      windows:
+        type: boolean
+        required: false 
+        default: true
+        description: Should a Windows binary be generated
+      windows_preset:
+        type: string
+        required: false 
+        default: 'Windows Desktop'
+      linux:
+        type: boolean
+        required: false 
+        default: true
+        description: Should a Linux binary be generated
+      linux_preset:
+        type: string
+        required: false 
+        default: 'Linux/X11 Desktop'          
+      project_path:
+        type: string
+        required: false 
+        default: '.'
+      export_presets_path:
+        type: string
+        required: false 
+        default: '.'
+        description: Relative to the project path
+        
+env:
+  GODOT_VERSION: ${{ inputs.godot_version }}
+  EXPORT_NAME: ${{ inputs.export_name }}${{ inputs.debug && '-debug' || '' }}
+  PROJECT_PATH: ${{ inputs.project_path }}
+  EXPORT_PRESETS_PATH: ${{ inputs.export_presets_path }}
+
+jobs:
+  set_tag:
+    name: Set godot-ci tag
+    runs-on: ubuntu-latest
+    outputs:
+      godot_ci_tag: ${{ steps.set_tag.outputs.tag }}
+    steps:
+      - id: set_tag
+        run: echo "tag=$GODOT_VERSION" >> $GITHUB_OUTPUT
+        
+  set_matrix:
+    name: Set build matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ toJSON(steps.*.outputs.platform) }}
+    steps:
+      - id: windows
+        if: inputs.windows
+        run: echo "platform=windows" >> $GITHUB_OUTPUT
+      - id: linux
+        if: inputs.linux
+        run: echo "platform=linux" >> $GITHUB_OUTPUT
+
+  export:
+    name: Export for ${{ matrix.platform }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: ${{ fromJSON(needs.set_matrix.outputs.matrix) }}
+    defaults:
+      run:
+        shell: bash
+    needs: 
+      - set_tag
+      - set_matrix
+    container:
+      image: barichello/godot-ci:${{ needs.set_tag.outputs.godot_ci_tag }}
+    env:
+      PLATFORM: ${{ matrix.platform }}
+      BINARY_EXT: ${{ (matrix.platform == 'windows' && 'exe') || (matrix.platform == 'linux' && 'zip') || 'zip' }}
+      PRESET: ${{ inputs[format('{0}_preset', matrix.platform)] }}
+      DEBUG: ${{ inputs.debug }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true          
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          
+          if [ ! -f "$PROJECT_PATH/$EXPORT_PRESETS_PATH/export_presets.cfg" ]
+          then 
+            mv $PROJECT_PATH/$EXPORT_PRESETS_PATH/export_presets.cfg $PROJECT_PATH/export_presets.cfg
+          fi
+      - name: Build
+        run: |
+          mkdir -v -p ${PROJECT_PATH}/build/${PLATFORM}
+          godot_command=(godot -v --path $PROJECT_PATH --headless)
+          
+          if $DEBUG == 'true'
+          then
+            godot_command+=(--export-debug)
+          else 
+            godot_command+=(--export-release)
+          fi
+          
+          godot_command+=("$PRESET" $PROJECT_PATH/build/${PLATFORM}/$EXPORT_NAME.$BINARY_EXT)
+          "${godot_command[@]}" 2>&1 | tee "$PROJECT_PATH/$EXPORT_NAME.output"  
+      - name: Check for errors
+        shell: bash
+        run: |
+          BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project" "ERROR: Invalid export preset name")
+          
+          if [ ! -f "$PROJECT_PATH/$EXPORT_NAME.output" ]
+          then
+            echo "No output file found"
+            exit 1
+          fi  
+          
+          if [ $(cat "$PROJECT_PATH/$EXPORT_NAME.output" | wc -l) -lt 1 ]
+          then
+            echo "No data found in Godot build output"
+            exit 1
+          fi  
+          
+          for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
+          do
+            if grep -q "${BUILD_ERRORS[$i]}" $PROJECT_PATH/$EXPORT_NAME.output
+            then
+              echo "Found error ${BUILD_ERRORS[$i]} in Godot build output"
+              exit 1
+            fi
+          done
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: ${{ matrix.platform }}-${{ env.EXPORT_NAME }}
+          path: ${{ env.PROJECT_PATH }}/build/${{ matrix.platform }}
