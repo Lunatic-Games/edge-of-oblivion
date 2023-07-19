@@ -26,6 +26,8 @@ jobs:
     name: Purge old artifacts
     uses: ./.github/workflows/plug_artifact_cleanup.yml
     needs: build
+    permissions: 
+      actions: write
     with:
       name_contains: ${{ github.event.repository.name }}-debug
       number_to_keep: 2 # Since we are generating both a Windows and Linux
