@@ -29,6 +29,7 @@
 
 [node name="ForgottenKing" instance=ExtResource("4")]
 max_hp = 100
+move_precedence = 3.0
 
 [node name="Sprite2D" parent="." index="1"]
 material = ExtResource("3_3lidq")
