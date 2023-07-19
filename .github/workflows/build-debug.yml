@@ -1,4 +1,4 @@
-name: Build Debug Enabled Executables
+name: Build Debug Executables
 
 on:
   push:
@@ -10,7 +10,7 @@ env:
 jobs:
   build:
     name: Build game
-    uses: bigdavisc/edge-of-oblivion/.github/workflows/godot_build.yml@master
+    uses: ./.github/workflows/godot_build.yml
     with:
       debug: true
       godot_version: "4.1"
