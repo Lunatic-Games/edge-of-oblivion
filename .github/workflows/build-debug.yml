@@ -10,7 +10,7 @@ env:
 jobs:
   build:
     name: Build game
-    uses: ./.github/workflows/godot_build.yml
+    uses: ./.github/workflows/pluggable/godot_build.yml
     with:
       debug: true
       godot_version: "4.1"
@@ -22,39 +22,10 @@ jobs:
       project_path: '.'
       export_presets_path: '.'
       
-  clean:
-    name: Cleanup old artifacts
-    runs-on: ubuntu-latest
-    permissions: 
-      actions: write
+  purge:
+    name: Purge old artifacts
+    uses: ./.github/workflows/pluggable/artifact_cleanup.yml
     needs: build
-    steps:
-      - name: Find and delete old artifacts
-        uses: actions/github-script@v6
-        id: delete-artifacts
-        with:
-          script: |
-            const res = await github.rest.actions.listArtifactsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
-
-            const allArtifacts = res.data.artifacts
-                    .sort( (a,b) => (new Date(a.created_at)) - (new Date(b.created_at)) );
-
-            const artifactsToDelete = allArtifacts
-                    .slice(0, -${{ env.NUM_OF_HISTORICAL_ARTIFACTS_TO_KEEP }})
-                    .filter(({ name }) => name.includes('${{ github.event.repository.name }}-debug'))
-
-            artifactsToDelete.forEach(({ id }) => {
-               github.rest.actions.deleteArtifact({
-                 owner: context.repo.owner,
-                 repo: context.repo.repo,
-                 artifact_id: id,
-               })
-              })
-              
-            return artifactsToDelete
-            
-      - name: Print deleted artifacts
-        run: echo "${{steps.delete-artifacts.outputs.result}}"
+    with:
+      name_contains: ${{ github.event.repository.name }}-debug
+      number_to_keep: 2 # Since we are generating both a Windows and Linux
