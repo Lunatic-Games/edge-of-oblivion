@@ -1,14 +1,10 @@
-[gd_scene load_steps=48 format=3 uid="uid://dm5qvaa1qimwq"]
+[gd_scene load_steps=44 format=3 uid="uid://dm5qvaa1qimwq"]
 
 [ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_3hsuh"]
 [ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="2_138v5"]
-[ext_resource type="PackedScene" uid="uid://kjqcigs27uqk" path="res://Data/Occupants/Enemies/Faded/Faded.tscn" id="2_p5j74"]
-[ext_resource type="PackedScene" uid="uid://p0e7f46xip6t" path="res://Data/Occupants/Enemies/LostRanger/LostRanger.tscn" id="3_42bde"]
 [ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="3_g3fsi"]
 [ext_resource type="Texture2D" uid="uid://cx1ga40jy1ut6" path="res://Assets/textures/glow.svg" id="4_dcbad"]
-[ext_resource type="PackedScene" uid="uid://cfthurngpg1ps" path="res://Data/Occupants/Enemies/ForswornPike/ForswornPike.tscn" id="4_lujl8"]
 [ext_resource type="PackedScene" uid="uid://c1ordt6583753" path="res://Data/Particles/Decoration/CampfireParticles.tscn" id="5_cpbow"]
-[ext_resource type="PackedScene" uid="uid://j054uqo7ev21" path="res://Data/Occupants/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn" id="5_m6sh4"]
 [ext_resource type="Script" path="res://Data/Levels/WAVE_DATA.gd" id="6_mofnk"]
 [ext_resource type="Texture2D" uid="uid://bh37a154red3i" path="res://Assets/art/background/game/tree.svg" id="6_yv738"]
 [ext_resource type="Texture2D" uid="uid://bnq1kfjiksfy5" path="res://Assets/art/background/game/skull.svg" id="7_vmjjr"]
@@ -18,226 +14,126 @@
 [sub_resource type="Resource" id="Resource_2ro8f"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 1
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_g0k22"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 4
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_1poh2"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 6
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_1dbp5"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 8
-"# Faded" = 8
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_cht6y"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 6
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_wu0xb"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 8
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_61dwj"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 6
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_nmvuk"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 4
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_sjvju"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 11
-"# Faded" = 5
-"# LostRanger" = 5
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_fmpu2"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 10
-"# Faded" = 1
-"# LostRanger" = 1
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_3rxs6"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 10
-"# Faded" = 2
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_1iitl"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 5
-"# Faded" = 1
-"# LostRanger" = 1
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_ueot7"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 5
-"# Faded" = 1
-"# LostRanger" = 2
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_tjj5o"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 5
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_oue8v"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 10
-"# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 7
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_aptwa"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 5
-"# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_tj5io"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 10
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_mxj62"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 10
-"# Faded" = 1
-"# LostRanger" = 1
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_sr3f6"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 10
-"# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_yqrof"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 10
-"# Faded" = 0
-"# LostRanger" = 2
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_q8c62"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 5
-"# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 1
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_jy2oq"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 2
-"# Faded" = 2
-"# LostRanger" = 1
-"# ForswornPike" = 2
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_3wx36"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 6
-"# Faded" = 1
-"# LostRanger" = 1
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_wcpql"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 10
-"# Faded" = 0
-"# LostRanger" = 3
-"# ForswornPike" = 2
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_qhio4"]
 script = ExtResource("6_mofnk")
 turn_wait_from_previous_wave = 7
-"# Faded" = 1
-"# LostRanger" = 1
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
 "info_ " = null
 
 [sub_resource type="Gradient" id="Gradient_hakff"]
@@ -386,7 +282,6 @@ _data = {
 [node name="TheForest" instance=ExtResource("1_3hsuh")]
 
 [node name="Waves" parent="." index="0"]
-enemy_scenes = Array[PackedScene]([ExtResource("2_p5j74"), ExtResource("3_42bde"), ExtResource("4_lujl8"), ExtResource("5_m6sh4")])
 waves = Array[ExtResource("6_mofnk")]([SubResource("Resource_2ro8f"), SubResource("Resource_g0k22"), SubResource("Resource_1poh2"), SubResource("Resource_1dbp5"), SubResource("Resource_cht6y"), SubResource("Resource_wu0xb"), SubResource("Resource_61dwj"), SubResource("Resource_nmvuk"), SubResource("Resource_sjvju"), SubResource("Resource_fmpu2"), SubResource("Resource_3rxs6"), SubResource("Resource_1iitl"), SubResource("Resource_ueot7"), SubResource("Resource_tjj5o"), SubResource("Resource_oue8v"), SubResource("Resource_aptwa"), SubResource("Resource_tj5io"), SubResource("Resource_mxj62"), SubResource("Resource_sr3f6"), SubResource("Resource_yqrof"), SubResource("Resource_q8c62"), SubResource("Resource_jy2oq"), SubResource("Resource_3wx36"), SubResource("Resource_wcpql"), SubResource("Resource_qhio4")])
 
 [node name="Background" type="CanvasLayer" parent="." index="1"]

@@ -67,7 +67,6 @@ _data = {
 }
 
 [node name="SpawnFlag" type="Node2D"]
-modulate = Color(1, 1, 1, 0)
 script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

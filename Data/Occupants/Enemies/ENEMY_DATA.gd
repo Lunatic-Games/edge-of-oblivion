@@ -5,7 +5,7 @@ extends Resource
 @export var enemy_name: String
 @export var sprite: Texture2D = null
 @export var enemy_scene: PackedScene = null
-@export var xp_value: int = 5
+@export var xp_value: int = 1
 @export var is_boss: bool = false
 @export var boss_soundtrack: AudioStream = null
 @export_multiline var popup_text: String = ""
