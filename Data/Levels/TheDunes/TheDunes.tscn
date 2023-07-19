@@ -149,9 +149,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.811765, 0.639216, 0.560784, 1)
 
-[node name="Ground" type="Node2D" parent="." index="2"]
-
-[node name="BoardBackground" type="Node2D" parent="." index="3"]
+[node name="BoardBackground" type="Node2D" parent="." index="2"]
 
 [node name="BoardRamp" type="ColorRect" parent="BoardBackground" index="0"]
 offset_left = 624.0
@@ -167,7 +165,7 @@ offset_right = 1120.0
 offset_bottom = 770.0
 color = Color(0.678431, 0.478431, 0.345098, 1)
 
-[node name="Decorations" type="Node2D" parent="." index="4"]
+[node name="Decorations" type="Node2D" parent="." index="3"]
 
 [node name="Grass" type="Node2D" parent="Decorations" index="0"]
 modulate = Color(0.701961, 0.603922, 0.482353, 0.756863)
@@ -411,7 +409,7 @@ scale = Vector2(0.179878, 0.179878)
 texture = ExtResource("11_7gf32")
 flip_h = true
 
-[node name="Ribs" type="Sprite2D" parent="." index="5"]
+[node name="Ribs" type="Sprite2D" parent="Decorations" index="6"]
 position = Vector2(818, 969)
 scale = Vector2(0.426829, 0.426829)
 texture = ExtResource("12_25a2d")
