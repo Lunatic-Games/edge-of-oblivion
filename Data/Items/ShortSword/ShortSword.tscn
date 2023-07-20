@@ -1,19 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6oyy1un0mhdv"]
+[gd_scene load_steps=11 format=3 uid="uid://b6oyy1un0mhdv"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_r3n8e"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="3_aepoh"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="3_hv802"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="4_ehsl6"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="4_lobvm"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="5_5l6qm"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="6_ihmua"]
 [ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="8_hmr6i"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="10_mltra"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_wrwdj"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="12_demeu"]
 
-[node name="ShortSword" instance=ExtResource("1")]
+[node name="ShortSword" node_paths=PackedStringArray("primary_every_x_node") instance=ExtResource("1")]
+primary_every_x_node = NodePath("LT_OnItemUpdate/LogicTree/LT_EveryXCalls")
 
 [node name="ItemPopupHover" parent="." index="0"]
 anchors_preset = 0
@@ -69,25 +68,6 @@ mirror_x_if_left_of_first_tile = NodePath("../../../Item user tile")
 script = ExtResource("10_wrwdj")
 tiles = NodePath("../Selected tiles")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
-
-[node name="Set item ready apperance to unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("items")]
-script = ExtResource("4_lobvm")
-items = NodePath("../../../This item")
-appear_ready = false
-
-[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
-script = ExtResource("3_hv802")
-x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
-on_one_before = true
-
-[node name="Set item ready apperance to ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("4_lobvm")
-items = NodePath("../../../This item")
-
-[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("10_mltra")
-progress_bar = NodePath("../../../CoolDownBar")
-every_x_calls = NodePath("../LT_EveryXCalls")
 
 [node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("4_ehsl6")

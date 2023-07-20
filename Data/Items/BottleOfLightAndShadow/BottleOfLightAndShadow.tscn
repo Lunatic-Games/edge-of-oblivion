@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cihw8t15k8w"]
+[gd_scene load_steps=20 format=3 uid="uid://cihw8t15k8w"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_0flwa"]
 [ext_resource type="Texture2D" uid="uid://88jskpnkcjfg" path="res://Assets/art/icons/weapons/lorc/bottle-vapors.svg" id="2_t2f6r"]
@@ -16,13 +16,12 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectClosestTiles.gd" id="12_kr602"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="13_mru7o"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="14_u3sy7"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="16_72xym"]
 [ext_resource type="PackedScene" uid="uid://d0op1tkkadxvm" path="res://Data/Particles/Items/BottleOfLightAndShadowParticles.tscn" id="17_1uerp"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="18_dlocp"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="19_wprry"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="20_8sl7k"]
 
-[node name="BottleOfLightAndShadow" instance=ExtResource("1_0flwa")]
+[node name="BottleOfLightAndShadow" node_paths=PackedStringArray("primary_every_x_node") instance=ExtResource("1_0flwa")]
+primary_every_x_node = NodePath("LT_OnItemUpdate/LogicTree/EveryXCalls")
 
 [node name="Texture" parent="." index="1"]
 texture = ExtResource("2_t2f6r")
@@ -141,25 +140,6 @@ color = 3
 script = ExtResource("9_oomi7")
 bool_variable = NodePath("../../../../../LT_PersistentVariables/Is in healing mode")
 value = true
-
-[node name="Appear unready" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="2" node_paths=PackedStringArray("items")]
-script = ExtResource("16_72xym")
-items = NodePath("../../../This item")
-appear_ready = false
-
-[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("x_override")]
-script = ExtResource("5_1wuaq")
-x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
-on_one_before = true
-
-[node name="Appear ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("16_72xym")
-items = NodePath("../../../This item")
-
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="3" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("18_dlocp")
-progress_bar = NodePath("../../../CoolDownBar")
-every_x_calls = NodePath("../EveryXCalls")
 
 [node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("19_wprry")

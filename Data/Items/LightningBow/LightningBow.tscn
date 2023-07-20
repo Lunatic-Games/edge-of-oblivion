@@ -1,10 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://chl3bu7jqyiqr"]
+[gd_scene load_steps=17 format=3 uid="uid://chl3bu7jqyiqr"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_twq0p"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_31l78"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="5_5dytl"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="6_klx2m"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_uhqm5"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_3tq3w"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="8_ykuaq"]
@@ -19,7 +17,8 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="15_1way7"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="17_58wo7"]
 
-[node name="LightningBow" instance=ExtResource("1")]
+[node name="LightningBow" node_paths=PackedStringArray("primary_every_x_node") instance=ExtResource("1")]
+primary_every_x_node = NodePath("LT_OnItemUpdate/LogicTree/LT_EveryXCalls")
 
 [node name="ItemPopupHover" parent="." index="0"]
 anchors_preset = 0
@@ -47,40 +46,35 @@ default_value = 1
 script = ExtResource("4_31l78")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 
-[node name="Set item ready apperance to unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("5_5dytl")
-items = NodePath("../../../This item")
-appear_ready = false
-
-[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1"]
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
 script = ExtResource("6_uhqm5")
 
-[node name="Select Upper Tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select Upper Tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("7_3tq3w")
 input_tiles = NodePath("../../../Item user tile")
 output_tiles = NodePath("../Targets")
 directions = 1
 distance_start = 2
 
-[node name="Damage tile occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage tile occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("8_ykuaq")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="Spawn arrow effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
+[node name="Spawn arrow effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
 script = ExtResource("9_ggmof")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("9_mlvr2")
 
-[node name="Chains left" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("default_value_override")]
+[node name="Chains left" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("default_value_override")]
 script = ExtResource("3_twq0p")
 default_value_override = NodePath("../../../../LT_PersistentVariables/Chain")
 
-[node name="Should chain" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6"]
+[node name="Should chain" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5"]
 script = ExtResource("10_chng4")
 default_value = true
 
-[node name="While should chain" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("input")]
+[node name="While should chain" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("input")]
 script = ExtResource("11_8vjst")
 input = NodePath("../Should chain")
 
@@ -128,20 +122,6 @@ comparison = 3
 [node name="Stop chaining" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While should chain/If chain is zero" index="0" node_paths=PackedStringArray("bool_variable")]
 script = ExtResource("17_58wo7")
 bool_variable = NodePath("../../../Should chain")
-
-[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
-script = ExtResource("4_31l78")
-x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
-on_one_before = true
-
-[node name="Set item ready apperance to ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("5_5dytl")
-items = NodePath("../../../This item")
-
-[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("6_klx2m")
-progress_bar = NodePath("../../../CoolDownBar")
-every_x_calls = NodePath("../LT_EveryXCalls")
 
 [node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("12_40nmw")

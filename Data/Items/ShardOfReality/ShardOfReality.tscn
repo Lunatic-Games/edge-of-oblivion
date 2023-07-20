@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cyxmb8j8ab4g4"]
+[gd_scene load_steps=13 format=3 uid="uid://cyxmb8j8ab4g4"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_1pb1i"]
 [ext_resource type="Texture2D" uid="uid://bcjva1lcxwxpf" path="res://Assets/art/icons/weapons/lorc/octogonal-eye.svg" id="2_6w2js"]
@@ -8,14 +8,13 @@
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="5_6h3ml"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="6_ebnvw"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="7_5gf65"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="8_y2auk"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_mspdn"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="9_ojm6e"]
 [ext_resource type="PackedScene" uid="uid://byxi3b2q06204" path="res://Data/Particles/Items/ShardOfRealityParticles.tscn" id="10_mnrgv"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="10_xy4ex"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="11_uhitr"]
 
-[node name="ShardOfReality" instance=ExtResource("1_1pb1i")]
+[node name="ShardOfReality" node_paths=PackedStringArray("primary_every_x_node") instance=ExtResource("1_1pb1i")]
+primary_every_x_node = NodePath("LT_OnItemUpdate/LogicTree/LT_EveryXCalls")
 
 [node name="Texture" parent="." index="1"]
 texture = ExtResource("2_6w2js")
@@ -74,25 +73,6 @@ damage_override = NodePath("../../../../LT_PersistentVariables/Enemy damage")
 script = ExtResource("9_mspdn")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("10_mnrgv")
-
-[node name="Appear unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("items")]
-script = ExtResource("8_y2auk")
-items = NodePath("../../../This item")
-appear_ready = false
-
-[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
-script = ExtResource("3_8pxqc")
-x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
-on_one_before = true
-
-[node name="Appear ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("8_y2auk")
-items = NodePath("../../../This item")
-
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("9_ojm6e")
-progress_bar = NodePath("../../../CoolDownBar")
-every_x_calls = NodePath("../LT_EveryXCalls")
 
 [node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("10_xy4ex")

@@ -3,6 +3,8 @@ class_name LogicTree
 extends Node
 
 
+signal evaluated
+
 @export var invert_recurse_condition: bool = false
 @export_range(0, 1000, 1, "or_greater") var async_wait_before_recurse_ms: float
 
@@ -13,12 +15,14 @@ func evaluate() -> void:
 	
 	# Don't continue if false and not inverted, or if true and inverted
 	if evaluate_condition() == invert_recurse_condition:
+		evaluated.emit()
 		return
 	
 	if async_wait_before_recurse_ms > 0:
 		await get_tree().create_timer(async_wait_before_recurse_ms / 1000.0).timeout
 	
 	evaluate_child_trees()
+	evaluated.emit()
 
 
 # Should not be overriden except for special cases

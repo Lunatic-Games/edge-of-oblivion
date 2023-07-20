@@ -11,9 +11,17 @@ var times_evaluated: int = 0
 var met_condition: bool = false
 
 
-func perform_behavior() -> void:
+func refresh() -> void:
 	if x_override != null:
 		x = x_override.value
+
+
+func is_one_before() -> bool:
+	return times_evaluated == x - 1
+
+
+func perform_behavior() -> void:
+	refresh()
 	
 	times_evaluated += 1
 	if on_one_before and times_evaluated == x - 1:
@@ -23,8 +31,8 @@ func perform_behavior() -> void:
 	else:
 		met_condition = false
 	
-	if times_evaluated >= x:
-		times_evaluated = 0
+	while times_evaluated >= x:
+		times_evaluated -= x
 
 
 func evaluate_condition() -> bool:
