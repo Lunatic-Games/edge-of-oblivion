@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://768wywni10mp"]
+[gd_scene load_steps=7 format=3 uid="uid://768wywni10mp"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_5j58d"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_iq66l"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="5_om48k"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="6_g0orv"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="7_dhywa"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="8_3yslp"]
 [ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="8_eg28p"]
 
 [node name="TokenOfLove" instance=ExtResource("1")]
@@ -32,30 +30,13 @@ default_value = 10
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_iq66l")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
 
 [node name="Heal player" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("tiles", "heal_override")]
 script = ExtResource("8_eg28p")
 tiles = NodePath("../../../Item user tile")
 heal_override = NodePath("../../../../LT_PersistentVariables/Heal")
-
-[node name="Set item ready apperance to unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("items")]
-script = ExtResource("7_dhywa")
-items = NodePath("../../../This item")
-appear_ready = false
-
-[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
-script = ExtResource("5_iq66l")
-x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
-on_one_before = true
-
-[node name="Set item ready apperance to ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("7_dhywa")
-items = NodePath("../../../This item")
-
-[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("8_3yslp")
-progress_bar = NodePath("../../../CoolDownBar")
-every_x_calls = NodePath("../LT_EveryXCalls")
 
 [node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("5_om48k")

@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwngnw61blh85"]
+[gd_scene load_steps=12 format=3 uid="uid://dwngnw61blh85"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_ymxun"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_c72xt"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="5_qpgiu"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_y07cf"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_q11i7"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="8_5gg7j"]
@@ -11,7 +10,6 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/KnockbackTileOccupants.gd" id="9_5ou7l"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_a2ss4"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="10_k60wr"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="11_ufv1h"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_vkbki"]
 
 [node name="Hammer" instance=ExtResource("1")]
@@ -45,51 +43,34 @@ default_value = 20
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("4_c72xt")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
 
-[node name="Set item ready apperance to unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("5_qpgiu")
-items = NodePath("../../../This item")
-appear_ready = false
-
-[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1"]
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
 script = ExtResource("6_y07cf")
 
-[node name="Select top and bottom" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select top and bottom" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("7_q11i7")
 input_tiles = NodePath("../../../Item user tile")
 output_tiles = NodePath("../Targets")
 directions = 5
 
-[node name="Spawn visual effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
+[node name="Spawn visual effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("tiles")]
 script = ExtResource("8_5gg7j")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("8_73rgf")
 
-[node name="Damage occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("10_a2ss4")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="Knockback occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles", "references_tiles", "distance_override", "damage_on_collide_override")]
+[node name="Knockback occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "references_tiles", "distance_override", "damage_on_collide_override")]
 script = ExtResource("9_5ou7l")
 tiles = NodePath("../Targets")
 references_tiles = NodePath("../../../Item user tile")
 distance_override = NodePath("../../../../LT_PersistentVariables/Knockback")
 damage_on_collide_override = NodePath("../../../../LT_PersistentVariables/Collision damage")
-
-[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
-script = ExtResource("4_c72xt")
-x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
-on_one_before = true
-
-[node name="Set item ready apperance to ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("5_qpgiu")
-items = NodePath("../../../This item")
-
-[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("11_ufv1h")
-progress_bar = NodePath("../../../CoolDownBar")
-every_x_calls = NodePath("../LT_EveryXCalls")
 
 [node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("10_k60wr")

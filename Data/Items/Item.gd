@@ -11,15 +11,7 @@ var current_tier: int = 0
 
 @onready var texture_rect: TextureRect = $Texture
 @onready var animator: AnimationPlayer = $AnimationPlayer
-
-
-func _ready() -> void:
-	appear_unready(false)
-
-
-func update():
-	update_triggered.emit()
-	GlobalLogicTreeSignals.item_update_triggered.emit(self)
+@onready var countdown_label: Label = $CountdownLabel
 
 
 func setup(item_data: ItemData) -> void:
@@ -30,21 +22,27 @@ func setup(item_data: ItemData) -> void:
 	GlobalLogicTreeSignals.item_setup_completed.emit(self)
 
 
+func update():
+	update_triggered.emit()
+	GlobalLogicTreeSignals.item_update_triggered.emit(self)
+
+
 func set_sprite_color(color: Color):
 	texture_rect.modulate = color
 
 
-func appear_ready() -> void:
+func appear_ready(play_animation: bool = true) -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(texture_rect, "self_modulate:a", 1.0, 0.2)
 	
-	animator.play("ready")
+	if play_animation:
+		animator.play("ready")
 
 
 func appear_unready(play_animation: bool = true) -> void:
 	var tween: Tween = create_tween().set_parallel()
-	
 	tween.tween_property(texture_rect, "self_modulate:a", 0.4, 0.2)
+	
 	if play_animation:
 		animator.play("unready")
 

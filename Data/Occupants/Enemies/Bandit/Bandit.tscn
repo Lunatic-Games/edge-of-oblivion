@@ -1,11 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://33utax8lsyid"]
+[gd_scene load_steps=22 format=3 uid="uid://33utax8lsyid"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Occupants/Enemies/Enemy.tscn" id="1_p0l3s"]
 [ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="2_s5vbx"]
 [ext_resource type="Texture2D" uid="uid://ktl4jkcycks" path="res://Assets/art/icons/enemies/Delapouite/bandit.svg" id="3_7ln71"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_5udhq"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_m0s5u"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="5_bbh3w"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_emll4"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="7_jbe6o"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetTileArray.gd" id="8_ebp6d"]
@@ -19,7 +18,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="15_x8gr5"]
 [ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="16_vheue"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="17_yk28r"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="18_34xd0"]
 
 [sub_resource type="FastNoiseLite" id="2"]
 frequency = 0.005
@@ -56,36 +54,31 @@ default_value = 15
 script = ExtResource("4_5udhq")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 
-[node name="Set appear unready" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("enemies")]
-script = ExtResource("5_bbh3w")
-enemies = NodePath("../../../This enemy")
-appear_ready = false
-
-[node name="Targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="1"]
+[node name="Targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0"]
 script = ExtResource("6_emll4")
 
-[node name="Set targets to indicated" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("tile_array", "array_value")]
+[node name="Set targets to indicated" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("tile_array", "array_value")]
 script = ExtResource("8_ebp6d")
 tile_array = NodePath("../Targets")
 array_value = NodePath("../../BeforeEveryXCalls/Targets to indicate")
 
-[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("7_jbe6o")
 input_tiles = NodePath("../Targets")
 output_tiles = NodePath("../Targets")
 occupant_type = 1
 
-[node name="Damage player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("8_pku5r")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles")]
+[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
 script = ExtResource("9_jwnwx")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("10_8av8v")
 
-[node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="6"]
+[node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="5"]
 script = ExtResource("11_7b7uf")
 
 [node name="Players tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="0"]
@@ -125,26 +118,17 @@ script = ExtResource("4_5udhq")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 on_one_before = true
 
-[node name="Set appear ready" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("enemies")]
-script = ExtResource("5_bbh3w")
-enemies = NodePath("../../../This enemy")
-
-[node name="Targets to indicate" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="1"]
+[node name="Targets to indicate" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="0"]
 script = ExtResource("6_emll4")
 
-[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("13_p05tu")
 input_tiles = NodePath("../../../Enemy tile")
 output_tiles = NodePath("../Targets to indicate")
 directions = 15
 distance_length = 3
 
-[node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
+[node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("tiles")]
 script = ExtResource("9_jwnwx")
 tiles = NodePath("../Targets to indicate")
 node2d_to_spawn = ExtResource("17_yk28r")
-
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("18_34xd0")
-progress_bar = NodePath("../../../AttackBar")
-every_x_calls = NodePath("../LT_EveryXCalls")
