@@ -31,17 +31,18 @@ func set_sprite_color(color: Color):
 	texture_rect.modulate = color
 
 
-func appear_ready() -> void:
+func appear_ready(play_animation: bool = true) -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(texture_rect, "self_modulate:a", 1.0, 0.2)
 	
-	animator.play("ready")
+	if play_animation:
+		animator.play("ready")
 
 
 func appear_unready(play_animation: bool = true) -> void:
 	var tween: Tween = create_tween().set_parallel()
-	
 	tween.tween_property(texture_rect, "self_modulate:a", 0.4, 0.2)
+	
 	if play_animation:
 		animator.play("unready")
 

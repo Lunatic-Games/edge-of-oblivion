@@ -32,14 +32,15 @@ default_value = 80
 script = ExtResource("2_i8qos")
 default_value = 1
 
-[node name="Set item ready" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("4_fc7ej")
-items = NodePath("../../This item")
-
-[node name="Set color" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="1" node_paths=PackedStringArray("items")]
+[node name="Set color" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="0" node_paths=PackedStringArray("items")]
 script = ExtResource("5_2n263")
 items = NodePath("../../This item")
 color = 3
+
+[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="1" node_paths=PackedStringArray("items")]
+script = ExtResource("4_fc7ej")
+items = NodePath("../../This item")
+animate = false
 
 [node name="Chance to trigger" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0"]
 script = ExtResource("2_yaukn")
