@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cfthurngpg1ps"]
+[gd_scene load_steps=23 format=3 uid="uid://cfthurngpg1ps"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Occupants/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://c57vgp84qqrhc" path="res://Assets/art/icons/medieval-fantasy/delapouite/spartan-helmet.svg" id="3"]
@@ -12,7 +12,12 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_vyr0p"]
 [ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="10_q4nla"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="10_x2wv3"]
+[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="12_1d28s"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Getters/GetPlayer.gd" id="13_s8vch"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="13_yv5sx"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectClosestTiles.gd" id="14_4kt6v"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="15_4n7of"]
+[ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="16_bctek"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -104,6 +109,41 @@ node2d_to_spawn = ExtResource("10_q4nla")
 script = ExtResource("10_x2wv3")
 enemies = NodePath("../../../This enemy")
 appear_ready = false
+
+[node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="6"]
+script = ExtResource("12_1d28s")
+
+[node name="Players tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="0"]
+script = ExtResource("5_xt3t3")
+
+[node name="LT_GetPlayer" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="1" node_paths=PackedStringArray("output_player_tile")]
+script = ExtResource("13_s8vch")
+output_player_tile = NodePath("../Players tile")
+
+[node name="Tile to move to" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="2"]
+script = ExtResource("5_xt3t3")
+
+[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_m56k6")
+input_tiles = NodePath("../../../../Enemy tile")
+output_tiles = NodePath("../Tile to move to")
+directions = 15
+
+[node name="Select closest to player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="4" node_paths=PackedStringArray("tiles", "tiles_to_measure_to", "output_tiles")]
+script = ExtResource("14_4kt6v")
+tiles = NodePath("../Tile to move to")
+tiles_to_measure_to = NodePath("../Players tile")
+output_tiles = NodePath("../Tile to move to")
+
+[node name="Select random tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="5" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("15_4n7of")
+input_tiles = NodePath("../Tile to move to")
+output_tiles = NodePath("../Tile to move to")
+
+[node name="Move to tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="6" node_paths=PackedStringArray("tile", "destination_tile")]
+script = ExtResource("16_bctek")
+tile = NodePath("../../../../Enemy tile")
+destination_tile = NodePath("../Tile to move to")
 
 [node name="BeforeEveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
 script = ExtResource("4_wro21")
