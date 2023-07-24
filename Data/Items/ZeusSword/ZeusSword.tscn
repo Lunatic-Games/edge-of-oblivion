@@ -20,8 +20,7 @@
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="17_43pt7"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="18_5pfjt"]
 
-[node name="ZeusSword" node_paths=PackedStringArray("primary_every_x_node") instance=ExtResource("1_57hos")]
-primary_every_x_node = NodePath("LT_OnItemUpdate/LogicTree/EveryXCalls")
+[node name="ZeusSword" instance=ExtResource("1_57hos")]
 
 [node name="Texture" parent="." index="1"]
 texture = ExtResource("2_2f8e6")
@@ -145,6 +144,8 @@ bool_variable = NodePath("../../../Should chain")
 [node name="EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_7h5kw")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
 
 [node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="0"]
 script = ExtResource("5_m6me2")

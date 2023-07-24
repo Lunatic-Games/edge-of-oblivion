@@ -20,8 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bhbfl04uf5012" path="res://Data/Particles/Items/TaintedFlaskParticles.tscn" id="17_alqbd"]
 [ext_resource type="Script" path="res://LogicTree/Effects/UpdateCountdown.gd" id="18_cvsvm"]
 
-[node name="TaintedFlask" node_paths=PackedStringArray("primary_every_x_node") instance=ExtResource("1_dvm1i")]
-primary_every_x_node = NodePath("LT_OnEntityHealed/LogicTree/LT_EveryXCalls")
+[node name="TaintedFlask" instance=ExtResource("1_dvm1i")]
 
 [node name="Texture" parent="." index="1"]
 texture = ExtResource("2_6fk1j")
@@ -86,6 +85,8 @@ script = ExtResource("9_e6j72")
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnEntityHealed/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("12_0kj2l")
 x_override = NodePath("../../../LT_PersistentVariables/Trigger count")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
 
 [node name="Targets" type="Node" parent="LT_OnEntityHealed/LogicTree/LT_EveryXCalls" index="0"]
 script = ExtResource("7_rh1ql")

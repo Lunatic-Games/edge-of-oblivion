@@ -13,8 +13,7 @@
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="10_xy4ex"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="11_uhitr"]
 
-[node name="ShardOfReality" node_paths=PackedStringArray("primary_every_x_node") instance=ExtResource("1_1pb1i")]
-primary_every_x_node = NodePath("LT_OnItemUpdate/LogicTree/LT_EveryXCalls")
+[node name="ShardOfReality" instance=ExtResource("1_1pb1i")]
 
 [node name="Texture" parent="." index="1"]
 texture = ExtResource("2_6w2js")
@@ -34,6 +33,8 @@ default_value = 20
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("3_8pxqc")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
 
 [node name="Damage self" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("4_7hfrs")

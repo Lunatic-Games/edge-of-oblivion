@@ -14,8 +14,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="11_po4j4"]
 [ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="11_wxece"]
 
-[node name="DraculasKnives" node_paths=PackedStringArray("primary_every_x_node") instance=ExtResource("1")]
-primary_every_x_node = NodePath("LT_OnItemUpdate/LogicTree/LT_EveryXCalls")
+[node name="DraculasKnives" instance=ExtResource("1")]
 
 [node name="ItemPopupHover" parent="." index="0"]
 anchors_preset = 0
@@ -38,6 +37,8 @@ default_value = 10
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_ypwwl")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
 
 [node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
 script = ExtResource("6_4lchr")
