@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d33wjgbvtrael"]
+[gd_scene load_steps=25 format=3 uid="uid://d33wjgbvtrael"]
 
 [ext_resource type="Material" uid="uid://b5ph02ufnp2l8" path="res://Shaders/boss_material.tres" id="3_3lidq"]
 [ext_resource type="Texture2D" uid="uid://cl3rgny2d8t5b" path="res://Assets/art/icons/medieval-fantasy/lorc/crowned-skull.svg" id="3_4gsk5"]
@@ -24,8 +24,6 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="16_lnb0q"]
 [ext_resource type="PackedScene" uid="uid://brdufu1xvat6y" path="res://Data/Indicators/Lunge/LungeIndicator.tscn" id="17_af4dp"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfBool.gd" id="20_o47bg"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="23_0tnmu"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="24_jg810"]
 
 [node name="ForgottenKing" instance=ExtResource("4")]
 max_hp = 100
@@ -131,10 +129,6 @@ script = ExtResource("10_tcar0")
 tiles = NodePath("../../../../../../LT_PersistentVariables/Targets")
 node2d_to_spawn = ExtResource("17_af4dp")
 
-[node name="Appear ready" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="6" node_paths=PackedStringArray("enemies")]
-script = ExtResource("23_0tnmu")
-enemies = NodePath("../../../This enemy")
-
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_rpxjt")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
@@ -168,13 +162,3 @@ occupant_type = 1
 script = ExtResource("12_r5tjo")
 tiles = NodePath("../../../../../LT_PersistentVariables/Targets")
 damage_override = NodePath("../../../../../LT_PersistentVariables/Damage")
-
-[node name="Appear unready" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("enemies")]
-script = ExtResource("23_0tnmu")
-enemies = NodePath("../../../This enemy")
-appear_ready = false
-
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("24_jg810")
-progress_bar = NodePath("../../../AttackBar")
-every_x_calls = NodePath("../LT_EveryXCalls")

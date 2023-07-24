@@ -117,7 +117,7 @@ func move_to_tile(tile) -> void:
 			return
 	
 	var collectable = null
-	if is_in_group("player") && tile.occupant:
+	if tile.occupant:
 		if tile.occupant.occupant_type == tile.occupant.OccupantType.COLLECTABLE:
 			collectable = tile.occupant
 	

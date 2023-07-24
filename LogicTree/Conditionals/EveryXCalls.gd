@@ -11,6 +11,10 @@ extends LogicTreeConditional
 @export var auto_update_item_ready_state: bool = false
 @export var auto_update_item_countdown: bool = false
 
+@export_group("Enemy configuration")
+@export var auto_update_enemy_ready_state: bool = false
+@export var auto_update_enemy_attack_bar: bool = false
+
 var times_evaluated: int = 0
 var met_condition: bool = false
 
@@ -20,10 +24,12 @@ func _ready() -> void:
 		x_override.changed.connect(refresh)
 	
 	var owner_item: Item = owner as Item
-	if owner_item == null:
-		return
+	if owner_item != null:
+		owner_item.ready.connect(_on_owner_item_ready)
 	
-	owner_item.setup_completed.connect(_on_owner_item_setup_completed)
+	var owner_enemy: Enemy = owner as Enemy
+	if owner_enemy != null:
+		owner_enemy.ready.connect(_on_owner_enemy_ready)
 
 
 func refresh() -> void:
@@ -31,14 +37,18 @@ func refresh() -> void:
 		x = x_override.value
 	
 	var owner_item: Item = owner as Item
-	if owner_item == null:
-		return
+	if owner_item != null:
+		if auto_update_item_ready_state:
+			update_item_ready_state(owner_item)
+		if auto_update_item_countdown:
+			update_item_countdown(owner_item)
 	
-	if auto_update_item_ready_state:
-		update_item_state(owner_item)
-	
-	if auto_update_item_countdown:
-		update_item_countdown(owner_item)
+	var owner_enemy: Enemy = owner as Enemy
+	if owner_enemy != null:
+		if auto_update_enemy_ready_state:
+			update_enemy_ready_state(owner_enemy)
+		if auto_update_enemy_attack_bar:
+			update_enemy_attack_bar(owner_enemy)
 
 
 func is_one_before() -> bool:
@@ -64,11 +74,11 @@ func evaluate_condition() -> bool:
 	return met_condition
 
 
-func update_item_state(item: Item):
-	if times_evaluated == 0:
-		item.appear_unready()
-	elif is_one_before():
+func update_item_ready_state(item: Item):
+	if is_one_before():
 		item.appear_ready()
+	elif times_evaluated == 0:
+		item.appear_unready()
 
 
 func update_item_countdown(item: Item):
@@ -76,5 +86,21 @@ func update_item_countdown(item: Item):
 	item.countdown_label.text = str(countdown)
 
 
-func _on_owner_item_setup_completed():
+func update_enemy_ready_state(enemy: Enemy):
+	if is_one_before():
+		enemy.appear_ready()
+	elif times_evaluated == 0:
+		enemy.appear_unready()
+
+
+func update_enemy_attack_bar(enemy: Enemy):
+	var progress_bar: ProgressBar = enemy.attack_bar
+	progress_bar.value = progress_bar.max_value * float(times_evaluated) / float(x - 1)
+
+
+func _on_owner_item_ready():
+	refresh()
+
+
+func _on_owner_enemy_ready():
 	refresh()
