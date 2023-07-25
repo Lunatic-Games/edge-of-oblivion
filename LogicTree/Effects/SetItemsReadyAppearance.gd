@@ -5,6 +5,7 @@ extends LogicTreeEffect
 
 @export var items: LT_ItemArrayVariable
 @export var appear_ready: bool = true
+@export var animate: bool = true
 
 
 func _ready() -> void:
@@ -14,6 +15,6 @@ func _ready() -> void:
 func perform_behavior() -> void:
 	for item in items.value:
 		if appear_ready:
-			item.appear_ready()
+			item.appear_ready(animate)
 		else:
-			item.appear_unready()
+			item.appear_unready(animate)

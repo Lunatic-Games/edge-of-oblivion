@@ -2,6 +2,7 @@ class_name Enemy
 extends Unit
 
 
+signal setup_completed
 signal update_triggered
 
 var data: EnemyData = null

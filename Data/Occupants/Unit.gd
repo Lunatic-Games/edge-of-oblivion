@@ -117,8 +117,10 @@ func move_to_tile(tile) -> void:
 			return
 	
 	var collectable = null
-	if tile.occupant and tile.occupant.occupant_type == tile.occupant.OccupantType.COLLECTABLE:
-		collectable = tile.occupant
+
+	if tile.occupant:
+		if tile.occupant.occupant_type == tile.occupant.OccupantType.COLLECTABLE:
+			collectable = tile.occupant
 	
 	current_tile.occupant = null
 	

@@ -60,10 +60,10 @@ func victory():
 	await get_tree().create_timer(1.0).timeout
 	
 	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
-	game_over_menu.run_summary.update(gain_result)
+	victory_menu.run_summary.update(gain_result)
 	Saving.save_progress_to_file()
 	
-	game_over_menu.show()
+	victory_menu.show()
 
 
 func game_over():
@@ -75,10 +75,10 @@ func game_over():
 	await get_tree().create_timer(1.0).timeout
 	
 	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
-	victory_menu.run_summary.update(gain_result)
+	game_over_menu.run_summary.update(gain_result)
 	Saving.save_progress_to_file()
 	
-	victory_menu.show()
+	game_over_menu.show()
 
 
 func _on_new_round_started() -> void:

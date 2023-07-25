@@ -1,11 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://dkibhs2bt0a1j"]
+[gd_scene load_steps=22 format=3 uid="uid://dkibhs2bt0a1j"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Occupants/Enemies/Enemy.tscn" id="1_ymlt4"]
 [ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="2_ty76g"]
 [ext_resource type="Texture2D" uid="uid://kv83wimtaroh" path="res://Assets/art/icons/animals/lorc/crab.svg" id="3_pm0re"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_4dbkm"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_pmj1k"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="6_bye78"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="7_5xwm5"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetTileArray.gd" id="8_qsq6q"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="8_vplrk"]
@@ -19,7 +18,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="16_433b8"]
 [ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="17_uhq1u"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="18_w4fs7"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="19_0nwuu"]
 
 [sub_resource type="FastNoiseLite" id="2"]
 frequency = 0.005
@@ -57,36 +55,31 @@ default_value = 4
 script = ExtResource("5_pmj1k")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 
-[node name="Set appear unready" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("enemies")]
-script = ExtResource("6_bye78")
-enemies = NodePath("../../../This enemy")
-appear_ready = false
-
-[node name="Targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="1"]
+[node name="Targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0"]
 script = ExtResource("7_5xwm5")
 
-[node name="Set targets to indicated" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("tile_array", "array_value")]
+[node name="Set targets to indicated" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("tile_array", "array_value")]
 script = ExtResource("8_qsq6q")
 tile_array = NodePath("../Targets")
 array_value = NodePath("../../BeforeEveryXCalls/Targets to indicate")
 
-[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("8_vplrk")
 input_tiles = NodePath("../Targets")
 output_tiles = NodePath("../Targets")
 occupant_type = 1
 
-[node name="Damage player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("9_rolb4")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles")]
+[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
 script = ExtResource("10_m0fjl")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("11_ia5kc")
 
-[node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="6"]
+[node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="5"]
 script = ExtResource("12_v2kcw")
 
 [node name="Players tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="0"]
@@ -126,25 +119,16 @@ script = ExtResource("5_pmj1k")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 on_one_before = true
 
-[node name="Set appear ready" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("enemies")]
-script = ExtResource("6_bye78")
-enemies = NodePath("../../../This enemy")
-
-[node name="Targets to indicate" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="1"]
+[node name="Targets to indicate" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="0"]
 script = ExtResource("7_5xwm5")
 
-[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("14_huxnd")
 input_tiles = NodePath("../../../Enemy tile")
 output_tiles = NodePath("../Targets to indicate")
 directions = 15
 
-[node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
+[node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("tiles")]
 script = ExtResource("10_m0fjl")
 tiles = NodePath("../Targets to indicate")
 node2d_to_spawn = ExtResource("18_w4fs7")
-
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("19_0nwuu")
-progress_bar = NodePath("../../../AttackBar")
-every_x_calls = NodePath("../LT_EveryXCalls")

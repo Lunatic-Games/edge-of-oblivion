@@ -12,7 +12,8 @@ func _ready() -> void:
 
 func collect() -> void:
 	var new_tile: Tile = GlobalGameState.board.get_random_unoccupied_tile()
-	current_tile.occupant = null
+	if current_tile.occupant == self:
+		current_tile.occupant = null  # Don't set to null if something moved on to collect
 	
 	if new_tile == null:
 		current_tile = null  # Makes the spawn flag invalid for anything trying to use it

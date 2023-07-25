@@ -3,10 +3,17 @@ class_name LT_TileArrayVariable
 extends LogicTreeVariable
 
 
+signal changed
+
 @export var default_value: Array[Tile] = []
 @export var default_value_override: LT_TileArrayVariable
 
-var value: Array[Tile] = []
+var value: Array[Tile] = []:
+	set(new_value):
+		var is_new_value: bool = new_value != value
+		value = new_value
+		if is_new_value:
+			changed.emit()
 
 
 func reset_to_default() -> void:

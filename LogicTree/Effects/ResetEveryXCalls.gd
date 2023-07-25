@@ -12,3 +12,4 @@ func _ready() -> void:
 
 func perform_behavior() -> void:
 	every_x_calls.times_evaluated = 0
+	every_x_calls.refresh()
