@@ -132,6 +132,8 @@ node2d_to_spawn = ExtResource("17_af4dp")
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_rpxjt")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_enemy_ready_state = true
+auto_update_enemy_attack_bar = true
 
 [node name="If should move" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("20_o47bg")

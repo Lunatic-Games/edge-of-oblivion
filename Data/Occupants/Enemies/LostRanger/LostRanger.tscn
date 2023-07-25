@@ -76,6 +76,8 @@ script = ExtResource("6_a73v3")
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("4_3dbgs")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_enemy_ready_state = true
+auto_update_enemy_attack_bar = true
 
 [node name="Spawn projectile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("origin_tiles", "target_tiles")]
 script = ExtResource("7_b41y0")
