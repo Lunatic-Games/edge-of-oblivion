@@ -35,12 +35,11 @@ default_value = 3
 
 [node name="Heal" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("4_i1fua")
-default_value = 10
+default_value = 5
 
-[node name="Self damage" type="Node" parent="LT_PersistentVariables" index="3" node_paths=PackedStringArray("default_value_override")]
+[node name="Self damage" type="Node" parent="LT_PersistentVariables" index="3"]
 script = ExtResource("4_i1fua")
-default_value = 10
-default_value_override = NodePath(".")
+default_value = 3
 
 [node name="Number of Targets" type="Node" parent="LT_PersistentVariables" index="4"]
 script = ExtResource("4_i1fua")

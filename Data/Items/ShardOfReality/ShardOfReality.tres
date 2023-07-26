@@ -15,4 +15,5 @@ max_tier = 3
 use_tier_1_text_for_popup_texts = true
 card_text_1 = "Damages self and enemies at exactly radius 2."
 card_text_2 = "Damage 20 -> 30."
-card_text_3 = "Self damage 5 -> 10."
+card_text_3 = "Self damage 5 -> 8.
+Damage 30 -> 50."

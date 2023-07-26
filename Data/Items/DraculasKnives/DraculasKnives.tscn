@@ -108,8 +108,8 @@ default_value_override = NodePath("../total damage done")
 
 [node name="scale for lifesteal" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="10" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("11_po4j4")
-int_variable = NodePath("../total damage done")
-value = 5
+int_variable = NodePath("../total to heal")
+value = 10
 operation = 5
 
 [node name="Heal player" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="11" node_paths=PackedStringArray("tiles", "heal_override")]
