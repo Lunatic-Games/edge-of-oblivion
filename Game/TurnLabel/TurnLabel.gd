@@ -14,7 +14,7 @@ func _on_new_round():
 
 
 func _on_enemy_turn_started():
-	change_text("~ENEMY TURN~")
+	change_text("")
 
 
 func change_text(new_text: String) -> void:
