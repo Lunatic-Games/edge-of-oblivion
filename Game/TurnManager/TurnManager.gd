@@ -45,7 +45,7 @@ func _on_player_finished_moving(player: Player) -> void:
 	
 	GlobalGameState.game.spawn_flags_for_next_round()
 	await get_tree().create_timer(DELAY_AFTER_FLAG_SPAWN).timeout
-	GlobalSignals.new_round_started.emit()
+	
 	if is_instance_valid(player):  # If they died during enemy turn
 		player.reset_moves_remaining()
 

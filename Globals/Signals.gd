@@ -6,7 +6,6 @@ signal save_loaded
 signal run_started
 signal run_ended(is_victory: bool)
 signal main_menu_entered
-signal new_round_started
 
 signal player_spawned(player: Player)
 signal player_died(player: Player)
