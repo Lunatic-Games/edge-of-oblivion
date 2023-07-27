@@ -8,7 +8,7 @@ func _ready() -> void:
 	GlobalSignals.player_spawned.connect(_on_player_spawned)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_instance_valid(tracked_player):
 		global_position = tracked_player.global_position
 

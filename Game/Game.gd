@@ -78,18 +78,16 @@ func game_over():
 	game_over_menu.show()
 
 
-func spawn_enemies_for_round() -> int:
+func spawn_enemies_for_round() -> void:
 	var round_i: int = turn_manager.current_round
 	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_turn(round_i)
 	spawn_handler.spawn_enemies(enemies_to_spawn)
-	return enemies_to_spawn.size()
 
 
-func spawn_flags_for_next_round() -> int:
+func spawn_flags_for_next_round() -> void:
 	var round_i: int = turn_manager.current_round
 	var n_enemies_next_turn: int = level.data.level_waves.get_enemies_for_turn(round_i + 1).size()
 	spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
-	return n_enemies_next_turn
 
 
 func _on_player_levelled_up(_player: Player):

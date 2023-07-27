@@ -26,6 +26,7 @@ func _ready() -> void:
 
 func display() -> void:
 	GlobalGameState.in_upgrade_menu = true
+	GlobalGameState.player.set_strech_animation_paused(true)
 	
 	if card_display.get_child_count() > 0:
 		n_queued_upgrades += 1
@@ -68,6 +69,7 @@ func display() -> void:
 		show()
 	else:
 		GlobalGameState.in_upgrade_menu = false
+		GlobalGameState.player.set_strech_animation_paused(false)
 
 
 func _on_run_ended(_is_victory: bool) -> void:
@@ -88,6 +90,7 @@ func _on_card_display_card_selected() -> void:
 			n_queued_upgrades -= 1
 			display()
 		else:
+			GlobalGameState.player.set_strech_animation_paused(false)
 			hide()
 
 func _set_n_card_to_spawn(value: int):

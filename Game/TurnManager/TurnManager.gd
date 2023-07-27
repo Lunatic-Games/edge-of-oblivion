@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _on_run_started() -> void:
 	current_round += 1
-	var n_flags_spawned: int  = GlobalGameState.game.spawn_flags_for_next_round()
+	GlobalGameState.game.spawn_flags_for_next_round()
 
 
 func _on_player_finished_moving(player: Player) -> void:
@@ -34,10 +34,10 @@ func _on_player_finished_moving(player: Player) -> void:
 	await get_tree().create_timer(0.1).timeout
 	
 	current_round += 1
-	var n_enemies_spawned: int = GlobalGameState.game.spawn_enemies_for_round()
+	GlobalGameState.game.spawn_enemies_for_round()
 	await get_tree().create_timer(0.1).timeout
 	
-	var n_flags_spawned: int  = GlobalGameState.game.spawn_flags_for_next_round()
+	GlobalGameState.game.spawn_flags_for_next_round()
 	await get_tree().create_timer(0.1).timeout
 	GlobalSignals.new_round_started.emit()
 	if is_instance_valid(player):  # If they died during enemy turn
