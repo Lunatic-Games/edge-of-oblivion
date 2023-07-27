@@ -19,27 +19,27 @@ func _on_player_finished_moving(player: Player) -> void:
 	for item in player.inventory.items.values():
 		item.update()
 	
-	await get_tree().create_timer(0.15).timeout
+	await get_tree().create_timer(0.1).timeout
 	if GlobalGameState.game.upgrade_menu.visible:
 		await GlobalGameState.game.upgrade_menu.visibility_changed
 	
-	GlobalSignals.enemy_turn_started.emit()
 	await get_tree().create_timer(0.1).timeout
 	
 	for tile in GlobalGameState.board.all_tiles:
 		tile.update()
 	
+	GlobalSignals.enemy_turn_started.emit()
 	for enemy in GlobalGameState.game.spawn_handler.spawned_enemies:
 		enemy.update()
 	
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.2).timeout
 	
 	current_round += 1
 	var n_enemies_spawned: int = GlobalGameState.game.spawn_enemies_for_round()
 	if n_enemies_spawned > 0:
 		await get_tree().create_timer(0.4).timeout
 	else:
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.1).timeout
 	
 	var n_flags_spawned: int  = GlobalGameState.game.spawn_flags_for_next_round()
 	if n_flags_spawned > 0:
