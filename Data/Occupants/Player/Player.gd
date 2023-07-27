@@ -56,19 +56,19 @@ func handle_movement() -> void:
 	if hp <= 0 or GlobalGameState.game_ended or GlobalGameState.in_upgrade_menu:
 		return
 	
-	if Input.is_action_just_pressed("up") and current_tile.top_tile:
+	if Input.is_action_pressed("up") and current_tile.top_tile:
 		handle_move_or_wait(current_tile.top_tile)
 	
-	elif Input.is_action_just_pressed("down") and current_tile.bottom_tile:
+	elif Input.is_action_pressed("down") and current_tile.bottom_tile:
 		handle_move_or_wait(current_tile.bottom_tile)
 	
-	elif Input.is_action_just_pressed("left") and current_tile.left_tile:
+	elif Input.is_action_pressed("left") and current_tile.left_tile:
 		handle_move_or_wait(current_tile.left_tile)
 	
-	elif Input.is_action_just_pressed("right") and current_tile.right_tile:
+	elif Input.is_action_pressed("right") and current_tile.right_tile:
 		handle_move_or_wait(current_tile.right_tile)
 	
-	elif Input.is_action_just_pressed("wait"):
+	elif Input.is_action_pressed("wait"):
 		handle_move_or_wait(current_tile)
 
 

@@ -16,14 +16,13 @@ func _on_run_started() -> void:
 
 
 func _on_player_finished_moving(player: Player) -> void:
+	await get_tree().create_timer(0.1).timeout
 	for item in player.inventory.items.values():
 		item.update()
 	
 	await get_tree().create_timer(0.1).timeout
 	if GlobalGameState.game.upgrade_menu.visible:
 		await GlobalGameState.game.upgrade_menu.visibility_changed
-	
-	await get_tree().create_timer(0.15).timeout
 	
 	for tile in GlobalGameState.board.all_tiles:
 		tile.update()
@@ -32,7 +31,7 @@ func _on_player_finished_moving(player: Player) -> void:
 	for enemy in GlobalGameState.game.spawn_handler.spawned_enemies:
 		enemy.update()
 	
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.1).timeout
 	
 	current_round += 1
 	var n_enemies_spawned: int = GlobalGameState.game.spawn_enemies_for_round()
