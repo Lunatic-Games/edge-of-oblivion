@@ -67,6 +67,7 @@ func game_over():
 	if GlobalGameState.game_ended:
 		return
 	
+	upgrade_menu.hide()
 	GlobalGameState.game_ended = true
 	GlobalSignals.run_ended.emit(false)
 	await get_tree().create_timer(1.0).timeout
