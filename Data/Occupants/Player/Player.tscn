@@ -20,9 +20,7 @@ max_hp = 30
 
 [node name="Sprite2D" parent="." index="0"]
 material = ExtResource("3_7bo40")
-position = Vector2(0, 32)
 texture = ExtResource("5")
-offset = Vector2(0, -256)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
 
