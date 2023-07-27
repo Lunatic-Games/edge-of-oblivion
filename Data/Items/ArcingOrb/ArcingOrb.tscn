@@ -26,7 +26,7 @@ text = "%"
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("2_i8qos")
-default_value = 80
+default_value = 60
 
 [node name="Number of targets" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("2_i8qos")
@@ -99,5 +99,5 @@ value = 3
 [node name="Add damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("13_pwr8a")
 int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
-value = 8
+value = 30
 operation = 1
