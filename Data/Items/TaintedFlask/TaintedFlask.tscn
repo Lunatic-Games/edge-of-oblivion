@@ -34,7 +34,7 @@ default_value = 2
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("3_vjjpo")
-default_value = 15
+default_value = 25
 
 [node name="Trigger count" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("3_vjjpo")
