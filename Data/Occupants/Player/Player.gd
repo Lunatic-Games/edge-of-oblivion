@@ -23,6 +23,8 @@ var level_thresholds = {
 var starting_items: Array[Resource] = [
 	load("res://Data/Items/ShortSword/ShortSword.tres")
 ]
+var queued_move_tile: Tile = null
+var queued_move_timer: Timer = null
 
 @onready var inventory: Inventory = $CanvasLayer/Inventory
 @onready var player_camera: Camera2D = $PlayerCamera
@@ -40,15 +42,18 @@ func _physics_process(_delta: float) -> void:
 
 func reset_moves_remaining():
 	moves_remaining = moves_per_turn
-	var modulate_tween: Tween = create_tween()
-	modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a", 1.0, 0.2)
+	if queued_move_timer != null and queued_move_timer.is_stopped() == false:
+		$Sprite2D.material.set("shader_parameter/modulate:a", 1.0)
+		handle_move_or_wait(queued_move_tile)
+		queued_move_timer.queue_free()
+		queued_move_tile = null
+	else:
+		var modulate_tween: Tween = create_tween()
+		modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a", 1.0, 0.2)
 
 
 func handle_movement() -> void:
-	if moves_remaining == 0 or lock_movement or hp <= 0:
-		return
-	
-	if GlobalGameState.game_ended or GlobalGameState.in_upgrade_menu:
+	if hp <= 0 or GlobalGameState.game_ended or GlobalGameState.in_upgrade_menu:
 		return
 	
 	if Input.is_action_just_pressed("up") and current_tile.top_tile:
@@ -73,6 +78,16 @@ func add_starting_items() -> void:
 
 
 func handle_move_or_wait(tile: Tile):
+	if moves_remaining == 0 or lock_movement:
+#		if queued_move_timer != null:
+#			queued_move_timer.queue_free()
+#		queued_move_tile = tile
+#		queued_move_timer = Timer.new()
+#		queued_move_timer.wait_time = 0.3
+#		add_child(queued_move_timer)
+#		queued_move_timer.start()
+		return
+	
 	if tile != current_tile:
 		move_to_tile(tile)
 	

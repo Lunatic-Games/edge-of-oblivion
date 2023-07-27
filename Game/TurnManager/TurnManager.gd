@@ -23,7 +23,7 @@ func _on_player_finished_moving(player: Player) -> void:
 	if GlobalGameState.game.upgrade_menu.visible:
 		await GlobalGameState.game.upgrade_menu.visibility_changed
 	
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.15).timeout
 	
 	for tile in GlobalGameState.board.all_tiles:
 		tile.update()
@@ -36,14 +36,10 @@ func _on_player_finished_moving(player: Player) -> void:
 	
 	current_round += 1
 	var n_enemies_spawned: int = GlobalGameState.game.spawn_enemies_for_round()
-	if n_enemies_spawned > 0:
-		await get_tree().create_timer(0.4).timeout
-	else:
-		await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1).timeout
 	
 	var n_flags_spawned: int  = GlobalGameState.game.spawn_flags_for_next_round()
-	if n_flags_spawned > 0:
-		await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(0.1).timeout
 	GlobalSignals.new_round_started.emit()
 	if is_instance_valid(player):  # If they died during enemy turn
 		player.reset_moves_remaining()
