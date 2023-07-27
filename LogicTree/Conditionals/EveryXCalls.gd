@@ -94,8 +94,7 @@ func update_enemy_ready_state(enemy: Enemy):
 
 
 func update_enemy_attack_bar(enemy: Enemy):
-	var progress_bar: ProgressBar = enemy.attack_bar
-	progress_bar.value = progress_bar.max_value * float(times_evaluated) / float(x - 1)
+	enemy.set_attack_bar_progress(float(times_evaluated) / float(x - 1))
 
 
 func _on_owner_item_ready():

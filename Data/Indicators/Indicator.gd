@@ -5,11 +5,10 @@ extends Node2D
 
 
 func _ready() -> void:
-	GlobalSignals.player_finished_moving.connect(_on_player_finished_moving)
-	animator.play("spawn")
+	GlobalSignals.enemy_turn_started.connect(_on_enemy_turn_started)
 
 
-func _on_player_finished_moving(_player: Player) -> void:
+func _on_enemy_turn_started() -> void:
 	animator.play("remove")
 	await animator.animation_finished
 	queue_free()

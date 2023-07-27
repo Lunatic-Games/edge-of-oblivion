@@ -7,7 +7,6 @@ extends Occupant
 
 func _ready() -> void:
 	occupant_type = OccupantType.COLLECTABLE
-	animator.play("spawn")
 
 
 func collect() -> void:
@@ -20,6 +19,7 @@ func collect() -> void:
 		queue_free()
 		return
 	
+	animator.play("spawn")
 	current_tile = new_tile
 	current_tile.occupant = self
 	global_position = current_tile.global_position

@@ -8,6 +8,7 @@ signal update_triggered
 var data: EnemyData = null
 
 @onready var attack_bar = $AttackBar
+@onready var attack_bar_animator: AnimationPlayer = $AttackBar/AttackBarAnimator
 
 
 func _ready() -> void:
@@ -42,3 +43,13 @@ func die() -> void:
 	if data.is_boss:
 		GlobalSignals.boss_defeated.emit(self)
 	super.die()
+
+
+func set_attack_bar_progress(ratio: float):
+	var new_value: float = attack_bar.max_value * ratio
+	var tween: Tween = create_tween()
+	tween.tween_property(attack_bar, "value", new_value, 0.2)
+	if new_value == attack_bar.max_value:
+		attack_bar_animator.play("flash")
+	else:
+		attack_bar_animator.play("RESET")
