@@ -78,6 +78,11 @@ func game_over():
 	game_over_menu.show()
 
 
+func check_for_upgrades() -> void:
+	if upgrade_menu.n_queued_upgrades > 0 and GlobalGameState.game_ended == false:
+		upgrade_menu.display()
+
+
 func spawn_enemies_for_round() -> void:
 	var round_i: int = turn_manager.current_round
 	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_turn(round_i)
@@ -91,8 +96,7 @@ func spawn_flags_for_next_round() -> void:
 
 
 func _on_player_levelled_up(_player: Player):
-	if GlobalGameState.game_ended == false:
-		upgrade_menu.display()
+	upgrade_menu.queue_upgrade()
 
 
 func _on_Player_died(_player: Player) -> void:

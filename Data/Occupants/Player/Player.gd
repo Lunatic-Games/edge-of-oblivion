@@ -28,7 +28,6 @@ var level_thresholds = {
 var starting_items: Array[Resource] = [
 	load("res://Data/Items/ShortSword/ShortSword.tres")
 ]
-var stretch_tween: Tween = null
 
 @onready var inventory: Inventory = $CanvasLayer/Inventory
 @onready var experience_bar: ProgressBar = $CanvasLayer/ExperienceBar
@@ -45,9 +44,6 @@ func _physics_process(_delta: float) -> void:
 
 func reset_moves_remaining():
 	moves_remaining = moves_per_turn
-	var modulate_tween: Tween = create_tween().set_parallel()
-	modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a", 1.0,
-		READY_FADE_IN_TIME_SECONDS)
 
 
 func handle_movement() -> void:
@@ -85,14 +81,29 @@ func handle_move_or_wait(tile: Tile):
 	moves_remaining -= 1
 	assert(moves_remaining >= 0, "Negative moves remaining.")
 	
-	if moves_remaining == 0:
-		var modulate_tween: Tween = create_tween().set_parallel()
-		modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a",
-			UNREADY_ALPHA, UNREADY_FADE_OUT_TIME_SECONDS)
-		GlobalSignals.player_finished_moving.emit(self)
+	if moves_remaining > 0:
+		return
 	
+	GlobalSignals.player_finished_moving.emit(self)
+	move_modulate_tween()
+	move_scale_tween()
+
+
+func move_modulate_tween():
 	var time_until_next_move: float = GlobalGameState.game.turn_manager.calculate_time_between_player_move()
-	stretch_tween = create_tween()
+	var time_between = time_until_next_move - UNREADY_FADE_OUT_TIME_SECONDS - READY_FADE_IN_TIME_SECONDS
+	var modulate_tween: Tween = create_tween()
+	modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a",
+		UNREADY_ALPHA, UNREADY_FADE_OUT_TIME_SECONDS)
+	modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a",
+		UNREADY_ALPHA, time_between)
+	modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a",
+		1.0, READY_FADE_IN_TIME_SECONDS)
+
+
+func move_scale_tween():
+	var time_until_next_move: float = GlobalGameState.game.turn_manager.calculate_time_between_player_move()
+	var stretch_tween: Tween = create_tween()
 	stretch_tween.tween_property($Sprite2D, "scale", SQUISHED_SCALE, time_until_next_move / 2.0)
 	await stretch_tween.finished
 	stretch_tween = create_tween()
@@ -149,12 +160,3 @@ func update_experience_bar() -> void:
 			EXPERIENCE_BAR_UPDATE_ANIMATION_TIME)
 	else:
 		experience_bar.value = current_xp
-
-
-func set_strech_animation_paused(should_pause: bool):
-	if is_instance_valid(stretch_tween):
-		if should_pause:
-			stretch_tween.pause()
-		else:
-			stretch_tween.play()
-		
