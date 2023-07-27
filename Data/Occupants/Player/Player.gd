@@ -40,6 +40,8 @@ func _physics_process(_delta: float) -> void:
 
 func reset_moves_remaining():
 	moves_remaining = moves_per_turn
+	var modulate_tween: Tween = create_tween()
+	modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a", 1.0, 0.2)
 
 
 func handle_movement() -> void:
@@ -78,6 +80,8 @@ func handle_move_or_wait(tile: Tile):
 	assert(moves_remaining >= 0, "Negative moves remaining.")
 	
 	if moves_remaining == 0:
+		var modulate_tween: Tween = create_tween()
+		modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a", 0.3, 0.2)
 		GlobalSignals.player_finished_moving.emit(self)
 
 
