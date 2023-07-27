@@ -19,7 +19,10 @@ func _on_player_finished_moving(player: Player) -> void:
 	for item in player.inventory.items.values():
 		item.update()
 	
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.15).timeout
+	if GlobalGameState.game.upgrade_menu.visible:
+		await GlobalGameState.game.upgrade_menu.visibility_changed
+	
 	GlobalSignals.enemy_turn_started.emit()
 	await get_tree().create_timer(0.1).timeout
 	
