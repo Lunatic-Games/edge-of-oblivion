@@ -22,7 +22,6 @@ func _ready() -> void:
 	GlobalSignals.player_died.connect(_on_Player_died)  # Game over!
 	GlobalSignals.boss_defeated.connect(_on_Boss_defeated)  # Game won!
 	
-	GlobalSignals.new_round_started.connect(_on_new_round_started)
 	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
 	
 	level = level_data.level_scene.instantiate()
@@ -34,8 +33,6 @@ func _ready() -> void:
 	GlobalGameState.new_game(self)
 	var player: Player = spawn_handler.spawn_player()
 	player.add_starting_items()
-	
-	turn_manager.new_round()
 	
 	GlobalSignals.run_started.emit()
 
@@ -81,13 +78,18 @@ func game_over():
 	game_over_menu.show()
 
 
-func _on_new_round_started() -> void:
+func spawn_enemies_for_round() -> int:
 	var round_i: int = turn_manager.current_round
 	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_turn(round_i)
 	spawn_handler.spawn_enemies(enemies_to_spawn)
+	return enemies_to_spawn.size()
 
+
+func spawn_flags_for_next_round() -> int:
+	var round_i: int = turn_manager.current_round
 	var n_enemies_next_turn: int = level.data.level_waves.get_enemies_for_turn(round_i + 1).size()
 	spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
+	return n_enemies_next_turn
 
 
 func _on_player_levelled_up(_player: Player):

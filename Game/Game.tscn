@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://clkedmwe4xw0b"]
+[gd_scene load_steps=15 format=3 uid="uid://clkedmwe4xw0b"]
 
 [ext_resource type="Script" path="res://Game/Game.gd" id="1_iqcmv"]
 [ext_resource type="Resource" uid="uid://bj2807sghnvk0" path="res://Data/Levels/TheEdge/TheEdge.tres" id="2_5dl06"]
 [ext_resource type="Script" path="res://Game/RunStats/RunStats.gd" id="5_6lftp"]
 [ext_resource type="PackedScene" uid="uid://b78b62i3ejtqc" path="res://UI/Overlays/BossOverlay/BossOverlay.tscn" id="6_c6fvf"]
+[ext_resource type="PackedScene" uid="uid://dok2x2mrjnein" path="res://Game/TurnLabel/TurnLabel.tscn" id="7_0pit3"]
 [ext_resource type="PackedScene" uid="uid://c7dqfw38kh88k" path="res://UI/Menus/VictoryMenu/VictoryMenu.tscn" id="8_4y0it"]
 [ext_resource type="PackedScene" uid="uid://dn681uoihob4j" path="res://UI/Menus/GameoverMenu/GameOverMenu.tscn" id="9_rua7w"]
 [ext_resource type="PackedScene" uid="uid://bo2no0imyp676" path="res://UI/Menus/PauseMenu/PauseMenu.tscn" id="10_a7fxs"]
@@ -89,6 +90,8 @@ script = ExtResource("5_6lftp")
 
 [node name="BossOverlay" parent="HUD" instance=ExtResource("6_c6fvf")]
 visible = false
+
+[node name="TurnLabel" parent="HUD" instance=ExtResource("7_0pit3")]
 
 [node name="Menus" type="CanvasLayer" parent="."]
 

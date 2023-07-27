@@ -7,7 +7,6 @@ extends Occupant
 
 func _ready() -> void:
 	occupant_type = OccupantType.COLLECTABLE
-	animator.play("spawn")
 
 
 func collect() -> void:

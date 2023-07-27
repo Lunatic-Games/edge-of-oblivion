@@ -31,7 +31,6 @@ var starting_items: Array[Resource] = [
 
 func _ready() -> void:
 	update_experience_bar()
-	GlobalSignals.new_round_started.connect(reset_moves_remaining)
 	GlobalSignals.player_spawned.emit(self)
 
 
