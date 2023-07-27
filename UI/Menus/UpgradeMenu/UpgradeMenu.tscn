@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://baighpghx6fu3"]
+[gd_scene load_steps=16 format=3 uid="uid://baighpghx6fu3"]
 
 [ext_resource type="Script" path="res://UI/Menus/UpgradeMenu/UpgradeMenu.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="2_fc34o"]
 [ext_resource type="Script" path="res://UI/Menus/UpgradeMenu/CardDisplay/CardDisplay.gd" id="2_ia3xo"]
+[ext_resource type="Texture2D" uid="uid://na1s8mfgqroy" path="res://Assets/art/icons/misc/custom/eye.svg" id="4_nw267"]
 
 [sub_resource type="Animation" id="Animation_p7j0g"]
 length = 0.001
@@ -151,6 +152,10 @@ _data = {
 "pop_up": SubResource("Animation_010n2")
 }
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hikqs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pq6a8"]
+
 [node name="UpgradeMenu" type="CanvasLayer"]
 script = ExtResource("1")
 0 = 3
@@ -210,4 +215,24 @@ theme_override_constants/separation = 100
 alignment = 1
 script = ExtResource("2_ia3xo")
 
+[node name="VisibilityButton" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -122.0
+offset_right = -33.0
+offset_bottom = 96.0
+grow_horizontal = 0
+theme_override_colors/icon_normal_color = Color(0.796078, 0.796078, 0.796078, 1)
+theme_override_colors/icon_pressed_color = Color(0.403922, 0.403922, 0.403922, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.403922, 0.403922, 0.403922, 1)
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hikqs")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pq6a8")
+toggle_mode = true
+icon = ExtResource("4_nw267")
+flat = true
+expand_icon = true
+
 [connection signal="card_selected" from="CardDisplay" to="." method="_on_card_display_card_selected"]
+[connection signal="toggled" from="VisibilityButton" to="." method="_on_visibility_button_toggled"]

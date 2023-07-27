@@ -13,8 +13,10 @@ var n_new_items_for_each_inventory_size = []
 var n_queued_upgrades: int = 0  # For if multiple level ups occur
 
 @onready var background_animator: AnimationPlayer = $Background/BackgroundAnimator
+@onready var title: Label = $Title
 @onready var title_animator: AnimationPlayer = $Title/TitleAnimator
 @onready var card_display: CardDisplay = $CardDisplay
+@onready var visibility_button: Button = $VisibilityButton
 
 
 # Upgrades are queued during turn and then done on start of player turn
@@ -68,6 +70,7 @@ func display() -> void:
 		card_display.display_items(items_to_display)
 		background_animator.play("fade_in")
 		title_animator.play("pop_up")
+		visibility_button.show()
 		show()
 	else:
 		GlobalGameState.in_upgrade_menu = false
@@ -81,6 +84,7 @@ func _on_card_display_card_selected() -> void:
 	else:
 		GlobalGameState.in_upgrade_menu = false
 		background_animator.play("fade_out")
+		visibility_button.hide()
 
 
 func _set_n_card_to_spawn(value: int):
@@ -150,3 +154,12 @@ func _resize_n_new_items_for_each_inventory_size():
 			n_new_items_for_each_inventory_size[i] = 0
 		elif n_new_items_for_each_inventory_size[i] == null:
 			n_new_items_for_each_inventory_size[i] = 0
+
+
+func _on_visibility_button_toggled(button_pressed: bool) -> void:
+	if button_pressed:
+		title.hide()
+		card_display.hide()
+	else:
+		title.show()
+		card_display.show()
