@@ -5,6 +5,9 @@ extends Unit
 const EXPERIENCE_BAR_UPDATE_ANIMATION_TIME: float = 0.2
 const DEFAULT_SCALE: Vector2 = Vector2(0.125, 0.125)
 const SQUISHED_SCALE: Vector2 = Vector2(0.1, 0.1)
+const UNREADY_FADE_OUT_TIME_SECONDS: float = 0.2
+const UNREADY_ALPHA: float = 0.3
+const READY_FADE_IN_TIME_SECONDS: float = 0.2
 
 var moves_per_turn: int = 1
 var moves_remaining: int = moves_per_turn
@@ -43,7 +46,8 @@ func _physics_process(_delta: float) -> void:
 func reset_moves_remaining():
 	moves_remaining = moves_per_turn
 	var modulate_tween: Tween = create_tween().set_parallel()
-	modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a", 1.0, 0.2)
+	modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a", 1.0,
+		READY_FADE_IN_TIME_SECONDS)
 
 
 func handle_movement() -> void:
@@ -83,14 +87,16 @@ func handle_move_or_wait(tile: Tile):
 	
 	if moves_remaining == 0:
 		var modulate_tween: Tween = create_tween().set_parallel()
-		modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a", 0.3, 0.2)
+		modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a",
+			UNREADY_ALPHA, UNREADY_FADE_OUT_TIME_SECONDS)
 		GlobalSignals.player_finished_moving.emit(self)
 	
+	var time_until_next_move: float = GlobalGameState.game.turn_manager.calculate_time_between_player_move()
 	stretch_tween = create_tween()
-	stretch_tween.tween_property($Sprite2D, "scale", SQUISHED_SCALE, 0.25)
+	stretch_tween.tween_property($Sprite2D, "scale", SQUISHED_SCALE, time_until_next_move / 2.0)
 	await stretch_tween.finished
 	stretch_tween = create_tween()
-	stretch_tween.tween_property($Sprite2D, "scale", DEFAULT_SCALE, 0.25)
+	stretch_tween.tween_property($Sprite2D, "scale", DEFAULT_SCALE, time_until_next_move / 2.0)
 
 
 func die() -> void:
