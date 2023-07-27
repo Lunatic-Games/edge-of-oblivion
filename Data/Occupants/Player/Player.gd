@@ -27,7 +27,6 @@ var queued_move_tile: Tile = null
 var queued_move_timer: Timer = null
 
 @onready var inventory: Inventory = $CanvasLayer/Inventory
-@onready var player_camera: Camera2D = $PlayerCamera
 @onready var experience_bar: ProgressBar = $CanvasLayer/ExperienceBar
 
 
@@ -101,14 +100,6 @@ func handle_move_or_wait(tile: Tile):
 
 
 func die() -> void:
-	var camera_position_before: Vector2 = player_camera.global_position
-	
-	self.remove_child(player_camera)
-	GlobalGameState.board.add_child(player_camera)
-	player_camera.set_owner(GlobalGameState.board)
-	
-	player_camera.global_position = camera_position_before
-	
 	GlobalSignals.player_died.emit(self)
 	super.die()
 
