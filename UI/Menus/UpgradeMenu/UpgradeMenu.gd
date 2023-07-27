@@ -68,7 +68,8 @@ func display() -> void:
 	
 	if items_to_display:
 		card_display.display_items(items_to_display)
-		background_animator.play("fade_in")
+		if visible == false:  # Don't fade if multiple level ups being processed
+			background_animator.play("fade_in")
 		title_animator.play("pop_up")
 		visibility_button.show()
 		show()
