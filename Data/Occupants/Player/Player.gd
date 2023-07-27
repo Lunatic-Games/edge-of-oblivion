@@ -3,6 +3,8 @@ extends Unit
 
 
 const EXPERIENCE_BAR_UPDATE_ANIMATION_TIME: float = 0.2
+const DEFAULT_Y_SCALE: float = 0.125
+const SQUISHED_Y_SCALE: float = 0.1
 
 var moves_per_turn: int = 1
 var moves_remaining: int = moves_per_turn
@@ -97,6 +99,12 @@ func handle_move_or_wait(tile: Tile):
 		var modulate_tween: Tween = create_tween()
 		modulate_tween.tween_property($Sprite2D.material, "shader_parameter/modulate:a", 0.3, 0.2)
 		GlobalSignals.player_finished_moving.emit(self)
+	
+	var stretch_tween: Tween = create_tween()
+	stretch_tween.tween_property($Sprite2D, "scale:y", SQUISHED_Y_SCALE, 0.25)
+	await stretch_tween.finished
+	var unstretch_tween: Tween = create_tween()
+	unstretch_tween.tween_property($Sprite2D, "scale:y", DEFAULT_Y_SCALE, 0.25)
 
 
 func die() -> void:
