@@ -45,4 +45,5 @@ func _on_player_finished_moving(player: Player) -> void:
 	if n_flags_spawned > 0:
 		await get_tree().create_timer(0.4).timeout
 	GlobalSignals.new_round_started.emit()
-	player.reset_moves_remaining()
+	if is_instance_valid(player):  # If they died during enemy turn
+		player.reset_moves_remaining()

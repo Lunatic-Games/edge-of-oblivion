@@ -19,6 +19,7 @@ func collect() -> void:
 		queue_free()
 		return
 	
+	animator.play("spawn")
 	current_tile = new_tile
 	current_tile.occupant = self
 	global_position = current_tile.global_position
