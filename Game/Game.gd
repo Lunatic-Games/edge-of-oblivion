@@ -67,6 +67,7 @@ func game_over():
 	if GlobalGameState.game_ended:
 		return
 	
+	upgrade_menu.hide()
 	GlobalGameState.game_ended = true
 	GlobalSignals.run_ended.emit(false)
 	await get_tree().create_timer(1.0).timeout
@@ -76,6 +77,11 @@ func game_over():
 	Saving.save_progress_to_file()
 	
 	game_over_menu.show()
+
+
+func check_for_upgrades() -> void:
+	if upgrade_menu.n_queued_upgrades > 0 and GlobalGameState.game_ended == false:
+		upgrade_menu.display()
 
 
 func spawn_enemies_for_round() -> void:
@@ -91,8 +97,7 @@ func spawn_flags_for_next_round() -> void:
 
 
 func _on_player_levelled_up(_player: Player):
-	if GlobalGameState.game_ended == false:
-		upgrade_menu.display()
+	upgrade_menu.queue_upgrade()
 
 
 func _on_Player_died(_player: Player) -> void:

@@ -4,7 +4,8 @@ extends Node
 
 const DELAY_AFTER_MOVING: float = 0.05
 const DELAY_AFTER_ITEMS: float = 0.15
-const DELAY_AFTER_ENEMIES: float = 0.1
+const DELAY_AFTER_TILES: float = 0.0
+const DELAY_AFTER_ENEMIES: float = 0.15
 const DELAY_AFTER_ENEMY_SPAWN: float = 0.1
 const DELAY_AFTER_FLAG_SPAWN: float = 0.1
 
@@ -27,11 +28,11 @@ func _on_player_finished_moving(player: Player) -> void:
 		item.update()
 	
 	await get_tree().create_timer(DELAY_AFTER_ITEMS).timeout
-	if GlobalGameState.game.upgrade_menu.visible:
-		await GlobalGameState.game.upgrade_menu.visibility_changed
 	
 	for tile in GlobalGameState.board.all_tiles:
 		tile.update()
+	
+	await get_tree().create_timer(DELAY_AFTER_TILES).timeout
 	
 	GlobalSignals.enemy_turn_started.emit()
 	for enemy in GlobalGameState.game.spawn_handler.spawned_enemies:
@@ -46,10 +47,12 @@ func _on_player_finished_moving(player: Player) -> void:
 	GlobalGameState.game.spawn_flags_for_next_round()
 	await get_tree().create_timer(DELAY_AFTER_FLAG_SPAWN).timeout
 	
+	GlobalGameState.game.check_for_upgrades()
+	
 	if is_instance_valid(player):  # If they died during enemy turn
 		player.reset_moves_remaining()
 
 
 func calculate_time_between_player_move() -> float:
-	return DELAY_AFTER_MOVING + DELAY_AFTER_ITEMS + DELAY_AFTER_ENEMIES + \
-		DELAY_AFTER_ENEMY_SPAWN + DELAY_AFTER_FLAG_SPAWN
+	return DELAY_AFTER_MOVING + DELAY_AFTER_ITEMS + DELAY_AFTER_TILES + \
+		DELAY_AFTER_ENEMIES + DELAY_AFTER_ENEMY_SPAWN + DELAY_AFTER_FLAG_SPAWN
