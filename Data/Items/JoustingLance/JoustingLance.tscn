@@ -1,0 +1,178 @@
+[gd_scene load_steps=19 format=3 uid="uid://kg4yqcdibvem"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_1xjsb"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_fgnjw"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="3_r6ixb"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="4_67v0s"]
+[ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="4_g2hhd"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="5_oyq3x"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="6_bosc8"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="6_pkjpw"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/WhileBool.gd" id="6_vhjwx"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfTileArraySize.gd" id="7_dtexh"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="7_v641r"]
+[ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="8_665hs"]
+[ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="8_qnwsf"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="9_fwo0m"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="10_dw86p"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetTileArray.gd" id="10_kly64"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="16_ptxqa"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfItemArraySize.gd" id="17_iskpl"]
+
+[node name="JoustingLance" instance=ExtResource("1_1xjsb")]
+
+[node name="ItemPopupHover" parent="." index="0"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("2_fgnjw")
+default_value = 7
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("2_fgnjw")
+default_value = 10
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("3_r6ixb")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
+async_wait_before_recurse_ms = 200.0
+
+[node name="Charging" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
+script = ExtResource("4_g2hhd")
+default_value = true
+
+[node name="Total damage to do" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("default_value_override")]
+script = ExtResource("2_fgnjw")
+default_value_override = NodePath("../../../../LT_PersistentVariables/Damage")
+
+[node name="Reset total damage" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("int_variable", "value_override")]
+script = ExtResource("10_dw86p")
+int_variable = NodePath("../Total damage to do")
+value_override = NodePath("../../../../LT_PersistentVariables/Damage")
+
+[node name="Last tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3"]
+script = ExtResource("4_67v0s")
+
+[node name="Set last tile to user tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tile_array", "array_value")]
+script = ExtResource("10_kly64")
+tile_array = NodePath("../Last tile")
+array_value = NodePath("../../../Item user tile")
+
+[node name="While charging" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("input")]
+script = ExtResource("6_vhjwx")
+input = NodePath("../Charging")
+
+[node name="Next tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging" index="0"]
+script = ExtResource("4_67v0s")
+
+[node name="Select next tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("5_oyq3x")
+input_tiles = NodePath("../../Last tile")
+output_tiles = NodePath("../Next tile")
+directions = 8
+
+[node name="occupied tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging" index="2"]
+script = ExtResource("4_67v0s")
+
+[node name="Check if occupied" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_bosc8")
+input_tiles = NodePath("../Next tile")
+output_tiles = NodePath("../occupied tile")
+occupant_type = 2
+
+[node name="If unoccupied tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging" index="4" node_paths=PackedStringArray("input")]
+script = ExtResource("7_dtexh")
+input = NodePath("../occupied tile")
+comparison = 3
+
+[node name="Increase damage" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging/If unoccupied tile" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("10_dw86p")
+int_variable = NodePath("../../../Total damage to do")
+value = 10
+operation = 1
+
+[node name="If occupied tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging" index="5" node_paths=PackedStringArray("input")]
+script = ExtResource("7_dtexh")
+input = NodePath("../occupied tile")
+
+[node name="Move to tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging/If occupied tile" index="0" node_paths=PackedStringArray("tile", "destination_tile")]
+script = ExtResource("8_qnwsf")
+tile = NodePath("../../../../../../LT_OnItemSetupCompleted/Item user tile")
+destination_tile = NodePath("../../../Last tile")
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging/If occupied tile" index="1"]
+script = ExtResource("4_67v0s")
+async_wait_before_recurse_ms = 200.0
+
+[node name="Grab main target" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging/If occupied tile" index="2" node_paths=PackedStringArray("tile_array", "array_value")]
+script = ExtResource("10_kly64")
+tile_array = NodePath("../Targets")
+array_value = NodePath("../../occupied tile")
+
+[node name="Select adjacents" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging/If occupied tile" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("5_oyq3x")
+input_tiles = NodePath("../../occupied tile")
+output_tiles = NodePath("../Targets")
+directions = 15
+operation = 1
+
+[node name="Select only enemies" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging/If occupied tile" index="4" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_bosc8")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+occupant_type = 2
+
+[node name="Spawn slash effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging/If occupied tile" index="5" node_paths=PackedStringArray("tiles", "mirror_x_if_left_of_first_tile")]
+script = ExtResource("7_v641r")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("8_665hs")
+mirror_x_if_left_of_first_tile = NodePath("../../../../../Item user tile")
+
+[node name="Damage occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging/If occupied tile" index="6" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("9_fwo0m")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../Total damage to do")
+
+[node name="Set not charging" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging/If occupied tile" index="7" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("16_ptxqa")
+bool_variable = NodePath("../../../Charging")
+
+[node name="if next tile doesn\'t exist" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging" index="6" node_paths=PackedStringArray("input")]
+script = ExtResource("17_iskpl")
+input = NodePath("../Next tile")
+comparison = 3
+
+[node name="Move to last tile that did exist" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging/if next tile doesn\'t exist" index="0" node_paths=PackedStringArray("tile", "destination_tile")]
+script = ExtResource("8_qnwsf")
+tile = NodePath("../../../../../Item user tile")
+destination_tile = NodePath("../../../Last tile")
+
+[node name="Set not charging" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging/if next tile doesn\'t exist" index="1" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("16_ptxqa")
+bool_variable = NodePath("../../../Charging")
+
+[node name="Set last tile to next tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/While charging" index="7" node_paths=PackedStringArray("tile_array", "array_value")]
+script = ExtResource("10_kly64")
+tile_array = NodePath("../../Last tile")
+array_value = NodePath("../Next tile")
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("6_pkjpw")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Increase damage by 20" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("10_dw86p")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 20
+operation = 1

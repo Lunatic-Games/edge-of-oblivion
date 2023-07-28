@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dulfv6dmtv1hf"]
+
+[ext_resource type="PackedScene" uid="uid://kg4yqcdibvem" path="res://Data/Items/JoustingLance/JoustingLance.tscn" id="1_cbiew"]
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="2_14uc0"]
+[ext_resource type="Texture2D" uid="uid://dejcgbkt8tws3" path="res://Assets/art/icons/weapons/lorc/barbed-spear.svg" id="3_shylx"]
+
+[resource]
+script = ExtResource("2_14uc0")
+sprite = ExtResource("3_shylx")
+item_scene = ExtResource("1_cbiew")
+item_name = "Jousting Lance"
+popup_item_name_color = "royalblue"
+flavor_text = "You once knew this weapon very well."
+max_tier = 3
+use_tier_1_text_for_popup_texts = false
+card_text_1 = "Every 7 turns: Charge left doing damage in a plus to the first enemy hit."
+card_text_2 = "Also attack right."
+card_text_3 = "Greatly increased damage."
+popup_text_1 = "Attack left."
+popup_text_2 = "Attack left and right."
+popup_text_3 = "Attack left and right."
