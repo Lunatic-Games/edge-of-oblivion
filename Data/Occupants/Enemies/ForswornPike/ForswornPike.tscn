@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cfthurngpg1ps"]
+[gd_scene load_steps=22 format=3 uid="uid://cfthurngpg1ps"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Occupants/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://c57vgp84qqrhc" path="res://Assets/art/icons/medieval-fantasy/delapouite/spartan-helmet.svg" id="3"]
@@ -58,6 +58,10 @@ shader_parameter/strength = 0.25
 shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
 shader_parameter/noise = SubResource("3")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0lhx"]
+resource_local_to_scene = true
+bg_color = Color(0.223529, 0.478431, 0.611765, 1)
+
 [node name="ForswornPike" instance=ExtResource("2")]
 max_hp = 60
 
@@ -65,9 +69,12 @@ max_hp = 60
 material = SubResource("ShaderMaterial_1e0he")
 texture = ExtResource("3")
 
+[node name="AttackBar" parent="." index="4"]
+theme_override_styles/fill = SubResource("StyleBoxFlat_n0lhx")
+
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("3_vx7mm")
-default_value = 5
+default_value = 7
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("3_vx7mm")

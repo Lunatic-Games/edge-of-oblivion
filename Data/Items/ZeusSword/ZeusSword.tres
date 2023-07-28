@@ -14,6 +14,6 @@ flavor_text = "The blade of a former god. Shocking."
 max_tier = 3
 use_tier_1_text_for_popup_texts = true
 card_text_1 = "Attack a random adjacent enemy. [volatile]Volatile[/volatile]: Also has a small chance to zap nearby enemies. [chain]Chain 2[/chain]."
-card_text_2 = "Main attack [chain]Chain 1[/chain], cooldown 8 -> 6.
+card_text_2 = "Main attack [chain]Chain 1[/chain].
 [volatile]Volatile[/volatile] 16.6% -> 20%"
 card_text_3 = "Damage 50 -> 70, [volatile]Volatile[/volatile] 20% -> 25%."

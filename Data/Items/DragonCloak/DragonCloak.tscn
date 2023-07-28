@@ -33,7 +33,7 @@ default_value = 1
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("4_vo51b")
-default_value = 5
+default_value = 10
 
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_ukkjn")
@@ -68,7 +68,7 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 2
 
-[node name="1 shorter cooldown" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+[node name="Shorter cooldown" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("13_jvyv0")
 int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
 value = 1
@@ -80,8 +80,8 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 3
 
-[node name="radius 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+[node name="More damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("13_jvyv0")
-int_variable = NodePath("../../../../LT_PersistentVariables/Radius")
-value = 1
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 10
 operation = 1

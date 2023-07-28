@@ -184,54 +184,60 @@ default_value_override = NodePath("../../../../LT_PersistentVariables/Main chain
 script = ExtResource("9_yjwnr")
 default_value = true
 
-[node name="While should chain" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="8" node_paths=PackedStringArray("input")]
-script = ExtResource("10_72peb")
-input = NodePath("../Should chain")
+[node name="If tier 2" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls" index="8" node_paths=PackedStringArray("input")]
+script = ExtResource("17_43pt7")
+input = NodePath("../../../Item tier")
+comparison = 1
+value = 2
 
-[node name="ChainLightningEffect" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain" index="0"]
+[node name="While should chain" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If tier 2" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("10_72peb")
+input = NodePath("../../Should chain")
+
+[node name="ChainLightningEffect" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If tier 2/While should chain" index="0"]
 script = ExtResource("11_yolur")
 
-[node name="Select all adjacent tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select all adjacent tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If tier 2/While should chain/ChainLightningEffect" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("11_o81ap")
-input_tiles = NodePath("../../../Targets")
-output_tiles = NodePath("../../../Targets")
+input_tiles = NodePath("../../../../Targets")
+output_tiles = NodePath("../../../../Targets")
 directions = 15
 
-[node name="Select occupied tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select occupied tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If tier 2/While should chain/ChainLightningEffect" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("7_udosm")
-input_tiles = NodePath("../../../Targets")
-output_tiles = NodePath("../../../Targets")
+input_tiles = NodePath("../../../../Targets")
+output_tiles = NodePath("../../../../Targets")
 occupant_type = 2
 
-[node name="Select a random tile" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select a random tile" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If tier 2/While should chain/ChainLightningEffect" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("8_quum3")
-input_tiles = NodePath("../../../Targets")
-output_tiles = NodePath("../../../Targets")
+input_tiles = NodePath("../../../../Targets")
+output_tiles = NodePath("../../../../Targets")
 
-[node name="Spawn lightning effect" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="3" node_paths=PackedStringArray("tiles")]
+[node name="Spawn lightning effect" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If tier 2/While should chain/ChainLightningEffect" index="3" node_paths=PackedStringArray("tiles")]
 script = ExtResource("13_c63nc")
-tiles = NodePath("../../../Targets")
+tiles = NodePath("../../../../Targets")
 node2d_to_spawn = ExtResource("10_oym8o")
 
-[node name="Damage occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/ChainLightningEffect" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage occupant" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If tier 2/While should chain/ChainLightningEffect" index="4" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("12_4v4hg")
-tiles = NodePath("../../../Targets")
-damage_override = NodePath("../../../../../../LT_PersistentVariables/Main damage")
+tiles = NodePath("../../../../Targets")
+damage_override = NodePath("../../../../../../../LT_PersistentVariables/Main damage")
 
-[node name="Decrement chain" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain" index="1" node_paths=PackedStringArray("int_variable")]
+[node name="Decrement chain" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If tier 2/While should chain" index="1" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("16_odm42")
-int_variable = NodePath("../../Chains left")
+int_variable = NodePath("../../../Chains left")
 value = 1
 operation = 2
 
-[node name="If chain is zero" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain" index="2" node_paths=PackedStringArray("input")]
+[node name="If chain is zero" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If tier 2/While should chain" index="2" node_paths=PackedStringArray("input")]
 script = ExtResource("17_43pt7")
-input = NodePath("../../Chains left")
+input = NodePath("../../../Chains left")
 comparison = 3
 
-[node name="Stop chaining" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/While should chain/If chain is zero" index="0" node_paths=PackedStringArray("bool_variable")]
+[node name="Stop chaining" type="Node" parent="LT_OnItemUpdate/LogicTree/EveryXCalls/If tier 2/While should chain/If chain is zero" index="0" node_paths=PackedStringArray("bool_variable")]
 script = ExtResource("18_5pfjt")
-bool_variable = NodePath("../../../Should chain")
+bool_variable = NodePath("../../../../Should chain")
 
 [node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("17_43pt7")
@@ -239,19 +245,13 @@ input = NodePath("../../New tier")
 comparison = 2
 value = 2
 
-[node name="Decrease cooldown" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("16_odm42")
-int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
-value = 2
-operation = 2
-
-[node name="Increase odds" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="1" node_paths=PackedStringArray("int_variable")]
+[node name="Increase odds" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("16_odm42")
 int_variable = NodePath("../../../../LT_PersistentVariables/Chance to trigger")
 value = 1
 operation = 2
 
-[node name="Increase main chain" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="2" node_paths=PackedStringArray("int_variable")]
+[node name="Increase main chain" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="1" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("16_odm42")
 int_variable = NodePath("../../../../LT_PersistentVariables/Main chains")
 value = 1
