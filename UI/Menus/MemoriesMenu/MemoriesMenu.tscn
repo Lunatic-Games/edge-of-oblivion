@@ -1,8 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://c21tsme1w6uqc"]
+[gd_scene load_steps=12 format=3 uid="uid://c21tsme1w6uqc"]
 
 [ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="1_185um"]
 [ext_resource type="Script" path="res://UI/Menus/MemoriesMenu/MemoriesMenu.gd" id="1_hytkw"]
+[ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="3_73ogr"]
 [ext_resource type="PackedScene" uid="uid://cwv1hkh0qltmy" path="res://UI/Menus/MemoriesMenu/AccountSection/AccountSection.tscn" id="3_ufou1"]
+
+[sub_resource type="FontVariation" id="FontVariation_kj5ma"]
+base_font = ExtResource("3_73ogr")
+spacing_glyph = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sv2u8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tl0wd"]
 
 [sub_resource type="Animation" id="Animation_7ar6e"]
 length = 0.001
@@ -157,20 +166,50 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "ACCOUNT"
 
-[node name="ItemsButton" parent="Sections/TopArea/SectionButtons" instance=ExtResource("1_185um")]
+[node name="ItemsButton" type="Button" parent="Sections/TopArea/SectionButtons"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.603922, 0.603922, 0.603922, 1)
+theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_kj5ma")
 theme_override_font_sizes/font_size = 35
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_sv2u8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tl0wd")
+disabled = true
 text = "ITEMS"
+flat = true
 
-[node name="CharactersButton" parent="Sections/TopArea/SectionButtons" instance=ExtResource("1_185um")]
+[node name="EnemiesButton" type="Button" parent="Sections/TopArea/SectionButtons"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.603922, 0.603922, 0.603922, 1)
+theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_kj5ma")
 theme_override_font_sizes/font_size = 35
-text = "CHARACTERS"
-
-[node name="EnemiesButton" parent="Sections/TopArea/SectionButtons" instance=ExtResource("1_185um")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_sv2u8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tl0wd")
+disabled = true
 text = "ENEMIES"
+flat = true
+
+[node name="CharactersButton" type="Button" parent="Sections/TopArea/SectionButtons"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.603922, 0.603922, 0.603922, 1)
+theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_kj5ma")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_sv2u8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tl0wd")
+disabled = true
+text = "CHARACTERS"
+flat = true
 
 [node name="Content" type="Control" parent="Sections"]
 layout_mode = 2
