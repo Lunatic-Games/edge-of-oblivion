@@ -7,6 +7,7 @@ func setup() -> void:
 	add_to_menu("Kill player", kill_player)
 	add_to_menu("Heal player", partially_heal_player)
 	add_to_menu("Fully heal player", fully_heal_player)
+	add_to_menu("Teleport player", teleport_player)
 
 
 func level_up() -> void:
@@ -51,3 +52,18 @@ func kill_player() -> void:
 	
 	var current_health: int = GlobalGameState.player.hp
 	GlobalGameState.player.take_damage(current_health)
+
+
+func teleport_player() -> void:
+	GlobalDebugOverlay.select_tiles_menu.begin_selection(_teleport_player_to_tile,
+		"Select Empty Tile")
+
+
+func _teleport_player_to_tile(tile: Tile):
+	if tile == null or GlobalGameState.player == null:
+		return
+	
+	if tile.occupant != null and tile.occupant.occupant_type == tile.occupant.OccupantType.BLOCKING:
+		return
+	
+	GlobalGameState.player.move_to_tile(tile)

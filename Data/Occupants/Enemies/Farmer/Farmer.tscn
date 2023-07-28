@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cpmckykiqkfx8"]
+[gd_scene load_steps=24 format=3 uid="uid://cpmckykiqkfx8"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Occupants/Enemies/Enemy.tscn" id="1_cawjn"]
 [ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="2_ygu5p"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectClosestTiles.gd" id="16_cdply"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="17_n5n26"]
 [ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="18_0ahyp"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnIndicatorOnTiles.gd" id="18_ag8cc"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="19_attu2"]
 
 [sub_resource type="FastNoiseLite" id="2"]
@@ -36,11 +37,21 @@ shader_parameter/strength = 0.25
 shader_parameter/modulate = Color(0.78, 0.62, 0.65, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7txs"]
+resource_local_to_scene = true
+bg_color = Color(0.223529, 0.478431, 0.611765, 1)
+
 [node name="Farmer" instance=ExtResource("1_cawjn")]
+max_hp = null
+move_precedence = null
+can_fall = null
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_xuykp")
 texture = ExtResource("3_riaeh")
+
+[node name="AttackBar" parent="." index="4"]
+theme_override_styles/fill = SubResource("StyleBoxFlat_s7txs")
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("4_grvaq")
@@ -75,10 +86,11 @@ script = ExtResource("10_f6yak")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
+[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "mirror_x_if_left_of_first_tile")]
 script = ExtResource("11_vslyq")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("12_c0sij")
+mirror_x_if_left_of_first_tile = NodePath("../../../Enemy tile")
 
 [node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="5"]
 script = ExtResource("13_70rnc")
@@ -138,6 +150,6 @@ distance_length = 2
 operation = 1
 
 [node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
-script = ExtResource("11_vslyq")
+script = ExtResource("18_ag8cc")
 tiles = NodePath("../Targets to indicate")
-node2d_to_spawn = ExtResource("19_attu2")
+indicator_to_spawn = ExtResource("19_attu2")

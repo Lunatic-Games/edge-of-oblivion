@@ -38,7 +38,8 @@ func appear_unready() -> void:
 
 
 func die() -> void:
-	GlobalGameState.player.gain_experience(data.xp_value)
+	if killed_via_debug == false:
+		GlobalGameState.player.gain_experience(data.xp_value)
 	GlobalSignals.enemy_killed.emit(self)
 	if data.is_boss:
 		GlobalSignals.boss_defeated.emit(self)

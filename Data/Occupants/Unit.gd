@@ -12,6 +12,7 @@ const HEALTH_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Health
 @export var can_fall: bool = true
 
 var lock_movement: bool = false
+var killed_via_debug: bool = false
 
 @onready var hp: int = max_hp
 
@@ -158,3 +159,8 @@ func get_displace_tile(base_tile: Tile) -> Tile:
 		return possible_tiles.pick_random()
 	
 	return null
+
+
+func debug_kill():
+	killed_via_debug = true
+	take_damage(max_hp)

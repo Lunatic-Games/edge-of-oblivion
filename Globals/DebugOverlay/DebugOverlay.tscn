@@ -1,12 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://dec5mxhj85sw3"]
+[gd_scene load_steps=14 format=3 uid="uid://dec5mxhj85sw3"]
 
 [ext_resource type="Script" path="res://Globals/DebugOverlay/DebugOverlay.gd" id="1_bya3d"]
+[ext_resource type="PackedScene" uid="uid://dtw6pn33rlm01" path="res://Globals/DebugOverlay/SelectTilesMenu/SelectTilesMenu.tscn" id="2_gae75"]
 [ext_resource type="PackedScene" uid="uid://er66f71v3mir" path="res://Globals/DebugOverlay/MenuDropdownButton/MenuDropdownButton.tscn" id="2_kyr2u"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/SpawningDropdown.gd" id="3_uoxgx"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/ItemsDropdown.gd" id="4_mbdw0"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/PlayerDropdown.gd" id="5_qagcx"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/SceneDropdown.gd" id="6_x3lws"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/LevelsDropdown.gd" id="7_cilm5"]
+[ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/EnemiesDropdown.gd" id="7_fyx2i"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/AccountDropdown.gd" id="8_qgndo"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/SaveDropdown.gd" id="9_07phx"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/MiscDropdown.gd" id="10_d751k"]
@@ -17,6 +19,9 @@ bg_color = Color(0.0823529, 0.0901961, 0.219608, 1)
 [node name="DebugOverlay" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_bya3d")
+
+[node name="SelectTilesMenu" parent="." instance=ExtResource("2_gae75")]
+visible = false
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(0, 50)
@@ -55,6 +60,11 @@ script = ExtResource("4_mbdw0")
 layout_mode = 2
 text = "Player..."
 script = ExtResource("5_qagcx")
+
+[node name="EnemiesDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
+layout_mode = 2
+text = "Enemies..."
+script = ExtResource("7_fyx2i")
 
 [node name="SceneDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
 layout_mode = 2

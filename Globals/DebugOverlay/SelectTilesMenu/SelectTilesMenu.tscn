@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtw6pn33rlm01"]
+
+[ext_resource type="Script" path="res://Globals/DebugOverlay/SelectTilesMenu/SelectTilesMenu.gd" id="1_v06ie"]
+
+[node name="SelectTilesMenu" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.305882)
+script = ExtResource("1_v06ie")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -210.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectInfo" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Select tiles"
+horizontal_alignment = 1
+
+[node name="StopInfo" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Press ` to stop"
+horizontal_alignment = 1

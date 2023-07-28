@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c8apyj23ef6yu"]
+[gd_scene load_steps=23 format=3 uid="uid://c8apyj23ef6yu"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Occupants/Enemies/Enemy.tscn" id="1_hekwp"]
 [ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="2_l52ke"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="14_48u5u"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectClosestTiles.gd" id="15_6lik7"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="16_q1odc"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnIndicatorOnTiles.gd" id="17_k282q"]
 [ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="17_yghta"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="18_vmtih"]
 
@@ -35,12 +36,21 @@ shader_parameter/strength = 0.25
 shader_parameter/modulate = Color(0.78, 0.62, 0.65, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iyars"]
+resource_local_to_scene = true
+bg_color = Color(0.223529, 0.478431, 0.611765, 1)
+
 [node name="Cobra" instance=ExtResource("1_hekwp")]
 max_hp = 30
+move_precedence = null
+can_fall = null
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_xuykp")
 texture = ExtResource("3_oywu4")
+
+[node name="AttackBar" parent="." index="4"]
+theme_override_styles/fill = SubResource("StyleBoxFlat_iyars")
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("4_51o37")
@@ -125,6 +135,6 @@ output_tiles = NodePath("../Targets to indicate")
 directions = 15
 
 [node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("tiles")]
-script = ExtResource("10_0c8ny")
+script = ExtResource("17_k282q")
 tiles = NodePath("../Targets to indicate")
-node2d_to_spawn = ExtResource("18_vmtih")
+indicator_to_spawn = ExtResource("18_vmtih")
