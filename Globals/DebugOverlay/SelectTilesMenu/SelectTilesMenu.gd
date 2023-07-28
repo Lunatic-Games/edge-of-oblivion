@@ -10,7 +10,7 @@ var on_select: Callable
 
 
 func _input(event: InputEvent) -> void:
-	if visible == false:
+	if is_visible_in_tree() == false:
 		return
 	
 	if event.is_action_pressed("debug_menu_end_selection"):

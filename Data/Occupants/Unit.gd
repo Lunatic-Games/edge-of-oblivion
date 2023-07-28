@@ -92,14 +92,6 @@ func die() -> void:
 	queue_free()
 
 
-func fall() -> void:
-	if can_fall:
-		die()
-	else:
-		# Handle cases like bosses where unit can't fall
-		pass
-
-
 func is_alive() -> bool:
 	if hp > 0:
 		return true

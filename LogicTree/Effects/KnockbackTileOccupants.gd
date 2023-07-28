@@ -62,10 +62,12 @@ func apply_knockback(target: Unit, direction: Vector2i, knockback: int, collideD
 	
 	for i in knockback:
 		if next_tile == null:
-			# Fall off end of map
-			target.fall()
-			current_tile.occupant = null
-			break
+			if target.can_fall:
+				# Fall off end of map
+				target.die()
+				break
+			else:
+				return false
 			
 		var next_tile_occupant: Unit = next_tile.occupant as Unit
 			

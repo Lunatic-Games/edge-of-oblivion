@@ -33,7 +33,7 @@ bg_color = Color(0.223529, 0.478431, 0.611765, 1)
 [node name="ForgottenKing" instance=ExtResource("4")]
 max_hp = 450
 move_precedence = 3.0
-can_fall = null
+can_fall = false
 
 [node name="Sprite2D" parent="." index="1"]
 material = ExtResource("3_3lidq")
