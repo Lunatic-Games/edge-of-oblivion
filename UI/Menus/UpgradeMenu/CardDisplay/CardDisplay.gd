@@ -20,8 +20,8 @@ const CHOSEN_RISE_TIME_SECONDS: float = 1.0
 var n_cards_waiting_to_disappear: int = 0
 
 
-func display_items(items: Array[ItemData], base_delay_seconds: float):
-	var float_up_delay: float = base_delay_seconds
+func display_items(items: Array[ItemData]):
+	var float_up_delay: float = 0.0
 	for item_data in items:
 		_add_card_to_display(item_data, float_up_delay)
 		float_up_delay += DISPLAY_DELAY_BETWEEN_CARDS_SECONDS
