@@ -7,6 +7,7 @@ signal changed
 
 @export var default_value: int = 0
 @export var default_value_override: LT_IntVariable
+var last_simulated_value: int = 0
 
 var value: int = 0:
 	set(new_value):
@@ -19,5 +20,7 @@ var value: int = 0:
 func reset_to_default() -> void:
 	if default_value_override != null:
 		value = default_value_override.value
+		last_simulated_value = value
 	else:
 		value = default_value
+		last_simulated_value = value

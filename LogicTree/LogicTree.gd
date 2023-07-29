@@ -45,8 +45,8 @@ func perform_behavior() -> void:
 
 # Can be overriden to define the end state of the logic tree
 # after perform_behavior() is run
-func simulate_behavior() -> LogicTree:
-	return self
+func simulate_behavior() -> void:
+	pass
 
 
 # Can be overriden to make children evaluation to only occur in certain conditions

@@ -35,7 +35,11 @@ func get_popup_text(tier: int) -> String:
 	# Start simulation
 	var item_key = item_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED).name
 	var item = GlobalGameState.get_tree().root.get_node('Game/TheEdge/Board/Player/CanvasLayer/Inventory/' + item_key)
+	var tier_trigger = item.get_node('LT_OnItemTierIncrease')
 	GlobalLogicTreeSignals.item_tier_increased_simulate.emit(item)
+	print("Current Tier: " + str(item.current_tier) + " Damage: " + str(item.get_node('LT_PersistentVariables/Damage').value))
+	print("Next Tier: " + str(item.current_tier + 1) + "  Damage: " + str(item.get_node('LT_PersistentVariables/Damage').last_simulated_value))
+	
 	
 	return title + _popup_texts.get(POPUP_TEXT_EXPORT_PREFIX + str(tier), "")
 

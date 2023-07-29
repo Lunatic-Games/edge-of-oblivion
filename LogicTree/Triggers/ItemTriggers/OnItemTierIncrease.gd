@@ -35,8 +35,6 @@ func trigger_simulate(item: Item) -> void:
 
 
 func trigger(item: Item, simulate: bool = false) -> void:
-	print_debug("LT_OnItemTierIncrease triggered with simulate: " + str(simulate))
-	print()
 	assert(item != null, "Passed item is null for '" + name + "'")
 	
 	if output_item_array != null:
@@ -55,6 +53,9 @@ func trigger(item: Item, simulate: bool = false) -> void:
 			output_item_user_tile.value.clear()
 	
 	if output_item_new_tier != null:
-		output_item_new_tier.value = item.current_tier
+		if simulate:
+			output_item_new_tier.value = item.current_tier + 1
+		else:
+			output_item_new_tier.value = item.current_tier
 	
 	logic_tree_on_trigger.evaluate(simulate)
