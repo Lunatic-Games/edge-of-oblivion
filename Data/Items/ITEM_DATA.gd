@@ -31,6 +31,12 @@ func get_popup_text(tier: int) -> String:
 	var title: String = color_tag + item_name + tier_info + ":[/color] "
 	if use_tier_1_text_for_popup_texts:
 		return title + _card_texts.get(CARD_TEXT_EXPORT_PREFIX + str(1), "")
+	
+	# Start simulation
+	var item_key = item_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED).name
+	var item = GlobalGameState.get_tree().root.get_node('Game/TheEdge/Board/Player/CanvasLayer/Inventory/' + item_key)
+	GlobalLogicTreeSignals.item_tier_increased_simulate.emit(item)
+	
 	return title + _popup_texts.get(POPUP_TEXT_EXPORT_PREFIX + str(tier), "")
 
 

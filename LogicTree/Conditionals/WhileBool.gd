@@ -10,9 +10,9 @@ func _ready() -> void:
 	assert(input != null, "Input not set for '" + name + "'")
 
 
-func evaluate_child_trees() -> void:
-	super.evaluate_child_trees()
-	evaluate()  # Will cause tree to loop until condition is false
+func evaluate_child_trees(simulate: bool = false) -> void:
+	super.evaluate_child_trees(simulate)
+	evaluate(simulate)  # Will cause tree to loop until condition is false
 
 
 func evaluate_condition() -> bool:
