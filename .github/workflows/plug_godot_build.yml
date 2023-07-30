@@ -41,6 +41,11 @@ on:
         required: false 
         default: '.'
         description: Relative to the project path
+      artifact_retention_days:
+        type: number
+        required: false
+        default: 0
+        description: The number of days for the artifacts to be retained
         
 env:
   GODOT_VERSION: ${{ inputs.godot_version }}
@@ -144,7 +149,8 @@ jobs:
             fi
           done
       - name: Upload artifact
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: ${{ matrix.platform }}-${{ env.EXPORT_NAME }}
           path: ${{ env.PROJECT_PATH }}/build/${{ matrix.platform }}
+          retention-days: ${{ inputs.artifact_retention_days }}
