@@ -30,16 +30,6 @@ func get_popup_text(tier: int) -> String:
 	var tier_info: String = "(" + "I".repeat(tier) + ")"
 	var title: String = color_tag + item_name + tier_info + ":[/color] "
 	
-	# WIP: Simulation Testing
-	var item_key = item_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED).name
-	var item = GlobalGameState.get_tree().root.get_node('Game/TheEdge/Board/Player/CanvasLayer/Inventory/' + item_key)
-	if item:
-		var simulated_variables = get_simulated_variables(item)
-		for key in simulated_variables:
-			print("Item: " + item.name + " Current Tier: " + str(item.current_tier) + " " + key + ": " + str(item.get_node("LT_PersistentVariables/" + key).value))
-			print("Item: " + item.name + " Next Tier: " + str(item.current_tier + 1) + " " + key + ": " + str(simulated_variables[key]))
-	# END WIP
-	
 	if use_tier_1_text_for_popup_texts:
 		return title + _card_texts.get(CARD_TEXT_EXPORT_PREFIX + str(1), "")
 	return title + _popup_texts.get(POPUP_TEXT_EXPORT_PREFIX + str(tier), "")
