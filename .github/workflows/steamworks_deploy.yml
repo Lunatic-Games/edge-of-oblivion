@@ -13,7 +13,7 @@ on:
         required: false
         default: true
       windows:
-        description: Build Linux
+        description: Build Windows
         type: boolean
         required: false
         default: true
