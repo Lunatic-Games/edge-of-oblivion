@@ -54,7 +54,7 @@ jobs:
           path: build/linux
           
       - name: Test download
-        run: ls -la
+        run: find . -maxdepth 3
           
  #     - uses: game-ci/steam-deploy@v3
  #       with:
