@@ -9,10 +9,12 @@ on:
         default: 'A generic build'
       linux:
         description: Build Linux
+        type: boolean
         required: false
         default: true
       windows:
         description: Build Linux
+        type: boolean
         required: false
         default: true
 
@@ -24,9 +26,9 @@ jobs:
       debug: false
       godot_version: "4.1"
       export_name: dist-${{ github.event.repository.name }}-${{ github.run_number }}
-      windows: ${{ imputs.windows }}
+      windows: ${{ inputs.windows }}
       windows_preset: Windows Desktop
-      linux: ${{ imputs.linux }}
+      linux: ${{ inputs.linux }}
       linux_preset: Linux/X11
       project_path: '.'
       export_presets_path: '.'
