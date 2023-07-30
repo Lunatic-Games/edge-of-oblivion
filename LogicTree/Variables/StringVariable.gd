@@ -22,3 +22,4 @@ func reset_to_default() -> void:
 		value = default_value_override.value
 	else:
 		value = default_value
+	last_simulated_value = value

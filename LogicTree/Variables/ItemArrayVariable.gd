@@ -24,3 +24,4 @@ func reset_to_default() -> void:
 		value.append_array(default_value_override.value)
 	else:
 		value.append_array(default_value)
+	last_simulated_value = value.duplicate()

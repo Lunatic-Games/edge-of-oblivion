@@ -20,7 +20,6 @@ var value: int = 0:
 func reset_to_default() -> void:
 	if default_value_override != null:
 		value = default_value_override.value
-		last_simulated_value = value
 	else:
 		value = default_value
-		last_simulated_value = value
+	last_simulated_value = value
