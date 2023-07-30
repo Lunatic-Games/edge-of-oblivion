@@ -12,3 +12,10 @@ func _ready() -> void:
 
 func perform_behavior() -> void:
 	item_array.value = []
+
+
+func simulate_behavior() -> void:
+	var current_val: Array[Item] = item_array.value
+	perform_behavior()
+	item_array.last_simulated_value = item_array.value
+	item_array.value = current_val

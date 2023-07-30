@@ -37,3 +37,10 @@ func perform_behavior() -> void:
 		Operation.DIVIDE:
 			assert(value != 0.0, "Trying to divide by zero for '" + name + "'")
 			float_variable.value /= value
+
+
+func simulate_behavior() -> void:
+	var current_val: float = float_variable.value
+	perform_behavior()
+	float_variable.last_simulated_value = float_variable.value
+	float_variable.value = current_val

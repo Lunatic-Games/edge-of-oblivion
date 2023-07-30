@@ -27,3 +27,10 @@ func perform_behavior() -> void:
 		entity_array.value.clear()
 		entity_array.value.append_array(array_value.value)
 		return
+
+
+func simulate_behavior() -> void:
+	var current_val: Array[Occupant] = entity_array.value
+	perform_behavior()
+	entity_array.last_simulated_value = entity_array.value
+	entity_array.value = current_val
