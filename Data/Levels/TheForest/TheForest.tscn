@@ -1,244 +1,14 @@
-[gd_scene load_steps=48 format=3 uid="uid://dm5qvaa1qimwq"]
+[gd_scene load_steps=18 format=3 uid="uid://dm5qvaa1qimwq"]
 
 [ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_3hsuh"]
 [ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="2_138v5"]
-[ext_resource type="PackedScene" uid="uid://kjqcigs27uqk" path="res://Data/Occupants/Enemies/Faded/Faded.tscn" id="2_p5j74"]
-[ext_resource type="PackedScene" uid="uid://p0e7f46xip6t" path="res://Data/Occupants/Enemies/LostRanger/LostRanger.tscn" id="3_42bde"]
 [ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="3_g3fsi"]
 [ext_resource type="Texture2D" uid="uid://cx1ga40jy1ut6" path="res://Assets/textures/glow.svg" id="4_dcbad"]
-[ext_resource type="PackedScene" uid="uid://cfthurngpg1ps" path="res://Data/Occupants/Enemies/ForswornPike/ForswornPike.tscn" id="4_lujl8"]
 [ext_resource type="PackedScene" uid="uid://c1ordt6583753" path="res://Data/Particles/Decoration/CampfireParticles.tscn" id="5_cpbow"]
-[ext_resource type="PackedScene" uid="uid://j054uqo7ev21" path="res://Data/Occupants/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn" id="5_m6sh4"]
-[ext_resource type="Script" path="res://Data/Levels/WAVE_DATA.gd" id="6_mofnk"]
 [ext_resource type="Texture2D" uid="uid://bh37a154red3i" path="res://Assets/art/background/game/tree.svg" id="6_yv738"]
 [ext_resource type="Texture2D" uid="uid://bnq1kfjiksfy5" path="res://Assets/art/background/game/skull.svg" id="7_vmjjr"]
 [ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="12_0jynk"]
 [ext_resource type="Texture2D" uid="uid://c18ock40fgesm" path="res://Assets/art/background/game/ribs.svg" id="13_n2xpd"]
-
-[sub_resource type="Resource" id="Resource_2ro8f"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 1
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_g0k22"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 4
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_1poh2"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 6
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_1dbp5"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 8
-"# Faded" = 8
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_cht6y"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 6
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_wu0xb"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 8
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_61dwj"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 6
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_nmvuk"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 4
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_sjvju"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 11
-"# Faded" = 5
-"# LostRanger" = 5
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_fmpu2"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 10
-"# Faded" = 1
-"# LostRanger" = 1
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_3rxs6"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 10
-"# Faded" = 2
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_1iitl"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 5
-"# Faded" = 1
-"# LostRanger" = 1
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_ueot7"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 5
-"# Faded" = 1
-"# LostRanger" = 2
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_tjj5o"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 5
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_oue8v"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 10
-"# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 7
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_aptwa"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 5
-"# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_tj5io"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 10
-"# Faded" = 1
-"# LostRanger" = 0
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_mxj62"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 10
-"# Faded" = 1
-"# LostRanger" = 1
-"# ForswornPike" = 0
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_sr3f6"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 10
-"# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_yqrof"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 10
-"# Faded" = 0
-"# LostRanger" = 2
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_q8c62"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 5
-"# Faded" = 0
-"# LostRanger" = 0
-"# ForswornPike" = 0
-"# ForgottenKing" = 1
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_jy2oq"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 2
-"# Faded" = 2
-"# LostRanger" = 1
-"# ForswornPike" = 2
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_3wx36"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 6
-"# Faded" = 1
-"# LostRanger" = 1
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_wcpql"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 10
-"# Faded" = 0
-"# LostRanger" = 3
-"# ForswornPike" = 2
-"# ForgottenKing" = 0
-"info_ " = null
-
-[sub_resource type="Resource" id="Resource_qhio4"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 7
-"# Faded" = 1
-"# LostRanger" = 1
-"# ForswornPike" = 1
-"# ForgottenKing" = 0
-"info_ " = null
 
 [sub_resource type="Gradient" id="Gradient_hakff"]
 offsets = PackedFloat32Array(0, 0.0894309, 0.841463, 1)
@@ -385,9 +155,8 @@ _data = {
 
 [node name="TheForest" instance=ExtResource("1_3hsuh")]
 
-[node name="Waves" parent="." index="0"]
-enemy_scenes = Array[PackedScene]([ExtResource("2_p5j74"), ExtResource("3_42bde"), ExtResource("4_lujl8"), ExtResource("5_m6sh4")])
-waves = Array[ExtResource("6_mofnk")]([SubResource("Resource_2ro8f"), SubResource("Resource_g0k22"), SubResource("Resource_1poh2"), SubResource("Resource_1dbp5"), SubResource("Resource_cht6y"), SubResource("Resource_wu0xb"), SubResource("Resource_61dwj"), SubResource("Resource_nmvuk"), SubResource("Resource_sjvju"), SubResource("Resource_fmpu2"), SubResource("Resource_3rxs6"), SubResource("Resource_1iitl"), SubResource("Resource_ueot7"), SubResource("Resource_tjj5o"), SubResource("Resource_oue8v"), SubResource("Resource_aptwa"), SubResource("Resource_tj5io"), SubResource("Resource_mxj62"), SubResource("Resource_sr3f6"), SubResource("Resource_yqrof"), SubResource("Resource_q8c62"), SubResource("Resource_jy2oq"), SubResource("Resource_3wx36"), SubResource("Resource_wcpql"), SubResource("Resource_qhio4")])
+[node name="Board" parent="." index="0"]
+layer_0/tile_data = PackedInt32Array(196619, 0, 131072, 196620, 0, 131072, 196621, 0, 131072, 196622, 0, 131072, 262158, 0, 131072, 262157, 0, 131072, 262156, 0, 131072, 262155, 0, 131072, 262154, 0, 131072, 327690, 0, 131072, 393226, 0, 131072, 458762, 0, 131072, 524298, 0, 131072, 589834, 0, 131072, 589835, 0, 131072, 589836, 0, 131072, 589837, 0, 131072, 589838, 0, 131072, 589839, 0, 131072, 524303, 0, 131072, 458767, 0, 131072, 393231, 0, 131072, 327695, 0, 131072, 262159, 0, 131072, 196623, 0, 131072, 131087, 0, 131072, 131086, 0, 131072, 131085, 0, 131072, 131084, 0, 131072, 131083, 0, 131072, 131082, 0, 131072, 196618, 0, 131072, 196617, 0, 131072, 262153, 0, 131072, 327689, 0, 131072, 393225, 0, 131072, 458761, 0, 131072, 524297, 0, 131072, 589833, 0, 131072, 327691, 0, 131072, 393227, 0, 131072, 458763, 0, 131072, 524299, 0, 131072, 524300, 0, 131072, 524301, 0, 131072, 524302, 0, 131072, 458766, 0, 131072, 393230, 0, 131072, 327694, 0, 131072, 327693, 0, 131072, 327692, 0, 131072, 196624, 0, 131072, 262160, 0, 131072, 327696, 0, 131072, 393232, 0, 131072, 458768, 0, 131072, 524304, 0, 131072, 589840, 0, 131072, 327688, 0, 131072, 393224, 0, 131072, 458760, 0, 131072, 524296, 0, 131072, 262152, 0, 131072, 262161, 0, 131072, 327697, 0, 131072, 393233, 0, 131072, 458769, 0, 131072, 524305, 0, 131072, 655372, 0, 131072, 720908, 0, 131072, 720909, 0, 131072, 655373, 0, 131072, 589841, 0, 131072, 655376, 0, 131072, 720911, 0, 131072, 720910, 0, 131072, 655374, 0, 131072, 655375, 0, 131072, 720907, 0, 131072, 655371, 0, 131072, 720906, 0, 131072, 655370, 0, 131072, 589832, 0, 131072, 655369, 0, 131072)
 
 [node name="Background" type="CanvasLayer" parent="." index="1"]
 layer = -1
@@ -680,6 +449,3 @@ texture = ExtResource("13_n2xpd")
 position = Vector2(24, 568)
 scale = Vector2(0.338415, 0.338415)
 texture = ExtResource("13_n2xpd")
-
-[node name="Board" parent="." index="3"]
-layer_0/tile_data = PackedInt32Array(196619, 0, 131072, 196620, 0, 131072, 196621, 0, 131072, 196622, 0, 131072, 262158, 0, 131072, 262157, 0, 131072, 262156, 0, 131072, 262155, 0, 131072, 262154, 0, 131072, 327690, 0, 131072, 393226, 0, 131072, 458762, 0, 131072, 524298, 0, 131072, 589834, 0, 131072, 589835, 0, 131072, 589836, 0, 131072, 589837, 0, 131072, 589838, 0, 131072, 589839, 0, 131072, 524303, 0, 131072, 458767, 0, 131072, 393231, 0, 131072, 327695, 0, 131072, 262159, 0, 131072, 196623, 0, 131072, 131087, 0, 131072, 131086, 0, 131072, 131085, 0, 131072, 131084, 0, 131072, 131083, 0, 131072, 131082, 0, 131072, 196618, 0, 131072, 196617, 0, 131072, 262153, 0, 131072, 327689, 0, 131072, 393225, 0, 131072, 458761, 0, 131072, 524297, 0, 131072, 589833, 0, 131072, 327691, 0, 131072, 393227, 0, 131072, 458763, 0, 131072, 524299, 0, 131072, 524300, 0, 131072, 524301, 0, 131072, 524302, 0, 131072, 458766, 0, 131072, 393230, 0, 131072, 327694, 0, 131072, 327693, 0, 131072, 327692, 0, 131072, 196624, 0, 131072, 262160, 0, 131072, 327696, 0, 131072, 393232, 0, 131072, 458768, 0, 131072, 524304, 0, 131072, 589840, 0, 131072, 327688, 0, 131072, 393224, 0, 131072, 458760, 0, 131072, 524296, 0, 131072, 262152, 0, 131072, 262161, 0, 131072, 327697, 0, 131072, 393233, 0, 131072, 458769, 0, 131072, 524305, 0, 131072, 655372, 0, 131072, 720908, 0, 131072, 720909, 0, 131072, 655373, 0, 131072, 589841, 0, 131072, 655376, 0, 131072, 720911, 0, 131072, 720910, 0, 131072, 655374, 0, 131072, 655375, 0, 131072, 720907, 0, 131072, 655371, 0, 131072, 720906, 0, 131072, 655370, 0, 131072, 589832, 0, 131072, 655369, 0, 131072)

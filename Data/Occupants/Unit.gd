@@ -108,18 +108,19 @@ func is_alive() -> bool:
 func move_to_tile(tile) -> void:
 	if tile.occupant && tile.occupant.occupant_type == tile.occupant.OccupantType.BLOCKING:
 		if move_precedence > tile.occupant.move_precedence:
-			var pushed_occupant: Unit = tile.occupant
-			var last_resort_tile: Tile = current_tile
-			current_tile.occupant = null
-			var tile_to_displace: Tile = get_displace_tile(tile, last_resort_tile)
-			pushed_occupant.move_to_tile(tile_to_displace)
+			var current_tile_occupant: Unit = tile.occupant
+			var tile_to_displace_to: Tile = get_displace_tile(tile)
+			if tile_to_displace_to == null:
+				return
+			
+			current_tile_occupant.move_to_tile(tile_to_displace_to)
 		else:
 			return
 	
 	var collectable = null
-	if is_in_group("player") && tile.occupant:
-		if tile.occupant.occupant_type == tile.occupant.OccupantType.COLLECTABLE:
-			collectable = tile.occupant
+
+	if tile.occupant and tile.occupant.occupant_type == tile.occupant.OccupantType.COLLECTABLE:
+		collectable = tile.occupant
 	
 	current_tile.occupant = null
 	
@@ -142,18 +143,18 @@ func move_to_tile(tile) -> void:
 	lock_movement = false
 
 
-func get_displace_tile(displacees_tile: Tile, last_resort_tile: Tile) -> Tile:
+func get_displace_tile(base_tile: Tile) -> Tile:
 	var possible_tiles: Array[Tile] = []
-	if displacees_tile.top_tile && !displacees_tile.top_tile.occupant:
-		possible_tiles.append(displacees_tile.top_tile)
-	if displacees_tile.bottom_tile && !displacees_tile.bottom_tile.occupant:
-		possible_tiles.append(displacees_tile.bottom_tile)
-	if displacees_tile.left_tile && !displacees_tile.left_tile.occupant:
-		possible_tiles.append(displacees_tile.left_tile)
-	if displacees_tile.right_tile && !displacees_tile.right_tile.occupant:
-		possible_tiles.append(displacees_tile.right_tile)
+	if base_tile.top_tile && !base_tile.top_tile.occupant:
+		possible_tiles.append(base_tile.top_tile)
+	if base_tile.bottom_tile && !base_tile.bottom_tile.occupant:
+		possible_tiles.append(base_tile.bottom_tile)
+	if base_tile.left_tile && !base_tile.left_tile.occupant:
+		possible_tiles.append(base_tile.left_tile)
+	if base_tile.right_tile && !base_tile.right_tile.occupant:
+		possible_tiles.append(base_tile.right_tile)
 	
 	if possible_tiles.size() > 0:
-		return possible_tiles[randi()%possible_tiles.size()]
+		return possible_tiles.pick_random()
 	
-	return last_resort_tile
+	return null

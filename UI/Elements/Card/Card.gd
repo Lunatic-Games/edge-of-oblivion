@@ -16,9 +16,6 @@ var hover_tween: Tween = null
 @onready var card_description: RichTextLabel = $Background/BottomText/Description
 @onready var flavor_text: Label = $Background/BottomText/FlavorText
 
-@onready var damage_icon_text: RichTextLabel = $Icons/DamageIcon/RichTextLabel
-@onready var activation_icon_text: RichTextLabel = $Icons/ActivationIcon/RichTextLabel
-
 
 func setup(item_data: ItemData, item_tier: int, hover: bool = true):
 	held_item_data = item_data
@@ -26,18 +23,9 @@ func setup(item_data: ItemData, item_tier: int, hover: bool = true):
 	card_name.text = item_data.item_name
 	item_sprite.texture = item_data.sprite
 	
-	damage_icon_text.text = str(item_data.item_damage)
-	activation_icon_text.text = str(item_data.max_turn_timer)
-	
-	match item_tier:
-		1: 
-			card_description.text = item_data.tier1Text
-		2: 
-			card_description.text = item_data.tier2Text
-			tier_up_banner.show()
-		3: 
-			card_description.text = item_data.tier3Text
-			tier_up_banner.show()
+	card_description.text = item_data.get_card_text(item_tier)
+	if item_tier > 1:
+		tier_up_banner.show()
 	
 	flavor_text.text = item_data.flavor_text
 	

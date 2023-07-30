@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://earl3h2iw0gr"]
+
+[ext_resource type="AudioStream" uid="uid://8vw3rrccmokk" path="res://Assets/music/boss/Endless-Storm.ogg" id="1_gftvr"]
+[ext_resource type="Script" path="res://Data/Occupants/Enemies/ENEMY_DATA.gd" id="1_mm6fk"]
+[ext_resource type="PackedScene" uid="uid://d33wjgbvtrael" path="res://Data/Occupants/Enemies/Bosses/ForgottenKing/ForgottenKing.tscn" id="1_qmmbo"]
+[ext_resource type="Texture2D" uid="uid://cl3rgny2d8t5b" path="res://Assets/art/icons/medieval-fantasy/lorc/crowned-skull.svg" id="3_lccag"]
+
+[resource]
+script = ExtResource("1_mm6fk")
+enemy_name = "Forgotten King"
+sprite = ExtResource("3_lccag")
+enemy_scene = ExtResource("1_qmmbo")
+xp_value = 5
+is_boss = true
+boss_soundtrack = ExtResource("1_gftvr")
+popup_text = "Charges at the player, also has an AOE attack."
+flavor_text = "Once a benevolent and loved ruler. Most closely resembles a rabbid dog now."

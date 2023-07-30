@@ -1,11 +1,9 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://c7hli08icqjh3"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_ixnne"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_stxdh"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsReadyAppearance.gd" id="5_kdvde"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_0abbk"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="6_1tflu"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="7_4nvp7"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_vcq01"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="8_er71j"]
@@ -16,8 +14,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_bqjgb"]
 
 [node name="Broom" instance=ExtResource("1")]
-popup_info_text = "[color=cyan]Broom:[/color] Targets a number of random adjacent enemies and knocks them away."
-popup_flavor_text = "Cleans cobwebs pretty good"
 
 [node name="ItemPopupHover" parent="." index="0"]
 offset_right = 8.0
@@ -34,56 +30,39 @@ default_value = 1
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("4_stxdh")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
 
-[node name="Set item appear unready" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("5_kdvde")
-items = NodePath("../../../This item")
-appear_ready = false
-
-[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1"]
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
 script = ExtResource("6_0abbk")
 
-[node name="Select all adjacent tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select all adjacent tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("7_vcq01")
 input_tiles = NodePath("../../../Item user tile")
 output_tiles = NodePath("../Targets")
 directions = 15
 
-[node name="Select occupied tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select occupied tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("7_4nvp7")
 input_tiles = NodePath("../Targets")
 output_tiles = NodePath("../Targets")
 occupant_type = 2
 
-[node name="Select N random tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("input_tiles", "output_tiles", "n_selections_override")]
+[node name="Select N random tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles", "n_selections_override")]
 script = ExtResource("8_er71j")
 input_tiles = NodePath("../Targets")
 output_tiles = NodePath("../Targets")
 n_selections_override = NodePath("../../../../LT_PersistentVariables/Number of targets")
 
-[node name="Visual effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles")]
+[node name="Visual effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
 script = ExtResource("10_6enu7")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("10_myh2v")
 
-[node name="Knockback targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles", "references_tiles")]
+[node name="Knockback targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles", "references_tiles")]
 script = ExtResource("9_6i4rm")
 tiles = NodePath("../Targets")
 references_tiles = NodePath("../../../Item user tile")
-
-[node name="BeforeEveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("x_override")]
-script = ExtResource("4_stxdh")
-x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
-on_one_before = true
-
-[node name="Set item appear ready" type="Node" parent="LT_OnItemUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("5_kdvde")
-items = NodePath("../../../This item")
-
-[node name="Update progress bar" type="Node" parent="LT_OnItemUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("6_1tflu")
-progress_bar = NodePath("../../../CoolDownBar")
-every_x_calls = NodePath("../LT_EveryXCalls")
 
 [node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("12_1fu45")

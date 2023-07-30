@@ -16,6 +16,7 @@ func _ready() -> void:
 		quit_button.hide()  # Doesn't work in web browser
 	
 	transition_player.play("RESET")
+	transition_player.queue("fade_from_black")
 	GlobalSignals.main_menu_entered.emit()
 	Saving.save_user_settings_to_file()
 

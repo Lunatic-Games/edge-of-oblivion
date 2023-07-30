@@ -14,6 +14,7 @@ func level_up() -> void:
 		return
 	
 	GlobalGameState.player.level_up()
+	GlobalGameState.game.check_for_upgrades()
 
 
 func damage_player() -> void:

@@ -9,12 +9,11 @@ script = ExtResource("1_qc61f")
 sprite = ExtResource("3_atuen")
 item_scene = ExtResource("1_ofelp")
 item_name = "Zeus' Sword"
-tier1Text = "Attack a random adjacent enemy. [color=pink]Volatile[/color]: Also has a small chance to zap nearby enemies [color=cyan]Chain 2[/color].
-"
-tier2Text = " Main attack [color=cyan]Chain 1[/color], cooldown 8 -> 6.
-[color=pink]Volatile[/color] 16.6% -> 20%"
-tier3Text = "Damage 50 -> 70
-[color=pink]Volatile[/color] 20% -> 25%"
+popup_item_name_color = "cyan"
 flavor_text = "The blade of a former god. Shocking."
-max_turn_timer = 3
-item_damage = 1
+max_tier = 3
+use_tier_1_text_for_popup_texts = true
+card_text_1 = "Attack a random adjacent enemy. [volatile]Volatile[/volatile]: Also has a small chance to zap nearby enemies. [chain]Chain 2[/chain]."
+card_text_2 = "Main attack [chain]Chain 1[/chain].
+[volatile]Volatile[/volatile] 16.6% -> 20%"
+card_text_3 = "Damage 50 -> 70, [volatile]Volatile[/volatile] 20% -> 25%."

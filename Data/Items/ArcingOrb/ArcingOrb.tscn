@@ -17,31 +17,30 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="13_pwr8a"]
 
 [node name="ArcingOrb" instance=ExtResource("1_5mbus")]
-popup_info_text = "[color=cyan]Arcing Orb:[/color] Has a chance each turn to blast a random enemy with lightning."
-popup_flavor_text = "Tastes lightning-y."
 
 [node name="Texture" parent="." index="1"]
 texture = ExtResource("2_mbh46")
 
-[node name="CoolDownBar" parent="." index="3"]
-visible = false
+[node name="CountdownLabel" parent="." index="2"]
+text = "%"
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("2_i8qos")
-default_value = 80
+default_value = 60
 
 [node name="Number of targets" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("2_i8qos")
 default_value = 1
 
-[node name="Set item ready" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="0" node_paths=PackedStringArray("items")]
-script = ExtResource("4_fc7ej")
-items = NodePath("../../This item")
-
-[node name="Set color" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="1" node_paths=PackedStringArray("items")]
+[node name="Set color" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="0" node_paths=PackedStringArray("items")]
 script = ExtResource("5_2n263")
 items = NodePath("../../This item")
 color = 3
+
+[node name="LT_SetItemsReadyAppearance" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="1" node_paths=PackedStringArray("items")]
+script = ExtResource("4_fc7ej")
+items = NodePath("../../This item")
+animate = false
 
 [node name="Chance to trigger" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0"]
 script = ExtResource("2_yaukn")
@@ -100,5 +99,5 @@ value = 3
 [node name="Add damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("13_pwr8a")
 int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
-value = 8
+value = 30
 operation = 1

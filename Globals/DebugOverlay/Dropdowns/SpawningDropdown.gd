@@ -2,36 +2,36 @@ extends MenuDropdownButton
 
 
 const ENEMIES_FOLDER = "res://Data/Occupants/Enemies"
-const BOSSES_FOLDER = "res://Data/Occupants/Enemies/Bosses"  # Expected to be under ENEMIES_FOLDER
 const EXCLUDED_ENEMY_NAMES = ["Boss", "Enemy"]
 
-var loaded_normal_enemies: Dictionary = {}  # Name : loaded scene
-var loaded_bosses: Dictionary = {}  # Name : loaded scene
+var loaded_normal_enemies: Array[EnemyData] = []
+var loaded_bosses: Array[EnemyData] = []
 
 
 func setup() -> void:
-	var enemy_paths = FileUtility.get_all_files_under_folder("res://Data/Occupants/Enemies", ".tscn")
+	var enemy_paths = FileUtility.get_all_files_under_folder("res://Data/Occupants/Enemies", ".tres")
 	for path in enemy_paths:
-		var is_boss: bool = path.contains(BOSSES_FOLDER)
-		var display_name: String = path.get_file().trim_suffix(".tscn")
+		var display_name: String = path.get_file().trim_suffix(".tres")
 		if EXCLUDED_ENEMY_NAMES.has(display_name):
 			continue
 		
-		if is_boss:
-			loaded_bosses[display_name] = load(path)
+		var enemy_data: EnemyData = load(path)
+		
+		if enemy_data.is_boss:
+			loaded_bosses.append(enemy_data)
 		else:
-			loaded_normal_enemies[display_name] = load(path)
+			loaded_normal_enemies.append(enemy_data)
 	
-	for enemy_name in loaded_normal_enemies:
-		add_to_menu(enemy_name, _spawn_enemy_scene.bind(loaded_normal_enemies[enemy_name]))
+	for enemy_data in loaded_normal_enemies:
+		add_to_menu(enemy_data.enemy_name, _spawn_enemy_scene.bind(enemy_data))
 	
 	add_spacer()
 	
-	for boss_name in loaded_bosses:
-		add_to_menu(boss_name, _spawn_enemy_scene.bind(loaded_bosses[boss_name]))
+	for enemy_data in loaded_bosses:
+		add_to_menu(enemy_data.enemy_name, _spawn_enemy_scene.bind(enemy_data))
 
 
-func _spawn_enemy_scene(scene: PackedScene):
+func _spawn_enemy_scene(enemy_data: EnemyData):
 	if GlobalGameState.board == null or GlobalGameState.game == null:
 		return
 	
@@ -39,4 +39,4 @@ func _spawn_enemy_scene(scene: PackedScene):
 	if tile == null:
 		return
 	
-	GlobalGameState.game.spawn_handler.spawn_enemy_on_tile(scene, tile)
+	GlobalGameState.game.spawn_handler.spawn_enemy_on_tile(enemy_data, tile)

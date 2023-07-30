@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://bebpkrrm6ni0m"]
+
+[ext_resource type="PackedScene" uid="uid://cpmckykiqkfx8" path="res://Data/Occupants/Enemies/Farmer/Farmer.tscn" id="1_byqy0"]
+[ext_resource type="Script" path="res://Data/Occupants/Enemies/ENEMY_DATA.gd" id="1_n2w14"]
+[ext_resource type="Texture2D" uid="uid://dduidtuwcjbld" path="res://Assets/art/icons/enemies/Delapouite/farmer.svg" id="3_qhlnc"]
+
+[resource]
+script = ExtResource("1_n2w14")
+enemy_name = "Farmer"
+sprite = ExtResource("3_qhlnc")
+enemy_scene = ExtResource("1_byqy0")
+xp_value = 1
+is_boss = false
+popup_text = "Attacks all adjacent tiles, stronger up and down, then moves towards the player."
+flavor_text = "An eternity of tangling with the river crabs has left them nimble."

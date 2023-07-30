@@ -1,8 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://csppnkkol763h"]
+[gd_scene load_steps=28 format=3 uid="uid://csppnkkol763h"]
 
 [ext_resource type="Script" path="res://UI/Elements/HoverPopups/ItemPopup/ItemPopup.gd" id="1_ywlxe"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="2_p527v"]
+[ext_resource type="Script" path="res://UI/BBCode/Chain.gd" id="3_h0mq2"]
 [ext_resource type="FontFile" uid="uid://br33sipyuwalp" path="res://Assets/fonts/Caudex-Italic.ttf" id="3_sbxrm"]
+[ext_resource type="Script" path="res://UI/BBCode/Heal.gd" id="4_lg5aa"]
+[ext_resource type="Script" path="res://UI/BBCode/Knockback.gd" id="5_m6vcn"]
+[ext_resource type="Script" path="res://UI/BBCode/Lifesteal.gd" id="6_xicr3"]
+[ext_resource type="Script" path="res://UI/BBCode/Volatile.gd" id="7_2aglh"]
+[ext_resource type="Script" path="res://UI/BBCode/Range.gd" id="8_gw62v"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u277i"]
 
@@ -46,6 +52,24 @@ expand_margin_left = 5.0
 expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_3h6rj"]
+script = ExtResource("3_h0mq2")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_c14lr"]
+script = ExtResource("4_lg5aa")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_y8jv0"]
+script = ExtResource("5_m6vcn")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_g6s4t"]
+script = ExtResource("6_xicr3")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_m26vm"]
+script = ExtResource("7_2aglh")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_h8dri"]
+script = ExtResource("8_gw62v")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vpws5"]
 bg_color = Color(0.141176, 0.133333, 0.192157, 1)
@@ -113,6 +137,7 @@ script = ExtResource("1_ywlxe")
 
 [node name="PopupBorderContainer" type="PanelContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_right = 325.0
 offset_bottom = 66.0
 scale = Vector2(1.5, 1.5)
@@ -142,6 +167,7 @@ theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "Here is some text"
 fit_content = true
+custom_effects = [SubResource("RichTextEffect_3h6rj"), SubResource("RichTextEffect_c14lr"), SubResource("RichTextEffect_y8jv0"), SubResource("RichTextEffect_g6s4t"), SubResource("RichTextEffect_m26vm"), SubResource("RichTextEffect_h8dri")]
 
 [node name="PanelContainer2" type="PanelContainer" parent="PopupBorderContainer/BackgroundPanel/VBoxContainer"]
 layout_mode = 2

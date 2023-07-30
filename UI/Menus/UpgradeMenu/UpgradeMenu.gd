@@ -3,8 +3,6 @@ class_name UpgradeMenu
 extends CanvasLayer
 
 
-@export_range(0.0, 5.0, 0.1) var delay_on_levelling_up_in_seconds: float = 0.2
-
 @export_range(1, 5, 1, "or_greater") var max_n_cards_to_spawn: int = 3:
 	set = _set_n_card_to_spawn
 @export_range(0, 10, 1, "or_greater") var inventory_limit: int = 5:
@@ -14,22 +12,27 @@ extends CanvasLayer
 var n_new_items_for_each_inventory_size = []
 var n_queued_upgrades: int = 0  # For if multiple level ups occur
 
+@onready var background_animator: AnimationPlayer = $Background/BackgroundAnimator
+@onready var title: Label = $Title
+@onready var title_animator: AnimationPlayer = $Title/TitleAnimator
 @onready var card_display: CardDisplay = $CardDisplay
+@onready var visibility_button: Button = $VisibilityButton
 
 
-func _ready() -> void:
-	if Engine.is_editor_hint():
-		return
-	
-	GlobalSignals.run_ended.connect(_on_run_ended)
+# Upgrades are queued during turn and then done on start of player turn
+func queue_upgrade() -> void:
+	n_queued_upgrades += 1
 
 
 func display() -> void:
+	assert(n_queued_upgrades > 0, "Trying to display upgrade menu without queued upgrade!")
+	
 	GlobalGameState.in_upgrade_menu = true
 	
 	if card_display.get_child_count() > 0:
-		n_queued_upgrades += 1
 		return
+	
+	n_queued_upgrades -= 1
 	
 	var possible_items: Array[ItemData] = []
 	possible_items.append_array(GlobalAccount.unlocked_items)
@@ -64,31 +67,26 @@ func display() -> void:
 	items_to_display.append_array(upgrades.slice(0, n_upgrades))
 	
 	if items_to_display:
-		card_display.display_items(items_to_display, delay_on_levelling_up_in_seconds)
+		card_display.display_items(items_to_display)
+		if visible == false:  # Don't fade if multiple level ups being processed
+			background_animator.play("fade_in")
+		title_animator.play("pop_up")
+		visibility_button.show()
 		show()
 	else:
 		GlobalGameState.in_upgrade_menu = false
 
 
-func _on_run_ended(_is_victory: bool) -> void:
-	if visible:
-		GlobalGameState.in_upgrade_menu = false
-		hide()
-
-
 func _on_card_display_card_selected() -> void:
-	if n_queued_upgrades:
-		n_queued_upgrades -= 1
+	title_animator.play("fade_out")
+	if n_queued_upgrades > 0:
 		await card_display.finished_animating_selection
 		display()
 	else:
 		GlobalGameState.in_upgrade_menu = false
-		await card_display.finished_animating_selection
-		if n_queued_upgrades:
-			n_queued_upgrades -= 1
-			display()
-		else:
-			hide()
+		background_animator.play("fade_out")
+		visibility_button.hide()
+
 
 func _set_n_card_to_spawn(value: int):
 	max_n_cards_to_spawn = value
@@ -157,3 +155,12 @@ func _resize_n_new_items_for_each_inventory_size():
 			n_new_items_for_each_inventory_size[i] = 0
 		elif n_new_items_for_each_inventory_size[i] == null:
 			n_new_items_for_each_inventory_size[i] = 0
+
+
+func _on_visibility_button_toggled(button_pressed: bool) -> void:
+	if button_pressed:
+		title.hide()
+		card_display.hide()
+	else:
+		title.show()
+		card_display.show()

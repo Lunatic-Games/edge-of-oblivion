@@ -1,10 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://p0e7f46xip6t"]
+[gd_scene load_steps=18 format=3 uid="uid://p0e7f46xip6t"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Occupants/Enemies/Enemy.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://cinfmdwcoldqr" path="res://Assets/art/icons/medieval-fantasy/lorc/cowled.svg" id="3"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_ln1e0"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_3dbgs"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="5_4ppo6"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_a73v3"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnProjectiles.gd" id="7_b41y0"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_n0fur"]
@@ -14,7 +13,6 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="9_ubhh0"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/ClearTileArray.gd" id="10_8ohql"]
 [ext_resource type="PackedScene" uid="uid://b42f4d0kescg8" path="res://Data/Indicators/Ranged/RangedIndicator.tscn" id="10_83j3l"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="14_3gvj6"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -58,8 +56,6 @@ shader_parameter/modulate = Color(0.776471, 0.623529, 0.647059, 1)
 shader_parameter/noise = SubResource("3")
 
 [node name="LostRanger" instance=ExtResource("1")]
-popup_info_text = "[color=cyan]The Lost Ranger:[/color] Looks for a target above and below within range 3."
-popup_flavor_text = "A long time ago, they'd lose themselves in the hunt. Now they are lost to it forever."
 max_hp = 30
 
 [node name="Sprite2D" parent="." index="1"]
@@ -80,24 +76,21 @@ script = ExtResource("6_a73v3")
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("4_3dbgs")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_enemy_ready_state = true
+auto_update_enemy_attack_bar = true
 
-[node name="Appear unready" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("enemies")]
-script = ExtResource("5_4ppo6")
-enemies = NodePath("../../../This enemy")
-appear_ready = false
-
-[node name="Spawn projectile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("origin_tiles", "target_tiles")]
+[node name="Spawn projectile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("origin_tiles", "target_tiles")]
 script = ExtResource("7_b41y0")
 origin_tiles = NodePath("../../../Enemy tile")
 target_tiles = NodePath("../../../../LT_PersistentVariables/Targets")
 projectile_scene = ExtResource("8_ema5x")
 
-[node name="Damage player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("9_fyx1r")
 tiles = NodePath("../../../../LT_PersistentVariables/Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="Clear targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tile_array")]
+[node name="Clear targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("tile_array")]
 script = ExtResource("10_8ohql")
 tile_array = NodePath("../../../../LT_PersistentVariables/Targets")
 
@@ -106,29 +99,20 @@ script = ExtResource("4_3dbgs")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 on_one_before = true
 
-[node name="Appear ready" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("enemies")]
-script = ExtResource("5_4ppo6")
-enemies = NodePath("../../../This enemy")
-
-[node name="Select tiles up to 3 away" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select tiles up to 3 away" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("7_n0fur")
 input_tiles = NodePath("../../../Enemy tile")
 output_tiles = NodePath("../../../../LT_PersistentVariables/Targets")
 directions = 5
 distance_length = 3
 
-[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("8_amqhn")
 input_tiles = NodePath("../../../../LT_PersistentVariables/Targets")
 output_tiles = NodePath("../../../../LT_PersistentVariables/Targets")
 occupant_type = 1
 
-[node name="Indicate ranged" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
+[node name="Indicate ranged" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("tiles")]
 script = ExtResource("9_ubhh0")
 tiles = NodePath("../../../../LT_PersistentVariables/Targets")
 node2d_to_spawn = ExtResource("10_83j3l")
-
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("14_3gvj6")
-progress_bar = NodePath("../../../AttackBar")
-every_x_calls = NodePath("../LT_EveryXCalls")

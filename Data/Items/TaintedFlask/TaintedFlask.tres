@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://olilhse4njhm"]
 
 [ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1_6exb4"]
-[ext_resource type="PackedScene" path="res://Data/Items/TaintedFlask/TaintedFlask.tscn" id="1_eheqk"]
+[ext_resource type="PackedScene" uid="uid://cchv0jq2ufru4" path="res://Data/Items/TaintedFlask/TaintedFlask.tscn" id="1_eheqk"]
 [ext_resource type="Texture2D" uid="uid://cmmcsx0c7vww8" path="res://Assets/art/icons/weapons/starseeker/potion-of-madness.svg" id="3_mvocm"]
 
 [resource]
@@ -9,10 +9,10 @@ script = ExtResource("1_6exb4")
 sprite = ExtResource("3_mvocm")
 item_scene = ExtResource("1_eheqk")
 item_name = "Tainted Flask"
-tier1Text = "After healing 3 times: Does damage to 2 random units near you."
-tier2Text = "Damage 15 -> 30"
-tier3Text = "Damage 30 -> 45
-Targets 2 ->  3"
+popup_item_name_color = "royalblue"
 flavor_text = "A cursed existence in a bottle."
-max_turn_timer = 3
-item_damage = 1
+max_tier = 3
+use_tier_1_text_for_popup_texts = true
+card_text_1 = "Upon healing 3 times, damages 2 random nearby enemies."
+card_text_2 = "Damage 25 -> 40."
+card_text_3 = "Damage 40 -> 55."

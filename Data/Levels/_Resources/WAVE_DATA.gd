@@ -8,20 +8,19 @@ signal turn_wait_value_changed
 	set = set_turn_wait
 
 var _absolute_round: int = 0  # Needs to be told from whatever manages waves
-var _enemy_scenes: Dictionary  # export variable name : packed scene
+var _enemy_data: Dictionary  # export variable name : enemy data
 var _spawn_data: Dictionary  # export variable name : number of spawns
 
 
-func update_enemy_scenes(scenes: Array[PackedScene]) -> void:
-	_enemy_scenes.clear()
+func update_available_enemies(enemies: Array[EnemyData]) -> void:
+	_enemy_data.clear()
 	
-	for scene in scenes:
-		if scene == null:
+	for enemy_data in enemies:
+		if enemy_data == null:
 			continue
 		
-		var root_name: String = scene.get_state().get_node_name(0)
-		var export_name: String = "# " + root_name
-		_enemy_scenes[export_name] = scene
+		var export_name: String = "# " + enemy_data.enemy_name
+		_enemy_data[export_name] = enemy_data
 		
 		if not _spawn_data.has(export_name):
 			_spawn_data[export_name] = 0
@@ -41,30 +40,30 @@ func update_round_info(wave_round: int):
 	notify_property_list_changed()
 
 
-func get_enemy_scenes_for_wave() -> Array[PackedScene]:
-	var scenes: Array[PackedScene] = []
+func get_enemies_for_wave() -> Array[EnemyData]:
+	var enemies: Array[EnemyData] = []
 	
 	for export_name in _spawn_data:
-		var packed_scene: PackedScene = _enemy_scenes[export_name]
+		var enemy_data: EnemyData = _enemy_data[export_name]
 
 		for i in _spawn_data[export_name]:
-			scenes.append(packed_scene)
+			enemies.append(enemy_data)
 			
-	return scenes
+	return enemies
 
 
 func _get_property_list() -> Array[Dictionary]:
 	var properties: Array[Dictionary] = []
-	for export_name in _enemy_scenes:
+	for export_name in _enemy_data:
 		properties.append({
 			"name": export_name,
 			"type": TYPE_INT,
 			"usage": PROPERTY_USAGE_DEFAULT
 		})
 	
-	var n_scenes = get_enemy_scenes_for_wave().size()
+	var n_enemies = get_enemies_for_wave().size()
 	properties.append({
-		"name": str(n_scenes) + " enemies at round " + str(_absolute_round),
+		"name": str(n_enemies) + " enemies at round " + str(_absolute_round),
 		"hint_string": "info_",
 		"type": TYPE_NIL,
 		"usage": PROPERTY_USAGE_GROUP

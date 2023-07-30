@@ -19,9 +19,8 @@ var is_popup_spawned: bool = false
 
 
 func _ready() -> void:
-	popup_text.text = item.popup_info_text
-	popup_flavor_text.text = item.popup_flavor_text
-
+	item.setup_completed.connect(_on_item_setup_completed)
+	item.tier_increased.connect(_on_item_tier_increased)
 
 func _on_mouse_entered() -> void:
 	is_hovered = true
@@ -62,3 +61,12 @@ func spawn_popup() -> void:
 func remove_text_popup() -> void:
 	is_popup_spawned = false
 	animator.play("fade_out")
+
+
+func _on_item_setup_completed() -> void:
+	popup_text.text = item.data.get_popup_text(item.current_tier)
+	popup_flavor_text.text = item.data.flavor_text
+
+
+func _on_item_tier_increased() -> void:
+	popup_text.text = item.data.get_popup_text(item.current_tier)

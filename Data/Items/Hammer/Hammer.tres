@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bkxc4j0i03skk"]
 
-[ext_resource type="PackedScene" path="res://Data/Items/Hammer/Hammer.tscn" id="1_6d6wv"]
+[ext_resource type="PackedScene" uid="uid://dwngnw61blh85" path="res://Data/Items/Hammer/Hammer.tscn" id="1_6d6wv"]
 [ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="2_eu4ws"]
 [ext_resource type="Texture2D" uid="uid://cs8ppwofd3bri" path="res://Assets/art/icons/misc/lorc/flat-hammer.svg" id="3_ittkr"]
 
@@ -9,10 +9,10 @@ script = ExtResource("2_eu4ws")
 sprite = ExtResource("3_ittkr")
 item_scene = ExtResource("1_6d6wv")
 item_name = "Hammer"
-tier1Text = "Every 3 turns: [color=pink]Knockback[/color] and damage a random unit above or below."
-tier2Text = "Increased damage if the unit collides with something."
-tier3Text = "Increased damage.
-Increased [color=pink]knockback[/color]."
+popup_item_name_color = "royalblue"
 flavor_text = "Affectionally called the Breaker of Bones."
-max_turn_timer = 3
-item_damage = 1
+max_tier = 3
+use_tier_1_text_for_popup_texts = true
+card_text_1 = "[knockback]Knockback[/knockback] enemies above and below. Has massive collision damage."
+card_text_2 = "Increased collision damage."
+card_text_3 = "Increased damage."

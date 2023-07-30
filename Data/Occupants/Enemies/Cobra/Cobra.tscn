@@ -1,11 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://c8apyj23ef6yu"]
+[gd_scene load_steps=21 format=3 uid="uid://c8apyj23ef6yu"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Occupants/Enemies/Enemy.tscn" id="1_hekwp"]
 [ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="2_l52ke"]
 [ext_resource type="Texture2D" uid="uid://d4i04bbnewpqp" path="res://Assets/art/icons/animals/delapouite/cobra.svg" id="3_oywu4"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_51o37"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_k6hm1"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="6_27esn"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="7_k5fao"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="8_m4r7b"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="9_wbjpk"]
@@ -18,7 +17,6 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="16_q1odc"]
 [ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="17_yghta"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="18_vmtih"]
-[ext_resource type="Script" path="res://LogicTree/Effects/UpdateProgressBar.gd" id="19_w4rig"]
 
 [sub_resource type="FastNoiseLite" id="2"]
 frequency = 0.005
@@ -38,8 +36,6 @@ shader_parameter/modulate = Color(0.78, 0.62, 0.65, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
 
 [node name="Cobra" instance=ExtResource("1_hekwp")]
-popup_info_text = "[color=cyan]Dune Cobra:[/color] attacks all adjacent tiles, then moves towards the player."
-popup_flavor_text = "Was once the most venomous bite in the sand dunes."
 max_hp = 30
 
 [node name="Sprite2D" parent="." index="1"]
@@ -57,32 +53,29 @@ default_value = 4
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_k6hm1")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_enemy_ready_state = true
+auto_update_enemy_attack_bar = true
 
-[node name="Set appear unready" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("enemies")]
-script = ExtResource("6_27esn")
-enemies = NodePath("../../../This enemy")
-appear_ready = false
-
-[node name="Targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="1"]
+[node name="Targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0"]
 script = ExtResource("7_k5fao")
 
-[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("8_m4r7b")
 input_tiles = NodePath("../Targets")
 output_tiles = NodePath("../Targets")
 occupant_type = 1
 
-[node name="Damage player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
+[node name="Damage player" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("9_wbjpk")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
+[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
 script = ExtResource("10_0c8ny")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("11_vu6d8")
 
-[node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="5"]
+[node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="4"]
 script = ExtResource("12_aor5x")
 
 [node name="Players tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls/Handle Move Logic" index="0"]
@@ -122,25 +115,16 @@ script = ExtResource("5_k6hm1")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
 on_one_before = true
 
-[node name="Set appear ready" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="0" node_paths=PackedStringArray("enemies")]
-script = ExtResource("6_27esn")
-enemies = NodePath("../../../This enemy")
-
-[node name="Targets to indicate" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="1"]
+[node name="Targets to indicate" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="0"]
 script = ExtResource("7_k5fao")
 
-[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
 script = ExtResource("14_48u5u")
 input_tiles = NodePath("../../../Enemy tile")
 output_tiles = NodePath("../Targets to indicate")
 directions = 15
 
-[node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
+[node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("tiles")]
 script = ExtResource("10_0c8ny")
 tiles = NodePath("../Targets to indicate")
 node2d_to_spawn = ExtResource("18_vmtih")
-
-[node name="LT_UpdateProgressBar" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="2" node_paths=PackedStringArray("progress_bar", "every_x_calls")]
-script = ExtResource("19_w4rig")
-progress_bar = NodePath("../../../AttackBar")
-every_x_calls = NodePath("../LT_EveryXCalls")
