@@ -5,7 +5,6 @@ extends Node
 signal item_setup_completed(item: Item)
 signal item_update_triggered(item: Item)
 signal item_tier_increased(item: Item)
-signal item_tier_increased_simulate(item: Item)
 
 # TILE SIGNALS
 signal tile_update_triggered(tile: Tile)

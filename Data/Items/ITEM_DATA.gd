@@ -29,19 +29,31 @@ func get_popup_text(tier: int) -> String:
 	var color_tag: String = "[color=" + Color(popup_item_name_color).to_html() + "]"
 	var tier_info: String = "(" + "I".repeat(tier) + ")"
 	var title: String = color_tag + item_name + tier_info + ":[/color] "
-	if use_tier_1_text_for_popup_texts:
-		return title + _card_texts.get(CARD_TEXT_EXPORT_PREFIX + str(1), "")
 	
-	# Start simulation
+	# WIP: Simulation Testing
 	var item_key = item_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED).name
 	var item = GlobalGameState.get_tree().root.get_node('Game/TheEdge/Board/Player/CanvasLayer/Inventory/' + item_key)
-	var tier_trigger = item.get_node('LT_OnItemTierIncrease')
-	GlobalLogicTreeSignals.item_tier_increased_simulate.emit(item)
-	print("Current Tier: " + str(item.current_tier) + " Damage: " + str(item.get_node('LT_PersistentVariables/Damage').value))
-	print("Next Tier: " + str(item.current_tier + 1) + "  Damage: " + str(item.get_node('LT_PersistentVariables/Damage').last_simulated_value))
+	if item:
+		var simulated_variables = get_simulated_variables(item)
+		for key in simulated_variables:
+			print("Item: " + item.name + " Current Tier: " + str(item.current_tier) + " " + key + ": " + str(item.get_node("LT_PersistentVariables/" + key).value))
+			print("Item: " + item.name + " Next Tier: " + str(item.current_tier + 1) + " " + key + ": " + str(simulated_variables[key]))
+	# END WIP
 	
-	
+	if use_tier_1_text_for_popup_texts:
+		return title + _card_texts.get(CARD_TEXT_EXPORT_PREFIX + str(1), "")
 	return title + _popup_texts.get(POPUP_TEXT_EXPORT_PREFIX + str(tier), "")
+
+
+func get_simulated_variables(item: Item) -> Dictionary:
+	var result: Dictionary = {}
+	item.simulate_tier_increase.emit()
+	for variable in item.get_node("LT_PersistentVariables/").get_children():
+		var name: String = variable.name
+		var LT_variable: LogicTreeVariable = item.get_node("LT_PersistentVariables/" + name)
+		if LT_variable:
+			result[name] = LT_variable.last_simulated_value
+	return result
 
 
 func _set_max_tier(n: int) -> void:
