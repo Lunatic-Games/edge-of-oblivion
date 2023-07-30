@@ -35,17 +35,6 @@ func get_popup_text(tier: int) -> String:
 	return title + _popup_texts.get(POPUP_TEXT_EXPORT_PREFIX + str(tier), "")
 
 
-func get_simulated_variables(item: Item) -> Dictionary:
-	var result: Dictionary = {}
-	item.simulate_tier_increase.emit()
-	for variable in item.get_node("LT_PersistentVariables/").get_children():
-		var name: String = variable.name
-		var LT_variable: LogicTreeVariable = item.get_node("LT_PersistentVariables/" + name)
-		if LT_variable:
-			result[name] = LT_variable.last_simulated_value
-	return result
-
-
 func _set_max_tier(n: int) -> void:
 	max_tier = n
 	for i in max_tier:
