@@ -7,6 +7,7 @@ signal changed
 
 @export var default_value: bool = false
 @export var default_value_override: LT_BoolVariable
+var last_simulated_value: bool = false
 
 var value: bool = false:
 	set(new_value):

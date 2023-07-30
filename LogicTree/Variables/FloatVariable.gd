@@ -7,6 +7,7 @@ signal changed
 
 @export var default_value: float = 0.0
 @export var default_value_override: LT_FloatVariable
+var last_simulated_value: float = 0.0
 
 var value: float = 0.0:
 	set(new_value):

@@ -7,6 +7,7 @@ signal changed
 
 @export var default_value: Array[Item] = []
 @export var default_value_override: LT_ItemArrayVariable
+var last_simulated_value: Array[Item] = []
 
 var value: Array[Item] = []:
 	set(new_value):
