@@ -53,14 +53,14 @@ jobs:
           name: linux-dist-${{ github.event.repository.name }}-${{ github.run_number }}
           path: build/linux
           
-      - name: Test download
-        run: find . -maxdepth 3
-          
- #     - uses: game-ci/steam-deploy@v3
- #       with:
- #         username: ${{ secrets.STEAM_USERNAME }}          
- #         configVdf: ${{ secrets.STEAM_CONFIG_VDF}}          
- #         appId: 1354590
- #         buildDescription: ${{ github.event.inputs.buildDescription }}
- #         rootPath: build
- #         depot1Path: windows
+      - name: Push to Steam
+        uses: game-ci/steam-deploy@v3
+        with:
+          username: ${{ secrets.STEAM_USERNAME }}          
+          configVdf: ${{ secrets.STEAM_CONFIG_VDF}}          
+          appId: 1354590
+          buildDescription: ${{ github.event.inputs.buildDescription }}
+          rootPath: build
+          depot1Path: windows
+          depot2Path: linux
+          releaseBranch: prerelease
