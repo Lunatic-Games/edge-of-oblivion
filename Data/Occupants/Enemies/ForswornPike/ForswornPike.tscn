@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cfthurngpg1ps"]
+[gd_scene load_steps=23 format=3 uid="uid://cfthurngpg1ps"]
 
 [ext_resource type="PackedScene" uid="uid://duyl86m61pckf" path="res://Data/Occupants/Enemies/Enemy.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://c57vgp84qqrhc" path="res://Assets/art/icons/medieval-fantasy/delapouite/spartan-helmet.svg" id="3"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectClosestTiles.gd" id="14_4kt6v"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="15_4n7of"]
 [ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="16_bctek"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnIndicatorOnTiles.gd" id="16_ihaqj"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -107,10 +108,11 @@ script = ExtResource("8_t16fy")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles")]
+[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "mirror_x_if_left_of_first_tile")]
 script = ExtResource("9_vyr0p")
 tiles = NodePath("../Targets")
 node2d_to_spawn = ExtResource("10_q4nla")
+mirror_x_if_left_of_first_tile = NodePath("../../../Enemy tile")
 
 [node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="5"]
 script = ExtResource("12_1d28s")
@@ -163,6 +165,6 @@ directions = 15
 distance_length = 2
 
 [node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("tiles")]
-script = ExtResource("9_vyr0p")
+script = ExtResource("16_ihaqj")
 tiles = NodePath("../Targets to indicate")
-node2d_to_spawn = ExtResource("13_yv5sx")
+indicator_to_spawn = ExtResource("13_yv5sx")

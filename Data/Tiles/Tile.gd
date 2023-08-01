@@ -14,6 +14,8 @@ var left_tile: Tile
 var occupant: Occupant : set = _set_occupant
 var coord: Vector2i = Vector2i.ZERO
 
+@onready var background: ColorRect = $Background
+
 
 func update():
 	update_triggered.emit()
@@ -89,6 +91,10 @@ func get_adjacent_occupied_tiles() -> Array[Tile]:
 			occupied_tiles.append(tile)
 	
 	return occupied_tiles
+
+
+func is_position_within_tile(pos: Vector2):
+	return background.get_global_rect().has_point(pos)
 
 
 func _set_occupant(new_occupant: Occupant):
