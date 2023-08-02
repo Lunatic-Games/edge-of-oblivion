@@ -30,7 +30,7 @@ jobs:
     with:
       debug: false
       godot_version: "4.1"
-      export_name: dist-${{ github.event.repository.name }}-${{ github.run_number }}
+      export_name: ${{ github.event.repository.name }} # Pretty name for distribution
       windows: ${{ inputs.windows }}
       windows_preset: Windows Desktop
       linux: ${{ inputs.linux }}
@@ -64,7 +64,7 @@ jobs:
         with:
           username: ${{ secrets.STEAM_USERNAME }}          
           configVdf: ${{ secrets.STEAM_CONFIG_VDF}}          
-          appId: 1354590
+          appId: ${{ vars.STEAM_APP_ID }}
           buildDescription: ${{ github.event.inputs.build_description }}
           rootPath: build
           depot1Path: windows
