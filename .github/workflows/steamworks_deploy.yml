@@ -63,4 +63,4 @@ jobs:
           rootPath: build
           depot1Path: windows
           depot2Path: linux
-          releaseBranch: prerelease
+          #releaseBranch: prerelease # Want to leave this disabled for testing
