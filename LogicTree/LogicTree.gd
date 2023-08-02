@@ -43,8 +43,8 @@ func perform_behavior() -> void:
 	pass
 
 
-# Can be overriden to define the end state of the logic tree
-# after perform_behavior() is run
+# Can be overriden to define behavior that performs 
+# the nodes action without a lasting effect
 func simulate_behavior() -> void:
 	pass
 

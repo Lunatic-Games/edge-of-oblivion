@@ -30,7 +30,7 @@ func perform_behavior() -> void:
 
 
 func simulate_behavior() -> void:
-	var current_val: Array[Tile] = tile_array.value.duplicate()
+	var current_value: Array[Tile] = tile_array.value.duplicate()
 	perform_behavior()
 	tile_array.last_simulated_value = tile_array.value.duplicate()
-	tile_array.value = current_val
+	tile_array.value = current_value

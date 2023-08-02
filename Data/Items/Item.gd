@@ -4,7 +4,7 @@ extends Control
 signal update_triggered
 signal setup_completed
 signal tier_increase_triggered
-signal tier_increase_complete
+signal tier_increase_completed
 signal simulate_tier_increase
 
 var data: ItemData = null

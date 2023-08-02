@@ -20,7 +20,7 @@ var is_popup_spawned: bool = false
 
 func _ready() -> void:
 	item.setup_completed.connect(_on_item_setup_completed)
-	item.tier_increase_complete.connect(_on_item_tier_increased)
+	item.tier_increase_completed.connect(_on_item_tier_increased)
 
 func _on_mouse_entered() -> void:
 	is_hovered = true

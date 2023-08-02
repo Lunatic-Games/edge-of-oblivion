@@ -7,6 +7,7 @@ signal changed
 
 @export var default_value: int = 0
 @export var default_value_override: LT_IntVariable
+
 var last_simulated_value: int = 0
 
 var value: int = 0:

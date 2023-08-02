@@ -7,6 +7,7 @@ signal changed
 
 @export var default_value: Array[Tile] = []
 @export var default_value_override: LT_TileArrayVariable
+
 var last_simulated_value: Array[Tile] = []
 
 var value: Array[Tile] = []:

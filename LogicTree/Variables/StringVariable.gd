@@ -7,6 +7,7 @@ signal changed
 
 @export var default_value: String = ""
 @export var default_value_override: LT_StringVariable
+
 var last_simulated_value: String = ""
 
 var value: String = "":

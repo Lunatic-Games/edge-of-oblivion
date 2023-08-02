@@ -7,6 +7,7 @@ signal changed
 
 @export var default_value: Array[Occupant] = []
 @export var default_value_override: LT_EntityArrayVariable
+
 var last_simulated_value: Array[Occupant] = []
 
 var value: Array[Occupant] = []:

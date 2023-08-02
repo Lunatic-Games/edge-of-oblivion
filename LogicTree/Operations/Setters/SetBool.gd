@@ -20,7 +20,7 @@ func perform_behavior() -> void:
 
 
 func simulate_behavior() -> void:
-	var current_val: bool = bool_variable.value
+	var current_value: bool = bool_variable.value
 	perform_behavior()
 	bool_variable.last_simulated_value = bool_variable.value
-	bool_variable.value = current_val
+	bool_variable.value = current_value

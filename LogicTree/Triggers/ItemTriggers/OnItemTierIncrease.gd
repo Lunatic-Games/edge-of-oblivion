@@ -53,4 +53,4 @@ func trigger(item: Item, simulate: bool = false) -> void:
 	
 	logic_tree_on_trigger.evaluate(simulate)
 	if !simulate:
-		item.tier_increase_complete.emit()
+		item.tier_increase_completed.emit()

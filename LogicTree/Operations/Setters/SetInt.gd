@@ -48,7 +48,7 @@ func perform_behavior() -> void:
 
 
 func simulate_behavior() -> void:
-	var current_val: int = int_variable.value
+	var current_value: int = int_variable.value
 	perform_behavior()
 	int_variable.last_simulated_value = int_variable.value
-	int_variable.value = current_val
+	int_variable.value = current_value

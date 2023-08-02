@@ -20,7 +20,7 @@ func perform_behavior() -> void:
 
 
 func simulate_behavior() -> void:
-	var current_val: String = string_variable.value
+	var current_value: String = string_variable.value
 	perform_behavior()
 	string_variable.last_simulated_value = string_variable.value
-	string_variable.value = current_val
+	string_variable.value = current_value

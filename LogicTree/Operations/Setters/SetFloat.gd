@@ -40,7 +40,7 @@ func perform_behavior() -> void:
 
 
 func simulate_behavior() -> void:
-	var current_val: float = float_variable.value
+	var current_value: float = float_variable.value
 	perform_behavior()
 	float_variable.last_simulated_value = float_variable.value
-	float_variable.value = current_val
+	float_variable.value = current_value

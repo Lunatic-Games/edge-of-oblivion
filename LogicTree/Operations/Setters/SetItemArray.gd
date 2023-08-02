@@ -30,7 +30,7 @@ func perform_behavior() -> void:
 
 
 func simulate_behavior() -> void:
-	var current_val: Array[Item] = item_array.value.duplicate()
+	var current_value: Array[Item] = item_array.value.duplicate()
 	perform_behavior()
 	item_array.last_simulated_value = item_array.value.duplicate()
-	item_array.value = current_val
+	item_array.value = current_value
