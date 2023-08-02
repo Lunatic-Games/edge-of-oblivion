@@ -41,6 +41,10 @@ on:
         required: false 
         default: '.'
         description: Relative to the project path
+      artifact_name:
+        type: string
+        required: false
+        description: Used as the name of the artifact, prepended with the OS built for (windows, linux, html5, or macos)
       artifact_retention_days:
         type: number
         required: false
@@ -50,6 +54,7 @@ on:
 env:
   GODOT_VERSION: ${{ inputs.godot_version }}
   EXPORT_NAME: ${{ inputs.export_name }}${{ inputs.debug && '-debug' || '' }}
+  ARTIFACT_NAME: ${{ !!inputs.artifact_name && inputs.artifact_name || env.EXPORT_NAME }}
   PROJECT_PATH: ${{ inputs.project_path }}
   EXPORT_PRESETS_PATH: ${{ inputs.export_presets_path }}
 
