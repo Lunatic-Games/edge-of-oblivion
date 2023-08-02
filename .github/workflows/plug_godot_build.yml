@@ -53,8 +53,8 @@ on:
         
 env:
   GODOT_VERSION: ${{ inputs.godot_version }}
-  EXPORT_NAME: ${{ inputs.export_name }}${{ inputs.debug && '-debug' || '' }}
-  ARTIFACT_NAME: ${{ !!inputs.artifact_name && inputs.artifact_name || env.EXPORT_NAME }}
+  EXPORT_NAME: ${{ format('{0}{1}', inputs.export_name, (inputs.debug && '-debug' || '')) }}
+  ARTIFACT_NAME: ${{ !!inputs.artifact_name && inputs.artifact_name || format('{0}{1}', inputs.export_name, (inputs.debug && '-debug' || '')) }}
   PROJECT_PATH: ${{ inputs.project_path }}
   EXPORT_PRESETS_PATH: ${{ inputs.export_presets_path }}
 
@@ -156,6 +156,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3.1.2
         with:
-          name: ${{ matrix.platform }}-${{ env.EXPORT_NAME }}
+          name: ${{ matrix.platform }}-${{ env.ARTIFACT_NAME }}
           path: ${{ env.PROJECT_PATH }}/build/${{ matrix.platform }}
           retention-days: ${{ inputs.artifact_retention_days }}
