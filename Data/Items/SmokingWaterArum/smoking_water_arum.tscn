@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bou08quora8fc"]
+[gd_scene load_steps=11 format=3 uid="uid://bou08quora8fc"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_lc0l6"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_t553l"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="5_l688v"]
 [ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="6_8ndo4"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="7_bsbc7"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="7_e7ty7"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="8_2qanb"]
+[ext_resource type="PackedScene" uid="uid://bi6xika22wja2" path="res://Data/Particles/Items/SmokingWaterArumParticles.tscn" id="8_rsrv1"]
 
 [node name="SmokingWaterArum" instance=ExtResource("1_lc0l6")]
 
@@ -39,6 +41,11 @@ radius = 1
 script = ExtResource("6_8ndo4")
 tiles = NodePath("../Targets")
 heal_override = NodePath("../../../../LT_PersistentVariables/Heal")
+
+[node name="Vfx" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
+script = ExtResource("7_e7ty7")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("8_rsrv1")
 
 [node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("7_bsbc7")
