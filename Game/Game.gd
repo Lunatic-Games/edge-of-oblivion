@@ -2,13 +2,13 @@ class_name Game
 extends Node2D
 
 
-@export var level_data: LevelData
+@export var level_data: LevelData = null
 
-var level: Level
-
-@onready var turn_manager: TurnManager = $TurnManager
-@onready var spawn_handler: SpawnHandler = $SpawnHandler
-@onready var run_stats: RunStats = $RunStats
+var player: Player = null
+var level: Level = null
+var turn_manager: TurnManager = TurnManager.new()
+var spawn_handler: SpawnHandler = SpawnHandler.new()
+var run_stats: RunStats = RunStats.new()
 
 @onready var upgrade_menu: UpgradeMenu = $Menus/UpgradeMenu
 @onready var victory_menu: VictoryMenu = $Menus/VictoryMenu
@@ -19,8 +19,8 @@ var level: Level
 func _ready() -> void:
 	randomize()
 	
-	GlobalSignals.player_died.connect(_on_Player_died)  # Game over!
-	GlobalSignals.boss_defeated.connect(_on_Boss_defeated)  # Game won!
+	GlobalSignals.player_died.connect(_on_player_died)  # Game over!
+	GlobalSignals.boss_defeated.connect(_on_boss_defeated)  # Game won!
 	
 	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
 	
@@ -31,9 +31,13 @@ func _ready() -> void:
 	await level.board.tile_generation_completed
 	
 	GlobalGameState.new_game(self)
-	spawn_handler.spawn_player()
+	player = spawn_handler.spawn_player()
 	
 	GlobalSignals.run_started.emit()
+
+
+func _process(_delta: float) -> void:
+	turn_manager.update(player, self)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -99,9 +103,9 @@ func _on_player_levelled_up(_player: Player):
 	upgrade_menu.queue_upgrade()
 
 
-func _on_Player_died(_player: Player) -> void:
+func _on_player_died(_player: Player) -> void:
 	game_over()
 
 
-func _on_Boss_defeated(_boss: Enemy) -> void:
+func _on_boss_defeated(_boss: Enemy) -> void:
 	victory()

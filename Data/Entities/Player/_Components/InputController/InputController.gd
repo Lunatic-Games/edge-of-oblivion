@@ -28,10 +28,34 @@ func check_for_input():
 	if moves_remaining == 0 or is_movement_locked:
 		return
 	
+	var current_tile: Tile = entity.occupancy.current_tile
+	if Input.is_action_pressed("up") and current_tile.top_tile:
+		handle_move_or_wait(current_tile.top_tile)
 	
+	elif Input.is_action_pressed("down") and current_tile.bottom_tile:
+		handle_move_or_wait(current_tile.bottom_tile)
+	
+	elif Input.is_action_pressed("left") and current_tile.left_tile:
+		handle_move_or_wait(current_tile.left_tile)
+	
+	elif Input.is_action_pressed("right") and current_tile.right_tile:
+		handle_move_or_wait(current_tile.right_tile)
+	
+	elif Input.is_action_pressed("wait"):
+		handle_move_or_wait(current_tile)
+
+
+func are_moves_all_used() -> bool:
+	return moves_remaining == 0
+
+
 func handle_move_or_wait(tile: Tile):
 	if tile != entity.occupancy.current_tile:
-		entity.occupancy.move_to_tile(tile)
+		var was_move_succesful: bool = entity.occupancy.move_to_tile(tile)
+		if was_move_succesful:
+			is_movement_locked = true
+			entity.occupancy.move_animation_completed.connect(_on_occupancy_move_animation_finished,
+				CONNECT_ONE_SHOT)
 	
 	moves_remaining -= 1
 	assert(moves_remaining >= 0, "Negative moves remaining.")
@@ -39,13 +63,16 @@ func handle_move_or_wait(tile: Tile):
 	if moves_remaining > 0:
 		return
 	
-	GlobalSignals.player_finished_moving.emit(self)
 	move_modulate_tween()
 	move_scale_tween()
 
 
+func reset_moves_remaining():
+	moves_remaining = data.moves_per_turn
+
+
 func move_modulate_tween():
-	var time_until_next_move: float = GlobalGameState.game.turn_manager.calculate_time_between_player_move()
+	var time_until_next_move: float = TurnManager.calculate_time_between_player_move()
 	var time_between = time_until_next_move - UNREADY_FADE_OUT_TIME_SECONDS - READY_FADE_IN_TIME_SECONDS
 	var sprite_material: Material = entity.sprite.material
 	
@@ -59,7 +86,7 @@ func move_modulate_tween():
 
 
 func move_scale_tween():
-	var time_until_next_move: float = GlobalGameState.game.turn_manager.calculate_time_between_player_move()
+	var time_until_next_move: float = TurnManager.calculate_time_between_player_move()
 	var sprite: Sprite2D = entity.sprite
 	
 	var stretch_tween: Tween = entity.create_tween()
@@ -69,3 +96,7 @@ func move_scale_tween():
 	
 	stretch_tween = entity.create_tween()
 	stretch_tween.tween_property(sprite, "scale", DEFAULT_SCALE, time_until_next_move / 2.0)
+
+
+func _on_occupancy_move_animation_finished():
+	is_movement_locked = false

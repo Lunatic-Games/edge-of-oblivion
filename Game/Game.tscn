@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://clkedmwe4xw0b"]
+[gd_scene load_steps=14 format=3 uid="uid://clkedmwe4xw0b"]
 
 [ext_resource type="Script" path="res://Game/Game.gd" id="1_iqcmv"]
 [ext_resource type="Resource" uid="uid://bj2807sghnvk0" path="res://Data/Levels/TheEdge/TheEdge.tres" id="2_5dl06"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://c7dqfw38kh88k" path="res://UI/Menus/VictoryMenu/VictoryMenu.tscn" id="8_4y0it"]
 [ext_resource type="PackedScene" uid="uid://dn681uoihob4j" path="res://UI/Menus/GameoverMenu/GameOverMenu.tscn" id="9_rua7w"]
 [ext_resource type="PackedScene" uid="uid://bo2no0imyp676" path="res://UI/Menus/PauseMenu/PauseMenu.tscn" id="10_a7fxs"]
-[ext_resource type="Script" path="res://Game/TurnManager/TurnManager.gd" id="12_q02uk"]
 [ext_resource type="Script" path="res://Game/SpawnHandler/SpawnHandler.gd" id="13_8agfr"]
 [ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://UI/Menus/UpgradeMenu/UpgradeMenu.tscn" id="15_tirfb"]
 
@@ -78,9 +77,6 @@ script = ExtResource("1_iqcmv")
 level_data = ExtResource("2_5dl06")
 
 [node name="Camera" parent="." instance=ExtResource("3_if80k")]
-
-[node name="TurnManager" type="Node" parent="."]
-script = ExtResource("12_q02uk")
 
 [node name="SpawnHandler" type="Node" parent="."]
 script = ExtResource("13_8agfr")
