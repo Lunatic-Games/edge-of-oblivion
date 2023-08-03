@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerData" load_steps=13 format=3 uid="uid://cy0654pvgkbd3"]
+[gd_resource type="Resource" script_class="PlayerData" load_steps=14 format=3 uid="uid://cy0654pvgkbd3"]
 
 [ext_resource type="PackedScene" uid="uid://salxfsmwvg5l" path="res://Data/Entities/Player/Player.tscn" id="1_31to8"]
 [ext_resource type="Script" path="res://Data/Entities/Player/PLAYER_DATA.gd" id="1_sx63k"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Data/Entities/Player/_Components/InputController/INPUT_CONTROLLER_DATA.gd" id="3_v1cor"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="4_2vscx"]
 [ext_resource type="Script" path="res://Data/Entities/Player/_Components/Levelling/LEVELLING_DATA.gd" id="4_6welu"]
+[ext_resource type="Resource" uid="uid://b44nfpsd5kbd4" path="res://Data/Items/ShortSword/ShortSword.tres" id="5_w4jcp"]
 
 [sub_resource type="Resource" id="Resource_jy6b3"]
 script = ExtResource("2_xj0x2")
@@ -22,7 +23,7 @@ moves_per_turn = 1
 [sub_resource type="Resource" id="Resource_icrph"]
 script = ExtResource("3_42vg8")
 max_inventory_size = 6
-starting_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([])
+starting_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("5_w4jcp")])
 
 [sub_resource type="Resource" id="Resource_81x5u"]
 script = ExtResource("4_6welu")

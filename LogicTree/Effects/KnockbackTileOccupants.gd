@@ -57,7 +57,7 @@ func apply_knockback(target: Entity, direction: Vector2i, knockback: int, collid
 	if not target.is_alive() or knockback == 0:
 		return true
 		
-	var current_tile: Tile = target.current_tile
+	var current_tile: Tile = target.occupancy.current_tile
 	var next_tile: Tile = current_tile.get_tile_in_direction(direction)
 	
 	for i in knockback:

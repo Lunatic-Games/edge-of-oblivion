@@ -23,7 +23,7 @@ func perform_behavior() -> void:
 			output_user_entity.value.clear()
 	
 	if output_user_tile != null:
-		if this_item.user != null and this_item.user.current_tile != null:
-			output_user_tile.value = [this_item.user.current_tile]
+		if this_item.user != null and this_item.user.occupancy.current_tile != null:
+			output_user_tile.value = [this_item.user.occupancy.current_tile]
 		else:
 			output_user_tile.value.clear()

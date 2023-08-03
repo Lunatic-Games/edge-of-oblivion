@@ -8,6 +8,6 @@ func did_fail_to_relocate():
 
 func destroy_self() -> void:
 	occupancy.current_tile.occupant = null
-	animator.play("despawn")
+	animator.play("quick_despawn")
 	await animator.animation_finished
 	queue_free()

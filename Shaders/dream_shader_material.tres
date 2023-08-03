@@ -16,5 +16,4 @@ noise = SubResource("2")
 resource_local_to_scene = true
 shader = ExtResource("1_0hubq")
 shader_parameter/strength = 0.25
-shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")

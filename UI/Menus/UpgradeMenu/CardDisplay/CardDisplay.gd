@@ -66,7 +66,7 @@ func _on_card_selected(selected_card: Card) -> void:
 		
 		if card == selected_card:
 			if GlobalGameState.player:
-				GlobalGameState.player.inventory.gain_item(card.held_item_data)
+				GlobalGameState.player.inventory.add_or_upgrade_item(card.held_item_data)
 			_raise_chosen_card(card)
 		else:
 			_drop_unchosen_card(card)

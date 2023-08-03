@@ -27,7 +27,7 @@ func perform_behavior() -> void:
 		if entity == null:
 			continue
 		
-		var amount_damaged = entity.take_damage(damage)
+		var amount_damaged = entity.health.take_damage(damage)
 		if amount_damaged > 0:
 			entities_killed.append(entity)
 			total_damage_dealt += amount_damaged
@@ -40,7 +40,7 @@ func perform_behavior() -> void:
 
 
 func handle_damage_signal(amount_damaged: int, damaged_entity: Entity):
-	var was_killing_blow: bool = not damaged_entity.is_alive()
+	var was_killing_blow: bool = not damaged_entity.health.is_alive()
 	if (owner as Tile) != null:
 		GlobalLogicTreeSignals.entity_damaged.emit(null, null, owner, damaged_entity,
 			amount_damaged, was_killing_blow)

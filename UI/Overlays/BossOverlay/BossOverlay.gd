@@ -1,3 +1,4 @@
+class_name BossOverlay
 extends CanvasLayer
 
 

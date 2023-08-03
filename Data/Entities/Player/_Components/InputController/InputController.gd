@@ -7,6 +7,7 @@ const SQUISHED_SCALE: Vector2 = Vector2(0.1, 0.1)
 const UNREADY_FADE_OUT_TIME_SECONDS: float = 0.2
 const UNREADY_ALPHA: float = 0.3
 const READY_FADE_IN_TIME_SECONDS: float = 0.2
+const EXTRA_FADE_DURATION_SECONDS: float = 0.1  # Can make it feel like you can move earlier
 
 var entity: Entity = null
 var data: InputControllerData = null
@@ -63,29 +64,29 @@ func handle_move_or_wait(tile: Tile):
 	if moves_remaining > 0:
 		return
 	
-	move_modulate_tween()
-	move_scale_tween()
+	modulate_to_next_turn()
+	scale_to_next_turn()
 
 
 func reset_moves_remaining():
 	moves_remaining = data.moves_per_turn
 
 
-func move_modulate_tween():
+func modulate_to_next_turn():
 	var time_until_next_move: float = TurnManager.calculate_time_between_player_move()
 	var time_between = time_until_next_move - UNREADY_FADE_OUT_TIME_SECONDS - READY_FADE_IN_TIME_SECONDS
-	var sprite_material: Material = entity.sprite.material
+	var sprite: Sprite2D = entity.sprite
 	
 	var modulate_tween: Tween = entity.create_tween()
-	modulate_tween.tween_property(sprite_material, "shader_parameter/modulate:a",
+	modulate_tween.tween_property(sprite, "modulate:a",
 		UNREADY_ALPHA, UNREADY_FADE_OUT_TIME_SECONDS)
-	modulate_tween.tween_property(sprite_material, "shader_parameter/modulate:a",
-		UNREADY_ALPHA, time_between)
-	modulate_tween.tween_property(sprite_material, "shader_parameter/modulate:a",
+	modulate_tween.tween_property(sprite, "modulate:a",
+		UNREADY_ALPHA, time_between + EXTRA_FADE_DURATION_SECONDS)
+	modulate_tween.tween_property(sprite, "modulate:a",
 		1.0, READY_FADE_IN_TIME_SECONDS)
 
 
-func move_scale_tween():
+func scale_to_next_turn():
 	var time_until_next_move: float = TurnManager.calculate_time_between_player_move()
 	var sprite: Sprite2D = entity.sprite
 	

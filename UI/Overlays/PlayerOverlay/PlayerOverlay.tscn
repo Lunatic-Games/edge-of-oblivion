@@ -1,46 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://7cc4vdch3hbd"]
+[gd_scene load_steps=4 format=3 uid="uid://7cc4vdch3hbd"]
 
-[ext_resource type="Script" path="res://UI/Overlays/PlayerOverlay/InventoryDisplay.gd" id="1_igerd"]
-[ext_resource type="Script" path="res://UI/Overlays/PlayerOverlay/ExperienceBar.gd" id="2_wig2x"]
-[ext_resource type="PackedScene" uid="uid://clspetko05r6t" path="res://Data/Particles/UI/LevelUpParticles.tscn" id="3_1jt43"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hm36x"]
-bg_color = Color(0.215686, 0.215686, 0.215686, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bij8g"]
-bg_color = Color(0.411765, 0.564706, 0.403922, 1)
+[ext_resource type="Script" path="res://UI/Overlays/PlayerOverlay/PlayerOverlay.gd" id="1_ic1qj"]
+[ext_resource type="PackedScene" uid="uid://dub7fxxrneltf" path="res://UI/Overlays/PlayerOverlay/InventoryDisplay/InventoryDisplay.tscn" id="2_cs5qm"]
+[ext_resource type="PackedScene" uid="uid://oi46lwjctei4" path="res://UI/Overlays/PlayerOverlay/ExperienceBar/ExperienceBar.tscn" id="3_nn11g"]
 
 [node name="PlayerOverlay" type="CanvasLayer"]
+script = ExtResource("1_ic1qj")
 
-[node name="InventoryDisplay" type="HBoxContainer" parent="."]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -198.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-theme_override_constants/separation = 20
-alignment = 1
-script = ExtResource("1_igerd")
+[node name="InventoryDisplay" parent="." instance=ExtResource("2_cs5qm")]
 
-[node name="ExperienceBar" type="ProgressBar" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -446.0
-offset_top = -37.0
-offset_right = 446.0
-offset_bottom = -17.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_hm36x")
-theme_override_styles/fill = SubResource("StyleBoxFlat_bij8g")
-show_percentage = false
-script = ExtResource("2_wig2x")
-
-[node name="LevelUpParticles" parent="ExperienceBar" instance=ExtResource("3_1jt43")]
+[node name="ExperienceBar" parent="." instance=ExtResource("3_nn11g")]

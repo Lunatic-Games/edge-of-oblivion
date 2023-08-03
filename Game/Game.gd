@@ -6,9 +6,13 @@ extends Node2D
 
 var player: Player = null
 var level: Level = null
+
 var turn_manager: TurnManager = TurnManager.new()
 var spawn_handler: SpawnHandler = SpawnHandler.new()
 var run_stats: RunStats = RunStats.new()
+
+@onready var player_overlay: PlayerOverlay = $HUD/PlayerOverlay
+@onready var boss_overlay: BossOverlay = $HUD/BossOverlay
 
 @onready var upgrade_menu: UpgradeMenu = $Menus/UpgradeMenu
 @onready var victory_menu: VictoryMenu = $Menus/VictoryMenu
@@ -32,6 +36,7 @@ func _ready() -> void:
 	
 	GlobalGameState.new_game(self)
 	player = spawn_handler.spawn_player()
+	player.inventory.add_starting_items()
 	spawn_flags_for_next_round()
 	
 	GlobalSignals.run_started.emit()

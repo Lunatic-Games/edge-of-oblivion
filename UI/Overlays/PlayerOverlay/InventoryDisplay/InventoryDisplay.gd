@@ -10,10 +10,10 @@ const TIER_UP_ROTATE_TIME_SECONDS: float = 0.5
 
 var items: Dictionary = {}  # ItemData : Item Scene
 
-func _on_item_added_to_inventory(item: Item, item_data: ItemData, animate: bool = true) -> void:
-	items[item_data] = item
+
+func add_item_to_display(item: Item, animate: bool = true) -> void:
+	items[item.data] = item
 	add_child(item)
-	item.setup(item_data)
 	
 	if animate == false:
 		return
@@ -29,10 +29,7 @@ func _on_item_added_to_inventory(item: Item, item_data: ItemData, animate: bool 
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 
-func _on_item_upgraded(item: Item, item_data: ItemData, animate: bool = true) -> void:
-	if animate == false:
-		return
-	
+func animate_item_upgrade(item: Item) -> void:
 	var rotate_tween: Tween = create_tween()
 	rotate_tween.tween_property(item, "rotation_degrees", TIER_UP_ROTATE_DEGREES,
 		TIER_UP_ROTATE_TIME_SECONDS / 4.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)

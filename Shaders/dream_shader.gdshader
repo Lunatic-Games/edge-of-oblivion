@@ -1,8 +1,13 @@
 shader_type canvas_item;
 
 uniform float strength = 0.25f;
-uniform vec4 modulate: source_color = vec4(1.0);
 uniform sampler2D noise;
+
+varying flat vec4 modulate;
+
+void vertex() {
+	modulate = COLOR;
+}
 
 void fragment() {
 	vec2 dist = vec2(0.5f) - UV;

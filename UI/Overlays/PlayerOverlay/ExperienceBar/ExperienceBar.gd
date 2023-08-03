@@ -1,3 +1,4 @@
+class_name ExperienceBar
 extends ProgressBar
 
 

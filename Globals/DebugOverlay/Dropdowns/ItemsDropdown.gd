@@ -30,7 +30,7 @@ func _give_player_item(item_data: ItemData) -> void:
 	if not GlobalGameState.player:
 		return
 	
-	GlobalGameState.player.inventory.gain_item(item_data)
+	GlobalGameState.player.inventory.add_or_upgrade_item(item_data)
 
 
 func _on_player_spawned(_player: Player) -> void:

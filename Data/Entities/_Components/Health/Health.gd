@@ -25,7 +25,7 @@ func take_damage(damage: int) -> int:
 	var value_before: int = current_value
 	current_value = maxi(current_value - damage, 0)
 	
-	entity.animation_player.play("damaged")
+	entity.animator.play("damaged")
 	
 	var amount_changed: int = value_before - current_value
 	if amount_changed > 0:

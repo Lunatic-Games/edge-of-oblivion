@@ -14,8 +14,8 @@ turn_wait_from_previous_wave = 1
 
 [sub_resource type="Resource" id="Resource_1d8pj"]
 script = ExtResource("3_muwfv")
-enemies = Array[Resource("res://Data/Entities/Enemies/ENEMY_DATA.gd")]([ExtResource("2_gc6kx")])
-waves = Array[ExtResource("4_y7l5b")]([SubResource("Resource_p30rr")])
+enemies = [ExtResource("2_gc6kx")]
+waves = [SubResource("Resource_p30rr")]
 
 [resource]
 script = ExtResource("3_o20or")

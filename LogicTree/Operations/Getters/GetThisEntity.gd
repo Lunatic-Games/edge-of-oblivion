@@ -16,7 +16,7 @@ func perform_behavior() -> void:
 		output_entity.value = [this_entity]
 	
 	if output_entity_tile != null:
-		if output_entity != null and output_entity.current_tile != null:
-			output_entity_tile.value = [output_entity.current_tile]
+		if output_entity != null and output_entity.occupancy.current_tile != null:
+			output_entity_tile.value = [output_entity.occupancy.current_tile]
 		else:
 			output_entity_tile.value.clear()
