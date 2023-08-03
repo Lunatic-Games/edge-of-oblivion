@@ -35,4 +35,12 @@ func update():
 
 
 func _on_health_hit_zero():
+	occupancy.current_tile = null
 	died.emit()
+	
+	var tween: Tween = create_tween().set_parallel(true)
+	tween.tween_property(self, "global_position:y", -25.0, 0.5).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	
+	await tween.finished
+	queue_free()

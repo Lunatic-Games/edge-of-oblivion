@@ -42,7 +42,7 @@ func _on_enemy_button_pressed(enemy_data: EnemyData):
 	else:
 		enemy_to_spawn_on_tile_selected = enemy_data
 		GlobalDebugOverlay.select_tiles_menu.begin_selection(_spawn_enemy_on_selected_tile,
-			"Select Tiles to Spawn " + enemy_data.enemy_name + " on")
+			"Select Tiles to Spawn " + enemy_data.entity_name + " on")
 
 
 func _spawn_enemy_on_selected_tile(tile: Tile):

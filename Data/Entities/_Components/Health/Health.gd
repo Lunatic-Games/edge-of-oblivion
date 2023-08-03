@@ -29,6 +29,7 @@ func take_damage(damage: int) -> int:
 	
 	var amount_changed: int = value_before - current_value
 	if amount_changed > 0:
+		update_health_bar()
 		value_changed.emit(amount_changed)
 	
 	if is_alive() == false:
@@ -48,6 +49,7 @@ func heal(heal_amount: int) -> int:
 	var amount_changed: int = current_value - value_before
 	
 	if amount_changed > 0:
+		update_health_bar()
 		value_changed.emit(amount_changed)
 	
 	return amount_changed
@@ -55,3 +57,10 @@ func heal(heal_amount: int) -> int:
 
 func is_alive() -> bool:
 	return current_value > 0
+
+
+func update_health_bar() -> void:
+	var target_value: float = float(current_value) / float(data.max_health) * 100.0
+	
+	var tween: Tween = entity.create_tween()
+	tween.tween_property(entity.health_bar, "value", target_value, 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)

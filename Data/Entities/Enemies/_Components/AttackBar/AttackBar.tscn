@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://buofx67yt2myt"]
+
+[ext_resource type="Script" path="res://Data/Entities/Enemies/_Components/AttackBar/AttackBar.gd" id="1_ngpvg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njfde"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1y27"]
+resource_local_to_scene = true
+bg_color = Color(0.223529, 0.478431, 0.611765, 1)
+
+[sub_resource type="Animation" id="Animation_fpcjl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackBar:theme_override_styles/fill:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.223529, 0.478431, 0.611765, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tk3ob"]
+resource_name = "flash"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackBar:theme_override_styles/fill:bg_color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.223529, 0.478431, 0.611765, 1), Color(0.776471, 0.894118, 0.964706, 1), Color(0.223529, 0.478431, 0.611765, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jsc2o"]
+_data = {
+"RESET": SubResource("Animation_fpcjl"),
+"flash": SubResource("Animation_tk3ob")
+}
+
+[node name="AttackBar" type="ProgressBar"]
+offset_left = -24.0
+offset_top = 35.0
+offset_right = 24.0
+offset_bottom = 39.0
+theme_override_styles/background = SubResource("StyleBoxFlat_njfde")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r1y27")
+show_percentage = false
+script = ExtResource("1_ngpvg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_jsc2o")
+}

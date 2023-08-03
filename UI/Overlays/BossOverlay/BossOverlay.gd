@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 func _on_boss_spawned(boss: Enemy) -> void:
-	title.text = "[shake]" + boss.data.enemy_name + "[/shake]"
+	title.text = "[shake]" + boss.data.entity_name + "[/shake]"
 	boss.health_changed.connect(_on_boss_health_changed.bind(boss))
 	show()
 

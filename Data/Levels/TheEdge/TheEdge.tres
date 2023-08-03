@@ -1,24 +1,24 @@
 [gd_resource type="Resource" script_class="LevelData" load_steps=8 format=3 uid="uid://bj2807sghnvk0"]
 
 [ext_resource type="PackedScene" uid="uid://bvu03ruea1xp7" path="res://Data/Levels/TheEdge/TheEdge.tscn" id="1_k1yk8"]
-[ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Faded/Faded.tres" id="2_gc6kx"]
-[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="3_muwfv"]
+[ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Faded/Faded.tres" id="2_fcdim"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="2_xcnee"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="3_o20or"]
-[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="4_y7l5b"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="4_qop6g"]
 
-[sub_resource type="Resource" id="Resource_p30rr"]
-script = ExtResource("4_y7l5b")
-turn_wait_from_previous_wave = 1
-"# Faded" = 1
+[sub_resource type="Resource" id="Resource_g7mw5"]
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 1
+"# Faded" = 3
 "info_ " = null
 
-[sub_resource type="Resource" id="Resource_1d8pj"]
-script = ExtResource("3_muwfv")
-enemies = [ExtResource("2_gc6kx")]
-waves = [SubResource("Resource_p30rr")]
+[sub_resource type="Resource" id="Resource_x6fjg"]
+script = ExtResource("2_xcnee")
+enemies = Array[Resource("res://Data/Entities/Enemies/ENEMY_DATA.gd")]([ExtResource("2_fcdim")])
+waves = Array[ExtResource("4_qop6g")]([SubResource("Resource_g7mw5")])
 
 [resource]
 script = ExtResource("3_o20or")
 level_name = "The Edge"
 level_scene = ExtResource("1_k1yk8")
-level_waves = SubResource("Resource_1d8pj")
+level_waves = SubResource("Resource_x6fjg")
