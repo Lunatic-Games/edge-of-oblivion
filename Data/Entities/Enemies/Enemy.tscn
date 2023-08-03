@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://fujdstcnhao2"]
+[gd_scene load_steps=4 format=3 uid="uid://fujdstcnhao2"]
 
 [ext_resource type="PackedScene" uid="uid://dvxtrysir3pm4" path="res://Data/Entities/Entity.tscn" id="1_7ubr1"]
+[ext_resource type="Material" uid="uid://dtm7co10b0rj" path="res://Shaders/enemy_material.tres" id="2_0vysr"]
 [ext_resource type="Script" path="res://Data/Entities/Enemies/Enemy.gd" id="2_553l7"]
 
 [node name="Enemy" instance=ExtResource("1_7ubr1")]
+material = ExtResource("2_0vysr")
 script = ExtResource("2_553l7")

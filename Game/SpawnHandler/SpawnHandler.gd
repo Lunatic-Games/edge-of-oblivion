@@ -21,12 +21,12 @@ func spawn_player() -> Player:
 func spawn_enemies(enemies: Array[EnemyData]) -> void:
 	for enemy_data in enemies:
 		var spawn_flag: SpawnFlag = spawn_flags.pop_front()
-		if spawn_flag == null or spawn_flag.current_tile == null:  # Check for invalid due to failed move
+		if spawn_flag == null or spawn_flag.did_fail_to_relocate():
 			# More enemies to spawn then there are spawn flags, map likely too small
 			break
 		spawn_flag.destroy_self()
 		
-		var _enemy: Enemy = spawn_enemy_on_tile(enemy_data, spawn_flag.current_tile)
+		var _enemy: Enemy = spawn_enemy_on_tile(enemy_data, spawn_flag.occupancy.current_tile)
 	
 	assert(spawn_flags.is_empty(), "More spawn flags than enemies to spawn for this round.")
 

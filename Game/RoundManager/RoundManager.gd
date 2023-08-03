@@ -10,11 +10,11 @@ const DELAY_AFTER_ENEMY_SPAWN: float = 0.1
 const DELAY_AFTER_FLAG_SPAWN: float = 0.1
 
 var current_round: int = 1
-var is_turn_processing: bool = false
+var is_round_processing: bool = false
 
 
 func update(player: Player, game: Game):
-	if is_turn_processing:
+	if is_round_processing:
 		return
 	
 	player.input_controller.check_for_input()
@@ -24,7 +24,7 @@ func update(player: Player, game: Game):
 
 func on_player_finished_moving(player: Player, game: Game) -> void:
 	var scene_tree: SceneTree = game.get_tree()
-	is_turn_processing = true
+	is_round_processing = true
 	
 	await scene_tree.create_timer(DELAY_AFTER_MOVING).timeout
 	for item in player.inventory.items.values():
@@ -55,7 +55,7 @@ func on_player_finished_moving(player: Player, game: Game) -> void:
 	if is_instance_valid(player):  # If they died during enemy turn
 		player.input_controller.reset_moves_remaining()
 	
-	is_turn_processing = false
+	is_round_processing = false
 
 
 static func calculate_time_between_player_move() -> float:

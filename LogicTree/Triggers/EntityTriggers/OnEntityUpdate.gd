@@ -32,8 +32,8 @@ func trigger(entity: Entity) -> void:
 		output_entity.value = [entity]
 	
 	if output_entity_tile != null:
-		if entity.current_tile != null:
-			output_entity_tile.value = [entity.current_tile]
+		if entity.occupancy.current_tile != null:
+			output_entity_tile.value = [entity.occupancy.current_tile]
 		else:
 			output_entity_tile.value.clear()
 	

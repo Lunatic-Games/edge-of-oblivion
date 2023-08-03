@@ -32,6 +32,7 @@ func _ready() -> void:
 	
 	GlobalGameState.new_game(self)
 	player = spawn_handler.spawn_player()
+	spawn_flags_for_next_round()
 	
 	GlobalSignals.run_started.emit()
 
@@ -89,13 +90,13 @@ func check_for_upgrades() -> void:
 
 func spawn_enemies_for_round() -> void:
 	var round_i: int = turn_manager.current_round
-	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_turn(round_i)
+	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_round(round_i)
 	spawn_handler.spawn_enemies(enemies_to_spawn)
 
 
 func spawn_flags_for_next_round() -> void:
 	var round_i: int = turn_manager.current_round
-	var n_enemies_next_turn: int = level.data.level_waves.get_enemies_for_turn(round_i + 1).size()
+	var n_enemies_next_turn: int = level.data.level_waves.get_enemies_for_round(round_i + 1).size()
 	spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
 
 
