@@ -2,8 +2,8 @@ class_name SpawnHandler
 extends Node
 
 
-const PLAYER_SCENE = preload("res://Data/Occupants/Player/Player.tscn")
-const SPAWN_FLAG_SCENE = preload("res://Data/Occupants/SpawnFlag/SpawnFlag.tscn")
+var PLAYER_DATA: PlayerData = load("res://Data/Entities/Player/PlayerData.tres")
+const SPAWN_FLAG_DATA: EntityData = preload("res://Data/Entities/SpawnFlag/SpawnFlagData.tres")
 
 var spawned_enemies: Array[Enemy] = []
 var spawn_flags: Array[SpawnFlag] = []
@@ -12,7 +12,10 @@ var spawn_flags: Array[SpawnFlag] = []
 func spawn_player() -> Player:
 	var spawn_tile: Tile = GlobalGameState.board.get_random_unoccupied_tile()
 	assert(spawn_tile != null, "No free tile to spawn player on.")
-	return spawn_occupant_on_tile(PLAYER_SCENE, spawn_tile)
+	
+	var player: Player = spawn_entity_on_tile(PLAYER_DATA, spawn_tile)
+	GlobalSignals.player_spawned.emit(player)
+	return player
 
 
 func spawn_enemies(enemies: Array[EnemyData]) -> void:
@@ -29,18 +32,11 @@ func spawn_enemies(enemies: Array[EnemyData]) -> void:
 
 
 func spawn_enemy_on_tile(enemy_data: EnemyData, tile: Tile) -> Enemy:
-	var enemy: Enemy = enemy_data.enemy_scene.instantiate()
-	enemy.setup(enemy_data)
-	
-	GlobalGameState.board.add_child(enemy)
-	
-	tile.occupant = enemy
-	enemy.current_tile = tile
-	enemy.global_position = tile.global_position
-	
+	var enemy: Enemy = spawn_entity_on_tile(enemy_data, tile)
 	spawned_enemies.append(enemy)
+	
 	enemy.died.connect(_on_enemy_died.bind(enemy))
-	if enemy.data.is_boss:
+	if enemy_data.is_boss():
 		GlobalSignals.boss_spawned.emit(enemy)
 	return enemy
 
@@ -52,21 +48,22 @@ func spawn_flags_for_next_turn(n_flags: int) -> void:
 			# No more room to spawn
 			break
 		
-		var spawn_flag: SpawnFlag = spawn_occupant_on_tile(SPAWN_FLAG_SCENE, spawn_tile)
+		var spawn_flag: SpawnFlag = spawn_entity_on_tile(SPAWN_FLAG_DATA, spawn_tile)
 		spawn_flags.append(spawn_flag)
 
 
-func spawn_occupant_on_tile(occupant_scene: PackedScene, tile: Tile) -> Occupant:
-	var occupant: Occupant = occupant_scene.instantiate()
-	assert(occupant != null, "Failed to instantiate PackedScene as an Occupant")
+func spawn_entity_on_tile(entity_data: EntityData, tile: Tile) -> Entity:
+	var entity: Entity = entity_data.entity_scene.instantiate()
+	assert(entity != null, "Failed to instantiate PackedScene as an Entity")
 	
-	GlobalGameState.board.add_child(occupant)
+	GlobalGameState.board.add_child(entity)
+	entity.setup(entity_data)
 	
-	tile.occupant = occupant
-	occupant.current_tile = tile
-	occupant.global_position = tile.global_position
+	tile.occupant = entity
+	entity.occupancy.current_tile = tile
+	entity.global_position = tile.global_position
 	
-	return occupant
+	return entity
 
 
 func _on_enemy_died(enemy: Enemy) -> void:

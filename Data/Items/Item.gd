@@ -6,7 +6,7 @@ signal setup_completed
 signal tier_increased
 
 var data: ItemData = null
-var user: Unit = null
+var user: Entity = null
 var current_tier: int = 0
 
 @onready var texture_rect: TextureRect = $Texture

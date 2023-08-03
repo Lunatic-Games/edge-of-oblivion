@@ -3,20 +3,30 @@ class_name UpgradeMenu
 extends CanvasLayer
 
 
+#const PLAYER_DATA: PlayerData = preload("res://Data/Entities/Player/PlayerData.tres")
+
 @export_range(1, 5, 1, "or_greater") var max_n_cards_to_spawn: int = 3:
 	set = _set_n_card_to_spawn
-@export_range(0, 10, 1, "or_greater") var inventory_limit: int = 5:
-	set = _set_inventory_limit
+
+var inventory_limit: int = 5
+var n_queued_upgrades: int = 0  # For if multiple level ups occur
 
 # Size of (inventory_limit + 1) and contains ints between 0 and max_n_cards_to_spawn
 var n_new_items_for_each_inventory_size = []
-var n_queued_upgrades: int = 0  # For if multiple level ups occur
+
 
 @onready var background_animator: AnimationPlayer = $Background/BackgroundAnimator
 @onready var title: Label = $Title
 @onready var title_animator: AnimationPlayer = $Title/TitleAnimator
 @onready var card_display: CardDisplay = $CardDisplay
 @onready var visibility_button: Button = $VisibilityButton
+
+
+func _ready() -> void:
+	#inventory_limit = PLAYER_DATA.inventory_data.max_inventory_size
+	inventory_limit = 5
+	_resize_n_new_items_for_each_inventory_size()
+	notify_property_list_changed()
 
 
 # Upgrades are queued during turn and then done on start of player turn
@@ -90,12 +100,6 @@ func _on_card_display_card_selected() -> void:
 
 func _set_n_card_to_spawn(value: int):
 	max_n_cards_to_spawn = value
-	notify_property_list_changed()
-
-
-func _set_inventory_limit(value: int):
-	inventory_limit = value
-	_resize_n_new_items_for_each_inventory_size()
 	notify_property_list_changed()
 
 

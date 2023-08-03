@@ -19,7 +19,7 @@ func update_available_enemies(enemies: Array[EnemyData]) -> void:
 		if enemy_data == null:
 			continue
 		
-		var export_name: String = "# " + enemy_data.enemy_name
+		var export_name: String = "# " + enemy_data.entity_name
 		_enemy_data[export_name] = enemy_data
 		
 		if not _spawn_data.has(export_name):

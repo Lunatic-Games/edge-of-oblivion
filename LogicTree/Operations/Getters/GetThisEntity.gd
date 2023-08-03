@@ -8,7 +8,7 @@ extends LogicTreeGetterOperation
 
 
 func perform_behavior() -> void:
-	var this_entity: Occupant = owner as Occupant
+	var this_entity: Entity = owner as Entity
 	assert(this_entity != null,
 			"Trying to get 'this entity' for '" + name + "'but 'this entity' is not an entity")
 	

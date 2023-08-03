@@ -31,8 +31,7 @@ func _ready() -> void:
 	await level.board.tile_generation_completed
 	
 	GlobalGameState.new_game(self)
-	var player: Player = spawn_handler.spawn_player()
-	player.add_starting_items()
+	spawn_handler.spawn_player()
 	
 	GlobalSignals.run_started.emit()
 

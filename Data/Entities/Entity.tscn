@@ -1,0 +1,120 @@
+[gd_scene load_steps=13 format=3 uid="uid://dvxtrysir3pm4"]
+
+[ext_resource type="Script" path="res://Data/Entities/Entity.gd" id="1_cwokw"]
+[ext_resource type="Texture2D" uid="uid://mtn0jnckub5a" path="res://Assets/art/icons/targets/sbed/head-shot.svg" id="2_43fd8"]
+[ext_resource type="Script" path="res://LogicTree/Triggers/EntityTriggers/OnEntityUpdate.gd" id="3_376v7"]
+[ext_resource type="Script" path="res://LogicTree/Variables/EntityArrayVariable.gd" id="4_5mgbo"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="5_yea2p"]
+[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="6_h4f05"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2kyyk"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_id850"]
+bg_color = Color(0.603922, 0.32549, 0.858824, 1)
+
+[sub_resource type="Animation" id="Animation_7tpjf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="6"]
+resource_name = "damaged"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.125, 0.125), Vector2(0.085, 0.085), Vector2(0.1, 0.1), Vector2(0.09, 0.09), Vector2(0.13, 0.13), Vector2(0.125, 0.125)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -10.0, 10.0, -5.0, 5.0, -1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8ung8"]
+resource_name = "spawn"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.18, 0.18), Vector2(0.125, 0.125)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mhx0i"]
+_data = {
+"RESET": SubResource("Animation_7tpjf"),
+"damaged": SubResource("6"),
+"spawn": SubResource("Animation_8ung8")
+}
+
+[node name="Entity" type="Node2D"]
+script = ExtResource("1_cwokw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_43fd8")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -24.0
+offset_top = 30.0
+offset_right = 24.0
+offset_bottom = 34.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2kyyk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_id850")
+value = 100.0
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spawn"
+libraries = {
+"": SubResource("AnimationLibrary_mhx0i")
+}
+
+[node name="LT_PersistentVariables" type="Node" parent="."]
+
+[node name="LT_OnEntityUpdate" type="Node" parent="." node_paths=PackedStringArray("output_entity", "output_entity_tile", "logic_tree_on_trigger")]
+script = ExtResource("3_376v7")
+output_entity = NodePath("This enemy")
+output_entity_tile = NodePath("Enemy tile")
+logic_tree_on_trigger = NodePath("LogicTree")
+
+[node name="This enemy" type="Node" parent="LT_OnEntityUpdate"]
+script = ExtResource("4_5mgbo")
+
+[node name="Enemy tile" type="Node" parent="LT_OnEntityUpdate"]
+script = ExtResource("5_yea2p")
+
+[node name="LogicTree" type="Node" parent="LT_OnEntityUpdate"]
+script = ExtResource("6_h4f05")

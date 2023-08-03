@@ -20,10 +20,10 @@ func perform_behavior() -> void:
 		damage = damage_override.value
 	
 	var total_damage_dealt: int = 0
-	var entities_killed: Array[Unit] = []
+	var entities_killed: Array[Entity] = []
 	
 	for tile in tiles.value:
-		var entity: Unit = tile.occupant as Unit
+		var entity: Entity = tile.occupant as Entity
 		if entity == null:
 			continue
 		
@@ -39,12 +39,12 @@ func perform_behavior() -> void:
 		output_total_damage.value = total_damage_dealt
 
 
-func handle_damage_signal(amount_damaged: int, damaged_entity: Unit):
+func handle_damage_signal(amount_damaged: int, damaged_entity: Entity):
 	var was_killing_blow: bool = not damaged_entity.is_alive()
 	if (owner as Tile) != null:
 		GlobalLogicTreeSignals.entity_damaged.emit(null, null, owner, damaged_entity,
 			amount_damaged, was_killing_blow)
-	elif (owner as Unit) != null:
+	elif (owner as Entity) != null:
 		GlobalLogicTreeSignals.entity_damaged.emit(null, owner, null, damaged_entity, 
 		amount_damaged, was_killing_blow)
 	elif (owner as Item) != null:

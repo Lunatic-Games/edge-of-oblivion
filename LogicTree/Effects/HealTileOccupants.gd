@@ -21,7 +21,7 @@ func perform_behavior() -> void:
 	
 	var total_healed: int = 0
 	for tile in tiles.value:
-		var unit: Unit = tile.occupant as Unit
+		var unit: Entity = tile.occupant as Entity
 		if unit == null:
 			continue
 		
@@ -36,10 +36,10 @@ func perform_behavior() -> void:
 		output_total_healed.value = total_healed
 
 
-func handle_heal_signal(amount_healed: int, healed_entity: Unit):
+func handle_heal_signal(amount_healed: int, healed_entity: Entity):
 	if (owner as Tile) != null:
 		GlobalLogicTreeSignals.entity_healed.emit(null, null, owner, healed_entity, amount_healed)
-	elif (owner as Unit) != null:
+	elif (owner as Entity) != null:
 		GlobalLogicTreeSignals.entity_healed.emit(null, owner, null, healed_entity, amount_healed)
 	elif (owner as Item) != null:
 		GlobalLogicTreeSignals.entity_healed.emit(owner, null, null, healed_entity, amount_healed)

@@ -24,7 +24,7 @@ func perform_behavior() -> void:
 	if tile_n == 0 or destination_n == 0:
 		return
 	
-	var tile_entity: Unit = tile.value[0].occupant as Unit
+	var tile_entity: Entity = tile.value[0].occupant as Entity
 	assert(tile_entity != null,
 		"Invalid move target for '" + name + "'")
 	

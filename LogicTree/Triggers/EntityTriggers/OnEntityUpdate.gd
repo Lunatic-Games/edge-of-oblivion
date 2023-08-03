@@ -18,7 +18,7 @@ func _ready() -> void:
 	super._ready()
 	
 	if entity_filter == EntityFilter.THIS_ENTITY:
-		var as_entity: Occupant = owner as Occupant
+		var as_entity: Entity = owner as Entity
 		assert(as_entity != null,
 			"Entity filter set to 'this entity' for '" + name + "' but 'this entity' is not an entity")
 		as_entity.update_triggered.connect(trigger.bind(as_entity))
@@ -27,7 +27,7 @@ func _ready() -> void:
 		GlobalLogicTreeSignals.entity_update_triggered.connect(trigger)
 
 
-func trigger(entity: Occupant) -> void:
+func trigger(entity: Entity) -> void:
 	if output_entity != null:
 		output_entity.value = [entity]
 	

@@ -41,8 +41,8 @@ func _ready() -> void:
 	GlobalLogicTreeSignals.entity_damaged.connect(trigger)
 
 
-func trigger(source_item: Item, source_entity: Unit, source_tile: Tile,
-	receiver_entity: Unit, damage_amount: int, was_killing_blow: bool) -> void:
+func trigger(source_item: Item, source_entity: Entity, source_tile: Tile,
+	receiver_entity: Entity, damage_amount: int, was_killing_blow: bool) -> void:
 	
 	if only_if_nonzero_amount == true and damage_amount == 0:
 		return
@@ -98,7 +98,7 @@ func trigger(source_item: Item, source_entity: Unit, source_tile: Tile,
 	logic_tree_on_trigger.evaluate()
 
 
-func does_match_source_filter(source_item: Item, source_entity: Unit, source_tile: Tile) -> bool:
+func does_match_source_filter(source_item: Item, source_entity: Entity, source_tile: Tile) -> bool:
 	match source_filter:
 		SourceType.ANY:
 			return true
@@ -120,7 +120,7 @@ func does_match_source_filter(source_item: Item, source_entity: Unit, source_til
 	return false
 
 
-func does_match_receiver_filter(receiver_entity: Unit) -> bool:
+func does_match_receiver_filter(receiver_entity: Entity) -> bool:
 	match receiver_filter:
 		ReceiverType.ANY:
 			return true

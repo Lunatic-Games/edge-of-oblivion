@@ -1,7 +1,7 @@
 extends MenuDropdownButton
 
 
-const ENEMIES_FOLDER = "res://Data/Occupants/Enemies"
+const ENEMIES_FOLDER = "res://Data/Entities/Enemies"
 const EXCLUDED_ENEMY_NAMES = ["Boss", "Enemy"]
 
 var loaded_normal_enemies: Array[EnemyData] = []
@@ -19,12 +19,12 @@ func setup() -> void:
 	add_spacer()
 
 	for enemy_data in loaded_normal_enemies:
-		add_to_menu(enemy_data.enemy_name, _on_enemy_button_pressed.bind(enemy_data))
+		add_to_menu(enemy_data.entity_name, _on_enemy_button_pressed.bind(enemy_data))
 	
 	add_spacer()
 	
 	for enemy_data in loaded_bosses:
-		add_to_menu(enemy_data.enemy_name, _on_enemy_button_pressed.bind(enemy_data))
+		add_to_menu(enemy_data.entity_name, _on_enemy_button_pressed.bind(enemy_data))
 
 
 func _random_toggle_pressed():
@@ -67,7 +67,7 @@ func _spawn_enemy_on_random_tile(enemy_data: EnemyData):
 
 
 func _load_enemies():
-	var enemy_paths = FileUtility.get_all_files_under_folder("res://Data/Occupants/Enemies", ".tres")
+	var enemy_paths = FileUtility.get_all_files_under_folder(ENEMIES_FOLDER, ".tres")
 	for path in enemy_paths:
 		var display_name: String = path.get_file().trim_suffix(".tres")
 		if EXCLUDED_ENEMY_NAMES.has(display_name):
@@ -75,7 +75,7 @@ func _load_enemies():
 		
 		var enemy_data: EnemyData = load(path)
 		
-		if enemy_data.is_boss:
+		if enemy_data.is_boss():
 			loaded_bosses.append(enemy_data)
 		else:
 			loaded_normal_enemies.append(enemy_data)

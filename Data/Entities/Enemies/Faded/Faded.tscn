@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqdxbijvgbrxm"]
+
+[ext_resource type="PackedScene" uid="uid://fujdstcnhao2" path="res://Data/Entities/Enemies/Enemy.tscn" id="1_g358b"]
+[ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="2_8k64s"]
+
+[node name="Faded" instance=ExtResource("1_g358b")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_8k64s")
