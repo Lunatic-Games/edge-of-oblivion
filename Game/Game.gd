@@ -35,15 +35,19 @@ func _ready() -> void:
 	await level.board.tile_generation_completed
 	
 	GlobalGameState.new_game(self)
+	
 	player = spawn_handler.spawn_player()
 	player.inventory.add_starting_items()
+	player.died.connect(_on_player_died)
+	
 	spawn_flags_for_next_round()
 	
 	GlobalSignals.run_started.emit()
 
 
 func _process(_delta: float) -> void:
-	turn_manager.update(player, self)
+	if is_instance_valid(player) and player.health.is_alive():
+		turn_manager.update(player, self)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -109,7 +113,7 @@ func _on_player_levelled_up(_player: Player):
 	upgrade_menu.queue_upgrade()
 
 
-func _on_player_died(_player: Player) -> void:
+func _on_player_died() -> void:
 	game_over()
 
 

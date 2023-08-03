@@ -35,7 +35,7 @@ func update():
 
 
 func _on_health_hit_zero():
-	occupancy.current_tile = null
+	occupancy.current_tile.occupant = null
 	died.emit()
 	
 	var tween: Tween = create_tween().set_parallel(true)

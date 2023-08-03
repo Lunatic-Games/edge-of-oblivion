@@ -14,7 +14,7 @@ func _init(p_entity: Entity, p_data: InventoryData):
 
 func add_starting_items():
 	for item_data in data.starting_items:
-		add_item(item_data)
+		add_item(item_data, false)
 
 
 func add_or_upgrade_item(item_data: ItemData, animate: bool = true) -> void:

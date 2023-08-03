@@ -19,11 +19,14 @@ func _init(p_entity: Entity, p_data: HealthData):
 
 func take_damage(damage: int) -> int:
 	assert(damage >= 0, "Damage should be positive")
-	if damage == 0 or is_alive() == false:
+	if damage == 0 or is_alive() == false or data.can_be_damaged == false:
 		return 0
 	
 	var value_before: int = current_value
-	current_value = maxi(current_value - damage, 0)
+	if data.can_be_killed:
+		current_value = maxi(current_value - damage, 0)
+	else:
+		current_value = maxi(current_value - damage, 1)
 	
 	entity.animator.play("damaged")
 	
@@ -41,7 +44,7 @@ func take_damage(damage: int) -> int:
 func heal(heal_amount: int) -> int:
 	assert(heal_amount >= 0, "Heal amount should be positive")
 	
-	if heal_amount == 0:
+	if heal_amount == 0 or is_alive() == false or data.can_be_healed == false:
 		return 0
 	
 	var value_before: int = current_value
@@ -53,6 +56,14 @@ func heal(heal_amount: int) -> int:
 		value_changed.emit(amount_changed)
 	
 	return amount_changed
+
+
+func full_heal() -> int:
+	return heal(data.max_health - current_value)
+
+
+func deal_lethal_damage() -> int:
+	return take_damage(current_value)
 
 
 func is_alive() -> bool:

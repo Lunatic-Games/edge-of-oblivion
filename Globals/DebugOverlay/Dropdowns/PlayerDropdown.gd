@@ -22,36 +22,32 @@ func damage_player() -> void:
 	if GlobalGameState.player == null:
 		return
 	
-	var max_health: int = GlobalGameState.player.max_hp
+	var max_health: int = GlobalGameState.player.health.data.max_health
 	var damage_amount: int = int(max_health / 4.0)
-	GlobalGameState.player.take_damage(damage_amount)
+	GlobalGameState.player.health.take_damage(damage_amount)
 
 
 func partially_heal_player() -> void:
 	if GlobalGameState.player == null:
 		return
 	
-	var max_health: int = GlobalGameState.player.max_hp
+	var max_health: int = GlobalGameState.player.health.data.max_health
 	var heal_amount: int = int(max_health / 4.0) 
-	GlobalGameState.player.heal(heal_amount)
+	GlobalGameState.player.health.heal(heal_amount)
 
 
 func fully_heal_player() -> void:
 	if GlobalGameState.player == null:
 		return
 	
-	var max_health: int = GlobalGameState.player.max_hp
-	# Make sure it's not negative and that it's a non-zero heal (for vfx to trigger)
-	var heal_amount: int = max(1, max_health - GlobalGameState.player.hp)
-	GlobalGameState.player.heal(heal_amount)
+	GlobalGameState.player.health.full_heal()
 
 
 func kill_player() -> void:
 	if GlobalGameState.player == null:
 		return
 	
-	var current_health: int = GlobalGameState.player.hp
-	GlobalGameState.player.take_damage(current_health)
+	GlobalGameState.player.health.deal_lethal_damage()
 
 
 func teleport_player() -> void:
@@ -63,7 +59,9 @@ func _teleport_player_to_tile(tile: Tile):
 	if tile == null or GlobalGameState.player == null:
 		return
 	
-	if tile.occupant != null and tile.occupant.occupant_type == tile.occupant.OccupantType.BLOCKING:
-		return
+	if tile.occupant != null:
+		var blocking_behavior = tile.occupant.occupancy.data.blocking_behavior
+		if blocking_behavior != OccupancyData.BlockingBehavior.FREE_SPACE:
+			return
 	
-	GlobalGameState.player.move_to_tile(tile)
+	GlobalGameState.player.occupancy.move_to_tile(tile)

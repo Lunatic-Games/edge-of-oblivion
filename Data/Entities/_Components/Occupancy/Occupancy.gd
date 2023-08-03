@@ -22,15 +22,16 @@ func move_to_tile(destination_tile: Tile) -> bool:
 	var destination_occupant: Entity = destination_tile.occupant
 	if destination_occupant:
 		var destination_occupancy: EntityOccupancy = destination_occupant.occupancy
-		if destination_occupancy.blocking_behavior == OccupancyData.BlockingBehavior.OCCUPIED:
+		if destination_occupancy.data.blocking_behavior == OccupancyData.BlockingBehavior.OCCUPIED:
 			var tile_to_displace_to: Tile = get_displace_tile(destination_tile)
 			if tile_to_displace_to == null:
 				return false
 			
 			destination_occupancy.move_to_tile(tile_to_displace_to)
 		else:
-			return false
-			
+			# Collect
+			pass
+	
 	current_tile.occupant = null
 	current_tile = destination_tile
 	current_tile.occupant = entity

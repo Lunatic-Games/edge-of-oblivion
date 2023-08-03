@@ -32,14 +32,14 @@ func _ready() -> void:
 		owner_enemy.ready.connect(_on_owner_enemy_ready)
 
 
-func refresh() -> void:
+func refresh(animate_ready_state: bool = true) -> void:
 	if x_override != null:
 		x = x_override.value
 	
 	var owner_item: Item = owner as Item
 	if owner_item != null:
 		if auto_update_item_ready_state:
-			update_item_ready_state(owner_item)
+			update_item_ready_state(owner_item, animate_ready_state)
 		if auto_update_item_countdown:
 			update_item_countdown(owner_item)
 	
@@ -74,11 +74,11 @@ func evaluate_condition() -> bool:
 	return met_condition
 
 
-func update_item_ready_state(item: Item):
+func update_item_ready_state(item: Item, animate: bool = true):
 	if is_one_before():
-		item.appear_ready()
+		item.appear_ready(animate)
 	elif times_evaluated == 0:
-		item.appear_unready()
+		item.appear_unready(animate)
 
 
 func update_item_countdown(item: Item):
@@ -98,8 +98,8 @@ func update_enemy_attack_bar(enemy: Enemy):
 
 
 func _on_owner_item_ready():
-	refresh()
+	refresh(false)
 
 
 func _on_owner_enemy_ready():
-	refresh()
+	refresh(false)
