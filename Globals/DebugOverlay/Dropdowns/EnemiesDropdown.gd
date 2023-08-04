@@ -44,4 +44,4 @@ func _update_enemy_on_tile(tile: Tile):
 	if enemy == null:
 		return
 
-	enemy.health.deal_lethal_damage()
+	enemy.update()

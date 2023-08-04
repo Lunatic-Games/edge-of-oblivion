@@ -22,7 +22,7 @@ func move_to_tile(destination_tile: Tile) -> bool:
 	var destination_occupant: Entity = destination_tile.occupant
 	if destination_occupant:
 		var destination_occupancy: EntityOccupancy = destination_occupant.occupancy
-		if destination_occupancy.data.blocking_behavior == OccupancyData.BlockingBehavior.OCCUPIED:
+		if destination_occupancy.data.blocking_behavior == OccupancyData.BlockingBehavior.STANDARD:
 			var tile_to_displace_to: Tile = get_displace_tile(destination_tile)
 			if tile_to_displace_to == null:
 				return false
@@ -35,16 +35,19 @@ func move_to_tile(destination_tile: Tile) -> bool:
 	current_tile.occupant = null
 	current_tile = destination_tile
 	current_tile.occupant = entity
-	
+	do_move_animation(current_tile.global_position)
+	return true
+
+
+func do_move_animation(destination: Vector2):
 	var base_tween: Tween = entity.create_tween()
-	base_tween.tween_property(entity, "global_position", current_tile.global_position, 0.20).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	base_tween.tween_property(entity, "global_position", destination, 0.20).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	
 	var offset_tween: Tween = entity.create_tween()
-	offset_tween.tween_property(entity.sprite, "position:y", -15.0, 0.10).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-	offset_tween.tween_property(entity.sprite, "position:y", 15.0, 0.10).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	offset_tween.tween_property(entity.sprite, "position:y", -15.0, 0.10).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	offset_tween.tween_property(entity.sprite, "position:y", 15.0, 0.10).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	
 	base_tween.finished.connect(_on_move_tween_finished, CONNECT_ONE_SHOT)
-	return true
 
 
 func get_displace_tile(base_tile: Tile) -> Tile:

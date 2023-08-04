@@ -84,6 +84,10 @@ func is_position_within_tile(pos: Vector2):
 	return background.get_global_rect().has_point(pos)
 
 
+func get_approximate_size() -> Vector2i:
+	return background.get_rect().size
+
+
 func _set_occupant(new_occupant: Entity):
 	var occupant_before: Entity = occupant
 	occupant = new_occupant

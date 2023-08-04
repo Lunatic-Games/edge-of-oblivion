@@ -18,8 +18,8 @@ emit_particles_on_taking_damage = true
 script = ExtResource("3_jlpar")
 size = 0
 blocking_behavior = 1
+can_be_pushed_off_map = true
 can_push_entities = false
-can_be_pushed_off_map = false
 
 [resource]
 script = ExtResource("1_olb4q")

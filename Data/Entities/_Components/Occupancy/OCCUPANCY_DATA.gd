@@ -10,14 +10,14 @@ enum EntitySize {
 
 enum BlockingBehavior {
 	FREE_SPACE,
-	OCCUPIED,
+	STANDARD,
 	IMMOVABLE
 }
 
 @export var size: EntitySize = EntitySize.SMALL
-@export var blocking_behavior: BlockingBehavior = BlockingBehavior.OCCUPIED
+@export var blocking_behavior: BlockingBehavior = BlockingBehavior.STANDARD
+@export var can_be_pushed_off_map: bool = true
 @export var can_push_entities: bool = false
-@export var can_be_pushed_off_map: bool = false
 
 
 func can_move_to_tile(tile: Tile) -> bool:
@@ -29,7 +29,22 @@ func can_move_to_tile(tile: Tile) -> bool:
 	if other_occupancy_data.blocking_behavior == BlockingBehavior.IMMOVABLE:
 		return false
 	
-	if other_occupancy_data.blocking_behavior == BlockingBehavior.FREE_SPACE:
+	if other_occupancy_data.behaves_like_open_tile():
 		return true
 	
 	return can_push_entities
+
+
+func behaves_like_open_tile():
+	return blocking_behavior == BlockingBehavior.FREE_SPACE
+
+
+func can_be_knockbacked() -> bool:
+	match blocking_behavior:
+		BlockingBehavior.FREE_SPACE:
+			return false
+		BlockingBehavior.STANDARD:
+			return true
+		BlockingBehavior.IMMOVABLE:
+			return false
+	return false

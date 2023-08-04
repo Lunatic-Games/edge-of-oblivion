@@ -44,8 +44,8 @@ xp_level_10 = 1
 script = ExtResource("4_2vscx")
 size = 0
 blocking_behavior = 1
-can_push_entities = false
 can_be_pushed_off_map = false
+can_push_entities = false
 
 [resource]
 script = ExtResource("1_sx63k")

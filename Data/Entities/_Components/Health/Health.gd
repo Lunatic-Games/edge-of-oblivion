@@ -86,8 +86,8 @@ func _die() -> void:
 	died.emit()
 	
 	var tween: Tween = entity.create_tween().set_parallel(true)
-	tween.tween_property(entity, "global_position:y", -25.0, 0.5).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
-	tween.tween_property(entity, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(entity.sprite, "position:y", -25.0, 0.5).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	tween.tween_property(entity, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	
 	await tween.finished
 	entity.queue_free()

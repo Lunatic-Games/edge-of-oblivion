@@ -8,8 +8,8 @@
 script = ExtResource("2_8yiuj")
 size = 0
 blocking_behavior = 0
-can_push_entities = false
 can_be_pushed_off_map = false
+can_push_entities = false
 
 [resource]
 script = ExtResource("1_yj4qf")

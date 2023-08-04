@@ -59,9 +59,7 @@ func _teleport_player_to_tile(tile: Tile):
 	if tile == null or GlobalGameState.player == null:
 		return
 	
-	if tile.occupant != null:
-		var blocking_behavior = tile.occupant.occupancy.data.blocking_behavior
-		if blocking_behavior != OccupancyData.BlockingBehavior.FREE_SPACE:
-			return
+	if tile.occupant != null and !tile.occupant.occupancy.data.behaves_like_open_tile():
+		return
 	
 	GlobalGameState.player.occupancy.move_to_tile(tile)
