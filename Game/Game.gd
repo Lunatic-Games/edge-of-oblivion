@@ -23,8 +23,6 @@ var run_stats: RunStats = RunStats.new()
 func _ready() -> void:
 	randomize()
 	
-	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
-	
 	level = level_data.level_scene.instantiate()
 	level.setup(level_data)
 	add_child(level)

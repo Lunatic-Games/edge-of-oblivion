@@ -15,6 +15,8 @@ max_health = 100
 can_be_damaged = true
 can_be_killed = true
 can_be_healed = true
+emit_particles_on_heal = true
+emit_particles_on_taking_damage = true
 
 [sub_resource type="Resource" id="Resource_08kry"]
 script = ExtResource("3_v1cor")
@@ -25,18 +27,18 @@ script = ExtResource("3_42vg8")
 max_inventory_size = 6
 starting_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("5_w4jcp")])
 
-[sub_resource type="Resource" id="Resource_81x5u"]
+[sub_resource type="Resource" id="Resource_85vcj"]
 script = ExtResource("4_6welu")
 max_level = 10
-xp_level2 = null
-xp_level3 = null
-xp_level4 = null
-xp_level5 = null
-xp_level6 = null
-xp_level7 = null
-xp_level8 = null
-xp_level9 = null
-xp_level10 = null
+xp_level_2 = 1
+xp_level_3 = 1
+xp_level_4 = 1
+xp_level_5 = 1
+xp_level_6 = 1
+xp_level_7 = 1
+xp_level_8 = 1
+xp_level_9 = 1
+xp_level_10 = 1
 
 [sub_resource type="Resource" id="Resource_yx0co"]
 script = ExtResource("4_2vscx")
@@ -49,7 +51,7 @@ can_be_pushed_off_map = false
 script = ExtResource("1_sx63k")
 input_controller_data = SubResource("Resource_08kry")
 inventory_data = SubResource("Resource_icrph")
-levelling_data = SubResource("Resource_81x5u")
+levelling_data = SubResource("Resource_85vcj")
 entity_scene = ExtResource("1_31to8")
 health_data = SubResource("Resource_jy6b3")
 occupancy_data = SubResource("Resource_yx0co")

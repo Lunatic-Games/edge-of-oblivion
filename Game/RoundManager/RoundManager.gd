@@ -37,7 +37,6 @@ func on_player_finished_moving(player: Player, game: Game) -> void:
 	
 	await scene_tree.create_timer(DELAY_AFTER_TILES).timeout
 	
-	GlobalSignals.enemy_turn_started.emit()
 	for enemy in game.spawn_handler.spawned_enemies:
 		enemy.update()
 	

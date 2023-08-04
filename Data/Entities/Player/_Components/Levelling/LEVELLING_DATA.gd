@@ -3,7 +3,7 @@ class_name LevellingData
 extends Resource
 
 
-const XP_EXPORT_PREFIX: String = "xp_level"
+const XP_EXPORT_PREFIX: String = "xp_level_"
 
 @export_range(1, 10, 1, "or_greater") var max_level: int = 10:
 	set = set_max_level
@@ -39,14 +39,17 @@ func _get_property_list() -> Array[Dictionary]:
 
 
 func _get(property: StringName) -> Variant:
-	if property.begins_with(XP_EXPORT_PREFIX) and xp_to_level.has(property):
-		return xp_to_level[property]
+	if property.begins_with(XP_EXPORT_PREFIX):
+		if xp_to_level.has(property):
+			return xp_to_level[property]
+		else:
+			return 1
 	
 	return null
 
 
 func _set(property: StringName, value: Variant) -> bool:
-	if property.begins_with(XP_EXPORT_PREFIX):
+	if property.begins_with(XP_EXPORT_PREFIX) and value > 0:
 		xp_to_level[property] = value
 	
 	return true

@@ -32,7 +32,8 @@ func take_damage(damage: int) -> int:
 		current_value = maxi(current_value - damage, 1)
 	
 	entity.animator.play("damaged")
-	_spawn_particles(DAMAGED_PARTICLES_SCENE)
+	if data.emit_particles_on_taking_damage:
+		_spawn_particles(DAMAGED_PARTICLES_SCENE)
 	
 	var amount_changed: int = value_before - current_value
 	if amount_changed > 0:
@@ -54,7 +55,8 @@ func heal(heal_amount: int) -> int:
 	var value_before: int = current_value
 	current_value = mini(current_value + heal_amount, data.max_health)
 	
-	_spawn_particles(HEAL_PARTICLES_SCENE)
+	if data.emit_particles_on_heal:
+		_spawn_particles(HEAL_PARTICLES_SCENE)
 	
 	var amount_changed: int = current_value - value_before
 	
