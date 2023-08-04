@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dvxtrysir3pm4" path="res://Data/Entities/Entity.tscn" id="1_7ubr1"]
 [ext_resource type="Material" uid="uid://d2p8yth5vp4kr" path="res://Shaders/dream_shader_material.tres" id="2_50ip7"]
 [ext_resource type="Script" path="res://Data/Entities/Enemies/Enemy.gd" id="2_553l7"]
-[ext_resource type="PackedScene" uid="uid://buofx67yt2myt" path="res://Data/Entities/Enemies/_Components/AttackBar/AttackBar.tscn" id="4_8glbs"]
+[ext_resource type="PackedScene" uid="uid://buofx67yt2myt" path="res://UI/Elements/AttackBar/AttackBar.tscn" id="4_8glbs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60g3f"]
 resource_local_to_scene = true

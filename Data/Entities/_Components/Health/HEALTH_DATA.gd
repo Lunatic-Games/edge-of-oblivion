@@ -6,3 +6,7 @@ extends Resource
 @export var can_be_damaged: bool = true
 @export var can_be_killed: bool = true
 @export var can_be_healed: bool = true
+
+@export_group("VFX")
+@export var emit_particles_on_heal: bool = true
+@export var emit_particles_on_taking_damage: bool = true

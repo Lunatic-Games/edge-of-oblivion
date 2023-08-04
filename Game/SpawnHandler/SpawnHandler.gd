@@ -35,7 +35,7 @@ func spawn_enemy_on_tile(enemy_data: EnemyData, tile: Tile) -> Enemy:
 	var enemy: Enemy = spawn_entity_on_tile(enemy_data, tile)
 	spawned_enemies.append(enemy)
 	
-	enemy.died.connect(_on_enemy_died.bind(enemy))
+	enemy.health.died.connect(_on_enemy_died.bind(enemy))
 	if enemy_data.is_boss():
 		GlobalSignals.boss_spawned.emit(enemy)
 	return enemy

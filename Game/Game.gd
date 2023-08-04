@@ -23,9 +23,6 @@ var run_stats: RunStats = RunStats.new()
 func _ready() -> void:
 	randomize()
 	
-	GlobalSignals.player_died.connect(_on_player_died)  # Game over!
-	GlobalSignals.boss_defeated.connect(_on_boss_defeated)  # Game won!
-	
 	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
 	
 	level = level_data.level_scene.instantiate()
@@ -38,7 +35,8 @@ func _ready() -> void:
 	
 	player = spawn_handler.spawn_player()
 	player.inventory.add_starting_items()
-	player.died.connect(_on_player_died)
+	player.health.died.connect(_on_player_died)
+	player.levelling.levelled_up.connect(_on_player_levelled_up)
 	
 	spawn_flags_for_next_round()
 	
@@ -98,18 +96,24 @@ func check_for_upgrades() -> void:
 
 
 func spawn_enemies_for_round() -> void:
+	if level.data.level_waves == null:
+		return
+	
 	var round_i: int = turn_manager.current_round
 	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_round(round_i)
 	spawn_handler.spawn_enemies(enemies_to_spawn)
 
 
 func spawn_flags_for_next_round() -> void:
+	if level.data.level_waves == null:
+		return
+	
 	var round_i: int = turn_manager.current_round
 	var n_enemies_next_turn: int = level.data.level_waves.get_enemies_for_round(round_i + 1).size()
 	spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
 
 
-func _on_player_levelled_up(_player: Player):
+func _on_player_levelled_up(_player_level: int):
 	upgrade_menu.queue_upgrade()
 
 

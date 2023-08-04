@@ -25,7 +25,7 @@ func perform_behavior() -> void:
 		if unit == null:
 			continue
 		
-		var amount_healed = unit.heal(heal)
+		var amount_healed = unit.health.heal(heal)
 		if amount_healed > 0:
 			total_healed += amount_healed
 		

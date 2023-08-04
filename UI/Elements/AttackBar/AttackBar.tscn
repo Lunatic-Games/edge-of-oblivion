@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://buofx67yt2myt"]
 
-[ext_resource type="Script" path="res://Data/Entities/Enemies/_Components/AttackBar/AttackBar.gd" id="1_ngpvg"]
+[ext_resource type="Script" path="res://UI/Elements/AttackBar/AttackBar.gd" id="1_ngpvg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njfde"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)

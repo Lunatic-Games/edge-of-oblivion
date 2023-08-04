@@ -16,7 +16,7 @@ func _process(_delta: float) -> void:
 func _on_player_spawned(spawned_player: Player) -> void:
 	assert(tracked_player == null, "Camera already has a player it is tracking")
 	tracked_player = spawned_player
-	spawned_player.died.connect(_on_player_died)
+	spawned_player.health.died.connect(_on_player_died)
 
 
 func _on_player_died() -> void:

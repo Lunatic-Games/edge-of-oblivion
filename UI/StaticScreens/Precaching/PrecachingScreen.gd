@@ -3,7 +3,7 @@ extends CanvasLayer
 
 const MAIN_MENU_SCENE: PackedScene = preload("res://UI/Menus/MainMenu/MainMenu.tscn")
 const PARTICLES_FOLDER_PATH: String = "res://Data/Particles"
-const UNITS_FOLDER_PATH: String = "res://Data/Occupants"
+const ENTITIES_FOLDER_PATH: String = "res://Data/Entities"
 
 
 func _ready() -> void:
@@ -27,16 +27,14 @@ func _ready() -> void:
 		if "emitting" in particles:  
 			particles.emitting = true
 	
-	var unit_paths: Array[String] = FileUtility.get_all_files_under_folder(UNITS_FOLDER_PATH, ".tscn")
+	var entity_paths: Array[String] = FileUtility.get_all_files_under_folder(ENTITIES_FOLDER_PATH, ".tscn")
 	var n_misc_precaching: int = 0
-	for path in unit_paths:
+	for path in entity_paths:
 		var scene: PackedScene = load(path)
-		var unit: Node = scene.instantiate()
-		nodes.append(unit)
-		add_child(unit)
+		var entity: Entity = scene.instantiate()
+		nodes.append(entity)
+		add_child(entity)
 		n_misc_precaching += 1
-		
-		unit.set_physics_process(false)  # Otherwise player movement handling will crash
 	
 	print("Precaching {0} particles and {1} units...".format(
 		[n_particles_precaching, n_misc_precaching]))

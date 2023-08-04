@@ -2,6 +2,8 @@ class_name Levelling
 extends Node
 
 
+signal levelled_up(new_level: int)
+
 var entity: Entity = null
 var data: LevellingData = null
 

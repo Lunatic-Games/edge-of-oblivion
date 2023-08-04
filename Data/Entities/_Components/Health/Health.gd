@@ -3,7 +3,10 @@ extends Object
 
 
 signal value_changed(amount: int)
-signal hit_zero
+signal died
+
+const HEAL_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Health/HealParticles.tscn")
+const DAMAGED_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Health/DamagedParticles.tscn")
 
 var entity: Entity = null
 var data: HealthData = null
@@ -29,14 +32,15 @@ func take_damage(damage: int) -> int:
 		current_value = maxi(current_value - damage, 1)
 	
 	entity.animator.play("damaged")
+	_spawn_particles(DAMAGED_PARTICLES_SCENE)
 	
 	var amount_changed: int = value_before - current_value
 	if amount_changed > 0:
-		update_health_bar()
+		_update_health_bar()
 		value_changed.emit(amount_changed)
 	
 	if is_alive() == false:
-		hit_zero.emit()
+		_die()
 	
 	return amount_changed
 
@@ -49,17 +53,20 @@ func heal(heal_amount: int) -> int:
 	
 	var value_before: int = current_value
 	current_value = mini(current_value + heal_amount, data.max_health)
+	
+	_spawn_particles(HEAL_PARTICLES_SCENE)
+	
 	var amount_changed: int = current_value - value_before
 	
 	if amount_changed > 0:
-		update_health_bar()
+		_update_health_bar()
 		value_changed.emit(amount_changed)
 	
 	return amount_changed
 
 
 func full_heal() -> int:
-	return heal(data.max_health - current_value)
+	return heal(data.max_health)
 
 
 func deal_lethal_damage() -> int:
@@ -70,7 +77,27 @@ func is_alive() -> bool:
 	return current_value > 0
 
 
-func update_health_bar() -> void:
+func _die() -> void:
+	if entity.occupancy and entity.occupancy.current_tile:
+		entity.occupancy.current_tile.occupant = null
+	
+	died.emit()
+	
+	var tween: Tween = entity.create_tween().set_parallel(true)
+	tween.tween_property(entity, "global_position:y", -25.0, 0.5).as_relative().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
+	tween.tween_property(entity, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	
+	await tween.finished
+	entity.queue_free()
+
+
+func _spawn_particles(particles_scene: PackedScene) -> void:
+	var particle: Node2D = particles_scene.instantiate()
+	particle.global_position = entity.global_position
+	GlobalGameState.board.add_child(particle)
+
+
+func _update_health_bar() -> void:
 	var target_value: float = float(current_value) / float(data.max_health) * 100.0
 	
 	var tween: Tween = entity.create_tween()
