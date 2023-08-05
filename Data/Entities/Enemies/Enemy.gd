@@ -28,5 +28,7 @@ func _on_died():
 	
 	var enemy_data: EnemyData = data as EnemyData
 	player.levelling.gain_xp(enemy_data.xp_value)
+	
+	GlobalSignals.enemy_killed.emit(self)
 	if enemy_data.boss_data != null:
 		GlobalSignals.boss_defeated.emit(self)

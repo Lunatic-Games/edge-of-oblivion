@@ -42,7 +42,7 @@ func set_enemies(value: Array[EnemyData]) -> void:
 	
 	for wave in waves:
 		if wave:
-			wave.update_enemies(enemies)
+			wave.update_available_enemies(enemies)
 
 
 func set_waves(value: Array[WaveData]) -> void:

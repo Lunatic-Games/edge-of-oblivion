@@ -30,6 +30,7 @@ func _ready() -> void:
 	await level.board.tile_generation_completed
 	
 	GlobalGameState.new_game(self)
+	GlobalSignals.boss_defeated.connect(_on_boss_defeated)
 	
 	player = spawn_handler.spawn_player()
 	player.inventory.add_starting_items()

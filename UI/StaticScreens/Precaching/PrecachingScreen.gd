@@ -36,7 +36,7 @@ func _ready() -> void:
 		add_child(entity)
 		n_misc_precaching += 1
 	
-	print("Precaching {0} particles and {1} units...".format(
+	print("Precaching {0} particles and {1} entities...".format(
 		[n_particles_precaching, n_misc_precaching]))
 	
 	# Give some time for particles to process before cleaning up

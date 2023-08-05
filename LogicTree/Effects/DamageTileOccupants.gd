@@ -24,7 +24,7 @@ func perform_behavior() -> void:
 	
 	for tile in tiles.value:
 		var entity: Entity = tile.occupant as Entity
-		if entity == null:
+		if entity == null or entity.health == null:
 			continue
 		
 		var amount_damaged = entity.health.take_damage(damage)

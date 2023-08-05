@@ -7,7 +7,7 @@ var n_bosses_killed: int = 0
 var xp_gained: int = 0
 
 
-func _ready() -> void:
+func _init() -> void:
 	GlobalSignals.enemy_killed.connect(_on_enemy_killed)
 
 
