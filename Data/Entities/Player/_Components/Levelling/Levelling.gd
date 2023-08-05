@@ -33,17 +33,23 @@ func gain_xp(amount: int):
 		level_up()
 		xp_to_next_level = get_xp_to_next_level()
 	
-	var experience_bar: ExperienceBar = GlobalGameState.game.player_overlay.experience_bar
-	if xp_to_next_level == -1:
-		experience_bar.update(current_level, 1.0)
-	else:
-		experience_bar.update(current_level, float(current_xp) / float(xp_to_next_level))
+	_update_experience_bar()
 
 
 func level_up() -> void:
 	current_level += 1
 	levelled_up.emit(current_level)
+	_update_experience_bar()
 
 
 func get_xp_to_next_level() -> int:
 	return data.get_xp_to_level(current_level + 1)
+
+
+func _update_experience_bar():
+	var xp_to_next_level = get_xp_to_next_level()
+	var experience_bar: ExperienceBar = GlobalGameState.game.player_overlay.experience_bar
+	if xp_to_next_level == -1:
+		experience_bar.update(current_level, 1.0)
+	else:
+		experience_bar.update(current_level, float(current_xp) / float(xp_to_next_level))

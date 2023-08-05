@@ -14,7 +14,7 @@ func level_up() -> void:
 	if GlobalGameState.player == null:
 		return
 	
-	GlobalGameState.player.level_up()
+	GlobalGameState.player.levelling.level_up()
 	GlobalGameState.game.check_for_upgrades()
 
 
