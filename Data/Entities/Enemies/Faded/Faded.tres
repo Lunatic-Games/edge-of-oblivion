@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_3v846"]
 script = ExtResource("2_vwnvt")
-max_health = 40
+max_health = 20
 can_be_damaged = true
 can_be_killed = true
 can_be_healed = true
@@ -28,5 +28,5 @@ entity_scene = ExtResource("1_epjq3")
 health_data = SubResource("Resource_3v846")
 occupancy_data = SubResource("Resource_lpolm")
 entity_name = "Faded"
-popup_text = ""
-flavor_text = ""
+main_text = "Attacks all adjacent tiles then moves towards the player."
+flavor_text = "Once somebody... now, barely a memory."

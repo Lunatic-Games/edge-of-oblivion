@@ -9,5 +9,9 @@ extends Resource
 @export_group("Info")
 @export var sprite: Texture = null
 @export var entity_name: String = ""
-@export_multiline var popup_text: String = ""
+@export_multiline var main_text: String = ""
 @export_multiline var flavor_text: String = ""
+
+
+func get_full_main_text():
+	return "[color=cyan]" + entity_name + ":[/color] " + main_text

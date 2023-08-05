@@ -16,5 +16,5 @@ script = ExtResource("1_yj4qf")
 entity_scene = ExtResource("1_5skme")
 occupancy_data = SubResource("Resource_kg668")
 entity_name = ""
-popup_text = ""
+main_text = ""
 flavor_text = ""
