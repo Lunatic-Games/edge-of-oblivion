@@ -2,7 +2,7 @@ class_name Levelling
 extends Node
 
 
-signal xp_changed(amount: int)
+signal gained_xp(amount: int)
 signal levelled_up(new_level: int)
 
 var entity: Entity = null
@@ -22,7 +22,7 @@ func gain_xp(amount: int):
 		return
 	
 	current_xp += amount
-	xp_changed.emit(amount)
+	gained_xp.emit(amount)
 	
 	var xp_to_next_level: int = get_xp_to_next_level()
 	while current_xp >= xp_to_next_level:
@@ -32,6 +32,12 @@ func gain_xp(amount: int):
 		current_xp -= xp_to_next_level
 		level_up()
 		xp_to_next_level = get_xp_to_next_level()
+	
+	var experience_bar: ExperienceBar = GlobalGameState.game.player_overlay.experience_bar
+	if xp_to_next_level == -1:
+		experience_bar.update(current_level, 1.0)
+	else:
+		experience_bar.update(current_level, float(current_xp) / float(xp_to_next_level))
 
 
 func level_up() -> void:

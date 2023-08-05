@@ -2,34 +2,33 @@ class_name ExperienceBar
 extends ProgressBar
 
 
-var player: Player = null
+const VALUE_UPDATE_PER_SECOND: float = 200.0
+
+var current_displayed_level: int = 1
+var target_level: int = 1
+var target_progress_ratio: float = 0
+var is_max_level: bool = false
 
 @onready var level_up_particles: GPUParticles2D = $LevelUpParticles
 
 
-func _ready() -> void:
-	GlobalSignals.player_spawned.connect(_on_player_spawned)
+func _process(delta: float) -> void:
+	var is_displayed_level_target: bool = target_level == current_displayed_level
+	if is_displayed_level_target and target_progress_ratio == value / max_value:
+		return
+	
+	var value_increasing_towards: float = target_progress_ratio * max_value
+	if is_displayed_level_target == false:
+		value_increasing_towards = max_value
+	
+	value = minf(value + VALUE_UPDATE_PER_SECOND * delta, value_increasing_towards)
+	
+	if value >= max_value and is_displayed_level_target == false:
+		value = 0.0
+		current_displayed_level += 1
+		level_up_particles.emitting = true
 
 
-func _on_player_spawned(spawned_player: Player):
-	player = spawned_player
-	player.levelling.xp_changed.connect(_on_player_xp_changed)
-	player.levelling.levelled_up.connect(_on_player_levelled_up)
-
-
-func _on_player_xp_changed(_amount: int) -> void:
-	var xp_to_next_level: int = player.levelling.get_xp_to_next_level()
-	if xp_to_next_level == -1:
-		value = max_value
-	else:
-		var current_xp = player.levelling.current_xp
-		var ratio_to_next_level: float = clampf(float(current_xp) / float(xp_to_next_level), 0, 1)
-		value = ratio_to_next_level * max_value
-
-
-func _on_player_levelled_up(_new_level: int) -> void:
-	level_up_particles.emitting = true
-	var current_xp = player.levelling.current_xp
-	var xp_to_next_level: int = player.levelling.get_xp_to_next_level()
-	var ratio_to_next_level: float = clampf(float(current_xp) / float(xp_to_next_level), 0, 1)
-	value = ratio_to_next_level * max_value
+func update(level: int, remainder_ratio: float) -> void:
+	target_level = level
+	target_progress_ratio = remainder_ratio
