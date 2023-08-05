@@ -81,8 +81,19 @@ func apply_knockback(target: Entity, direction: Vector2i, knockback: int,
 				target.health.take_damage(collision_damage)
 				if target.health.is_alive() == false:
 					target.occupancy.do_move_animation(next_tile.global_position)
+			
 			if next_tile_occupant.health != null:
 				next_tile_occupant.health.take_damage(collision_damage)
+				if next_tile_occupant.health.is_alive() == false:
+					if target.health != null and target.health.is_alive():
+						target.occupancy.move_to_tile(next_tile)
+					else:
+						target.occupancy.do_move_animation(next_tile.global_position)
+			
+			if target.health != null and target.health.is_alive() == false:
+				return true
+			if next_tile_occupant.health != null and next_tile_occupant.health.is_alive() == false:
+				return true
 			
 			if apply_knockback(next_tile_occupant, direction, 1):
 				return target.occupancy.move_to_tile(next_tile)
