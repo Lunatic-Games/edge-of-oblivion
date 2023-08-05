@@ -23,13 +23,14 @@ func _ready() -> void:
 		var this_item: Item = owner as Item
 		assert(this_item != null,
 			"Item filter set to 'this item' for '" + name + "' but 'this item' is not an item")
-		this_item.tier_increased.connect(trigger.bind(this_item))
+		this_item.simulate_tier_increase.connect(trigger.bind(this_item, true))
+		this_item.tier_increase_triggered.connect(trigger.bind(this_item))
 	
 	elif item_filter == ItemFilter.ANY_ITEM:
 		GlobalLogicTreeSignals.item_setup_completed.connect(trigger)
 
 
-func trigger(item: Item) -> void:
+func trigger(item: Item, simulate: bool = false) -> void:
 	assert(item != null, "Passed item is null for '" + name + "'")
 	
 	if output_item_array != null:
@@ -48,6 +49,8 @@ func trigger(item: Item) -> void:
 			output_item_user_tile.value.clear()
 	
 	if output_item_new_tier != null:
-		output_item_new_tier.value = item.current_tier
+		output_item_new_tier.value = item.current_tier + (1 if simulate else 0)
 	
-	logic_tree_on_trigger.evaluate()
+	logic_tree_on_trigger.evaluate(simulate)
+	if !simulate:
+		item.tier_increase_completed.emit()

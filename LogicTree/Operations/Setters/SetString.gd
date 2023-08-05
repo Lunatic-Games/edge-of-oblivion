@@ -17,3 +17,10 @@ func perform_behavior() -> void:
 		value = value_override.value
 	
 	string_variable.value = value
+
+
+func simulate_behavior() -> void:
+	var current_value: String = string_variable.value
+	perform_behavior()
+	string_variable.last_simulated_value = string_variable.value
+	string_variable.value = current_value

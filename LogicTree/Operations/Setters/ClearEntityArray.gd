@@ -12,3 +12,10 @@ func _ready() -> void:
 
 func perform_behavior() -> void:
 	entity_array.value = []
+
+
+func simulate_behavior() -> void:
+	var current_value: Array[Occupant] = entity_array.value.duplicate()
+	perform_behavior()
+	entity_array.last_simulated_value = entity_array.value.duplicate()
+	entity_array.value = current_value

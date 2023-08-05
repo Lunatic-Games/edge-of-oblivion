@@ -3,7 +3,9 @@ extends Control
 
 signal update_triggered
 signal setup_completed
-signal tier_increased
+signal tier_increase_triggered
+signal tier_increase_completed
+signal simulate_tier_increase
 
 var data: ItemData = null
 var user: Unit = null
@@ -52,7 +54,7 @@ func upgrade_tier():
 		return
 	
 	current_tier += 1
-	tier_increased.emit()
+	tier_increase_triggered.emit()
 	GlobalLogicTreeSignals.item_tier_increased.emit(self)
 
 

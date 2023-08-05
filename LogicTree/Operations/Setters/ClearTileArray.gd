@@ -12,3 +12,10 @@ func _ready() -> void:
 
 func perform_behavior() -> void:
 	tile_array.value = []
+
+
+func simulate_behavior() -> void:
+	var current_value: Array[Tile] = tile_array.value.duplicate()
+	perform_behavior()
+	tile_array.last_simulated_value = tile_array.value.duplicate()
+	tile_array.value = current_value

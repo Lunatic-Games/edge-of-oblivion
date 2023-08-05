@@ -8,6 +8,8 @@ signal changed
 @export var default_value: Array[Item] = []
 @export var default_value_override: LT_ItemArrayVariable
 
+var last_simulated_value: Array[Item] = []
+
 var value: Array[Item] = []:
 	set(new_value):
 		var is_new_value: bool = new_value != value
@@ -23,3 +25,4 @@ func reset_to_default() -> void:
 		value.append_array(default_value_override.value)
 	else:
 		value.append_array(default_value)
+	last_simulated_value = value.duplicate()

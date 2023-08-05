@@ -29,6 +29,7 @@ func get_popup_text(tier: int) -> String:
 	var color_tag: String = "[color=" + Color(popup_item_name_color).to_html() + "]"
 	var tier_info: String = "(" + "I".repeat(tier) + ")"
 	var title: String = color_tag + item_name + tier_info + ":[/color] "
+	
 	if use_tier_1_text_for_popup_texts:
 		return title + _card_texts.get(CARD_TEXT_EXPORT_PREFIX + str(1), "")
 	return title + _popup_texts.get(POPUP_TEXT_EXPORT_PREFIX + str(tier), "")

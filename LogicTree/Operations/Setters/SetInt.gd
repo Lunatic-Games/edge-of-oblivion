@@ -45,3 +45,10 @@ func perform_behavior() -> void:
 			var value_as_float := float(value)
 			var current_value_as_float := float(int_variable.value)
 			int_variable.value = ceili(current_value_as_float / value_as_float)
+
+
+func simulate_behavior() -> void:
+	var current_value: int = int_variable.value
+	perform_behavior()
+	int_variable.last_simulated_value = int_variable.value
+	int_variable.value = current_value
