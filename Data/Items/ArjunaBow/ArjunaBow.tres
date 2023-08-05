@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://ckgkfxx4t656u"]
+
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1_8es72"]
+[ext_resource type="PackedScene" uid="uid://b1xb616vwbi1p" path="res://Data/Items/ArjunaBow/ArjunasBow.tscn" id="1_o3pbw"]
+[ext_resource type="Texture2D" uid="uid://ccaahek1hcnvn" path="res://Assets/art/icons/weapons/delapouite/bow-arrow.svg" id="2_uyh44"]
+
+[resource]
+script = ExtResource("1_8es72")
+sprite = ExtResource("2_uyh44")
+item_scene = ExtResource("1_o3pbw")
+item_name = "Arjuna's Bow"
+popup_item_name_color = "royalblue"
+flavor_text = "An ancient bow that would never judge its wielder."
+max_tier = 3
+use_tier_1_text_for_popup_texts = false
+card_text_1 = "Every 5 turns: Attack at Range 2 for 20 damage."
+card_text_2 = "Damage 20 -> 40"
+card_text_3 = "Cooldown 5 -> 4"
+popup_text_1 = "1 target. Range 2. 20 Damage. Every 5 turns."
+popup_text_2 = "1 target. Range 2. 40 Damage. Every 5 turns."
+popup_text_3 = "1 target. Range 2. 40 Damage. Every 4 turns."
