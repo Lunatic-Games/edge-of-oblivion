@@ -8,10 +8,10 @@
 [ext_resource type="Script" path="res://LogicTree/Debug/PrintToOutput.gd" id="5_r7nvw"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="6_bslmu"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="7_x5voc"]
-[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="8_8yyym"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="8_hqlqf"]
-[ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="9_ip33y"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnProjectiles.gd" id="9_7i1wx"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_isvke"]
+[ext_resource type="PackedScene" uid="uid://iflg7f4k25l6" path="res://Data/Projectiles/Projectile.tscn" id="10_vlltp"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="13_gno2y"]
 
 [node name="TellsCrossbow" instance=ExtResource("1_8jqgr")]
@@ -94,20 +94,23 @@ script = ExtResource("7_x5voc")
 input_tiles = NodePath("../Ricochet")
 output_tiles = NodePath("../Ricochet")
 
-[node name="Arrow effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select random enemy/If Tier 2 or higher" index="4" node_paths=PackedStringArray("tiles")]
-script = ExtResource("8_8yyym")
-tiles = NodePath("../Ricochet")
-node2d_to_spawn = ExtResource("9_ip33y")
+[node name="LT_SpawnProjectiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select random enemy/If Tier 2 or higher" index="4" node_paths=PackedStringArray("origin_tiles", "target_tiles")]
+script = ExtResource("9_7i1wx")
+origin_tiles = NodePath("../../../Prime Target")
+target_tiles = NodePath("../Ricochet")
+projectile_scene = ExtResource("10_vlltp")
 
 [node name="Damage 2nd enemy" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select random enemy/If Tier 2 or higher" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("10_isvke")
 tiles = NodePath("../Ricochet")
 damage_override = NodePath("../../../../../../LT_PersistentVariables/Damage")
 
-[node name="Arrow effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles")]
-script = ExtResource("8_8yyym")
-tiles = NodePath("../Prime Target")
-node2d_to_spawn = ExtResource("9_ip33y")
+[node name="LT_SpawnProjectiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("origin_tiles", "target_tiles")]
+script = ExtResource("9_7i1wx")
+origin_tiles = NodePath("../../../Item user tile")
+target_tiles = NodePath("../Prime Target")
+projectile_scene = ExtResource("10_vlltp")
+seconds_per_tile_speed = 0.04
 
 [node name="Damage enemy" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("tiles", "damage_override")]
 script = ExtResource("10_isvke")
