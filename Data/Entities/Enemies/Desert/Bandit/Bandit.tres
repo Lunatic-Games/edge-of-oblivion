@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://wgvucq7mxtaq"]
+
+[ext_resource type="PackedScene" uid="uid://cfwrl2ospjjsn" path="res://Data/Entities/Enemies/Desert/Bandit/Bandit.tscn" id="1_ij5uo"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="1_xkw4b"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_p6art"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_yukqi"]
+[ext_resource type="Texture2D" uid="uid://ktl4jkcycks" path="res://Assets/art/icons/enemies/Delapouite/bandit.svg" id="5_nrpnv"]
+
+[sub_resource type="Resource" id="Resource_v5agk"]
+script = ExtResource("2_p6art")
+max_health = 20
+can_be_damaged = true
+can_be_killed = true
+can_be_healed = true
+emit_particles_on_heal = true
+emit_particles_on_taking_damage = true
+
+[sub_resource type="Resource" id="Resource_2tgkx"]
+script = ExtResource("3_yukqi")
+size = 0
+blocking_behavior = 1
+can_be_pushed_off_map = true
+can_push_entities = false
+
+[resource]
+script = ExtResource("1_xkw4b")
+xp_value = 1
+entity_scene = ExtResource("1_ij5uo")
+health_data = SubResource("Resource_v5agk")
+occupancy_data = SubResource("Resource_2tgkx")
+sprite = ExtResource("5_nrpnv")
+entity_name = "Bandit"
+main_text = "Attacks all directions range 3, then moves towards the player."
+flavor_text = "The rooten tootenist baddy of the Dunes."

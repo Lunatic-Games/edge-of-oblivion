@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://bsnphtkgiwpsv"]
+
+[ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="1_2lnsi"]
+[ext_resource type="PackedScene" uid="uid://df2otijwesw57" path="res://Data/Entities/Enemies/Swamp/LostRanger/LostRanger.tscn" id="1_oyxen"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_xie1l"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_whdbl"]
+[ext_resource type="Texture2D" uid="uid://cinfmdwcoldqr" path="res://Assets/art/icons/medieval-fantasy/lorc/cowled.svg" id="5_wrlik"]
+
+[sub_resource type="Resource" id="Resource_u32dd"]
+script = ExtResource("2_xie1l")
+max_health = 20
+can_be_damaged = true
+can_be_killed = true
+can_be_healed = true
+emit_particles_on_heal = true
+emit_particles_on_taking_damage = true
+
+[sub_resource type="Resource" id="Resource_5jdpi"]
+script = ExtResource("3_whdbl")
+size = 0
+blocking_behavior = 1
+can_be_pushed_off_map = true
+can_push_entities = false
+
+[resource]
+script = ExtResource("1_2lnsi")
+xp_value = 1
+entity_scene = ExtResource("1_oyxen")
+health_data = SubResource("Resource_u32dd")
+occupancy_data = SubResource("Resource_5jdpi")
+sprite = ExtResource("5_wrlik")
+entity_name = "Lost Ranger"
+main_text = "Looks for a target above and below within range 3."
+flavor_text = "A long time ago, they'd lose themselves in the hunt. Now they are lost to it forever."

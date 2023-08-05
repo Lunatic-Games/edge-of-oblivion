@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LevelData" load_steps=8 format=3 uid="uid://bj2807sghnvk0"]
 
 [ext_resource type="PackedScene" uid="uid://bvu03ruea1xp7" path="res://Data/Levels/TheEdge/TheEdge.tscn" id="1_k1yk8"]
-[ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Faded/Faded.tres" id="2_fcdim"]
+[ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Swamp/Faded/Faded.tres" id="2_fcdim"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="2_xcnee"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="3_o20or"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="4_qop6g"]

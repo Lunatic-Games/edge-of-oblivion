@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=11 format=3 uid="uid://bme4pcpoh4pvr"]
+
+[ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="1_8qqdc"]
+[ext_resource type="PackedScene" uid="uid://oiwmidbv61w0" path="res://Data/Entities/Enemies/Swamp/ForgottenKing/ForgottenKing.tscn" id="1_q1hhg"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/_Components/Boss/BOSS_DATA.gd" id="1_s6jpd"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_5wlvw"]
+[ext_resource type="AudioStream" uid="uid://8vw3rrccmokk" path="res://Assets/music/boss/Endless-Storm.ogg" id="2_k6vno"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_rk135"]
+[ext_resource type="Texture2D" uid="uid://cl3rgny2d8t5b" path="res://Assets/art/icons/medieval-fantasy/lorc/crowned-skull.svg" id="7_o4up4"]
+
+[sub_resource type="Resource" id="Resource_b4d2u"]
+script = ExtResource("1_s6jpd")
+soundtrack = ExtResource("2_k6vno")
+
+[sub_resource type="Resource" id="Resource_twefk"]
+script = ExtResource("2_5wlvw")
+max_health = 450
+can_be_damaged = true
+can_be_killed = true
+can_be_healed = true
+emit_particles_on_heal = true
+emit_particles_on_taking_damage = true
+
+[sub_resource type="Resource" id="Resource_frhjo"]
+script = ExtResource("3_rk135")
+size = 0
+blocking_behavior = 1
+can_be_pushed_off_map = false
+can_push_entities = false
+
+[resource]
+script = ExtResource("1_8qqdc")
+xp_value = 5
+boss_data = SubResource("Resource_b4d2u")
+entity_scene = ExtResource("1_q1hhg")
+health_data = SubResource("Resource_twefk")
+occupancy_data = SubResource("Resource_frhjo")
+sprite = ExtResource("7_o4up4")
+entity_name = "Forgotten King"
+main_text = "Charges at the player, also has an AOE attack."
+flavor_text = "Once a benevolent and loved ruler. Most closely resembles a rabbid dog now."
