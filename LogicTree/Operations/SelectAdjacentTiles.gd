@@ -101,7 +101,7 @@ func tile_matches_stop_condition(tile: Tile) -> bool:
 		StopCondition.ENEMY_ENTITY:
 			return (tile.occupant as Enemy) != null
 		StopCondition.BLOCKING_ENTITY:
-			return tile.occupant != null and !tile.occupant.occupancy.data.behaves_like_open_tile()
+			return tile.occupant != null and !tile.occupant.occupancy.data.is_collectable()
 		StopCondition.NO_ENTITY:
 			return tile.occupant == null
 	return true

@@ -3,6 +3,7 @@ extends Object
 
 
 signal move_animation_completed
+signal collected(by: Entity)
 
 var entity: Entity = null
 var data: OccupancyData = null
@@ -22,15 +23,17 @@ func move_to_tile(destination_tile: Tile) -> bool:
 	var destination_occupant: Entity = destination_tile.occupant
 	if destination_occupant:
 		var destination_occupancy: EntityOccupancy = destination_occupant.occupancy
-		if destination_occupancy.data.blocking_behavior == OccupancyData.BlockingBehavior.STANDARD:
-			var tile_to_displace_to: Tile = get_displace_tile(destination_tile)
-			if tile_to_displace_to == null:
+		match destination_occupancy.data.blocking_behavior:
+			OccupancyData.BlockingBehavior.STANDARD:
+				var tile_to_displace_to: Tile = get_displace_tile(destination_tile)
+				if tile_to_displace_to == null:
+					return false
+				
+				destination_occupancy.move_to_tile(tile_to_displace_to)
+			OccupancyData.BlockingBehavior.IMMOVABLE:
 				return false
-			
-			destination_occupancy.move_to_tile(tile_to_displace_to)
-		else:
-			# Collect
-			pass
+			OccupancyData.BlockingBehavior.COLLECTABLE:
+				destination_occupancy.collect(entity)
 	
 	current_tile.occupant = null
 	current_tile = destination_tile
@@ -65,6 +68,10 @@ func get_displace_tile(base_tile: Tile) -> Tile:
 		return possible_tiles.pick_random()
 	
 	return null
+
+
+func collect(collector: Entity):
+	collected.emit(collector)
 
 
 func _on_move_tween_finished():

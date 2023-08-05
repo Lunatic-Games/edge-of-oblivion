@@ -49,7 +49,7 @@ func _spawn_enemy_on_selected_tile(tile: Tile):
 	if tile == null or GlobalGameState.board == null or GlobalGameState.game == null:
 		return
 	
-	if tile.occupant != null and !tile.occupant.occupancy.data.behaves_like_open_tile():
+	if tile.occupant != null and !tile.occupant.occupancy.data.is_collectable():
 		return
 	
 	GlobalGameState.game.spawn_handler.spawn_enemy_on_tile(enemy_to_spawn_on_tile_selected, tile)

@@ -9,7 +9,7 @@ enum EntitySize {
 }
 
 enum BlockingBehavior {
-	FREE_SPACE,
+	COLLECTABLE,
 	STANDARD,
 	IMMOVABLE
 }
@@ -29,19 +29,19 @@ func can_move_to_tile(tile: Tile) -> bool:
 	if other_occupancy_data.blocking_behavior == BlockingBehavior.IMMOVABLE:
 		return false
 	
-	if other_occupancy_data.behaves_like_open_tile():
+	if other_occupancy_data.is_collectable():
 		return true
 	
 	return can_push_entities
 
 
-func behaves_like_open_tile():
-	return blocking_behavior == BlockingBehavior.FREE_SPACE
+func is_collectable():
+	return blocking_behavior == BlockingBehavior.COLLECTABLE
 
 
 func can_be_knockbacked() -> bool:
 	match blocking_behavior:
-		BlockingBehavior.FREE_SPACE:
+		BlockingBehavior.COLLECTABLE:
 			return false
 		BlockingBehavior.STANDARD:
 			return true

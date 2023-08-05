@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=7 format=3 uid="uid://7wtuo0ukril7"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://7wtuo0ukril7"]
 
 [ext_resource type="PackedScene" uid="uid://bqdxbijvgbrxm" path="res://Data/Entities/Enemies/Faded/Faded.tscn" id="1_epjq3"]
 [ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="1_olb4q"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_vwnvt"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_jlpar"]
+[ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="5_hkvge"]
 
 [sub_resource type="Resource" id="Resource_3v846"]
 script = ExtResource("2_vwnvt")
@@ -27,6 +28,7 @@ xp_value = 1
 entity_scene = ExtResource("1_epjq3")
 health_data = SubResource("Resource_3v846")
 occupancy_data = SubResource("Resource_lpolm")
+sprite = ExtResource("5_hkvge")
 entity_name = "Faded"
 main_text = "Attacks all adjacent tiles then moves towards the player."
 flavor_text = "Once somebody... now, barely a memory."

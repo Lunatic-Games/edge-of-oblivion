@@ -76,7 +76,7 @@ func apply_knockback(target: Entity, direction: Vector2i, knockback: int,
 		var next_tile_occupant: Entity = next_tile.occupant as Entity
 			
 		# Try pushing into next occupant if there is one
-		if next_tile_occupant and !next_tile_occupant.occupancy.data.behaves_like_open_tile():
+		if next_tile_occupant and !next_tile_occupant.occupancy.data.is_collectable():
 			if target.health != null:
 				target.health.take_damage(collision_damage)
 				if target.health.is_alive() == false:
