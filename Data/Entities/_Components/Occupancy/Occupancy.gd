@@ -21,6 +21,8 @@ func move_to_tile(destination_tile: Tile) -> bool:
 		return false
 	
 	var destination_occupant: Entity = destination_tile.occupant
+	var collectable: Entity = null
+	
 	if destination_occupant:
 		var destination_occupancy: EntityOccupancy = destination_occupant.occupancy
 		match destination_occupancy.data.blocking_behavior:
@@ -33,11 +35,15 @@ func move_to_tile(destination_tile: Tile) -> bool:
 			OccupancyData.BlockingBehavior.IMMOVABLE:
 				return false
 			OccupancyData.BlockingBehavior.COLLECTABLE:
-				destination_occupancy.collect(entity)
+				collectable = destination_occupant
 	
 	current_tile.occupant = null
 	current_tile = destination_tile
 	current_tile.occupant = entity
+	
+	if collectable != null:
+		collectable.occupancy.collect(entity)
+	
 	do_move_animation(current_tile.global_position)
 	return true
 
