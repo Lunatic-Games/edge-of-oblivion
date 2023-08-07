@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://ceje4cjsotpey" path="res://Game/Camera/Camera.tscn" id="3_if80k"]
 [ext_resource type="Script" path="res://Game/RunStats/RunStats.gd" id="5_6lftp"]
 [ext_resource type="PackedScene" uid="uid://b78b62i3ejtqc" path="res://UI/Overlays/BossOverlay/BossOverlay.tscn" id="6_c6fvf"]
+[ext_resource type="PackedScene" uid="uid://7cc4vdch3hbd" path="res://UI/Overlays/PlayerOverlay/PlayerOverlay.tscn" id="7_j6mug"]
 [ext_resource type="PackedScene" uid="uid://c7dqfw38kh88k" path="res://UI/Menus/VictoryMenu/VictoryMenu.tscn" id="8_4y0it"]
 [ext_resource type="PackedScene" uid="uid://dn681uoihob4j" path="res://UI/Menus/GameoverMenu/GameOverMenu.tscn" id="9_rua7w"]
 [ext_resource type="PackedScene" uid="uid://bo2no0imyp676" path="res://UI/Menus/PauseMenu/PauseMenu.tscn" id="10_a7fxs"]
-[ext_resource type="Script" path="res://Game/TurnManager/TurnManager.gd" id="12_q02uk"]
 [ext_resource type="Script" path="res://Game/SpawnHandler/SpawnHandler.gd" id="13_8agfr"]
 [ext_resource type="PackedScene" uid="uid://baighpghx6fu3" path="res://UI/Menus/UpgradeMenu/UpgradeMenu.tscn" id="15_tirfb"]
 
@@ -79,9 +79,6 @@ level_data = ExtResource("2_5dl06")
 
 [node name="Camera" parent="." instance=ExtResource("3_if80k")]
 
-[node name="TurnManager" type="Node" parent="."]
-script = ExtResource("12_q02uk")
-
 [node name="SpawnHandler" type="Node" parent="."]
 script = ExtResource("13_8agfr")
 
@@ -89,6 +86,8 @@ script = ExtResource("13_8agfr")
 script = ExtResource("5_6lftp")
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PlayerOverlay" parent="HUD" instance=ExtResource("7_j6mug")]
 
 [node name="BossOverlay" parent="HUD" instance=ExtResource("6_c6fvf")]
 visible = false

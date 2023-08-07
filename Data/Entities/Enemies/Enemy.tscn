@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://fujdstcnhao2"]
+
+[ext_resource type="PackedScene" uid="uid://dvxtrysir3pm4" path="res://Data/Entities/Entity.tscn" id="1_7ubr1"]
+[ext_resource type="Material" uid="uid://d2p8yth5vp4kr" path="res://Shaders/dream_shader_material.tres" id="2_50ip7"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/Enemy.gd" id="2_553l7"]
+[ext_resource type="PackedScene" uid="uid://buofx67yt2myt" path="res://UI/Elements/AttackBar/AttackBar.tscn" id="4_8glbs"]
+[ext_resource type="PackedScene" uid="uid://bvu1bphpfddf1" path="res://UI/Elements/HoverPopups/EnemyPopup/EnemyPopup.tscn" id="5_845da"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e03ss"]
+resource_local_to_scene = true
+bg_color = Color(0.223529, 0.478431, 0.611765, 1)
+
+[node name="Enemy" instance=ExtResource("1_7ubr1")]
+script = ExtResource("2_553l7")
+
+[node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(0.78, 0.62, 0.65, 1)
+material = ExtResource("2_50ip7")
+
+[node name="AttackBar" parent="." index="2" instance=ExtResource("4_8glbs")]
+theme_override_styles/fill = SubResource("StyleBoxFlat_e03ss")
+
+[node name="EnemyPopupHover" parent="." index="3" node_paths=PackedStringArray("enemy") instance=ExtResource("5_845da")]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+enemy = NodePath("..")

@@ -26,10 +26,12 @@ func _on_run_started() -> void:
 
 
 func _on_boss_spawned(boss: Enemy) -> void:
-	assert(boss.data.boss_soundtrack != null, "Boss does not have a soundtrack!")
+	var enemy_data: EnemyData = boss.data as EnemyData
+	var boss_data: BossData = enemy_data.boss_data
+	assert(boss_data != null, "Boss does not have a soundtrack!")
 	
 	battle_music_player.fade_out_volume()
-	boss_music_player.tracks = [boss.data.boss_soundtrack]
+	boss_music_player.tracks = [boss_data.soundtrack]
 	boss_music_player.start_new_random_track(true)
 
 

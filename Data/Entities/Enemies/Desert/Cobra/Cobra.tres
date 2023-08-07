@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://mkhynw35am68"]
+
+[ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="1_hutkn"]
+[ext_resource type="PackedScene" uid="uid://3baaioqcekbf" path="res://Data/Entities/Enemies/Desert/Cobra/Cobra.tscn" id="1_tpb8w"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_irwkw"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_x0nn1"]
+[ext_resource type="Texture2D" uid="uid://d4i04bbnewpqp" path="res://Assets/art/icons/animals/delapouite/cobra.svg" id="5_g0u6d"]
+
+[sub_resource type="Resource" id="Resource_31hnv"]
+script = ExtResource("2_irwkw")
+max_health = 20
+can_be_damaged = true
+can_be_killed = true
+can_be_healed = true
+emit_particles_on_heal = true
+emit_particles_on_taking_damage = true
+
+[sub_resource type="Resource" id="Resource_gius2"]
+script = ExtResource("3_x0nn1")
+size = 0
+blocking_behavior = 1
+can_be_pushed_off_map = true
+can_push_entities = false
+
+[resource]
+script = ExtResource("1_hutkn")
+xp_value = 1
+entity_scene = ExtResource("1_tpb8w")
+health_data = SubResource("Resource_31hnv")
+occupancy_data = SubResource("Resource_gius2")
+sprite = ExtResource("5_g0u6d")
+entity_name = "Cobra"
+main_text = "Attacks all adjacent tiles, then moves towards the player."
+flavor_text = "Was once the most venomous bite in the sand dunes."

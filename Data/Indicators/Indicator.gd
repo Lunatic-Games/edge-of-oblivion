@@ -9,7 +9,7 @@ var removing: bool = false
 
 func setup(enemy_spawned_by: Enemy):
 	enemy_spawned_by.update_triggered.connect(remove, CONNECT_ONE_SHOT)
-	enemy_spawned_by.died.connect(remove, CONNECT_ONE_SHOT)
+	enemy_spawned_by.health.died.connect(remove, CONNECT_ONE_SHOT)
 
 
 func remove() -> void:

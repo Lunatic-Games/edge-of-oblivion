@@ -7,9 +7,9 @@ func setup(starting_tile: Tile, target_tile: Tile, seconds_per_tile_speed: float
 	
 	var position_tween: Tween = create_tween()
 	position_tween.tween_property(self, "global_position", target_tile.global_position,
-		distance * seconds_per_tile_speed).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+		distance * seconds_per_tile_speed).set_trans(Tween.TRANS_LINEAR)
 	await position_tween.finished
 	
 	var modulate_tween: Tween = create_tween()
-	modulate_tween.tween_property(self, "modulate:a", 0.0, 0.2).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	modulate_tween.tween_property(self, "modulate:a", 0.0, 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	await modulate_tween.finished

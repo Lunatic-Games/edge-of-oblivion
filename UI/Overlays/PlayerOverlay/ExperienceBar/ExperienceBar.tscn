@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://oi46lwjctei4"]
+
+[ext_resource type="Script" path="res://UI/Overlays/PlayerOverlay/ExperienceBar/ExperienceBar.gd" id="1_u4gu2"]
+[ext_resource type="PackedScene" uid="uid://clspetko05r6t" path="res://Data/Particles/UI/LevelUpParticles.tscn" id="2_22cj3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hm36x"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bij8g"]
+bg_color = Color(0.411765, 0.564706, 0.403922, 1)
+
+[node name="ExperienceBar" type="ProgressBar"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -446.0
+offset_top = -37.0
+offset_right = 446.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_hm36x")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bij8g")
+show_percentage = false
+script = ExtResource("1_u4gu2")
+
+[node name="LevelUpParticles" parent="." instance=ExtResource("2_22cj3")]

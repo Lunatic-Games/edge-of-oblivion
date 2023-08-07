@@ -1,17 +1,17 @@
 [gd_resource type="Resource" script_class="LevelData" load_steps=21 format=3 uid="uid://bj2807sghnvk0"]
 
 [ext_resource type="PackedScene" uid="uid://bvu03ruea1xp7" path="res://Data/Levels/TheEdge/TheEdge.tscn" id="1_k1yk8"]
-[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="2_gkm7x"]
+[ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Swamp/Faded/Faded.tres" id="2_fcdim"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="2_xcnee"]
+[ext_resource type="Resource" uid="uid://bsnphtkgiwpsv" path="res://Data/Entities/Enemies/Swamp/LostRanger/LostRanger.tres" id="3_nho3p"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="3_o20or"]
-[ext_resource type="Resource" uid="uid://dm131pcfxjehd" path="res://Data/Occupants/Enemies/Faded/Faded.tres" id="3_q1qku"]
-[ext_resource type="Resource" uid="uid://b8gshcc47p1wa" path="res://Data/Occupants/Enemies/LostRanger/LostRanger.tres" id="4_udbrb"]
-[ext_resource type="Resource" uid="uid://b5fnasmirlmnw" path="res://Data/Occupants/Enemies/ForswornPike/ForswornPike.tres" id="5_yynvo"]
-[ext_resource type="Resource" uid="uid://earl3h2iw0gr" path="res://Data/Occupants/Enemies/Bosses/ForgottenKing/ForgottenKing.tres" id="6_gbni2"]
-[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="6_mofnk"]
+[ext_resource type="Resource" uid="uid://drvpn77ymyoa7" path="res://Data/Entities/Enemies/Swamp/ForswornPike/ForswornPike.tres" id="4_e5f1t"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="4_qop6g"]
+[ext_resource type="Resource" uid="uid://bme4pcpoh4pvr" path="res://Data/Entities/Enemies/Swamp/ForgottenKing/ForgottenKing.tres" id="5_lq3cf"]
 
 [sub_resource type="Resource" id="Resource_37nne"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 1
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 1
 "# Faded" = 3
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 0
@@ -19,8 +19,8 @@ turn_wait_from_previous_wave = 1
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_5g8g7"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 7
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 7
 "# Faded" = 3
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 0
@@ -28,8 +28,8 @@ turn_wait_from_previous_wave = 7
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_nl62y"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 7
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 7
 "# Faded" = 6
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 0
@@ -37,8 +37,8 @@ turn_wait_from_previous_wave = 7
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_gbbau"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 10
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 10
 "# Faded" = 4
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 0
@@ -46,8 +46,8 @@ turn_wait_from_previous_wave = 10
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_k3yvo"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 6
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 6
 "# Faded" = 4
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 0
@@ -55,8 +55,8 @@ turn_wait_from_previous_wave = 6
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_8tdvg"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 9
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 9
 "# Faded" = 0
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 5
@@ -64,8 +64,8 @@ turn_wait_from_previous_wave = 9
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_r3fpe"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 7
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 7
 "# Faded" = 0
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 3
@@ -73,8 +73,8 @@ turn_wait_from_previous_wave = 7
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_qigp6"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 12
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 12
 "# Faded" = 3
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 2
@@ -82,8 +82,8 @@ turn_wait_from_previous_wave = 12
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_6x6vt"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 10
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 10
 "# Faded" = 3
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 3
@@ -91,8 +91,8 @@ turn_wait_from_previous_wave = 10
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_hi5kx"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 10
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 10
 "# Faded" = 7
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 2
@@ -100,21 +100,21 @@ turn_wait_from_previous_wave = 10
 "info_ " = null
 
 [sub_resource type="Resource" id="Resource_2vq4g"]
-script = ExtResource("6_mofnk")
-turn_wait_from_previous_wave = 14
+script = ExtResource("4_qop6g")
+round_wait_from_previous_wave = 14
 "# Faded" = 3
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 3
 "# Forgotten King" = 1
 "info_ " = null
 
-[sub_resource type="Resource" id="Resource_ssucw"]
-script = ExtResource("2_gkm7x")
-enemies = Array[Resource("res://Data/Occupants/Enemies/ENEMY_DATA.gd")]([ExtResource("3_q1qku"), ExtResource("4_udbrb"), ExtResource("5_yynvo"), ExtResource("6_gbni2")])
-waves = Array[ExtResource("6_mofnk")]([SubResource("Resource_37nne"), SubResource("Resource_5g8g7"), SubResource("Resource_nl62y"), SubResource("Resource_gbbau"), SubResource("Resource_k3yvo"), SubResource("Resource_8tdvg"), SubResource("Resource_r3fpe"), SubResource("Resource_qigp6"), SubResource("Resource_6x6vt"), SubResource("Resource_hi5kx"), SubResource("Resource_2vq4g")])
+[sub_resource type="Resource" id="Resource_x6fjg"]
+script = ExtResource("2_xcnee")
+enemies = Array[Resource("res://Data/Entities/Enemies/ENEMY_DATA.gd")]([ExtResource("2_fcdim"), ExtResource("3_nho3p"), ExtResource("4_e5f1t"), ExtResource("5_lq3cf")])
+waves = Array[ExtResource("4_qop6g")]([SubResource("Resource_37nne"), SubResource("Resource_5g8g7"), SubResource("Resource_nl62y"), SubResource("Resource_gbbau"), SubResource("Resource_k3yvo"), SubResource("Resource_8tdvg"), SubResource("Resource_r3fpe"), SubResource("Resource_qigp6"), SubResource("Resource_6x6vt"), SubResource("Resource_hi5kx"), SubResource("Resource_2vq4g")])
 
 [resource]
 script = ExtResource("3_o20or")
 level_name = "The Edge"
 level_scene = ExtResource("1_k1yk8")
-level_waves = SubResource("Resource_ssucw")
+level_waves = SubResource("Resource_x6fjg")

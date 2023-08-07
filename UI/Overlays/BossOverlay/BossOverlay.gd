@@ -1,3 +1,4 @@
+class_name BossOverlay
 extends CanvasLayer
 
 
@@ -14,16 +15,16 @@ func _ready() -> void:
 
 
 func _on_boss_spawned(boss: Enemy) -> void:
-	title.text = "[shake]" + boss.data.enemy_name + "[/shake]"
-	boss.health_changed.connect(_on_boss_health_changed.bind(boss))
+	title.text = "[shake]" + boss.data.entity_name + "[/shake]"
+	boss.health.value_changed.connect(_on_boss_health_changed.bind(boss))
 	show()
 
 
-func _on_boss_health_changed(boss: Enemy) -> void:
+func _on_boss_health_changed(_change: int, boss: Enemy) -> void:
 	if health_bar_tween:
 		health_bar_tween.kill()
 	
-	var target_value: float = float(boss.hp) / float(boss.max_hp) * health_bar.max_value
+	var target_value: float = float(boss.health.current_value) / float(boss.health.data.max_health) * health_bar.max_value
 	health_bar_tween = create_tween()
 	health_bar_tween.tween_property(health_bar, "value", target_value, 
 		HEALTH_BAR_TWEEN_TIME).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)

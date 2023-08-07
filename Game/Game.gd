@@ -2,13 +2,17 @@ class_name Game
 extends Node2D
 
 
-@export var level_data: LevelData
+@export var level_data: LevelData = null
 
-var level: Level
+var player: Player = null
+var level: Level = null
 
-@onready var turn_manager: TurnManager = $TurnManager
-@onready var spawn_handler: SpawnHandler = $SpawnHandler
-@onready var run_stats: RunStats = $RunStats
+var turn_manager: TurnManager = TurnManager.new()
+var spawn_handler: SpawnHandler = SpawnHandler.new()
+var run_stats: RunStats = RunStats.new()
+
+@onready var player_overlay: PlayerOverlay = $HUD/PlayerOverlay
+@onready var boss_overlay: BossOverlay = $HUD/BossOverlay
 
 @onready var upgrade_menu: UpgradeMenu = $Menus/UpgradeMenu
 @onready var victory_menu: VictoryMenu = $Menus/VictoryMenu
@@ -19,11 +23,6 @@ var level: Level
 func _ready() -> void:
 	randomize()
 	
-	GlobalSignals.player_died.connect(_on_Player_died)  # Game over!
-	GlobalSignals.boss_defeated.connect(_on_Boss_defeated)  # Game won!
-	
-	GlobalSignals.player_levelled_up.connect(_on_player_levelled_up)
-	
 	level = level_data.level_scene.instantiate()
 	level.setup(level_data)
 	add_child(level)
@@ -31,10 +30,21 @@ func _ready() -> void:
 	await level.board.tile_generation_completed
 	
 	GlobalGameState.new_game(self)
-	var player: Player = spawn_handler.spawn_player()
-	player.add_starting_items()
+	GlobalSignals.boss_defeated.connect(_on_boss_defeated)
+	
+	player = spawn_handler.spawn_player()
+	player.inventory.add_starting_items()
+	player.health.died.connect(_on_player_died)
+	player.levelling.levelled_up.connect(_on_player_levelled_up)
+	
+	spawn_flags_for_next_round()
 	
 	GlobalSignals.run_started.emit()
+
+
+func _process(_delta: float) -> void:
+	if is_instance_valid(player) and player.health.is_alive():
+		turn_manager.update(player, self)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -85,24 +95,30 @@ func check_for_upgrades() -> void:
 
 
 func spawn_enemies_for_round() -> void:
+	if level.data.level_waves == null:
+		return
+	
 	var round_i: int = turn_manager.current_round
-	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_turn(round_i)
+	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_round(round_i)
 	spawn_handler.spawn_enemies(enemies_to_spawn)
 
 
 func spawn_flags_for_next_round() -> void:
+	if level.data.level_waves == null:
+		return
+	
 	var round_i: int = turn_manager.current_round
-	var n_enemies_next_turn: int = level.data.level_waves.get_enemies_for_turn(round_i + 1).size()
+	var n_enemies_next_turn: int = level.data.level_waves.get_enemies_for_round(round_i + 1).size()
 	spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
 
 
-func _on_player_levelled_up(_player: Player):
+func _on_player_levelled_up(_player_level: int):
 	upgrade_menu.queue_upgrade()
 
 
-func _on_Player_died(_player: Player) -> void:
+func _on_player_died() -> void:
 	game_over()
 
 
-func _on_Boss_defeated(_boss: Enemy) -> void:
+func _on_boss_defeated(_boss: Enemy) -> void:
 	victory()

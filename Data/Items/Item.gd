@@ -6,15 +6,16 @@ signal setup_completed
 signal tier_increased
 
 var data: ItemData = null
-var user: Unit = null
-var current_tier: int = 0
+var user: Entity = null
+var current_tier: int = 1
 
 @onready var texture_rect: TextureRect = $Texture
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var countdown_label: Label = $CountdownLabel
 
 
-func setup(item_data: ItemData) -> void:
+func setup(item_user: Entity, item_data: ItemData) -> void:
+	user = item_user
 	data = item_data
 	texture_rect.texture = data.sprite
 	
