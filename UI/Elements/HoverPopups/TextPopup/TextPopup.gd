@@ -4,7 +4,7 @@ extends Button
 const POPOUT_OFFSET: Vector2 = Vector2(-10, -10)
 const SCREEN_BORDER_PADDING: Vector2 = Vector2(32, 32)
 
-@export_placeholder("Lorem ipsum dolor iset imun babab baba chug wug!") var display_string: String
+@export_multiline var display_string: String = "Popup text"
 
 var delay_in_seconds: float = 0.5
 var time_hovered_in_seconds: float = 0.0

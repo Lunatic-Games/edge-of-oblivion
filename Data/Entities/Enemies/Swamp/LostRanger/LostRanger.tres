@@ -21,6 +21,7 @@ size = 0
 blocking_behavior = 1
 can_be_pushed_off_map = true
 can_push_entities = false
+collectable_filter = 0
 
 [resource]
 script = ExtResource("4_fikgl")

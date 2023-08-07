@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=5 format=3 uid="uid://lj7stbro228l"]
+
+[ext_resource type="PackedScene" uid="uid://bob2kw4ty4xc2" path="res://Data/Entities/SpawnFlag/SpawnFlag.tscn" id="1_nenq2"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="2_40ha1"]
+[ext_resource type="Script" path="res://Data/Entities/ENTITY_DATA.gd" id="3_21gvk"]
+
+[sub_resource type="Resource" id="Resource_kg668"]
+script = ExtResource("2_40ha1")
+size = 0
+blocking_behavior = 0
+can_be_pushed_off_map = false
+can_push_entities = false
+collectable_filter = 0
+
+[resource]
+script = ExtResource("3_21gvk")
+entity_scene = ExtResource("1_nenq2")
+occupancy_data = SubResource("Resource_kg668")
+entity_name = ""
+main_text = ""
+flavor_text = ""

@@ -2,8 +2,9 @@ class_name SpawnHandler
 extends Node
 
 
-var PLAYER_DATA: PlayerData = load("res://Data/Entities/Player/PlayerData.tres")
-const SPAWN_FLAG_DATA: EntityData = preload("res://Data/Entities/SpawnFlag/SpawnFlagData.tres")
+const PLAYER_DATA: PlayerData = preload("res://Data/Entities/Player/PlayerData.tres")
+const SPAWN_FLAG_DATA: EntityData = preload("res://Data/Entities/SpawnFlag/SpawnFlag.tres")
+const GATEWAY_DATA: EntityData = preload("res://Data/Entities/Gateway/Gateway.tres")
 
 var spawned_enemies: Array[Enemy] = []
 var spawn_flags: Array[SpawnFlag] = []
@@ -39,6 +40,12 @@ func spawn_flags_for_next_turn(n_flags: int) -> void:
 			break
 		
 		spawn_entity_on_tile(SPAWN_FLAG_DATA, spawn_tile)
+
+
+func spawn_gateway(to: LevelData) -> void:
+	var spawn_tile: Tile = GlobalGameState.board.get_random_unoccupied_tile()
+	var gateway: Gateway = spawn_entity_on_tile(GATEWAY_DATA, spawn_tile)
+	gateway.set_destination(to)
 
 
 func spawn_entity_on_tile(entity_data: EntityData, tile: Tile) -> Entity:

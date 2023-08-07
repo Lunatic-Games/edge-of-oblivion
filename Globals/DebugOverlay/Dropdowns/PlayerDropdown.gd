@@ -60,7 +60,9 @@ func _teleport_player_to_tile(tile: Tile):
 	if tile == null or GlobalGameState.player == null:
 		return
 	
-	if tile.occupant != null and !tile.occupant.occupancy.data.is_collectable():
+	var player_data: PlayerData = GlobalGameState.player.data as PlayerData
+	
+	if tile.occupant != null and !tile.occupant.occupancy.data.can_be_collected(player_data):
 		return
 	
 	GlobalGameState.player.occupancy.move_to_tile(tile)

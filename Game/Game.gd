@@ -2,14 +2,14 @@ class_name Game
 extends Node2D
 
 
-@export var level_data: LevelData = null
-
-var player: Player = null
+var level_data: LevelData = load("res://Data/Levels/TheEdge/TheEdge.tres")
 var level: Level = null
+var player: Player = null
 
-var turn_manager: TurnManager = TurnManager.new()
+var round_manager: RoundManager = RoundManager.new()
 var spawn_handler: SpawnHandler = SpawnHandler.new()
 var run_stats: RunStats = RunStats.new()
+var queued_level_transition: LevelData = null
 
 @onready var player_overlay: PlayerOverlay = $HUD/PlayerOverlay
 @onready var boss_overlay: BossOverlay = $HUD/BossOverlay
@@ -27,6 +27,7 @@ func _ready() -> void:
 	level.setup(level_data)
 	add_child(level)
 	move_child(level, spawn_handler.get_index() + 1)
+	player_overlay.visible = level_data.is_combat_level
 	await level.board.tile_generation_completed
 	
 	GlobalGameState.new_game(self)
@@ -39,12 +40,16 @@ func _ready() -> void:
 	
 	spawn_flags_for_next_round()
 	
+	if level_data.gateway_spawn_condition == LevelData.GatewaySpawnCondition.ON_LOAD:
+		if level_data.next_level != null:
+			spawn_handler.spawn_gateway(level_data.next_level)
+	
 	GlobalSignals.run_started.emit()
 
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(player) and player.health.is_alive():
-		turn_manager.update(player, self)
+		round_manager.update(player, self)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -94,11 +99,17 @@ func check_for_upgrades() -> void:
 		upgrade_menu.display()
 
 
+func check_for_level_transition() -> void:
+	if queued_level_transition != null:
+		set_process(false)
+		LevelLoading.load_level(get_tree(), queued_level_transition)
+
+
 func spawn_enemies_for_round() -> void:
 	if level.data.level_waves == null:
 		return
 	
-	var round_i: int = turn_manager.current_round
+	var round_i: int = round_manager.current_round
 	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_round(round_i)
 	spawn_handler.spawn_enemies(enemies_to_spawn)
 
@@ -107,7 +118,7 @@ func spawn_flags_for_next_round() -> void:
 	if level.data.level_waves == null:
 		return
 	
-	var round_i: int = turn_manager.current_round
+	var round_i: int = round_manager.current_round
 	var n_enemies_next_turn: int = level.data.level_waves.get_enemies_for_round(round_i + 1).size()
 	spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
 

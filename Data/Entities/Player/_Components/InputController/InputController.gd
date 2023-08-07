@@ -73,7 +73,7 @@ func reset_moves_remaining():
 
 
 func modulate_to_next_turn():
-	var time_until_next_move: float = TurnManager.calculate_time_between_player_move()
+	var time_until_next_move: float = RoundManager.calculate_time_between_player_move()
 	var time_between = time_until_next_move - UNREADY_FADE_OUT_TIME_SECONDS - READY_FADE_IN_TIME_SECONDS
 	var sprite: Sprite2D = entity.sprite
 	
@@ -87,7 +87,7 @@ func modulate_to_next_turn():
 
 
 func scale_to_next_turn():
-	var time_until_next_move: float = TurnManager.calculate_time_between_player_move()
+	var time_until_next_move: float = RoundManager.calculate_time_between_player_move()
 	var sprite: Sprite2D = entity.sprite
 	
 	var stretch_tween: Tween = entity.create_tween()

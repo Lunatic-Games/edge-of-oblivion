@@ -17,7 +17,7 @@ func _init(p_entity: Entity, p_data: OccupancyData):
 
 
 func move_to_tile(destination_tile: Tile) -> bool:
-	if data.can_move_to_tile(destination_tile) == false:
+	if can_move_to_tile(destination_tile) == false:
 		return false
 	
 	var destination_occupant: Entity = destination_tile.occupant
@@ -46,6 +46,21 @@ func move_to_tile(destination_tile: Tile) -> bool:
 	
 	do_move_animation(current_tile.global_position)
 	return true
+
+
+func can_move_to_tile(tile: Tile) -> bool:
+	var other_occupant: Entity = tile.occupant
+	if other_occupant == null:
+		return true
+	
+	var other_occupancy_data: OccupancyData = other_occupant.occupancy.data
+	if other_occupancy_data.blocking_behavior == OccupancyData.BlockingBehavior.IMMOVABLE:
+		return false
+	
+	if other_occupancy_data.can_be_collected(entity.data):
+		return true
+	
+	return data.can_push_entities
 
 
 func do_move_animation(destination: Vector2):

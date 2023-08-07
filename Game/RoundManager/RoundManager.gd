@@ -1,4 +1,4 @@
-class_name TurnManager
+class_name RoundManager
 extends Object
 
 
@@ -18,19 +18,31 @@ func update(player: Player, game: Game):
 		return
 	
 	player.input_controller.check_for_input()
-	if player.input_controller.are_moves_all_used():
-		on_player_finished_moving(player, game)
+	if player.input_controller.are_moves_all_used() == false:
+		return
+	
+	if game.level_data.is_combat_level:
+		standard_round_processing(player, game)
+	else:
+		non_combat_level_processing(player, game)
 
 
-func on_player_finished_moving(player: Player, game: Game) -> void:
+func standard_round_processing(player: Player, game: Game) -> void:
 	var scene_tree: SceneTree = game.get_tree()
 	is_round_processing = true
 	
 	await scene_tree.create_timer(DELAY_AFTER_MOVING).timeout
+	if is_instance_valid(player) == false:  # Moved onto gateway or something
+		#is_round_processing = false
+		return
+	
 	for item in player.inventory.items.values():
 		item.update()
 	
 	await scene_tree.create_timer(DELAY_AFTER_ITEMS).timeout
+	if is_instance_valid(player) == false:  # Moved onto gateway or something
+		#is_round_processing = false
+		return
 	
 	for tile in game.level.board.all_tiles:
 		tile.update()
@@ -50,9 +62,36 @@ func on_player_finished_moving(player: Player, game: Game) -> void:
 	await scene_tree.create_timer(DELAY_AFTER_FLAG_SPAWN).timeout
 	
 	game.check_for_upgrades()
+	game.check_for_level_transition()
 	
 	if is_instance_valid(player):  # If they died during enemy turn
 		player.input_controller.reset_moves_remaining()
+	
+	is_round_processing = false
+
+
+func non_combat_level_processing(player, game) -> void:
+	var scene_tree: SceneTree = game.get_tree()
+	is_round_processing = true
+	
+	await scene_tree.create_timer(DELAY_AFTER_MOVING).timeout
+	if is_instance_valid(player) == false:  # Moved onto gateway or something
+		#is_round_processing = false
+		return
+	
+	await scene_tree.create_timer(DELAY_AFTER_ITEMS).timeout
+	
+	for tile in game.level.board.all_tiles:
+		tile.update()
+	
+	await scene_tree.create_timer(DELAY_AFTER_TILES).timeout
+	await scene_tree.create_timer(DELAY_AFTER_ENEMIES).timeout
+	await scene_tree.create_timer(DELAY_AFTER_ENEMY_SPAWN).timeout
+	await scene_tree.create_timer(DELAY_AFTER_FLAG_SPAWN).timeout
+	
+	game.check_for_upgrades()
+	game.check_for_level_transition()
+	player.input_controller.reset_moves_remaining()
 	
 	is_round_processing = false
 

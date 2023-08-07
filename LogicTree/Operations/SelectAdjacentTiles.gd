@@ -15,7 +15,6 @@ enum StopCondition {
 	ANY_ENTITY,
 	PLAYER_ENTITY,
 	ENEMY_ENTITY,
-	BLOCKING_ENTITY,
 	NO_ENTITY
 }
 
@@ -100,8 +99,6 @@ func tile_matches_stop_condition(tile: Tile) -> bool:
 			return (tile.occupant as Player) != null
 		StopCondition.ENEMY_ENTITY:
 			return (tile.occupant as Enemy) != null
-		StopCondition.BLOCKING_ENTITY:
-			return tile.occupant != null and !tile.occupant.occupancy.data.is_collectable()
 		StopCondition.NO_ENTITY:
 			return tile.occupant == null
 	return true

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://vtxbvir775gy"]
+
+[ext_resource type="PackedScene" uid="uid://dvxtrysir3pm4" path="res://Data/Entities/Entity.tscn" id="1_xjb16"]
+[ext_resource type="Texture2D" uid="uid://dnrw01px541ng" path="res://Assets/art/icons/buildings/delapouite/dungeon-gate.svg" id="2_5mqil"]
+[ext_resource type="Script" path="res://Data/Entities/Gateway/Gateway.gd" id="2_lj0wg"]
+[ext_resource type="PackedScene" uid="uid://1rgwr4l47b25" path="res://UI/Elements/HoverPopups/TextPopup/TextPopup.tscn" id="4_k1idb"]
+
+[node name="Gateway" instance=ExtResource("1_xjb16")]
+script = ExtResource("2_lj0wg")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_5mqil")
+
+[node name="HealthBar" parent="." index="1"]
+visible = false
+
+[node name="TextPopupHover" parent="." index="2" instance=ExtResource("4_k1idb")]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+display_string = "[color=cyan]Gateway:[/color] will take you to... somewhere."
