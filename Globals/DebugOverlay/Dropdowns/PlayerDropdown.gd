@@ -8,6 +8,7 @@ func setup() -> void:
 	add_to_menu("Heal player", partially_heal_player)
 	add_to_menu("Fully heal player", fully_heal_player)
 	add_to_menu("Teleport player", teleport_player)
+	add_to_menu("Update items", update_items)
 
 
 func level_up() -> void:
@@ -63,3 +64,11 @@ func _teleport_player_to_tile(tile: Tile):
 		return
 	
 	GlobalGameState.player.occupancy.move_to_tile(tile)
+
+
+func update_items():
+	if GlobalGameState.player == null:
+		return
+	
+	for item in GlobalGameState.player.inventory.items.values():
+		item.update()
