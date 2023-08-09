@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://clkedmwe4xw0b"]
+[gd_scene load_steps=15 format=3 uid="uid://clkedmwe4xw0b"]
 
 [ext_resource type="Script" path="res://Game/Game.gd" id="1_iqcmv"]
 [ext_resource type="PackedScene" uid="uid://ceje4cjsotpey" path="res://Game/Camera/Camera.tscn" id="3_if80k"]
@@ -45,7 +45,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("FadeRect:self_modulate")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
@@ -66,10 +66,39 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_py80g"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeRect:self_modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_35cvi"]
 _data = {
 "RESET": SubResource("Animation_av5bu"),
-"fade_in": SubResource("Animation_i6r7k")
+"fade_in": SubResource("Animation_i6r7k"),
+"fade_out": SubResource("Animation_py80g")
 }
 
 [node name="Game" type="Node2D"]
@@ -119,3 +148,5 @@ autoplay = "fade_in"
 libraries = {
 "": SubResource("AnimationLibrary_35cvi")
 }
+
+[connection signal="closed" from="Menus/UpgradeMenu" to="." method="_on_upgrade_menu_closed"]

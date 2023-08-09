@@ -3,6 +3,8 @@ class_name UpgradeMenu
 extends CanvasLayer
 
 
+signal closed
+
 #const PLAYER_DATA: PlayerData = preload("res://Data/Entities/Player/PlayerData.tres")
 
 @export_range(1, 5, 1, "or_greater") var max_n_cards_to_spawn: int = 3:
@@ -87,6 +89,7 @@ func display() -> void:
 		show()
 	else:
 		has_priority = false
+		closed.emit()
 
 
 func _on_card_display_card_selected() -> void:
@@ -98,6 +101,7 @@ func _on_card_display_card_selected() -> void:
 		has_priority = false
 		background_animator.play("fade_out")
 		visibility_button.hide()
+		closed.emit()
 
 
 func _set_n_card_to_spawn(value: int):

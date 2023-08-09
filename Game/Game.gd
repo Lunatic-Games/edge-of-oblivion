@@ -20,6 +20,7 @@ var has_ended: bool = false
 @onready var victory_menu: VictoryMenu = $Menus/VictoryMenu
 @onready var game_over_menu: GameOverMenu = $Menus/GameOverMenu
 @onready var pause_menu: PauseMenu = $Menus/PauseMenu
+@onready var fade_animator: AnimationPlayer = $FadeOverlay/FadePlayer
 
 
 func _ready() -> void:
@@ -54,15 +55,21 @@ func new_level_setup() -> void:
 
 
 func transition_to_new_level(new_level_data: LevelData) -> void:
+	set_process(false)
+	fade_animator.play("fade_out")
+	await fade_animator.animation_finished
 	if level != null:
 		level.queue_free()
 	
 	level_data = new_level_data
 	new_level_setup()
+	set_process(true)
+	fade_animator.play("fade_in")
 
 
 func _process(_delta: float) -> void:
-	game_mode.update()
+	if game_mode != null:
+		game_mode.update()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -107,15 +114,21 @@ func game_over():
 	game_over_menu.show()
 
 
-func check_for_upgrades() -> void:
+func check_for_upgrades() -> bool:
 	if upgrade_menu.n_queued_upgrades > 0 and has_ended == false:
 		upgrade_menu.display()
+		return true
+	
+	return false
 
 
-func check_for_level_transition() -> void:
-	if queued_level_transition != null:
+func check_for_level_transition() -> bool:
+	if queued_level_transition != null and has_ended == false:
 		transition_to_new_level(queued_level_transition)
 		queued_level_transition = null
+		return true
+	
+	return false
 
 
 func _on_player_levelled_up(_player_level: int):
@@ -128,3 +141,7 @@ func _on_player_died() -> void:
 
 func _on_boss_defeated(_boss: Enemy) -> void:
 	victory()
+
+
+func _on_upgrade_menu_closed() -> void:
+	check_for_level_transition()

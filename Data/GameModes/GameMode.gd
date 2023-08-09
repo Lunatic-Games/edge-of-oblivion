@@ -62,8 +62,9 @@ func process_round() -> void:
 	_spawn_flags_for_next_round()
 	await scene_tree.create_timer(data.spawn_flag_phase_duration_seconds).timeout
 	
-	game.check_for_upgrades()
-	game.check_for_level_transition()
+	var levelled_up: bool = game.check_for_upgrades()
+	if levelled_up == false and is_instance_valid(player) and player.health.is_alive():
+		game.check_for_level_transition()
 	
 	if is_instance_valid(player):  # If they died or something since their turn
 		player.input_controller.reset_moves_remaining()
