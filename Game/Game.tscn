@@ -148,5 +148,3 @@ autoplay = "fade_in"
 libraries = {
 "": SubResource("AnimationLibrary_35cvi")
 }
-
-[connection signal="closed" from="Menus/UpgradeMenu" to="." method="_on_upgrade_menu_closed"]

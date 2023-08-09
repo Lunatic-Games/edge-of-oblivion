@@ -3,9 +3,9 @@ extends Resource
 
 
 enum GatewaySpawnCondition {
-	#NO_GATEWAY,
-	#BOSS_DEFEATED,
-	#DEFEATED_ALL_WAVES,
+	NEVER,
+	BOSS_DEFEATED,
+	LAST_WAVE_SPAWNED,
 	ON_LOAD
 }
 
@@ -14,4 +14,5 @@ enum GatewaySpawnCondition {
 @export var level_waves: LevelWaves = null
 @export var next_level: LevelData = null
 @export var game_mode: GameModeData = preload("res://Data/GameModes/Standard/Standard.tres")
-@export var gateway_spawn_condition: GatewaySpawnCondition = GatewaySpawnCondition.ON_LOAD
+@export var gateway_spawn_condition: GatewaySpawnCondition = GatewaySpawnCondition.NEVER
+@export var killing_boss_completes_run: bool = false

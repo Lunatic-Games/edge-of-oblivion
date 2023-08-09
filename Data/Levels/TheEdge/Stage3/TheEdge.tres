@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LevelData" load_steps=23 format=3 uid="uid://bj2807sghnvk0"]
 
 [ext_resource type="Resource" uid="uid://50bvt7hgm20i" path="res://Data/GameModes/Standard/Standard.tres" id="1_ce4x6"]
-[ext_resource type="PackedScene" uid="uid://bvu03ruea1xp7" path="res://Data/Levels/TheEdge/TheEdge.tscn" id="1_k1yk8"]
+[ext_resource type="PackedScene" uid="uid://bvu03ruea1xp7" path="res://Data/Levels/TheEdge/Stage3/TheEdge.tscn" id="1_k1yk8"]
 [ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Swamp/Faded/Faded.tres" id="2_fcdim"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="2_xcnee"]
 [ext_resource type="Resource" uid="uid://bsnphtkgiwpsv" path="res://Data/Entities/Enemies/Swamp/LostRanger/LostRanger.tres" id="3_nho3p"]
@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://drvpn77ymyoa7" path="res://Data/Entities/Enemies/Swamp/ForswornPike/ForswornPike.tres" id="4_e5f1t"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="4_qop6g"]
 [ext_resource type="Resource" uid="uid://bme4pcpoh4pvr" path="res://Data/Entities/Enemies/Swamp/ForgottenKing/ForgottenKing.tres" id="5_lq3cf"]
-[ext_resource type="Resource" uid="uid://ydcjy7iyqo5n" path="res://Data/Levels/TheEdgeHaven/TheEdgeHaven.tres" id="8_7gsjq"]
+[ext_resource type="Resource" uid="uid://ydcjy7iyqo5n" path="res://Data/Levels/TheEdge/Haven/TheEdgeHaven.tres" id="8_7gsjq"]
 
 [sub_resource type="Resource" id="Resource_37nne"]
 script = ExtResource("4_qop6g")

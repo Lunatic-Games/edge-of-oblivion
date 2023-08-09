@@ -23,14 +23,7 @@ func _init(p_entity: Entity, p_data: InputControllerData):
 
 
 func check_for_input(time_for_turn_seconds: float):
-	if !entity.health.is_alive():
-		return
-	
-	var game: Game = GlobalGameState.get_game()
-	if game.has_ended or game.upgrade_menu.has_priority:
-		return
-	
-	if moves_remaining == 0 or is_movement_locked:
+	if !entity.health.is_alive() or moves_remaining == 0 or is_movement_locked:
 		return
 	
 	var current_tile: Tile = entity.occupancy.current_tile

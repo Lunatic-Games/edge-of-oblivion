@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="LevelData" load_steps=5 format=3 uid="uid://ydcjy7iyqo5n"]
 
-[ext_resource type="PackedScene" uid="uid://dpdhlyx02h5gf" path="res://Data/Levels/TheEdgeHaven/TheEdgeHaven.tscn" id="1_63r3q"]
+[ext_resource type="PackedScene" uid="uid://dpdhlyx02h5gf" path="res://Data/Levels/TheEdge/Haven/TheEdgeHaven.tscn" id="1_63r3q"]
 [ext_resource type="Resource" uid="uid://c7crkijqi5ruj" path="res://Data/GameModes/NonCombatZone/NonCombatZone.tres" id="1_l0fc3"]
 [ext_resource type="Resource" uid="uid://d1tqh8fbckgnb" path="res://Data/Levels/TheForest/TheForest.tres" id="8_tiurh"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="9_2u34d"]

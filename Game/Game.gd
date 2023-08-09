@@ -2,7 +2,7 @@ class_name Game
 extends Node2D
 
 
-var level_data: LevelData = load("res://Data/Levels/TheEdge/TheEdge.tres")
+var level_data: LevelData = load("res://Data/Levels/TheEdge/Stage3/TheEdge.tres")
 var level: Level = null
 var player: Player = null
 var game_mode: GameMode = null
@@ -11,7 +11,7 @@ var spawn_handler: SpawnHandler = SpawnHandler.new()
 var run_stats: RunStats = RunStats.new()
 var queued_level_transition: LevelData = null
 
-var has_ended: bool = false
+var run_over: bool = false
 
 @onready var player_overlay: PlayerOverlay = $HUD/PlayerOverlay
 @onready var boss_overlay: BossOverlay = $HUD/BossOverlay
@@ -25,10 +25,8 @@ var has_ended: bool = false
 
 func _ready() -> void:
 	randomize()
-	GlobalSignals.boss_defeated.connect(_on_boss_defeated)
 
 	await new_level_setup()
-	
 	GlobalSignals.run_started.emit()
 
 
@@ -42,14 +40,6 @@ func new_level_setup() -> void:
 	await level.board.tile_generation_completed
 	
 	GlobalSignals.initial_level_setup_completed.emit(self)
-	
-	if level_data.gateway_spawn_condition == LevelData.GatewaySpawnCondition.ON_LOAD:
-		if level_data.next_level != null:
-			spawn_handler.spawn_gateway(level_data.next_level)
-	
-	player = spawn_handler.spawn_player()
-	player.health.died.connect(_on_player_died)
-	player.levelling.levelled_up.connect(_on_player_levelled_up)
 	
 	game_mode = GameMode.new(self, level_data.game_mode)
 
@@ -68,7 +58,7 @@ func transition_to_new_level(new_level_data: LevelData) -> void:
 
 
 func _process(_delta: float) -> void:
-	if game_mode != null:
+	if game_mode != null and run_over == false and upgrade_menu.has_priority == false:
 		game_mode.update()
 
 
@@ -76,7 +66,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("pause"):
 		return
 	
-	if has_ended or pause_menu.visible:
+	if run_over or pause_menu.visible:
 		return
 	
 	get_viewport().set_input_as_handled()
@@ -84,10 +74,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func victory():
-	if has_ended:
+	if run_over:
 		return
 	
-	has_ended = true
+	run_over = true
 	GlobalSignals.run_ended.emit(true)
 	await get_tree().create_timer(1.0).timeout
 	
@@ -99,11 +89,11 @@ func victory():
 
 
 func game_over():
-	if has_ended:
+	if run_over:
 		return
 	
 	upgrade_menu.hide()
-	has_ended = true
+	run_over = true
 	GlobalSignals.run_ended.emit(false)
 	await get_tree().create_timer(1.0).timeout
 	
@@ -115,7 +105,7 @@ func game_over():
 
 
 func check_for_upgrades() -> bool:
-	if upgrade_menu.n_queued_upgrades > 0 and has_ended == false:
+	if upgrade_menu.n_queued_upgrades > 0 and run_over == false:
 		upgrade_menu.display()
 		return true
 	
@@ -123,25 +113,9 @@ func check_for_upgrades() -> bool:
 
 
 func check_for_level_transition() -> bool:
-	if queued_level_transition != null and has_ended == false:
+	if queued_level_transition != null and run_over == false:
 		transition_to_new_level(queued_level_transition)
 		queued_level_transition = null
 		return true
 	
 	return false
-
-
-func _on_player_levelled_up(_player_level: int):
-	upgrade_menu.queue_upgrade()
-
-
-func _on_player_died() -> void:
-	game_over()
-
-
-func _on_boss_defeated(_boss: Enemy) -> void:
-	victory()
-
-
-func _on_upgrade_menu_closed() -> void:
-	check_for_level_transition()
