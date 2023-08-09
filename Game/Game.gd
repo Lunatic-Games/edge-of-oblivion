@@ -6,7 +6,7 @@ var level_data: LevelData = load("res://Data/Levels/TheEdge/TheEdge.tres")
 var level: Level = null
 var player: Player = null
 
-var round_manager: RoundManager = RoundManager.new()
+var round_manager: RoundManager = null
 var spawn_handler: SpawnHandler = SpawnHandler.new()
 var run_stats: RunStats = RunStats.new()
 var queued_level_transition: LevelData = null
@@ -32,11 +32,12 @@ func _ready() -> void:
 
 
 func new_level_setup() -> void:
+	player_overlay.visible = level_data.game_mode.show_player_ui_overlay
+	
 	level = level_data.level_scene.instantiate()
 	level.setup(level_data)
 	add_child(level)
 	move_child(level, spawn_handler.get_index() + 1)
-	player_overlay.visible = level_data.is_combat_level
 	await level.board.tile_generation_completed
 	
 	GlobalSignals.initial_level_setup_completed.emit(self)
@@ -45,12 +46,13 @@ func new_level_setup() -> void:
 		if level_data.next_level != null:
 			spawn_handler.spawn_gateway(level_data.next_level)
 	
-	spawn_flags_for_next_round()
-	
 	player = spawn_handler.spawn_player()
 	player.inventory.add_starting_items()
 	player.health.died.connect(_on_player_died)
 	player.levelling.levelled_up.connect(_on_player_levelled_up)
+	
+	round_manager = RoundManager.new(self, level_data.game_mode)
+	spawn_flags_for_next_round()
 
 
 func transition_to_new_level(new_level_data: LevelData) -> void:
@@ -58,13 +60,12 @@ func transition_to_new_level(new_level_data: LevelData) -> void:
 		level.queue_free()
 	
 	level_data = new_level_data
-	round_manager = RoundManager.new()
 	new_level_setup()
 
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(player) and player.health.is_alive():
-		round_manager.update(player, self)
+		round_manager.update()
 
 
 func _unhandled_input(event: InputEvent) -> void:

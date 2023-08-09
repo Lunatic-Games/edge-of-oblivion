@@ -13,5 +13,5 @@ enum GatewaySpawnCondition {
 @export var level_scene: PackedScene = null
 @export var level_waves: LevelWaves = null
 @export var next_level: LevelData = null
-@export var is_combat_level: bool = true
+@export var game_mode: GameModeData = preload("res://Data/GameModes/Standard/Standard.tres")
 @export var gateway_spawn_condition: GatewaySpawnCondition = GatewaySpawnCondition.ON_LOAD

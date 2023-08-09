@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=22 format=3 uid="uid://bj2807sghnvk0"]
+[gd_resource type="Resource" script_class="LevelData" load_steps=23 format=3 uid="uid://bj2807sghnvk0"]
 
+[ext_resource type="Resource" uid="uid://50bvt7hgm20i" path="res://Data/GameModes/Standard/Standard.tres" id="1_ce4x6"]
 [ext_resource type="PackedScene" uid="uid://bvu03ruea1xp7" path="res://Data/Levels/TheEdge/TheEdge.tscn" id="1_k1yk8"]
 [ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Swamp/Faded/Faded.tres" id="2_fcdim"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="2_xcnee"]
@@ -120,5 +121,5 @@ level_name = "The Edge"
 level_scene = ExtResource("1_k1yk8")
 level_waves = SubResource("Resource_x6fjg")
 next_level = ExtResource("8_7gsjq")
-is_combat_level = true
+game_mode = ExtResource("1_ce4x6")
 gateway_spawn_condition = 0
