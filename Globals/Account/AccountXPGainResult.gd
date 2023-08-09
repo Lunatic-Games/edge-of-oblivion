@@ -1,5 +1,5 @@
 class_name AccountXPGainResult
-extends Object
+extends RefCounted
 
 
 var xp_gained: int = 0

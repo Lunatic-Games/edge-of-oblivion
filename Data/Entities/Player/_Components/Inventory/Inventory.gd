@@ -1,5 +1,5 @@
 class_name Inventory
-extends Object
+extends RefCounted
 
 
 var entity: Entity = null

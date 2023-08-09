@@ -1,5 +1,5 @@
 class_name LogicTreeDirectionUtility
-extends Object
+extends RefCounted
 
 
 static func get_direction_from_tile_offset(position_offset: Vector2) -> Vector2i:

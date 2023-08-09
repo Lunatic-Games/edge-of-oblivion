@@ -21,6 +21,20 @@ func spawn_player() -> Player:
 	return player
 
 
+func spawn_existing_player(player: Player) -> Player:
+	var board: Board = GlobalGameState.get_board()
+	var spawn_tile: Tile = board.get_random_unoccupied_tile()
+	assert(spawn_tile != null, "No free tile to spawn player on.")
+	
+	GlobalSignals.player_spawned.emit(player)
+	player.reparent(board)
+	
+	spawn_tile.occupant = player
+	player.occupancy.current_tile = spawn_tile
+	player.global_position = spawn_tile.global_position
+	return player
+
+
 func spawn_enemies(enemies: Array[EnemyData]) -> void:
 	for enemy_data in enemies:
 		var spawn_flag: SpawnFlag = spawn_flags.pop_front()

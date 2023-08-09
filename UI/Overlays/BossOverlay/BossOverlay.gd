@@ -12,6 +12,7 @@ var health_bar_tween: Tween
 
 func _ready() -> void:
 	GlobalSignals.boss_spawned.connect(_on_boss_spawned)
+	GlobalSignals.boss_defeated.connect(_on_boss_defeated)
 
 
 func _on_boss_spawned(boss: Enemy) -> void:
@@ -28,3 +29,8 @@ func _on_boss_health_changed(_change: int, boss: Enemy) -> void:
 	health_bar_tween = create_tween()
 	health_bar_tween.tween_property(health_bar, "value", target_value, 
 		HEALTH_BAR_TWEEN_TIME).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+
+
+func _on_boss_defeated(_boss: Enemy) -> void:
+	hide()
+

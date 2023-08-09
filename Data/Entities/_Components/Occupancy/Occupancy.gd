@@ -1,5 +1,5 @@
 class_name EntityOccupancy
-extends Object
+extends RefCounted
 
 
 signal move_animation_completed

@@ -1,5 +1,5 @@
 class_name InputController
-extends Object
+extends RefCounted
 
 
 const DEFAULT_SCALE: Vector2 = Vector2(0.125, 0.125)

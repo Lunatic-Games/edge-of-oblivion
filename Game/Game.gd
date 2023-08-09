@@ -2,9 +2,8 @@ class_name Game
 extends Node2D
 
 
-var level_data: LevelData = load("res://Data/Levels/TheEdge/Stage3/TheEdge.tres")
+var level_data: LevelData = load("res://Data/Levels/TheEdge/Stage1/TheEdge1.tres")
 var level: Level = null
-var player: Player = null
 var game_mode: GameMode = null
 
 var spawn_handler: SpawnHandler = SpawnHandler.new()
@@ -48,6 +47,11 @@ func transition_to_new_level(new_level_data: LevelData) -> void:
 	set_process(false)
 	fade_animator.play("fade_out")
 	await fade_animator.animation_finished
+	if new_level_data.persist_player_on_entering:
+		var player: Player = GlobalGameState.get_player()
+		if player:
+			player.reparent(self)
+	
 	if level != null:
 		level.queue_free()
 	

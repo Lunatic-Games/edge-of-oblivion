@@ -1,5 +1,5 @@
 class_name EntityHealth
-extends Object
+extends RefCounted
 
 
 signal value_changed(amount: int)
