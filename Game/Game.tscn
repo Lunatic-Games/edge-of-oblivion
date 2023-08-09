@@ -39,7 +39,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_i6r7k"]
-resource_name = "fade_out"
+resource_name = "fade_in"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -69,7 +69,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_35cvi"]
 _data = {
 "RESET": SubResource("Animation_av5bu"),
-"fade_out": SubResource("Animation_i6r7k")
+"fade_in": SubResource("Animation_i6r7k")
 }
 
 [node name="Game" type="Node2D"]
@@ -115,7 +115,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="FadePlayer" type="AnimationPlayer" parent="FadeOverlay"]
-autoplay = "fade_out"
+autoplay = "fade_in"
 libraries = {
 "": SubResource("AnimationLibrary_35cvi")
 }

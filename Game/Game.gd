@@ -5,8 +5,8 @@ extends Node2D
 var level_data: LevelData = load("res://Data/Levels/TheEdge/TheEdge.tres")
 var level: Level = null
 var player: Player = null
+var game_mode: GameMode = null
 
-var round_manager: RoundManager = null
 var spawn_handler: SpawnHandler = SpawnHandler.new()
 var run_stats: RunStats = RunStats.new()
 var queued_level_transition: LevelData = null
@@ -47,12 +47,10 @@ func new_level_setup() -> void:
 			spawn_handler.spawn_gateway(level_data.next_level)
 	
 	player = spawn_handler.spawn_player()
-	player.inventory.add_starting_items()
 	player.health.died.connect(_on_player_died)
 	player.levelling.levelled_up.connect(_on_player_levelled_up)
 	
-	round_manager = RoundManager.new(self, level_data.game_mode)
-	spawn_flags_for_next_round()
+	game_mode = GameMode.new(self, level_data.game_mode)
 
 
 func transition_to_new_level(new_level_data: LevelData) -> void:
@@ -64,8 +62,7 @@ func transition_to_new_level(new_level_data: LevelData) -> void:
 
 
 func _process(_delta: float) -> void:
-	if is_instance_valid(player) and player.health.is_alive():
-		round_manager.update()
+	game_mode.update()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -119,24 +116,6 @@ func check_for_level_transition() -> void:
 	if queued_level_transition != null:
 		transition_to_new_level(queued_level_transition)
 		queued_level_transition = null
-
-
-func spawn_enemies_for_round() -> void:
-	if level.data.level_waves == null:
-		return
-	
-	var round_i: int = round_manager.current_round
-	var enemies_to_spawn: Array[EnemyData] = level.data.level_waves.get_enemies_for_round(round_i)
-	spawn_handler.spawn_enemies(enemies_to_spawn)
-
-
-func spawn_flags_for_next_round() -> void:
-	if level.data.level_waves == null:
-		return
-	
-	var round_i: int = round_manager.current_round
-	var n_enemies_next_turn: int = level.data.level_waves.get_enemies_for_round(round_i + 1).size()
-	spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
 
 
 func _on_player_levelled_up(_player_level: int):

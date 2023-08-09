@@ -16,6 +16,7 @@ func spawn_player() -> Player:
 	assert(spawn_tile != null, "No free tile to spawn player on.")
 	
 	var player: Player = spawn_entity_on_tile(PLAYER_DATA, spawn_tile)
+	player.inventory.add_starting_items()
 	GlobalSignals.player_spawned.emit(player)
 	return player
 
