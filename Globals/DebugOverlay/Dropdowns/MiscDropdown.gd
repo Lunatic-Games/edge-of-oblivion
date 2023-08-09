@@ -7,10 +7,11 @@ func setup():
 
 
 func show_victory_screen():
-	if GlobalGameState.game == null:
+	var game: Game = GlobalGameState.get_game()
+	if game == null:
 		return
 	
-	GlobalGameState.game._on_boss_defeated(null)
+	game.victory()
 
 
 func toggle_fullscreen():

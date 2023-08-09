@@ -10,6 +10,10 @@ var items: Dictionary = {}  # ItemData : Item Scene
 func _init(p_entity: Entity, p_data: InventoryData):
 	entity = p_entity
 	data = p_data
+	
+	var game: Game = GlobalGameState.get_game()
+	var inventory_display: InventoryDisplay = game.player_overlay.inventory_display
+	inventory_display.reset_display()
 
 
 func add_starting_items():
@@ -28,7 +32,8 @@ func add_item(item_data: ItemData, animate: bool = true) -> void:
 	var item: Item = item_data.item_scene.instantiate()
 	items[item_data] = item
 	
-	var inventory_display: InventoryDisplay = GlobalGameState.game.player_overlay.inventory_display
+	var game: Game = GlobalGameState.get_game()
+	var inventory_display: InventoryDisplay = game.player_overlay.inventory_display
 	inventory_display.add_item_to_display(item, animate)
 	item.setup(entity, item_data)
 	
@@ -42,7 +47,8 @@ func upgrade_item(item_data: ItemData, animate: bool = true) -> void:
 	item.upgrade_tier()
 	
 	if animate:
-		var inventory_display: InventoryDisplay = GlobalGameState.game.player_overlay.inventory_display
+		var game: Game = GlobalGameState.get_game()
+		var inventory_display: InventoryDisplay = game.player_overlay.inventory_display
 		inventory_display.animate_item_upgrade(item)
 	
 	GlobalSignals.item_increased_tier.emit(item, item_data)

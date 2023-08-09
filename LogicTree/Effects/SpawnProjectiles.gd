@@ -17,11 +17,13 @@ func _ready() -> void:
 
 
 func perform_behavior() -> void:
+	var board: Board = GlobalGameState.get_board()
+	
 	for origin_tile in origin_tiles.value:
 		for target_tile in target_tiles.value:
 			var projectile: Projectile = projectile_scene.instantiate() as Projectile
 			assert(projectile != null, "Failed to instaniate packed scene as a Projectile for '" + name + "'")
-			GlobalGameState.board.add_child(projectile)
+			board.add_child(projectile)
 			
 			projectile.global_position = origin_tile.global_position
 			projectile.setup(origin_tile, target_tile, seconds_per_tile_speed)

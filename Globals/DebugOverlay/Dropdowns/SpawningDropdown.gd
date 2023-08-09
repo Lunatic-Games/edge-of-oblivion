@@ -46,26 +46,33 @@ func _on_enemy_button_pressed(enemy_data: EnemyData):
 
 
 func _spawn_enemy_on_selected_tile(tile: Tile):
-	if tile == null or GlobalGameState.board == null or GlobalGameState.game == null:
-		return
-	
-	var enemy_data: EnemyData = enemy_to_spawn_on_tile_selected
-	
-	if tile.occupant != null and !tile.occupant.occupancy.can_be_collected(enemy_data):
-		return
-	
-	GlobalGameState.game.spawn_handler.spawn_entity_on_tile(enemy_data, tile)
-
-
-func _spawn_enemy_on_random_tile(enemy_data: EnemyData):
-	if GlobalGameState.board == null or GlobalGameState.game == null:
-		return
-	
-	var tile: Tile = GlobalGameState.board.get_random_unoccupied_tile()
 	if tile == null:
 		return
 	
-	GlobalGameState.game.spawn_handler.spawn_entity_on_tile(enemy_data, tile)
+	var enemy_data: EnemyData = enemy_to_spawn_on_tile_selected
+	if tile.occupant != null and !tile.occupant.occupancy.can_be_collected(enemy_data):
+		return
+	
+	var spawn_handler: SpawnHandler = GlobalGameState.get_spawn_handler()
+	if spawn_handler == null:
+		return
+	
+	spawn_handler.spawn_entity_on_tile(enemy_data, tile)
+
+
+func _spawn_enemy_on_random_tile(enemy_data: EnemyData):
+	var board: Board = GlobalGameState.get_board()
+	if board == null:
+		return
+	
+	var tile: Tile = board.get_random_unoccupied_tile()
+	if tile == null:
+		return
+	
+	var spawn_handler: SpawnHandler = GlobalGameState.get_spawn_handler()
+	if spawn_handler == null:
+		return
+	spawn_handler.spawn_entity_on_tile(enemy_data, tile)
 
 
 func _load_enemies():

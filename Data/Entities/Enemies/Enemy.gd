@@ -22,7 +22,7 @@ func appear_unready() -> void:
 
 
 func _on_died():
-	var player: Player = GlobalGameState.player
+	var player: Player = GlobalGameState.get_player()
 	if player == null:
 		return
 	

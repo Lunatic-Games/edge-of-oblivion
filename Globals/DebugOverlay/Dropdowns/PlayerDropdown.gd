@@ -12,43 +12,50 @@ func setup() -> void:
 
 
 func level_up() -> void:
-	if GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	GlobalGameState.player.levelling.level_up()
-	GlobalGameState.game.check_for_upgrades()
+	player.levelling.level_up()
+	
+	var game: Game = GlobalGameState.get_game()
+	game.check_for_upgrades()
 
 
 func damage_player() -> void:
-	if GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	var max_health: int = GlobalGameState.player.health.data.max_health
+	var max_health: int = player.health.data.max_health
 	var damage_amount: int = int(max_health / 4.0)
-	GlobalGameState.player.health.take_damage(damage_amount)
+	player.health.take_damage(damage_amount)
 
 
 func partially_heal_player() -> void:
-	if GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	var max_health: int = GlobalGameState.player.health.data.max_health
+	var max_health: int = player.health.data.max_health
 	var heal_amount: int = int(max_health / 4.0) 
-	GlobalGameState.player.health.heal(heal_amount)
+	player.health.heal(heal_amount)
 
 
 func fully_heal_player() -> void:
-	if GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	GlobalGameState.player.health.full_heal()
+	player.health.full_heal()
 
 
 func kill_player() -> void:
-	if GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	GlobalGameState.player.health.deal_lethal_damage()
+	player.health.deal_lethal_damage()
 
 
 func teleport_player() -> void:
@@ -57,20 +64,22 @@ func teleport_player() -> void:
 
 
 func _teleport_player_to_tile(tile: Tile):
-	if tile == null or GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if tile == null or player == null:
 		return
 	
-	var player_data: PlayerData = GlobalGameState.player.data as PlayerData
+	var player_data: PlayerData = player.data as PlayerData
 	
 	if tile.occupant != null and !tile.occupant.occupancy.data.can_be_collected(player_data):
 		return
 	
-	GlobalGameState.player.occupancy.move_to_tile(tile)
+	player.occupancy.move_to_tile(tile)
 
 
 func update_items():
-	if GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	for item in GlobalGameState.player.inventory.items.values():
+	for item in player.inventory.items.values():
 		item.update()

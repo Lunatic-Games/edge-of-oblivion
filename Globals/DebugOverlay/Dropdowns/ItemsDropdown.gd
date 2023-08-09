@@ -27,10 +27,11 @@ func setup() -> void:
 
 
 func _give_player_item(item_data: ItemData) -> void:
-	if not GlobalGameState.player:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	GlobalGameState.player.inventory.add_or_upgrade_item(item_data)
+	player.inventory.add_or_upgrade_item(item_data)
 
 
 func _on_player_spawned(_player: Player) -> void:

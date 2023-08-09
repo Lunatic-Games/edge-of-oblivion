@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("9_2u34d")
-level_name = "The Edge"
+level_name = "The Edge Haven"
 level_scene = ExtResource("1_63r3q")
 next_level = ExtResource("8_tiurh")
 is_combat_level = false

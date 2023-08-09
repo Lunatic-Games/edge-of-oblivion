@@ -16,11 +16,12 @@ func target_update() -> void:
 
 
 func kill_all() -> void:
-	if GlobalGameState.game == null:
+	var spawn_handler: SpawnHandler = GlobalGameState.get_spawn_handler()
+	if spawn_handler == null:
 		return
 	
 	# Iterate backwards since elements are deleted as they die
-	var enemies: Array[Enemy] = GlobalGameState.game.spawn_handler.spawned_enemies
+	var enemies: Array[Enemy] = spawn_handler.spawned_enemies
 	for i in range(enemies.size() - 1, -1, -1):
 		enemies[i].health.deal_lethal_damage()
 

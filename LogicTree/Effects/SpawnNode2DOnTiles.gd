@@ -14,10 +14,12 @@ func _ready() -> void:
 
 
 func perform_behavior() -> void:
+	var board: Board = GlobalGameState.get_board()
+	
 	for tile in tiles.value:
 		var node: Node2D = node2d_to_spawn.instantiate()
 		assert(node != null, "Failed to instaniate packed scene as a Node2D for '" + name + "'")
-		GlobalGameState.board.add_child(node)
+		board.add_child(node)
 		
 		node.global_position = tile.global_position
 		if mirror_x_if_left_of_first_tile != null:

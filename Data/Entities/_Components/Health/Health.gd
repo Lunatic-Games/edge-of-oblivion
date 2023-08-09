@@ -96,7 +96,9 @@ func _die() -> void:
 func _spawn_particles(particles_scene: PackedScene) -> void:
 	var particle: Node2D = particles_scene.instantiate()
 	particle.global_position = entity.global_position
-	GlobalGameState.board.add_child(particle)
+	
+	var board: Board = GlobalGameState.get_board()
+	board.add_child(particle)
 
 
 func _update_health_bar() -> void:

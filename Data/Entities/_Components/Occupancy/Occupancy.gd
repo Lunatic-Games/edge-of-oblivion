@@ -27,11 +27,11 @@ func move_to_tile(destination_tile: Tile) -> bool:
 		var destination_occupancy: EntityOccupancy = destination_occupant.occupancy
 		match destination_occupancy.data.blocking_behavior:
 			OccupancyData.BlockingBehavior.STANDARD:
-				var tile_to_displace_to: Tile = get_displace_tile(destination_tile)
+				var tile_to_displace_to: Tile = destination_occupancy.get_displace_tile()
 				if tile_to_displace_to == null:
 					return false
-				
-				destination_occupancy.move_to_tile(tile_to_displace_to)
+				if destination_occupancy.move_to_tile(tile_to_displace_to) == false:
+					return false
 			OccupancyData.BlockingBehavior.IMMOVABLE:
 				return false
 			OccupancyData.BlockingBehavior.COLLECTABLE:
@@ -74,16 +74,16 @@ func do_move_animation(destination: Vector2):
 	base_tween.finished.connect(_on_move_tween_finished, CONNECT_ONE_SHOT)
 
 
-func get_displace_tile(base_tile: Tile) -> Tile:
+func get_displace_tile() -> Tile:
 	var possible_tiles: Array[Tile] = []
-	if base_tile.top_tile && !base_tile.top_tile.occupant:
-		possible_tiles.append(base_tile.top_tile)
-	if base_tile.bottom_tile && !base_tile.bottom_tile.occupant:
-		possible_tiles.append(base_tile.bottom_tile)
-	if base_tile.left_tile && !base_tile.left_tile.occupant:
-		possible_tiles.append(base_tile.left_tile)
-	if base_tile.right_tile && !base_tile.right_tile.occupant:
-		possible_tiles.append(base_tile.right_tile)
+	if current_tile.top_tile && can_move_to_tile(current_tile.top_tile):
+		possible_tiles.append(current_tile.top_tile)
+	if current_tile.bottom_tile && can_move_to_tile(current_tile.bottom_tile):
+		possible_tiles.append(current_tile.bottom_tile)
+	if current_tile.left_tile && can_move_to_tile(current_tile.left_tile):
+		possible_tiles.append(current_tile.left_tile)
+	if current_tile.right_tile && can_move_to_tile(current_tile.right_tile):
+		possible_tiles.append(current_tile.right_tile)
 	
 	if possible_tiles.size() > 0:
 		return possible_tiles.pick_random()

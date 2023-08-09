@@ -16,4 +16,5 @@ func set_destination(gateway_destination: LevelData) -> void:
 
 func _on_collected(_by) -> void:
 	assert(destination != null, "Gateway does not have a destination set")
-	GlobalGameState.game.queued_level_transition = destination
+	var game: Game = GlobalGameState.get_game()
+	game.queued_level_transition = destination

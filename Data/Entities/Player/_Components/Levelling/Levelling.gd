@@ -48,7 +48,8 @@ func get_xp_to_next_level() -> int:
 
 func _update_experience_bar():
 	var xp_to_next_level = get_xp_to_next_level()
-	var experience_bar: ExperienceBar = GlobalGameState.game.player_overlay.experience_bar
+	var game: Game = GlobalGameState.get_game()
+	var experience_bar: ExperienceBar = game.player_overlay.experience_bar
 	if xp_to_next_level == -1:
 		experience_bar.update(current_level, 1.0)
 	else:
