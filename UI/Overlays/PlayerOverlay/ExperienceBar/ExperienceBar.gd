@@ -7,7 +7,6 @@ const VALUE_UPDATE_PER_SECOND: float = 200.0
 var current_displayed_level: int = 1
 var target_level: int = 1
 var target_progress_ratio: float = 0
-var is_max_level: bool = false
 
 @onready var level_up_particles: GPUParticles2D = $LevelUpParticles
 
@@ -29,6 +28,10 @@ func _process(delta: float) -> void:
 		level_up_particles.emitting = true
 
 
-func update(level: int, remainder_ratio: float) -> void:
+func update(level: int, remainder_ratio: float, animate: bool = true) -> void:
 	target_level = level
 	target_progress_ratio = remainder_ratio
+	
+	if animate == false:
+		current_displayed_level = target_level
+		value = max_value * remainder_ratio

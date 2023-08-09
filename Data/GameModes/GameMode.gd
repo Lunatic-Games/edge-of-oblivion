@@ -117,7 +117,7 @@ func _spawn_flags_for_next_round() -> void:
 	game.spawn_handler.spawn_flags_for_next_turn(n_enemies_next_turn)
 
 
-func _on_player_died(_player: Player) -> void:
+func _on_player_died(_source: int) -> void:
 	game.game_over()
 
 

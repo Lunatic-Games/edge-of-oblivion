@@ -91,10 +91,14 @@ func _on_enemy_spawned(enemy: Enemy) -> void:
 	spawned_enemies.append(enemy)
 	
 	var enemy_data: EnemyData = enemy.data as EnemyData
-	enemy.health.died.connect(_stop_tracking_enemy.bind(enemy))
+	enemy.health.died.connect(_on_enemy_died.bind(enemy))
 	enemy.tree_exiting.connect(_stop_tracking_enemy.bind(enemy))
 	if enemy_data.is_boss():
 		GlobalSignals.boss_spawned.emit(enemy)
+
+
+func _on_enemy_died(_source: int, enemy: Enemy) -> void:
+	_stop_tracking_enemy(enemy)
 
 
 func _stop_tracking_enemy(enemy: Enemy) -> void:

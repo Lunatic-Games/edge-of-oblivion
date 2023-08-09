@@ -21,13 +21,15 @@ func appear_unready() -> void:
 	tween.tween_property(sprite, "self_modulate:a", 0.4, 0.2)
 
 
-func _on_died():
+func _on_died(source: int = 0):
 	var player: Player = GlobalGameState.get_player()
 	if player == null:
 		return
 	
 	var enemy_data: EnemyData = data as EnemyData
-	player.levelling.gain_xp(enemy_data.xp_value)
+	
+	if source == HealthData.SourceOfDamage.NORMAL:	
+		player.levelling.gain_xp(enemy_data.xp_value)
 	
 	GlobalSignals.enemy_killed.emit(self)
 	if enemy_data.boss_data != null:

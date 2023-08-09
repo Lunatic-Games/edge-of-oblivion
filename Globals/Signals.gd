@@ -9,7 +9,6 @@ signal run_ended(is_victory: bool)
 signal main_menu_entered
 
 signal player_spawned(player: Player)
-signal player_died(player: Player)
 signal player_healed(player: Player, amount: int)
 
 signal item_added_to_inventory(item: Item, item_data: ItemData)

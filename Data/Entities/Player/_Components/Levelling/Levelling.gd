@@ -15,6 +15,10 @@ var current_xp: int = 0
 func _init(p_entity: Entity, p_data: LevellingData):
 	entity = p_entity
 	data = p_data
+	
+	var game: Game = GlobalGameState.get_game()
+	var experience_bar: ExperienceBar = game.player_overlay.experience_bar
+	experience_bar.update(current_level, 0.0, false)
 
 
 func gain_xp(amount: int):

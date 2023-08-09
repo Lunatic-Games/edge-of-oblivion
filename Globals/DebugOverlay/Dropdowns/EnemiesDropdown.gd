@@ -23,7 +23,7 @@ func kill_all() -> void:
 	# Iterate backwards since elements are deleted as they die
 	var enemies: Array[Enemy] = spawn_handler.spawned_enemies
 	for i in range(enemies.size() - 1, -1, -1):
-		enemies[i].health.deal_lethal_damage()
+		enemies[i].health.deal_lethal_damage(HealthData.SourceOfDamage.DEBUG)
 
 
 func _kill_enemy_on_tile(tile: Tile):
@@ -34,7 +34,7 @@ func _kill_enemy_on_tile(tile: Tile):
 	if enemy == null:
 		return
 	
-	enemy.health.deal_lethal_damage()
+	enemy.health.deal_lethal_damage(HealthData.SourceOfDamage.DEBUG)
 
 
 func _update_enemy_on_tile(tile: Tile):
