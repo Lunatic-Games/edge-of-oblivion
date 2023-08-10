@@ -34,10 +34,11 @@ func _give_player_item(item_data: ItemData) -> void:
 	player.inventory.add_or_upgrade_item(item_data)
 
 
-func _on_player_spawned(_player: Player) -> void:
+func _on_player_spawned(player: Player) -> void:
 	for item_data in item_buttons:
 		var button: Button = item_buttons[item_data]
-		button.text = _get_display_name_for_item(null, item_data)
+		var existing_item: Item = player.inventory.items.get(item_data, null)
+		button.text = _get_display_name_for_item(existing_item, item_data)
 		button.show()
 
 

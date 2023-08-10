@@ -60,10 +60,12 @@ func spawn_flags_for_next_turn(n_flags: int) -> void:
 		spawn_entity_on_tile(SPAWN_FLAG_DATA, spawn_tile)
 
 
-func spawn_gateway(to: LevelData) -> void:
+func spawn_gateway(to: LevelData, tile: Tile = null) -> void:
 	var board: Board = GlobalGameState.get_board()
-	var spawn_tile: Tile = board.get_random_unoccupied_tile()
-	var gateway: Gateway = spawn_entity_on_tile(GATEWAY_DATA, spawn_tile)
+	if tile == null:
+		tile = board.get_random_unoccupied_tile()
+	
+	var gateway: Gateway = spawn_entity_on_tile(GATEWAY_DATA, tile)
 	gateway.set_destination(to)
 
 

@@ -122,3 +122,4 @@ level_waves = SubResource("Resource_x6fjg")
 game_mode = ExtResource("1_vxb4y")
 gateway_spawn_condition = 0
 killing_boss_completes_run = true
+persist_player_on_entering = true

@@ -1,8 +1,7 @@
 class_name Game
 extends Node2D
 
-
-var level_data: LevelData = load("res://Data/Levels/TheEdge/Stage1/TheEdge1.tres")
+var level_data: LevelData = null
 var level: Level = null
 var game_mode: GameMode = null
 
@@ -24,7 +23,11 @@ var run_over: bool = false
 
 func _ready() -> void:
 	randomize()
-
+	
+	if level_data == null:
+		var game_config: GameConfig = load("res://Data/Config/GameConfig.tres")
+		level_data = game_config.starting_level_data
+	
 	await new_level_setup()
 	GlobalSignals.run_started.emit()
 
