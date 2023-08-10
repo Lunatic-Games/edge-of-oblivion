@@ -24,6 +24,8 @@ enum CollectableFilter {
 @export var blocking_behavior: BlockingBehavior = BlockingBehavior.STANDARD
 @export var can_be_pushed_off_map: bool = true
 @export var can_push_entities: bool = false
+
+@export_group("Collectable config")
 @export var collectable_filter: CollectableFilter = CollectableFilter.ANY
 
 
