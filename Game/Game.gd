@@ -34,6 +34,7 @@ func _ready() -> void:
 
 func new_level_setup() -> void:
 	player_overlay.visible = level_data.game_mode.show_player_ui_overlay
+	boss_overlay.hide()
 	
 	level = level_data.level_scene.instantiate()
 	level.setup(level_data)
