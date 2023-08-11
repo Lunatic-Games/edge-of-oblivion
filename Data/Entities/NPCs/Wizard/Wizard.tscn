@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4a3ey4658ncl"]
+
+[ext_resource type="PackedScene" uid="uid://bpp12botbqk4r" path="res://Data/Entities/NPCs/NPC.tscn" id="1_sjy1l"]
+[ext_resource type="Texture2D" uid="uid://bnjcbgum8k33l" path="res://Assets/art/icons/medieval-fantasy/delapouite/wizard-face.svg" id="2_43os5"]
+
+[node name="Wizard" instance=ExtResource("1_sjy1l")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_43os5")
