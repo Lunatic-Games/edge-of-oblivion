@@ -6,8 +6,13 @@ func spawn_entity():
 	var board: Board = GlobalGameState.get_board()
 	var tile: Tile = board.get_tile_at_position(global_position)
 
-	if tile == null or tile.occupant:
-		assert(false, "Invalid tile to spawn on")
+	if tile == null:
+		assert(false, "Gateway spawner is not placed over a valid tile")
+		queue_free()
+		return
+	
+	if tile.occupant != null:
+		assert(false, "Gateway spawner is placed on an occupied tile")
 		queue_free()
 		return
 	
