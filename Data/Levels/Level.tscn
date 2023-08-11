@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://v4k7ckpo5fy4"]
+[gd_scene load_steps=4 format=3 uid="uid://v4k7ckpo5fy4"]
 
 [ext_resource type="Script" path="res://Data/Levels/Level.gd" id="1_8gsta"]
 [ext_resource type="PackedScene" uid="uid://egkjbc7yqn6n" path="res://Game/Board/Board.tscn" id="3_4g7nv"]
+[ext_resource type="PackedScene" uid="uid://m185thmcba3j" path="res://Data/Spawners/PlayerSpawner/PlayerSpawner.tscn" id="3_nr8bs"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_8gsta")
@@ -9,3 +10,5 @@ script = ExtResource("1_8gsta")
 [node name="Board" parent="." instance=ExtResource("3_4g7nv")]
 
 [node name="Spawners" type="Node2D" parent="."]
+
+[node name="PlayerSpawner" parent="Spawners" instance=ExtResource("3_nr8bs")]

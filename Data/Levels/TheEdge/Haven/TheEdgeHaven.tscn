@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://dpdhlyx02h5gf"]
+[gd_scene load_steps=32 format=3 uid="uid://dpdhlyx02h5gf"]
 
 [ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_k7j7a"]
 [ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="2_b7su2"]
-[ext_resource type="PackedScene" uid="uid://b3ch015hwia16" path="res://Data/Spawners/BaseSpawner.tscn" id="2_fa8xi"]
+[ext_resource type="PackedScene" uid="uid://biem3v2m8g7ls" path="res://Data/Spawners/GatewaySpawner/GatewaySpawner.tscn" id="2_m66y4"]
 [ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Swamp/Faded/Faded.tres" id="3_0l8aj"]
 [ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="3_r55nt"]
+[ext_resource type="PackedScene" uid="uid://c2vgqrf2sgx0p" path="res://Data/Spawners/NPCSpawner/NPCSpawner.tscn" id="3_si5i7"]
 [ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="3_ysnnp"]
 [ext_resource type="Texture2D" uid="uid://cx1ga40jy1ut6" path="res://Assets/textures/glow.svg" id="4_4uqox"]
 [ext_resource type="PackedScene" uid="uid://c1ordt6583753" path="res://Data/Particles/Decoration/CampfireParticles.tscn" id="5_dacdw"]
@@ -399,25 +400,30 @@ color = Color(0.133333, 0.133333, 0.239216, 1)
 
 [node name="BoardRamp" type="ColorRect" parent="BoardBackground" index="0"]
 offset_left = 345.0
-offset_top = 344.0
+offset_top = 275.0
 offset_right = 1126.0
 offset_bottom = 636.0
 color = Color(0.133333, 0.137255, 0.247059, 1)
 
 [node name="BoardBackground" type="ColorRect" parent="BoardBackground" index="1"]
 offset_left = 350.0
-offset_top = 350.0
+offset_top = 280.0
 offset_right = 1120.0
 offset_bottom = 630.0
 color = Color(0.160784, 0.164706, 0.290196, 1)
 
 [node name="Board" parent="." index="3"]
-layer_0/tile_data = PackedInt32Array(327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 524298, 0, 65536, 458762, 0, 65536, 393226, 0, 65536, 393227, 0, 65536, 327691, 0, 65536, 327690, 0, 65536, 458763, 0, 65536, 524299, 0, 65536, 524300, 0, 65536, 458764, 0, 65536, 393228, 0, 65536, 327693, 0, 65536, 393229, 0, 65536, 458765, 0, 65536, 524301, 0, 65536, 524302, 0, 65536, 524303, 0, 65536, 458767, 0, 65536, 393231, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 327695, 0, 65536, 327692, 0, 65536, 327694, 0, 65536, 327688, 0, 65536, 393224, 0, 65536, 458760, 0, 65536, 524296, 0, 65536, 524295, 0, 65536, 458759, 0, 65536, 393223, 0, 65536, 327687, 0, 65536, 327686, 0, 65536, 327685, 0, 65536, 393221, 0, 65536, 458757, 0, 65536, 524293, 0, 65536, 524294, 0, 65536, 458758, 0, 65536, 393222, 0, 65536)
+layer_0/tile_data = PackedInt32Array(327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 524298, 0, 65536, 458762, 0, 65536, 393226, 0, 65536, 393227, 0, 65536, 327691, 0, 65536, 327690, 0, 65536, 458763, 0, 65536, 524299, 0, 65536, 524300, 0, 65536, 458764, 0, 65536, 393228, 0, 65536, 327693, 0, 65536, 393229, 0, 65536, 458765, 0, 65536, 524301, 0, 65536, 524302, 0, 65536, 524303, 0, 65536, 458767, 0, 65536, 393231, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 327695, 0, 65536, 327692, 0, 65536, 327694, 0, 65536, 327688, 0, 65536, 393224, 0, 65536, 458760, 0, 65536, 524296, 0, 65536, 524295, 0, 65536, 458759, 0, 65536, 393223, 0, 65536, 327687, 0, 65536, 327686, 0, 65536, 327685, 0, 65536, 393221, 0, 65536, 458757, 0, 65536, 524293, 0, 65536, 524294, 0, 65536, 458758, 0, 65536, 393222, 0, 65536, 262149, 0, 65536, 262150, 0, 65536, 262151, 0, 65536, 262152, 0, 65536, 262153, 0, 65536, 262154, 0, 65536, 262155, 0, 65536, 262156, 0, 65536, 262157, 0, 65536, 262158, 0, 65536, 262159, 0, 65536)
 
-[node name="Spawner" parent="Spawners" index="0" instance=ExtResource("2_fa8xi")]
-position = Vector2(700, 560)
+[node name="PlayerSpawner" parent="Spawners" index="0"]
+position = Vector2(420, 420)
+
+[node name="GatewaySpawner" parent="Spawners" index="1" instance=ExtResource("2_m66y4")]
+position = Vector2(980, 420)
+
+[node name="NPCSpawner" parent="Spawners" index="2" instance=ExtResource("3_si5i7")]
+position = Vector2(700, 280)
 texture = ExtResource("3_ysnnp")
-offset = Vector2(256, 256)
 entity_data = ExtResource("3_0l8aj")
 
 [node name="Decorations" type="Node2D" parent="." index="5"]

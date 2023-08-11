@@ -19,14 +19,7 @@ func _init(p_game: Game, game_mode_data: GameModeData) -> void:
 	
 	game.get_tree().call_group("spawner", "spawn_entity")
 	
-	var existing_player: Player = GlobalGameState.get_player()
-	# If the player is set to persist then they will still be valid
-	# If they aren't then they will be queued for being freed and be invalid
-	if is_instance_valid(existing_player):
-		player = game.spawn_handler.spawn_existing_player(existing_player)
-	else:
-		player = game.spawn_handler.spawn_player()
-	
+	player = GlobalGameState.get_player()  # Spawned by player spawner
 	player.health.died.connect(_on_player_died)
 	player.levelling.levelled_up.connect(_on_player_levelled_up)
 	
