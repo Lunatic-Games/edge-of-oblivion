@@ -7,3 +7,5 @@
 script = ExtResource("1_8gsta")
 
 [node name="Board" parent="." instance=ExtResource("3_4g7nv")]
+
+[node name="Spawners" type="Node2D" parent="."]

@@ -1,8 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://dpdhlyx02h5gf"]
+[gd_scene load_steps=31 format=3 uid="uid://dpdhlyx02h5gf"]
 
 [ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_k7j7a"]
 [ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="2_b7su2"]
+[ext_resource type="PackedScene" uid="uid://b3ch015hwia16" path="res://Data/Spawners/BaseSpawner.tscn" id="2_fa8xi"]
+[ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Swamp/Faded/Faded.tres" id="3_0l8aj"]
 [ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="3_r55nt"]
+[ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="3_ysnnp"]
 [ext_resource type="Texture2D" uid="uid://cx1ga40jy1ut6" path="res://Assets/textures/glow.svg" id="4_4uqox"]
 [ext_resource type="PackedScene" uid="uid://c1ordt6583753" path="res://Data/Particles/Decoration/CampfireParticles.tscn" id="5_dacdw"]
 [ext_resource type="Texture2D" uid="uid://ciihbexjkmiq8" path="res://Assets/art/background/game/lantern.svg" id="6_51j0n"]
@@ -324,7 +327,20 @@ _data = {
 
 [node name="TheEdgeHaven" instance=ExtResource("1_k7j7a")]
 
-[node name="Ground" type="Node2D" parent="." index="0"]
+[node name="BackgroundFill" type="CanvasLayer" parent="." index="0"]
+layer = -1
+
+[node name="Pit" type="ColorRect" parent="BackgroundFill" index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0784314, 0.0784314, 0.152941, 1)
+
+[node name="Ground" type="Node2D" parent="." index="1"]
 
 [node name="DropOff" type="ColorRect" parent="Ground" index="0"]
 offset_left = -102.0
@@ -379,7 +395,7 @@ offset_bottom = 778.0
 rotation = 0.261799
 color = Color(0.133333, 0.133333, 0.239216, 1)
 
-[node name="BoardBackground" type="Node2D" parent="." index="1"]
+[node name="BoardBackground" type="Node2D" parent="." index="2"]
 
 [node name="BoardRamp" type="ColorRect" parent="BoardBackground" index="0"]
 offset_left = 345.0
@@ -395,23 +411,16 @@ offset_right = 1120.0
 offset_bottom = 630.0
 color = Color(0.160784, 0.164706, 0.290196, 1)
 
-[node name="Board" parent="." index="2"]
+[node name="Board" parent="." index="3"]
 layer_0/tile_data = PackedInt32Array(327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 524298, 0, 65536, 458762, 0, 65536, 393226, 0, 65536, 393227, 0, 65536, 327691, 0, 65536, 327690, 0, 65536, 458763, 0, 65536, 524299, 0, 65536, 524300, 0, 65536, 458764, 0, 65536, 393228, 0, 65536, 327693, 0, 65536, 393229, 0, 65536, 458765, 0, 65536, 524301, 0, 65536, 524302, 0, 65536, 524303, 0, 65536, 458767, 0, 65536, 393231, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 327695, 0, 65536, 327692, 0, 65536, 327694, 0, 65536, 327688, 0, 65536, 393224, 0, 65536, 458760, 0, 65536, 524296, 0, 65536, 524295, 0, 65536, 458759, 0, 65536, 393223, 0, 65536, 327687, 0, 65536, 327686, 0, 65536, 327685, 0, 65536, 393221, 0, 65536, 458757, 0, 65536, 524293, 0, 65536, 524294, 0, 65536, 458758, 0, 65536, 393222, 0, 65536)
 
-[node name="BackgroundFill" type="CanvasLayer" parent="." index="3"]
-layer = -1
+[node name="Spawner" parent="Spawners" index="0" instance=ExtResource("2_fa8xi")]
+position = Vector2(700, 560)
+texture = ExtResource("3_ysnnp")
+offset = Vector2(256, 256)
+entity_data = ExtResource("3_0l8aj")
 
-[node name="Pit" type="ColorRect" parent="BackgroundFill" index="0"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0784314, 0.0784314, 0.152941, 1)
-
-[node name="Decorations" type="Node2D" parent="." index="4"]
+[node name="Decorations" type="Node2D" parent="." index="5"]
 
 [node name="Campfire" type="Node2D" parent="Decorations" index="0"]
 position = Vector2(638, 161)
