@@ -18,7 +18,8 @@ func remove() -> void:
 
 
 func _on_collected(_by: Entity) -> void:
-	var new_tile: Tile = GlobalGameState.board.get_random_unoccupied_tile()
+	var board: Board = GlobalGameState.get_board()
+	var new_tile: Tile = board.get_random_unoccupied_tile()
 	
 	if new_tile == null:
 		freed_due_to_failed_move.emit()

@@ -27,6 +27,7 @@ size = 0
 blocking_behavior = 1
 can_be_pushed_off_map = false
 can_push_entities = true
+collectable_filter = 0
 
 [resource]
 script = ExtResource("1_8qqdc")

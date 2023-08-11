@@ -15,6 +15,10 @@ var current_xp: int = 0
 func _init(p_entity: Entity, p_data: LevellingData):
 	entity = p_entity
 	data = p_data
+	
+	var game: Game = GlobalGameState.get_game()
+	var experience_bar: ExperienceBar = game.player_overlay.experience_bar
+	experience_bar.update(current_level, 0.0, false)
 
 
 func gain_xp(amount: int):
@@ -48,7 +52,8 @@ func get_xp_to_next_level() -> int:
 
 func _update_experience_bar():
 	var xp_to_next_level = get_xp_to_next_level()
-	var experience_bar: ExperienceBar = GlobalGameState.game.player_overlay.experience_bar
+	var game: Game = GlobalGameState.get_game()
+	var experience_bar: ExperienceBar = game.player_overlay.experience_bar
 	if xp_to_next_level == -1:
 		experience_bar.update(current_level, 1.0)
 	else:

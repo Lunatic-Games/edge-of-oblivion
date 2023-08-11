@@ -21,12 +21,13 @@ func _input(event: InputEvent) -> void:
 
 
 func attempt_select() -> void:
-	if GlobalGameState.game == null:
+	var board: Board = GlobalGameState.get_board()
+	if board == null:
 		return
 	
-	# Use game because of debug menu being on a different canvas layer
-	var pos: Vector2 = GlobalGameState.game.get_global_mouse_position()
-	var tile: Tile = GlobalGameState.board.get_tile_at_position(pos)
+	# Use board because of debug menu being on a different canvas layer
+	var pos: Vector2 = board.get_global_mouse_position()
+	var tile: Tile = board.get_tile_at_position(pos)
 	if tile != null:
 		on_select.call(tile)
 	n_selections += 1

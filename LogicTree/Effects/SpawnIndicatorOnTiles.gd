@@ -15,12 +15,14 @@ func _ready() -> void:
 
 
 func perform_behavior() -> void:
+	var board: Board = GlobalGameState.get_board()
+	
 	for tile in tiles.value:
 		var indicator: Indicator = indicator_to_spawn.instantiate()
 		assert(indicator != null, "Failed to instaniate packed scene as an indicator for '" + name + "'")
 		
 		indicator.setup(owner)
-		GlobalGameState.board.add_child(indicator)
+		board.add_child(indicator)
 		
 		indicator.global_position = tile.global_position
 		if mirror_x_if_left_of_first_tile != null:

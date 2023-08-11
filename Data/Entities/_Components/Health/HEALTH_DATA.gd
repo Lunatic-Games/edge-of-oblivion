@@ -2,6 +2,11 @@ class_name HealthData
 extends Resource
 
 
+enum SourceOfDamage {
+	NORMAL,
+	DEBUG
+}
+
 @export var max_health: int = 20
 @export var can_be_damaged: bool = true
 @export var can_be_killed: bool = true

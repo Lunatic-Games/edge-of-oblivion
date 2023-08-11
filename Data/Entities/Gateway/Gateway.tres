@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=5 format=3 uid="uid://yt7xpl5xmim4"]
+
+[ext_resource type="Script" path="res://Data/Entities/ENTITY_DATA.gd" id="1_5t3d7"]
+[ext_resource type="PackedScene" uid="uid://vtxbvir775gy" path="res://Data/Entities/Gateway/Gateway.tscn" id="1_or48u"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="2_5j0dt"]
+
+[sub_resource type="Resource" id="Resource_bnh4x"]
+script = ExtResource("2_5j0dt")
+size = 0
+blocking_behavior = 0
+can_be_pushed_off_map = false
+can_push_entities = false
+collectable_filter = 1
+
+[resource]
+script = ExtResource("1_5t3d7")
+entity_scene = ExtResource("1_or48u")
+occupancy_data = SubResource("Resource_bnh4x")
+entity_name = ""
+main_text = ""
+flavor_text = ""

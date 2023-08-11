@@ -14,29 +14,31 @@ enum BlockingBehavior {
 	IMMOVABLE
 }
 
+enum CollectableFilter {
+	ANY,
+	PLAYER,
+	ENEMY
+}
+
 @export var size: EntitySize = EntitySize.SMALL
 @export var blocking_behavior: BlockingBehavior = BlockingBehavior.STANDARD
 @export var can_be_pushed_off_map: bool = true
 @export var can_push_entities: bool = false
 
+@export_group("Collectable config")
+@export var collectable_filter: CollectableFilter = CollectableFilter.ANY
 
-func can_move_to_tile(tile: Tile) -> bool:
-	var other_occupant: Entity = tile.occupant
-	if other_occupant == null:
-		return true
-	
-	var other_occupancy_data: OccupancyData = other_occupant.occupancy.data
-	if other_occupancy_data.blocking_behavior == BlockingBehavior.IMMOVABLE:
+
+func can_be_collected(by: EntityData) -> bool:
+	if blocking_behavior != BlockingBehavior.COLLECTABLE:
 		return false
 	
-	if other_occupancy_data.is_collectable():
-		return true
-	
-	return can_push_entities
-
-
-func is_collectable():
-	return blocking_behavior == BlockingBehavior.COLLECTABLE
+	match collectable_filter:
+		CollectableFilter.PLAYER:
+			return by is PlayerData
+		CollectableFilter.ENEMY:
+			return by is EnemyData
+	return true
 
 
 func can_be_knockbacked() -> bool:

@@ -1,9 +1,9 @@
 class_name EntityHealth
-extends Object
+extends RefCounted
 
 
 signal value_changed(amount: int)
-signal died
+signal died(source: int)
 
 const HEAL_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Health/HealParticles.tscn")
 const DAMAGED_PARTICLES_SCENE: PackedScene = preload("res://Data/Particles/Health/DamagedParticles.tscn")
@@ -20,7 +20,7 @@ func _init(p_entity: Entity, p_data: HealthData):
 	self.current_value = data.max_health
 
 
-func take_damage(damage: int) -> int:
+func take_damage(damage: int, source: int = 0) -> int:
 	assert(damage >= 0, "Damage should be positive")
 	if damage == 0 or is_alive() == false or data.can_be_damaged == false:
 		return 0
@@ -41,7 +41,7 @@ func take_damage(damage: int) -> int:
 		value_changed.emit(amount_changed)
 	
 	if is_alive() == false:
-		_die()
+		_die(source)
 	
 	return amount_changed
 
@@ -71,19 +71,19 @@ func full_heal() -> int:
 	return heal(data.max_health)
 
 
-func deal_lethal_damage() -> int:
-	return take_damage(current_value)
+func deal_lethal_damage(source: int = 0) -> int:
+	return take_damage(current_value, source)
 
 
 func is_alive() -> bool:
 	return current_value > 0
 
 
-func _die() -> void:
+func _die(source: int = 0) -> void:
 	if entity.occupancy and entity.occupancy.current_tile:
 		entity.occupancy.current_tile.occupant = null
 	
-	died.emit()
+	died.emit(source)
 	
 	var tween: Tween = entity.create_tween().set_parallel(true)
 	tween.tween_property(entity.sprite, "position:y", -25.0, 0.5).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
@@ -96,7 +96,9 @@ func _die() -> void:
 func _spawn_particles(particles_scene: PackedScene) -> void:
 	var particle: Node2D = particles_scene.instantiate()
 	particle.global_position = entity.global_position
-	GlobalGameState.board.add_child(particle)
+	
+	var board: Board = GlobalGameState.get_board()
+	board.add_child(particle)
 
 
 func _update_health_bar() -> void:

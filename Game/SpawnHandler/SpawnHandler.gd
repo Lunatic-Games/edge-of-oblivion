@@ -2,19 +2,36 @@ class_name SpawnHandler
 extends Node
 
 
-var PLAYER_DATA: PlayerData = load("res://Data/Entities/Player/PlayerData.tres")
-const SPAWN_FLAG_DATA: EntityData = preload("res://Data/Entities/SpawnFlag/SpawnFlagData.tres")
+const PLAYER_DATA: PlayerData = preload("res://Data/Entities/Player/PlayerData.tres")
+const SPAWN_FLAG_DATA: EntityData = preload("res://Data/Entities/SpawnFlag/SpawnFlag.tres")
+const GATEWAY_DATA: EntityData = preload("res://Data/Entities/Gateway/Gateway.tres")
 
 var spawned_enemies: Array[Enemy] = []
 var spawn_flags: Array[SpawnFlag] = []
 
 
 func spawn_player() -> Player:
-	var spawn_tile: Tile = GlobalGameState.board.get_random_unoccupied_tile()
+	var board: Board = GlobalGameState.get_board()
+	var spawn_tile: Tile = board.get_random_unoccupied_tile()
 	assert(spawn_tile != null, "No free tile to spawn player on.")
 	
 	var player: Player = spawn_entity_on_tile(PLAYER_DATA, spawn_tile)
+	player.inventory.add_starting_items()
 	GlobalSignals.player_spawned.emit(player)
+	return player
+
+
+func spawn_existing_player(player: Player) -> Player:
+	var board: Board = GlobalGameState.get_board()
+	var spawn_tile: Tile = board.get_random_unoccupied_tile()
+	assert(spawn_tile != null, "No free tile to spawn player on.")
+	
+	GlobalSignals.player_spawned.emit(player)
+	player.reparent(board)
+	
+	spawn_tile.occupant = player
+	player.occupancy.current_tile = spawn_tile
+	player.global_position = spawn_tile.global_position
 	return player
 
 
@@ -32,8 +49,10 @@ func spawn_enemies(enemies: Array[EnemyData]) -> void:
 
 
 func spawn_flags_for_next_turn(n_flags: int) -> void:
+	var board: Board = GlobalGameState.get_board()
+	
 	for _i in n_flags:
-		var spawn_tile: Tile = GlobalGameState.board.get_random_unoccupied_tile()
+		var spawn_tile: Tile = board.get_random_unoccupied_tile()
 		if spawn_tile == null:
 			# No more room to spawn
 			break
@@ -41,11 +60,21 @@ func spawn_flags_for_next_turn(n_flags: int) -> void:
 		spawn_entity_on_tile(SPAWN_FLAG_DATA, spawn_tile)
 
 
+func spawn_gateway(to: LevelData, tile: Tile = null) -> void:
+	var board: Board = GlobalGameState.get_board()
+	if tile == null:
+		tile = board.get_random_unoccupied_tile()
+	
+	var gateway: Gateway = spawn_entity_on_tile(GATEWAY_DATA, tile)
+	gateway.set_destination(to)
+
+
 func spawn_entity_on_tile(entity_data: EntityData, tile: Tile) -> Entity:
 	var entity: Entity = entity_data.entity_scene.instantiate()
 	assert(entity != null, "Failed to instantiate PackedScene as an Entity")
 	
-	GlobalGameState.board.add_child(entity)
+	var board: Board = GlobalGameState.get_board()
+	board.add_child(entity)
 	entity.setup(entity_data)
 	
 	tile.occupant = entity
@@ -65,18 +94,26 @@ func _on_enemy_spawned(enemy: Enemy) -> void:
 	
 	var enemy_data: EnemyData = enemy.data as EnemyData
 	enemy.health.died.connect(_on_enemy_died.bind(enemy))
+	enemy.tree_exiting.connect(_stop_tracking_enemy.bind(enemy))
 	if enemy_data.is_boss():
 		GlobalSignals.boss_spawned.emit(enemy)
 
 
-func _on_enemy_died(enemy: Enemy) -> void:
-	spawned_enemies.erase(enemy)
+func _on_enemy_died(_source: int, enemy: Enemy) -> void:
+	_stop_tracking_enemy(enemy)
+
+
+func _stop_tracking_enemy(enemy: Enemy) -> void:
+	if spawned_enemies.has(enemy):
+		spawned_enemies.erase(enemy)
 
 
 func _on_spawn_flag_spawned(spawn_flag: SpawnFlag) -> void:
 	spawn_flags.append(spawn_flag)
-	spawn_flag.freed_due_to_failed_move.connect(_on_spawn_flag_freed_due_to_failed_move.bind(spawn_flag))
+	spawn_flag.freed_due_to_failed_move.connect(_stop_tracking_spawn_flag.bind(spawn_flag))
+	spawn_flag.tree_exiting.connect(_stop_tracking_spawn_flag.bind(spawn_flag))
 
 
-func _on_spawn_flag_freed_due_to_failed_move(spawn_flag: SpawnFlag) -> void:
-	spawn_flags.erase(spawn_flag)
+func _stop_tracking_spawn_flag(spawn_flag: SpawnFlag) -> void:
+	if spawn_flags.has(spawn_flag):
+		spawn_flags.erase(spawn_flag)

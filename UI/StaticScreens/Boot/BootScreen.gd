@@ -1,30 +1,35 @@
 extends CanvasLayer
 
 
-const MIN_WINDOW_SIZE: Vector2i = Vector2i(800, 600)
+const MAIN_MENU_SCENE: PackedScene = preload("res://UI/Menus/MainMenu/MainMenu.tscn")
+const PRECACHE_SCENE: PackedScene = preload("res://UI/StaticScreens/Precaching/PrecachingScreen.tscn")
 
-@export var default_start_scene: PackedScene
-@export var web_start_scene: PackedScene
-
-@export_group("Debug build")
-@export var debug_start_scene: PackedScene
-@export var debug_load_progress_save_file: bool = false
-@export var debug_load_settings_save_file: bool = false
+const GAME_CONFIG: GameConfig = preload("res://Data/Config/GameConfig.tres")
 
 
 func _ready() -> void:
-	assert(default_start_scene != null, "No default start scene set")
+	DisplayServer.window_set_min_size(GAME_CONFIG.min_window_size)
 	
-	DisplayServer.window_set_min_size(MIN_WINDOW_SIZE)
-	
-	if !OS.is_debug_build() or debug_load_progress_save_file:
+	if !OS.is_debug_build() or GAME_CONFIG.debug_load_progress_save_file:
 		Saving.load_progress_from_file()
-	if !OS.is_debug_build() or debug_load_settings_save_file:
+	if !OS.is_debug_build() or GAME_CONFIG.debug_load_settings_save_file:
 		Saving.load_user_settings_from_file()
 	
-	if OS.is_debug_build() and debug_start_scene != null:
-		get_tree().change_scene_to_packed(debug_start_scene)
-	elif OS.has_feature("web") and web_start_scene != null:
-		get_tree().change_scene_to_packed(web_start_scene)
-	else:
-		get_tree().change_scene_to_packed(default_start_scene)
+	if OS.is_debug_build() and GAME_CONFIG.debug_start_scene != null:
+		get_tree().change_scene_to_packed(GAME_CONFIG.debug_start_scene)
+		return
+	
+	match GAME_CONFIG.precache:
+		GameConfig.PrecacheSettings.ALWAYS:
+			get_tree().change_scene_to_packed(PRECACHE_SCENE)
+			return
+		GameConfig.PrecacheSettings.WEB_BUILDS:
+			if OS.has_feature("web"):
+				get_tree().change_scene_to_packed(PRECACHE_SCENE)
+				return
+		GAME_CONFIG.PrecacheSettings.RELEASE_BUILDS:
+			if OS.is_debug_build() == false:
+				get_tree().change_scene_to_packed(PRECACHE_SCENE)
+				return
+	
+	get_tree().change_scene_to_packed(MAIN_MENU_SCENE)

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=21 format=3 uid="uid://d1tqh8fbckgnb"]
+[gd_resource type="Resource" script_class="LevelData" load_steps=22 format=3 uid="uid://d1tqh8fbckgnb"]
 
 [ext_resource type="PackedScene" uid="uid://dm5qvaa1qimwq" path="res://Data/Levels/TheForest/TheForest.tscn" id="1_dpvau"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="1_v0seb"]
+[ext_resource type="Resource" uid="uid://50bvt7hgm20i" path="res://Data/GameModes/Standard/Standard.tres" id="1_vxb4y"]
 [ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Swamp/Faded/Faded.tres" id="2_y07sg"]
 [ext_resource type="Resource" uid="uid://bsnphtkgiwpsv" path="res://Data/Entities/Enemies/Swamp/LostRanger/LostRanger.tres" id="3_k2p7d"]
 [ext_resource type="Resource" uid="uid://drvpn77ymyoa7" path="res://Data/Entities/Enemies/Swamp/ForswornPike/ForswornPike.tres" id="4_cfrhb"]
@@ -20,7 +21,7 @@ round_wait_from_previous_wave = 1
 
 [sub_resource type="Resource" id="Resource_5g8g7"]
 script = ExtResource("7_4a3oy")
-round_wait_from_previous_wave = 1
+round_wait_from_previous_wave = 7
 "# Faded" = 3
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 0
@@ -29,7 +30,7 @@ round_wait_from_previous_wave = 1
 
 [sub_resource type="Resource" id="Resource_nl62y"]
 script = ExtResource("7_4a3oy")
-round_wait_from_previous_wave = 1
+round_wait_from_previous_wave = 7
 "# Faded" = 6
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 0
@@ -38,7 +39,7 @@ round_wait_from_previous_wave = 1
 
 [sub_resource type="Resource" id="Resource_gbbau"]
 script = ExtResource("7_4a3oy")
-round_wait_from_previous_wave = 1
+round_wait_from_previous_wave = 10
 "# Faded" = 4
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 0
@@ -47,7 +48,7 @@ round_wait_from_previous_wave = 1
 
 [sub_resource type="Resource" id="Resource_k3yvo"]
 script = ExtResource("7_4a3oy")
-round_wait_from_previous_wave = 1
+round_wait_from_previous_wave = 6
 "# Faded" = 4
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 0
@@ -56,7 +57,7 @@ round_wait_from_previous_wave = 1
 
 [sub_resource type="Resource" id="Resource_8tdvg"]
 script = ExtResource("7_4a3oy")
-round_wait_from_previous_wave = 1
+round_wait_from_previous_wave = 9
 "# Faded" = 0
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 5
@@ -65,7 +66,7 @@ round_wait_from_previous_wave = 1
 
 [sub_resource type="Resource" id="Resource_r3fpe"]
 script = ExtResource("7_4a3oy")
-round_wait_from_previous_wave = 1
+round_wait_from_previous_wave = 7
 "# Faded" = 0
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 3
@@ -74,7 +75,7 @@ round_wait_from_previous_wave = 1
 
 [sub_resource type="Resource" id="Resource_qigp6"]
 script = ExtResource("7_4a3oy")
-round_wait_from_previous_wave = 1
+round_wait_from_previous_wave = 12
 "# Faded" = 3
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 2
@@ -83,7 +84,7 @@ round_wait_from_previous_wave = 1
 
 [sub_resource type="Resource" id="Resource_6x6vt"]
 script = ExtResource("7_4a3oy")
-round_wait_from_previous_wave = 1
+round_wait_from_previous_wave = 10
 "# Faded" = 3
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 3
@@ -92,7 +93,7 @@ round_wait_from_previous_wave = 1
 
 [sub_resource type="Resource" id="Resource_hi5kx"]
 script = ExtResource("7_4a3oy")
-round_wait_from_previous_wave = 1
+round_wait_from_previous_wave = 10
 "# Faded" = 7
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 2
@@ -101,7 +102,7 @@ round_wait_from_previous_wave = 1
 
 [sub_resource type="Resource" id="Resource_2vq4g"]
 script = ExtResource("7_4a3oy")
-round_wait_from_previous_wave = 1
+round_wait_from_previous_wave = 14
 "# Faded" = 3
 "# Lost Ranger" = 0
 "# Forsworn Pike" = 3
@@ -118,3 +119,7 @@ script = ExtResource("1_v0seb")
 level_name = "The Forest"
 level_scene = ExtResource("1_dpvau")
 level_waves = SubResource("Resource_x6fjg")
+game_mode = ExtResource("1_vxb4y")
+gateway_spawn_condition = 0
+killing_boss_completes_run = true
+persist_player_on_entering = true

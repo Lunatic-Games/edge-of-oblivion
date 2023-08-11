@@ -3,6 +3,8 @@ class_name UpgradeMenu
 extends CanvasLayer
 
 
+signal closed
+
 #const PLAYER_DATA: PlayerData = preload("res://Data/Entities/Player/PlayerData.tres")
 
 @export_range(1, 5, 1, "or_greater") var max_n_cards_to_spawn: int = 3:
@@ -10,6 +12,7 @@ extends CanvasLayer
 
 var inventory_limit: int = 5
 var n_queued_upgrades: int = 0  # For if multiple level ups occur
+var has_priority: bool = false  # Player won't move when upgrade menu has priority
 
 # Size of (inventory_limit + 1) and contains ints between 0 and max_n_cards_to_spawn
 var n_new_items_for_each_inventory_size = []
@@ -37,7 +40,7 @@ func queue_upgrade() -> void:
 func display() -> void:
 	assert(n_queued_upgrades > 0, "Trying to display upgrade menu without queued upgrade!")
 	
-	GlobalGameState.in_upgrade_menu = true
+	has_priority = true
 	
 	if card_display.get_child_count() > 0:
 		return
@@ -48,7 +51,8 @@ func display() -> void:
 	possible_items.append_array(GlobalAccount.unlocked_items)
 	possible_items.shuffle()
 	
-	var player_inventory: Inventory = GlobalGameState.player.inventory
+	var player: Player = GlobalGameState.get_player()
+	var player_inventory: Inventory = player.inventory
 	var inventory_size: int = min(player_inventory.items.size(), inventory_limit)
 	var preferred_n_new_items: int = n_new_items_for_each_inventory_size[inventory_size]
 	
@@ -84,7 +88,8 @@ func display() -> void:
 		visibility_button.show()
 		show()
 	else:
-		GlobalGameState.in_upgrade_menu = false
+		has_priority = false
+		closed.emit()
 
 
 func _on_card_display_card_selected() -> void:
@@ -93,9 +98,10 @@ func _on_card_display_card_selected() -> void:
 		await card_display.finished_animating_selection
 		display()
 	else:
-		GlobalGameState.in_upgrade_menu = false
+		has_priority = false
 		background_animator.play("fade_out")
 		visibility_button.hide()
+		closed.emit()
 
 
 func _set_n_card_to_spawn(value: int):

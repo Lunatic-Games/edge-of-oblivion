@@ -9,6 +9,7 @@ extends Resource
 	set = set_waves
 
 var spawns_for_round: Dictionary  # round number : [scenes]
+var round_of_last_wave: int = -1
 
 
 func _ready() -> void:
@@ -29,6 +30,8 @@ func calculate_spawns_for_each_round() -> void:
 		i += wave.round_wait_from_previous_wave
 		spawns_for_round[i] = wave.get_enemies_for_wave()
 		wave.update_round_info(i)
+	
+	round_of_last_wave = i
 
 
 func set_enemies(value: Array[EnemyData]) -> void:

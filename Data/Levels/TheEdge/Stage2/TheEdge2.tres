@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=13 format=3 uid="uid://ljf7mr67r03r"]
+
+[ext_resource type="Resource" uid="uid://50bvt7hgm20i" path="res://Data/GameModes/Standard/Standard.tres" id="1_kegr2"]
+[ext_resource type="PackedScene" uid="uid://dmawn7pjxgfyf" path="res://Data/Levels/TheEdge/Stage2/TheEdge2.tscn" id="2_nrxv0"]
+[ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Swamp/Faded/Faded.tres" id="3_2kkxe"]
+[ext_resource type="Resource" uid="uid://bsnphtkgiwpsv" path="res://Data/Entities/Enemies/Swamp/LostRanger/LostRanger.tres" id="4_fqag0"]
+[ext_resource type="Resource" uid="uid://drvpn77ymyoa7" path="res://Data/Entities/Enemies/Swamp/ForswornPike/ForswornPike.tres" id="5_b156v"]
+[ext_resource type="Resource" uid="uid://bme4pcpoh4pvr" path="res://Data/Entities/Enemies/Swamp/ForgottenKing/ForgottenKing.tres" id="6_33nfk"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="7_5twv4"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="8_7l48f"]
+[ext_resource type="Resource" uid="uid://bj2807sghnvk0" path="res://Data/Levels/TheEdge/Stage3/TheEdge3.tres" id="9_pxgbx"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="10_ff7i6"]
+
+[sub_resource type="Resource" id="Resource_37nne"]
+script = ExtResource("8_7l48f")
+round_wait_from_previous_wave = 1
+"# Faded" = 3
+"# Lost Ranger" = 0
+"# Forsworn Pike" = 0
+"# Forgotten King" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_x6fjg"]
+script = ExtResource("7_5twv4")
+enemies = Array[Resource("res://Data/Entities/Enemies/ENEMY_DATA.gd")]([ExtResource("3_2kkxe"), ExtResource("4_fqag0"), ExtResource("5_b156v"), ExtResource("6_33nfk")])
+waves = Array[ExtResource("8_7l48f")]([SubResource("Resource_37nne")])
+
+[resource]
+script = ExtResource("10_ff7i6")
+level_name = "The Edge - 2"
+level_scene = ExtResource("2_nrxv0")
+level_waves = SubResource("Resource_x6fjg")
+next_level = ExtResource("9_pxgbx")
+game_mode = ExtResource("1_kegr2")
+gateway_spawn_condition = 2
+killing_boss_completes_run = false
+persist_player_on_entering = true
