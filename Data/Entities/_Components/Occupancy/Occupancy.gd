@@ -11,9 +11,14 @@ var data: OccupancyData = null
 var current_tile: Tile = null
 
 
-func _init(p_entity: Entity, p_data: OccupancyData):
+func _init(p_entity: Entity, p_data: OccupancyData, start_tile: Tile = null):
 	entity = p_entity
 	data = p_data
+	
+	if start_tile != null:
+		start_tile.occupant = entity
+		current_tile = start_tile
+		entity.global_position = start_tile.global_position
 
 
 func move_to_tile(destination_tile: Tile) -> bool:

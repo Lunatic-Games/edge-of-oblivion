@@ -19,6 +19,6 @@ dialogue = Array[String](["Why hello there!", "Oh did you think I would give you
 entity_scene = ExtResource("1_knvs3")
 occupancy_data = SubResource("Resource_6v0lp")
 sprite = ExtResource("4_tg1t6")
-entity_name = "Wizard"
+entity_name = "The Wizard"
 main_text = ""
 flavor_text = ""
