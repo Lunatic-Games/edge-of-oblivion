@@ -2,6 +2,7 @@ extends CanvasLayer
 
 
 @onready var menus_container: BoxContainer = $Panel/MarginContainer/Menus
+@onready var select_tiles_menu: DebugSelectTilesMenu = $SelectTilesMenu
 
 
 func _ready() -> void:

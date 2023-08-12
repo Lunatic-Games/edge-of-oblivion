@@ -31,9 +31,10 @@ func _add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> v
 	var card: Card = CARD_SCENE.instantiate()
 	add_child(card)
 	
+	var player: Player = GlobalGameState.get_player()
 	var item_tier: int = 1
-	if GlobalGameState.player and item_data in GlobalGameState.player.inventory.items:
-		item_tier = GlobalGameState.player.inventory.items[item_data].current_tier + 1
+	if player != null and item_data in player.inventory.items:
+		item_tier = player.inventory.items[item_data].current_tier + 1
 	
 	card.setup(item_data, item_tier, true)
 	card.selected.connect(_on_card_selected.bind(card))
@@ -65,8 +66,9 @@ func _on_card_selected(selected_card: Card) -> void:
 		card.selected.disconnect(_on_card_selected)
 		
 		if card == selected_card:
-			if GlobalGameState.player:
-				GlobalGameState.player.inventory.gain_item(card.held_item_data)
+			var player: Player = GlobalGameState.get_player()
+			if player != null:
+				player.inventory.add_or_upgrade_item(card.held_item_data)
 			_raise_chosen_card(card)
 		else:
 			_drop_unchosen_card(card)

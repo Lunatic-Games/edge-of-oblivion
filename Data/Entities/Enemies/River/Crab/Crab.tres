@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://dhcnek827wiq2"]
+
+[ext_resource type="PackedScene" uid="uid://qi4agp4lbxbs" path="res://Data/Entities/Enemies/River/Crab/Crab.tscn" id="1_4ujng"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="1_6vrpi"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_7qgiq"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_vqivm"]
+[ext_resource type="Texture2D" uid="uid://kv83wimtaroh" path="res://Assets/art/icons/animals/lorc/crab.svg" id="5_g32iw"]
+
+[sub_resource type="Resource" id="Resource_ltr0f"]
+script = ExtResource("2_7qgiq")
+max_health = 20
+can_be_damaged = true
+can_be_killed = true
+can_be_healed = true
+emit_particles_on_heal = true
+emit_particles_on_taking_damage = true
+
+[sub_resource type="Resource" id="Resource_0kgxv"]
+script = ExtResource("3_vqivm")
+size = 0
+blocking_behavior = 1
+can_be_pushed_off_map = true
+can_push_entities = false
+
+[resource]
+script = ExtResource("1_6vrpi")
+xp_value = 1
+entity_scene = ExtResource("1_4ujng")
+health_data = SubResource("Resource_ltr0f")
+occupancy_data = SubResource("Resource_0kgxv")
+sprite = ExtResource("5_g32iw")
+entity_name = "Crab"
+main_text = "Attacks all adjacent tiles, then moves towards the player."
+flavor_text = "Child of the mud, with piercing claws."

@@ -12,9 +12,10 @@ enum Direction {
 
 enum StopCondition {
 	NO_CONDITION,
-	ANY_OCCUPANT,
+	ANY_ENTITY,
 	PLAYER_ENTITY,
-	NO_OCCUPANT
+	ENEMY_ENTITY,
+	NO_ENTITY
 }
 
 @export var input_tiles: LT_TileArrayVariable
@@ -92,10 +93,12 @@ func tile_matches_stop_condition(tile: Tile) -> bool:
 	match stop_condition:
 		StopCondition.NO_CONDITION:
 			return false
-		StopCondition.ANY_OCCUPANT:
+		StopCondition.ANY_ENTITY:
 			return tile.occupant != null
 		StopCondition.PLAYER_ENTITY:
 			return (tile.occupant as Player) != null
-		StopCondition.NO_OCCUPANT:
+		StopCondition.ENEMY_ENTITY:
+			return (tile.occupant as Enemy) != null
+		StopCondition.NO_ENTITY:
 			return tile.occupant == null
 	return true

@@ -26,9 +26,9 @@ func perform_behavior() -> void:
 	var selected_tiles: Array[Tile] = []
 	
 	for tile in input_tiles.value:
-		var occupant = tile.occupant as Occupant
+		var entity = tile.occupant as Entity
 		
-		if occupant == null:
+		if entity == null:
 			if occupant_type == OccupantType.NO_OCCUPANT:
 				selected_tiles.append(tile)
 			continue
@@ -38,13 +38,13 @@ func perform_behavior() -> void:
 			continue
 		
 		if occupant_type == OccupantType.PLAYER_ENTITY:
-			var as_player: Player = occupant as Player
+			var as_player: Player = entity as Player
 			if as_player != null:
 				selected_tiles.append(tile)
 			continue
 		
 		if occupant_type == OccupantType.ENEMY_ENTITY:
-			var as_enemy: Enemy = occupant as Enemy
+			var as_enemy: Enemy = entity as Enemy
 			if as_enemy != null:
 				selected_tiles.append(tile)
 			continue

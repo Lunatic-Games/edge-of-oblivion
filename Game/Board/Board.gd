@@ -10,22 +10,22 @@ var unoccupied_tiles: Array[Tile] = []
 
 
 func _ready() -> void:
-	await get_tree().process_frame
+	await get_tree().process_frame  # Need to wait for tile scenes to be instanced
 	
 	for child in get_children():
-		var as_tile: Tile = child as Tile
-		if as_tile == null:
+		var tile: Tile = child as Tile
+		if tile == null:
 			continue
 		
-		var map_coord: Vector2i = local_to_map(as_tile.position)
-		as_tile.coord = map_coord
-		all_tiles.append(as_tile)
-		if as_tile.occupant == null:
-			unoccupied_tiles.append(as_tile)
-		as_tile.occupied_by_new_occupant.connect(_on_tile_occupied_by_new_occupant.bind(as_tile))
-		as_tile.no_longer_occupied.connect(_on_tile_no_longer_occupied.bind(as_tile))
+		var map_coord: Vector2i = local_to_map(tile.position)
+		tile.coord = map_coord
+		all_tiles.append(tile)
+		if tile.occupant == null:
+			unoccupied_tiles.append(tile)
+		tile.occupied_by_new_entity.connect(_on_tile_occupied_by_new_entity.bind(tile))
+		tile.no_longer_occupied.connect(_on_tile_no_longer_occupied.bind(tile))
 
-		tiles_at_coord[map_coord] = as_tile
+		tiles_at_coord[map_coord] = tile
 	
 	for tile in all_tiles:
 		tile.top_tile = tiles_at_coord.get(tile.coord + Vector2i.UP, null)
@@ -50,7 +50,15 @@ func get_random_unoccupied_tile() -> Tile:
 	return unoccupied_tiles.pick_random()
 
 
-func _on_tile_occupied_by_new_occupant(_occupant: Occupant, tile: Tile) -> void:
+# Not performant, currently just used by debug menu but should not be used in production
+func get_tile_at_position(pos: Vector2) -> Tile:
+	for tile in all_tiles:
+		if tile.is_position_within_tile(pos):
+			return tile
+	return null
+
+
+func _on_tile_occupied_by_new_entity(_occupant: Entity, tile: Tile) -> void:
 	unoccupied_tiles.erase(tile)
 
 

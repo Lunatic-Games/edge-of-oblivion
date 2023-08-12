@@ -2,10 +2,10 @@
 class_name WaveData
 extends Resource
 
-signal turn_wait_value_changed
+signal round_wait_value_changed
 
-@export_range(1, 99, 1, "or_greater") var turn_wait_from_previous_wave: int = 1:
-	set = set_turn_wait
+@export_range(1, 99, 1, "or_greater") var round_wait_from_previous_wave: int = 1:
+	set = set_round_wait
 
 var _absolute_round: int = 0  # Needs to be told from whatever manages waves
 var _enemy_data: Dictionary  # export variable name : enemy data
@@ -19,7 +19,7 @@ func update_available_enemies(enemies: Array[EnemyData]) -> void:
 		if enemy_data == null:
 			continue
 		
-		var export_name: String = "# " + enemy_data.enemy_name
+		var export_name: String = "# " + enemy_data.entity_name
 		_enemy_data[export_name] = enemy_data
 		
 		if not _spawn_data.has(export_name):
@@ -28,11 +28,11 @@ func update_available_enemies(enemies: Array[EnemyData]) -> void:
 	notify_property_list_changed()
 
 
-func set_turn_wait(value: int):
-	var value_before: int = turn_wait_from_previous_wave
-	turn_wait_from_previous_wave = value
-	if turn_wait_from_previous_wave != value_before:
-		turn_wait_value_changed.emit()
+func set_round_wait(value: int):
+	var value_before: int = round_wait_from_previous_wave
+	round_wait_from_previous_wave = value
+	if round_wait_from_previous_wave != value_before:
+		round_wait_value_changed.emit()
 
 
 func update_round_info(wave_round: int):

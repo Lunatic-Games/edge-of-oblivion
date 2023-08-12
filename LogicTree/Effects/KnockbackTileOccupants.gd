@@ -33,7 +33,7 @@ func perform_behavior() -> void:
 		damage_on_collide = damage_on_collide_override.value
 	
 	for tile in tiles.value:
-		var occupant: Unit = tile.occupant as Unit
+		var occupant: Entity = tile.occupant as Entity
 		if occupant == null:
 			continue
 		
@@ -53,43 +53,56 @@ func perform_behavior() -> void:
 				var direction = -_get_average_direction_to_tile(tile)
 				apply_knockback(occupant, direction, distance, damage_on_collide)
 
-func apply_knockback(target: Unit, direction: Vector2i, knockback: int, collideDamage: int = 0) -> bool:
-	if not target.is_alive() or knockback == 0:
-		return true
-		
-	var current_tile: Tile = target.current_tile
+
+# Returns true if the entity was knocked back in the given direction
+func apply_knockback(target: Entity, direction: Vector2i, knockback: int, 
+		collision_damage: int = 0) -> bool:
+	if target.occupancy.data.can_be_knockbacked() == false:
+		return false
+	
+	var current_tile: Tile = target.occupancy.current_tile
 	var next_tile: Tile = current_tile.get_tile_in_direction(direction)
 	
 	for i in knockback:
 		if next_tile == null:
-			# Fall off end of map
-			target.fall()
-			current_tile.occupant = null
-			break
+			if target.occupancy.data.can_be_pushed_off_map:
+				var next_tile_position: Vector2 = current_tile.global_position
+				next_tile_position +=  Vector2(current_tile.get_approximate_size() * direction)
+				target.occupancy.do_move_animation(next_tile_position)
+				target.health.deal_lethal_damage()
+				return true
+			return false
 			
-		var next_tile_occupant: Unit = next_tile.occupant as Unit
+		var next_tile_occupant: Entity = next_tile.occupant as Entity
 			
 		# Try pushing into next occupant if there is one
-		if next_tile_occupant:
-			if target.damageable:
-				target.take_damage(collideDamage)
-			if next_tile_occupant.damageable:
-				next_tile_occupant.take_damage(collideDamage)
+		if next_tile_occupant and !next_tile_occupant.occupancy.data.can_be_collected(target.data):
+			if target.health != null:
+				target.health.take_damage(collision_damage)
+				if target.health.is_alive() == false:
+					target.occupancy.do_move_animation(next_tile.global_position)
 			
-			if next_tile_occupant.pushable:
-				if apply_knockback(next_tile_occupant, direction, 1):
-					target.move_to_tile(next_tile)
-					if not target.is_alive():
-						next_tile.occupant = null
-					return true
-				else:
-					return false
+			if next_tile_occupant.health != null:
+				next_tile_occupant.health.take_damage(collision_damage)
+				if next_tile_occupant.health.is_alive() == false:
+					if target.health != null and target.health.is_alive():
+						target.occupancy.move_to_tile(next_tile)
+					else:
+						target.occupancy.do_move_animation(next_tile.global_position)
+			
+			if target.health != null and target.health.is_alive() == false:
+				return true
+			if next_tile_occupant.health != null and next_tile_occupant.health.is_alive() == false:
+				return true
+			
+			if apply_knockback(next_tile_occupant, direction, 1):
+				return target.occupancy.move_to_tile(next_tile)
 			else:
 				return false
 		
 		# No next occupant, can just move
 		else:
-			target.move_to_tile(next_tile)
+			target.occupancy.move_to_tile(next_tile)
 			current_tile = next_tile
 			next_tile = current_tile.get_tile_in_direction(direction)
 	

@@ -7,47 +7,79 @@ func setup() -> void:
 	add_to_menu("Kill player", kill_player)
 	add_to_menu("Heal player", partially_heal_player)
 	add_to_menu("Fully heal player", fully_heal_player)
+	add_to_menu("Teleport player", teleport_player)
+	add_to_menu("Update items", update_items)
 
 
 func level_up() -> void:
-	if GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	GlobalGameState.player.level_up()
-	GlobalGameState.game.check_for_upgrades()
+	player.levelling.level_up()
+	
+	var game: Game = GlobalGameState.get_game()
+	game.check_for_upgrades()
 
 
 func damage_player() -> void:
-	if GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	var max_health: int = GlobalGameState.player.max_hp
+	var max_health: int = player.health.data.max_health
 	var damage_amount: int = int(max_health / 4.0)
-	GlobalGameState.player.take_damage(damage_amount)
+	player.health.take_damage(damage_amount)
 
 
 func partially_heal_player() -> void:
-	if GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	var max_health: int = GlobalGameState.player.max_hp
+	var max_health: int = player.health.data.max_health
 	var heal_amount: int = int(max_health / 4.0) 
-	GlobalGameState.player.heal(heal_amount)
+	player.health.heal(heal_amount)
 
 
 func fully_heal_player() -> void:
-	if GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	var max_health: int = GlobalGameState.player.max_hp
-	# Make sure it's not negative and that it's a non-zero heal (for vfx to trigger)
-	var heal_amount: int = max(1, max_health - GlobalGameState.player.hp)
-	GlobalGameState.player.heal(heal_amount)
+	player.health.full_heal()
 
 
 func kill_player() -> void:
-	if GlobalGameState.player == null:
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
 		return
 	
-	var current_health: int = GlobalGameState.player.hp
-	GlobalGameState.player.take_damage(current_health)
+	player.health.deal_lethal_damage()
+
+
+func teleport_player() -> void:
+	GlobalDebugOverlay.select_tiles_menu.begin_selection(_teleport_player_to_tile,
+		"Select Empty Tile")
+
+
+func _teleport_player_to_tile(tile: Tile):
+	var player: Player = GlobalGameState.get_player()
+	if tile == null or player == null:
+		return
+	
+	var player_data: PlayerData = player.data as PlayerData
+	
+	if tile.occupant != null and !tile.occupant.occupancy.data.can_be_collected(player_data):
+		return
+	
+	player.occupancy.move_to_tile(tile)
+
+
+func update_items():
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
+		return
+	
+	for item in player.inventory.items.values():
+		item.update()

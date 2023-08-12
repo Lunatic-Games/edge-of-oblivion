@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GameModeData" load_steps=2 format=3 uid="uid://c7crkijqi5ruj"]
+
+[ext_resource type="Script" path="res://Data/GameModes/GAME_MODE_DATA.gd" id="1_fqe1u"]
+
+[resource]
+script = ExtResource("1_fqe1u")
+show_player_ui_overlay = false
+update_items = false
+increment_round_number = false
+move_phase_duration_seconds = 0.2
+item_phase_duration_seconds = 0.0
+tile_phase_duration_seconds = 0.0
+enemy_phase_duration_seconds = 0.0
+enemy_spawn_phase_duration_seconds = 0.0
+spawn_flag_phase_duration_seconds = 0.0

@@ -17,11 +17,6 @@ var is_popup_spawned: bool = false
 @onready var animator: AnimationPlayer = $AnimationPlayer
 
 
-func _ready() -> void:
-	popup_text.text = enemy.data.get_full_popup_text()
-	popup_flavor_text.text = enemy.data.flavor_text
-
-
 func _on_mouse_entered() -> void:
 	is_hovered = true
 
@@ -40,6 +35,9 @@ func _process(delta:float) -> void:
 
 
 func spawn_popup() -> void:
+	popup_text.text = enemy.data.get_full_main_text()
+	popup_flavor_text.text = enemy.data.flavor_text
+	
 	is_popup_spawned = true
 	popup.global_position = get_global_mouse_position() - panel.size + POPUP_OFFSET
 	

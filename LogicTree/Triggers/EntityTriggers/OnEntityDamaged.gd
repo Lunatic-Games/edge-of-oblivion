@@ -41,8 +41,8 @@ func _ready() -> void:
 	GlobalLogicTreeSignals.entity_damaged.connect(trigger)
 
 
-func trigger(source_item: Item, source_entity: Unit, source_tile: Tile,
-	receiver_entity: Unit, damage_amount: int, was_killing_blow: bool) -> void:
+func trigger(source_item: Item, source_entity: Entity, source_tile: Tile,
+	receiver_entity: Entity, damage_amount: int, was_killing_blow: bool) -> void:
 	
 	if only_if_nonzero_amount == true and damage_amount == 0:
 		return
@@ -70,10 +70,10 @@ func trigger(source_item: Item, source_entity: Unit, source_tile: Tile,
 	if output_source_tile != null:
 		if source_tile != null:
 			output_source_tile.value = [source_tile]
-		elif source_item != null and source_item.user != null and source_item.user.current_tile != null:
+		elif source_item != null and source_item.user != null and source_item.user.occupancy.current_tile != null:
 			output_source_tile.value = [source_item.user.current_tile]
-		elif source_entity != null and source_entity.current_tile != null:
-			output_source_tile.value = [source_entity.current_tile]
+		elif source_entity != null and source_entity.occupancy.current_tile != null:
+			output_source_tile.value = [source_entity.occupancy.current_tile]
 		else:
 			output_source_tile.value.clear()
 	
@@ -84,8 +84,8 @@ func trigger(source_item: Item, source_entity: Unit, source_tile: Tile,
 			output_receiver_entity.value.clear()
 	
 	if output_receiver_tile != null:
-		if receiver_entity != null and receiver_entity.current_tile != null:
-			output_receiver_tile.value = [receiver_entity.current_tile]
+		if receiver_entity != null and receiver_entity.occupancy.current_tile != null:
+			output_receiver_tile.value = [receiver_entity.occupancy.current_tile]
 		else:
 			output_receiver_tile.value.clear()
 
@@ -98,7 +98,7 @@ func trigger(source_item: Item, source_entity: Unit, source_tile: Tile,
 	logic_tree_on_trigger.evaluate()
 
 
-func does_match_source_filter(source_item: Item, source_entity: Unit, source_tile: Tile) -> bool:
+func does_match_source_filter(source_item: Item, source_entity: Entity, source_tile: Tile) -> bool:
 	match source_filter:
 		SourceType.ANY:
 			return true
@@ -120,7 +120,7 @@ func does_match_source_filter(source_item: Item, source_entity: Unit, source_til
 	return false
 
 
-func does_match_receiver_filter(receiver_entity: Unit) -> bool:
+func does_match_receiver_filter(receiver_entity: Entity) -> bool:
 	match receiver_filter:
 		ReceiverType.ANY:
 			return true

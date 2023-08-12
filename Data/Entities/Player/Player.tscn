@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://salxfsmwvg5l"]
+
+[ext_resource type="PackedScene" uid="uid://dvxtrysir3pm4" path="res://Data/Entities/Entity.tscn" id="1_a1amo"]
+[ext_resource type="Script" path="res://Data/Entities/Player/Player.gd" id="2_jsy5b"]
+[ext_resource type="Texture2D" uid="uid://bvyw2arekg3an" path="res://Assets/art/icons/medieval-fantasy/lorc/barbute.svg" id="3_4wans"]
+[ext_resource type="Material" uid="uid://d2p8yth5vp4kr" path="res://Shaders/dream_shader_material.tres" id="3_6d11q"]
+
+[node name="Player" instance=ExtResource("1_a1amo")]
+script = ExtResource("2_jsy5b")
+
+[node name="Sprite2D" parent="." index="0"]
+material = ExtResource("3_6d11q")
+texture = ExtResource("3_4wans")

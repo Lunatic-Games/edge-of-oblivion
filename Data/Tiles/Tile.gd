@@ -3,7 +3,7 @@ extends Node2D
 
 
 signal update_triggered
-signal occupied_by_new_occupant(occupant: Occupant)
+signal occupied_by_new_entity(occupant: Entity)
 signal no_longer_occupied
 
 var top_tile: Tile
@@ -11,8 +11,10 @@ var bottom_tile: Tile
 var right_tile: Tile
 var left_tile: Tile
 
-var occupant: Occupant : set = _set_occupant
+var occupant: Entity : set = _set_occupant
 var coord: Vector2i = Vector2i.ZERO
+
+@onready var background: ColorRect = $Background
 
 
 func update():
@@ -52,19 +54,6 @@ func get_direction_to_tile(tile: Tile) -> Vector2i:
 	return Vector2i.ZERO
 
 
-func get_random_enemy_occupied_adjacent_tile() -> Tile:
-	var occupied_adjacent_tiles = []
-	
-	for tile in get_adjacent_occupied_tiles():
-		if tile.occupant is Enemy:
-			occupied_adjacent_tiles.append(tile)
-	
-	if occupied_adjacent_tiles.is_empty():
-		return null
-	
-	return occupied_adjacent_tiles.pick_random()
-
-
 func get_coord_distance_to_given_tile(other_tile: Tile) -> Vector2i:
 	return Vector2i(other_tile.coord - coord)
 
@@ -91,12 +80,20 @@ func get_adjacent_occupied_tiles() -> Array[Tile]:
 	return occupied_tiles
 
 
-func _set_occupant(new_occupant: Occupant):
-	var occupant_before: Occupant = occupant
+func is_position_within_tile(pos: Vector2):
+	return background.get_global_rect().has_point(pos)
+
+
+func get_approximate_size() -> Vector2i:
+	return background.get_rect().size
+
+
+func _set_occupant(new_occupant: Entity):
+	var occupant_before: Entity = occupant
 	occupant = new_occupant
 	
 	if occupant != null and occupant != occupant_before:
-		occupied_by_new_occupant.emit(occupant)
+		occupied_by_new_entity.emit(occupant)
 	
 	if occupant == null and occupant_before != null:
 		no_longer_occupied.emit()

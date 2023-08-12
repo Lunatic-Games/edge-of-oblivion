@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://Globals/Account/ACCOUNT_LEVEL_DATA.gd" id="11_jpvjp"]
 [ext_resource type="Resource" uid="uid://dst01geftrhcn" path="res://Data/Items/ZeusSword/ZeusSword.tres" id="12_eu5fd"]
 [ext_resource type="Resource" uid="uid://dhmba6khldbxi" path="res://Data/Items/ArcingOrb/ArcingOrb.tres" id="13_dxm28"]
-[ext_resource type="Resource" uid="uid://btk8ha0wkgfgt" path="res://Data/Items/BottleOfLightAndShadow/BottleOfLightAndShadow.tres" id="14_x88y5"]
+[ext_resource type="Resource" uid="uid://btk8ha0wkgfgt" path="res://Data/Items/BottleOfLightAndShadow/BottledVapours.tres" id="14_x88y5"]
 [ext_resource type="Resource" uid="uid://b5tt1gbbv75nc" path="res://Data/Items/ShardOfReality/ShardOfReality.tres" id="15_8yyxb"]
 
 [sub_resource type="Resource" id="Resource_1qmer"]

@@ -1,0 +1,109 @@
+[gd_scene load_steps=12 format=3 uid="uid://dwngnw61blh85"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_ymxun"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_c72xt"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_y07cf"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_q11i7"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="8_5gg7j"]
+[ext_resource type="PackedScene" uid="uid://cr5pb3kmn70mg" path="res://Data/Particles/Items/HammerParticles.tscn" id="8_73rgf"]
+[ext_resource type="Script" path="res://LogicTree/Effects/KnockbackTileOccupants.gd" id="9_5ou7l"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_a2ss4"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="10_k60wr"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="14_vkbki"]
+
+[node name="Hammer" instance=ExtResource("1")]
+
+[node name="ItemPopupHover" parent="." index="0"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("3_ymxun")
+default_value = 6
+
+[node name="Knockback" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("3_ymxun")
+default_value = 1
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("3_ymxun")
+default_value = 10
+
+[node name="Collision damage" type="Node" parent="LT_PersistentVariables" index="3"]
+script = ExtResource("3_ymxun")
+default_value = 20
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("4_c72xt")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
+script = ExtResource("6_y07cf")
+
+[node name="Select top and bottom" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_q11i7")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Targets")
+directions = 5
+
+[node name="Spawn visual effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("tiles")]
+script = ExtResource("8_5gg7j")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("8_73rgf")
+
+[node name="Damage occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("10_a2ss4")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
+
+[node name="Knockback occupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "references_tiles", "distance_override", "damage_on_collide_override")]
+script = ExtResource("9_5ou7l")
+tiles = NodePath("../Targets")
+references_tiles = NodePath("../../../Item user tile")
+distance_override = NodePath("../../../../LT_PersistentVariables/Knockback")
+damage_on_collide_override = NodePath("../../../../LT_PersistentVariables/Collision damage")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("10_k60wr")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="Increase knockback" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("14_vkbki")
+int_variable = NodePath("../../../../LT_PersistentVariables/Knockback")
+value = 1
+operation = 1
+
+[node name="Increase collision damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("14_vkbki")
+int_variable = NodePath("../../../../LT_PersistentVariables/Collision damage")
+value = 20
+operation = 1
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("10_k60wr")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Increase knockback" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("14_vkbki")
+int_variable = NodePath("../../../../LT_PersistentVariables/Knockback")
+value = 1
+operation = 1
+
+[node name="Increase collision damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("14_vkbki")
+int_variable = NodePath("../../../../LT_PersistentVariables/Collision damage")
+value = 20
+operation = 1

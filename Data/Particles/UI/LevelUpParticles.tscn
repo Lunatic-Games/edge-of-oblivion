@@ -1,23 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://clspetko05r6t"]
+[gd_scene load_steps=7 format=3 uid="uid://clspetko05r6t"]
 
 [ext_resource type="Texture2D" uid="uid://db3pua10byebi" path="res://Assets/art/icons/stars/delapouite/round-star.svg" id="1_vm7nm"]
 
-[sub_resource type="Gradient" id="Gradient_e54r2"]
-offsets = PackedFloat32Array(0.00862069, 0.146552, 0.840517, 1)
-colors = PackedColorArray(0.992157, 1, 0.913725, 0, 0.992157, 1, 0.913725, 0.666667, 0.992157, 1, 0.913725, 0.666667, 0.992157, 1, 0.913725, 0)
+[sub_resource type="Gradient" id="Gradient_oieex"]
+offsets = PackedFloat32Array(0, 0.134058, 0.880435, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.905949, 0.905949, 0.905949, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1ux78"]
-gradient = SubResource("Gradient_e54r2")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4iv6u"]
+gradient = SubResource("Gradient_oieex")
+
+[sub_resource type="Curve" id="Curve_72qx4"]
+_data = [Vector2(0, 0.463158), 0.0, 0.0, 0, 0, Vector2(0.599349, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.515789), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rs2fx"]
+curve = SubResource("Curve_72qx4")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_puee3"]
 emission_shape = 3
-emission_box_extents = Vector3(450, 1, 1)
+emission_box_extents = Vector3(450, 25, 1)
 direction = Vector3(0, -1, 0)
-gravity = Vector3(0, 20, 0)
+gravity = Vector3(0, 0, 0)
 scale_min = 0.05
 scale_max = 0.1
+scale_curve = SubResource("CurveTexture_rs2fx")
 color = Color(0.835294, 1, 0.882353, 1)
-color_ramp = SubResource("GradientTexture2D_1ux78")
+color_ramp = SubResource("GradientTexture1D_4iv6u")
 
 [node name="LevelUpParticles" type="GPUParticles2D"]
 position = Vector2(450, 3)
@@ -25,7 +33,7 @@ emitting = false
 amount = 25
 process_material = SubResource("ParticleProcessMaterial_puee3")
 texture = ExtResource("1_vm7nm")
-lifetime = 6.0
+lifetime = 3.0
 one_shot = true
 speed_scale = 4.0
 randomness = 0.32

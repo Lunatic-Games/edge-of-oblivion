@@ -1,5 +1,5 @@
 class_name LogicTreeSelection
-extends Object
+extends RefCounted
 
 
 enum Operation {

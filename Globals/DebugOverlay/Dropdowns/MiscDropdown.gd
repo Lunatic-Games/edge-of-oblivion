@@ -2,26 +2,17 @@ extends MenuDropdownButton
 
 
 func setup():
-	add_to_menu("Kill all enemies", kill_all_enemies)
 	add_to_menu("Trigger victory screen", show_victory_screen)
 	add_to_menu("Toggle fullscreen", toggle_fullscreen)
-
-
-func kill_all_enemies():
-	if GlobalGameState.game == null:
-		return
-	
-	# Iterate backwards since elements are deleted as they die
-	var enemies: Array[Enemy] = GlobalGameState.game.spawn_handler.spawned_enemies
-	for i in range(enemies.size() - 1, -1, -1):
-		enemies[i].take_damage(enemies[i].max_hp)
+	add_to_menu("Trigger gateway", spawn_gateway)
 
 
 func show_victory_screen():
-	if GlobalGameState.game == null:
+	var game: Game = GlobalGameState.get_game()
+	if game == null:
 		return
 	
-	GlobalGameState.game._on_Boss_defeated(Enemy.new())
+	game.victory()
 
 
 func toggle_fullscreen():
@@ -29,3 +20,22 @@ func toggle_fullscreen():
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+
+func spawn_gateway():
+	var game: Game = GlobalGameState.get_game()
+	if game == null:
+		return
+	
+	var level_data: LevelData = game.level_data
+	if level_data == null:
+		return
+	
+	var next_level_data: LevelData = level_data.next_level
+	if next_level_data == null:
+		print("Won't spawn a gateway since there isn't a next level set")
+		return
+	
+	var spawn_handler: SpawnHandler = GlobalGameState.get_spawn_handler()
+	if spawn_handler != null:
+		spawn_handler.spawn_gateway(next_level_data)
