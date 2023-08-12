@@ -10,7 +10,7 @@ func setup(p_data: EntityData, start_tile: Tile = null) -> void:
 	occupancy.collected.connect(_on_collected)
 
 
-func _on_collected(by: Entity) -> void:
+func _on_collected(_by: Entity) -> void:
 	triggered.emit()
 	
 	if occupancy.current_tile.occupant == self:
