@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://8oqd8o4tf8i3"]
+
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1_0doda"]
+[ext_resource type="PackedScene" uid="uid://1wlog2drjf07" path="res://Data/Items/Tell'sCrossbow/TellsCrossbow.tscn" id="1_vnsom"]
+[ext_resource type="Texture2D" uid="uid://de71rbyq2rdo0" path="res://Assets/art/icons/weapons/carl-olsen/crossbow.svg" id="3_0ghpt"]
+
+[resource]
+script = ExtResource("1_0doda")
+sprite = ExtResource("3_0ghpt")
+item_scene = ExtResource("1_vnsom")
+item_name = "Tell's Crossbow"
+popup_item_name_color = "royalblue"
+flavor_text = "This bow smells faintly of apples."
+max_tier = 3
+use_tier_1_text_for_popup_texts = false
+card_text_1 = "Every 7 turns: Attacks 1 random enemy at a [range]range[/range] of 3 for 40 damage."
+card_text_2 = "Attack [chain]ricochets to 2nd enemy[/chain] adjacent to target. 40 damage to both."
+card_text_3 = "Damage increases 40 -> 80"
+popup_text_1 = "Attacks 1 random enemy at a range of 3. 40 damage."
+popup_text_2 = "Attacks 1 random enemy at a range of 3 and 1 enemy adjacent to target. 40 damage."
+popup_text_3 = "Attacks 1 random enemy at a range of 3 and 1 enemy adjacent to target. 80 damage."

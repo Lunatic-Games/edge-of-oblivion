@@ -1,0 +1,134 @@
+[gd_scene load_steps=14 format=3 uid="uid://1wlog2drjf07"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_8jqgr"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_gkouv"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="3_q4y2r"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_2ii1p"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="5_a8gis"]
+[ext_resource type="Script" path="res://LogicTree/Debug/PrintToOutput.gd" id="5_r7nvw"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="6_bslmu"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="7_x5voc"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="8_hqlqf"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnProjectiles.gd" id="9_7i1wx"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_isvke"]
+[ext_resource type="PackedScene" uid="uid://iflg7f4k25l6" path="res://Data/Projectiles/Projectile.tscn" id="10_vlltp"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="13_gno2y"]
+
+[node name="TellsCrossbow" instance=ExtResource("1_8jqgr")]
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("2_gkouv")
+default_value = 40
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("2_gkouv")
+default_value = 5
+
+[node name="Range" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("2_gkouv")
+default_value = 1
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("4_2ii1p")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
+
+[node name="Radius Tiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
+script = ExtResource("3_q4y2r")
+
+[node name="Prime Target" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1"]
+script = ExtResource("3_q4y2r")
+
+[node name="Select radius" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("5_a8gis")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Radius Tiles")
+shape = 1
+radius = 3
+
+[node name="Negate radius" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("5_a8gis")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Radius Tiles")
+shape = 1
+radius = 2
+operation = 2
+
+[node name="Refine to enemies" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_bslmu")
+input_tiles = NodePath("../Radius Tiles")
+output_tiles = NodePath("../Prime Target")
+occupant_type = 2
+
+[node name="Select random enemy" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_x5voc")
+input_tiles = NodePath("../Prime Target")
+output_tiles = NodePath("../Prime Target")
+
+[node name="If Tier 2 or higher" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select random enemy" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("8_hqlqf")
+input = NodePath("../../../../Item tier")
+comparison = 1
+value = 2
+
+[node name="Ricochet" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select random enemy/If Tier 2 or higher" index="0"]
+script = ExtResource("3_q4y2r")
+
+[node name="Select 2nd radius" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select random enemy/If Tier 2 or higher" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles", "radius_override")]
+script = ExtResource("5_a8gis")
+input_tiles = NodePath("../../../Prime Target")
+output_tiles = NodePath("../Ricochet")
+shape = 1
+radius_override = NodePath("../../../../../../LT_PersistentVariables/Range")
+include_origin_tile = false
+
+[node name="Refine to enemies" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select random enemy/If Tier 2 or higher" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_bslmu")
+input_tiles = NodePath("../Ricochet")
+output_tiles = NodePath("../Ricochet")
+occupant_type = 2
+
+[node name="Select random enemy" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select random enemy/If Tier 2 or higher" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_x5voc")
+input_tiles = NodePath("../Ricochet")
+output_tiles = NodePath("../Ricochet")
+
+[node name="LT_SpawnProjectiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select random enemy/If Tier 2 or higher" index="4" node_paths=PackedStringArray("origin_tiles", "target_tiles")]
+script = ExtResource("9_7i1wx")
+origin_tiles = NodePath("../../../Prime Target")
+target_tiles = NodePath("../Ricochet")
+projectile_scene = ExtResource("10_vlltp")
+
+[node name="Damage 2nd enemy" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select random enemy/If Tier 2 or higher" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("10_isvke")
+tiles = NodePath("../Ricochet")
+damage_override = NodePath("../../../../../../LT_PersistentVariables/Damage")
+
+[node name="LT_SpawnProjectiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("origin_tiles", "target_tiles")]
+script = ExtResource("9_7i1wx")
+origin_tiles = NodePath("../../../Item user tile")
+target_tiles = NodePath("../Prime Target")
+projectile_scene = ExtResource("10_vlltp")
+seconds_per_tile_speed = 0.04
+
+[node name="Damage enemy" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="7" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("10_isvke")
+tiles = NodePath("../Prime Target")
+damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
+
+[node name="LT_PrintToOutput" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Damage enemy" index="0" node_paths=PackedStringArray("int_var")]
+script = ExtResource("5_r7nvw")
+int_var = NodePath("../../../../../LT_PersistentVariables/Damage")
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("8_hqlqf")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Increase Damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("13_gno2y")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 40
+operation = 1
