@@ -3,97 +3,71 @@ name: Build and Deploy to Steam
 on:
   workflow_dispatch:
     inputs:
-      buildDescription:
+      build_description:
         description: Build Description
-        required: false
+        required: true
         default: 'A generic build'
-
-env:
-  GODOT_VERSION: 4.1
-  EXPORT_NAME: "${{ github.event.repository.name }}"
-  PROJECT_PATH: "."
+      linux:
+        description: Build Linux
+        type: boolean
+        required: true
+        default: true
+      windows:
+        description: Build Windows
+        type: boolean
+        required: true
+        default: true
+      dry_run:
+        description: Dry Run (will not upload to steam if checked)
+        type: boolean
+        required: true
+        default: false
 
 jobs:
-  set_tag:
-    name: Set godot-ci tag
-    runs-on: ubuntu-latest
-    outputs:
-      godot_ci_tag: ${{ steps.set_tag.outputs.tag }}
-    steps:
-      - id: set_tag
-        run: echo "tag=$GODOT_VERSION" >> $GITHUB_OUTPUT
-        
-  export:
-    name: Export from Godot
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-    needs: set_tag
-    container:
-      image: barichello/godot-ci:${{ needs.set_tag.outputs.godot_ci_tag }}
-    env:
-      WINDOWS_PRESET: Windows Desktop
-    steps:
-      - name: Checkout
-        if: steps.check-cache.outputs.cache-hit != 'true'
-        uses: actions/checkout@v3
-        with:
-          lfs: true     
-          
-      - name: Setup
-        if: steps.check-cache.outputs.cache-hit != 'true'
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-          # cp .github/workflows/export_presets.cfg ${PROJECT_PATH}/export_presets.cfg
-          
-      - name: Build for windows
-        if: steps.check-cache.outputs.cache-hit != 'true'
-        run: |
-          mkdir -v -p ${PROJECT_PATH}/build/windows
-          godot -v --path $PROJECT_PATH --headless --export-release "${WINDOWS_PRESET}" build/windows/$EXPORT_NAME.exe | tee $EXPORT_NAME.output
-          
-      - name: Check for build errors
-        if: steps.check-cache.outputs.cache-hit != 'true'
-        shell: bash
-        run: |
-          BUILD_ERRORS=("ERROR: Can't open project" "ERROR: Cannot export project")
-          for ((i = 0; i < ${#BUILD_ERRORS[@]}; i++))
-          do
-            if grep -q "${BUILD_ERRORS[$i]}" $EXPORT_NAME.output
-            then
-              echo "Found error ${BUILD_ERRORS[$i]} in Godot build output"
-              exit 1
-            fi
-          done
-          
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3.1.0
-        with:
-          name: dist-${{ github.event.repository.name }}
-          path: ${{ env.PROJECT_PATH }}/build
-          retention-days: 1
+  build:
+    name: Build game
+    uses: ./.github/workflows/plug_godot_build.yml
+    with:
+      debug: false
+      godot_version: "4.1"
+      export_name: ${{ github.event.repository.name }} # Pretty name for distribution
+      artifact_name: dist-${{ github.event.repository.name }}-${{ github.run_number }}
+      windows: ${{ inputs.windows }}
+      windows_preset: Windows Desktop
+      linux: ${{ inputs.linux }}
+      linux_preset: Linux/X11
+      project_path: '.'
+      export_presets_path: '.'
+      artifact_retention_days: 1
           
   deploy:
     name: Deploy to Steam
+    if: ${{ !inputs.dry_run }}
     runs-on: ubuntu-latest
-    needs: export
+    needs: build
     steps:
-      - name: Download artifacts
+      - name: Download windows artifacts
+        if: ${{ inputs.windows }}
         uses: actions/download-artifact@v3.0.2
         with:
-          name: dist-${{ github.event.repository.name }}
-          path: build
+          name: windows-dist-${{ github.event.repository.name }}-${{ github.run_number }}
+          path: build/windows
           
-      - name: Test cache find
-        run: find . -maxdepth 2
+      - name: Download linux artifacts
+        if: ${{ inputs.linux }}
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: linux-dist-${{ github.event.repository.name }}-${{ github.run_number }}
+          path: build/linux
           
- #     - uses: game-ci/steam-deploy@v3
- #       with:
- #         username: ${{ secrets.STEAM_USERNAME }}          
- #         configVdf: ${{ secrets.STEAM_CONFIG_VDF}}          
- #         appId: 1354590
- #         buildDescription: ${{ github.event.inputs.buildDescription }}
- #         rootPath: build
- #         depot1Path: windows
+      - name: Push to Steam
+        uses: game-ci/steam-deploy@v3
+        with:
+          username: ${{ secrets.STEAM_USERNAME }}          
+          configVdf: ${{ secrets.STEAM_CONFIG_VDF}}          
+          appId: ${{ vars.STEAM_APP_ID }}
+          buildDescription: ${{ format('{0} (Github Build #{1})', github.event.inputs.build_description, github.run_number) }}
+          rootPath: build
+          depot1Path: windows
+          depot2Path: linux
+          #releaseBranch: prerelease # Want to leave this disabled for testing
