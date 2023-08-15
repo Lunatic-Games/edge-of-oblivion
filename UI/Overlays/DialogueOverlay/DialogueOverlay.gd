@@ -2,15 +2,18 @@ class_name DialogueOverlay
 extends CanvasLayer
 
 
+signal next_triggered
+signal option_selected(option_name: String)
+
 const TEXT_ANIMATE_TIME_SECONDS: float = 0.1
+const OPTION_SCENE: PackedScene = preload("res://UI/Overlays/DialogueOverlay/DialogueOption/DialogueOption.tscn")
 
 var has_priority: bool = false
-var pages: Array[String] = []
-var page_index: int = 0
 var text_animate_timer: float = 0.0
 
 @onready var title_label: Label = $DialogueBox/TitleBox/Title
-@onready var dialogue_label: Label = $DialogueBox/CenterContainer/Dialogue
+@onready var dialogue_label: Label = $DialogueBox/CenterContainer/VBoxContainer/Dialogue
+@onready var option_container: VBoxContainer = $DialogueBox/CenterContainer/VBoxContainer/Options
 
 
 func _input(event) -> void:
@@ -20,7 +23,7 @@ func _input(event) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			interacted_with()
-			get_viewport().set_input_as_handled()
+			#get_viewport().set_input_as_handled()
 
 
 func _process(delta: float) -> void:
@@ -35,35 +38,42 @@ func _process(delta: float) -> void:
 			dialogue_label.visible_characters += 1
 
 
-func begin_dialogue(title: String, new_dialogue: Array[String]) -> void:
-	if new_dialogue.size() == 0:
-		return
+func display_text(text: String, title: String = "") -> void:
+	title_label.text = title
+	dialogue_label.text = text
+	dialogue_label.visible_characters = 0
+	option_container.hide()
+
+
+func display_options(options: Array[String], prompt_text: String = "", title: String = "") -> void:
+	assert(options.is_empty() == false, "No options provided.")
 	
 	title_label.text = title
-	pages = new_dialogue
-	page_index = 0
-	dialogue_label.text = pages[page_index]
+	dialogue_label.text = prompt_text
 	dialogue_label.visible_characters = 0
-	has_priority = true
-	show()
+	for child in option_container.get_children():
+		child.hide()
+		child.queue_free()
+	
+	for option in options:
+		var option_button: Button = OPTION_SCENE.instantiate()
+		option_button.text = option
+		option_container.add_child(option_button)
+		option_button.pressed.connect(_on_option_button_pressed.bind(option))
+	option_container.show()
 
 
 func interacted_with():
 	var n_visible_characters: int = dialogue_label.visible_characters
 	if n_visible_characters < dialogue_label.text.length():
-		skip_to_end()
+		dialogue_label.visible_characters = dialogue_label.text.length()
 	else:
-		next_page()
+		next_triggered.emit()
 
 
-func next_page() -> void:
-	if page_index == pages.size() -1:
-		close()
-		return
-	
-	page_index += 1
-	dialogue_label.text = pages[page_index]
-	dialogue_label.visible_characters = 0
+func open():
+	has_priority = true
+	show()
 
 
 func close():
@@ -71,5 +81,5 @@ func close():
 	hide()
 
 
-func skip_to_end() -> void:
-	dialogue_label.visible_characters = dialogue_label.text.length()
+func _on_option_button_pressed(option_text: String) -> void:
+	option_selected.emit(option_text)

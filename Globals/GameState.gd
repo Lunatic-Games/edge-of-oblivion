@@ -5,6 +5,7 @@ var _game: Game = null
 var _spawn_handler: SpawnHandler = null
 var _board: Board = null
 var _player: Player = null
+var _dialogue_overlay: DialogueOverlay = null
 
 
 func _ready() -> void:
@@ -28,10 +29,15 @@ func get_player() -> Player:
 	return _player
 
 
+func get_dialogue_overlay() -> DialogueOverlay:
+	return _dialogue_overlay
+
+
 func _on_initial_level_setup_completed(game: Game) -> void:
 	_game = game
 	_spawn_handler = game.spawn_handler
 	_board = game.level.board
+	_dialogue_overlay = game.dialogue_overlay
 
 
 func _on_player_spawned(spawned_player: Player) -> void:

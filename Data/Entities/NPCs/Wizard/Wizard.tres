@@ -15,7 +15,6 @@ collectable_filter = 0
 
 [resource]
 script = ExtResource("1_ucigf")
-dialogue = Array[String](["Why hello there!", "Oh did you think I would give you something to aid you on your journey?", "Tough luck bud; that ain't implemented."])
 entity_scene = ExtResource("1_knvs3")
 occupancy_data = SubResource("Resource_6v0lp")
 sprite = ExtResource("4_tg1t6")

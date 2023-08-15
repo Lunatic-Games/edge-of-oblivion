@@ -4,12 +4,13 @@ extends Entity
 
 const DIALOGUE_TRIGGER_DATA: EntityData = preload("res://Data/Entities/DialogueTrigger/DialogueTrigger.tres")
 
+@onready var dialogue_start: DS_Start = $DS_Start
+
 
 func setup(p_data: EntityData, start_tile: Tile = null) -> void:
 	super.setup(p_data, start_tile)
 	
-	var npc_data: NPCData = p_data as NPCData
-	if npc_data.dialogue.is_empty():
+	if dialogue_start.start_state == null:
 		return
 	
 	try_spawn_dialogue_trigger(start_tile.top_tile)
@@ -28,9 +29,7 @@ func try_spawn_dialogue_trigger(tile: Tile) -> void:
 
 
 func _on_dialogue_triggered(trigger: DialogueTrigger) -> void:
-	var game: Game = GlobalGameState.get_game()
-	var npc_data: NPCData = data as NPCData
-	game.dialogue_overlay.begin_dialogue(npc_data.entity_name, npc_data.dialogue)
+	dialogue_start.on_enter()
 	
 	var trigger_tile: Tile = trigger.occupancy.current_tile
 	trigger_tile.no_longer_occupied.connect(try_spawn_dialogue_trigger.bind(trigger_tile), CONNECT_ONE_SHOT)

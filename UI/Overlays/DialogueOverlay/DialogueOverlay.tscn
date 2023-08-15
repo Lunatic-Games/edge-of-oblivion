@@ -35,7 +35,7 @@ offset_right = 54.0
 offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 0
-color = Color(0.0235294, 0.0235294, 0.0235294, 1)
+color = Color(0.0235294, 0.0235294, 0.0235294, 0.698039)
 
 [node name="Title" type="Label" parent="DialogueBox/TitleBox"]
 layout_mode = 1
@@ -59,13 +59,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Dialogue" type="Label" parent="DialogueBox/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogueBox/CenterContainer"]
 custom_minimum_size = Vector2(1200, 250)
 layout_mode = 2
+
+[node name="Dialogue" type="Label" parent="DialogueBox/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("2_ddsk5")
 theme_override_font_sizes/font_size = 52
 text = "Dialogue text"
 autowrap_mode = 3
 clip_text = true
+visible_characters = 0
 visible_characters_behavior = 1
-visible_ratio = -0.0769231
+visible_ratio = 0.0
+
+[node name="Options" type="VBoxContainer" parent="DialogueBox/CenterContainer/VBoxContainer"]
+visible = false
+layout_mode = 2

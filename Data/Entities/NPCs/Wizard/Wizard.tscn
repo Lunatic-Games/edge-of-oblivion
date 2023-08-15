@@ -1,9 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4a3ey4658ncl"]
+[gd_scene load_steps=8 format=3 uid="uid://c4a3ey4658ncl"]
 
 [ext_resource type="PackedScene" uid="uid://bpp12botbqk4r" path="res://Data/Entities/NPCs/NPC.tscn" id="1_sjy1l"]
 [ext_resource type="Texture2D" uid="uid://bnjcbgum8k33l" path="res://Assets/art/icons/medieval-fantasy/delapouite/wizard-face.svg" id="2_43os5"]
+[ext_resource type="Script" path="res://DialogueState/Basic/Text.gd" id="3_4dyht"]
+[ext_resource type="Script" path="res://DialogueState/Question/Question.gd" id="4_ehm6g"]
+[ext_resource type="Script" path="res://DialogueState/Question/OPTION_DATA.gd" id="5_dxssi"]
+
+[sub_resource type="Resource" id="Resource_cuepq"]
+resource_local_to_scene = true
+script = ExtResource("5_dxssi")
+text = "Yes"
+state_on_chosen = NodePath("../Intro text")
+
+[sub_resource type="Resource" id="Resource_exjd4"]
+resource_local_to_scene = true
+script = ExtResource("5_dxssi")
+text = "No"
+state_on_chosen = NodePath("../Outro text")
 
 [node name="Wizard" instance=ExtResource("1_sjy1l")]
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_43os5")
+
+[node name="DS_Start" parent="." index="5" node_paths=PackedStringArray("start_state")]
+start_state = NodePath("Intro text")
+
+[node name="Intro text" type="Node" parent="DS_Start" index="0" node_paths=PackedStringArray("next_state")]
+script = ExtResource("3_4dyht")
+text = Array[String](["Hello, there!", "This conversation is made through DialogueState."])
+next_state = NodePath("../Ask to repeat")
+
+[node name="Ask to repeat" type="Node" parent="DS_Start" index="1"]
+script = ExtResource("4_ehm6g")
+prompt_text = "Did you want to restart this conversation?"
+options = Array[ExtResource("5_dxssi")]([SubResource("Resource_cuepq"), SubResource("Resource_exjd4")])
+
+[node name="Outro text" type="Node" parent="DS_Start" index="2" node_paths=PackedStringArray("next_state")]
+script = ExtResource("3_4dyht")
+text = Array[String](["Oh that's cool...", "No I didn't want to keep talking either..."])
+next_state = NodePath("../DS_End")
