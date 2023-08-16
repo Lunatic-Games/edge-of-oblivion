@@ -1,36 +1,24 @@
-[gd_scene load_steps=18 format=3 uid="uid://6lwa28jjrdin"]
+[gd_scene load_steps=14 format=3 uid="uid://6lwa28jjrdin"]
 
 [ext_resource type="Script" path="res://Globals/Account/Account.gd" id="1_y315m"]
-[ext_resource type="Resource" uid="uid://c4064o7rrsy36" path="res://Data/Items/DraculasKnives/DraculasKnives.tres" id="3_fsnl5"]
-[ext_resource type="Resource" uid="uid://dhbycs5j4to6b" path="res://Data/Items/DragonCloak/DragonCloak.tres" id="4_e1e52"]
+[ext_resource type="Resource" uid="uid://b13fjq68vxp3c" path="res://Data/Items/BrutusDagger/BrutusDagger.tres" id="4_shcna"]
 [ext_resource type="Resource" uid="uid://bkxc4j0i03skk" path="res://Data/Items/Hammer/Hammer.tres" id="5_cnn2a"]
-[ext_resource type="Resource" uid="uid://ciom03ipb83hk" path="res://Data/Items/HolyFire/HolyFire.tres" id="6_vgatg"]
-[ext_resource type="Resource" uid="uid://ds3bgi1j8ywkc" path="res://Data/Items/LightningBow/LightningBow.tres" id="7_6fetj"]
+[ext_resource type="Resource" uid="uid://dpgph88bl6aj5" path="res://Data/Items/MorningStar/morning_star.tres" id="5_j7whs"]
+[ext_resource type="Resource" uid="uid://8oqd8o4tf8i3" path="res://Data/Items/Tell'sCrossbow/TellsCrossbow.tres" id="6_bqedx"]
 [ext_resource type="Resource" uid="uid://b44nfpsd5kbd4" path="res://Data/Items/ShortSword/ShortSword.tres" id="8_rywr0"]
+[ext_resource type="Resource" uid="uid://c47oj8cwe8y2k" path="res://Data/Items/SmokingWaterArum/smoking_water_arum.tres" id="8_s8sbn"]
 [ext_resource type="Resource" uid="uid://c7npess6g8cti" path="res://Data/Items/TokenOfLove/TokenOfLove.tres" id="9_qedbf"]
+[ext_resource type="Resource" uid="uid://c3mvqv275g3oi" path="res://Data/Items/Sling/sling.tres" id="9_sa23l"]
 [ext_resource type="Resource" uid="uid://olilhse4njhm" path="res://Data/Items/TaintedFlask/TaintedFlask.tres" id="10_460tp"]
+[ext_resource type="Resource" uid="uid://ckgkfxx4t656u" path="res://Data/Items/ArjunaBow/ArjunaBow.tres" id="10_668q3"]
 [ext_resource type="Script" path="res://Globals/Account/ACCOUNT_LEVEL_DATA.gd" id="11_jpvjp"]
-[ext_resource type="Resource" uid="uid://dst01geftrhcn" path="res://Data/Items/ZeusSword/ZeusSword.tres" id="12_eu5fd"]
-[ext_resource type="Resource" uid="uid://dhmba6khldbxi" path="res://Data/Items/ArcingOrb/ArcingOrb.tres" id="13_dxm28"]
-[ext_resource type="Resource" uid="uid://btk8ha0wkgfgt" path="res://Data/Items/BottleOfLightAndShadow/BottledVapours.tres" id="14_x88y5"]
-[ext_resource type="Resource" uid="uid://b5tt1gbbv75nc" path="res://Data/Items/ShardOfReality/ShardOfReality.tres" id="15_8yyxb"]
 
 [sub_resource type="Resource" id="Resource_1qmer"]
 script = ExtResource("11_jpvjp")
 xp_cost = 5
-item_unlocks = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("10_460tp")])
-
-[sub_resource type="Resource" id="Resource_mac5m"]
-script = ExtResource("11_jpvjp")
-xp_cost = 5
-item_unlocks = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("13_dxm28"), ExtResource("12_eu5fd")])
-
-[sub_resource type="Resource" id="Resource_18n5s"]
-script = ExtResource("11_jpvjp")
-xp_cost = 5
-item_unlocks = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("14_x88y5"), ExtResource("15_8yyxb")])
+item_unlocks = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("8_s8sbn"), ExtResource("9_sa23l"), ExtResource("10_668q3"), ExtResource("10_460tp")])
 
 [node name="Account" type="Node"]
 script = ExtResource("1_y315m")
-starting_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("3_fsnl5"), ExtResource("4_e1e52"), ExtResource("5_cnn2a"), ExtResource("6_vgatg"), ExtResource("7_6fetj"), ExtResource("8_rywr0"), ExtResource("9_qedbf")])
-levelling = Array[ExtResource("11_jpvjp")]([SubResource("Resource_1qmer"), SubResource("Resource_mac5m"), SubResource("Resource_18n5s")])
+starting_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("8_rywr0"), ExtResource("9_qedbf"), ExtResource("4_shcna"), ExtResource("5_j7whs"), ExtResource("6_bqedx"), ExtResource("5_cnn2a")])
+levelling = Array[ExtResource("11_jpvjp")]([SubResource("Resource_1qmer")])
