@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwd13ht6hum5s"]
+
+[ext_resource type="FontFile" uid="uid://bku8f7kbvl5b7" path="res://Assets/fonts/PTSansNarrow-Regular.ttf" id="1_uvavw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ngrh"]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7snr"]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 0.0941176)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu4pi"]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.286275)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4cyam"]
+
+[node name="DialogueOption" type="Button"]
+theme_override_fonts/font = ExtResource("1_uvavw")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_8ngrh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a7snr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fu4pi")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4cyam")
+text = "Option 1"

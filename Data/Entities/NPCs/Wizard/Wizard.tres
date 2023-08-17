@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="NPCData" load_steps=6 format=3 uid="uid://c78g617c0xpsx"]
+
+[ext_resource type="PackedScene" uid="uid://c4a3ey4658ncl" path="res://Data/Entities/NPCs/Wizard/Wizard.tscn" id="1_knvs3"]
+[ext_resource type="Script" path="res://Data/Entities/NPCs/NPC_DATA.gd" id="1_ucigf"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="2_jmy3n"]
+[ext_resource type="Texture2D" uid="uid://bnjcbgum8k33l" path="res://Assets/art/icons/medieval-fantasy/delapouite/wizard-face.svg" id="4_tg1t6"]
+
+[sub_resource type="Resource" id="Resource_6v0lp"]
+script = ExtResource("2_jmy3n")
+size = 0
+blocking_behavior = 1
+can_be_pushed_off_map = false
+can_push_entities = false
+collectable_filter = 0
+
+[resource]
+script = ExtResource("1_ucigf")
+entity_scene = ExtResource("1_knvs3")
+occupancy_data = SubResource("Resource_6v0lp")
+sprite = ExtResource("4_tg1t6")
+entity_name = "The Wizard"
+main_text = ""
+flavor_text = ""

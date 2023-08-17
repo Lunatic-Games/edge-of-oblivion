@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_k7j7a"]
 [ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="2_b7su2"]
 [ext_resource type="PackedScene" uid="uid://biem3v2m8g7ls" path="res://Data/Spawners/GatewaySpawner/GatewaySpawner.tscn" id="2_m66y4"]
-[ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Swamp/Faded/Faded.tres" id="3_0l8aj"]
 [ext_resource type="Texture2D" uid="uid://djq5c8e2a45v8" path="res://Assets/art/background/game/lantern_fire.svg" id="3_r55nt"]
 [ext_resource type="PackedScene" uid="uid://c2vgqrf2sgx0p" path="res://Data/Spawners/NPCSpawner/NPCSpawner.tscn" id="3_si5i7"]
-[ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="3_ysnnp"]
 [ext_resource type="Texture2D" uid="uid://cx1ga40jy1ut6" path="res://Assets/textures/glow.svg" id="4_4uqox"]
+[ext_resource type="Texture2D" uid="uid://bnjcbgum8k33l" path="res://Assets/art/icons/medieval-fantasy/delapouite/wizard-face.svg" id="4_dtwmk"]
 [ext_resource type="PackedScene" uid="uid://c1ordt6583753" path="res://Data/Particles/Decoration/CampfireParticles.tscn" id="5_dacdw"]
+[ext_resource type="Resource" uid="uid://c78g617c0xpsx" path="res://Data/Entities/NPCs/Wizard/Wizard.tres" id="5_mi4jl"]
 [ext_resource type="Texture2D" uid="uid://ciihbexjkmiq8" path="res://Assets/art/background/game/lantern.svg" id="6_51j0n"]
 [ext_resource type="Texture2D" uid="uid://c6xlhl00wu8r6" path="res://Assets/art/background/game/lantern_cage.svg" id="7_jdk2p"]
 [ext_resource type="Texture2D" uid="uid://c11immlfgb1vh" path="res://Assets/art/background/game/grass.svg" id="8_t114l"]
@@ -423,8 +423,8 @@ position = Vector2(980, 420)
 
 [node name="NPCSpawner" parent="Spawners" index="2" instance=ExtResource("3_si5i7")]
 position = Vector2(700, 280)
-texture = ExtResource("3_ysnnp")
-entity_data = ExtResource("3_0l8aj")
+texture = ExtResource("4_dtwmk")
+entity_data = ExtResource("5_mi4jl")
 
 [node name="Decorations" type="Node2D" parent="." index="5"]
 

@@ -11,6 +11,7 @@ var queued_level_transition: LevelData = null
 
 var run_over: bool = false
 
+@onready var dialogue_overlay: DialogueOverlay = $HUD/DialogueOverlay
 @onready var player_overlay: PlayerOverlay = $HUD/PlayerOverlay
 @onready var boss_overlay: BossOverlay = $HUD/BossOverlay
 
@@ -66,8 +67,13 @@ func transition_to_new_level(new_level_data: LevelData) -> void:
 
 
 func _process(_delta: float) -> void:
-	if game_mode != null and run_over == false and upgrade_menu.has_priority == false:
-		game_mode.update()
+	if game_mode == null or run_over == true:
+		return
+	
+	if upgrade_menu.has_priority == true or dialogue_overlay.has_priority == true:
+		return
+	
+	game_mode.update()
 
 
 func _unhandled_input(event: InputEvent) -> void:

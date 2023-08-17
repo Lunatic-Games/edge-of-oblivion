@@ -62,11 +62,7 @@ func spawn_entity_on_tile(entity_data: EntityData, tile: Tile) -> Entity:
 	
 	var board: Board = GlobalGameState.get_board()
 	board.add_child(entity)
-	entity.setup(entity_data)
-	
-	tile.occupant = entity
-	entity.occupancy.current_tile = tile
-	entity.global_position = tile.global_position
+	entity.setup(entity_data, tile)
 	
 	if entity is Player:
 		_on_player_spawned(entity)
