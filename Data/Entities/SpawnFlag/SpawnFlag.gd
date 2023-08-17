@@ -5,8 +5,8 @@ extends Entity
 signal freed_due_to_failed_move
 
 
-func setup(p_data: EntityData) -> void:
-	super.setup(p_data)
+func setup(p_data: EntityData, start_tile: Tile = null) -> void:
+	super.setup(p_data, start_tile)
 	occupancy.collected.connect(_on_collected)
 
 

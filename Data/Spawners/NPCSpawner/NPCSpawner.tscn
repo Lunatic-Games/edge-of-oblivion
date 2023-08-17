@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2vgqrf2sgx0p"]
+
+[ext_resource type="PackedScene" uid="uid://b3ch015hwia16" path="res://Data/Spawners/BaseSpawner.tscn" id="1_rpg2u"]
+[ext_resource type="Texture2D" uid="uid://mtn0jnckub5a" path="res://Assets/art/icons/targets/sbed/head-shot.svg" id="2_6kcmm"]
+[ext_resource type="Script" path="res://Data/Spawners/NPCSpawner/NPCSpawner.gd" id="2_v5as2"]
+
+[node name="NPCSpawner" instance=ExtResource("1_rpg2u")]
+texture = ExtResource("2_6kcmm")
+script = ExtResource("2_v5as2")
+entity_data = null

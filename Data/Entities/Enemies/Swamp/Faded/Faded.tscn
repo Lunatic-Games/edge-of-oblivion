@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bqdxbijvgbrxm"]
+[gd_scene load_steps=23 format=3 uid="uid://bqdxbijvgbrxm"]
 
 [ext_resource type="PackedScene" uid="uid://fujdstcnhao2" path="res://Data/Entities/Enemies/Enemy.tscn" id="1_g358b"]
 [ext_resource type="Texture2D" uid="uid://b7rgka7xmtk6l" path="res://Assets/art/icons/medieval-fantasy/lorc/cultist.svg" id="2_8k64s"]
@@ -35,11 +35,18 @@ shader = ExtResource("2_ocvj2")
 shader_parameter/strength = 0.25
 shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_23ics"]
+resource_local_to_scene = true
+bg_color = Color(0.223529, 0.478431, 0.611765, 1)
+
 [node name="Faded" instance=ExtResource("1_g358b")]
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_olqb1")
 texture = ExtResource("2_8k64s")
+
+[node name="AttackBar" parent="." index="2"]
+theme_override_styles/fill = SubResource("StyleBoxFlat_23ics")
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("3_cmyjp")

@@ -5,8 +5,8 @@ extends Entity
 @onready var attack_bar: AttackBar = $AttackBar
 
 
-func setup(p_data: EntityData) -> void:
-	super.setup(p_data)
+func setup(p_data: EntityData, start_tile: Tile = null) -> void:
+	super.setup(p_data, start_tile)
 	if health != null:
 		health.died.connect(_on_died)
 

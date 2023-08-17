@@ -7,8 +7,8 @@ var inventory: Inventory = null
 var levelling: Levelling = null
 
 
-func setup(p_data: EntityData) -> void:
-	super.setup(p_data)
+func setup(p_data: EntityData, start_tile: Tile = null) -> void:
+	super.setup(p_data, start_tile)
 	
 	var player_data: PlayerData = p_data as PlayerData
 	input_controller = InputController.new(self, player_data.input_controller_data)

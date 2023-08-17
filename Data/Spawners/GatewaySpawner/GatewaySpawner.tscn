@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://biem3v2m8g7ls"]
+
+[ext_resource type="PackedScene" uid="uid://b3ch015hwia16" path="res://Data/Spawners/BaseSpawner.tscn" id="1_vqvxy"]
+[ext_resource type="Script" path="res://Data/Spawners/GatewaySpawner/GatewaySpawner.gd" id="2_3cqrq"]
+[ext_resource type="Texture2D" uid="uid://dnrw01px541ng" path="res://Assets/art/icons/buildings/delapouite/dungeon-gate.svg" id="2_hp411"]
+
+[node name="GatewaySpawner" instance=ExtResource("1_vqvxy")]
+texture = ExtResource("2_hp411")
+script = ExtResource("2_3cqrq")
