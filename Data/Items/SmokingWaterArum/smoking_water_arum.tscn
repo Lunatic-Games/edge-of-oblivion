@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://bou08quora8fc"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_lc0l6"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_t553l"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="3_a2mic"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="4_rjnwl"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="5_l688v"]
+[ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="6_8ndo4"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="7_bsbc7"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="7_e7ty7"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="8_2qanb"]
+[ext_resource type="PackedScene" uid="uid://bi6xika22wja2" path="res://Data/Particles/Items/SmokingWaterArumParticles.tscn" id="8_rsrv1"]
+
+[node name="SmokingWaterArum" instance=ExtResource("1_lc0l6")]
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("2_t553l")
+default_value = 3
+
+[node name="Heal" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("2_t553l")
+default_value = 1
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("3_a2mic")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
+script = ExtResource("4_rjnwl")
+
+[node name="Select all in range 1" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("5_l688v")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Targets")
+shape = 1
+radius = 1
+
+[node name="Heal targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("tiles", "heal_override")]
+script = ExtResource("6_8ndo4")
+tiles = NodePath("../Targets")
+heal_override = NodePath("../../../../LT_PersistentVariables/Heal")
+
+[node name="Vfx" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("tiles")]
+script = ExtResource("7_e7ty7")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("8_rsrv1")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("7_bsbc7")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="Decrease cooldown" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_2qanb")
+int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
+value = 1
+operation = 2
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("7_bsbc7")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Increase healing" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_2qanb")
+int_variable = NodePath("../../../../LT_PersistentVariables/Heal")
+value = 1
+operation = 1

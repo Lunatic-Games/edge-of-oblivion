@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b13fjq68vxp3c"]
+
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1_ll7k7"]
+[ext_resource type="PackedScene" uid="uid://dff0w2fg2tn0l" path="res://Data/Items/BrutusDagger/BrutusDagger.tscn" id="1_m0xn7"]
+[ext_resource type="Texture2D" uid="uid://bs005c4y5tmpm" path="res://Assets/art/icons/weapons/lorc/backstab.svg" id="2_0tohc"]
+
+[resource]
+script = ExtResource("1_ll7k7")
+sprite = ExtResource("2_0tohc")
+item_scene = ExtResource("1_m0xn7")
+item_name = "Brutus' Dagger"
+popup_item_name_color = "royalblue"
+flavor_text = "A deadly and unexpected dagger."
+max_tier = 3
+use_tier_1_text_for_popup_texts = false
+card_text_1 = "Every 2 turns: Attack a random,orthogonally adjacent enemy for 10 damage"
+card_text_2 = "Attack a 2nd  random orthogonally adjacent enemy"
+card_text_3 = "Damage from 10 -> 20"
+popup_text_1 = "Attacks a random orthogonally adjacent enemy for 10 damage."
+popup_text_2 = "Attacks 2 random orthogonally adjacent enemies for 10 damage."
+popup_text_3 = "Attacks 2 random orthogonally adjacent enemies for 20 damage."
