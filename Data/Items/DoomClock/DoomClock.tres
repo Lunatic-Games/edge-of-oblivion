@@ -13,7 +13,7 @@ popup_item_name_color = "royalblue"
 flavor_text = "This pulsating clock radiates necrotic energy. The slower it ticks, the more damage it causes."
 max_tier = 3
 use_tier_1_text_for_popup_texts = false
-card_text_1 = "The first click takes 1 turn and hits all entities for 1 damage. The second tick takes 2 turns and hits all entities for 2 damage, the third tick,. etc. "
+card_text_1 = "Triggers every 1+N,  (N = Number of previous times triggered). Damages all entities for 1+N."
 card_text_2 = "Wielder takes half damage. "
 card_text_3 = "Doubles the damage of each tick."
 popup_text_1 = "Damages all entities on tick. Each tick is 1 turn slower and adds 1 to damage."
