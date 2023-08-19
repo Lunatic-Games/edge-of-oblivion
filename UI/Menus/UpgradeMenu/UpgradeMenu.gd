@@ -48,7 +48,8 @@ func display() -> void:
 	n_queued_upgrades -= 1
 	
 	var possible_items: Array[ItemData] = []
-	possible_items.append_array(GlobalAccount.unlocked_items)
+	var game: Game = GlobalGameState.get_game()
+	possible_items.append_array(game.game_mode.item_deck)
 	possible_items.shuffle()
 	
 	var player: Player = GlobalGameState.get_player()

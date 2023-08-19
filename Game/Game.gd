@@ -95,8 +95,6 @@ func victory():
 	GlobalSignals.run_ended.emit(true)
 	await get_tree().create_timer(1.0).timeout
 	
-	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
-	victory_menu.run_summary.update(gain_result)
 	Saving.save_progress_to_file()
 	
 	victory_menu.show()
@@ -111,8 +109,6 @@ func game_over():
 	GlobalSignals.run_ended.emit(false)
 	await get_tree().create_timer(1.0).timeout
 	
-	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
-	game_over_menu.run_summary.update(gain_result)
 	Saving.save_progress_to_file()
 	
 	game_over_menu.show()

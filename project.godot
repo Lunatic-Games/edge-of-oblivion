@@ -20,10 +20,9 @@ config/icon="res://icon.png"
 GlobalGameState="*res://Globals/GameState.gd"
 GlobalSignals="*res://Globals/Signals.gd"
 GlobalLogicTreeSignals="*res://Globals/LogicTreeSignals.gd"
-GlobalAccount="*res://Globals/Account/Account.tscn"
 GlobalMusicManager="res://Globals/MusicManager/MusicManager.tscn"
 GlobalDebugOverlay="*res://Globals/DebugOverlay/DebugOverlay.tscn"
-GlobalAccountStatTracker="*res://Globals/Account/AccountStatTracker.gd"
+GlobalAccountStatTracker="*res://Globals/AccountStatTracker.gd"
 
 [debug]
 

@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://1wlog2drjf07"]
+[gd_scene load_steps=13 format=3 uid="uid://1wlog2drjf07"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_8jqgr"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_gkouv"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="3_q4y2r"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_2ii1p"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="5_a8gis"]
-[ext_resource type="Script" path="res://LogicTree/Debug/PrintToOutput.gd" id="5_r7nvw"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="6_bslmu"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="7_x5voc"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="8_hqlqf"]
@@ -116,10 +115,6 @@ seconds_per_tile_speed = 0.04
 script = ExtResource("10_isvke")
 tiles = NodePath("../Prime Target")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
-
-[node name="LT_PrintToOutput" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Damage enemy" index="0" node_paths=PackedStringArray("int_var")]
-script = ExtResource("5_r7nvw")
-int_var = NodePath("../../../../../LT_PersistentVariables/Damage")
 
 [node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("8_hqlqf")

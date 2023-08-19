@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://b1xb616vwbi1p"]
+[gd_scene load_steps=13 format=3 uid="uid://b1xb616vwbi1p"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_i85ab"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="2_jb6ch"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_wnvhw"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="4_qmvc5"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="5_87gjf"]
-[ext_resource type="Script" path="res://LogicTree/Debug/PrintToOutput.gd" id="6_8ljhv"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="7_2gvdl"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="8_53cyx"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnProjectiles.gd" id="9_18rvh"]
@@ -73,10 +72,6 @@ projectile_scene = ExtResource("10_kwncv")
 script = ExtResource("11_lm8s8")
 tiles = NodePath("../Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
-
-[node name="LT_PrintToOutput" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Damage Enemy" index="0" node_paths=PackedStringArray("int_var")]
-script = ExtResource("6_8ljhv")
-int_var = NodePath("../../../../../LT_PersistentVariables/Damage")
 
 [node name="If Tier 2 or higher" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("12_7drwb")
