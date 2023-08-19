@@ -8,6 +8,7 @@ var game_mode: GameMode = null
 var spawn_handler: SpawnHandler = SpawnHandler.new()
 var run_stats: RunStats = RunStats.new()
 var queued_level_transition: LevelData = null
+var item_deck: Array[ItemData] = []
 
 var run_over: bool = false
 
@@ -30,6 +31,10 @@ func _ready() -> void:
 		level_data = game_config.starting_level_data
 	
 	await new_level_setup()
+	
+	var player_data: PlayerData = GlobalGameState.get_player().data as PlayerData
+	item_deck.append_array(player_data.initial_item_deck)
+	
 	GlobalSignals.run_started.emit()
 
 
@@ -95,8 +100,6 @@ func victory():
 	GlobalSignals.run_ended.emit(true)
 	await get_tree().create_timer(1.0).timeout
 	
-	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
-	victory_menu.run_summary.update(gain_result)
 	Saving.save_progress_to_file()
 	
 	victory_menu.show()
@@ -111,8 +114,6 @@ func game_over():
 	GlobalSignals.run_ended.emit(false)
 	await get_tree().create_timer(1.0).timeout
 	
-	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
-	game_over_menu.run_summary.update(gain_result)
 	Saving.save_progress_to_file()
 	
 	game_over_menu.show()

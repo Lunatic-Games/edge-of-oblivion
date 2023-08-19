@@ -42,7 +42,8 @@ func move_to_tile(destination_tile: Tile) -> bool:
 			OccupancyData.BlockingBehavior.COLLECTABLE:
 				collectable = destination_occupant
 	
-	if current_tile.occupant == entity:  # Might not be occupant if moving on being being collected
+
+	if current_tile.occupant == entity:  # Might not be occupant if it's a collectable being moved
 		current_tile.occupant = null
 	current_tile = destination_tile
 	current_tile.occupant = entity

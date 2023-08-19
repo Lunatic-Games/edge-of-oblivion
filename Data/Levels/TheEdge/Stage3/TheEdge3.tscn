@@ -415,7 +415,7 @@ position = Vector2(840, 630)
 [node name="Decorations" type="Node2D" parent="." index="5"]
 
 [node name="Campfire" type="Node2D" parent="Decorations" index="0"]
-position = Vector2(638, 161)
+position = Vector2(880, 489)
 
 [node name="BackRocks" type="Node2D" parent="Decorations/Campfire" index="0"]
 modulate = Color(0.317647, 0.305882, 0.4, 1)

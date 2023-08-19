@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7dqfw38kh88k"]
+[gd_scene load_steps=7 format=3 uid="uid://c7dqfw38kh88k"]
 
 [ext_resource type="Script" path="res://UI/Menus/VictoryMenu/VictoryMenu.gd" id="1_su0ui"]
 [ext_resource type="FontFile" uid="uid://delvnctbli24y" path="res://Assets/fonts/Caudex-Bold.ttf" id="1_wyv8k"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="2_mjd1w"]
 [ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="3_koym7"]
-[ext_resource type="PackedScene" uid="uid://bosom7y11rha3" path="res://UI/Elements/RunSummary/RunSummary.tscn" id="4_8gl2g"]
 
 [sub_resource type="FontVariation" id="FontVariation_ihk8i"]
 base_font = ExtResource("1_wyv8k")
@@ -31,9 +30,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -631.0
+offset_left = -452.5
 offset_top = -409.0
-offset_right = 631.0
+offset_right = 452.5
 offset_bottom = 409.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -46,12 +45,7 @@ theme_override_font_sizes/font_size = 120
 text = "VICTORY"
 horizontal_alignment = 1
 
-[node name="Sections" type="HBoxContainer" parent="Container"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 200
-
-[node name="Message" type="Label" parent="Container/Sections"]
+[node name="Message" type="Label" parent="Container"]
 custom_minimum_size = Vector2(200, 400)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -64,9 +58,6 @@ Thank you so much for playing!
 The full game will not end here... it'll have more bosses, more weapons, and hopefully, more fun. Stay tuned for updates!"
 vertical_alignment = 1
 autowrap_mode = 3
-
-[node name="RunSummary" parent="Container/Sections" instance=ExtResource("4_8gl2g")]
-layout_mode = 2
 
 [node name="Buttons" type="HBoxContainer" parent="Container"]
 layout_mode = 2

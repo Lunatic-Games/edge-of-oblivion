@@ -2,7 +2,7 @@ class_name Saving
 extends Node
 
 
-const SAVE_PROGRESS_VERSION = 1  # Increment when becomes incompatible
+const SAVE_PROGRESS_VERSION = 2  # Increment when becomes incompatible
 const SAVE_PROGRESS_PATH = "user://progress.save"
 const SAVE_PROGRESS_PASSPHRASE = "EOO"
 
@@ -17,14 +17,7 @@ static func save_progress_to_file():
 	if f == null:
 		return
 	
-	var unlocked_item_data_paths: Array[String] = []
-	for item_data in GlobalAccount.unlocked_items:
-		unlocked_item_data_paths.append(item_data.resource_path)
-	
 	var save_data: Dictionary = {
-		"unlocked_items": unlocked_item_data_paths,
-		"account_level": GlobalAccount.level,
-		"account_xp": GlobalAccount.xp,
 		"account_stats": JSON.stringify(GlobalAccountStatTracker.stats)
 	}
 	
@@ -50,22 +43,11 @@ static func load_progress_from_file():
 	if dict == null:
 		return
 	
-	GlobalAccount.level = dict.get("account_level", 1)
-	GlobalAccount.xp = dict.get("account_xp", 0)
 	var saved_stats = JSON.parse_string(dict.get("account_stats", ""))
 	if saved_stats:
 		for key in saved_stats:
 			if GlobalAccountStatTracker.stats.has(key):
 				GlobalAccountStatTracker.stats[key] = saved_stats[key]
-	
-	var unlocked_item_data_paths: Array = dict.get("unlocked_items", []) as Array
-	for item_data_path in unlocked_item_data_paths:
-		var item_data: ItemData = load(item_data_path) as ItemData
-		if item_data == null:
-			continue
-		
-		if not GlobalAccount.unlocked_items.has(item_data):
-			GlobalAccount.unlocked_items.append(item_data)
 	
 	GlobalSignals.save_loaded.emit()
 

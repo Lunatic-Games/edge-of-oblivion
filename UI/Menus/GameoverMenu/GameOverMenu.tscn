@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dn681uoihob4j"]
+[gd_scene load_steps=5 format=3 uid="uid://dn681uoihob4j"]
 
 [ext_resource type="FontFile" uid="uid://delvnctbli24y" path="res://Assets/fonts/Caudex-Bold.ttf" id="1_3rhuj"]
 [ext_resource type="Script" path="res://UI/Menus/GameoverMenu/GameOverMenu.gd" id="1_ayrgk"]
 [ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="2_rtebt"]
-[ext_resource type="PackedScene" uid="uid://bosom7y11rha3" path="res://UI/Elements/RunSummary/RunSummary.tscn" id="3_1rdfv"]
 
 [sub_resource type="FontVariation" id="FontVariation_ihk8i"]
 base_font = ExtResource("1_3rhuj")
@@ -44,9 +43,6 @@ theme_override_fonts/font = SubResource("FontVariation_ihk8i")
 theme_override_font_sizes/font_size = 120
 text = "GAME OVER"
 horizontal_alignment = 1
-
-[node name="RunSummary" parent="Container" instance=ExtResource("3_1rdfv")]
-layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container"]
 layout_mode = 2

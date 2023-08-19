@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dpdhlyx02h5gf"]
+[gd_scene load_steps=34 format=3 uid="uid://dpdhlyx02h5gf"]
 
 [ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_k7j7a"]
 [ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="2_b7su2"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://c1ordt6583753" path="res://Data/Particles/Decoration/CampfireParticles.tscn" id="5_dacdw"]
 [ext_resource type="Resource" uid="uid://c78g617c0xpsx" path="res://Data/Entities/NPCs/Wizard/Wizard.tres" id="5_mi4jl"]
 [ext_resource type="Texture2D" uid="uid://ciihbexjkmiq8" path="res://Assets/art/background/game/lantern.svg" id="6_51j0n"]
+[ext_resource type="Texture2D" uid="uid://6uiaqwo76du0" path="res://Assets/art/icons/medieval-fantasy/cathelineau/witch-face.svg" id="6_nio58"]
+[ext_resource type="Resource" uid="uid://dstlgh21f5kko" path="res://Data/Entities/NPCs/Witch/Witch.tres" id="6_sf44s"]
 [ext_resource type="Texture2D" uid="uid://c6xlhl00wu8r6" path="res://Assets/art/background/game/lantern_cage.svg" id="7_jdk2p"]
 [ext_resource type="Texture2D" uid="uid://c11immlfgb1vh" path="res://Assets/art/background/game/grass.svg" id="8_t114l"]
 [ext_resource type="Texture2D" uid="uid://bh37a154red3i" path="res://Assets/art/background/game/tree.svg" id="9_k34mf"]
@@ -413,7 +415,7 @@ offset_bottom = 630.0
 color = Color(0.160784, 0.164706, 0.290196, 1)
 
 [node name="Board" parent="." index="3"]
-layer_0/tile_data = PackedInt32Array(327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 524298, 0, 65536, 458762, 0, 65536, 393226, 0, 65536, 393227, 0, 65536, 327691, 0, 65536, 327690, 0, 65536, 458763, 0, 65536, 524299, 0, 65536, 524300, 0, 65536, 458764, 0, 65536, 393228, 0, 65536, 327693, 0, 65536, 393229, 0, 65536, 458765, 0, 65536, 524301, 0, 65536, 524302, 0, 65536, 524303, 0, 65536, 458767, 0, 65536, 393231, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 327695, 0, 65536, 327692, 0, 65536, 327694, 0, 65536, 327688, 0, 65536, 393224, 0, 65536, 458760, 0, 65536, 524296, 0, 65536, 524295, 0, 65536, 458759, 0, 65536, 393223, 0, 65536, 327687, 0, 65536, 327686, 0, 65536, 327685, 0, 65536, 393221, 0, 65536, 458757, 0, 65536, 524293, 0, 65536, 524294, 0, 65536, 458758, 0, 65536, 393222, 0, 65536, 262149, 0, 65536, 262150, 0, 65536, 262151, 0, 65536, 262152, 0, 65536, 262153, 0, 65536, 262154, 0, 65536, 262155, 0, 65536, 262156, 0, 65536, 262157, 0, 65536, 262158, 0, 65536, 262159, 0, 65536)
+layer_0/tile_data = PackedInt32Array(327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 524298, 0, 65536, 458762, 0, 65536, 393226, 0, 65536, 393227, 0, 65536, 327691, 0, 65536, 327690, 0, 65536, 458763, 0, 65536, 524299, 0, 65536, 524300, 0, 65536, 458764, 0, 65536, 393228, 0, 65536, 327693, 0, 65536, 393229, 0, 65536, 458765, 0, 65536, 524301, 0, 65536, 524302, 0, 65536, 524303, 0, 65536, 458767, 0, 65536, 393231, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 327695, 0, 65536, 327692, 0, 65536, 327694, 0, 65536, 327688, 0, 65536, 393224, 0, 65536, 458760, 0, 65536, 524296, 0, 65536, 524295, 0, 65536, 458759, 0, 65536, 393223, 0, 65536, 327687, 0, 65536, 327686, 0, 65536, 327685, 0, 65536, 393221, 0, 65536, 458757, 0, 65536, 524293, 0, 65536, 524294, 0, 65536, 458758, 0, 65536, 393222, 0, 65536, 262149, 0, 65536, 262150, 0, 65536, 262151, 0, 65536, 262152, 0, 65536, 262153, 0, 65536, 262154, 0, 65536, 262155, 0, 65536, 262156, 0, 65536, 262157, 0, 65536, 262158, 0, 65536, 262159, 0, 65536, 196618, 0, 65536, 196620, 0, 65536)
 
 [node name="PlayerSpawner" parent="Spawners" index="0"]
 position = Vector2(420, 420)
@@ -422,9 +424,14 @@ position = Vector2(420, 420)
 position = Vector2(980, 420)
 
 [node name="NPCSpawner" parent="Spawners" index="2" instance=ExtResource("3_si5i7")]
-position = Vector2(700, 280)
+position = Vector2(700, 210)
 texture = ExtResource("4_dtwmk")
 entity_data = ExtResource("5_mi4jl")
+
+[node name="NPCSpawner2" parent="Spawners" index="3" instance=ExtResource("3_si5i7")]
+position = Vector2(840, 210)
+texture = ExtResource("6_nio58")
+entity_data = ExtResource("6_sf44s")
 
 [node name="Decorations" type="Node2D" parent="." index="5"]
 
