@@ -49,7 +49,7 @@ func display() -> void:
 	
 	var possible_items: Array[ItemData] = []
 	var game: Game = GlobalGameState.get_game()
-	possible_items.append_array(game.game_mode.item_deck)
+	possible_items.append_array(game.item_deck)
 	possible_items.shuffle()
 	
 	var player: Player = GlobalGameState.get_player()

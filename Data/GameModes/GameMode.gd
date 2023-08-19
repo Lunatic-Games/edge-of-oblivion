@@ -6,7 +6,6 @@ var game: Game = null
 var player: Player = null
 var data: GameModeData = null
 
-var item_deck: Array[ItemData] = []
 var current_round: int = 1
 var is_round_processing: bool = false
 
@@ -23,9 +22,6 @@ func _init(p_game: Game, game_mode_data: GameModeData) -> void:
 	player = GlobalGameState.get_player()  # Spawned by player spawner
 	player.health.died.connect(_on_player_died)
 	player.levelling.levelled_up.connect(_on_player_levelled_up)
-	
-	var player_data: PlayerData = player.data as PlayerData
-	item_deck.append_array(player_data.potential_items)
 	
 	_spawn_flags_for_next_round()
 	

@@ -8,6 +8,7 @@ var game_mode: GameMode = null
 var spawn_handler: SpawnHandler = SpawnHandler.new()
 var run_stats: RunStats = RunStats.new()
 var queued_level_transition: LevelData = null
+var item_deck: Array[ItemData] = []
 
 var run_over: bool = false
 
@@ -30,6 +31,10 @@ func _ready() -> void:
 		level_data = game_config.starting_level_data
 	
 	await new_level_setup()
+	
+	var player_data: PlayerData = GlobalGameState.get_player().data as PlayerData
+	item_deck.append_array(player_data.initial_item_deck)
+	
 	GlobalSignals.run_started.emit()
 
 
