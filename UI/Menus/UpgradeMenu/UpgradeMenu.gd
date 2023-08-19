@@ -40,11 +40,10 @@ func queue_upgrade() -> void:
 func display() -> void:
 	assert(n_queued_upgrades > 0, "Trying to display upgrade menu without queued upgrade!")
 	
-	has_priority = true
-	
 	if card_display.get_child_count() > 0:
 		return
-	
+		
+	has_priority = true
 	n_queued_upgrades -= 1
 	
 	var possible_items: Array[ItemData] = []

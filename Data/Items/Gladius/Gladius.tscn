@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_wrwdj"]
 [ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="12_demeu"]
 
-[node name="ShortSword" instance=ExtResource("1")]
+[node name="Gladius" instance=ExtResource("1")]
 
 [node name="ItemPopupHover" parent="." index="0"]
 anchors_preset = 0
