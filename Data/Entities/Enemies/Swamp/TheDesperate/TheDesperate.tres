@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://crw5uf7i2mrtg"]
+
+[ext_resource type="PackedScene" uid="uid://do1sjyq6tmup3" path="res://Data/Entities/Enemies/Swamp/TheDesperate/TheDesperate.tscn" id="1_idr2m"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_k165t"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_7paix"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="4_6arhd"]
+[ext_resource type="Texture2D" uid="uid://cdsr250l6xud4" path="res://Assets/art/icons/medieval-fantasy/delapouite/warlock-hood.svg" id="5_wnqiq"]
+
+[sub_resource type="Resource" id="Resource_3v846"]
+script = ExtResource("2_k165t")
+max_health = 30
+can_be_damaged = true
+can_be_killed = true
+can_be_healed = true
+emit_particles_on_heal = true
+emit_particles_on_taking_damage = true
+
+[sub_resource type="Resource" id="Resource_lpolm"]
+script = ExtResource("3_7paix")
+size = 0
+blocking_behavior = 1
+can_be_pushed_off_map = true
+can_push_entities = false
+collectable_filter = 0
+
+[resource]
+script = ExtResource("4_6arhd")
+xp_value = 1
+entity_scene = ExtResource("1_idr2m")
+health_data = SubResource("Resource_3v846")
+occupancy_data = SubResource("Resource_lpolm")
+sprite = ExtResource("5_wnqiq")
+entity_name = "The Desperate"
+main_text = "Attacks all adjacent tiles then moves towards the player."
+flavor_text = "You can see it in their eyes... desperation."
