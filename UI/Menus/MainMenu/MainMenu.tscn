@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://0364xgi5b6v8"]
+[gd_scene load_steps=51 format=3 uid="uid://0364xgi5b6v8"]
 
 [ext_resource type="Script" path="res://UI/Menus/MainMenu/MainMenu.gd" id="1_43f1y"]
 [ext_resource type="Texture2D" uid="uid://b7i4tg1ov4x4t" path="res://Assets/art/background/main-menu/background.png" id="2_o7bjx"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://brcokbmoxawv4" path="res://UI/Menus/CreditsMenu/CreditsMenu.tscn" id="20_gw22j"]
 [ext_resource type="PackedScene" uid="uid://ph4dg61vtfbr" path="res://UI/Menus/SettingsMenu/SettingsMenu.tscn" id="20_uvn8p"]
 [ext_resource type="PackedScene" uid="uid://c21tsme1w6uqc" path="res://UI/Menus/MemoriesMenu/MemoriesMenu.tscn" id="21_e2dqv"]
+[ext_resource type="PackedScene" uid="uid://buemv2gxyydv7" path="res://UI/Menus/CharacterSelectMenu/CharacterSelectMenu.tscn" id="21_lc4kw"]
 
 [sub_resource type="Animation" id="Animation_50y08"]
 length = 0.001
@@ -1469,7 +1470,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="PlayButton" parent="MenuContainer" instance=ExtResource("19_step2")]
+[node name="NewRunButton" parent="MenuContainer" instance=ExtResource("19_step2")]
 layout_mode = 2
 text = "NEW RUN"
 
@@ -1497,6 +1498,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="CharacterSelectMenu" parent="." instance=ExtResource("21_lc4kw")]
+layer = 2
+visible = false
+
 [node name="MemoriesMenu" parent="." instance=ExtResource("21_e2dqv")]
 visible = false
 
@@ -1514,11 +1519,12 @@ libraries = {
 }
 
 [connection signal="anything_pressed" from="PressAnything" to="." method="_on_PressAnything_anything_pressed"]
-[connection signal="pressed" from="MenuContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="MenuContainer/NewRunButton" to="." method="_on_new_run_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MemoriesButton" to="." method="_on_memories_button_pressed"]
 [connection signal="pressed" from="MenuContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="MenuContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="MenuContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="faded_out" from="CharacterSelectMenu" to="." method="_on_character_select_menu_faded_out"]
 [connection signal="faded_out" from="MemoriesMenu" to="." method="_on_memories_menu_faded_out"]
 [connection signal="faded_out" from="SettingsMenu" to="." method="_on_SettingsMenu_faded_out"]
 [connection signal="faded_out" from="CreditsMenu" to="." method="_on_CreditsMenu_faded_out"]
