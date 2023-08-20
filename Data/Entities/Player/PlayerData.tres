@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerData" load_steps=25 format=3 uid="uid://cy0654pvgkbd3"]
+[gd_resource type="Resource" script_class="PlayerData" load_steps=19 format=3 uid="uid://cy0654pvgkbd3"]
 
 [ext_resource type="PackedScene" uid="uid://salxfsmwvg5l" path="res://Data/Entities/Player/Player.tscn" id="1_31to8"]
 [ext_resource type="Script" path="res://Data/Entities/Player/PLAYER_DATA.gd" id="1_sx63k"]
@@ -7,17 +7,11 @@
 [ext_resource type="Script" path="res://Data/Entities/Player/_Components/InputController/INPUT_CONTROLLER_DATA.gd" id="3_v1cor"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="4_2vscx"]
 [ext_resource type="Script" path="res://Data/Entities/Player/_Components/Levelling/LEVELLING_DATA.gd" id="4_6welu"]
-[ext_resource type="Resource" uid="uid://ckgkfxx4t656u" path="res://Data/Items/ArjunaBow/ArjunaBow.tres" id="5_43c02"]
 [ext_resource type="Resource" uid="uid://b44nfpsd5kbd4" path="res://Data/Items/Gladius/Gladius.tres" id="5_w4jcp"]
 [ext_resource type="Resource" uid="uid://b13fjq68vxp3c" path="res://Data/Items/BrutusDagger/BrutusDagger.tres" id="9_nt2a6"]
-[ext_resource type="Resource" uid="uid://c4064o7rrsy36" path="res://Data/Items/DraculasKnives/DraculasKnives.tres" id="10_ur8h5"]
-[ext_resource type="Resource" uid="uid://dhbycs5j4to6b" path="res://Data/Items/DragonCloak/DragonCloak.tres" id="11_wjivf"]
 [ext_resource type="Resource" uid="uid://bkxc4j0i03skk" path="res://Data/Items/Hammer/Hammer.tres" id="12_vc1xb"]
-[ext_resource type="Resource" uid="uid://ds3bgi1j8ywkc" path="res://Data/Items/LightningBow/LightningBow.tres" id="13_7dafm"]
 [ext_resource type="Resource" uid="uid://dpgph88bl6aj5" path="res://Data/Items/MorningStar/MorningStar.tres" id="14_h2o78"]
-[ext_resource type="Resource" uid="uid://c3mvqv275g3oi" path="res://Data/Items/Sling/Sling.tres" id="15_7d823"]
 [ext_resource type="Resource" uid="uid://8oqd8o4tf8i3" path="res://Data/Items/TellsCrossbow/TellsCrossbow.tres" id="16_q8ffb"]
-[ext_resource type="Resource" uid="uid://dst01geftrhcn" path="res://Data/Items/ZeusSword/ZeusSword.tres" id="17_h1cgc"]
 [ext_resource type="Resource" uid="uid://c7npess6g8cti" path="res://Data/Items/TokenOfLove/TokenOfLove.tres" id="18_1nxnh"]
 
 [sub_resource type="Resource" id="Resource_jy6b3"]
@@ -64,7 +58,7 @@ script = ExtResource("1_sx63k")
 input_controller_data = SubResource("Resource_08kry")
 inventory_data = SubResource("Resource_icrph")
 levelling_data = SubResource("Resource_85vcj")
-initial_item_deck = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("5_w4jcp"), ExtResource("11_wjivf"), ExtResource("5_43c02"), ExtResource("9_nt2a6"), ExtResource("10_ur8h5"), ExtResource("12_vc1xb"), ExtResource("13_7dafm"), ExtResource("14_h2o78"), ExtResource("15_7d823"), ExtResource("16_q8ffb"), ExtResource("18_1nxnh"), ExtResource("17_h1cgc")])
+initial_item_deck = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("5_w4jcp"), ExtResource("9_nt2a6"), ExtResource("12_vc1xb"), ExtResource("14_h2o78"), ExtResource("16_q8ffb"), ExtResource("18_1nxnh")])
 entity_scene = ExtResource("1_31to8")
 health_data = SubResource("Resource_jy6b3")
 occupancy_data = SubResource("Resource_yx0co")

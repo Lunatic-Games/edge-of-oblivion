@@ -27,7 +27,7 @@ grow_vertical = 1
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("2_r3n8e")
-default_value = 3
+default_value = 5
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("2_r3n8e")
