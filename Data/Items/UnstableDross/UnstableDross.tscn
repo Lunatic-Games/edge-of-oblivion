@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3 uid="uid://s6u13fi2hi8k"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_nu3w6"]
+[ext_resource type="Texture2D" uid="uid://cuxn643adpqu1" path="res://Assets/art/icons/weapons/lorc/grenade.svg" id="2_euvmc"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_wqx5f"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="3_62v3n"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="4_2wwbx"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="5_6kni7"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="6_1v31q"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="7_kmoqg"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="9_bd8xx"]
+[ext_resource type="PackedScene" uid="uid://ojrx25emyca2" path="res://Data/Particles/Items/UnstableDrossParticles.tscn" id="9_ph0bs"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_lhv4c"]
+[ext_resource type="Script" path="res://LogicTree/Effects/KnockbackTileOccupants.gd" id="10_s3oqn"]
+
+[node name="UnstableDross" instance=ExtResource("1_nu3w6")]
+
+[node name="Texture" parent="." index="1"]
+texture = ExtResource("2_euvmc")
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("2_wqx5f")
+default_value = 15
+
+[node name="DamageEnemy" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("2_wqx5f")
+default_value = 25
+
+[node name="DamageSelf" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("2_wqx5f")
+default_value = 8
+
+[node name="Knockback distance" type="Node" parent="LT_PersistentVariables" index="3"]
+script = ExtResource("2_wqx5f")
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("3_62v3n")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
+
+[node name="DamageSelf" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("4_2wwbx")
+tiles = NodePath("../../../Item user tile")
+damage_override = NodePath("../../../../LT_PersistentVariables/DamageSelf")
+
+[node name="DamageEffectSelf" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("tiles", "mirror_x_if_left_of_first_tile")]
+script = ExtResource("10_lhv4c")
+tiles = NodePath("../../../Item user tile")
+node2d_to_spawn = ExtResource("9_ph0bs")
+mirror_x_if_left_of_first_tile = NodePath("../../../Item user tile")
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2"]
+script = ExtResource("5_6kni7")
+
+[node name="LT_SelectTilesInRadius" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_1v31q")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Targets")
+radius = 2
+include_origin_tile = false
+
+[node name="DamageEffect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("tiles", "mirror_x_if_left_of_first_tile")]
+script = ExtResource("10_lhv4c")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("9_ph0bs")
+mirror_x_if_left_of_first_tile = NodePath("../../../Item user tile")
+
+[node name="LT_DamageTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("4_2wwbx")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../LT_PersistentVariables/DamageEnemy")
+
+[node name="LT_KnockbackTileOccupants" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6" node_paths=PackedStringArray("tiles", "references_tiles", "distance_override")]
+script = ExtResource("10_s3oqn")
+tiles = NodePath("../Targets")
+references_tiles = NodePath("../../../Item user tile")
+distance_override = NodePath("../../../../LT_PersistentVariables/Knockback distance")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("7_kmoqg")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="Increase self damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_bd8xx")
+int_variable = NodePath("../../../../LT_PersistentVariables/DamageSelf")
+value = 7
+operation = 1
+
+[node name="Increase enemy damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_bd8xx")
+int_variable = NodePath("../../../../LT_PersistentVariables/DamageEnemy")
+value = 25
+operation = 1
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("7_kmoqg")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Add knockback 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_bd8xx")
+int_variable = NodePath("../../../../LT_PersistentVariables/Knockback distance")
+value = 2
+operation = 1
