@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3 uid="uid://ojrx25emyca2"]
+
+[ext_resource type="Texture2D" uid="uid://ckyexhft8377i" path="res://Assets/art/icons/weapons/delapouite/steam.svg" id="1_iydms"]
+
+[sub_resource type="Gradient" id="Gradient_sb8w0"]
+offsets = PackedFloat32Array(0, 0.119266, 0.215596, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.196078, 1, 1, 1, 0.196078, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_no6na"]
+gradient = SubResource("Gradient_sb8w0")
+
+[sub_resource type="Curve" id="Curve_2rxf2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.261044, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.736364), -0.638461, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0mtlq"]
+curve = SubResource("Curve_2rxf2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2q0go"]
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 180.0
+flatness = 0.25
+gravity = Vector3(0, -6, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_min = 40.0
+linear_accel_max = 70.0
+radial_accel_min = -10.0
+damping_min = 25.0
+damping_max = 40.0
+scale_min = 0.05
+scale_max = 0.08
+scale_curve = SubResource("CurveTexture_0mtlq")
+color = Color(1, 0.882353, 0.858824, 1)
+color_ramp = SubResource("GradientTexture1D_no6na")
+hue_variation_max = 0.01
+turbulence_noise_scale = 10.0
+
+[sub_resource type="Animation" id="Animation_mw3ka"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_u2f5r"]
+resource_name = "emit"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y5pmy"]
+_data = {
+"RESET": SubResource("Animation_mw3ka"),
+"emit": SubResource("Animation_u2f5r")
+}
+
+[node name="SmokingWaterArumParticles" type="GPUParticles2D"]
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_2q0go")
+texture = ExtResource("1_iydms")
+one_shot = true
+explosiveness = 0.7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "emit"
+libraries = {
+"": SubResource("AnimationLibrary_y5pmy")
+}

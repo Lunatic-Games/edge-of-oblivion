@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dhoxm7jdi0q5d"]
+
+[ext_resource type="PackedScene" uid="uid://cvu57gmnenxk4" path="res://Data/Items/BerserkerStone/BerserkerStone.tscn" id="1_yfx5t"]
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="2_igh4g"]
+[ext_resource type="Texture2D" uid="uid://3k34mcsy1xik" path="res://Assets/art/icons/buildings/lorc/stone-tower.svg" id="3_kw3xe"]
+
+[resource]
+script = ExtResource("2_igh4g")
+sprite = ExtResource("3_kw3xe")
+item_scene = ExtResource("1_yfx5t")
+item_name = "Berserker Stone"
+popup_item_name_color = "royalblue"
+flavor_text = "A stone full of rage and hate..."
+max_tier = 3
+use_tier_1_text_for_popup_texts = false
+card_text_1 = "Upon dealing self damage 5 times, activate for 4 rounds. While active, 10% lifesteal on all attacks."
+card_text_2 = "Active for 4 -> 5 rounds."
+card_text_3 = "Active for 5 -> 6 rounds."
+popup_text_1 = "Upon dealing self damage 5 times, activate for 4 rounds. While active, 10% lifesteal on all attacks."
+popup_text_2 = "Upon dealing self damage 5 times, activate for 5 rounds. While active, 10% lifesteal on all attacks."
+popup_text_3 = "Upon dealing self damage 5 times, activate for 6 rounds. While active, 10% lifesteal on all attacks."
