@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b20natap0l33x"]
+
+[ext_resource type="PackedScene" uid="uid://c5e62g2ouwosf" path="res://Data/Items/DoomClock/DoomClock.tscn" id="1_du61y"]
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1_s8waa"]
+[ext_resource type="Texture2D" uid="uid://dvmmmg7av74if" path="res://Assets/art/icons/stars/delapouite/solar-time.svg" id="2_fb0ot"]
+
+[resource]
+script = ExtResource("1_s8waa")
+sprite = ExtResource("2_fb0ot")
+item_scene = ExtResource("1_du61y")
+item_name = "Doom Clock"
+popup_item_name_color = "royalblue"
+flavor_text = "This pulsating clock radiates necrotic energy. The slower it ticks, the more damage it causes."
+max_tier = 3
+use_tier_1_text_for_popup_texts = false
+card_text_1 = "Triggers every 1+N,  (N = Number of previous times triggered). Damages all entities for 1+N."
+card_text_2 = "Wielder takes half damage. "
+card_text_3 = "Doubles the damage of each tick."
+popup_text_1 = "Damages all entities on tick. Each tick is 1 turn slower and adds 1 to damage."
+popup_text_2 = "Damages all entities on tick. Each tick is 1 turn slower and adds 1 to damage. Damage to self is halved. "
+popup_text_3 = "Base damage is doubled. Damages all entities on tick. Each tick is 1 turn slower and adds 2 to damage. Damage to self is halved. "

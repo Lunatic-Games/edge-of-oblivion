@@ -1,0 +1,178 @@
+[gd_scene load_steps=13 format=3 uid="uid://c5e62g2ouwosf"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_x2j1j"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_r3dww"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="3_13j20"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="4_ekvpo"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="5_vgcdh"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="6_jtd3n"]
+[ext_resource type="Script" path="res://LogicTree/Debug/PrintToOutput.gd" id="7_bdsqw"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="7_lx6pt"]
+[ext_resource type="PackedScene" uid="uid://pxgd8dt1wgp" path="res://Data/Particles/Health/DamagedParticles.tscn" id="8_no01h"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="9_dm1h2"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="10_y5o35"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="12_0a3c6"]
+
+[node name="DoomClock" instance=ExtResource("1_x2j1j")]
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("2_r3dww")
+default_value = 1
+
+[node name="Doom Counter" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("2_r3dww")
+default_value = 1
+
+[node name="Counter severity" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("2_r3dww")
+default_value = 3
+
+[node name="Half Damage" type="Node" parent="LT_PersistentVariables" index="3"]
+script = ExtResource("2_r3dww")
+
+[node name="Damage Scaler" type="Node" parent="LT_PersistentVariables" index="4"]
+script = ExtResource("2_r3dww")
+
+[node name="Damage A" type="Node" parent="LT_PersistentVariables" index="5"]
+script = ExtResource("2_r3dww")
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("3_13j20")
+x_override = NodePath("../../../LT_PersistentVariables/Doom Counter")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0"]
+script = ExtResource("4_ekvpo")
+
+[node name="Hero Tile" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1"]
+script = ExtResource("4_ekvpo")
+
+[node name="Select Map radius 15" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("5_vgcdh")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Targets")
+shape = 1
+radius = 15
+include_origin_tile = false
+
+[node name="Select Enemies" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="3" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_jtd3n")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+occupant_type = 2
+
+[node name="Damage effect" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Enemies" index="0" node_paths=PackedStringArray("tiles")]
+script = ExtResource("7_lx6pt")
+tiles = NodePath("../../Targets")
+node2d_to_spawn = ExtResource("8_no01h")
+
+[node name="If Tier 2 or lower" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Enemies/Damage effect" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("12_0a3c6")
+input = NodePath("../../../../../Item tier")
+comparison = 3
+value = 2
+
+[node name="Damage all" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Enemies/Damage effect/If Tier 2 or lower" index="0" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("9_dm1h2")
+tiles = NodePath("../../../../Targets")
+damage_override = NodePath("../../../../../../../LT_PersistentVariables/Doom Counter")
+
+[node name="If Tier 3" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Enemies/Damage effect" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("12_0a3c6")
+input = NodePath("../../../../../Item tier")
+comparison = 1
+value = 3
+
+[node name="Set Damage A" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Enemies/Damage effect/If Tier 3" index="0" node_paths=PackedStringArray("int_variable", "value_override")]
+script = ExtResource("10_y5o35")
+int_variable = NodePath("../../../../../../../LT_PersistentVariables/Damage")
+value = 1
+value_override = NodePath("../../../../../../../LT_PersistentVariables/Doom Counter")
+
+[node name="LT_SetInt2" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Enemies/Damage effect/If Tier 3" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("10_y5o35")
+int_variable = NodePath("../../../../../../../LT_PersistentVariables/Damage")
+value = 2
+operation = 3
+
+[node name="Damage all" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Enemies/Damage effect/If Tier 3" index="2" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("9_dm1h2")
+tiles = NodePath("../../../../Targets")
+damage_override = NodePath("../../../../../../../LT_PersistentVariables/Damage")
+
+[node name="LT_PrintToOutput" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Enemies/Damage effect/If Tier 3/Damage all" index="0" node_paths=PackedStringArray("int_var")]
+script = ExtResource("7_bdsqw")
+int_var = NodePath("../../../../../../../../LT_PersistentVariables/Damage")
+
+[node name="LT_PrintToOutput2" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Enemies/Damage effect/If Tier 3/Damage all" index="1" node_paths=PackedStringArray("int_var")]
+script = ExtResource("7_bdsqw")
+int_var = NodePath("../../../../../../../../LT_PersistentVariables/Doom Counter")
+
+[node name="Add Doom" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="4" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("10_y5o35")
+int_variable = NodePath("../../../../LT_PersistentVariables/Doom Counter")
+value = 1
+operation = 1
+
+[node name="Select Hero" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="5" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("6_jtd3n")
+input_tiles = NodePath("../../../Item user tile")
+output_tiles = NodePath("../Hero Tile")
+occupant_type = 1
+
+[node name="LT_SpawnNode2DOnTiles" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Hero" index="0" node_paths=PackedStringArray("tiles")]
+script = ExtResource("7_lx6pt")
+tiles = NodePath("../../Hero Tile")
+node2d_to_spawn = ExtResource("8_no01h")
+
+[node name="If Tier 1" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Hero" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("12_0a3c6")
+input = NodePath("../../../../Item tier")
+comparison = 2
+value = 1
+
+[node name="Damage Hero" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Hero/If Tier 1" index="0" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("9_dm1h2")
+tiles = NodePath("../../../Hero Tile")
+damage_override = NodePath("../../../../../../LT_PersistentVariables/Doom Counter")
+
+[node name="If Tier 2 or higher" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Hero" index="2" node_paths=PackedStringArray("input")]
+script = ExtResource("12_0a3c6")
+input = NodePath("../../../../Item tier")
+comparison = 1
+value = 2
+
+[node name="Damage Hero" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Hero/If Tier 2 or higher" index="0" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("9_dm1h2")
+tiles = NodePath("../../../Hero Tile")
+damage_override = NodePath("../../../../../../LT_PersistentVariables/Half Damage")
+
+[node name="If Tier 3 or higher" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Hero" index="3" node_paths=PackedStringArray("input")]
+script = ExtResource("12_0a3c6")
+input = NodePath("../../../../Item tier")
+comparison = 1
+value = 3
+
+[node name="Damage Hero" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Hero/If Tier 3 or higher" index="0" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("9_dm1h2")
+tiles = NodePath("../../../Hero Tile")
+damage_override = NodePath("../../../../../../LT_PersistentVariables/Doom Counter")
+
+[node name="LT_PrintToOutput" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Select Hero/If Tier 3 or higher/Damage Hero" index="0" node_paths=PackedStringArray("int_var")]
+script = ExtResource("7_bdsqw")
+int_var = NodePath("../../../../../../../LT_PersistentVariables/Doom Counter")
+
+[node name="Every2Calls" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="6"]
+script = ExtResource("3_13j20")
+x = 2
+
+[node name="Set Hero damage relative to Doom" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Every2Calls" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("10_y5o35")
+int_variable = NodePath("../../../../../LT_PersistentVariables/Half Damage")
+value = 1
+operation = 1
+
+[node name="LT_PrintToOutput" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Every2Calls/Set Hero damage relative to Doom" index="0" node_paths=PackedStringArray("int_var")]
+script = ExtResource("7_bdsqw")
+int_var = NodePath("../../../../../../LT_PersistentVariables/Half Damage")
