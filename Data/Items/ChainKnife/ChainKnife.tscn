@@ -1,0 +1,196 @@
+[gd_scene load_steps=16 format=3 uid="uid://1x4gfsn03tqa"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_7665x"]
+[ext_resource type="Texture2D" uid="uid://cxky0j8p56fn5" path="res://Assets/art/icons/weapons/lorc/dripping-knife.svg" id="2_pn5va"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_dtkml"]
+[ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="4_rhvc0"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsColor.gd" id="5_yn7ti"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfBool.gd" id="6_o4qe5"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="7_g5ylp"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="8_lvk66"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="9_yj127"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_kfxqd"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="12_0m7v3"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="13_pom1u"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="15_0cn7w"]
+[ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="15_5dft0"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="17_vosrf"]
+
+[node name="ChainKnife" instance=ExtResource("1_7665x")]
+
+[node name="Texture" parent="." index="1"]
+texture = ExtResource("2_pn5va")
+
+[node name="CountdownLabel" parent="." index="2"]
+text = "0"
+
+[node name="Rounds active" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("3_dtkml")
+
+[node name="Max rounds active" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("3_dtkml")
+default_value = 2
+
+[node name="Is item active" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("4_rhvc0")
+
+[node name="Should attack close" type="Node" parent="LT_PersistentVariables" index="3"]
+script = ExtResource("4_rhvc0")
+default_value = true
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="4"]
+script = ExtResource("3_dtkml")
+default_value = 10
+
+[node name="Self Damage" type="Node" parent="LT_PersistentVariables" index="5"]
+script = ExtResource("3_dtkml")
+default_value = 2
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="6"]
+script = ExtResource("3_dtkml")
+default_value = 6
+
+[node name="LT_SetItemsColor" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("5_yn7ti")
+items = NodePath("../../This item")
+color = 2
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("17_vosrf")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
+
+[node name="Set item to active" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("8_lvk66")
+bool_variable = NodePath("../../../../LT_PersistentVariables/Is item active")
+value = true
+
+[node name="Set attack close" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("8_lvk66")
+bool_variable = NodePath("../../../../LT_PersistentVariables/Should attack close")
+value = true
+
+[node name="Set rounds active to zero" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls" index="2" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_yj127")
+int_variable = NodePath("../../../../LT_PersistentVariables/Rounds active")
+
+[node name="If is active" type="Node" parent="LT_OnItemUpdate/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("6_o4qe5")
+input = NodePath("../../../LT_PersistentVariables/Is item active")
+
+[node name="TempAttackType" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active" index="0"]
+script = ExtResource("4_rhvc0")
+
+[node name="If rounds active more than max" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active" index="1" node_paths=PackedStringArray("input", "value_override")]
+script = ExtResource("7_g5ylp")
+input = NodePath("../../../../LT_PersistentVariables/Rounds active")
+comparison = 1
+value_override = NodePath("../../../../LT_PersistentVariables/Max rounds active")
+
+[node name="Set inactive" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active more than max" index="0" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("8_lvk66")
+bool_variable = NodePath("../../../../../LT_PersistentVariables/Is item active")
+
+[node name="If rounds active less than max" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active" index="2" node_paths=PackedStringArray("input", "value_override")]
+script = ExtResource("7_g5ylp")
+input = NodePath("../../../../LT_PersistentVariables/Rounds active")
+comparison = 4
+value_override = NodePath("../../../../LT_PersistentVariables/Max rounds active")
+
+[node name="SelfDamage" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max" index="0" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("13_pom1u")
+tiles = NodePath("../../../../Item user tile")
+damage_override = NodePath("../../../../../LT_PersistentVariables/Self Damage")
+
+[node name="Add 1 to rounds active" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_yj127")
+int_variable = NodePath("../../../../../LT_PersistentVariables/Rounds active")
+value = 1
+operation = 1
+
+[node name="Targets" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max" index="2"]
+script = ExtResource("15_0cn7w")
+
+[node name="If should attack close" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max" index="3" node_paths=PackedStringArray("input")]
+script = ExtResource("6_o4qe5")
+input = NodePath("../../../../../LT_PersistentVariables/Should attack close")
+
+[node name="Select radius around" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max/If should attack close" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("12_0m7v3")
+input_tiles = NodePath("../../../../../Item user tile")
+output_tiles = NodePath("../../Targets")
+shape = 1
+radius = 1
+include_origin_tile = false
+
+[node name="Set attack far" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max/If should attack close" index="1" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("8_lvk66")
+bool_variable = NodePath("../../../TempAttackType")
+
+[node name="If should attack far" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max" index="4" node_paths=PackedStringArray("input")]
+script = ExtResource("6_o4qe5")
+input = NodePath("../../../../../LT_PersistentVariables/Should attack close")
+value = 1
+
+[node name="Select radius around" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max/If should attack far" index="0" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("12_0m7v3")
+input_tiles = NodePath("../../../../../Item user tile")
+output_tiles = NodePath("../../Targets")
+shape = 1
+radius = 2
+include_origin_tile = false
+
+[node name="Remove inner radius" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max/If should attack far" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("12_0m7v3")
+input_tiles = NodePath("../../../../../Item user tile")
+output_tiles = NodePath("../../Targets")
+shape = 1
+radius = 1
+operation = 2
+include_origin_tile = false
+
+[node name="Set attack close" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max/If should attack far" index="2" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("8_lvk66")
+bool_variable = NodePath("../../../TempAttackType")
+value = true
+
+[node name="Damage targets" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max" index="5" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("13_pom1u")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../../LT_PersistentVariables/Damage")
+
+[node name="spawn vfx" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max" index="6" node_paths=PackedStringArray("tiles", "mirror_x_if_left_of_first_tile")]
+script = ExtResource("10_kfxqd")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("15_5dft0")
+mirror_x_if_left_of_first_tile = NodePath("../../../../Item user tile")
+
+[node name="Set attack var to temp" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max" index="7" node_paths=PackedStringArray("bool_variable", "value_override")]
+script = ExtResource("8_lvk66")
+bool_variable = NodePath("../../../../../LT_PersistentVariables/Should attack close")
+value_override = NodePath("../../TempAttackType")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("7_g5ylp")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="Increase rounds active" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_yj127")
+int_variable = NodePath("../../../../LT_PersistentVariables/Max rounds active")
+value = 1
+operation = 1
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("7_g5ylp")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Increase rounds active" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_yj127")
+int_variable = NodePath("../../../../LT_PersistentVariables/Max rounds active")
+value = 1
+operation = 1
