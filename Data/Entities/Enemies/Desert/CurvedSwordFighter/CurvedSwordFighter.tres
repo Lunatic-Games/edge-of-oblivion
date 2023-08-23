@@ -32,4 +32,4 @@ occupancy_data = SubResource("Resource_gius2")
 sprite = ExtResource("5_yu6ux")
 entity_name = "Curved Sword Fighter"
 main_text = "Attacks all adjacent tiles, then moves towards the player."
-flavor_text = "Was once the most venomous bite in the sand dunes."
+flavor_text = "A truly talented warrior behind the blade."
