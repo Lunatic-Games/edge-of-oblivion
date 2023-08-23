@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://6yuv3obvadka"]
+
+[ext_resource type="Texture2D" uid="uid://b86a8mt5v18fr" path="res://Assets/art/icons/misc/delapouite/two-coins.svg" id="1_fy01i"]
+[ext_resource type="Script" path="res://UI/Overlays/PlayerOverlay/GoldDisplay/GoldDisplay.gd" id="1_msmoy"]
+[ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="2_kre7j"]
+
+[node name="GoldDisplay" type="HBoxContainer"]
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+alignment = 1
+script = ExtResource("1_msmoy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_fy01i")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(76, 48)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_kre7j")
+theme_override_font_sizes/font_size = 35
+text = "0"
+vertical_alignment = 2
+clip_text = true
+
+[node name="TickTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]

@@ -9,6 +9,7 @@ func setup() -> void:
 	add_to_menu("Fully heal player", fully_heal_player)
 	add_to_menu("Teleport player", teleport_player)
 	add_to_menu("Update items", update_items)
+	add_to_menu("Add Gold (50)", add_gold)
 
 
 func level_up() -> void:
@@ -83,3 +84,11 @@ func update_items():
 	
 	for item in player.inventory.items.values():
 		item.update()
+
+
+func add_gold():
+	var player: Player = GlobalGameState.get_player()
+	if player == null:
+		return
+	
+	player.inventory.add_or_remove_gold(50)

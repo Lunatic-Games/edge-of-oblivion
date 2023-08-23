@@ -11,6 +11,7 @@ item_scene = ExtResource("1_1ornq")
 item_name = "Chain Knife"
 popup_item_name_color = "royalblue"
 flavor_text = "One deadly chain."
+shop_cost = 1
 max_tier = 3
 use_tier_1_text_for_popup_texts = false
 card_text_1 = "Every 6 turns, activate for 2 rounds. Alternate hitting radius 1 and 2 for 10 damage. Also does 2 self damage."

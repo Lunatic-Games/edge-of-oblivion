@@ -13,4 +13,4 @@ next_level = ExtResource("3_tvydd")
 game_mode = ExtResource("1_nhcn6")
 gateway_spawn_condition = 0
 killing_boss_completes_run = false
-persist_player_on_entering = false
+player_persistence = 5

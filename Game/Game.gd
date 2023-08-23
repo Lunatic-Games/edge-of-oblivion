@@ -16,6 +16,7 @@ var run_over: bool = false
 @onready var player_overlay: PlayerOverlay = $HUD/PlayerOverlay
 @onready var boss_overlay: BossOverlay = $HUD/BossOverlay
 
+@onready var shop_menu: ShopMenu = $Menus/ShopMenu
 @onready var upgrade_menu: UpgradeMenu = $Menus/UpgradeMenu
 @onready var victory_menu: VictoryMenu = $Menus/VictoryMenu
 @onready var game_over_menu: GameOverMenu = $Menus/GameOverMenu
@@ -57,10 +58,9 @@ func transition_to_new_level(new_level_data: LevelData) -> void:
 	set_process(false)
 	fade_animator.play("fade_out")
 	await fade_animator.animation_finished
-	if new_level_data.persist_player_on_entering:
-		var player: Player = GlobalGameState.get_player()
-		if player:
-			player.reparent(self)
+	var player: Player = GlobalGameState.get_player()
+	if player:
+		player.reparent(self)
 	
 	if level != null:
 		level.queue_free()
@@ -76,6 +76,9 @@ func _process(_delta: float) -> void:
 		return
 	
 	if upgrade_menu.has_priority == true or dialogue_overlay.has_priority == true:
+		return
+	
+	if shop_menu.visible:
 		return
 	
 	game_mode.update()

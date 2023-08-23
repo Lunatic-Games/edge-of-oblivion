@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://clkedmwe4xw0b"]
+[gd_scene load_steps=17 format=3 uid="uid://clkedmwe4xw0b"]
 
 [ext_resource type="Script" path="res://Game/Game.gd" id="1_iqcmv"]
 [ext_resource type="PackedScene" uid="uid://ceje4cjsotpey" path="res://Game/Camera/Camera.tscn" id="3_if80k"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://7cc4vdch3hbd" path="res://UI/Overlays/PlayerOverlay/PlayerOverlay.tscn" id="7_j6mug"]
 [ext_resource type="PackedScene" uid="uid://kgjh2atufhqe" path="res://UI/Overlays/DialogueOverlay/DialogueOverlay.tscn" id="7_rn45n"]
 [ext_resource type="PackedScene" uid="uid://c7dqfw38kh88k" path="res://UI/Menus/VictoryMenu/VictoryMenu.tscn" id="8_4y0it"]
+[ext_resource type="PackedScene" uid="uid://q42hpg4kyidd" path="res://UI/Menus/ShopMenu/ShopMenu.tscn" id="8_70sda"]
 [ext_resource type="PackedScene" uid="uid://dn681uoihob4j" path="res://UI/Menus/GameoverMenu/GameOverMenu.tscn" id="9_rua7w"]
 [ext_resource type="PackedScene" uid="uid://bo2no0imyp676" path="res://UI/Menus/PauseMenu/PauseMenu.tscn" id="10_a7fxs"]
 [ext_resource type="Script" path="res://Game/SpawnHandler/SpawnHandler.gd" id="13_8agfr"]
@@ -124,6 +125,9 @@ visible = false
 visible = false
 
 [node name="Menus" type="CanvasLayer" parent="."]
+
+[node name="ShopMenu" parent="Menus" instance=ExtResource("8_70sda")]
+visible = false
 
 [node name="UpgradeMenu" parent="Menus" instance=ExtResource("15_tirfb")]
 visible = false

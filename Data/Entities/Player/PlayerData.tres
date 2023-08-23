@@ -31,6 +31,7 @@ moves_per_turn = 1
 script = ExtResource("3_42vg8")
 max_inventory_size = 6
 starting_items = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("5_w4jcp")])
+starting_gold = 10
 
 [sub_resource type="Resource" id="Resource_85vcj"]
 script = ExtResource("4_6welu")

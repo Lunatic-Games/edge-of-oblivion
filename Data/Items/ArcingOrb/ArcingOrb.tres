@@ -11,6 +11,7 @@ item_scene = ExtResource("1_csxk8")
 item_name = "Arcing Orb"
 popup_item_name_color = "cyan"
 flavor_text = "There was nothing left."
+shop_cost = 1
 max_tier = 3
 use_tier_1_text_for_popup_texts = false
 card_text_1 = "Has a chance each turn to blast 1 random nearby enemy for 60 damage."

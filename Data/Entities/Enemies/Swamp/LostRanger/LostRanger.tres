@@ -1,10 +1,19 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://bsnphtkgiwpsv"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://bsnphtkgiwpsv"]
 
 [ext_resource type="PackedScene" uid="uid://df2otijwesw57" path="res://Data/Entities/Enemies/Swamp/LostRanger/LostRanger.tscn" id="1_l30v6"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/_Components/GoldStorage/GOLD_STORAGE_DATA.gd" id="2_weh3o"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_yrw8k"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_xukj1"]
 [ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="4_fikgl"]
 [ext_resource type="Texture2D" uid="uid://cinfmdwcoldqr" path="res://Assets/art/icons/medieval-fantasy/lorc/cowled.svg" id="5_byfw0"]
+
+[sub_resource type="Resource" id="Resource_2v7wb"]
+script = ExtResource("2_weh3o")
+chance_of_generating_gold = 1.0
+min_gold_generated = 1
+max_gold_generated = 3
+stores_collected_gold = true
+add_particles_on_collecting_gold = true
 
 [sub_resource type="Resource" id="Resource_u32dd"]
 script = ExtResource("2_yrw8k")
@@ -26,6 +35,7 @@ collectable_filter = 0
 [resource]
 script = ExtResource("4_fikgl")
 xp_value = 1
+gold_storage_data = SubResource("Resource_2v7wb")
 entity_scene = ExtResource("1_l30v6")
 health_data = SubResource("Resource_u32dd")
 occupancy_data = SubResource("Resource_5jdpi")
