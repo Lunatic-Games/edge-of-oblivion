@@ -31,5 +31,5 @@ health_data = SubResource("Resource_31hnv")
 occupancy_data = SubResource("Resource_gius2")
 sprite = ExtResource("5_uypdq")
 entity_name = "Mongolian Calvary"
-main_text = "Ativates for 3 rounds: Attacks all adjacent tiles, then moves towards the player."
+main_text = "Activates for 3 rounds: Attacks all adjacent tiles, then moves towards the player."
 flavor_text = "You'll hear your death coming from miles away, and feel the ground shake."
