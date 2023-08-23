@@ -1,5 +1,5 @@
 @tool
-@icon("res://Assets/art/logic-tree/variables/n.png")
+@icon("res://Assets/art/logic-tree/variables/n-tier.png")
 class_name LT_TierableIntVariable
 extends LT_IntVariable
 
@@ -12,7 +12,6 @@ var max_tier = 1
 func _ready():
 	super._ready()
 	var this_item: Item = owner as Item
-#	this_item.setup_completed.connect(set_current_value_for_item.bind(this_item))
 	this_item.tier_increased.connect(set_current_value_for_item.bind(this_item))
 
 func _get_property_list() -> Array[Dictionary]:
