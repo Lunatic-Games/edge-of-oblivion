@@ -20,6 +20,7 @@ func _init(p_game: Game, game_mode_data: GameModeData) -> void:
 	game.get_tree().call_group("spawner", "spawn_entity")
 	
 	player = GlobalGameState.get_player()  # Spawned by player spawner
+	player.reset(game.level_data.player_persistence)
 	player.health.died.connect(_on_player_died)
 	player.levelling.levelled_up.connect(_on_player_levelled_up)
 	

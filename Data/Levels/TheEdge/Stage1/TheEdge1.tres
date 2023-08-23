@@ -93,4 +93,4 @@ next_level = ExtResource("9_x03la")
 game_mode = ExtResource("1_v55cf")
 gateway_spawn_condition = 2
 killing_boss_completes_run = false
-persist_player_on_entering = true
+player_persistence = 15

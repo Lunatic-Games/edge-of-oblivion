@@ -13,7 +13,8 @@ var items: Dictionary = {}  # ItemData : Item Scene
 
 func reset_display() -> void:
 	for child in get_children():
-		child.queue_free()
+		if is_instance_valid(child):
+			child.queue_free()
 
 
 func add_item_to_display(item: Item, animate: bool = true) -> void:
