@@ -11,6 +11,7 @@ var gold: int = 0
 func _init(p_entity: Entity, p_data: InventoryData):
 	entity = p_entity
 	data = p_data
+	add_gold(p_data.starting_gold)
 
 
 func add_starting_items():
@@ -54,13 +55,16 @@ func upgrade_item(item_data: ItemData, animate: bool = true) -> void:
 		GlobalSignals.item_reached_max_tier.emit(item, item_data)
 
 
-func add_gold(amount: int) -> void:
+func add_gold(amount: int, animate: bool = true) -> void:
+	if amount == 0:
+		return
+	
 	assert(amount >= 0, "Adding negative gold.")
 	gold += amount
 	
 	var game: Game = GlobalGameState.get_game()
 	var gold_display: GoldDisplay = game.player_overlay.gold_display
-	gold_display.set_display_amount(gold)
+	gold_display.set_display_amount(gold, animate)
 
 
 func reset_items(add_starting_items_back: bool = true) -> void:
