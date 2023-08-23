@@ -4,11 +4,17 @@ extends Entity
 
 const DIALOGUE_TRIGGER_DATA: EntityData = preload("res://Data/Entities/DialogueTrigger/DialogueTrigger.tres")
 
+var shop_pool: ShopPool = null
+
 @onready var dialogue_start: DS_Start = $DS_Start
 
 
 func setup(p_data: EntityData, start_tile: Tile = null) -> void:
 	super.setup(p_data, start_tile)
+	
+	var npc_data: NPCData = p_data as NPCData
+	if npc_data.shop_pool_data != null:
+		shop_pool = ShopPool.new(self, npc_data.shop_pool_data)
 	
 	if dialogue_start.start_state == null:
 		return

@@ -91,4 +91,4 @@ func add_gold():
 	if player == null:
 		return
 	
-	player.inventory.add_gold(50)
+	player.inventory.add_or_remove_gold(50)

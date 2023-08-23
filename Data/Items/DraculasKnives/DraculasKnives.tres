@@ -11,6 +11,7 @@ item_scene = ExtResource("2")
 item_name = "Dracula's Knives"
 popup_item_name_color = "red"
 flavor_text = "Hopefully he doesn't want these back."
+shop_cost = 1
 max_tier = 3
 use_tier_1_text_for_popup_texts = false
 card_text_1 = "Attack right for 20 with [lifesteal]10% lifesteal[/lifesteal]."
