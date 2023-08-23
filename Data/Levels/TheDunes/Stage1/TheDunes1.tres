@@ -1,0 +1,96 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=20 format=3 uid="uid://cwjajr5c0fudm"]
+
+[ext_resource type="PackedScene" uid="uid://bpc1x4004b18" path="res://Data/Levels/TheDunes/Stage1/TheDunes1.tscn" id="1_0fmte"]
+[ext_resource type="Resource" uid="uid://50bvt7hgm20i" path="res://Data/GameModes/Standard/Standard.tres" id="1_hlinf"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="2_55q0j"]
+[ext_resource type="Resource" uid="uid://mkhynw35am68" path="res://Data/Entities/Enemies/Desert/Cobra/Cobra.tres" id="3_nmnaf"]
+[ext_resource type="Resource" uid="uid://wgvucq7mxtaq" path="res://Data/Entities/Enemies/Desert/Bandit/Bandit.tres" id="4_qxxty"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="6_x2f4i"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="6_x56rp"]
+[ext_resource type="Resource" uid="uid://dtpqom41jpnbo" path="res://Data/Levels/TheDunes/Stage2/TheDunes2.tres" id="7_y0v10"]
+
+[sub_resource type="Resource" id="Resource_wvxwa"]
+script = ExtResource("6_x2f4i")
+round_wait_from_previous_wave = 1
+"# Cobra" = 3
+"# Bandit" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_oht4j"]
+script = ExtResource("6_x2f4i")
+round_wait_from_previous_wave = 7
+"# Cobra" = 2
+"# Bandit" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_iw6c4"]
+script = ExtResource("6_x2f4i")
+round_wait_from_previous_wave = 7
+"# Cobra" = 3
+"# Bandit" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_ck4gv"]
+script = ExtResource("6_x2f4i")
+round_wait_from_previous_wave = 6
+"# Cobra" = 7
+"# Bandit" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_4j86u"]
+script = ExtResource("6_x2f4i")
+round_wait_from_previous_wave = 11
+"# Cobra" = 2
+"# Bandit" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_vnnko"]
+script = ExtResource("6_x2f4i")
+round_wait_from_previous_wave = 6
+"# Cobra" = 4
+"# Bandit" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_3ohnc"]
+script = ExtResource("6_x2f4i")
+round_wait_from_previous_wave = 8
+"# Cobra" = 0
+"# Bandit" = 6
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_410v4"]
+script = ExtResource("6_x2f4i")
+round_wait_from_previous_wave = 8
+"# Cobra" = 0
+"# Bandit" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_rnt4h"]
+script = ExtResource("6_x2f4i")
+round_wait_from_previous_wave = 8
+"# Cobra" = 3
+"# Bandit" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_ndu3w"]
+script = ExtResource("6_x2f4i")
+round_wait_from_previous_wave = 7
+"# Cobra" = 2
+"# Bandit" = 3
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_2d1ud"]
+script = ExtResource("6_x56rp")
+enemies = Array[Resource("res://Data/Entities/Enemies/ENEMY_DATA.gd")]([ExtResource("3_nmnaf"), ExtResource("4_qxxty")])
+waves = Array[ExtResource("6_x2f4i")]([SubResource("Resource_wvxwa"), SubResource("Resource_oht4j"), SubResource("Resource_iw6c4"), SubResource("Resource_ck4gv"), SubResource("Resource_4j86u"), SubResource("Resource_vnnko"), SubResource("Resource_3ohnc"), SubResource("Resource_410v4"), SubResource("Resource_rnt4h"), SubResource("Resource_ndu3w")])
+
+[resource]
+script = ExtResource("2_55q0j")
+level_name = "The Dunes - 1"
+level_scene = ExtResource("1_0fmte")
+level_waves = SubResource("Resource_2d1ud")
+next_level = ExtResource("7_y0v10")
+game_mode = ExtResource("1_hlinf")
+gateway_spawn_condition = 2
+killing_boss_completes_run = false
+persist_player_on_entering = true

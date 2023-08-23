@@ -1,0 +1,91 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=19 format=3 uid="uid://je04bn2o2ov6"]
+
+[ext_resource type="Resource" uid="uid://50bvt7hgm20i" path="res://Data/GameModes/Standard/Standard.tres" id="1_rutut"]
+[ext_resource type="PackedScene" uid="uid://bpc1x4004b18" path="res://Data/Levels/TheDunes/Stage1/TheDunes1.tscn" id="2_qdkfc"]
+[ext_resource type="Resource" uid="uid://mkhynw35am68" path="res://Data/Entities/Enemies/Desert/Cobra/Cobra.tres" id="3_dohp1"]
+[ext_resource type="Resource" uid="uid://wgvucq7mxtaq" path="res://Data/Entities/Enemies/Desert/Bandit/Bandit.tres" id="4_tht6j"]
+[ext_resource type="Resource" uid="uid://djehq2s20b720" path="res://Data/Entities/Enemies/Desert/MongolianCalvary/MongolianCalvary.tres" id="5_mr147"]
+[ext_resource type="Resource" uid="uid://crrsjeb5bsnah" path="res://Data/Entities/Enemies/Desert/CurvedSwordFighter/CurvedSwordFighter.tres" id="6_cc68b"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="6_mpn0j"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="7_2sbld"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="8_j6i8r"]
+[ext_resource type="Resource" uid="uid://d4i5puk6hrpfv" path="res://Data/Levels/TheDunes/Haven/Haven.tres" id="9_a5dcg"]
+
+[sub_resource type="Resource" id="Resource_jc8a4"]
+script = ExtResource("7_2sbld")
+round_wait_from_previous_wave = 1
+"# Cobra" = 0
+"# Bandit" = 0
+"# Mongolian Calvary" = 0
+"# Curved Sword Fighter" = 6
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_8mhbg"]
+script = ExtResource("7_2sbld")
+round_wait_from_previous_wave = 7
+"# Cobra" = 0
+"# Bandit" = 0
+"# Mongolian Calvary" = 3
+"# Curved Sword Fighter" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_8r1x5"]
+script = ExtResource("7_2sbld")
+round_wait_from_previous_wave = 7
+"# Cobra" = 0
+"# Bandit" = 0
+"# Mongolian Calvary" = 2
+"# Curved Sword Fighter" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_cnjpr"]
+script = ExtResource("7_2sbld")
+round_wait_from_previous_wave = 8
+"# Cobra" = 0
+"# Bandit" = 6
+"# Mongolian Calvary" = 2
+"# Curved Sword Fighter" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_4y18x"]
+script = ExtResource("7_2sbld")
+round_wait_from_previous_wave = 9
+"# Cobra" = 0
+"# Bandit" = 0
+"# Mongolian Calvary" = 0
+"# Curved Sword Fighter" = 7
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_hlxld"]
+script = ExtResource("7_2sbld")
+round_wait_from_previous_wave = 6
+"# Cobra" = 0
+"# Bandit" = 0
+"# Mongolian Calvary" = 0
+"# Curved Sword Fighter" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_qfiam"]
+script = ExtResource("7_2sbld")
+round_wait_from_previous_wave = 7
+"# Cobra" = 0
+"# Bandit" = 0
+"# Mongolian Calvary" = 1
+"# Curved Sword Fighter" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_t5mk1"]
+script = ExtResource("6_mpn0j")
+enemies = Array[Resource("res://Data/Entities/Enemies/ENEMY_DATA.gd")]([ExtResource("3_dohp1"), ExtResource("4_tht6j"), ExtResource("5_mr147"), ExtResource("6_cc68b")])
+waves = Array[ExtResource("7_2sbld")]([SubResource("Resource_jc8a4"), SubResource("Resource_8mhbg"), SubResource("Resource_8r1x5"), SubResource("Resource_cnjpr"), SubResource("Resource_4y18x"), SubResource("Resource_hlxld"), SubResource("Resource_qfiam")])
+
+[resource]
+script = ExtResource("8_j6i8r")
+level_name = "The Dunes - 3"
+level_scene = ExtResource("2_qdkfc")
+level_waves = SubResource("Resource_t5mk1")
+next_level = ExtResource("9_a5dcg")
+game_mode = ExtResource("1_rutut")
+gateway_spawn_condition = 2
+killing_boss_completes_run = false
+persist_player_on_entering = false
