@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://coecb2cxst48t"]
+
+[ext_resource type="PackedScene" uid="uid://b2sfg7xw7h5d3" path="res://Data/Tiles/Tile.tscn" id="1_d87mk"]
+[ext_resource type="Texture2D" uid="uid://8y8ya5h4f715" path="res://Assets/art/icons/misc/delapouite/swamp.svg" id="2_mfqgd"]
+
+[node name="HeavySandyTile" instance=ExtResource("1_d87mk")]
+
+[node name="Background" parent="." index="0"]
+color = Color(0.407843, 0.298039, 0.215686, 1)
+
+[node name="Sprite2D" parent="." index="1"]
+self_modulate = Color(0.85098, 0.647059, 0.458824, 0.14902)
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="2"]
+self_modulate = Color(0.878431, 0.670588, 0.47451, 0.360784)
+scale = Vector2(0.117, 0.117)
+texture = ExtResource("2_mfqgd")
