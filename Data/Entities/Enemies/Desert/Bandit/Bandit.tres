@@ -1,10 +1,19 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://wgvucq7mxtaq"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://wgvucq7mxtaq"]
 
 [ext_resource type="PackedScene" uid="uid://cfwrl2ospjjsn" path="res://Data/Entities/Enemies/Desert/Bandit/Bandit.tscn" id="1_ij5uo"]
 [ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="1_xkw4b"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/_Components/GoldStorage/GOLD_STORAGE_DATA.gd" id="2_h7115"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_p6art"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_yukqi"]
 [ext_resource type="Texture2D" uid="uid://ktl4jkcycks" path="res://Assets/art/icons/enemies/Delapouite/bandit.svg" id="5_nrpnv"]
+
+[sub_resource type="Resource" id="Resource_leada"]
+script = ExtResource("2_h7115")
+chance_of_generating_gold = 1.0
+min_gold_generated = 1
+max_gold_generated = 3
+stores_collected_gold = true
+add_particles_on_collecting_gold = true
 
 [sub_resource type="Resource" id="Resource_v5agk"]
 script = ExtResource("2_p6art")
@@ -21,10 +30,12 @@ size = 0
 blocking_behavior = 1
 can_be_pushed_off_map = true
 can_push_entities = false
+collectable_filter = 0
 
 [resource]
 script = ExtResource("1_xkw4b")
 xp_value = 1
+gold_storage_data = SubResource("Resource_leada")
 entity_scene = ExtResource("1_ij5uo")
 health_data = SubResource("Resource_v5agk")
 occupancy_data = SubResource("Resource_2tgkx")

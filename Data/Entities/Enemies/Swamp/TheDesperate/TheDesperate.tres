@@ -1,10 +1,19 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://crw5uf7i2mrtg"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://crw5uf7i2mrtg"]
 
 [ext_resource type="PackedScene" uid="uid://do1sjyq6tmup3" path="res://Data/Entities/Enemies/Swamp/TheDesperate/TheDesperate.tscn" id="1_idr2m"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/_Components/GoldStorage/GOLD_STORAGE_DATA.gd" id="2_dqqdp"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_k165t"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_7paix"]
 [ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="4_6arhd"]
 [ext_resource type="Texture2D" uid="uid://cdsr250l6xud4" path="res://Assets/art/icons/medieval-fantasy/delapouite/warlock-hood.svg" id="5_wnqiq"]
+
+[sub_resource type="Resource" id="Resource_7omdo"]
+script = ExtResource("2_dqqdp")
+chance_of_generating_gold = 1.0
+min_gold_generated = 1
+max_gold_generated = 3
+stores_collected_gold = true
+add_particles_on_collecting_gold = true
 
 [sub_resource type="Resource" id="Resource_3v846"]
 script = ExtResource("2_k165t")
@@ -26,6 +35,7 @@ collectable_filter = 0
 [resource]
 script = ExtResource("4_6arhd")
 xp_value = 1
+gold_storage_data = SubResource("Resource_7omdo")
 entity_scene = ExtResource("1_idr2m")
 health_data = SubResource("Resource_3v846")
 occupancy_data = SubResource("Resource_lpolm")

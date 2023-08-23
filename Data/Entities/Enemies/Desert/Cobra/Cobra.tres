@@ -1,10 +1,19 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://mkhynw35am68"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://mkhynw35am68"]
 
 [ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="1_hutkn"]
 [ext_resource type="PackedScene" uid="uid://3baaioqcekbf" path="res://Data/Entities/Enemies/Desert/Cobra/Cobra.tscn" id="1_tpb8w"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/_Components/GoldStorage/GOLD_STORAGE_DATA.gd" id="2_fpudr"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_irwkw"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_x0nn1"]
 [ext_resource type="Texture2D" uid="uid://d4i04bbnewpqp" path="res://Assets/art/icons/animals/delapouite/cobra.svg" id="5_g0u6d"]
+
+[sub_resource type="Resource" id="Resource_1rrk7"]
+script = ExtResource("2_fpudr")
+chance_of_generating_gold = 1.0
+min_gold_generated = 1
+max_gold_generated = 3
+stores_collected_gold = true
+add_particles_on_collecting_gold = true
 
 [sub_resource type="Resource" id="Resource_31hnv"]
 script = ExtResource("2_irwkw")
@@ -21,10 +30,12 @@ size = 0
 blocking_behavior = 1
 can_be_pushed_off_map = true
 can_push_entities = false
+collectable_filter = 0
 
 [resource]
 script = ExtResource("1_hutkn")
 xp_value = 1
+gold_storage_data = SubResource("Resource_1rrk7")
 entity_scene = ExtResource("1_tpb8w")
 health_data = SubResource("Resource_31hnv")
 occupancy_data = SubResource("Resource_gius2")

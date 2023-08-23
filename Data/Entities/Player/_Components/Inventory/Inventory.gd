@@ -5,6 +5,7 @@ extends RefCounted
 var entity: Entity = null
 var data: InventoryData = null
 var items: Dictionary = {}  # ItemData : Item Scene
+var gold: int = 0
 
 
 func _init(p_entity: Entity, p_data: InventoryData):
@@ -55,3 +56,12 @@ func upgrade_item(item_data: ItemData, animate: bool = true) -> void:
 	
 	if item.is_max_tier():
 		GlobalSignals.item_reached_max_tier.emit(item, item_data)
+
+
+func add_gold(amount: int) -> void:
+	assert(amount >= 0, "Adding negative gold.")
+	gold += amount
+	
+	var game: Game = GlobalGameState.get_game()
+	var gold_display: GoldDisplay = game.player_overlay.gold_display
+	gold_display.set_display_amount(gold)

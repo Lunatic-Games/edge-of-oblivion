@@ -1,10 +1,19 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://bnf2lcl8aejlb"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://bnf2lcl8aejlb"]
 
 [ext_resource type="PackedScene" uid="uid://b5sx5f048yn81" path="res://Data/Entities/Enemies/Swamp/TheFeral/TheFeral.tscn" id="1_7yqjw"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/_Components/GoldStorage/GOLD_STORAGE_DATA.gd" id="2_c6g8y"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_rkrcw"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_1i43g"]
 [ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="4_lna0o"]
 [ext_resource type="Texture2D" uid="uid://cvd8ctiqsgouw" path="res://Assets/art/icons/medieval-fantasy/delapouite/kenku-head.svg" id="5_13blr"]
+
+[sub_resource type="Resource" id="Resource_x1grs"]
+script = ExtResource("2_c6g8y")
+chance_of_generating_gold = 1.0
+min_gold_generated = 1
+max_gold_generated = 3
+stores_collected_gold = true
+add_particles_on_collecting_gold = true
 
 [sub_resource type="Resource" id="Resource_3v846"]
 script = ExtResource("2_rkrcw")
@@ -26,6 +35,7 @@ collectable_filter = 0
 [resource]
 script = ExtResource("4_lna0o")
 xp_value = 1
+gold_storage_data = SubResource("Resource_x1grs")
 entity_scene = ExtResource("1_7yqjw")
 health_data = SubResource("Resource_3v846")
 occupancy_data = SubResource("Resource_lpolm")

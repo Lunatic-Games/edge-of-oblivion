@@ -1,12 +1,59 @@
-[gd_scene load_steps=4 format=3 uid="uid://7cc4vdch3hbd"]
+[gd_scene load_steps=5 format=3 uid="uid://7cc4vdch3hbd"]
 
 [ext_resource type="Script" path="res://UI/Overlays/PlayerOverlay/PlayerOverlay.gd" id="1_ic1qj"]
 [ext_resource type="PackedScene" uid="uid://dub7fxxrneltf" path="res://UI/Overlays/PlayerOverlay/InventoryDisplay/InventoryDisplay.tscn" id="2_cs5qm"]
+[ext_resource type="PackedScene" uid="uid://6yuv3obvadka" path="res://UI/Overlays/PlayerOverlay/GoldDisplay/GoldDisplay.tscn" id="3_g2lnt"]
 [ext_resource type="PackedScene" uid="uid://oi46lwjctei4" path="res://UI/Overlays/PlayerOverlay/ExperienceBar/ExperienceBar.tscn" id="3_nn11g"]
 
 [node name="PlayerOverlay" type="CanvasLayer"]
 script = ExtResource("1_ic1qj")
 
 [node name="InventoryDisplay" parent="." instance=ExtResource("2_cs5qm")]
+custom_minimum_size = Vector2(0, 120)
+anchors_preset = 0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 1.0
+offset_top = 898.0
+offset_right = 1922.0
+offset_bottom = 1018.0
+grow_horizontal = 1
+grow_vertical = 1
 
-[node name="ExperienceBar" parent="." instance=ExtResource("3_nn11g")]
+[node name="Panel" type="ColorRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -558.5
+offset_top = -65.0
+offset_right = 558.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+color = Color(0.105882, 0.105882, 0.105882, 0.407843)
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="GoldDisplay" parent="Panel/MarginContainer/HBoxContainer" instance=ExtResource("3_g2lnt")]
+layout_mode = 2
+
+[node name="ExperienceBar" parent="Panel/MarginContainer/HBoxContainer" instance=ExtResource("3_nn11g")]
+custom_minimum_size = Vector2(892, 35)
+layout_mode = 2
+size_flags_vertical = 4
