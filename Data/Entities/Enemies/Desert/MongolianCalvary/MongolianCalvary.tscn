@@ -1,0 +1,241 @@
+[gd_scene load_steps=31 format=3 uid="uid://dtr3kkfgfguda"]
+
+[ext_resource type="PackedScene" uid="uid://fujdstcnhao2" path="res://Data/Entities/Enemies/Enemy.tscn" id="1_wu4v1"]
+[ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="2_bxec7"]
+[ext_resource type="Texture2D" uid="uid://c42on86b6iv3u" path="res://Assets/art/icons/enemies/Delapouite/calvary.svg" id="3_vbcxm"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_hccgh"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_lxsps"]
+[ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="5_ms1tu"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="6_1aoxj"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="7_e8rbl"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectAdjacentTiles.gd" id="7_w05gs"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="8_f5u8r"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="8_n7pi0"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfBool.gd" id="8_tvnl5"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="9_0o46x"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="10_f83ot"]
+[ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="11_bkihk"]
+[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="12_njy1v"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Getters/GetPlayer.gd" id="13_77ih4"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectClosestTiles.gd" id="14_id1v1"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="15_2g7rd"]
+[ext_resource type="Script" path="res://LogicTree/Effects/MoveTileOccupant.gd" id="16_mmke3"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnIndicatorOnTiles.gd" id="17_2eobx"]
+[ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="18_vradi"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetTileArray.gd" id="18_wohy5"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfTileArraySize.gd" id="20_g53sy"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="21_otyjr"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetEnemiesReadyAppearance.gd" id="24_7ghk6"]
+
+[sub_resource type="FastNoiseLite" id="2"]
+frequency = 0.005
+fractal_octaves = 3
+fractal_lacunarity = 1.7
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a76t5"]
+seamless = true
+as_normal_map = true
+noise = SubResource("2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xlc7h"]
+resource_local_to_scene = true
+shader = ExtResource("2_bxec7")
+shader_parameter/strength = 0.25
+shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cqp0"]
+resource_local_to_scene = true
+bg_color = Color(0.223529, 0.478431, 0.611765, 1)
+
+[node name="MongolianCalvary" instance=ExtResource("1_wu4v1")]
+
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_xlc7h")
+texture = ExtResource("3_vbcxm")
+
+[node name="AttackBar" parent="." index="2"]
+theme_override_styles/fill = SubResource("StyleBoxFlat_3cqp0")
+
+[node name="Damage" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("4_hccgh")
+default_value = 12
+
+[node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("4_hccgh")
+default_value = 9
+
+[node name="Is active" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("5_ms1tu")
+
+[node name="Max rounds active" type="Node" parent="LT_PersistentVariables" index="3"]
+script = ExtResource("4_hccgh")
+default_value = 3
+
+[node name="Rounds active" type="Node" parent="LT_PersistentVariables" index="4"]
+script = ExtResource("4_hccgh")
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_lxsps")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+auto_update_enemy_attack_bar = true
+
+[node name="set to active" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("7_e8rbl")
+bool_variable = NodePath("../../../../LT_PersistentVariables/Is active")
+value = true
+
+[node name="Set active rounds to 0" type="Node" parent="LT_OnEntityUpdate/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_f5u8r")
+int_variable = NodePath("../../../../LT_PersistentVariables/Rounds active")
+
+[node name="If active" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("8_tvnl5")
+input = NodePath("../../../LT_PersistentVariables/Is active")
+
+[node name="Targets" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active" index="0"]
+script = ExtResource("6_1aoxj")
+
+[node name="Select adjacent" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_w05gs")
+input_tiles = NodePath("../../../Enemy tile")
+output_tiles = NodePath("../Targets")
+directions = 15
+
+[node name="Select player" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active" index="2" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("8_n7pi0")
+input_tiles = NodePath("../Targets")
+output_tiles = NodePath("../Targets")
+occupant_type = 1
+
+[node name="Damage player" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active" index="3" node_paths=PackedStringArray("tiles", "damage_override")]
+script = ExtResource("9_0o46x")
+tiles = NodePath("../Targets")
+damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
+
+[node name="Spawn slash" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active" index="4" node_paths=PackedStringArray("tiles")]
+script = ExtResource("10_f83ot")
+tiles = NodePath("../Targets")
+node2d_to_spawn = ExtResource("11_bkihk")
+
+[node name="Handle Move Logic" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active" index="5"]
+script = ExtResource("12_njy1v")
+
+[node name="Players tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic" index="0"]
+script = ExtResource("6_1aoxj")
+
+[node name="LT_GetPlayer" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic" index="1" node_paths=PackedStringArray("output_player_tile")]
+script = ExtResource("13_77ih4")
+output_player_tile = NodePath("../Players tile")
+
+[node name="Tile to indicate" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic" index="2"]
+script = ExtResource("6_1aoxj")
+
+[node name="Set indicate tile to current tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic" index="3" node_paths=PackedStringArray("tile_array", "array_value")]
+script = ExtResource("18_wohy5")
+tile_array = NodePath("../Tile to indicate")
+array_value = NodePath("../../../../Enemy tile")
+
+[node name="Tile to move to" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic" index="4"]
+script = ExtResource("6_1aoxj")
+
+[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic" index="5" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_w05gs")
+input_tiles = NodePath("../../../../Enemy tile")
+output_tiles = NodePath("../Tile to move to")
+directions = 15
+
+[node name="Select closest to player" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic" index="6" node_paths=PackedStringArray("tiles", "tiles_to_measure_to", "output_tiles")]
+script = ExtResource("14_id1v1")
+tiles = NodePath("../Tile to move to")
+tiles_to_measure_to = NodePath("../Players tile")
+output_tiles = NodePath("../Tile to move to")
+
+[node name="Select random tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic" index="7" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("15_2g7rd")
+input_tiles = NodePath("../Tile to move to")
+output_tiles = NodePath("../Tile to move to")
+
+[node name="Select unoccupied tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic" index="8" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("8_n7pi0")
+input_tiles = NodePath("../Tile to move to")
+output_tiles = NodePath("../Tile to move to")
+occupant_type = 3
+
+[node name="If the tile is movable" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic" index="9" node_paths=PackedStringArray("input")]
+script = ExtResource("20_g53sy")
+input = NodePath("../Tile to move to")
+
+[node name="Move to tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic/If the tile is movable" index="0" node_paths=PackedStringArray("tile", "destination_tile")]
+script = ExtResource("16_mmke3")
+tile = NodePath("../../../../../Enemy tile")
+destination_tile = NodePath("../../Tile to move to")
+
+[node name="Set indicate tile to new tile" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/Handle Move Logic/If the tile is movable" index="1" node_paths=PackedStringArray("tile_array", "array_value")]
+script = ExtResource("18_wohy5")
+tile_array = NodePath("../../Tile to indicate")
+array_value = NodePath("../../Tile to move to")
+
+[node name="Increase active rounds" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active" index="6" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_f5u8r")
+int_variable = NodePath("../../../../LT_PersistentVariables/Rounds active")
+value = 1
+operation = 1
+
+[node name="If rounds active is not max" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active" index="7" node_paths=PackedStringArray("input", "value_override")]
+script = ExtResource("21_otyjr")
+input = NodePath("../../../../LT_PersistentVariables/Rounds active")
+comparison = 2
+value_override = NodePath("../../../../LT_PersistentVariables/Max rounds active")
+invert_recurse_condition = true
+
+[node name="Targets to indicate" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/If rounds active is not max" index="0"]
+script = ExtResource("6_1aoxj")
+
+[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/If rounds active is not max" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_w05gs")
+input_tiles = NodePath("../../Handle Move Logic/Tile to indicate")
+output_tiles = NodePath("../../../BeforeEveryXCalls/Targets to indicate")
+directions = 15
+
+[node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/If rounds active is not max" index="2" node_paths=PackedStringArray("tiles")]
+script = ExtResource("17_2eobx")
+tiles = NodePath("../../../BeforeEveryXCalls/Targets to indicate")
+indicator_to_spawn = ExtResource("18_vradi")
+
+[node name="If rounds active is max" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active" index="8" node_paths=PackedStringArray("input", "value_override")]
+script = ExtResource("21_otyjr")
+input = NodePath("../../../../LT_PersistentVariables/Rounds active")
+comparison = 1
+value_override = NodePath("../../../../LT_PersistentVariables/Max rounds active")
+
+[node name="Set not active" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/If rounds active is max" index="0" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("7_e8rbl")
+bool_variable = NodePath("../../../../../LT_PersistentVariables/Is active")
+
+[node name="Appear unready" type="Node" parent="LT_OnEntityUpdate/LogicTree/If active/If rounds active is max" index="1" node_paths=PackedStringArray("enemies")]
+script = ExtResource("24_7ghk6")
+enemies = NodePath("../../../../This enemy")
+appear_ready = false
+
+[node name="BeforeEveryXCalls" type="Node" parent="LT_OnEntityUpdate/LogicTree" index="2" node_paths=PackedStringArray("x_override")]
+script = ExtResource("5_lxsps")
+x_override = NodePath("../../../LT_PersistentVariables/Cooldown")
+on_one_before = true
+
+[node name="Targets to indicate" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="0"]
+script = ExtResource("6_1aoxj")
+
+[node name="Select adjacents" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("7_w05gs")
+input_tiles = NodePath("../../../Enemy tile")
+output_tiles = NodePath("../Targets to indicate")
+directions = 15
+
+[node name="Spawn indicators" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="2" node_paths=PackedStringArray("tiles")]
+script = ExtResource("17_2eobx")
+tiles = NodePath("../Targets to indicate")
+indicator_to_spawn = ExtResource("18_vradi")
+
+[node name="Appear ready" type="Node" parent="LT_OnEntityUpdate/LogicTree/BeforeEveryXCalls" index="3" node_paths=PackedStringArray("enemies")]
+script = ExtResource("24_7ghk6")
+enemies = NodePath("../../../This enemy")
