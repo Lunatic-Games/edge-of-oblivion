@@ -78,4 +78,4 @@ func reset_gold() -> void:
 	gold = 0
 	var game: Game = GlobalGameState.get_game()
 	var gold_display: GoldDisplay = game.player_overlay.gold_display
-	gold_display.set_display_amount(0)
+	gold_display.set_display_amount(0, false)
