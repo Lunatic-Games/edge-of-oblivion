@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://crrsjeb5bsnah"]
+
+[ext_resource type="PackedScene" uid="uid://dp8vqd55ydhui" path="res://Data/Entities/Enemies/Desert/CurvedSwordFighter/CurvedSwordFighter.tscn" id="1_eus0r"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_wfrqx"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_ghxao"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="4_tmogc"]
+[ext_resource type="Texture2D" uid="uid://c4obrqf4atmp7" path="res://Assets/art/icons/enemies/Delapouite/swords-power.svg" id="5_yu6ux"]
+
+[sub_resource type="Resource" id="Resource_31hnv"]
+script = ExtResource("2_wfrqx")
+max_health = 80
+can_be_damaged = true
+can_be_killed = true
+can_be_healed = true
+emit_particles_on_heal = true
+emit_particles_on_taking_damage = true
+
+[sub_resource type="Resource" id="Resource_gius2"]
+script = ExtResource("3_ghxao")
+size = 0
+blocking_behavior = 1
+can_be_pushed_off_map = true
+can_push_entities = false
+collectable_filter = 0
+
+[resource]
+script = ExtResource("4_tmogc")
+xp_value = 1
+entity_scene = ExtResource("1_eus0r")
+health_data = SubResource("Resource_31hnv")
+occupancy_data = SubResource("Resource_gius2")
+sprite = ExtResource("5_yu6ux")
+entity_name = "Curved Sword Fighter"
+main_text = "Attacks all adjacent tiles, then moves towards the player."
+flavor_text = "Was once the most venomous bite in the sand dunes."
