@@ -11,10 +11,6 @@ var gold: int = 0
 func _init(p_entity: Entity, p_data: InventoryData):
 	entity = p_entity
 	data = p_data
-	
-	var game: Game = GlobalGameState.get_game()
-	var inventory_display: InventoryDisplay = game.player_overlay.inventory_display
-	inventory_display.reset_display()
 
 
 func add_starting_items():
@@ -65,3 +61,21 @@ func add_gold(amount: int) -> void:
 	var game: Game = GlobalGameState.get_game()
 	var gold_display: GoldDisplay = game.player_overlay.gold_display
 	gold_display.set_display_amount(gold)
+
+
+func reset_items(add_starting_items_back: bool = true) -> void:
+	items.clear()
+	
+	var game: Game = GlobalGameState.get_game()
+	var inventory_display: InventoryDisplay = game.player_overlay.inventory_display
+	inventory_display.reset_display()
+	
+	if add_starting_items_back:
+		add_starting_items()
+
+
+func reset_gold() -> void:
+	gold = 0
+	var game: Game = GlobalGameState.get_game()
+	var gold_display: GoldDisplay = game.player_overlay.gold_display
+	gold_display.set_display_amount(0)

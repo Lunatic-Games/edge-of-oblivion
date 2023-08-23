@@ -57,10 +57,9 @@ func transition_to_new_level(new_level_data: LevelData) -> void:
 	set_process(false)
 	fade_animator.play("fade_out")
 	await fade_animator.animation_finished
-	if new_level_data.persist_player_on_entering:
-		var player: Player = GlobalGameState.get_player()
-		if player:
-			player.reparent(self)
+	var player: Player = GlobalGameState.get_player()
+	if player:
+		player.reparent(self)
 	
 	if level != null:
 		level.queue_free()
