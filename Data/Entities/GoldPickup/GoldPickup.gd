@@ -14,7 +14,7 @@ func _on_collected(by: Entity) -> void:
 	if by is Player:
 		var player: Player = by as Player
 		var inventory: Inventory = player.inventory
-		inventory.add_gold(gold_amount)
+		inventory.add_or_remove_gold(gold_amount)
 	elif by is Enemy:
 		var enemy: Enemy = by as Enemy
 		var storage: GoldStorage = enemy.gold_storage

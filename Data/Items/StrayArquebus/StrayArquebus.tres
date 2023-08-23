@@ -11,6 +11,7 @@ item_scene = ExtResource("2")
 item_name = "Stray Arquebus"
 popup_item_name_color = "royalblue"
 flavor_text = "So anyways I started blasting."
+shop_cost = 1
 max_tier = 3
 use_tier_1_text_for_popup_texts = true
 card_text_1 = "Every 3 turns: Attack in the last moved direction.

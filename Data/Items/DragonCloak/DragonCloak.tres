@@ -11,6 +11,7 @@ item_scene = ExtResource("2")
 item_name = "Dragon Cloak"
 popup_item_name_color = "red"
 flavor_text = "Once used by dragon slayers of old."
+shop_cost = 1
 max_tier = 3
 use_tier_1_text_for_popup_texts = false
 card_text_1 = "Every 4 turns: Burn everything in radius 1 for 10 damage."

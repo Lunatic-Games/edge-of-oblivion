@@ -11,6 +11,7 @@ item_scene = ExtResource("1_ofelp")
 item_name = "Zeus' Sword"
 popup_item_name_color = "cyan"
 flavor_text = "The blade of a former god. Shocking."
+shop_cost = 1
 max_tier = 3
 use_tier_1_text_for_popup_texts = true
 card_text_1 = "Attack a random adjacent enemy. [volatile]Volatile[/volatile]: Also has a small chance to zap nearby enemies. [chain]Chain 2[/chain]."

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="NPCData" load_steps=12 format=3 uid="uid://b42cxrlifdvsq"]
+
+[ext_resource type="PackedScene" uid="uid://c4a3ey4658ncl" path="res://Data/Entities/NPCs/Dwarf/Dwarf.tscn" id="1_ficox"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="2_fc2sh"]
+[ext_resource type="Script" path="res://Data/Entities/NPCs/NPC_DATA.gd" id="3_h1fld"]
+[ext_resource type="Resource" uid="uid://dhbycs5j4to6b" path="res://Data/Items/DragonCloak/DragonCloak.tres" id="4_v3xh1"]
+[ext_resource type="Resource" uid="uid://ciom03ipb83hk" path="res://Data/Items/HolyFire/HolyFire.tres" id="5_cms2t"]
+[ext_resource type="Resource" uid="uid://baj6eb61iqagw" path="res://Data/Items/StrayArquebus/StrayArquebus.tres" id="6_ja1jy"]
+[ext_resource type="Resource" uid="uid://dst01geftrhcn" path="res://Data/Items/ZeusSword/ZeusSword.tres" id="7_a00oy"]
+[ext_resource type="Script" path="res://Data/Entities/NPCs/_Components/SHOP_POOL_DATA.gd" id="8_24pp5"]
+[ext_resource type="Texture2D" uid="uid://csq8oey8u2p8t" path="res://Assets/art/icons/medieval-fantasy/kier-heyl/dwarf-helmet.svg" id="9_c1pyu"]
+
+[sub_resource type="Resource" id="Resource_6v0lp"]
+script = ExtResource("2_fc2sh")
+size = 0
+blocking_behavior = 1
+can_be_pushed_off_map = false
+can_push_entities = false
+collectable_filter = 0
+
+[sub_resource type="Resource" id="Resource_7863l"]
+script = ExtResource("8_24pp5")
+item_pool = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("4_v3xh1"), ExtResource("5_cms2t"), ExtResource("6_ja1jy"), ExtResource("7_a00oy")])
+max_n_items_to_offer = 6
+
+[resource]
+script = ExtResource("3_h1fld")
+shop_pool_data = SubResource("Resource_7863l")
+entity_scene = ExtResource("1_ficox")
+occupancy_data = SubResource("Resource_6v0lp")
+sprite = ExtResource("9_c1pyu")
+entity_name = "Bigon the Fishen"
+main_text = ""
+flavor_text = ""

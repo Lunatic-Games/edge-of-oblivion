@@ -78,6 +78,9 @@ func _process(_delta: float) -> void:
 	if upgrade_menu.has_priority == true or dialogue_overlay.has_priority == true:
 		return
 	
+	if shop_menu.visible:
+		return
+	
 	game_mode.update()
 
 

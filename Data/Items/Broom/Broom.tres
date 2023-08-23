@@ -11,6 +11,7 @@ item_scene = ExtResource("2")
 item_name = "Broom"
 popup_item_name_color = "royalblue"
 flavor_text = "Trusted by witches everywhere."
+shop_cost = 1
 max_tier = 3
 use_tier_1_text_for_popup_texts = true
 card_text_1 = "[knockback]Knockback[/knockback] a random adjacent enemy."

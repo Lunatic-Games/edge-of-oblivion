@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://UI/Menus/ShopMenu/ShopMenu.gd" id="1_gdmnj"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="1_mpyqx"]
-[ext_resource type="PackedScene" uid="uid://dins546jhadrn" path="res://UI/Elements/Card/Card.tscn" id="1_npaii"]
 [ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="3_hibpc"]
+[ext_resource type="PackedScene" uid="uid://6yuv3obvadka" path="res://UI/Overlays/PlayerOverlay/GoldDisplay/GoldDisplay.tscn" id="4_3k4ef"]
 
 [sub_resource type="FontVariation" id="FontVariation_ya4pm"]
 base_font = ExtResource("1_mpyqx")
@@ -11,6 +11,14 @@ spacing_space = 2
 
 [node name="ShopMenu" type="CanvasLayer"]
 script = ExtResource("1_gdmnj")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.466667)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -49,8 +57,7 @@ theme_override_font_sizes/font_size = 110
 text = "SHOP"
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(179, 0)
+[node name="GoldDisplay" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("4_3k4ef")]
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
@@ -58,24 +65,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
-
-[node name="Card" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
-layout_mode = 2
-
-[node name="Card2" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
-layout_mode = 2
-
-[node name="Card3" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
-layout_mode = 2
-
-[node name="Card4" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
-layout_mode = 2
-
-[node name="Card5" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
-layout_mode = 2
-
-[node name="Card6" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
-layout_mode = 2
 
 [node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)

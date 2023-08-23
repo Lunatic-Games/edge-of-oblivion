@@ -1,4 +1,4 @@
-@icon("res://Assets/art/dialogue-state/start.png")
+@icon("res://Assets/art/dialogue-state/money.png")
 class_name DS_OpenShop
 extends DialogueState
 
@@ -21,13 +21,12 @@ func on_enter():
 	var data: NPCData = npc.data as NPCData
 	var shop_pool_data: ShopPoolData = data.shop_pool_data
 	
+	dialogue_overlay.close()
+	
 	if shop_pool_data != null:
 		game.shop_menu.open(shop_pool_data.item_pool)
 	else:
 		game.shop_menu.open([])
-	
-	dialogue_overlay.close()
-	
 	game.shop_menu.closed.connect(_on_shop_closed, CONNECT_ONE_SHOT)
 
 
