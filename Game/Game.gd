@@ -16,6 +16,7 @@ var run_over: bool = false
 @onready var player_overlay: PlayerOverlay = $HUD/PlayerOverlay
 @onready var boss_overlay: BossOverlay = $HUD/BossOverlay
 
+@onready var shop_menu: ShopMenu = $Menus/ShopMenu
 @onready var upgrade_menu: UpgradeMenu = $Menus/UpgradeMenu
 @onready var victory_menu: VictoryMenu = $Menus/VictoryMenu
 @onready var game_over_menu: GameOverMenu = $Menus/GameOverMenu

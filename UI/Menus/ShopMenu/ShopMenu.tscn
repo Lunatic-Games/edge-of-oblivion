@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://q42hpg4kyidd"]
+
+[ext_resource type="Script" path="res://UI/Menus/ShopMenu/ShopMenu.gd" id="1_gdmnj"]
+[ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="1_mpyqx"]
+[ext_resource type="PackedScene" uid="uid://dins546jhadrn" path="res://UI/Elements/Card/Card.tscn" id="1_npaii"]
+[ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="3_hibpc"]
+
+[sub_resource type="FontVariation" id="FontVariation_ya4pm"]
+base_font = ExtResource("1_mpyqx")
+spacing_space = 2
+
+[node name="ShopMenu" type="CanvasLayer"]
+script = ExtResource("1_gdmnj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackButton" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_hibpc")]
+layout_mode = 2
+text = "< BACK"
+
+[node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_ya4pm")
+theme_override_font_sizes/font_size = 110
+text = "SHOP"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(179, 0)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="Card" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
+layout_mode = 2
+
+[node name="Card2" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
+layout_mode = 2
+
+[node name="Card3" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
+layout_mode = 2
+
+[node name="Card4" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
+layout_mode = 2
+
+[node name="Card5" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
+layout_mode = 2
+
+[node name="Card6" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource("1_npaii")]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

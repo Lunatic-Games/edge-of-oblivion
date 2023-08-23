@@ -11,6 +11,7 @@ const POPUP_TEXT_EXPORT_PREFIX: String = "popup_text_"
 @export_placeholder("Item Name") var item_name: String = ""
 @export_enum("red", "royalblue", "cyan", "springgreen", "white") var popup_item_name_color: String = "royalblue"
 @export_multiline var flavor_text: String = ""
+@export_range(0, 1000, 1, "or_greater") var shop_cost: int = 0
 
 @export_range(1, 10, 1, "or_greater") var max_tier: int = 3:
 	set = _set_max_tier
