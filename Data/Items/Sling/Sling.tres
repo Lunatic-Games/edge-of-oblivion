@@ -11,6 +11,7 @@ item_scene = ExtResource("1_boska")
 item_name = "Sling"
 popup_item_name_color = "royalblue"
 flavor_text = "Deadly with mastery"
+shop_cost = 120
 max_tier = 3
 use_tier_1_text_for_popup_texts = false
 card_text_1 = "Every 4 rounds: attack range 2 for 20 damage."

@@ -11,6 +11,7 @@ item_scene = ExtResource("1_yfx5t")
 item_name = "Berserker Stone"
 popup_item_name_color = "royalblue"
 flavor_text = "A stone full of rage and hate..."
+shop_cost = 200
 max_tier = 3
 use_tier_1_text_for_popup_texts = false
 card_text_1 = "Upon dealing self damage 5 times, activate for 4 rounds. While active, 10% lifesteal on all attacks."

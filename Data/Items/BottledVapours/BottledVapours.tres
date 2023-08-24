@@ -11,6 +11,7 @@ item_scene = ExtResource("1_w3r2e")
 item_name = "Bottled Vapours"
 popup_item_name_color = "royalblue"
 flavor_text = "Every whiff is something different."
+shop_cost = 120
 max_tier = 3
 use_tier_1_text_for_popup_texts = true
 card_text_1 = "Alternates between healing, and dealing damage to self and a random enemy in radius 2."
