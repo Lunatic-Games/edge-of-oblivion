@@ -15,7 +15,7 @@ func _init(p_game: Game, game_mode_data: GameModeData) -> void:
 	data = game_mode_data
 	
 	GlobalSignals.boss_defeated.connect(_on_boss_defeated)
-	game.upgrade_menu.closed.connect(_on_upgrade_menu_closed)
+	game.level_up_menu.closed.connect(_on_level_up_menu_closed)
 	
 	game.get_tree().call_group("spawner", "spawn_entity")
 	
@@ -23,6 +23,9 @@ func _init(p_game: Game, game_mode_data: GameModeData) -> void:
 	player.reset(game.level_data.player_persistence)
 	player.health.died.connect(_on_player_died)
 	player.levelling.levelled_up.connect(_on_player_levelled_up)
+	if game_mode_data.add_starting_items_if_empty_inventory:
+		if player.inventory.items.is_empty():
+			player.inventory.add_starting_items()
 	
 	_spawn_flags_for_next_round()
 	
@@ -118,7 +121,7 @@ func _on_player_died(_source: int) -> void:
 
 
 func _on_player_levelled_up(_player_level: int):
-	game.upgrade_menu.queue_upgrade()
+	game.level_up_menu.queue_upgrade()
 
 
 func _on_boss_defeated(_boss: Enemy) -> void:
@@ -132,5 +135,5 @@ func _on_boss_defeated(_boss: Enemy) -> void:
 			game.spawn_handler.spawn_gateway(level_data.next_level)
 
 
-func _on_upgrade_menu_closed() -> void:
+func _on_level_up_menu_closed() -> void:
 	game.check_for_level_transition()

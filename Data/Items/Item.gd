@@ -8,15 +8,17 @@ signal tier_increased
 var data: ItemData = null
 var user: Entity = null
 var current_tier: int = 1
+var forge_level: int = 1
 
 @onready var texture_rect: TextureRect = $Texture
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var countdown_label: Label = $CountdownLabel
 
 
-func setup(item_user: Entity, item_data: ItemData) -> void:
+func setup(item_user: Entity, item_data: ItemData, p_forge_level: int) -> void:
 	user = item_user
 	data = item_data
+	forge_level = p_forge_level
 	texture_rect.texture = data.sprite
 	
 	setup_completed.emit()

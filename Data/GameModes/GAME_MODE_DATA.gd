@@ -5,6 +5,7 @@ extends Resource
 @export var show_player_ui_overlay: bool = true
 @export var update_items: bool = true
 @export var increment_round_number: bool = true
+@export var add_starting_items_if_empty_inventory: bool = true
 
 @export_group("Phase durations")
 @export_range(0.0, 1.0, 0.01, "or_greater") var move_phase_duration_seconds: float = 0.05

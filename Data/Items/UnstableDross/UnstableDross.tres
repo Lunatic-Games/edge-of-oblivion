@@ -12,7 +12,11 @@ item_name = "Unstable Dross"
 popup_item_name_color = "royalblue"
 flavor_text = "An unwieldy weapon."
 max_tier = 3
+max_forge_level = 3
 use_tier_1_text_for_popup_texts = false
+cost_level_1 = 1
+cost_level_2 = 1
+cost_level_3 = 1
 card_text_1 = "Every 15 turns: Attack orthognally radius 2, for 25 damage, and yourself for 8 damage."
 card_text_2 = "Damage to self 8 -> 15.
 Damage to enemies 25 -> 50."

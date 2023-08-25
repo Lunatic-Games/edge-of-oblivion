@@ -16,5 +16,5 @@ func on_enter():
 	var game: Game = GlobalGameState.get_game()
 	assert(game.item_deck.has(item_to_add) == false, "Probably need a DS_IfDeckHasItem or something...")
 	
-	game.item_deck.append(item_to_add)
+	game.item_deck[item_to_add] = 1
 	transition(next_state)

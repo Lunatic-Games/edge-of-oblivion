@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dins546jhadrn"]
+[gd_scene load_steps=30 format=3 uid="uid://dins546jhadrn"]
 
 [ext_resource type="Script" path="res://UI/Elements/Card/Card.gd" id="1_e71sb"]
 [ext_resource type="PackedScene" uid="uid://57a3ac7a6uvb" path="res://Data/Particles/UI/RayParticles.tscn" id="2_2sdpx"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://UI/BBCode/Lifesteal.gd" id="11_83f2t"]
 [ext_resource type="Script" path="res://UI/BBCode/Volatile.gd" id="12_8k5ex"]
 [ext_resource type="Script" path="res://UI/BBCode/Range.gd" id="13_f5qhd"]
+[ext_resource type="Texture2D" uid="uid://8ck0qp711ccb" path="res://Assets/art/ui/card/star.svg" id="15_x1tuf"]
 
 [sub_resource type="Animation" id="Animation_ufg8h"]
 length = 0.001
@@ -648,6 +649,30 @@ theme_override_font_sizes/font_size = 28
 text = "LOCKED"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StarContainer" type="HBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -161.0
+offset_top = 34.0
+offset_right = 161.0
+offset_bottom = 66.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Star" type="TextureRect" parent="Background/StarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("15_x1tuf")
+expand_mode = 1
+
+[node name="Star2" type="TextureRect" parent="Background/StarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("15_x1tuf")
+expand_mode = 1
 
 [node name="RayParticles" parent="." instance=ExtResource("2_2sdpx")]
 modulate = Color(1, 1, 1, 0)

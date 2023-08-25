@@ -33,7 +33,7 @@ func add_item(item_data: ItemData, animate: bool = true) -> void:
 	var game: Game = GlobalGameState.get_game()
 	var inventory_display: InventoryDisplay = game.player_overlay.inventory_display
 	inventory_display.add_item_to_display(item, animate)
-	item.setup(entity, item_data)
+	item.setup(entity, item_data, game.item_deck.get(item_data, 1))
 	
 	GlobalSignals.item_added_to_inventory.emit(item, item_data)
 
@@ -66,15 +66,12 @@ func add_or_remove_gold(amount: int, animate: bool = true) -> void:
 	gold_display.set_display_amount(gold, animate)
 
 
-func reset_items(add_starting_items_back: bool = true) -> void:
+func reset_items() -> void:
 	items.clear()
 	
 	var game: Game = GlobalGameState.get_game()
 	var inventory_display: InventoryDisplay = game.player_overlay.inventory_display
 	inventory_display.reset_display()
-	
-	if add_starting_items_back:
-		add_starting_items()
 
 
 func reset_gold() -> void:

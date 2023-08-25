@@ -1,4 +1,4 @@
-class_name ShopMenu
+class_name ForgeMenu
 extends CanvasLayer
 
 
@@ -15,11 +15,18 @@ func open(items_to_offer: Array[ItemData]) -> void:
 	for card in card_container.get_children():
 		card.queue_free()
 	
+	var game: Game = GlobalGameState.get_game()
+	
 	for item_data in items_to_offer:
 		var card: Card = CARD_SCENE.instantiate()
 		card_container.add_child(card)
-		card.setup(item_data, 1, 1)
-		card.show_cost(1)
+		
+		var forge_level: int = 1
+		if game != null:
+			forge_level = game.item_deck.get(item_data, 1)
+		
+		card.setup(item_data, 1)
+		card.show_cost(forge_level)
 		card.selected.connect(_on_card_selected.bind(card))
 	
 	update_card_availabilities()
@@ -32,17 +39,18 @@ func update_card_availabilities():
 	var player: Player = GlobalGameState.get_player()
 	if game == null or player == null:
 		return
-		
+	
 	var item_deck: Dictionary = game.item_deck
 	var held_gold = player.inventory.gold
 	
 	for card in card_container.get_children():
 		card = card as Card
 		var data: ItemData = card.held_item_data
+		var forge_level: int = item_deck.get(data, 1)
 		
-		if item_deck.has(data) == true:
-			card.lock("ACQUIRED")
-		elif data.get_cost(1) > held_gold:
+		if forge_level >= data.max_forge_level:
+			card.lock("MAX FORGE LEVEL")
+		elif data.get_cost(forge_level) > held_gold:
 			card.lock("NOT ENOUGH GOLD")
 		else:
 			card.un_lock()
@@ -65,10 +73,13 @@ func _on_card_selected(card: Card):
 	
 	var item_deck: Dictionary = game.item_deck
 	var selected_item_data: ItemData = card.held_item_data
-	assert(item_deck.has(selected_item_data) == false, "Trying to add duplicate card to item deck")
 	
-	item_deck[selected_item_data] = 1
-	player.inventory.add_or_remove_gold(-selected_item_data.get_cost(1))
+	var forge_level: int = item_deck.get(selected_item_data, 1)
+	var new_forge_level: int = forge_level + 1
+	item_deck[selected_item_data] = new_forge_level
+	player.inventory.add_or_remove_gold(-selected_item_data.get_cost(forge_level))
+	card.update_stars(new_forge_level)
+	card.show_cost(new_forge_level)
 	update_card_availabilities()
 	update_gold_display()
 
