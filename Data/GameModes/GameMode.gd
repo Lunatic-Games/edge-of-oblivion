@@ -20,7 +20,7 @@ func _init(p_game: Game, game_mode_data: GameModeData) -> void:
 	game.get_tree().call_group("spawner", "spawn_entity")
 	
 	player = GlobalGameState.get_player()  # Spawned by player spawner
-	player.reset(game.level_data.player_persistence)
+	player.reset(data.player_persistence)
 	player.health.died.connect(_on_player_died)
 	player.levelling.levelled_up.connect(_on_player_levelled_up)
 	if game_mode_data.add_starting_items_if_empty_inventory:
@@ -121,7 +121,7 @@ func _on_player_died(_source: int) -> void:
 
 
 func _on_player_levelled_up(_player_level: int):
-	game.level_up_menu.queue_upgrade()
+	game.level_up_menu.queue_level_up()
 
 
 func _on_boss_defeated(_boss: Enemy) -> void:

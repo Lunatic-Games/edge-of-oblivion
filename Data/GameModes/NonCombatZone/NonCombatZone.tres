@@ -8,6 +8,7 @@ show_player_ui_overlay = false
 update_items = false
 increment_round_number = false
 add_starting_items_if_empty_inventory = false
+player_persistence = 5
 move_phase_duration_seconds = 0.2
 item_phase_duration_seconds = 0.0
 tile_phase_duration_seconds = 0.0

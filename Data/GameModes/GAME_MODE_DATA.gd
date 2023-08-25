@@ -7,6 +7,9 @@ extends Resource
 @export var increment_round_number: bool = true
 @export var add_starting_items_if_empty_inventory: bool = true
 
+# See Player.gd PersistenceSettings
+@export_flags("Health", "Items", "Gold", "XP") var player_persistence: int = 15
+
 @export_group("Phase durations")
 @export_range(0.0, 1.0, 0.01, "or_greater") var move_phase_duration_seconds: float = 0.05
 @export_range(0.0, 1.0, 0.01, "or_greater") var item_phase_duration_seconds: float = 0.15

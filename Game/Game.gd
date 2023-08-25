@@ -126,7 +126,7 @@ func game_over():
 
 
 func check_for_upgrades() -> bool:
-	if level_up_menu.n_queued_upgrades > 0 and run_over == false:
+	if level_up_menu.n_queued_level_ups > 0 and run_over == false:
 		level_up_menu.display()
 		return true
 	
