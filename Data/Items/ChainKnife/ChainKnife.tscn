@@ -40,7 +40,7 @@ default_value = true
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="4"]
 script = ExtResource("3_dtkml")
-default_value = 10
+default_value = 15
 
 [node name="Self Damage" type="Node" parent="LT_PersistentVariables" index="5"]
 script = ExtResource("3_dtkml")
