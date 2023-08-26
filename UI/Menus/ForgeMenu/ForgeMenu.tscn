@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvhbuo7beorol"]
+
+[ext_resource type="Script" path="res://UI/Menus/ForgeMenu/ForgeMenu.gd" id="1_23naq"]
+[ext_resource type="PackedScene" uid="uid://dtpkylmn14mi6" path="res://UI/Elements/MenuButton/MenuButton.tscn" id="2_70tw1"]
+[ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="3_l0q4a"]
+[ext_resource type="PackedScene" uid="uid://6yuv3obvadka" path="res://UI/Overlays/PlayerOverlay/GoldDisplay/GoldDisplay.tscn" id="4_47gmp"]
+
+[sub_resource type="FontVariation" id="FontVariation_ya4pm"]
+base_font = ExtResource("3_l0q4a")
+spacing_space = 2
+
+[node name="ForgeMenu" type="CanvasLayer"]
+script = ExtResource("1_23naq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.466667)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackButton" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_70tw1")]
+layout_mode = 2
+text = "< BACK"
+
+[node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0.498039, 0.631373, 0.870588, 0.384314)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_ya4pm")
+theme_override_font_sizes/font_size = 110
+text = "FORGE"
+horizontal_alignment = 1
+
+[node name="GoldDisplay" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("4_47gmp")]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -11,9 +11,12 @@ item_scene = ExtResource("2")
 item_name = "Lightning Bow"
 popup_item_name_color = "cyan"
 flavor_text = "A Zeus and Artemis collaboration. "
-shop_cost = 1
 max_tier = 3
+max_forge_level = 3
 use_tier_1_text_for_popup_texts = false
+cost_level_1 = 1
+cost_level_2 = 1
+cost_level_3 = 1
 card_text_1 = "Every 3 turns: Attack up.
 [color=pink]Range 1[/color]. [color=cyan]Chain 1[/color]."
 card_text_2 = "[chain]Chain 1->4[/chain]."

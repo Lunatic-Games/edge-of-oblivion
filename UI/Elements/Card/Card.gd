@@ -17,13 +17,14 @@ var is_hovered: bool = false
 @onready var item_sprite: TextureRect = $Background/ItemSprite
 @onready var card_description: RichTextLabel = $Background/BottomText/Description
 @onready var flavor_text: Label = $Background/BottomText/FlavorText
+@onready var star_container: Container = $Background/StarContainer
 
 @onready var locked_rect: ColorRect = $Background/LockedRect
 @onready var locked_label: Label = $Background/LockedRect/LockedLabel
 @onready var cost_label: Label = $Background/Cost
 
 
-func setup(item_data: ItemData, item_tier: int, hover: bool = true):
+func setup(item_data: ItemData, item_tier: int, forge_level: int = 1, hover: bool = true):
 	held_item_data = item_data
 	
 	card_name.text = item_data.item_name
@@ -35,11 +36,18 @@ func setup(item_data: ItemData, item_tier: int, hover: bool = true):
 	
 	flavor_text.text = item_data.flavor_text
 	
+	update_stars(forge_level)
+	
 	if hover and hover_tween == null:
 		hover_tween = create_tween()
 		hover_tween.tween_property(background, "position:y", -10, 2.0).as_relative()
 		hover_tween.chain().tween_property(background, "position:y", 10, 2.0).as_relative()
 		hover_tween.set_loops()
+
+
+func update_stars(forge_level: int = 1) -> void:
+	for i in star_container.get_child_count():
+		star_container.get_child(i).visible = forge_level > i + 1
 
 
 func lock(text: String = "LOCKED") -> void:
@@ -54,8 +62,8 @@ func un_lock() -> void:
 	locked_rect.hide()
 
 
-func show_cost() -> void:
-	cost_label.text = str(held_item_data.shop_cost) + "G"
+func show_cost(forge_level: int = 1) -> void:
+	cost_label.text = str(held_item_data.get_cost(forge_level)) + "G"
 	cost_label.show()
 
 

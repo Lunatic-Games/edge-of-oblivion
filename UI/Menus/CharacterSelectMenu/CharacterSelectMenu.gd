@@ -16,7 +16,7 @@ var transitioning_out: bool = false
 
 
 func _ready() -> void:
-	card.setup(displayed_item_data, 1, false)
+	card.setup(displayed_item_data, 1, 1, false)
 
 
 func fade_in():

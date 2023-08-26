@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4a3ey4658ncl"]
+
+[ext_resource type="PackedScene" uid="uid://bpp12botbqk4r" path="res://Data/Entities/NPCs/NPC.tscn" id="1_cf0yp"]
+[ext_resource type="Texture2D" uid="uid://pcahxrbossnb" path="res://Assets/art/icons/medieval-fantasy/kier-heyl/elf-helmet.svg" id="2_i00qd"]
+[ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="3_758lw"]
+[ext_resource type="Script" path="res://DialogueState/Basic/Text.gd" id="4_b0efo"]
+[ext_resource type="Script" path="res://DialogueState/OpenShop/OpenShop.gd" id="5_ewymn"]
+
+[node name="Armorer" instance=ExtResource("1_cf0yp")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_i00qd")
+
+[node name="ItemGiven" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("3_758lw")
+
+[node name="DS_Start" parent="." index="5" node_paths=PackedStringArray("start_state")]
+start_state = NodePath("Intro text")
+
+[node name="Intro text" type="Node" parent="DS_Start" index="0" node_paths=PackedStringArray("next_state")]
+script = ExtResource("4_b0efo")
+text = Array[String](["Armorer has wares, if you have the coin..."])
+next_state = NodePath("../DS_OpenShop")
+
+[node name="DS_OpenShop" type="Node" parent="DS_Start" index="1" node_paths=PackedStringArray("state_after_closing")]
+script = ExtResource("5_ewymn")
+state_after_closing = NodePath("../Outro")
+
+[node name="Outro" type="Node" parent="DS_Start" index="2" node_paths=PackedStringArray("next_state")]
+script = ExtResource("4_b0efo")
+text = Array[String](["May thy sword strike true."])
+next_state = NodePath("../DS_End")

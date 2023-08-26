@@ -16,6 +16,3 @@ enum GatewaySpawnCondition {
 @export var game_mode: GameModeData = preload("res://Data/GameModes/Standard/Standard.tres")
 @export var gateway_spawn_condition: GatewaySpawnCondition = GatewaySpawnCondition.NEVER
 @export var killing_boss_completes_run: bool = false
-
-# See Player.gd PersistenceSettings
-@export_flags("Health", "Items", "Gold", "XP") var player_persistence: int = 15

@@ -1,5 +1,5 @@
-@icon("res://Assets/art/dialogue-state/money.png")
-class_name DS_OpenShop
+@icon("res://Assets/art/dialogue-state/hammer.png")
+class_name DS_OpenForge
 extends DialogueState
 
 
@@ -16,20 +16,17 @@ func on_enter():
 	if game == null or dialogue_overlay == null:
 		return
 	
-	var npc: NPC = owner as NPC
-	assert(npc != null, "OpenShop is currently only supported on NPCs")
-	
 	dialogue_overlay.close()
 	
-	if npc.shop_pool != null:
-		game.shop_menu.open(npc.shop_pool.items)
-	else:
-		game.shop_menu.open([])
-	game.shop_menu.closed.connect(_on_shop_closed, CONNECT_ONE_SHOT)
+	var items_to_forge: Array[ItemData] = []
+	for item_data in game.item_deck:
+		items_to_forge.append(item_data)
+	game.forge_menu.open(items_to_forge)
+	game.forge_menu.closed.connect(_on_forge_closed, CONNECT_ONE_SHOT)
 
 
 
-func _on_shop_closed() -> void:
+func _on_forge_closed() -> void:
 	var dialogue_overlay: DialogueOverlay = GlobalGameState.get_dialogue_overlay()
 	if dialogue_overlay != null:
 		dialogue_overlay.open()
