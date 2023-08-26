@@ -27,6 +27,18 @@ default_value = 9
 script = ExtResource("4_5j58d")
 default_value = 5
 
+[node name="Increase heal 2" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("6_g0orv")
+int_variable = NodePath("../../../../LT_PersistentVariables/Heal")
+value = 2
+operation = 1
+
+[node name="Increase heal 2" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("6_g0orv")
+int_variable = NodePath("../../../../LT_PersistentVariables/Heal")
+value = 2
+operation = 1
+
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("5_iq66l")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")

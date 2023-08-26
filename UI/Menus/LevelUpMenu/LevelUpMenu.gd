@@ -1,5 +1,5 @@
 @tool
-class_name UpgradeMenu
+class_name LevelUpMenu
 extends CanvasLayer
 
 
@@ -11,7 +11,7 @@ signal closed
 	set = _set_n_card_to_spawn
 
 var inventory_limit: int = 5
-var n_queued_upgrades: int = 0  # For if multiple level ups occur
+var n_queued_level_ups: int = 0  # For if multiple level ups occur
 var has_priority: bool = false  # Player won't move when upgrade menu has priority
 
 # Size of (inventory_limit + 1) and contains ints between 0 and max_n_cards_to_spawn
@@ -33,22 +33,22 @@ func _ready() -> void:
 
 
 # Upgrades are queued during turn and then done on start of player turn
-func queue_upgrade() -> void:
-	n_queued_upgrades += 1
+func queue_level_up() -> void:
+	n_queued_level_ups += 1
 
 
 func display() -> void:
-	assert(n_queued_upgrades > 0, "Trying to display upgrade menu without queued upgrade!")
+	assert(n_queued_level_ups > 0, "Trying to display upgrade menu without queued upgrade!")
 	
 	if card_display.get_child_count() > 0:
 		return
 		
 	has_priority = true
-	n_queued_upgrades -= 1
+	n_queued_level_ups -= 1
 	
 	var possible_items: Array[ItemData] = []
 	var game: Game = GlobalGameState.get_game()
-	possible_items.append_array(game.item_deck)
+	possible_items.append_array(game.item_deck.keys())
 	possible_items.shuffle()
 	
 	var player: Player = GlobalGameState.get_player()
@@ -94,7 +94,7 @@ func display() -> void:
 
 func _on_card_display_card_selected() -> void:
 	title_animator.play("fade_out")
-	if n_queued_upgrades > 0:
+	if n_queued_level_ups > 0:
 		await card_display.finished_animating_selection
 		display()
 	else:

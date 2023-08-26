@@ -80,4 +80,3 @@ next_level = ExtResource("8_62kuv")
 game_mode = ExtResource("1_dj13m")
 gateway_spawn_condition = 2
 killing_boss_completes_run = false
-player_persistence = 15

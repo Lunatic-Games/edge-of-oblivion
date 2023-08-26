@@ -18,8 +18,8 @@ func open(items_to_offer: Array[ItemData]) -> void:
 	for item_data in items_to_offer:
 		var card: Card = CARD_SCENE.instantiate()
 		card_container.add_child(card)
-		card.setup(item_data, 1)
-		card.show_cost()
+		card.setup(item_data, 1, 1)
+		card.show_cost(1)
 		card.selected.connect(_on_card_selected.bind(card))
 	
 	update_card_availabilities()
@@ -33,14 +33,16 @@ func update_card_availabilities():
 	if game == null or player == null:
 		return
 		
-	var item_deck: Array[ItemData] = game.item_deck
+	var item_deck: Dictionary = game.item_deck
 	var held_gold = player.inventory.gold
 	
 	for card in card_container.get_children():
 		card = card as Card
-		if item_deck.has(card.held_item_data) == true:
+		var data: ItemData = card.held_item_data
+		
+		if item_deck.has(data) == true:
 			card.lock("ACQUIRED")
-		elif card.held_item_data.shop_cost > held_gold:
+		elif data.get_cost(1) > held_gold:
 			card.lock("NOT ENOUGH GOLD")
 		else:
 			card.un_lock()
@@ -61,12 +63,12 @@ func _on_card_selected(card: Card):
 	if game == null or player == null:
 		return
 	
-	var item_deck: Array[ItemData] = game.item_deck
+	var item_deck: Dictionary = game.item_deck
 	var selected_item_data: ItemData = card.held_item_data
 	assert(item_deck.has(selected_item_data) == false, "Trying to add duplicate card to item deck")
 	
-	item_deck.append(selected_item_data)
-	player.inventory.add_or_remove_gold(-selected_item_data.shop_cost)
+	item_deck[selected_item_data] = 1
+	player.inventory.add_or_remove_gold(-selected_item_data.get_cost(1))
 	update_card_availabilities()
 	update_gold_display()
 

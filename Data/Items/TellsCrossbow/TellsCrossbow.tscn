@@ -21,11 +21,23 @@ default_value = 40
 
 [node name="Cooldown" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("2_gkouv")
-default_value = 5
+default_value = 6
 
 [node name="Range" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("2_gkouv")
 default_value = 1
+
+[node name="Decrease cooldown" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("13_gno2y")
+int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
+value = 1
+operation = 2
+
+[node name="Increase damage" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("13_gno2y")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 40
+operation = 1
 
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("4_2ii1p")

@@ -8,7 +8,8 @@ var game_mode: GameMode = null
 var spawn_handler: SpawnHandler = SpawnHandler.new()
 var run_stats: RunStats = RunStats.new()
 var queued_level_transition: LevelData = null
-var item_deck: Array[ItemData] = []
+
+var item_deck: Dictionary = {}  # ItemData : forge level (int)
 
 var run_over: bool = false
 
@@ -17,7 +18,8 @@ var run_over: bool = false
 @onready var boss_overlay: BossOverlay = $HUD/BossOverlay
 
 @onready var shop_menu: ShopMenu = $Menus/ShopMenu
-@onready var upgrade_menu: UpgradeMenu = $Menus/UpgradeMenu
+@onready var forge_menu: ForgeMenu = $Menus/ForgeMenu
+@onready var level_up_menu: LevelUpMenu = $Menus/LevelUpMenu
 @onready var victory_menu: VictoryMenu = $Menus/VictoryMenu
 @onready var game_over_menu: GameOverMenu = $Menus/GameOverMenu
 @onready var pause_menu: PauseMenu = $Menus/PauseMenu
@@ -34,7 +36,8 @@ func _ready() -> void:
 	await new_level_setup()
 	
 	var player_data: PlayerData = GlobalGameState.get_player().data as PlayerData
-	item_deck.append_array(player_data.initial_item_deck)
+	for item_data in player_data.initial_item_deck:
+		item_deck[item_data] = 1
 	
 	GlobalSignals.run_started.emit()
 
@@ -75,10 +78,10 @@ func _process(_delta: float) -> void:
 	if game_mode == null or run_over == true:
 		return
 	
-	if upgrade_menu.has_priority == true or dialogue_overlay.has_priority == true:
+	if level_up_menu.has_priority == true or dialogue_overlay.has_priority == true:
 		return
 	
-	if shop_menu.visible:
+	if shop_menu.visible or forge_menu.visible:
 		return
 	
 	game_mode.update()
@@ -112,7 +115,7 @@ func game_over():
 	if run_over:
 		return
 	
-	upgrade_menu.hide()
+	level_up_menu.hide()
 	run_over = true
 	GlobalSignals.run_ended.emit(false)
 	await get_tree().create_timer(1.0).timeout
@@ -123,8 +126,8 @@ func game_over():
 
 
 func check_for_upgrades() -> bool:
-	if upgrade_menu.n_queued_upgrades > 0 and run_over == false:
-		upgrade_menu.display()
+	if level_up_menu.n_queued_level_ups > 0 and run_over == false:
+		level_up_menu.display()
 		return true
 	
 	return false

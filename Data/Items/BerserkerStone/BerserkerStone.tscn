@@ -50,6 +50,18 @@ script = ExtResource("4_ro3vn")
 items = NodePath("../../This item")
 color = 2
 
+[node name="Reduce trigger count" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("19_1mqq4")
+int_variable = NodePath("../../../../LT_PersistentVariables/Trigger count")
+value = 1
+operation = 2
+
+[node name="Lifesteal divisor -2" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("19_1mqq4")
+int_variable = NodePath("../../../../LT_PersistentVariables/Lifesteal Divisor")
+value = 2
+operation = 2
+
 [node name="If is active" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("6_rpkif")
 input = NodePath("../../../LT_PersistentVariables/Is item active")

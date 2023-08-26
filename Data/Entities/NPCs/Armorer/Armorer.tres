@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="NPCData" load_steps=17 format=3 uid="uid://b42cxrlifdvsq"]
+
+[ext_resource type="PackedScene" uid="uid://c4a3ey4658ncl" path="res://Data/Entities/NPCs/Armorer/Armorer.tscn" id="1_368l4"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="2_p7sst"]
+[ext_resource type="Script" path="res://Data/Entities/NPCs/NPC_DATA.gd" id="3_ory8t"]
+[ext_resource type="Resource" uid="uid://dhoxm7jdi0q5d" path="res://Data/Items/BerserkerStone/BerserkerStone.tres" id="4_0bama"]
+[ext_resource type="Resource" uid="uid://dhbycs5j4to6b" path="res://Data/Items/DragonCloak/DragonCloak.tres" id="4_gkxls"]
+[ext_resource type="Resource" uid="uid://ciom03ipb83hk" path="res://Data/Items/HolyFire/HolyFire.tres" id="5_12lkg"]
+[ext_resource type="Resource" uid="uid://btk8ha0wkgfgt" path="res://Data/Items/BottledVapours/BottledVapours.tres" id="5_55mcm"]
+[ext_resource type="Resource" uid="uid://c0t5coe7xqeyd" path="res://Data/Items/ChainKnife/ChainKnife.tres" id="6_fhxtn"]
+[ext_resource type="Script" path="res://Data/Entities/NPCs/_Components/SHOP_POOL_DATA.gd" id="8_qwwob"]
+[ext_resource type="Resource" uid="uid://c3mvqv275g3oi" path="res://Data/Items/Sling/Sling.tres" id="9_a0r3w"]
+[ext_resource type="Texture2D" uid="uid://pcahxrbossnb" path="res://Assets/art/icons/medieval-fantasy/kier-heyl/elf-helmet.svg" id="9_otc5g"]
+[ext_resource type="Resource" uid="uid://c47oj8cwe8y2k" path="res://Data/Items/SmokingWaterArum/SmokingWaterArum.tres" id="10_820tf"]
+[ext_resource type="Resource" uid="uid://olilhse4njhm" path="res://Data/Items/TaintedFlask/TaintedFlask.tres" id="11_r03ur"]
+[ext_resource type="Resource" uid="uid://b6eyc0e1h2nm2" path="res://Data/Items/UnstableDross/UnstableDross.tres" id="12_2m1t3"]
+
+[sub_resource type="Resource" id="Resource_6v0lp"]
+script = ExtResource("2_p7sst")
+size = 0
+blocking_behavior = 1
+can_be_pushed_off_map = false
+can_push_entities = false
+collectable_filter = 0
+
+[sub_resource type="Resource" id="Resource_7863l"]
+script = ExtResource("8_qwwob")
+item_pool = Array[Resource("res://Data/Items/ITEM_DATA.gd")]([ExtResource("4_0bama"), ExtResource("5_55mcm"), ExtResource("6_fhxtn"), ExtResource("4_gkxls"), ExtResource("5_12lkg"), ExtResource("9_a0r3w"), ExtResource("10_820tf"), ExtResource("11_r03ur"), ExtResource("12_2m1t3")])
+max_n_items_to_offer = 6
+
+[resource]
+script = ExtResource("3_ory8t")
+shop_pool_data = SubResource("Resource_7863l")
+entity_scene = ExtResource("1_368l4")
+occupancy_data = SubResource("Resource_6v0lp")
+sprite = ExtResource("9_otc5g")
+entity_name = "Omwar"
+main_text = ""
+flavor_text = ""

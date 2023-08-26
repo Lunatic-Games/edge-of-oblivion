@@ -36,7 +36,12 @@ func _add_card_to_display(item_data: ItemData, float_up_delay: float = 0.0) -> v
 	if player != null and item_data in player.inventory.items:
 		item_tier = player.inventory.items[item_data].current_tier + 1
 	
-	card.setup(item_data, item_tier, true)
+	var game: Game = GlobalGameState.get_game()
+	var forge_level: int = 1
+	if game != null:
+		forge_level = game.item_deck.get(item_data, 1)
+	
+	card.setup(item_data, item_tier, forge_level, true)
 	card.selected.connect(_on_card_selected.bind(card))
 	_float_card_up(card, float_up_delay)
 

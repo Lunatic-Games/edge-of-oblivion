@@ -18,13 +18,11 @@ func on_enter():
 	
 	var npc: NPC = owner as NPC
 	assert(npc != null, "OpenShop is currently only supported on NPCs")
-	var data: NPCData = npc.data as NPCData
-	var shop_pool_data: ShopPoolData = data.shop_pool_data
 	
 	dialogue_overlay.close()
 	
-	if shop_pool_data != null:
-		game.shop_menu.open(shop_pool_data.item_pool)
+	if npc.shop_pool != null:
+		game.shop_menu.open(npc.shop_pool.items)
 	else:
 		game.shop_menu.open([])
 	game.shop_menu.closed.connect(_on_shop_closed, CONNECT_ONE_SHOT)
