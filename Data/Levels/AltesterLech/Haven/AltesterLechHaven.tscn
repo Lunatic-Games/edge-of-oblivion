@@ -1,19 +1,19 @@
-[gd_scene load_steps=21 format=3 uid="uid://qjwh7gqec4ef"]
+[gd_scene load_steps=21 format=3 uid="uid://0xse7l54ha7n"]
 
-[ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_tk4og"]
-[ext_resource type="Texture2D" uid="uid://c11immlfgb1vh" path="res://Assets/art/background/game/grass.svg" id="2_0ubew"]
-[ext_resource type="PackedScene" uid="uid://biem3v2m8g7ls" path="res://Data/Spawners/GatewaySpawner/GatewaySpawner.tscn" id="2_anf0x"]
-[ext_resource type="PackedScene" uid="uid://c2vgqrf2sgx0p" path="res://Data/Spawners/NPCSpawner/NPCSpawner.tscn" id="3_2057i"]
-[ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="3_lsaa6"]
-[ext_resource type="Texture2D" uid="uid://pcahxrbossnb" path="res://Assets/art/icons/medieval-fantasy/kier-heyl/elf-helmet.svg" id="4_8t8d8"]
-[ext_resource type="Texture2D" uid="uid://b0og73dh6y3tx" path="res://Assets/art/background/game/sword_and_spear_ribbon.svg" id="4_cqka6"]
-[ext_resource type="Resource" uid="uid://b42cxrlifdvsq" path="res://Data/Entities/NPCs/Armorer/Armorer.tres" id="5_pqao7"]
-[ext_resource type="Texture2D" uid="uid://b71o5mbwqj30j" path="res://Assets/art/background/game/bison_skull.svg" id="5_tyto3"]
-[ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="6_cm01s"]
-[ext_resource type="Texture2D" uid="uid://csq8oey8u2p8t" path="res://Assets/art/icons/medieval-fantasy/kier-heyl/dwarf-helmet.svg" id="6_h1r8l"]
-[ext_resource type="Texture2D" uid="uid://bnq1kfjiksfy5" path="res://Assets/art/background/game/skull.svg" id="7_ec7ii"]
-[ext_resource type="Resource" uid="uid://vrc8wap8msr2" path="res://Data/Entities/NPCs/Dwarf/Dwarf.tres" id="7_kfags"]
-[ext_resource type="Texture2D" uid="uid://c18ock40fgesm" path="res://Assets/art/background/game/ribs.svg" id="8_dpiap"]
+[ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_icbtf"]
+[ext_resource type="PackedScene" uid="uid://biem3v2m8g7ls" path="res://Data/Spawners/GatewaySpawner/GatewaySpawner.tscn" id="2_ojqov"]
+[ext_resource type="Texture2D" uid="uid://c11immlfgb1vh" path="res://Assets/art/background/game/grass.svg" id="3_h220k"]
+[ext_resource type="PackedScene" uid="uid://c2vgqrf2sgx0p" path="res://Data/Spawners/NPCSpawner/NPCSpawner.tscn" id="3_om62j"]
+[ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="4_vbgba"]
+[ext_resource type="Texture2D" uid="uid://pcahxrbossnb" path="res://Assets/art/icons/medieval-fantasy/kier-heyl/elf-helmet.svg" id="4_ymobe"]
+[ext_resource type="Texture2D" uid="uid://b0og73dh6y3tx" path="res://Assets/art/background/game/sword_and_spear_ribbon.svg" id="5_cgiem"]
+[ext_resource type="Resource" uid="uid://b42cxrlifdvsq" path="res://Data/Entities/NPCs/Armorer/Armorer.tres" id="5_miqpl"]
+[ext_resource type="Texture2D" uid="uid://csq8oey8u2p8t" path="res://Assets/art/icons/medieval-fantasy/kier-heyl/dwarf-helmet.svg" id="6_34ehf"]
+[ext_resource type="Texture2D" uid="uid://b71o5mbwqj30j" path="res://Assets/art/background/game/bison_skull.svg" id="6_wbkkc"]
+[ext_resource type="Resource" uid="uid://vrc8wap8msr2" path="res://Data/Entities/NPCs/Dwarf/Dwarf.tres" id="7_e1ht4"]
+[ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="7_ol1u0"]
+[ext_resource type="Texture2D" uid="uid://bnq1kfjiksfy5" path="res://Assets/art/background/game/skull.svg" id="8_la27s"]
+[ext_resource type="Texture2D" uid="uid://c18ock40fgesm" path="res://Assets/art/background/game/ribs.svg" id="9_3jhy4"]
 
 [sub_resource type="Animation" id="Animation_lhjh6"]
 length = 0.001
@@ -139,7 +139,7 @@ _data = {
 "swing": SubResource("Animation_f1qql")
 }
 
-[node name="TheDunesHaven" instance=ExtResource("1_tk4og")]
+[node name="TheDunesHaven" instance=ExtResource("1_icbtf")]
 
 [node name="BackgroundFill" type="CanvasLayer" parent="." index="0"]
 layer = -1
@@ -150,7 +150,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.811765, 0.639216, 0.560784, 1)
+color = Color(0.364706, 0.443137, 0.568627, 1)
 
 [node name="BoardBackground" type="Node2D" parent="." index="1"]
 
@@ -159,14 +159,14 @@ offset_left = 554.0
 offset_top = 342.0
 offset_right = 1197.0
 offset_bottom = 707.0
-color = Color(0.776471, 0.545098, 0.419608, 1)
+color = Color(0.333333, 0.403922, 0.521569, 1)
 
 [node name="BoardBackground" type="ColorRect" parent="BoardBackground" index="1"]
 offset_left = 560.0
 offset_top = 349.0
 offset_right = 1191.0
 offset_bottom = 701.0
-color = Color(0.678431, 0.478431, 0.345098, 1)
+color = Color(0.254902, 0.337255, 0.470588, 1)
 
 [node name="Board" parent="." index="2"]
 layer_0/tile_data = PackedInt32Array(327689, 0, 196608, 393225, 0, 196608, 458761, 0, 196608, 524297, 0, 196608, 589833, 0, 196608, 589839, 0, 196608, 589838, 0, 196608, 589837, 0, 196608, 589836, 0, 196608, 589835, 0, 196608, 589834, 0, 196608, 524298, 0, 196608, 458762, 0, 196608, 393226, 0, 196608, 393227, 0, 196608, 327691, 0, 196608, 327690, 0, 196608, 458763, 0, 196608, 524299, 0, 196608, 524300, 0, 196608, 458764, 0, 196608, 393228, 0, 196608, 327693, 0, 196608, 393229, 0, 196608, 458765, 0, 196608, 524301, 0, 196608, 524302, 0, 196608, 524303, 0, 196608, 458767, 0, 196608, 393231, 0, 196608, 393230, 0, 196608, 458766, 0, 196608, 327695, 0, 196608, 327692, 0, 196608, 327694, 0, 196608, 327688, 0, 196608, 393224, 0, 196608, 458760, 0, 196608, 524296, 0, 196608, 589832, 0, 196608, 589840, 0, 196608, 524304, 0, 196608, 458768, 0, 196608, 393232, 0, 196608, 327696, 0, 196608)
@@ -174,18 +174,18 @@ layer_0/tile_data = PackedInt32Array(327689, 0, 196608, 393225, 0, 196608, 45876
 [node name="PlayerSpawner" parent="Spawners" index="0"]
 position = Vector2(840, 490)
 
-[node name="GatewaySpawner" parent="Spawners" index="1" instance=ExtResource("2_anf0x")]
+[node name="GatewaySpawner" parent="Spawners" index="1" instance=ExtResource("2_ojqov")]
 position = Vector2(1120, 490)
 
-[node name="NPCSpawner3" parent="Spawners" index="2" instance=ExtResource("3_2057i")]
+[node name="NPCSpawner3" parent="Spawners" index="2" instance=ExtResource("3_om62j")]
 position = Vector2(560, 630)
-texture = ExtResource("4_8t8d8")
-entity_data = ExtResource("5_pqao7")
+texture = ExtResource("4_ymobe")
+entity_data = ExtResource("5_miqpl")
 
-[node name="NPCSpawner4" parent="Spawners" index="3" instance=ExtResource("3_2057i")]
+[node name="NPCSpawner4" parent="Spawners" index="3" instance=ExtResource("3_om62j")]
 position = Vector2(770, 630)
-texture = ExtResource("6_h1r8l")
-entity_data = ExtResource("7_kfags")
+texture = ExtResource("6_34ehf")
+entity_data = ExtResource("7_e1ht4")
 
 [node name="Decorations" type="Node2D" parent="." index="4"]
 
@@ -195,69 +195,69 @@ modulate = Color(0.701961, 0.603922, 0.482353, 0.756863)
 [node name="Grass" type="Sprite2D" parent="Decorations/Grass" index="0"]
 position = Vector2(385, 524)
 scale = Vector2(0.201613, 0.243902)
-texture = ExtResource("2_0ubew")
+texture = ExtResource("3_h220k")
 
 [node name="Grass2" type="Sprite2D" parent="Decorations/Grass" index="1"]
 position = Vector2(1333, 807)
 scale = Vector2(0.201613, 0.243902)
-texture = ExtResource("2_0ubew")
+texture = ExtResource("3_h220k")
 
 [node name="Grass3" type="Sprite2D" parent="Decorations/Grass" index="2"]
 position = Vector2(954, 114)
 scale = Vector2(0.201613, 0.243902)
-texture = ExtResource("2_0ubew")
+texture = ExtResource("3_h220k")
 
 [node name="Grass8" type="Sprite2D" parent="Decorations/Grass" index="3"]
 position = Vector2(987, 134)
 scale = Vector2(0.131049, 0.158536)
-texture = ExtResource("2_0ubew")
+texture = ExtResource("3_h220k")
 
 [node name="Grass4" type="Sprite2D" parent="Decorations/Grass" index="4"]
 position = Vector2(417, 534)
 scale = Vector2(0.117852, 0.160061)
-texture = ExtResource("2_0ubew")
+texture = ExtResource("3_h220k")
 flip_h = true
 
 [node name="Grass5" type="Sprite2D" parent="Decorations/Grass" index="5"]
 position = Vector2(452, 527)
 scale = Vector2(0.201613, 0.243902)
-texture = ExtResource("2_0ubew")
+texture = ExtResource("3_h220k")
 flip_h = true
 
 [node name="Grass6" type="Sprite2D" parent="Decorations/Grass" index="6"]
 position = Vector2(1382, 799)
 scale = Vector2(0.201613, 0.243902)
-texture = ExtResource("2_0ubew")
+texture = ExtResource("3_h220k")
 flip_h = true
 
 [node name="Grass7" type="Sprite2D" parent="Decorations/Grass" index="7"]
 position = Vector2(1454.91, 154)
 scale = Vector2(0.201613, 0.243902)
-texture = ExtResource("2_0ubew")
+texture = ExtResource("3_h220k")
 flip_h = true
 
 [node name="Grass9" type="Sprite2D" parent="Decorations/Grass" index="8"]
 position = Vector2(1436.91, 174)
 scale = Vector2(0.128528, 0.155488)
-texture = ExtResource("2_0ubew")
+texture = ExtResource("3_h220k")
 flip_h = true
 
 [node name="Grass10" type="Sprite2D" parent="Decorations/Grass" index="9"]
 position = Vector2(1466.91, 174)
 scale = Vector2(0.128528, 0.155488)
-texture = ExtResource("2_0ubew")
+texture = ExtResource("3_h220k")
 flip_h = true
 
 [node name="SwordAndSpear" type="Sprite2D" parent="Decorations" index="1"]
 self_modulate = Color(0.619608, 0.439216, 0.313726, 1)
 position = Vector2(490, 899)
 scale = Vector2(0.746063, 0.639734)
-texture = ExtResource("3_lsaa6")
+texture = ExtResource("4_vbgba")
 
 [node name="Ribbon" type="Sprite2D" parent="Decorations/SwordAndSpear" index="0"]
 modulate = Color(0.843137, 0.768627, 0.752941, 1)
 position = Vector2(40.2111, -81.2837)
-texture = ExtResource("4_cqka6")
+texture = ExtResource("5_cgiem")
 offset = Vector2(-40, 80)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Decorations/SwordAndSpear" index="1"]
@@ -270,13 +270,13 @@ libraries = {
 self_modulate = Color(0.619608, 0.439216, 0.313726, 1)
 position = Vector2(1346, 265)
 scale = Vector2(0.746063, 0.639734)
-texture = ExtResource("3_lsaa6")
+texture = ExtResource("4_vbgba")
 flip_h = true
 
 [node name="Ribbon" type="Sprite2D" parent="Decorations/SwordAndSpear2" index="0"]
 modulate = Color(0.843137, 0.768627, 0.752941, 1)
 position = Vector2(-38.8707, -76.5943)
-texture = ExtResource("4_cqka6")
+texture = ExtResource("5_cgiem")
 offset = Vector2(40, 80)
 flip_h = true
 
@@ -291,12 +291,12 @@ libraries = {
 [node name="Skull" type="Sprite2D" parent="Decorations/BisonSkulls" index="0"]
 self_modulate = Color(0.85098, 0.85098, 0.85098, 1)
 position = Vector2(1424, 487)
-texture = ExtResource("5_tyto3")
+texture = ExtResource("6_wbkkc")
 
 [node name="Skull2" type="Sprite2D" parent="Decorations/BisonSkulls" index="1"]
 self_modulate = Color(0.85098, 0.85098, 0.85098, 1)
 position = Vector2(293, 148)
-texture = ExtResource("5_tyto3")
+texture = ExtResource("6_wbkkc")
 flip_h = true
 
 [node name="Rocks" type="Node2D" parent="Decorations" index="4"]
@@ -305,122 +305,122 @@ modulate = Color(0.780392, 0.623529, 0.560784, 1)
 [node name="Rocks" type="Sprite2D" parent="Decorations/Rocks" index="0"]
 position = Vector2(434, 541)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 
 [node name="Rocks14" type="Sprite2D" parent="Decorations/Rocks" index="1"]
 position = Vector2(397, 205)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 
 [node name="Rocks22" type="Sprite2D" parent="Decorations/Rocks" index="2"]
 position = Vector2(240, 245)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 
 [node name="Rocks15" type="Sprite2D" parent="Decorations/Rocks" index="3"]
 position = Vector2(1344, 538)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 
 [node name="Rocks16" type="Sprite2D" parent="Decorations/Rocks" index="4"]
 position = Vector2(1416, 561)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks18" type="Sprite2D" parent="Decorations/Rocks" index="5"]
 position = Vector2(1480, 585)
 scale = Vector2(0.28993, 0.181402)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks17" type="Sprite2D" parent="Decorations/Rocks" index="6"]
 position = Vector2(1555, 705)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks19" type="Sprite2D" parent="Decorations/Rocks" index="7"]
 position = Vector2(841, 927)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks20" type="Sprite2D" parent="Decorations/Rocks" index="8"]
 position = Vector2(908, 900)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks21" type="Sprite2D" parent="Decorations/Rocks" index="9"]
 position = Vector2(919, 921)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks2" type="Sprite2D" parent="Decorations/Rocks" index="10"]
 position = Vector2(1352, 821)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks3" type="Sprite2D" parent="Decorations/Rocks" index="11"]
 position = Vector2(828, 1193)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks4" type="Sprite2D" parent="Decorations/Rocks" index="12"]
 position = Vector2(118, 1064)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks5" type="Sprite2D" parent="Decorations/Rocks" index="13"]
 position = Vector2(-131, 225)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks6" type="Sprite2D" parent="Decorations/Rocks" index="14"]
 position = Vector2(-206, 225)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks7" type="Sprite2D" parent="Decorations/Rocks" index="15"]
 position = Vector2(-245, 731)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks8" type="Sprite2D" parent="Decorations/Rocks" index="16"]
 position = Vector2(528, 7.62939e-06)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks9" type="Sprite2D" parent="Decorations/Rocks" index="17"]
 position = Vector2(1287, 1408)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks10" type="Sprite2D" parent="Decorations/Rocks" index="18"]
 position = Vector2(479, 952)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 flip_h = true
 
 [node name="Rocks11" type="Sprite2D" parent="Decorations/Rocks" index="19"]
 position = Vector2(1359, 320)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 
 [node name="Rocks12" type="Sprite2D" parent="Decorations/Rocks" index="20"]
 position = Vector2(988, 134)
 scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("6_cm01s")
+texture = ExtResource("7_ol1u0")
 
 [node name="SmallSkulls" type="Node2D" parent="Decorations" index="5"]
 
@@ -428,11 +428,11 @@ texture = ExtResource("6_cm01s")
 self_modulate = Color(0.85098, 0.85098, 0.85098, 1)
 position = Vector2(884, 951)
 scale = Vector2(0.179878, 0.179878)
-texture = ExtResource("7_ec7ii")
+texture = ExtResource("8_la27s")
 flip_h = true
 
 [node name="Ribs" type="Sprite2D" parent="Decorations" index="6"]
 position = Vector2(818, 969)
 scale = Vector2(0.426829, 0.426829)
-texture = ExtResource("8_dpiap")
+texture = ExtResource("9_3jhy4")
 flip_h = true

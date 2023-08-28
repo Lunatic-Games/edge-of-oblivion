@@ -1,0 +1,82 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=18 format=3 uid="uid://br6ya1d3rkmlb"]
+
+[ext_resource type="Resource" uid="uid://50bvt7hgm20i" path="res://Data/GameModes/Standard/Standard.tres" id="1_l5jqv"]
+[ext_resource type="PackedScene" uid="uid://ig1yylkq6j3g" path="res://Data/Levels/AltesterLech/Stage2/AltesterLech2.tscn" id="2_bhgpe"]
+[ext_resource type="Resource" uid="uid://dhcnek827wiq2" path="res://Data/Entities/Enemies/River/Crab/Crab.tres" id="3_f2kgo"]
+[ext_resource type="Resource" uid="uid://h1u0ciaf4dn0" path="res://Data/Entities/Enemies/River/Farmer/Farmer.tres" id="4_3ogxj"]
+[ext_resource type="Resource" uid="uid://mmxs3f1x3ijd" path="res://Data/Entities/Enemies/River/PlaceholderMongolianCalvary/MongolianCalvary.tres" id="5_8pnn6"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="6_4wqcq"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="7_dncl5"]
+[ext_resource type="Resource" uid="uid://bm83frxy61oy2" path="res://Data/Levels/AltesterLech/Stage3/AltesterLech3.tres" id="8_nx7vu"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="9_iurwb"]
+
+[sub_resource type="Resource" id="Resource_6qo64"]
+script = ExtResource("7_dncl5")
+round_wait_from_previous_wave = 1
+"# Crab" = 2
+"# Farmer" = 3
+"# Mongolian Calvary" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_uxte8"]
+script = ExtResource("7_dncl5")
+round_wait_from_previous_wave = 7
+"# Crab" = 0
+"# Farmer" = 3
+"# Mongolian Calvary" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_vlfmg"]
+script = ExtResource("7_dncl5")
+round_wait_from_previous_wave = 7
+"# Crab" = 0
+"# Farmer" = 0
+"# Mongolian Calvary" = 7
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_1d42f"]
+script = ExtResource("7_dncl5")
+round_wait_from_previous_wave = 6
+"# Crab" = 2
+"# Farmer" = 0
+"# Mongolian Calvary" = 3
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_5f2v5"]
+script = ExtResource("7_dncl5")
+round_wait_from_previous_wave = 11
+"# Crab" = 0
+"# Farmer" = 3
+"# Mongolian Calvary" = 3
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_tufgb"]
+script = ExtResource("7_dncl5")
+round_wait_from_previous_wave = 6
+"# Crab" = 0
+"# Farmer" = 3
+"# Mongolian Calvary" = 3
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_8h07o"]
+script = ExtResource("7_dncl5")
+round_wait_from_previous_wave = 8
+"# Crab" = 0
+"# Farmer" = 2
+"# Mongolian Calvary" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_8vpt8"]
+script = ExtResource("6_4wqcq")
+enemies = Array[Resource("res://Data/Entities/Enemies/ENEMY_DATA.gd")]([ExtResource("3_f2kgo"), ExtResource("4_3ogxj"), ExtResource("5_8pnn6")])
+waves = Array[ExtResource("7_dncl5")]([SubResource("Resource_6qo64"), SubResource("Resource_uxte8"), SubResource("Resource_vlfmg"), SubResource("Resource_1d42f"), SubResource("Resource_5f2v5"), SubResource("Resource_tufgb"), SubResource("Resource_8h07o")])
+
+[resource]
+script = ExtResource("9_iurwb")
+level_name = "Altester Lech - 2"
+level_scene = ExtResource("2_bhgpe")
+level_waves = SubResource("Resource_8vpt8")
+next_level = ExtResource("8_nx7vu")
+game_mode = ExtResource("1_l5jqv")
+gateway_spawn_condition = 2
+killing_boss_completes_run = false

@@ -1,0 +1,95 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=20 format=3 uid="uid://c5gidqtpuqqx8"]
+
+[ext_resource type="Resource" uid="uid://50bvt7hgm20i" path="res://Data/GameModes/Standard/Standard.tres" id="1_f4pmm"]
+[ext_resource type="PackedScene" uid="uid://dug4q1jhvtq6h" path="res://Data/Levels/AltesterLech/Stage1/AltesterLech1.tscn" id="2_24biw"]
+[ext_resource type="Resource" uid="uid://dhcnek827wiq2" path="res://Data/Entities/Enemies/River/Crab/Crab.tres" id="3_aql2h"]
+[ext_resource type="Resource" uid="uid://h1u0ciaf4dn0" path="res://Data/Entities/Enemies/River/Farmer/Farmer.tres" id="4_jqpva"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="5_21ral"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="6_cdf3u"]
+[ext_resource type="Resource" uid="uid://br6ya1d3rkmlb" path="res://Data/Levels/AltesterLech/Stage2/AltesterLech2.tres" id="7_es5rw"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="8_dtvtc"]
+
+[sub_resource type="Resource" id="Resource_h1cd0"]
+script = ExtResource("6_cdf3u")
+round_wait_from_previous_wave = 1
+"# Crab" = 3
+"# Farmer" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_452jj"]
+script = ExtResource("6_cdf3u")
+round_wait_from_previous_wave = 7
+"# Crab" = 2
+"# Farmer" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_s0tdq"]
+script = ExtResource("6_cdf3u")
+round_wait_from_previous_wave = 7
+"# Crab" = 3
+"# Farmer" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_0glta"]
+script = ExtResource("6_cdf3u")
+round_wait_from_previous_wave = 6
+"# Crab" = 7
+"# Farmer" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_0xeg5"]
+script = ExtResource("6_cdf3u")
+round_wait_from_previous_wave = 11
+"# Crab" = 2
+"# Farmer" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_1f6rc"]
+script = ExtResource("6_cdf3u")
+round_wait_from_previous_wave = 6
+"# Crab" = 4
+"# Farmer" = 3
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_ip4l6"]
+script = ExtResource("6_cdf3u")
+round_wait_from_previous_wave = 8
+"# Crab" = 0
+"# Farmer" = 6
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_xhi2l"]
+script = ExtResource("6_cdf3u")
+round_wait_from_previous_wave = 8
+"# Crab" = 0
+"# Farmer" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_x0x2b"]
+script = ExtResource("6_cdf3u")
+round_wait_from_previous_wave = 8
+"# Crab" = 3
+"# Farmer" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_jsn4r"]
+script = ExtResource("6_cdf3u")
+round_wait_from_previous_wave = 7
+"# Crab" = 2
+"# Farmer" = 3
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_7trj7"]
+script = ExtResource("5_21ral")
+enemies = Array[Resource("res://Data/Entities/Enemies/ENEMY_DATA.gd")]([ExtResource("3_aql2h"), ExtResource("4_jqpva")])
+waves = Array[ExtResource("6_cdf3u")]([SubResource("Resource_h1cd0"), SubResource("Resource_452jj"), SubResource("Resource_s0tdq"), SubResource("Resource_0glta"), SubResource("Resource_0xeg5"), SubResource("Resource_1f6rc"), SubResource("Resource_ip4l6"), SubResource("Resource_xhi2l"), SubResource("Resource_x0x2b"), SubResource("Resource_jsn4r")])
+
+[resource]
+script = ExtResource("8_dtvtc")
+level_name = "Altester Lech - 1"
+level_scene = ExtResource("2_24biw")
+level_waves = SubResource("Resource_7trj7")
+next_level = ExtResource("7_es5rw")
+game_mode = ExtResource("1_f4pmm")
+gateway_spawn_condition = 2
+killing_boss_completes_run = false
