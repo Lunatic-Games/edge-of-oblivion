@@ -80,8 +80,8 @@ func do_move_animation(destination: Vector2):
 	base_tween.tween_property(entity, "global_position", destination, 0.20).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	
 	var offset_tween: Tween = entity.create_tween()
-	offset_tween.tween_property(entity.sprite, "position:y", -15.0, 0.10).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	offset_tween.tween_property(entity.sprite, "position:y", 15.0, 0.10).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	offset_tween.tween_property(entity.sprite_container, "position:y", -15.0, 0.10).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	offset_tween.tween_property(entity.sprite_container, "position:y", 15.0, 0.10).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	
 	base_tween.finished.connect(_on_move_tween_finished, CONNECT_ONE_SHOT)
 

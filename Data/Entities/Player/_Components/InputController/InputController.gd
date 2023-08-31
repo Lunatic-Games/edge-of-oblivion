@@ -2,8 +2,8 @@ class_name InputController
 extends RefCounted
 
 
-const DEFAULT_SCALE: Vector2 = Vector2(0.125, 0.125)
-const SQUISHED_SCALE: Vector2 = Vector2(0.1, 0.1)
+const DEFAULT_SCALE: Vector2 = Vector2(1, 1)
+const SQUISHED_SCALE: Vector2 = Vector2(0.7, 0.7)
 const UNREADY_FADE_OUT_TIME_SECONDS: float = 0.2
 const UNREADY_ALPHA: float = 0.3
 const READY_FADE_IN_TIME_SECONDS: float = 0.2
