@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://b5sx5f048yn81"]
+[gd_scene load_steps=25 format=3 uid="uid://b5sx5f048yn81"]
 
 [ext_resource type="PackedScene" uid="uid://fujdstcnhao2" path="res://Data/Entities/Enemies/Enemy.tscn" id="1_shbww"]
+[ext_resource type="Shader" path="res://Shaders/dream_shader.gdshader" id="2_nkcy2"]
 [ext_resource type="Texture2D" uid="uid://cvd8ctiqsgouw" path="res://Assets/art/icons/medieval-fantasy/delapouite/kenku-head.svg" id="3_1ufnp"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="4_rdt5f"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="5_d4cfj"]
@@ -20,6 +21,22 @@
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnIndicatorOnTiles.gd" id="17_w0osw"]
 [ext_resource type="PackedScene" uid="uid://cs8677p2ixfol" path="res://Data/Indicators/Indicator.tscn" id="18_80owe"]
 
+[sub_resource type="FastNoiseLite" id="2"]
+frequency = 0.005
+fractal_octaves = 3
+fractal_lacunarity = 1.7
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a76t5"]
+seamless = true
+as_normal_map = true
+noise = SubResource("2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7g0i"]
+resource_local_to_scene = true
+shader = ExtResource("2_nkcy2")
+shader_parameter/strength = 0.25
+shader_parameter/noise = SubResource("NoiseTexture2D_a76t5")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_23ics"]
 resource_local_to_scene = true
 bg_color = Color(0.223529, 0.478431, 0.611765, 1)
@@ -27,6 +44,7 @@ bg_color = Color(0.223529, 0.478431, 0.611765, 1)
 [node name="TheFeral" instance=ExtResource("1_shbww")]
 
 [node name="Sprite2D" parent="SpriteContainer" index="0"]
+material = SubResource("ShaderMaterial_m7g0i")
 texture = ExtResource("3_1ufnp")
 
 [node name="AttackBar" parent="." index="2"]
