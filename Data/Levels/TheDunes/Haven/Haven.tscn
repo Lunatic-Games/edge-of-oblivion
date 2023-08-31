@@ -1,10 +1,9 @@
 [gd_scene load_steps=21 format=3 uid="uid://qjwh7gqec4ef"]
 
-
 [ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_tk4og"]
 [ext_resource type="Texture2D" uid="uid://c11immlfgb1vh" path="res://Assets/art/background/game/grass.svg" id="2_0ubew"]
 [ext_resource type="PackedScene" uid="uid://biem3v2m8g7ls" path="res://Data/Spawners/GatewaySpawner/GatewaySpawner.tscn" id="2_anf0x"]
-[ext_resource type="PackedScene" uid="uid://c2vgqrf2sgx0p" path="res://Data/Spawners/NPCSpawner/NPCSpawner.tscn" id="3_2057i"]
+[ext_resource type="PackedScene" uid="uid://c2vgqrf2sgx0p" path="res://Data/Spawners/BasicEntitySpawner/BasicEntitySpawner.tscn" id="3_ib1ra"]
 [ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="3_lsaa6"]
 [ext_resource type="Texture2D" uid="uid://pcahxrbossnb" path="res://Assets/art/icons/medieval-fantasy/kier-heyl/elf-helmet.svg" id="4_8t8d8"]
 [ext_resource type="Texture2D" uid="uid://b0og73dh6y3tx" path="res://Assets/art/background/game/sword_and_spear_ribbon.svg" id="4_cqka6"]
@@ -178,12 +177,12 @@ position = Vector2(840, 490)
 [node name="GatewaySpawner" parent="Spawners" index="1" instance=ExtResource("2_anf0x")]
 position = Vector2(1120, 490)
 
-[node name="NPCSpawner3" parent="Spawners" index="2" instance=ExtResource("3_2057i")]
+[node name="NPCSpawner3" parent="Spawners" index="2" instance=ExtResource("3_ib1ra")]
 position = Vector2(560, 630)
 texture = ExtResource("4_8t8d8")
 entity_data = ExtResource("5_pqao7")
 
-[node name="NPCSpawner4" parent="Spawners" index="3" instance=ExtResource("3_2057i")]
+[node name="NPCSpawner4" parent="Spawners" index="3" instance=ExtResource("3_ib1ra")]
 position = Vector2(770, 630)
 texture = ExtResource("6_h1r8l")
 entity_data = ExtResource("7_kfags")

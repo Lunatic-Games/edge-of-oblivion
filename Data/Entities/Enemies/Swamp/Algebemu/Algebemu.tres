@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://d2nm36fewwhmo"]
+
+[ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="1_hwjyx"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="1_okfkw"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="1_rbspb"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/_Components/Boss/BOSS_DATA.gd" id="1_rvnhr"]
+[ext_resource type="AudioStream" uid="uid://8vw3rrccmokk" path="res://Assets/music/boss/Endless-Storm.ogg" id="2_nxo7t"]
+[ext_resource type="Texture2D" uid="uid://drvcofmjn0x0g" path="res://Assets/art/icons/animals/lorc/frog.svg" id="3_ijc73"]
+
+[sub_resource type="Resource" id="Resource_dunvl"]
+script = ExtResource("1_rvnhr")
+soundtrack = ExtResource("2_nxo7t")
+
+[sub_resource type="Resource" id="Resource_quff5"]
+script = ExtResource("1_hwjyx")
+max_health = 100
+can_be_damaged = true
+can_be_killed = true
+can_be_healed = true
+emit_particles_on_heal = true
+emit_particles_on_taking_damage = true
+
+[sub_resource type="Resource" id="Resource_trfgs"]
+script = ExtResource("1_okfkw")
+size = 1
+primary_tile = 0
+blocking_behavior = 2
+can_be_pushed_off_map = false
+can_push_entities = false
+collectable_filter = 0
+
+[resource]
+script = ExtResource("1_rbspb")
+xp_value = 1
+boss_data = SubResource("Resource_dunvl")
+health_data = SubResource("Resource_quff5")
+occupancy_data = SubResource("Resource_trfgs")
+sprite = ExtResource("3_ijc73")
+entity_name = ""
+main_text = ""
+flavor_text = ""

@@ -37,5 +37,5 @@ func try_spawn_dialogue_trigger(tile: Tile) -> void:
 func _on_dialogue_triggered(trigger: DialogueTrigger) -> void:
 	dialogue_start.on_enter()
 	
-	var trigger_tile: Tile = trigger.occupancy.current_tile
+	var trigger_tile: Tile = trigger.occupancy.primary_tile
 	trigger_tile.no_longer_occupied.connect(try_spawn_dialogue_trigger.bind(trigger_tile), CONNECT_ONE_SHOT)

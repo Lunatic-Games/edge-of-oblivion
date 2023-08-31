@@ -8,8 +8,7 @@
 [node name="SpawnFlag" instance=ExtResource("1_k0ii2")]
 script = ExtResource("2_m2ld0")
 
-[node name="Sprite2D" parent="." index="0"]
-self_modulate = Color(0.94902, 0.831373, 0.670588, 1)
+[node name="Sprite2D" parent="SpriteContainer" index="0"]
 texture = ExtResource("3_l06ki")
 
 [node name="TextPopupHover" parent="." index="2" instance=ExtResource("4_8v5ue")]

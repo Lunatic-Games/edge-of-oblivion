@@ -10,7 +10,7 @@ const DEFAULT_TEXTURE: Texture = preload("res://Assets/art/icons/targets/sbed/he
 
 func spawn_entity():
 	if entity_data == null:
-		assert(false, "No entity data set for NPC spawner")
+		assert(false, "No entity data set for basic entity spawner")
 		queue_free()
 		return
 	
@@ -18,12 +18,12 @@ func spawn_entity():
 	var tile: Tile = board.get_tile_at_position(global_position)
 	
 	if tile == null:
-		assert(false, "NPC spawner is not placed over a valid tile")
+		assert(false, "Basic entity spawner is not placed over a valid tile")
 		queue_free()
 		return
 	
 	if tile.occupant != null:
-		assert(false, "NPC spawner is placed on an occupied tile")
+		assert(false, "Basic entity spawner is placed on an occupied tile")
 		queue_free()
 		return
 	

@@ -4,8 +4,11 @@ extends Resource
 
 enum EntitySize {
 	SMALL,
-#	MEDIUM,
-#	LARGE
+	LARGE
+}
+
+enum PrimaryTile {
+	CENTER
 }
 
 enum BlockingBehavior {
@@ -21,6 +24,7 @@ enum CollectableFilter {
 }
 
 @export var size: EntitySize = EntitySize.SMALL
+@export var primary_tile: PrimaryTile = PrimaryTile.CENTER
 @export var blocking_behavior: BlockingBehavior = BlockingBehavior.STANDARD
 @export var can_be_pushed_off_map: bool = true
 @export var can_push_entities: bool = false

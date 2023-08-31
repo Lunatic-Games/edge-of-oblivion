@@ -18,8 +18,8 @@ func perform_behavior() -> void:
 			output_player_entity.value.clear()
 	
 	if output_player_tile != null:
-		if player != null and player.occupancy.current_tile != null:
-			output_player_tile.value = [player.occupancy.current_tile]
+		if player != null and player.occupancy.primary_tile != null:
+			output_player_tile.value = [player.occupancy.primary_tile]
 		else:
 			output_player_tile.value.clear()
 	

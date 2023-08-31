@@ -27,6 +27,7 @@ emit_particles_on_taking_damage = true
 [sub_resource type="Resource" id="Resource_lpolm"]
 script = ExtResource("3_7paix")
 size = 0
+primary_tile = 0
 blocking_behavior = 1
 can_be_pushed_off_map = true
 can_push_entities = false

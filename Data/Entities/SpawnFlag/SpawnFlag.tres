@@ -7,6 +7,7 @@
 [sub_resource type="Resource" id="Resource_kg668"]
 script = ExtResource("2_40ha1")
 size = 0
+primary_tile = 0
 blocking_behavior = 0
 can_be_pushed_off_map = false
 can_push_entities = false

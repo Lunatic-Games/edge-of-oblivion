@@ -1,0 +1,95 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=20 format=3 uid="uid://c0i0ifwlbs1h1"]
+
+[ext_resource type="Resource" uid="uid://50bvt7hgm20i" path="res://Data/GameModes/Standard/Standard.tres" id="1_00mbl"]
+[ext_resource type="PackedScene" uid="uid://dphr4qcyrwsyi" path="res://Data/Levels/TheEdge/BossRoom/TheEdgeBossRoom.tscn" id="2_jujld"]
+[ext_resource type="Resource" uid="uid://7wtuo0ukril7" path="res://Data/Entities/Enemies/Swamp/Faded/Faded.tres" id="3_26a1e"]
+[ext_resource type="Resource" uid="uid://crw5uf7i2mrtg" path="res://Data/Entities/Enemies/Swamp/TheDesperate/TheDesperate.tres" id="4_8ecso"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="5_myuc4"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="6_3fpt6"]
+[ext_resource type="Resource" uid="uid://ljf7mr67r03r" path="res://Data/Levels/TheEdge/Stage2/TheEdge2.tres" id="7_c6lrs"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="8_7x301"]
+
+[sub_resource type="Resource" id="Resource_w6xg2"]
+script = ExtResource("6_3fpt6")
+round_wait_from_previous_wave = 1
+"# Faded" = 3
+"# The Desperate" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_ow8di"]
+script = ExtResource("6_3fpt6")
+round_wait_from_previous_wave = 7
+"# Faded" = 2
+"# The Desperate" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_543j7"]
+script = ExtResource("6_3fpt6")
+round_wait_from_previous_wave = 7
+"# Faded" = 3
+"# The Desperate" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_4g4o0"]
+script = ExtResource("6_3fpt6")
+round_wait_from_previous_wave = 6
+"# Faded" = 7
+"# The Desperate" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_eyxbg"]
+script = ExtResource("6_3fpt6")
+round_wait_from_previous_wave = 11
+"# Faded" = 2
+"# The Desperate" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_aukhv"]
+script = ExtResource("6_3fpt6")
+round_wait_from_previous_wave = 6
+"# Faded" = 4
+"# The Desperate" = 3
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_eg4m5"]
+script = ExtResource("6_3fpt6")
+round_wait_from_previous_wave = 8
+"# Faded" = 0
+"# The Desperate" = 6
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_0lrht"]
+script = ExtResource("6_3fpt6")
+round_wait_from_previous_wave = 8
+"# Faded" = 0
+"# The Desperate" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_trddt"]
+script = ExtResource("6_3fpt6")
+round_wait_from_previous_wave = 8
+"# Faded" = 3
+"# The Desperate" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_4h3hw"]
+script = ExtResource("6_3fpt6")
+round_wait_from_previous_wave = 7
+"# Faded" = 2
+"# The Desperate" = 3
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_jdg53"]
+script = ExtResource("5_myuc4")
+enemies = Array[Resource("res://Data/Entities/Enemies/ENEMY_DATA.gd")]([ExtResource("3_26a1e"), ExtResource("4_8ecso")])
+waves = Array[ExtResource("6_3fpt6")]([SubResource("Resource_w6xg2"), SubResource("Resource_ow8di"), SubResource("Resource_543j7"), SubResource("Resource_4g4o0"), SubResource("Resource_eyxbg"), SubResource("Resource_aukhv"), SubResource("Resource_eg4m5"), SubResource("Resource_0lrht"), SubResource("Resource_trddt"), SubResource("Resource_4h3hw")])
+
+[resource]
+script = ExtResource("8_7x301")
+level_name = "The Edge - Boss Room"
+level_scene = ExtResource("2_jujld")
+level_waves = SubResource("Resource_jdg53")
+next_level = ExtResource("7_c6lrs")
+game_mode = ExtResource("1_00mbl")
+gateway_spawn_condition = 2
+killing_boss_completes_run = false

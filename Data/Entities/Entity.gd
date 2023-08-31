@@ -8,7 +8,7 @@ var data: EntityData = null
 var health: EntityHealth = null
 var occupancy: EntityOccupancy = null
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Sprite2D = $SpriteContainer/Sprite2D
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var health_bar: ProgressBar = $HealthBar
 

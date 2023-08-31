@@ -11,7 +11,8 @@ func setup(p_data: EntityData, start_tile: Tile = null) -> void:
 
 
 func remove() -> void:
-	occupancy.current_tile.occupant = null
+	occupancy.primary_tile.occupant = null
+	occupancy.additional_tiles.clear()
 	animator.play("quick_despawn")
 	await animator.animation_finished
 	queue_free()

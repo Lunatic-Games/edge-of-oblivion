@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://b2gabb6lthnt7"]
 
 [ext_resource type="PackedScene" uid="uid://bpp12botbqk4r" path="res://Data/Entities/NPCs/NPC.tscn" id="1_sjy1l"]
-[ext_resource type="Texture2D" uid="uid://6uiaqwo76du0" path="res://Assets/art/icons/medieval-fantasy/cathelineau/witch-face.svg" id="2_7fh0i"]
+[ext_resource type="Texture2D" uid="uid://bnjcbgum8k33l" path="res://Assets/art/icons/medieval-fantasy/delapouite/wizard-face.svg" id="2_6wwls"]
 [ext_resource type="Script" path="res://DialogueState/Basic/Text.gd" id="3_4dyht"]
 [ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="3_oemg3"]
 [ext_resource type="Script" path="res://DialogueState/Question/Question.gd" id="4_ehm6g"]
@@ -24,8 +24,8 @@ state_on_chosen = NodePath("../Not taken outro")
 
 [node name="Witch" instance=ExtResource("1_sjy1l")]
 
-[node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_7fh0i")
+[node name="Sprite2D" parent="SpriteContainer" index="0"]
+texture = ExtResource("2_6wwls")
 
 [node name="ItemGiven" type="Node" parent="LT_PersistentVariables" index="0"]
 script = ExtResource("3_oemg3")

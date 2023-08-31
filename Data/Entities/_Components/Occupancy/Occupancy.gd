@@ -8,7 +8,8 @@ signal collected(by: Entity)
 var entity: Entity = null
 var data: OccupancyData = null
 
-var current_tile: Tile = null
+var primary_tile: Tile = null
+var additional_tiles: Array[Tile] = []
 
 
 func _init(p_entity: Entity, p_data: OccupancyData, start_tile: Tile = null):
@@ -17,7 +18,11 @@ func _init(p_entity: Entity, p_data: OccupancyData, start_tile: Tile = null):
 	
 	if start_tile != null:
 		start_tile.occupant = entity
-		current_tile = start_tile
+		primary_tile = start_tile
+		if p_data.size == OccupancyData.EntitySize.LARGE:
+			assert(p_data.blocking_behavior == OccupancyData.BlockingBehavior.IMMOVABLE,
+				"Currently entities that are set to LARGE need to be set to IMMOVABLE")
+			add_additional_tiles_for_large_size()
 		entity.global_position = start_tile.global_position
 
 
@@ -43,15 +48,15 @@ func move_to_tile(destination_tile: Tile) -> bool:
 				collectable = destination_occupant
 	
 
-	if current_tile.occupant == entity:  # Might not be occupant if it's a collectable being moved
-		current_tile.occupant = null
-	current_tile = destination_tile
-	current_tile.occupant = entity
+	if primary_tile.occupant == entity:  # Might not be occupant if it's a collectable being moved
+		primary_tile.occupant = null
+	primary_tile = destination_tile
+	primary_tile.occupant = entity
 	
 	if collectable != null:
 		collectable.occupancy.collect(entity)
 	
-	do_move_animation(current_tile.global_position)
+	do_move_animation(primary_tile.global_position)
 	return true
 
 
@@ -83,14 +88,14 @@ func do_move_animation(destination: Vector2):
 
 func get_displace_tile() -> Tile:
 	var possible_tiles: Array[Tile] = []
-	if current_tile.top_tile && can_move_to_tile(current_tile.top_tile):
-		possible_tiles.append(current_tile.top_tile)
-	if current_tile.bottom_tile && can_move_to_tile(current_tile.bottom_tile):
-		possible_tiles.append(current_tile.bottom_tile)
-	if current_tile.left_tile && can_move_to_tile(current_tile.left_tile):
-		possible_tiles.append(current_tile.left_tile)
-	if current_tile.right_tile && can_move_to_tile(current_tile.right_tile):
-		possible_tiles.append(current_tile.right_tile)
+	if primary_tile.top_tile && can_move_to_tile(primary_tile.top_tile):
+		possible_tiles.append(primary_tile.top_tile)
+	if primary_tile.bottom_tile && can_move_to_tile(primary_tile.bottom_tile):
+		possible_tiles.append(primary_tile.bottom_tile)
+	if primary_tile.left_tile && can_move_to_tile(primary_tile.left_tile):
+		possible_tiles.append(primary_tile.left_tile)
+	if primary_tile.right_tile && can_move_to_tile(primary_tile.right_tile):
+		possible_tiles.append(primary_tile.right_tile)
 	
 	if possible_tiles.size() > 0:
 		return possible_tiles.pick_random()
@@ -100,6 +105,25 @@ func get_displace_tile() -> Tile:
 
 func collect(collector: Entity):
 	collected.emit(collector)
+
+
+func add_additional_tiles_for_large_size():
+	additional_tiles.append_array(
+		[primary_tile.top_tile, primary_tile.right_tile,
+		primary_tile.bottom_tile, primary_tile.left_tile]
+	)
+	
+	for tile in additional_tiles:
+		assert(tile != null, "Not enough tile space to spawn a large enemy")
+	
+	additional_tiles.append_array([
+		additional_tiles[0].right_tile, additional_tiles[0].left_tile,
+		additional_tiles[2].right_tile, additional_tiles[2].left_tile
+	])
+	for tile in additional_tiles:
+		assert(tile != null, "Not enough tile space to spawn a large enemy")
+		assert(tile.occupant == null, "Not enough room to spawn large enemy")
+		tile.occupant = entity
 
 
 func _on_move_tween_finished():
