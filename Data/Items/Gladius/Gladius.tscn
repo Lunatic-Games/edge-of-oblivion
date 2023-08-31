@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6oyy1un0mhdv"]
+[gd_scene load_steps=12 format=3 uid="uid://b6oyy1un0mhdv"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TierableIntVariable.gd" id="2_ck4rn"]
