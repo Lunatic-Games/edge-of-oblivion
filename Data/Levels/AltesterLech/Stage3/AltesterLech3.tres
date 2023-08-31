@@ -1,0 +1,90 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=19 format=3 uid="uid://bm83frxy61oy2"]
+
+[ext_resource type="Resource" uid="uid://50bvt7hgm20i" path="res://Data/GameModes/Standard/Standard.tres" id="1_tep15"]
+[ext_resource type="PackedScene" uid="uid://dhak7vpf0imi2" path="res://Data/Levels/AltesterLech/Stage3/AltesterLech3.tscn" id="2_na1ha"]
+[ext_resource type="Resource" uid="uid://dhcnek827wiq2" path="res://Data/Entities/Enemies/River/Crab/Crab.tres" id="3_klba3"]
+[ext_resource type="Resource" uid="uid://h1u0ciaf4dn0" path="res://Data/Entities/Enemies/River/Farmer/Farmer.tres" id="4_3tk15"]
+[ext_resource type="Resource" uid="uid://mmxs3f1x3ijd" path="res://Data/Entities/Enemies/River/PlaceholderMongolianCalvary/MongolianCalvary.tres" id="5_apdmd"]
+[ext_resource type="Resource" uid="uid://bug4lmfq4vfx7" path="res://Data/Entities/Enemies/River/PlaceholderCurvedSwordFighter/CurvedSwordFighter.tres" id="6_v1h1m"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="7_k2i1b"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="8_rjvxa"]
+[ext_resource type="Resource" uid="uid://d3amgnu6osq01" path="res://Data/Levels/AltesterLech/Haven/AltesterLechHaven.tres" id="9_srb7m"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="10_uw2qg"]
+
+[sub_resource type="Resource" id="Resource_rv13e"]
+script = ExtResource("8_rjvxa")
+round_wait_from_previous_wave = 1
+"# Crab" = 0
+"# Farmer" = 0
+"# Mongolian Calvary" = 0
+"# Curved Sword Fighter" = 6
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_hkl5s"]
+script = ExtResource("8_rjvxa")
+round_wait_from_previous_wave = 7
+"# Crab" = 0
+"# Farmer" = 0
+"# Mongolian Calvary" = 3
+"# Curved Sword Fighter" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_acul7"]
+script = ExtResource("8_rjvxa")
+round_wait_from_previous_wave = 7
+"# Crab" = 0
+"# Farmer" = 0
+"# Mongolian Calvary" = 2
+"# Curved Sword Fighter" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_4dsji"]
+script = ExtResource("8_rjvxa")
+round_wait_from_previous_wave = 8
+"# Crab" = 0
+"# Farmer" = 6
+"# Mongolian Calvary" = 2
+"# Curved Sword Fighter" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_6w1da"]
+script = ExtResource("8_rjvxa")
+round_wait_from_previous_wave = 9
+"# Crab" = 0
+"# Farmer" = 0
+"# Mongolian Calvary" = 0
+"# Curved Sword Fighter" = 7
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_m37aj"]
+script = ExtResource("8_rjvxa")
+round_wait_from_previous_wave = 6
+"# Crab" = 0
+"# Farmer" = 0
+"# Mongolian Calvary" = 0
+"# Curved Sword Fighter" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_554eh"]
+script = ExtResource("8_rjvxa")
+round_wait_from_previous_wave = 7
+"# Crab" = 0
+"# Farmer" = 0
+"# Mongolian Calvary" = 1
+"# Curved Sword Fighter" = 2
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_4esfd"]
+script = ExtResource("7_k2i1b")
+enemies = Array[Resource("res://Data/Entities/Enemies/ENEMY_DATA.gd")]([ExtResource("3_klba3"), ExtResource("4_3tk15"), ExtResource("5_apdmd"), ExtResource("6_v1h1m")])
+waves = Array[ExtResource("8_rjvxa")]([SubResource("Resource_rv13e"), SubResource("Resource_hkl5s"), SubResource("Resource_acul7"), SubResource("Resource_4dsji"), SubResource("Resource_6w1da"), SubResource("Resource_m37aj"), SubResource("Resource_554eh")])
+
+[resource]
+script = ExtResource("10_uw2qg")
+level_name = "Altester Lech - 3"
+level_scene = ExtResource("2_na1ha")
+level_waves = SubResource("Resource_4esfd")
+next_level = ExtResource("9_srb7m")
+game_mode = ExtResource("1_tep15")
+gateway_spawn_condition = 2
+killing_boss_completes_run = false

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=5 format=3 uid="uid://d3amgnu6osq01"]
+
+[ext_resource type="Resource" uid="uid://c7crkijqi5ruj" path="res://Data/GameModes/NonCombatZone/NonCombatZone.tres" id="1_hv57n"]
+[ext_resource type="PackedScene" uid="uid://0xse7l54ha7n" path="res://Data/Levels/AltesterLech/Haven/AltesterLechHaven.tscn" id="2_8hl5s"]
+[ext_resource type="Resource" uid="uid://d1tqh8fbckgnb" path="res://Data/Levels/TheForest/TheForest.tres" id="3_17d12"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="4_twfl4"]
+
+[resource]
+script = ExtResource("4_twfl4")
+level_name = "Altester Lech - Haven"
+level_scene = ExtResource("2_8hl5s")
+next_level = ExtResource("3_17d12")
+game_mode = ExtResource("1_hv57n")
+gateway_spawn_condition = 0
+killing_boss_completes_run = false

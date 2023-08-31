@@ -2,14 +2,14 @@
 
 [ext_resource type="Resource" uid="uid://c7crkijqi5ruj" path="res://Data/GameModes/NonCombatZone/NonCombatZone.tres" id="1_bw0jb"]
 [ext_resource type="PackedScene" uid="uid://qjwh7gqec4ef" path="res://Data/Levels/TheDunes/Haven/Haven.tscn" id="2_86b35"]
-[ext_resource type="Resource" uid="uid://d1tqh8fbckgnb" path="res://Data/Levels/TheForest/TheForest.tres" id="7_lnest"]
+[ext_resource type="Resource" uid="uid://c5gidqtpuqqx8" path="res://Data/Levels/AltesterLech/Stage1/AltesterLech1.tres" id="3_60d8g"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="8_e3usl"]
 
 [resource]
 script = ExtResource("8_e3usl")
 level_name = "Dunes - Haven"
 level_scene = ExtResource("2_86b35")
-next_level = ExtResource("7_lnest")
+next_level = ExtResource("3_60d8g")
 game_mode = ExtResource("1_bw0jb")
 gateway_spawn_condition = 0
 killing_boss_completes_run = false
