@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dpgph88bl6aj5"]
+
+[ext_resource type="PackedScene" uid="uid://cgsy66l7lqkrf" path="res://Data/Items/MorningStar/MorningStar.tscn" id="1_0ox01"]
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="1_so452"]
+[ext_resource type="Texture2D" uid="uid://3idso2oafkll" path="res://Assets/art/icons/weapons/delapouite/flail.svg" id="3_6dktn"]
+
+[resource]
+script = ExtResource("1_so452")
+sprite = ExtResource("3_6dktn")
+item_scene = ExtResource("1_0ox01")
+item_name = "Morning Star"
+popup_item_name_color = "royalblue"
+flavor_text = "An unwieldy weapon. Hit multiple enemies and the wielder. "
+max_tier = 3
+max_forge_level = 3
+use_tier_1_text_for_popup_texts = false
+cost_level_1 = 1
+cost_level_2 = 1
+cost_level_3 = 1
+card_text_1 = "Every 7 turns: Attack  the four corners for 20 damage, and yourself for 4 damage."
+card_text_2 = "Damage to self 4 -> 2."
+card_text_3 = "Attacks 8 tiles in a wide circle."
+popup_text_1 = "Attack the four corners for 20 damage and self for 4 damage."
+popup_text_2 = "Attack the four corners for 20 damage and self for 2 damage."
+popup_text_3 = "Attacks a wide circle of eight tiles for 20 damage and self for 2 damage. "

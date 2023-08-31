@@ -1,16 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwv1hkh0qltmy"]
+[gd_scene load_steps=4 format=3 uid="uid://cwv1hkh0qltmy"]
 
 [ext_resource type="Script" path="res://UI/Menus/MemoriesMenu/AccountSection/AccountSection.gd" id="1_dfrc3"]
 [ext_resource type="FontFile" uid="uid://bvvb51yov72a0" path="res://Assets/fonts/Caudex-Regular.ttf" id="2_i7yic"]
 
 [sub_resource type="FontVariation" id="FontVariation_4axqc"]
 base_font = ExtResource("2_i7yic")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sk3cc"]
-bg_color = Color(0.14902, 0.14902, 0.14902, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt0ty"]
-bg_color = Color(0.701961, 0.482353, 0.909804, 1)
 
 [node name="AccountSection" type="VBoxContainer"]
 anchors_preset = 15
@@ -23,55 +17,6 @@ script = ExtResource("1_dfrc3")
 
 [node name="Spacer" type="Control" parent="."]
 layout_mode = 2
-
-[node name="AccountSummary" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 24
-alignment = 1
-
-[node name="AccountLevel" type="HBoxContainer" parent="AccountSummary"]
-layout_mode = 2
-theme_override_constants/separation = 15
-alignment = 1
-
-[node name="Label" type="Label" parent="AccountSummary/AccountLevel"]
-layout_mode = 2
-theme_override_fonts/font = SubResource("FontVariation_4axqc")
-theme_override_font_sizes/font_size = 30
-text = "Account Level:"
-horizontal_alignment = 1
-
-[node name="LevelLabel" type="Label" parent="AccountSummary/AccountLevel"]
-layout_mode = 2
-theme_override_fonts/font = SubResource("FontVariation_4axqc")
-theme_override_font_sizes/font_size = 30
-text = "0"
-
-[node name="ProgressBar" type="ProgressBar" parent="AccountSummary"]
-custom_minimum_size = Vector2(600, 40)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = SubResource("FontVariation_4axqc")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/background = SubResource("StyleBoxFlat_sk3cc")
-theme_override_styles/fill = SubResource("StyleBoxFlat_rt0ty")
-value = 50.0
-show_percentage = false
-
-[node name="Label" type="Label" parent="AccountSummary/ProgressBar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = SubResource("FontVariation_4axqc")
-theme_override_font_sizes/font_size = 22
-text = "300XP / 300XP"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="StatsSummary" type="VBoxContainer" parent="."]
 layout_mode = 2

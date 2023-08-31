@@ -71,7 +71,7 @@ func trigger(source_item: Item, source_entity: Entity, source_tile: Tile,
 		if source_tile != null:
 			output_source_tile.value = [source_tile]
 		elif source_item != null and source_item.user != null and source_item.user.occupancy.current_tile != null:
-			output_source_tile.value = [source_item.user.current_tile]
+			output_source_tile.value = [source_item.user.occupancy.current_tile]
 		elif source_entity != null and source_entity.occupancy.current_tile != null:
 			output_source_tile.value = [source_entity.occupancy.current_tile]
 		else:

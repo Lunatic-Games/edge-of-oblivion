@@ -1,10 +1,19 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://h1u0ciaf4dn0"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://h1u0ciaf4dn0"]
 
 [ext_resource type="PackedScene" uid="uid://jpocmxt7ayld" path="res://Data/Entities/Enemies/River/Farmer/Farmer.tscn" id="1_2rylg"]
 [ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="1_accal"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_b8oab"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/_Components/GoldStorage/GOLD_STORAGE_DATA.gd" id="2_s85a2"]
 [ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_2eocb"]
 [ext_resource type="Texture2D" uid="uid://dduidtuwcjbld" path="res://Assets/art/icons/enemies/Delapouite/farmer.svg" id="5_hmwfu"]
+
+[sub_resource type="Resource" id="Resource_f0epa"]
+script = ExtResource("2_s85a2")
+chance_of_generating_gold = 1.0
+min_gold_generated = 1
+max_gold_generated = 3
+stores_collected_gold = true
+add_particles_on_collecting_gold = true
 
 [sub_resource type="Resource" id="Resource_8y2av"]
 script = ExtResource("2_b8oab")
@@ -21,10 +30,12 @@ size = 0
 blocking_behavior = 1
 can_be_pushed_off_map = true
 can_push_entities = false
+collectable_filter = 0
 
 [resource]
 script = ExtResource("1_accal")
 xp_value = 1
+gold_storage_data = SubResource("Resource_f0epa")
 entity_scene = ExtResource("1_2rylg")
 health_data = SubResource("Resource_8y2av")
 occupancy_data = SubResource("Resource_v35hq")

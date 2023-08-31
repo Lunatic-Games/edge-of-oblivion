@@ -1,0 +1,80 @@
+[gd_scene load_steps=14 format=3 uid="uid://b2gabb6lthnt7"]
+
+[ext_resource type="PackedScene" uid="uid://bpp12botbqk4r" path="res://Data/Entities/NPCs/NPC.tscn" id="1_sjy1l"]
+[ext_resource type="Texture2D" uid="uid://6uiaqwo76du0" path="res://Assets/art/icons/medieval-fantasy/cathelineau/witch-face.svg" id="2_7fh0i"]
+[ext_resource type="Script" path="res://DialogueState/Basic/Text.gd" id="3_4dyht"]
+[ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="3_oemg3"]
+[ext_resource type="Script" path="res://DialogueState/Question/Question.gd" id="4_ehm6g"]
+[ext_resource type="Script" path="res://DialogueState/Question/OPTION_DATA.gd" id="5_dxssi"]
+[ext_resource type="Script" path="res://DialogueState/Conditionals/IfLTBool.gd" id="5_v30wx"]
+[ext_resource type="Script" path="res://DialogueState/AddToRunDeck/AddToRunDeck.gd" id="6_swfrg"]
+[ext_resource type="Script" path="res://DialogueState/LogicTree/RunLogicTree.gd" id="9_q8tev"]
+[ext_resource type="Resource" uid="uid://olilhse4njhm" path="res://Data/Items/TaintedFlask/TaintedFlask.tres" id="9_ydyc3"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="10_hit4m"]
+
+[sub_resource type="Resource" id="Resource_1bik1"]
+script = ExtResource("5_dxssi")
+text = "Take the Tainted Flask"
+state_on_chosen = NodePath("../Add item")
+
+[sub_resource type="Resource" id="Resource_lf51j"]
+script = ExtResource("5_dxssi")
+text = "Ignore her and keep moving."
+state_on_chosen = NodePath("../Not taken outro")
+
+[node name="Witch" instance=ExtResource("1_sjy1l")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_7fh0i")
+
+[node name="ItemGiven" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("3_oemg3")
+
+[node name="DS_Start" parent="." index="5" node_paths=PackedStringArray("start_state")]
+start_state = NodePath("Intro text")
+
+[node name="Intro text" type="Node" parent="DS_Start" index="0" node_paths=PackedStringArray("next_state")]
+script = ExtResource("3_4dyht")
+text = Array[String](["You, a whisper of destiny surrounds your head."])
+next_state = NodePath("../If item given")
+
+[node name="If item given" type="Node" parent="DS_Start" index="1" node_paths=PackedStringArray("bool_variable", "next_state_if_true", "next_state_if_false")]
+script = ExtResource("5_v30wx")
+bool_variable = NodePath("../../LT_PersistentVariables/ItemGiven")
+next_state_if_true = NodePath("Already given outro")
+next_state_if_false = NodePath("../OfferItem")
+
+[node name="Already given outro" type="Node" parent="DS_Start/If item given" index="0" node_paths=PackedStringArray("next_state")]
+script = ExtResource("3_4dyht")
+text = Array[String](["I'm sorry but I don't have anything else to offer you!"])
+next_state = NodePath("../../DS_End")
+
+[node name="OfferItem" type="Node" parent="DS_Start" index="2"]
+script = ExtResource("4_ehm6g")
+prompt_text = "You will need this flask, the souls are hungry."
+options = Array[ExtResource("5_dxssi")]([SubResource("Resource_1bik1"), SubResource("Resource_lf51j")])
+
+[node name="Add item" type="Node" parent="DS_Start" index="3" node_paths=PackedStringArray("next_state")]
+script = ExtResource("6_swfrg")
+item_to_add = ExtResource("9_ydyc3")
+next_state = NodePath("../Set given")
+
+[node name="Set given" type="Node" parent="DS_Start" index="4" node_paths=PackedStringArray("logic_tree", "next_state")]
+script = ExtResource("9_q8tev")
+logic_tree = NodePath("LT_SetBool")
+next_state = NodePath("../Offer taken outro")
+
+[node name="LT_SetBool" type="Node" parent="DS_Start/Set given" index="0" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("10_hit4m")
+bool_variable = NodePath("../../../LT_PersistentVariables/ItemGiven")
+value = true
+
+[node name="Offer taken outro" type="Node" parent="DS_Start" index="5" node_paths=PackedStringArray("next_state")]
+script = ExtResource("3_4dyht")
+text = Array[String](["good..."])
+next_state = NodePath("../DS_End")
+
+[node name="Not taken outro" type="Node" parent="DS_Start" index="6" node_paths=PackedStringArray("next_state")]
+script = ExtResource("3_4dyht")
+text = Array[String](["So it will be..."])
+next_state = NodePath("../DS_End")

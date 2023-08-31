@@ -50,12 +50,9 @@ func get_random_unoccupied_tile() -> Tile:
 	return unoccupied_tiles.pick_random()
 
 
-# Not performant, currently just used by debug menu but should not be used in production
 func get_tile_at_position(pos: Vector2) -> Tile:
-	for tile in all_tiles:
-		if tile.is_position_within_tile(pos):
-			return tile
-	return null
+	var coord = local_to_map(to_local(pos))
+	return tiles_at_coord.get(coord, null)
 
 
 func _on_tile_occupied_by_new_entity(_occupant: Entity, tile: Tile) -> void:

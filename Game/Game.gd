@@ -9,12 +9,17 @@ var spawn_handler: SpawnHandler = SpawnHandler.new()
 var run_stats: RunStats = RunStats.new()
 var queued_level_transition: LevelData = null
 
+var item_deck: Dictionary = {}  # ItemData : forge level (int)
+
 var run_over: bool = false
 
+@onready var dialogue_overlay: DialogueOverlay = $HUD/DialogueOverlay
 @onready var player_overlay: PlayerOverlay = $HUD/PlayerOverlay
 @onready var boss_overlay: BossOverlay = $HUD/BossOverlay
 
-@onready var upgrade_menu: UpgradeMenu = $Menus/UpgradeMenu
+@onready var shop_menu: ShopMenu = $Menus/ShopMenu
+@onready var forge_menu: ForgeMenu = $Menus/ForgeMenu
+@onready var level_up_menu: LevelUpMenu = $Menus/LevelUpMenu
 @onready var victory_menu: VictoryMenu = $Menus/VictoryMenu
 @onready var game_over_menu: GameOverMenu = $Menus/GameOverMenu
 @onready var pause_menu: PauseMenu = $Menus/PauseMenu
@@ -29,6 +34,11 @@ func _ready() -> void:
 		level_data = game_config.starting_level_data
 	
 	await new_level_setup()
+	
+	var player_data: PlayerData = GlobalGameState.get_player().data as PlayerData
+	for item_data in player_data.initial_item_deck:
+		item_deck[item_data] = 1
+	
 	GlobalSignals.run_started.emit()
 
 
@@ -51,10 +61,9 @@ func transition_to_new_level(new_level_data: LevelData) -> void:
 	set_process(false)
 	fade_animator.play("fade_out")
 	await fade_animator.animation_finished
-	if new_level_data.persist_player_on_entering:
-		var player: Player = GlobalGameState.get_player()
-		if player:
-			player.reparent(self)
+	var player: Player = GlobalGameState.get_player()
+	if player:
+		player.reparent(self)
 	
 	if level != null:
 		level.queue_free()
@@ -66,8 +75,16 @@ func transition_to_new_level(new_level_data: LevelData) -> void:
 
 
 func _process(_delta: float) -> void:
-	if game_mode != null and run_over == false and upgrade_menu.has_priority == false:
-		game_mode.update()
+	if game_mode == null or run_over == true:
+		return
+	
+	if level_up_menu.has_priority == true or dialogue_overlay.has_priority == true:
+		return
+	
+	if shop_menu.visible or forge_menu.visible:
+		return
+	
+	game_mode.update()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -89,8 +106,6 @@ func victory():
 	GlobalSignals.run_ended.emit(true)
 	await get_tree().create_timer(1.0).timeout
 	
-	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
-	victory_menu.run_summary.update(gain_result)
 	Saving.save_progress_to_file()
 	
 	victory_menu.show()
@@ -100,21 +115,19 @@ func game_over():
 	if run_over:
 		return
 	
-	upgrade_menu.hide()
+	level_up_menu.hide()
 	run_over = true
 	GlobalSignals.run_ended.emit(false)
 	await get_tree().create_timer(1.0).timeout
 	
-	var gain_result: AccountXPGainResult = GlobalAccount.gain_xp(run_stats.xp_gained)
-	game_over_menu.run_summary.update(gain_result)
 	Saving.save_progress_to_file()
 	
 	game_over_menu.show()
 
 
 func check_for_upgrades() -> bool:
-	if upgrade_menu.n_queued_upgrades > 0 and run_over == false:
-		upgrade_menu.display()
+	if level_up_menu.n_queued_level_ups > 0 and run_over == false:
+		level_up_menu.display()
 		return true
 	
 	return false

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c0t5coe7xqeyd"]
+
+[ext_resource type="PackedScene" uid="uid://1x4gfsn03tqa" path="res://Data/Items/ChainKnife/ChainKnife.tscn" id="1_1ornq"]
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="2_gsisl"]
+[ext_resource type="Texture2D" uid="uid://cxky0j8p56fn5" path="res://Assets/art/icons/weapons/lorc/dripping-knife.svg" id="3_6x503"]
+
+[resource]
+script = ExtResource("2_gsisl")
+sprite = ExtResource("3_6x503")
+item_scene = ExtResource("1_1ornq")
+item_name = "Chain Knife"
+popup_item_name_color = "royalblue"
+flavor_text = "One deadly chain."
+max_tier = 3
+max_forge_level = 3
+use_tier_1_text_for_popup_texts = false
+cost_level_1 = 1
+cost_level_2 = 1
+cost_level_3 = 1
+card_text_1 = "Every 6 turns, activate for 2 rounds. Alternate hitting radius 1 and 2 for 10 damage. Also does 2 self damage."
+card_text_2 = "Active for 2 -> 3 rounds."
+card_text_3 = "Active for 3 -> 4 rounds."
+popup_text_1 = "Every 6 turns, activate for 2 rounds. Alternate hitting radius 1 and 2 for 10 damage. Also does 2 self damage."
+popup_text_2 = "Every 6 turns, activate for 3 rounds. Alternate hitting radius 1 and 2 for 10 damage. Also does 2 self damage."
+popup_text_3 = "Every 6 turns, activate for 4 rounds. Alternate hitting radius 1 and 2 for 10 damage. Also does 2 self damage."

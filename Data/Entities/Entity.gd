@@ -13,7 +13,7 @@ var occupancy: EntityOccupancy = null
 @onready var health_bar: ProgressBar = $HealthBar
 
 
-func setup(p_data: EntityData) -> void:
+func setup(p_data: EntityData, start_tile: Tile = null) -> void:
 	assert(p_data != null, "Null entity data")
 	
 	data = p_data
@@ -24,7 +24,7 @@ func setup(p_data: EntityData) -> void:
 		health_bar.hide()
 	
 	if data.occupancy_data != null:
-		occupancy = EntityOccupancy.new(self, data.occupancy_data)
+		occupancy = EntityOccupancy.new(self, data.occupancy_data, start_tile)
 
 
 func update():

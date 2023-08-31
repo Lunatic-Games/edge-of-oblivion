@@ -5,6 +5,7 @@ extends Resource
 
 const CARD_TEXT_EXPORT_PREFIX: String = "card_text_"
 const POPUP_TEXT_EXPORT_PREFIX: String = "popup_text_"
+const COST_EXPORT_PREFIX: String = "cost_level_"
 
 @export var sprite: Texture2D = null
 @export var item_scene: PackedScene = null
@@ -14,11 +15,18 @@ const POPUP_TEXT_EXPORT_PREFIX: String = "popup_text_"
 
 @export_range(1, 10, 1, "or_greater") var max_tier: int = 3:
 	set = _set_max_tier
+@export_range(1, 10, 1, "or_greater") var max_forge_level: int = 3:
+	set = _set_max_forge_level
 @export var use_tier_1_text_for_popup_texts: bool = false:
 	set = _set_use_tier_1_text_for_popup_texts
 
 var _card_texts: Dictionary = {}  # Property name : text
 var _popup_texts: Dictionary = {}  # Property name : text
+var _costs: Dictionary = {}  # Property name : gold cost (int)
+
+
+func get_cost(forge_level: int = 1) -> int:
+	return _costs.get(COST_EXPORT_PREFIX + str(forge_level), 0)
 
 
 func get_card_text(tier: int) -> String:
@@ -44,6 +52,14 @@ func _set_max_tier(n: int) -> void:
 	notify_property_list_changed()
 
 
+func _set_max_forge_level(n: int) -> void:
+	max_forge_level = n
+	for i in max_forge_level:
+		if _costs.has(COST_EXPORT_PREFIX + str(i + 1)) == false:
+			_costs[COST_EXPORT_PREFIX + str(i + 1)] = 1
+	notify_property_list_changed()
+
+
 func _set_use_tier_1_text_for_popup_texts(use_tier_1: bool) -> void:
 	use_tier_1_text_for_popup_texts = use_tier_1
 	notify_property_list_changed()
@@ -51,6 +67,21 @@ func _set_use_tier_1_text_for_popup_texts(use_tier_1: bool) -> void:
 
 func _get_property_list() -> Array[Dictionary]:
 	var properties: Array[Dictionary] = []
+	
+	properties.append({
+		"name": "Cost per forge level",
+		"hint_string": COST_EXPORT_PREFIX,
+		"type": TYPE_NIL,
+		"usage": PROPERTY_USAGE_GROUP
+	})
+	for i in max_forge_level:
+		properties.append({
+			"name": COST_EXPORT_PREFIX + str(i + 1),
+			"type": TYPE_INT,
+			"hint": PROPERTY_HINT_MULTILINE_TEXT,
+			"usage": PROPERTY_USAGE_DEFAULT
+		})
+	
 	properties.append({
 		"name": "Card tier texts",
 		"hint_string": CARD_TEXT_EXPORT_PREFIX,
@@ -89,6 +120,8 @@ func _get(property: StringName) -> Variant:
 		return _card_texts[property]
 	elif property.begins_with(POPUP_TEXT_EXPORT_PREFIX) and _popup_texts.has(property):
 		return _popup_texts[property]
+	elif property.begins_with(COST_EXPORT_PREFIX) and _costs.has(property):
+		return _costs[property]
 	
 	return null
 
@@ -98,5 +131,7 @@ func _set(property: StringName, value: Variant) -> bool:
 		_card_texts[property] = value
 	if property.begins_with(POPUP_TEXT_EXPORT_PREFIX):
 		_popup_texts[property] = value
+	if property.begins_with(COST_EXPORT_PREFIX):
+		_costs[property] = value
 	
 	return true

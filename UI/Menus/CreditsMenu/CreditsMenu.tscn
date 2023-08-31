@@ -168,7 +168,9 @@ From The Following Creators:
 Lorc
 Delapouite
 Skoll
-SBed"
+SBed
+Kier Heyl
+"
 
 [node name="AllAssetsCanBeFoundAt" parent="MarginContainer/VBoxContainer/ScrollContainer/Sections/Art" instance=ExtResource("3_0vm3t")]
 layout_mode = 2

@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Data/Config/GAME_CONFIG.gd" id="1_fegxe"]
 [ext_resource type="PackedScene" uid="uid://clkedmwe4xw0b" path="res://Game/Game.tscn" id="1_q3tlj"]
-[ext_resource type="Resource" uid="uid://bj2807sghnvk0" path="res://Data/Levels/TheEdge/Stage3/TheEdge3.tres" id="3_7b5s2"]
+[ext_resource type="Resource" uid="uid://b6v0k77eo7jwp" path="res://Data/Levels/TheEdge/Stage1/TheEdge1.tres" id="3_gfpps"]
 
 [resource]
 script = ExtResource("1_fegxe")
-starting_level_data = ExtResource("3_7b5s2")
+starting_level_data = ExtResource("3_gfpps")
 precache = 3
 min_window_size = Vector2i(800, 600)
 debug_start_scene = ExtResource("1_q3tlj")

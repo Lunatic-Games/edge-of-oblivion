@@ -4,6 +4,7 @@ extends Node
 signal save_loaded
 
 signal initial_level_setup_completed(game: Game)
+
 signal run_started
 signal run_ended(is_victory: bool)
 signal main_menu_entered

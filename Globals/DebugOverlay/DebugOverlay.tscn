@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dec5mxhj85sw3"]
+[gd_scene load_steps=13 format=3 uid="uid://dec5mxhj85sw3"]
 
 [ext_resource type="Script" path="res://Globals/DebugOverlay/DebugOverlay.gd" id="1_bya3d"]
 [ext_resource type="PackedScene" uid="uid://dtw6pn33rlm01" path="res://Globals/DebugOverlay/SelectTilesMenu/SelectTilesMenu.tscn" id="2_gae75"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/SceneDropdown.gd" id="6_x3lws"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/LevelsDropdown.gd" id="7_cilm5"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/EnemiesDropdown.gd" id="7_fyx2i"]
-[ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/AccountDropdown.gd" id="8_qgndo"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/SaveDropdown.gd" id="9_07phx"]
 [ext_resource type="Script" path="res://Globals/DebugOverlay/Dropdowns/MiscDropdown.gd" id="10_d751k"]
 
@@ -75,11 +74,6 @@ script = ExtResource("6_x3lws")
 layout_mode = 2
 text = "Levels..."
 script = ExtResource("7_cilm5")
-
-[node name="AccountDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
-layout_mode = 2
-text = "Account..."
-script = ExtResource("8_qgndo")
 
 [node name="SaveDropdown" parent="Panel/MarginContainer/Menus" instance=ExtResource("2_kyr2u")]
 layout_mode = 2

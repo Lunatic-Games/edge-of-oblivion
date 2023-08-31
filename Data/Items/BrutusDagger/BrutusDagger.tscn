@@ -82,14 +82,14 @@ script = ExtResource("11_680y7")
 tiles = NodePath("../../../../LT_PersistentVariables/Targets")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
 
-[node name="If Tier 3 or Greater" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Damage Enemies" index="0" node_paths=PackedStringArray("input")]
+[node name="If Tier 3 or Greater" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
 script = ExtResource("7_lwesr")
-input = NodePath("../../../../Item tier")
+input = NodePath("../../New tier")
 comparison = 1
 value = 3
 
-[node name="Increase Damage" type="Node" parent="LT_OnItemUpdate/LogicTree/LT_EveryXCalls/Damage Enemies/If Tier 3 or Greater" index="0" node_paths=PackedStringArray("int_variable")]
+[node name="Increase Damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If Tier 3 or Greater" index="0" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("12_xxjuw")
-int_variable = NodePath("../../../../../../LT_PersistentVariables/Damage")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
 value = 10
 operation = 1

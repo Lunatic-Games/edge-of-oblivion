@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://coecb2cxst48t"]
+
+[ext_resource type="PackedScene" uid="uid://b2sfg7xw7h5d3" path="res://Data/Tiles/Tile.tscn" id="1_d87mk"]
+[ext_resource type="Texture2D" uid="uid://dyh6n6mh1q8ed" path="res://Assets/art/icons/misc/delapouite/desert.svg" id="2_uiwx0"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="3_r1tpj"]
+[ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="4_ovd3i"]
+[ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="5_acg03"]
+
+[node name="HeavySandyTile" instance=ExtResource("1_d87mk")]
+
+[node name="Background" parent="." index="0"]
+color = Color(0.407843, 0.298039, 0.215686, 1)
+
+[node name="Sprite2D" parent="." index="1"]
+self_modulate = Color(0.85098, 0.647059, 0.458824, 0.14902)
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="2"]
+self_modulate = Color(0.878431, 0.670588, 0.47451, 0.360784)
+scale = Vector2(0.117, 0.117)
+texture = ExtResource("2_uiwx0")
+
+[node name="Target" type="Node" parent="LT_OnTileUpdate/LogicTree" index="0"]
+script = ExtResource("3_r1tpj")
+
+[node name="Grab player" type="Node" parent="LT_OnTileUpdate/LogicTree" index="1" node_paths=PackedStringArray("input_tiles", "output_tiles")]
+script = ExtResource("4_ovd3i")
+input_tiles = NodePath("../../This tile")
+output_tiles = NodePath("../Target")
+occupant_type = 1
+
+[node name="Deal 5 damage" type="Node" parent="LT_OnTileUpdate/LogicTree" index="2" node_paths=PackedStringArray("tiles")]
+script = ExtResource("5_acg03")
+tiles = NodePath("../Target")
+damage = 5

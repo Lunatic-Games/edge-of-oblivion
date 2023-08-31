@@ -79,6 +79,11 @@ func is_alive() -> bool:
 	return current_value > 0
 
 
+func reset() -> void:
+	current_value = data.max_health
+	_update_health_bar()
+
+
 func _die(source: int = 0) -> void:
 	if entity.occupancy and entity.occupancy.current_tile:
 		entity.occupancy.current_tile.occupant = null
@@ -101,8 +106,11 @@ func _spawn_particles(particles_scene: PackedScene) -> void:
 	board.add_child(particle)
 
 
-func _update_health_bar() -> void:
+func _update_health_bar(animate: bool = false) -> void:
 	var target_value: float = float(current_value) / float(data.max_health) * 100.0
 	
-	var tween: Tween = entity.create_tween()
-	tween.tween_property(entity.health_bar, "value", target_value, 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	if animate == false:
+		entity.health_bar.value = target_value
+	else:
+		var tween: Tween = entity.create_tween()
+		tween.tween_property(entity.health_bar, "value", target_value, 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)

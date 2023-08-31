@@ -194,10 +194,11 @@ script = ExtResource("3_4tnbp")
 
 [node name="LT_PersistentVariables" type="Node" parent="."]
 
-[node name="LT_OnItemSetupCompleted" type="Node" parent="." node_paths=PackedStringArray("output_item_array", "output_item_user_tile", "logic_tree_on_trigger")]
+[node name="LT_OnItemSetupCompleted" type="Node" parent="." node_paths=PackedStringArray("output_item_array", "output_item_user_tile", "output_forge_level", "logic_tree_on_trigger")]
 script = ExtResource("4_l35wj")
 output_item_array = NodePath("This item")
 output_item_user_tile = NodePath("Item user tile")
+output_forge_level = NodePath("../LT_OnItemUpdate/Forge level")
 logic_tree_on_trigger = NodePath("LogicTree")
 
 [node name="This item" type="Node" parent="LT_OnItemSetupCompleted"]
@@ -206,14 +207,18 @@ script = ExtResource("5_m47ox")
 [node name="Item user tile" type="Node" parent="LT_OnItemSetupCompleted"]
 script = ExtResource("6_e5w62")
 
+[node name="Item forge level" type="Node" parent="LT_OnItemSetupCompleted"]
+script = ExtResource("5_m47ox")
+
 [node name="LogicTree" type="Node" parent="LT_OnItemSetupCompleted"]
 script = ExtResource("7_18vgj")
 
-[node name="LT_OnItemUpdate" type="Node" parent="." node_paths=PackedStringArray("output_item_array", "output_item_user_tile", "output_item_tier", "logic_tree_on_trigger")]
+[node name="LT_OnItemUpdate" type="Node" parent="." node_paths=PackedStringArray("output_item_array", "output_item_user_tile", "output_item_tier", "output_forge_level", "logic_tree_on_trigger")]
 script = ExtResource("8_boaox")
 output_item_array = NodePath("This item")
 output_item_user_tile = NodePath("Item user tile")
 output_item_tier = NodePath("Item tier")
+output_forge_level = NodePath("Forge level")
 logic_tree_on_trigger = NodePath("LogicTree")
 
 [node name="This item" type="Node" parent="LT_OnItemUpdate"]
@@ -225,14 +230,18 @@ script = ExtResource("6_e5w62")
 [node name="Item tier" type="Node" parent="LT_OnItemUpdate"]
 script = ExtResource("9_fnaau")
 
+[node name="Forge level" type="Node" parent="LT_OnItemUpdate"]
+script = ExtResource("9_fnaau")
+
 [node name="LogicTree" type="Node" parent="LT_OnItemUpdate"]
 script = ExtResource("7_18vgj")
 
-[node name="LT_OnItemTierIncrease" type="Node" parent="." node_paths=PackedStringArray("output_item_array", "output_item_user_tile", "output_item_new_tier", "logic_tree_on_trigger")]
+[node name="LT_OnItemTierIncrease" type="Node" parent="." node_paths=PackedStringArray("output_item_array", "output_item_user_tile", "output_item_new_tier", "output_forge_level", "logic_tree_on_trigger")]
 script = ExtResource("10_1depo")
 output_item_array = NodePath("This item")
 output_item_user_tile = NodePath("Item user tile")
 output_item_new_tier = NodePath("New tier")
+output_forge_level = NodePath("Forge level")
 logic_tree_on_trigger = NodePath("LogicTree")
 
 [node name="This item" type="Node" parent="LT_OnItemTierIncrease"]
@@ -242,6 +251,9 @@ script = ExtResource("5_m47ox")
 script = ExtResource("6_e5w62")
 
 [node name="New tier" type="Node" parent="LT_OnItemTierIncrease"]
+script = ExtResource("9_fnaau")
+
+[node name="Forge level" type="Node" parent="LT_OnItemTierIncrease"]
 script = ExtResource("9_fnaau")
 
 [node name="LogicTree" type="Node" parent="LT_OnItemTierIncrease"]

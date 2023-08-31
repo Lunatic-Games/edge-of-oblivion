@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=10 format=3 uid="uid://drvpn77ymyoa7"]
+
+[ext_resource type="PackedScene" uid="uid://dxk1cdc1wn1ii" path="res://Data/Entities/Enemies/Swamp/Drosser/Drosser.tscn" id="1_slmr1"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Health/HEALTH_DATA.gd" id="2_icb3j"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/_Components/GoldStorage/GOLD_STORAGE_DATA.gd" id="2_isoug"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="3_v0ech"]
+[ext_resource type="Script" path="res://Data/Entities/Enemies/ENEMY_DATA.gd" id="4_grl7w"]
+[ext_resource type="Texture2D" uid="uid://dm6g2isduxqa0" path="res://Assets/art/icons/medieval-fantasy/delapouite/vampire-dracula.svg" id="5_0w5w7"]
+
+[sub_resource type="Resource" id="Resource_orsbl"]
+script = ExtResource("2_isoug")
+chance_of_generating_gold = 1.0
+min_gold_generated = 1
+max_gold_generated = 3
+stores_collected_gold = true
+add_particles_on_collecting_gold = true
+
+[sub_resource type="Resource" id="Resource_hl051"]
+script = ExtResource("2_icb3j")
+max_health = 60
+can_be_damaged = true
+can_be_killed = true
+can_be_healed = true
+emit_particles_on_heal = true
+emit_particles_on_taking_damage = true
+
+[sub_resource type="Resource" id="Resource_jppjb"]
+script = ExtResource("3_v0ech")
+size = 0
+blocking_behavior = 1
+can_be_pushed_off_map = true
+can_push_entities = false
+collectable_filter = 0
+
+[resource]
+script = ExtResource("4_grl7w")
+xp_value = 2
+gold_storage_data = SubResource("Resource_orsbl")
+entity_scene = ExtResource("1_slmr1")
+health_data = SubResource("Resource_hl051")
+occupancy_data = SubResource("Resource_jppjb")
+sprite = ExtResource("5_0w5w7")
+entity_name = "Drosser"
+main_text = "Attacks in all directions range 2. Then moves towards the player."
+flavor_text = "It was said they would stand guard for eternity. It was true."

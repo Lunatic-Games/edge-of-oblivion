@@ -10,28 +10,15 @@ var spawned_enemies: Array[Enemy] = []
 var spawn_flags: Array[SpawnFlag] = []
 
 
-func spawn_player() -> Player:
+func spawn_existing_player(player: Player, tile: Tile) -> Player:
 	var board: Board = GlobalGameState.get_board()
-	var spawn_tile: Tile = board.get_random_unoccupied_tile()
-	assert(spawn_tile != null, "No free tile to spawn player on.")
-	
-	var player: Player = spawn_entity_on_tile(PLAYER_DATA, spawn_tile)
-	player.inventory.add_starting_items()
-	GlobalSignals.player_spawned.emit(player)
-	return player
-
-
-func spawn_existing_player(player: Player) -> Player:
-	var board: Board = GlobalGameState.get_board()
-	var spawn_tile: Tile = board.get_random_unoccupied_tile()
-	assert(spawn_tile != null, "No free tile to spawn player on.")
-	
-	GlobalSignals.player_spawned.emit(player)
+	tile.occupant = player
+	player.occupancy.current_tile = tile
+	player.global_position = tile.global_position
 	player.reparent(board)
 	
-	spawn_tile.occupant = player
-	player.occupancy.current_tile = spawn_tile
-	player.global_position = spawn_tile.global_position
+	GlobalSignals.player_spawned.emit(player)
+	
 	return player
 
 
@@ -75,18 +62,21 @@ func spawn_entity_on_tile(entity_data: EntityData, tile: Tile) -> Entity:
 	
 	var board: Board = GlobalGameState.get_board()
 	board.add_child(entity)
-	entity.setup(entity_data)
+	entity.setup(entity_data, tile)
 	
-	tile.occupant = entity
-	entity.occupancy.current_tile = tile
-	entity.global_position = tile.global_position
-	
-	if entity is Enemy:
+	if entity is Player:
+		_on_player_spawned(entity)
+	elif entity is Enemy:
 		_on_enemy_spawned(entity)
 	elif entity is SpawnFlag:
 		_on_spawn_flag_spawned(entity)
 	
 	return entity
+
+
+func _on_player_spawned(player: Player) -> void:
+	player.inventory.add_starting_items()
+	GlobalSignals.player_spawned.emit(player)
 
 
 func _on_enemy_spawned(enemy: Enemy) -> void:

@@ -13,6 +13,7 @@ enum ItemFilter {
 @export var output_item_array: LT_ItemArrayVariable
 @export var output_item_user: LT_EntityArrayVariable
 @export var output_item_user_tile: LT_TileArrayVariable
+@export var output_forge_level: LT_IntVariable
 
 
 func _ready() -> void:
@@ -45,5 +46,8 @@ func trigger(item: Item) -> void:
 			output_item_user_tile.value = [item.user.occupancy.current_tile]
 		else:
 			output_item_user_tile.value.clear()
+	
+	if output_forge_level != null:
+		output_forge_level.value = item.forge_level
 	
 	logic_tree_on_trigger.evaluate()

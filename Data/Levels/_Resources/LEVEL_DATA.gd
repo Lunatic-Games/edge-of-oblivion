@@ -16,4 +16,3 @@ enum GatewaySpawnCondition {
 @export var game_mode: GameModeData = preload("res://Data/GameModes/Standard/Standard.tres")
 @export var gateway_spawn_condition: GatewaySpawnCondition = GatewaySpawnCondition.NEVER
 @export var killing_boss_completes_run: bool = false
-@export var persist_player_on_entering: bool = true

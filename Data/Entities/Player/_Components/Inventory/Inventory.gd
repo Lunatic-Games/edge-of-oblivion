@@ -5,15 +5,13 @@ extends RefCounted
 var entity: Entity = null
 var data: InventoryData = null
 var items: Dictionary = {}  # ItemData : Item Scene
+var gold: int = 0
 
 
 func _init(p_entity: Entity, p_data: InventoryData):
 	entity = p_entity
 	data = p_data
-	
-	var game: Game = GlobalGameState.get_game()
-	var inventory_display: InventoryDisplay = game.player_overlay.inventory_display
-	inventory_display.reset_display()
+	add_or_remove_gold(p_data.starting_gold)
 
 
 func add_starting_items():
@@ -35,7 +33,7 @@ func add_item(item_data: ItemData, animate: bool = true) -> void:
 	var game: Game = GlobalGameState.get_game()
 	var inventory_display: InventoryDisplay = game.player_overlay.inventory_display
 	inventory_display.add_item_to_display(item, animate)
-	item.setup(entity, item_data)
+	item.setup(entity, item_data, game.item_deck.get(item_data, 1))
 	
 	GlobalSignals.item_added_to_inventory.emit(item, item_data)
 
@@ -55,3 +53,29 @@ func upgrade_item(item_data: ItemData, animate: bool = true) -> void:
 	
 	if item.is_max_tier():
 		GlobalSignals.item_reached_max_tier.emit(item, item_data)
+
+
+func add_or_remove_gold(amount: int, animate: bool = true) -> void:
+	if amount == 0:
+		return
+	
+	gold += amount
+	
+	var game: Game = GlobalGameState.get_game()
+	var gold_display: GoldDisplay = game.player_overlay.gold_display
+	gold_display.set_display_amount(gold, animate)
+
+
+func reset_items() -> void:
+	items.clear()
+	
+	var game: Game = GlobalGameState.get_game()
+	var inventory_display: InventoryDisplay = game.player_overlay.inventory_display
+	inventory_display.reset_display()
+
+
+func reset_gold() -> void:
+	gold = 0
+	var game: Game = GlobalGameState.get_game()
+	var gold_display: GoldDisplay = game.player_overlay.gold_display
+	gold_display.set_display_amount(0, false)

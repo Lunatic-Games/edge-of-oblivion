@@ -12,7 +12,11 @@ item_name = "Stray Arquebus"
 popup_item_name_color = "royalblue"
 flavor_text = "So anyways I started blasting."
 max_tier = 3
+max_forge_level = 3
 use_tier_1_text_for_popup_texts = true
+cost_level_1 = 1
+cost_level_2 = 1
+cost_level_3 = 1
 card_text_1 = "Every 3 turns: Attack in the last moved direction.
 [volatile]Volatile:[/volatile] Reduced damage and range."
 card_text_2 = "Decreased [volatile]volatile chance:[/volatile]  1/6 -> 1/8."

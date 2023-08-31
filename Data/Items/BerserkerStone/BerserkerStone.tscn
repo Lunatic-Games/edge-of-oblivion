@@ -1,0 +1,213 @@
+[gd_scene load_steps=19 format=3 uid="uid://cvu57gmnenxk4"]
+
+[ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1_bvl5x"]
+[ext_resource type="Texture2D" uid="uid://3k34mcsy1xik" path="res://Assets/art/icons/buildings/lorc/stone-tower.svg" id="2_6s4bu"]
+[ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="3_jrpgd"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SetItemsColor.gd" id="4_ro3vn"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfBool.gd" id="6_rpkif"]
+[ext_resource type="Script" path="res://LogicTree/Variables/ItemArrayVariable.gd" id="7_d20qh"]
+[ext_resource type="Script" path="res://LogicTree/Variables/EntityArrayVariable.gd" id="8_g8bwu"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="9_flg3j"]
+[ext_resource type="PackedScene" uid="uid://bd7tyc22xck14" path="res://Data/Particles/Items/BerserkerStoneParticles.tscn" id="10_m0auw"]
+[ext_resource type="Script" path="res://LogicTree/LogicTree.gd" id="10_n1has"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="11_f8j2s"]
+[ext_resource type="Script" path="res://LogicTree/Effects/HealTileOccupants.gd" id="16_0ruko"]
+[ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="16_s014y"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="18_cg070"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="19_1mqq4"]
+[ext_resource type="Script" path="res://LogicTree/Triggers/EntityTriggers/OnEntityDamaged.gd" id="20_gloer"]
+[ext_resource type="Script" path="res://LogicTree/Variables/BoolVariable.gd" id="21_rnaia"]
+[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetBool.gd" id="22_5lq77"]
+
+[node name="BerserkerStone" instance=ExtResource("1_bvl5x")]
+
+[node name="Texture" parent="." index="1"]
+texture = ExtResource("2_6s4bu")
+
+[node name="CountdownLabel" parent="." index="2"]
+text = "0"
+
+[node name="Trigger count" type="Node" parent="LT_PersistentVariables" index="0"]
+script = ExtResource("3_jrpgd")
+default_value = 5
+
+[node name="Rounds active" type="Node" parent="LT_PersistentVariables" index="1"]
+script = ExtResource("3_jrpgd")
+
+[node name="Max rounds active" type="Node" parent="LT_PersistentVariables" index="2"]
+script = ExtResource("3_jrpgd")
+default_value = 4
+
+[node name="Lifesteal Divisor" type="Node" parent="LT_PersistentVariables" index="3"]
+script = ExtResource("3_jrpgd")
+default_value = 10
+
+[node name="Is item active" type="Node" parent="LT_PersistentVariables" index="4"]
+script = ExtResource("21_rnaia")
+
+[node name="LT_SetItemsColor" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="0" node_paths=PackedStringArray("items")]
+script = ExtResource("4_ro3vn")
+items = NodePath("../../This item")
+color = 2
+
+[node name="If is active" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("6_rpkif")
+input = NodePath("../../../LT_PersistentVariables/Is item active")
+
+[node name="If rounds active more than max" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active" index="0" node_paths=PackedStringArray("input", "value_override")]
+script = ExtResource("18_cg070")
+input = NodePath("../../../../LT_PersistentVariables/Rounds active")
+comparison = 1
+value_override = NodePath("../../../../LT_PersistentVariables/Max rounds active")
+
+[node name="Set inactive" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active more than max" index="0" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("22_5lq77")
+bool_variable = NodePath("../../../../../LT_PersistentVariables/Is item active")
+
+[node name="If rounds active less than max" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active" index="1" node_paths=PackedStringArray("input", "value_override")]
+script = ExtResource("18_cg070")
+input = NodePath("../../../../LT_PersistentVariables/Rounds active")
+comparison = 4
+value_override = NodePath("../../../../LT_PersistentVariables/Max rounds active")
+
+[node name="Add 1 to rounds active" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("19_1mqq4")
+int_variable = NodePath("../../../../../LT_PersistentVariables/Rounds active")
+value = 1
+operation = 1
+
+[node name="Spawn vfx on player" type="Node" parent="LT_OnItemUpdate/LogicTree/If is active/If rounds active less than max" index="1" node_paths=PackedStringArray("tiles")]
+script = ExtResource("16_s014y")
+tiles = NodePath("../../../../Item user tile")
+node2d_to_spawn = ExtResource("10_m0auw")
+
+[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("18_cg070")
+input = NodePath("../../New tier")
+comparison = 2
+value = 2
+
+[node name="Increase rounds active" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("19_1mqq4")
+int_variable = NodePath("../../../../LT_PersistentVariables/Max rounds active")
+value = 1
+operation = 1
+
+[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
+script = ExtResource("18_cg070")
+input = NodePath("../../New tier")
+comparison = 2
+value = 3
+
+[node name="Increase rounds active" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("19_1mqq4")
+int_variable = NodePath("../../../../LT_PersistentVariables/Max rounds active")
+value = 1
+operation = 1
+
+[node name="LT_OnPlayerSelfDamaged" type="Node" parent="." index="8" node_paths=PackedStringArray("output_source_item_array", "output_source_entity", "output_source_tile", "output_receiver_entity", "output_receiver_tile", "output_damage", "output_was_killing_blow", "logic_tree_on_trigger")]
+script = ExtResource("20_gloer")
+receiver_filter = 1
+output_source_item_array = NodePath("SourceItems")
+output_source_entity = NodePath("SourceEntity")
+output_source_tile = NodePath("SourceTile")
+output_receiver_entity = NodePath("ReceiverEntity")
+output_receiver_tile = NodePath("ReceiverTile")
+output_damage = NodePath("Output Damage")
+output_was_killing_blow = NodePath("Was killing blow")
+logic_tree_on_trigger = NodePath("LogicTree")
+
+[node name="SourceItems" type="Node" parent="LT_OnPlayerSelfDamaged" index="0"]
+script = ExtResource("7_d20qh")
+
+[node name="SourceEntity" type="Node" parent="LT_OnPlayerSelfDamaged" index="1"]
+script = ExtResource("8_g8bwu")
+
+[node name="SourceTile" type="Node" parent="LT_OnPlayerSelfDamaged" index="2"]
+script = ExtResource("9_flg3j")
+
+[node name="ReceiverEntity" type="Node" parent="LT_OnPlayerSelfDamaged" index="3"]
+script = ExtResource("8_g8bwu")
+
+[node name="ReceiverTile" type="Node" parent="LT_OnPlayerSelfDamaged" index="4"]
+script = ExtResource("9_flg3j")
+
+[node name="Output Damage" type="Node" parent="LT_OnPlayerSelfDamaged" index="5"]
+script = ExtResource("3_jrpgd")
+
+[node name="Was killing blow" type="Node" parent="LT_OnPlayerSelfDamaged" index="6"]
+script = ExtResource("21_rnaia")
+
+[node name="LogicTree" type="Node" parent="LT_OnPlayerSelfDamaged" index="7"]
+script = ExtResource("10_n1has")
+
+[node name="LT_EveryXCalls" type="Node" parent="LT_OnPlayerSelfDamaged/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
+script = ExtResource("11_f8j2s")
+x_override = NodePath("../../../LT_PersistentVariables/Trigger count")
+auto_update_item_ready_state = true
+auto_update_item_countdown = true
+
+[node name="Set item to active" type="Node" parent="LT_OnPlayerSelfDamaged/LogicTree/LT_EveryXCalls" index="0" node_paths=PackedStringArray("bool_variable")]
+script = ExtResource("22_5lq77")
+bool_variable = NodePath("../../../../LT_PersistentVariables/Is item active")
+value = true
+
+[node name="Set rounds active to zero" type="Node" parent="LT_OnPlayerSelfDamaged/LogicTree/LT_EveryXCalls" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("19_1mqq4")
+int_variable = NodePath("../../../../LT_PersistentVariables/Rounds active")
+
+[node name="LT_OnEnemyDamaged" type="Node" parent="." index="9" node_paths=PackedStringArray("output_source_item_array", "output_source_entity", "output_source_tile", "output_receiver_entity", "output_receiver_tile", "output_damage", "output_was_killing_blow", "logic_tree_on_trigger")]
+script = ExtResource("20_gloer")
+source_filter = 3
+receiver_filter = 2
+output_source_item_array = NodePath("SourceItems")
+output_source_entity = NodePath("SourceEntity")
+output_source_tile = NodePath("SourceTile")
+output_receiver_entity = NodePath("ReceiverEntity")
+output_receiver_tile = NodePath("ReceiverTile")
+output_damage = NodePath("Output Damage")
+output_was_killing_blow = NodePath("Was killing blow")
+logic_tree_on_trigger = NodePath("LogicTree")
+
+[node name="SourceItems" type="Node" parent="LT_OnEnemyDamaged" index="0"]
+script = ExtResource("7_d20qh")
+
+[node name="SourceEntity" type="Node" parent="LT_OnEnemyDamaged" index="1"]
+script = ExtResource("8_g8bwu")
+
+[node name="SourceTile" type="Node" parent="LT_OnEnemyDamaged" index="2"]
+script = ExtResource("9_flg3j")
+
+[node name="ReceiverEntity" type="Node" parent="LT_OnEnemyDamaged" index="3"]
+script = ExtResource("8_g8bwu")
+
+[node name="ReceiverTile" type="Node" parent="LT_OnEnemyDamaged" index="4"]
+script = ExtResource("9_flg3j")
+
+[node name="Output Damage" type="Node" parent="LT_OnEnemyDamaged" index="5"]
+script = ExtResource("3_jrpgd")
+
+[node name="Was killing blow" type="Node" parent="LT_OnEnemyDamaged" index="6"]
+script = ExtResource("21_rnaia")
+
+[node name="LogicTree" type="Node" parent="LT_OnEnemyDamaged" index="7"]
+script = ExtResource("10_n1has")
+
+[node name="If active" type="Node" parent="LT_OnEnemyDamaged/LogicTree" index="0" node_paths=PackedStringArray("input")]
+script = ExtResource("6_rpkif")
+input = NodePath("../../../LT_PersistentVariables/Is item active")
+
+[node name="Lifesteal amount" type="Node" parent="LT_OnEnemyDamaged/LogicTree/If active" index="0" node_paths=PackedStringArray("default_value_override")]
+script = ExtResource("3_jrpgd")
+default_value_override = NodePath("../../../Output Damage")
+
+[node name="10 percent lifesteal" type="Node" parent="LT_OnEnemyDamaged/LogicTree/If active" index="1" node_paths=PackedStringArray("int_variable", "value_override")]
+script = ExtResource("19_1mqq4")
+int_variable = NodePath("../Lifesteal amount")
+value_override = NodePath("../../../../LT_PersistentVariables/Lifesteal Divisor")
+operation = 5
+
+[node name="Lifesteal self" type="Node" parent="LT_OnEnemyDamaged/LogicTree/If active" index="2" node_paths=PackedStringArray("tiles", "heal_override")]
+script = ExtResource("16_0ruko")
+tiles = NodePath("../../../SourceTile")
+heal_override = NodePath("../Lifesteal amount")

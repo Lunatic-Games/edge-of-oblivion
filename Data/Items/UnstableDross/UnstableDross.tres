@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b6eyc0e1h2nm2"]
+
+[ext_resource type="PackedScene" uid="uid://s6u13fi2hi8k" path="res://Data/Items/UnstableDross/UnstableDross.tscn" id="1_yriym"]
+[ext_resource type="Script" path="res://Data/Items/ITEM_DATA.gd" id="2_hhtv1"]
+[ext_resource type="Texture2D" uid="uid://cuxn643adpqu1" path="res://Assets/art/icons/weapons/lorc/grenade.svg" id="3_quh0q"]
+
+[resource]
+script = ExtResource("2_hhtv1")
+sprite = ExtResource("3_quh0q")
+item_scene = ExtResource("1_yriym")
+item_name = "Unstable Dross"
+popup_item_name_color = "royalblue"
+flavor_text = "An unwieldy weapon."
+max_tier = 3
+max_forge_level = 3
+use_tier_1_text_for_popup_texts = false
+cost_level_1 = 1
+cost_level_2 = 1
+cost_level_3 = 1
+card_text_1 = "Every 15 turns: Attack orthognally radius 2, for 25 damage, and yourself for 8 damage."
+card_text_2 = "Damage to self 8 -> 15.
+Damage to enemies 25 -> 50."
+card_text_3 = "Also knockback 2."
+popup_text_1 = "Every 15 turns: Attack orthognally radius 2, for 25 damage, and yourself for 8 damage."
+popup_text_2 = "Every 15 turns: Attack orthognally radius 2, for 50 damage, and yourself for 15 damage."
+popup_text_3 = "Every 15 turns: Attack orthognally radius 2, for 50 damage and knockback 2, also 15 damage to self."

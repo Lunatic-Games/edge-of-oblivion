@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=5 format=3 uid="uid://luornvpe6iu3"]
+
+[ext_resource type="PackedScene" uid="uid://dioupw8qc6ahh" path="res://Data/Entities/GoldPickup/GoldPickup.tscn" id="1_2xly4"]
+[ext_resource type="Script" path="res://Data/Entities/ENTITY_DATA.gd" id="1_frx0g"]
+[ext_resource type="Script" path="res://Data/Entities/_Components/Occupancy/OCCUPANCY_DATA.gd" id="2_iveim"]
+
+[sub_resource type="Resource" id="Resource_30boc"]
+script = ExtResource("2_iveim")
+size = 0
+blocking_behavior = 0
+can_be_pushed_off_map = false
+can_push_entities = false
+collectable_filter = 0
+
+[resource]
+script = ExtResource("1_frx0g")
+entity_scene = ExtResource("1_2xly4")
+occupancy_data = SubResource("Resource_30boc")
+entity_name = ""
+main_text = ""
+flavor_text = ""

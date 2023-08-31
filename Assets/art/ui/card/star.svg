@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="star.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.13181247"
+     inkscape:cx="-1923.1868"
+     inkscape:cy="705.5478"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="star"
+       style="fill:#ffffff;stroke-width:1.48386;stroke-linecap:round;stroke-linejoin:round"
+       id="path236"
+       inkscape:flatsided="false"
+       sodipodi:sides="5"
+       sodipodi:cx="59.465397"
+       sodipodi:cy="62.476303"
+       sodipodi:r1="52.391308"
+       sodipodi:r2="26.19565"
+       sodipodi:arg1="0.9349579"
+       sodipodi:arg2="1.5632764"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 90.578096,104.62899 59.662384,88.671213 28.990161,105.09213 34.61343,70.758322 9.5179665,46.661647 43.909049,41.399963 59.071423,10.086477 74.703012,41.16839 109.16934,45.912265 84.439109,70.383629 Z"
+       inkscape:transform-center-x="0.16272293"
+       inkscape:transform-center-y="-6.6423837"
+       transform="matrix(1.3365717,0,0,1.359195,-11.483471,-11.903004)" />
+  </g>
+</svg>
