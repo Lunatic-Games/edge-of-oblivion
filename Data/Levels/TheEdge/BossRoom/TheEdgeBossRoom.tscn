@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dphr4qcyrwsyi"]
+[gd_scene load_steps=31 format=3 uid="uid://dphr4qcyrwsyi"]
 
 [ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_qwmox"]
 [ext_resource type="Texture2D" uid="uid://bo5v37wveo7o8" path="res://Assets/art/background/game/rocks.svg" id="2_j5coi"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://dmbs1q38ekhl4" path="res://Assets/art/background/game/lantern_wrap.svg" id="10_otbba"]
 [ext_resource type="Texture2D" uid="uid://ccrvjnf3js57j" path="res://Assets/art/background/game/sword_and_spear.svg" id="11_vaeth"]
 [ext_resource type="Texture2D" uid="uid://b0og73dh6y3tx" path="res://Assets/art/background/game/sword_and_spear_ribbon.svg" id="12_buieo"]
+[ext_resource type="PackedScene" uid="uid://c2vgqrf2sgx0p" path="res://Data/Spawners/BasicEntitySpawner/BasicEntitySpawner.tscn" id="13_6ppdr"]
+[ext_resource type="Texture2D" uid="uid://drvcofmjn0x0g" path="res://Assets/art/icons/animals/lorc/frog.svg" id="14_wvqhr"]
+[ext_resource type="Resource" uid="uid://d2nm36fewwhmo" path="res://Data/Entities/Enemies/Swamp/Algebemu/Algebemu.tres" id="15_5r8f7"]
 
 [sub_resource type="Animation" id="Animation_54o15"]
 length = 0.001
@@ -437,7 +440,7 @@ rotation = 1.5708
 color = Color(0.160784, 0.164706, 0.290196, 1)
 
 [node name="Board" parent="." index="3"]
-layer_0/tile_data = PackedInt32Array(655371, 0, 65536, 655372, 0, 65536, 655373, 0, 65536, 655374, 0, 65536, 655375, 0, 65536, 589839, 0, 65536, 589838, 0, 65536, 589837, 0, 65536, 589836, 0, 65536, 589835, 0, 65536, 524302, 0, 65536, 524303, 0, 65536, 458767, 0, 65536, 393231, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 327695, 0, 65536, 262159, 0, 65536, 262158, 0, 65536, 327694, 0, 65536, 589834, 0, 65536, 589833, 0, 65536, 655369, 0, 65536, 655370, 0, 65536, 524301, 0, 65536, 524300, 0, 65536, 524299, 0, 65536, 524298, 0, 65536, 524297, 0, 65536, 458761, 0, 65536, 393225, 0, 65536, 327689, 0, 65536, 262153, 0, 65536, 262154, 0, 65536, 262155, 0, 65536, 262156, 0, 65536, 262157, 0, 65536, 327693, 0, 65536, 327692, 0, 65536, 327691, 0, 65536, 327690, 0, 65536, 393226, 0, 65536, 458762, 0, 65536, 458763, 0, 65536, 393227, 0, 65536, 393228, 0, 65536, 393229, 0, 65536, 458765, 0, 65536, 458764, 0, 65536, 720906, 0, 65536, 720907, 0, 65536, 720908, 0, 65536, 720909, 0, 65536, 720910, 0, 65536, 589840, 0, 65536, 524304, 0, 65536, 458768, 0, 65536, 393232, 0, 65536, 327696, 0, 65536, 196622, 0, 65536, 196621, 0, 65536, 196620, 0, 65536, 196619, 0, 65536, 196618, 0, 65536, 327688, 0, 65536, 393224, 0, 65536, 458760, 0, 65536, 524296, 0, 65536, 589832, 0, 65536)
+layer_0/tile_data = PackedInt32Array(655371, 0, 65536, 655372, 0, 65536, 655373, 0, 65536, 655374, 0, 65536, 655375, 0, 65536, 589839, 0, 65536, 589838, 0, 65536, 589837, 0, 65536, 589836, 0, 65536, 589835, 0, 65536, 524302, 0, 65536, 524303, 0, 65536, 458767, 0, 65536, 393231, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 327695, 0, 65536, 262159, 0, 65536, 262158, 0, 65536, 327694, 0, 65536, 589834, 0, 65536, 589833, 0, 65536, 655369, 0, 65536, 655370, 0, 65536, 524301, 0, 65536, 524300, 0, 65536, 524299, 0, 65536, 524298, 0, 65536, 524297, 0, 65536, 458761, 0, 65536, 393225, 0, 65536, 327689, 0, 65536, 262153, 0, 65536, 262154, 0, 65536, 262155, 0, 65536, 262156, 0, 65536, 262157, 0, 65536, 327693, 0, 65536, 327692, 0, 65536, 327691, 0, 65536, 327690, 0, 65536, 393226, 0, 65536, 458762, 0, 65536, 458763, 0, 65536, 393227, 0, 65536, 393228, 0, 65536, 393229, 0, 65536, 458765, 0, 65536, 458764, 0, 65536, 720906, 0, 65536, 720907, 0, 65536, 720908, 0, 65536, 720909, 0, 65536, 720910, 0, 65536, 589840, 0, 65536, 524304, 0, 65536, 458768, 0, 65536, 393232, 0, 65536, 327696, 0, 65536, 196622, 0, 65536, 196621, 0, 65536, 196620, 0, 65536, 196619, 0, 65536, 196618, 0, 65536, 327688, 0, 65536, 393224, 0, 65536, 458760, 0, 65536, 524296, 0, 65536, 589832, 0, 65536, 393223, 0, 65536, 393222, 0, 65536, 393221, 0, 65536, 393220, 0, 65536, 458756, 0, 65536, 524292, 0, 65536, 524293, 0, 65536, 524294, 0, 65536, 524295, 0, 65536, 458759, 0, 65536, 458758, 0, 65536, 458757, 0, 65536, 393219, 0, 65536, 393218, 0, 65536, 458754, 0, 65536, 524290, 0, 65536, 524291, 0, 65536, 458755, 0, 65536)
 
 [node name="Decorations" type="Node2D" parent="." index="4"]
 
@@ -533,19 +536,13 @@ libraries = {
 [node name="BackGrass" type="Node2D" parent="Decorations" index="2"]
 modulate = Color(0.576471, 0.486275, 0.368627, 0.756863)
 
-[node name="Grass" type="Sprite2D" parent="Decorations/BackGrass" index="0"]
-position = Vector2(481, 514)
-scale = Vector2(0.201613, 0.243902)
-texture = ExtResource("8_iawji")
-flip_h = true
-
-[node name="Grass2" type="Sprite2D" parent="Decorations/BackGrass" index="1"]
+[node name="Grass2" type="Sprite2D" parent="Decorations/BackGrass" index="0"]
 position = Vector2(1456, 784)
 scale = Vector2(0.201613, 0.243902)
 texture = ExtResource("8_iawji")
 flip_h = true
 
-[node name="Grass3" type="Sprite2D" parent="Decorations/BackGrass" index="2"]
+[node name="Grass3" type="Sprite2D" parent="Decorations/BackGrass" index="1"]
 position = Vector2(1192, 139)
 scale = Vector2(0.201613, 0.243902)
 texture = ExtResource("8_iawji")
@@ -567,44 +564,38 @@ position = Vector2(1465, 611)
 scale = Vector2(0.595275, 0.771465)
 texture = ExtResource("9_wfjrf")
 
-[node name="Tree2" type="Sprite2D" parent="Decorations/Trees" index="1"]
-position = Vector2(334, 342)
-scale = Vector2(0.595275, 0.771465)
-texture = ExtResource("9_wfjrf")
-flip_h = true
-
-[node name="Tree3" type="Sprite2D" parent="Decorations/Trees" index="2"]
+[node name="Tree3" type="Sprite2D" parent="Decorations/Trees" index="1"]
 position = Vector2(781, 992)
 scale = Vector2(0.595275, 0.771465)
 texture = ExtResource("9_wfjrf")
 flip_h = true
 
-[node name="Tree4" type="Sprite2D" parent="Decorations/Trees" index="3"]
+[node name="Tree4" type="Sprite2D" parent="Decorations/Trees" index="2"]
 position = Vector2(1174, -30.9999)
 scale = Vector2(0.595275, 0.771465)
 texture = ExtResource("9_wfjrf")
 
-[node name="Tree5" type="Sprite2D" parent="Decorations/Trees" index="4"]
+[node name="Tree5" type="Sprite2D" parent="Decorations/Trees" index="3"]
 position = Vector2(226, 874)
 scale = Vector2(0.595275, 0.771465)
 texture = ExtResource("9_wfjrf")
 
-[node name="Tree6" type="Sprite2D" parent="Decorations/Trees" index="5"]
+[node name="Tree6" type="Sprite2D" parent="Decorations/Trees" index="4"]
 position = Vector2(594, -190)
 scale = Vector2(0.595275, 0.771465)
 texture = ExtResource("9_wfjrf")
 
-[node name="Tree7" type="Sprite2D" parent="Decorations/Trees" index="6"]
+[node name="Tree7" type="Sprite2D" parent="Decorations/Trees" index="5"]
 position = Vector2(1340, 1192)
 scale = Vector2(0.595275, 0.771465)
 texture = ExtResource("9_wfjrf")
 
-[node name="Tree8" type="Sprite2D" parent="Decorations/Trees" index="7"]
+[node name="Tree8" type="Sprite2D" parent="Decorations/Trees" index="6"]
 position = Vector2(-56, 30)
 scale = Vector2(0.595275, 0.771465)
 texture = ExtResource("9_wfjrf")
 
-[node name="Tree9" type="Sprite2D" parent="Decorations/Trees" index="8"]
+[node name="Tree9" type="Sprite2D" parent="Decorations/Trees" index="7"]
 position = Vector2(-150, 538)
 scale = Vector2(0.595275, 0.771465)
 texture = ExtResource("9_wfjrf")
@@ -619,26 +610,15 @@ texture = ExtResource("10_otbba")
 [node name="Grass" type="Node2D" parent="Decorations" index="6"]
 modulate = Color(0.701961, 0.603922, 0.482353, 0.756863)
 
-[node name="Grass" type="Sprite2D" parent="Decorations/Grass" index="0"]
-position = Vector2(385, 524)
-scale = Vector2(0.201613, 0.243902)
-texture = ExtResource("8_iawji")
-
-[node name="Grass2" type="Sprite2D" parent="Decorations/Grass" index="1"]
+[node name="Grass2" type="Sprite2D" parent="Decorations/Grass" index="0"]
 position = Vector2(1333, 807)
 scale = Vector2(0.201613, 0.243902)
 texture = ExtResource("8_iawji")
 
-[node name="Grass3" type="Sprite2D" parent="Decorations/Grass" index="2"]
+[node name="Grass3" type="Sprite2D" parent="Decorations/Grass" index="1"]
 position = Vector2(1014, 148)
 scale = Vector2(0.201613, 0.243902)
 texture = ExtResource("8_iawji")
-
-[node name="Grass4" type="Sprite2D" parent="Decorations/Grass" index="3"]
-position = Vector2(342, 533)
-scale = Vector2(0.117852, 0.160061)
-texture = ExtResource("8_iawji")
-flip_h = true
 
 [node name="SwordAndSpear" type="Sprite2D" parent="Decorations" index="7"]
 self_modulate = Color(0.286275, 0.294118, 0.305882, 1)
@@ -681,69 +661,69 @@ libraries = {
 [node name="Rocks" type="Node2D" parent="Decorations" index="9"]
 modulate = Color(0.317647, 0.305882, 0.4, 1)
 
-[node name="Rocks" type="Sprite2D" parent="Decorations/Rocks" index="0"]
-position = Vector2(434, 541)
-scale = Vector2(0.482405, 0.301829)
-texture = ExtResource("2_j5coi")
-
-[node name="Rocks2" type="Sprite2D" parent="Decorations/Rocks" index="1"]
+[node name="Rocks2" type="Sprite2D" parent="Decorations/Rocks" index="0"]
 position = Vector2(1352, 821)
 scale = Vector2(0.482405, 0.301829)
 texture = ExtResource("2_j5coi")
 flip_h = true
 
-[node name="Rocks3" type="Sprite2D" parent="Decorations/Rocks" index="2"]
+[node name="Rocks3" type="Sprite2D" parent="Decorations/Rocks" index="1"]
 position = Vector2(828, 1193)
 scale = Vector2(0.482405, 0.301829)
 texture = ExtResource("2_j5coi")
 flip_h = true
 
-[node name="Rocks4" type="Sprite2D" parent="Decorations/Rocks" index="3"]
+[node name="Rocks4" type="Sprite2D" parent="Decorations/Rocks" index="2"]
 position = Vector2(118, 1064)
 scale = Vector2(0.482405, 0.301829)
 texture = ExtResource("2_j5coi")
 flip_h = true
 
-[node name="Rocks5" type="Sprite2D" parent="Decorations/Rocks" index="4"]
+[node name="Rocks5" type="Sprite2D" parent="Decorations/Rocks" index="3"]
 position = Vector2(-131, 225)
 scale = Vector2(0.482405, 0.301829)
 texture = ExtResource("2_j5coi")
 flip_h = true
 
-[node name="Rocks6" type="Sprite2D" parent="Decorations/Rocks" index="5"]
+[node name="Rocks6" type="Sprite2D" parent="Decorations/Rocks" index="4"]
 position = Vector2(-206, 225)
 scale = Vector2(0.482405, 0.301829)
 texture = ExtResource("2_j5coi")
 flip_h = true
 
-[node name="Rocks7" type="Sprite2D" parent="Decorations/Rocks" index="6"]
+[node name="Rocks7" type="Sprite2D" parent="Decorations/Rocks" index="5"]
 position = Vector2(-245, 731)
 scale = Vector2(0.482405, 0.301829)
 texture = ExtResource("2_j5coi")
 flip_h = true
 
-[node name="Rocks8" type="Sprite2D" parent="Decorations/Rocks" index="7"]
+[node name="Rocks8" type="Sprite2D" parent="Decorations/Rocks" index="6"]
 position = Vector2(528, 7.62939e-06)
 scale = Vector2(0.482405, 0.301829)
 texture = ExtResource("2_j5coi")
 flip_h = true
 
-[node name="Rocks9" type="Sprite2D" parent="Decorations/Rocks" index="8"]
+[node name="Rocks9" type="Sprite2D" parent="Decorations/Rocks" index="7"]
 position = Vector2(1287, 1408)
 scale = Vector2(0.482405, 0.301829)
 texture = ExtResource("2_j5coi")
 flip_h = true
 
-[node name="Rocks10" type="Sprite2D" parent="Decorations/Rocks" index="9"]
+[node name="Rocks10" type="Sprite2D" parent="Decorations/Rocks" index="8"]
 position = Vector2(479, 952)
 scale = Vector2(0.482405, 0.301829)
 texture = ExtResource("2_j5coi")
 flip_h = true
 
-[node name="Rocks11" type="Sprite2D" parent="Decorations/Rocks" index="10"]
+[node name="Rocks11" type="Sprite2D" parent="Decorations/Rocks" index="9"]
 position = Vector2(1359, 320)
 scale = Vector2(0.482405, 0.301829)
 texture = ExtResource("2_j5coi")
 
 [node name="PlayerSpawner" parent="Spawners" index="0"]
-position = Vector2(630, 700)
+position = Vector2(210, 490)
+
+[node name="NPCSpawner" parent="Spawners" index="1" instance=ExtResource("13_6ppdr")]
+position = Vector2(840, 490)
+texture = ExtResource("14_wvqhr")
+entity_data = ExtResource("15_5r8f7")

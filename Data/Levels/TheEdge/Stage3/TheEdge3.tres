@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://bme4pcpoh4pvr" path="res://Data/Entities/Enemies/Swamp/ForgottenKing/ForgottenKing.tres" id="7_34vho"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="7_euqry"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="8_vkdgt"]
-[ext_resource type="Resource" uid="uid://ydcjy7iyqo5n" path="res://Data/Levels/TheEdge/Haven/TheEdgeHaven.tres" id="9_iqwg6"]
+[ext_resource type="Resource" uid="uid://c0i0ifwlbs1h1" path="res://Data/Levels/TheEdge/BossRoom/TheEdgeBossRoom.tres" id="10_7atvd"]
 [ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="10_ixyo0"]
 
 [sub_resource type="Resource" id="Resource_31qp4"]
@@ -102,7 +102,7 @@ script = ExtResource("10_ixyo0")
 level_name = "The Edge - 3"
 level_scene = ExtResource("2_m8f1i")
 level_waves = SubResource("Resource_286kk")
-next_level = ExtResource("9_iqwg6")
+next_level = ExtResource("10_7atvd")
 game_mode = ExtResource("1_0cptl")
 gateway_spawn_condition = 1
 killing_boss_completes_run = false
