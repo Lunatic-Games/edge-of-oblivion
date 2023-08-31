@@ -1,5 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://qjwh7gqec4ef"]
 
+
 [ext_resource type="PackedScene" uid="uid://v4k7ckpo5fy4" path="res://Data/Levels/Level.tscn" id="1_tk4og"]
 [ext_resource type="Texture2D" uid="uid://c11immlfgb1vh" path="res://Assets/art/background/game/grass.svg" id="2_0ubew"]
 [ext_resource type="PackedScene" uid="uid://biem3v2m8g7ls" path="res://Data/Spawners/GatewaySpawner/GatewaySpawner.tscn" id="2_anf0x"]
