@@ -40,6 +40,18 @@ script = ExtResource("3_aepoh")
 script = ExtResource("2_r3n8e")
 default_value = 1
 
+[node name="decrease cooldown by 1" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("12_demeu")
+int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
+value = 1
+operation = 2
+
+[node name="Increase damage by 10" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("12_demeu")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 10
+operation = 1
+
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("3_hv802")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")

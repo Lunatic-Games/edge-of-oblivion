@@ -17,7 +17,7 @@ add_particles_on_collecting_gold = true
 
 [sub_resource type="Resource" id="Resource_v5agk"]
 script = ExtResource("2_p6art")
-max_health = 45
+max_health = 50
 can_be_damaged = true
 can_be_killed = true
 can_be_healed = true

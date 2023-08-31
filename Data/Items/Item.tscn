@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cq6sdagc60luj"]
+[gd_scene load_steps=18 format=3 uid="uid://cq6sdagc60luj"]
 
 [ext_resource type="Script" path="res://Data/Items/Item.gd" id="1_fpqcw"]
 [ext_resource type="PackedScene" uid="uid://csppnkkol763h" path="res://UI/Elements/HoverPopups/ItemPopup/ItemPopup.tscn" id="2_28p5n"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://LogicTree/Triggers/ItemTriggers/OnItemUpdate.gd" id="8_boaox"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="9_fnaau"]
 [ext_resource type="Script" path="res://LogicTree/Triggers/ItemTriggers/OnItemTierIncrease.gd" id="10_1depo"]
+[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="11_bk3ad"]
 
 [sub_resource type="Animation" id="Animation_xetsw"]
 length = 0.001
@@ -198,7 +199,7 @@ script = ExtResource("3_4tnbp")
 script = ExtResource("4_l35wj")
 output_item_array = NodePath("This item")
 output_item_user_tile = NodePath("Item user tile")
-output_forge_level = NodePath("../LT_OnItemUpdate/Forge level")
+output_forge_level = NodePath("Forge level")
 logic_tree_on_trigger = NodePath("LogicTree")
 
 [node name="This item" type="Node" parent="LT_OnItemSetupCompleted"]
@@ -207,11 +208,23 @@ script = ExtResource("5_m47ox")
 [node name="Item user tile" type="Node" parent="LT_OnItemSetupCompleted"]
 script = ExtResource("6_e5w62")
 
-[node name="Item forge level" type="Node" parent="LT_OnItemSetupCompleted"]
-script = ExtResource("5_m47ox")
+[node name="Forge level" type="Node" parent="LT_OnItemSetupCompleted"]
+script = ExtResource("9_fnaau")
 
 [node name="LogicTree" type="Node" parent="LT_OnItemSetupCompleted"]
 script = ExtResource("7_18vgj")
+
+[node name="If forge level is 2" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" node_paths=PackedStringArray("input")]
+script = ExtResource("11_bk3ad")
+input = NodePath("../../Forge level")
+comparison = 2
+value = 2
+
+[node name="If forge level is 3" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" node_paths=PackedStringArray("input")]
+script = ExtResource("11_bk3ad")
+input = NodePath("../../Forge level")
+comparison = 2
+value = 3
 
 [node name="LT_OnItemUpdate" type="Node" parent="." node_paths=PackedStringArray("output_item_array", "output_item_user_tile", "output_item_tier", "output_forge_level", "logic_tree_on_trigger")]
 script = ExtResource("8_boaox")

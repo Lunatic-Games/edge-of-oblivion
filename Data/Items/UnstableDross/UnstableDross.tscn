@@ -24,7 +24,7 @@ default_value = 15
 
 [node name="DamageEnemy" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("2_wqx5f")
-default_value = 25
+default_value = 30
 
 [node name="DamageSelf" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("2_wqx5f")
@@ -32,6 +32,19 @@ default_value = 8
 
 [node name="Knockback distance" type="Node" parent="LT_PersistentVariables" index="3"]
 script = ExtResource("2_wqx5f")
+default_value = 1
+
+[node name="Reduce self damage" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_bd8xx")
+int_variable = NodePath("../../../../LT_PersistentVariables/DamageSelf")
+value = 6
+operation = 2
+
+[node name="Decrease cooldown" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_bd8xx")
+int_variable = NodePath("../../../../LT_PersistentVariables/Cooldown")
+value = 4
+operation = 2
 
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("3_62v3n")
@@ -92,7 +105,7 @@ operation = 1
 [node name="Increase enemy damage" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="1" node_paths=PackedStringArray("int_variable")]
 script = ExtResource("9_bd8xx")
 int_variable = NodePath("../../../../LT_PersistentVariables/DamageEnemy")
-value = 25
+value = 30
 operation = 1
 
 [node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]

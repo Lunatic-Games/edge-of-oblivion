@@ -40,6 +40,18 @@ default_value = 2
 script = ExtResource("3_wupxa")
 default_value = 3
 
+[node name="Number of selection +2" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("14_jln8d")
+int_variable = NodePath("../../../../LT_PersistentVariables/Number of selections")
+value = 2
+operation = 1
+
+[node name="Number of selection +2" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("14_jln8d")
+int_variable = NodePath("../../../../LT_PersistentVariables/Number of selections")
+value = 2
+operation = 1
+
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("4_et11c")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")

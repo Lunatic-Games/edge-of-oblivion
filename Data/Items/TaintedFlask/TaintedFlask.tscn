@@ -34,21 +34,33 @@ default_value = 2
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
 script = ExtResource("3_vjjpo")
-default_value = 25
+default_value = 30
 
 [node name="Trigger count" type="Node" parent="LT_PersistentVariables" index="2"]
 script = ExtResource("3_vjjpo")
 default_value = 3
+
+[node name="LT_UpdateCountdown" type="Node" parent="LT_OnItemSetupCompleted" index="3" node_paths=PackedStringArray("countdown_label", "every_x_calls")]
+script = ExtResource("18_cvsvm")
+countdown_label = NodePath("../../CountdownLabel")
+every_x_calls = NodePath("../../LT_OnEntityHealed/LogicTree/LT_EveryXCalls")
 
 [node name="LT_SetItemsColor" type="Node" parent="LT_OnItemSetupCompleted/LogicTree" index="0" node_paths=PackedStringArray("items")]
 script = ExtResource("4_uxt3n")
 items = NodePath("../../This item")
 color = 2
 
-[node name="LT_UpdateCountdown" type="Node" parent="LT_OnItemSetupCompleted" index="3" node_paths=PackedStringArray("countdown_label", "every_x_calls")]
-script = ExtResource("18_cvsvm")
-countdown_label = NodePath("../../CountdownLabel")
-every_x_calls = NodePath("../../LT_OnEntityHealed/LogicTree/LT_EveryXCalls")
+[node name="increase damage 30" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_gxdxj")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 30
+operation = 1
+
+[node name="add two more targets" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("8_gxdxj")
+int_variable = NodePath("../../../../LT_PersistentVariables/Number of targets")
+value = 2
+operation = 1
 
 [node name="LT_OnEntityHealed" type="Node" parent="." index="7" node_paths=PackedStringArray("output_source_item_array", "output_source_entity", "output_source_tile", "output_receiver_entity", "output_receiver_tile", "output_heal_amount", "logic_tree_on_trigger")]
 script = ExtResource("4_2nldu")

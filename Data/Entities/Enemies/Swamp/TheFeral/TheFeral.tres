@@ -10,8 +10,8 @@
 [sub_resource type="Resource" id="Resource_x1grs"]
 script = ExtResource("2_c6g8y")
 chance_of_generating_gold = 1.0
-min_gold_generated = 1
-max_gold_generated = 3
+min_gold_generated = 4
+max_gold_generated = 8
 stores_collected_gold = true
 add_particles_on_collecting_gold = true
 

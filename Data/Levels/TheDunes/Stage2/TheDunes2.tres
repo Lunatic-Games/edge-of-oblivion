@@ -1,0 +1,82 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=18 format=3 uid="uid://dtpqom41jpnbo"]
+
+[ext_resource type="Resource" uid="uid://50bvt7hgm20i" path="res://Data/GameModes/Standard/Standard.tres" id="1_dj13m"]
+[ext_resource type="PackedScene" uid="uid://bpc1x4004b18" path="res://Data/Levels/TheDunes/Stage1/TheDunes1.tscn" id="2_yl73p"]
+[ext_resource type="Resource" uid="uid://mkhynw35am68" path="res://Data/Entities/Enemies/Desert/Cobra/Cobra.tres" id="3_kcjal"]
+[ext_resource type="Resource" uid="uid://wgvucq7mxtaq" path="res://Data/Entities/Enemies/Desert/Bandit/Bandit.tres" id="4_7n2n4"]
+[ext_resource type="Resource" uid="uid://djehq2s20b720" path="res://Data/Entities/Enemies/Desert/MongolianCalvary/MongolianCalvary.tres" id="5_gw3s0"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_WAVES.gd" id="5_j3b1o"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/WAVE_DATA.gd" id="6_a46i3"]
+[ext_resource type="Script" path="res://Data/Levels/_Resources/LEVEL_DATA.gd" id="7_dun7j"]
+[ext_resource type="Resource" uid="uid://je04bn2o2ov6" path="res://Data/Levels/TheDunes/Stage3/TheDunes3.tres" id="8_62kuv"]
+
+[sub_resource type="Resource" id="Resource_rq8kv"]
+script = ExtResource("6_a46i3")
+round_wait_from_previous_wave = 1
+"# Cobra" = 2
+"# Bandit" = 3
+"# Mongolian Calvary" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_v1c3d"]
+script = ExtResource("6_a46i3")
+round_wait_from_previous_wave = 7
+"# Cobra" = 0
+"# Bandit" = 3
+"# Mongolian Calvary" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_p2ein"]
+script = ExtResource("6_a46i3")
+round_wait_from_previous_wave = 7
+"# Cobra" = 0
+"# Bandit" = 0
+"# Mongolian Calvary" = 7
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_e1c7x"]
+script = ExtResource("6_a46i3")
+round_wait_from_previous_wave = 6
+"# Cobra" = 2
+"# Bandit" = 0
+"# Mongolian Calvary" = 3
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_s567m"]
+script = ExtResource("6_a46i3")
+round_wait_from_previous_wave = 11
+"# Cobra" = 0
+"# Bandit" = 3
+"# Mongolian Calvary" = 3
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_qaiwj"]
+script = ExtResource("6_a46i3")
+round_wait_from_previous_wave = 6
+"# Cobra" = 0
+"# Bandit" = 3
+"# Mongolian Calvary" = 3
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_3vsku"]
+script = ExtResource("6_a46i3")
+round_wait_from_previous_wave = 8
+"# Cobra" = 0
+"# Bandit" = 2
+"# Mongolian Calvary" = 0
+"info_ " = null
+
+[sub_resource type="Resource" id="Resource_ot68o"]
+script = ExtResource("5_j3b1o")
+enemies = Array[Resource("res://Data/Entities/Enemies/ENEMY_DATA.gd")]([ExtResource("3_kcjal"), ExtResource("4_7n2n4"), ExtResource("5_gw3s0")])
+waves = Array[ExtResource("6_a46i3")]([SubResource("Resource_rq8kv"), SubResource("Resource_v1c3d"), SubResource("Resource_p2ein"), SubResource("Resource_e1c7x"), SubResource("Resource_s567m"), SubResource("Resource_qaiwj"), SubResource("Resource_3vsku")])
+
+[resource]
+script = ExtResource("7_dun7j")
+level_name = "The Dunes - 2"
+level_scene = ExtResource("2_yl73p")
+level_waves = SubResource("Resource_ot68o")
+next_level = ExtResource("8_62kuv")
+game_mode = ExtResource("1_dj13m")
+gateway_spawn_condition = 2
+killing_boss_completes_run = false

@@ -23,6 +23,18 @@ default_value = 4
 script = ExtResource("2_l5xcj")
 default_value = 20
 
+[node name="Increase damage 20" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("12_67ybi")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 20
+operation = 1
+
+[node name="Increase damage 20" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("12_67ybi")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 20
+operation = 1
+
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("3_0dq2p")
 x_override = NodePath("../../../LT_PersistentVariables/Cooldown")

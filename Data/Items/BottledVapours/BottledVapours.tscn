@@ -54,6 +54,24 @@ script = ExtResource("5_fbhms")
 items = NodePath("../../This item")
 color = 3
 
+[node name="Increase base damage 20" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("19_4kdps")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 20
+operation = 1
+
+[node name="Increase base damage 10" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("19_4kdps")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 10
+operation = 1
+
+[node name="Increase heal 3" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 3" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("19_4kdps")
+int_variable = NodePath("../../../../LT_PersistentVariables/Heal")
+value = 3
+operation = 1
+
 [node name="Temp healing mode" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("default_value_override")]
 script = ExtResource("3_daorn")
 default_value_override = NodePath("../../../LT_PersistentVariables/Is in healing mode")

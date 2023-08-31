@@ -40,7 +40,7 @@ default_value = true
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="4"]
 script = ExtResource("3_dtkml")
-default_value = 10
+default_value = 15
 
 [node name="Self Damage" type="Node" parent="LT_PersistentVariables" index="5"]
 script = ExtResource("3_dtkml")
@@ -54,6 +54,24 @@ default_value = 6
 script = ExtResource("5_yn7ti")
 items = NodePath("../../This item")
 color = 2
+
+[node name="increase damage 15" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 2" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_yj127")
+int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
+value = 15
+operation = 1
+
+[node name="increase self damage 1" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 2" index="1" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_yj127")
+int_variable = NodePath("../../../../LT_PersistentVariables/Self Damage")
+value = 1
+operation = 1
+
+[node name="Max rounds active increased by 2" type="Node" parent="LT_OnItemSetupCompleted/LogicTree/If forge level is 3" index="0" node_paths=PackedStringArray("int_variable")]
+script = ExtResource("9_yj127")
+int_variable = NodePath("../../../../LT_PersistentVariables/Max rounds active")
+value = 2
+operation = 1
 
 [node name="LT_EveryXCalls" type="Node" parent="LT_OnItemUpdate/LogicTree" index="0" node_paths=PackedStringArray("x_override")]
 script = ExtResource("17_vosrf")
