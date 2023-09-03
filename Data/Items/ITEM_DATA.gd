@@ -25,6 +25,12 @@ var _popup_texts: Dictionary = {}  # Property name : text
 var _costs: Dictionary = {}  # Property name : gold cost (int)
 
 
+func _get_item_with_data() -> Item:
+	var item = item_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
+	item = GlobalGameState.get_tree().root.find_child(item.name, true, false)
+	return item
+
+
 func get_cost(forge_level: int = 1) -> int:
 	return _costs.get(COST_EXPORT_PREFIX + str(forge_level), 0)
 
@@ -38,8 +44,9 @@ func get_popup_text(tier: int) -> String:
 	var tier_info: String = "(" + "I".repeat(tier) + ")"
 	var title: String = color_tag + item_name + tier_info + ":[/color] "
 	if use_tier_1_text_for_popup_texts:
-		return title + _card_texts.get(CARD_TEXT_EXPORT_PREFIX + str(1), "")
-	return title + _popup_texts.get(POPUP_TEXT_EXPORT_PREFIX + str(tier), "")
+		return Templator.template_string_from_item(_get_item_with_data(), title + _card_texts.get(CARD_TEXT_EXPORT_PREFIX + str(1), ""))
+		
+	return Templator.template_string_from_item(_get_item_with_data(), title + _popup_texts.get(POPUP_TEXT_EXPORT_PREFIX + str(tier), ""))
 
 
 func _set_max_tier(n: int) -> void:

@@ -1,5 +1,5 @@
-# NOTE: There is an invarient for this Node to work at that is that
-#       there must exist an {ITEM}.tres file (based on ITEM_DATE) in 
+# NOTE: There is an invarient for this Node to work that is 
+#       there must exist an {ITEM}.tres file (based on ITEM_DATA) in 
 #       the same folder as the {ITEM}.tscn file. Otherwise, bad stuff
 #       will follow.
 @tool
