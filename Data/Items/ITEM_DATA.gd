@@ -26,8 +26,13 @@ var _costs: Dictionary = {}  # Property name : gold cost (int)
 
 
 func _get_item_with_data() -> Item:
-	var item = item_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
-	item = GlobalGameState.get_tree().root.find_child(item.name, true, false)
+	var temp_item = item_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
+	var item = GlobalGameState.get_tree().root.find_child(temp_item.name, true, false)
+	# If this is a new item given to the user via card, we need to get a base
+	# copy of the Item node to work with first
+	if item == null:
+		temp_item.data = self
+		item = temp_item
 	return item
 
 
@@ -36,7 +41,7 @@ func get_cost(forge_level: int = 1) -> int:
 
 
 func get_card_text(tier: int) -> String:
-	return _card_texts.get(CARD_TEXT_EXPORT_PREFIX + str(tier), "")
+	return Templator.template_string_from_item(_get_item_with_data(), _card_texts.get(CARD_TEXT_EXPORT_PREFIX + str(tier), ""))
 
 
 func get_popup_text(tier: int) -> String:

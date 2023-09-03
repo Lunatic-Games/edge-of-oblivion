@@ -58,7 +58,7 @@ func _get(property: StringName) -> Variant:
 func _set(property: StringName, n: Variant) -> bool:
 	if property.begins_with(FORGE_VALUE_EXPORT_PREFIX) and property.contains(TIER_VALUE_EXPORT_PREFIX):
 		_tier_values[property] = n
-		if (property == FORGE_VALUE_EXPORT_PREFIX + "1" + TIER_VALUE_EXPORT_PREFIX + "1"):
+		if property == FORGE_VALUE_EXPORT_PREFIX + "1" + TIER_VALUE_EXPORT_PREFIX + "1":
 			default_value = n
 		return true
 	
