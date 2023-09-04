@@ -20,6 +20,7 @@ func _ready():
 	var this_item: Item = owner as Item
 	assert(this_item != null, "Owner is not an item for node: '" + name + "'")
 	this_item.tier_increased.connect(_on_tier_increased.bind(this_item))
+	this_item.setup_completed.connect(_on_tier_increased.bind(this_item))
 
 
 func _get_property_list() -> Array[Dictionary]:
