@@ -1,5 +1,5 @@
-# NOTE: There is an invarient for this Node to work at that is that
-#       there must exist an {ITEM}.tres file (based on ITEM_DATE) in 
+# NOTE: There is an invarient for this Node to work that is
+#       there must exist an {ITEM}.tres file (based on ITEM_DATA) in 
 #       the same folder as the {ITEM}.tscn file. Otherwise, bad stuff
 #       will follow.
 @tool
@@ -31,16 +31,16 @@ func _get_property_list() -> Array[Dictionary]:
 	max_forge = item_data.max_forge_level
 	
 	var properties: Array[Dictionary] = []
-	for i in max_forge:
+	for forge_level in max_forge:
 		properties.append({
-			"name": "Forge Level " + str(i + 1),
-			"hint_string": FORGE_VALUE_EXPORT_PREFIX + str(i + 1),
+			"name": "Forge Level " + str(forge_level + 1),
+			"hint_string": FORGE_VALUE_EXPORT_PREFIX + str(forge_level + 1),
 			"type": TYPE_NIL,
 			"usage": PROPERTY_USAGE_GROUP
 		})
-		for j in max_tier:
+		for tier in max_tier:
 			properties.append({
-				"name": FORGE_VALUE_EXPORT_PREFIX + str(i + 1) + TIER_VALUE_EXPORT_PREFIX + str(j + 1),
+				"name": FORGE_VALUE_EXPORT_PREFIX + str(forge_level + 1) + TIER_VALUE_EXPORT_PREFIX + str(tier + 1),
 				"type": TYPE_INT,
 				"usage": PROPERTY_USAGE_DEFAULT
 			})
