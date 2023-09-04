@@ -50,8 +50,10 @@ func _get_property_list() -> Array[Dictionary]:
 
 
 func _get(property: StringName) -> Variant:
-	if property.begins_with(FORGE_VALUE_EXPORT_PREFIX) and property.contains(TIER_VALUE_EXPORT_PREFIX) and _tier_values.has(property):
-		return _tier_values[property]
+	if property.begins_with(FORGE_VALUE_EXPORT_PREFIX) and property.contains(TIER_VALUE_EXPORT_PREFIX):
+		if _tier_values.has(property):
+			return _tier_values[property]
+		return 0
 	
 	return null
 
