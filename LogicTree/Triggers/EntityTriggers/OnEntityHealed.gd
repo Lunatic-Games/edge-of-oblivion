@@ -69,10 +69,10 @@ func trigger(source_item: Item, source_entity: Entity, source_tile: Tile,
 	if output_source_tile != null:
 		if source_tile != null:
 			output_source_tile.value = [source_tile]
-		elif source_item != null and source_item.user != null and source_item.user.occupancy.current_tile != null:
-			output_source_tile.value = [source_item.user.occupancy.current_tile]
-		elif source_entity != null and source_entity.occupancy.current_tile != null:
-			output_source_tile.value = [source_entity.occupancy.current_tile]
+		elif source_item != null and source_item.user != null and source_item.user.occupancy.primary_tile != null:
+			output_source_tile.value = [source_item.user.occupancy.primary_tile]
+		elif source_entity != null and source_entity.occupancy.primary_tile != null:
+			output_source_tile.value = [source_entity.occupancy.primary_tile]
 		else:
 			output_source_tile.value.clear()
 	
@@ -83,8 +83,8 @@ func trigger(source_item: Item, source_entity: Entity, source_tile: Tile,
 			output_receiver_entity.value.clear()
 	
 	if output_receiver_tile != null:
-		if receiver_entity != null and receiver_entity.occupancy.current_tile != null:
-			output_receiver_tile.value = [receiver_entity.occupancy.current_tile]
+		if receiver_entity != null and receiver_entity.occupancy.primary_tile != null:
+			output_receiver_tile.value = [receiver_entity.occupancy.primary_tile]
 		else:
 			output_receiver_tile.value.clear()
 

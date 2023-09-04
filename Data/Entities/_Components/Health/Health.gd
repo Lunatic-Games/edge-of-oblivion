@@ -85,8 +85,10 @@ func reset() -> void:
 
 
 func _die(source: int = 0) -> void:
-	if entity.occupancy and entity.occupancy.current_tile:
-		entity.occupancy.current_tile.occupant = null
+	if entity.occupancy and entity.occupancy.primary_tile:
+		entity.occupancy.primary_tile.occupant = null
+		for tile in entity.occupancy.additional_tiles:
+			tile.occupant = null
 	
 	died.emit(source)
 	

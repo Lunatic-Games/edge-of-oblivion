@@ -13,7 +13,7 @@ var spawn_flags: Array[SpawnFlag] = []
 func spawn_existing_player(player: Player, tile: Tile) -> Player:
 	var board: Board = GlobalGameState.get_board()
 	tile.occupant = player
-	player.occupancy.current_tile = tile
+	player.occupancy.primary_tile = tile
 	player.global_position = tile.global_position
 	player.reparent(board)
 	
@@ -30,7 +30,7 @@ func spawn_enemies(enemies: Array[EnemyData]) -> void:
 			break
 		
 		spawn_flag.remove()
-		spawn_entity_on_tile(enemy_data, spawn_flag.occupancy.current_tile)
+		spawn_entity_on_tile(enemy_data, spawn_flag.occupancy.primary_tile)
 	
 	assert(spawn_flags.is_empty(), "More spawn flags than enemies to spawn for this round.")
 

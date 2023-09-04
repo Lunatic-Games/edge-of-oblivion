@@ -13,8 +13,9 @@ func setup(p_data: EntityData, start_tile: Tile = null) -> void:
 func _on_collected(_by: Entity) -> void:
 	triggered.emit()
 	
-	if occupancy.current_tile.occupant == self:
-		occupancy.current_tile.occupant = null
+	if occupancy.primary_tile.occupant == self:
+		occupancy.primary_tile.occupant = null
+		occupancy.additional_tiles.clear()
 	animator.play("quick_despawn")
 	await animator.animation_finished
 	queue_free()

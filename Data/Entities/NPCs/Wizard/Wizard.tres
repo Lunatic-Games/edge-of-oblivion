@@ -8,6 +8,7 @@
 [sub_resource type="Resource" id="Resource_6v0lp"]
 script = ExtResource("2_jmy3n")
 size = 0
+primary_tile = 0
 blocking_behavior = 1
 can_be_pushed_off_map = false
 can_push_entities = false

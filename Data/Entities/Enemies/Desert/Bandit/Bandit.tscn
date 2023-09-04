@@ -30,7 +30,7 @@ seamless = true
 as_normal_map = true
 noise = SubResource("2")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iihjo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vsjdx"]
 resource_local_to_scene = true
 shader = ExtResource("2_81i4o")
 shader_parameter/strength = 0.25
@@ -42,8 +42,8 @@ bg_color = Color(0.223529, 0.478431, 0.611765, 1)
 
 [node name="Bandit" instance=ExtResource("1_8b1d7")]
 
-[node name="Sprite2D" parent="." index="0"]
-material = SubResource("ShaderMaterial_iihjo")
+[node name="Sprite2D" parent="SpriteContainer" index="0"]
+material = SubResource("ShaderMaterial_vsjdx")
 texture = ExtResource("3_q1q81")
 
 [node name="AttackBar" parent="." index="2"]

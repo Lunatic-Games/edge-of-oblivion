@@ -2,8 +2,8 @@ class_name InputController
 extends RefCounted
 
 
-const DEFAULT_SCALE: Vector2 = Vector2(0.125, 0.125)
-const SQUISHED_SCALE: Vector2 = Vector2(0.1, 0.1)
+const DEFAULT_SCALE: Vector2 = Vector2(1, 1)
+const SQUISHED_SCALE: Vector2 = Vector2(0.7, 0.7)
 const UNREADY_FADE_OUT_TIME_SECONDS: float = 0.2
 const UNREADY_ALPHA: float = 0.3
 const READY_FADE_IN_TIME_SECONDS: float = 0.2
@@ -26,7 +26,7 @@ func check_for_input(time_for_turn_seconds: float):
 	if !entity.health.is_alive() or moves_remaining == 0 or is_movement_locked:
 		return
 	
-	var current_tile: Tile = entity.occupancy.current_tile
+	var current_tile: Tile = entity.occupancy.primary_tile
 	if Input.is_action_pressed("up"):
 		handle_move_or_wait(current_tile.top_tile, time_for_turn_seconds)
 	
@@ -48,7 +48,7 @@ func are_moves_all_used() -> bool:
 
 
 func handle_move_or_wait(tile: Tile, time_for_turn_seconds: float):
-	if tile != null and tile != entity.occupancy.current_tile:
+	if tile != null and tile != entity.occupancy.primary_tile:
 		var was_move_succesful: bool = entity.occupancy.move_to_tile(tile)
 		if was_move_succesful:
 			is_movement_locked = true

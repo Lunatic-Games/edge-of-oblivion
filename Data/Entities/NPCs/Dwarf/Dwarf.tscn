@@ -8,7 +8,7 @@
 
 [node name="Dwarf" instance=ExtResource("1_0lbam")]
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="SpriteContainer" index="0"]
 texture = ExtResource("2_wb371")
 
 [node name="ItemGiven" type="Node" parent="LT_PersistentVariables" index="0"]

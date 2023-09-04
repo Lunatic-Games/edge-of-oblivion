@@ -7,6 +7,5 @@
 [node name="DialogueTrigger" instance=ExtResource("1_1ujdj")]
 script = ExtResource("2_vmt11")
 
-[node name="Sprite2D" parent="." index="0"]
-self_modulate = Color(1, 1, 1, 0.615686)
+[node name="Sprite2D" parent="SpriteContainer" index="0"]
 texture = ExtResource("2_6pkes")

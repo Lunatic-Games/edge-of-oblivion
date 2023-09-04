@@ -60,7 +60,7 @@ func apply_knockback(target: Entity, direction: Vector2i, knockback: int,
 	if target.occupancy.data.can_be_knockbacked() == false:
 		return false
 	
-	var current_tile: Tile = target.occupancy.current_tile
+	var current_tile: Tile = target.occupancy.primary_tile
 	var next_tile: Tile = current_tile.get_tile_in_direction(direction)
 	
 	for i in knockback:

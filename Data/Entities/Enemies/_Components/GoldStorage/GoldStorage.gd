@@ -37,7 +37,7 @@ func _on_died(_source: int = 0):
 	if stored_gold == 0:
 		return
 	
-	var tile_died_on: Tile = entity.occupancy.current_tile
+	var tile_died_on: Tile = entity.occupancy.primary_tile
 	if tile_died_on == null:
 		return
 		

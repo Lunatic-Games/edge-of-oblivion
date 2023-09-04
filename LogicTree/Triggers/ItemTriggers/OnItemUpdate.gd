@@ -43,8 +43,8 @@ func trigger(item: Item) -> void:
 			output_item_user.value.clear()
 	
 	if output_item_user_tile != null:
-		if item.user != null and item.user.occupancy.current_tile != null:
-			output_item_user_tile.value = [item.user.occupancy.current_tile]
+		if item.user != null and item.user.occupancy.primary_tile != null:
+			output_item_user_tile.value = [item.user.occupancy.primary_tile]
 		else:
 			output_item_user_tile.value.clear()
 	

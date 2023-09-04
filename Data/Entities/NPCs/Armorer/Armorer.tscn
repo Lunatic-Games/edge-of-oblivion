@@ -8,7 +8,7 @@
 
 [node name="Armorer" instance=ExtResource("1_cf0yp")]
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="SpriteContainer" index="0"]
 texture = ExtResource("2_i00qd")
 
 [node name="ItemGiven" type="Node" parent="LT_PersistentVariables" index="0"]

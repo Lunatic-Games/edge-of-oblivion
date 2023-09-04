@@ -8,6 +8,6 @@
 [node name="Player" instance=ExtResource("1_a1amo")]
 script = ExtResource("2_jsy5b")
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="SpriteContainer" index="0"]
 material = ExtResource("3_6d11q")
 texture = ExtResource("3_4wans")
