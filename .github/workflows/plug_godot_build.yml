@@ -41,10 +41,20 @@ on:
         required: false 
         default: '.'
         description: Relative to the project path
+      artifact_name:
+        type: string
+        required: false
+        description: Used as the name of the artifact, prepended with the OS built for (windows, linux, html5, or macos)
+      artifact_retention_days:
+        type: number
+        required: false
+        default: 0
+        description: The number of days for the artifacts to be retained
         
 env:
   GODOT_VERSION: ${{ inputs.godot_version }}
-  EXPORT_NAME: ${{ inputs.export_name }}${{ inputs.debug && '-debug' || '' }}
+  EXPORT_NAME: ${{ format('{0}{1}', inputs.export_name, (inputs.debug && '-debug' || '')) }}
+  ARTIFACT_NAME: ${{ !!inputs.artifact_name && inputs.artifact_name || format('{0}{1}', inputs.export_name, (inputs.debug && '-debug' || '')) }}
   PROJECT_PATH: ${{ inputs.project_path }}
   EXPORT_PRESETS_PATH: ${{ inputs.export_presets_path }}
 
@@ -87,7 +97,7 @@ jobs:
       image: barichello/godot-ci:${{ needs.set_tag.outputs.godot_ci_tag }}
     env:
       PLATFORM: ${{ matrix.platform }}
-      BINARY_EXT: ${{ (matrix.platform == 'windows' && 'exe') || (matrix.platform == 'linux' && 'zip') || 'zip' }}
+      BINARY_EXT: ${{ (matrix.platform == 'windows' && 'exe') || (matrix.platform == 'linux' && 'x86_64') || 'zip' }}
       PRESET: ${{ inputs[format('{0}_preset', matrix.platform)] }}
       DEBUG: ${{ inputs.debug }}
     steps:
@@ -144,7 +154,8 @@ jobs:
             fi
           done
       - name: Upload artifact
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v3.1.2
         with:
-          name: ${{ matrix.platform }}-${{ env.EXPORT_NAME }}
+          name: ${{ matrix.platform }}-${{ env.ARTIFACT_NAME }}
           path: ${{ env.PROJECT_PATH }}/build/${{ matrix.platform }}
+          retention-days: ${{ inputs.artifact_retention_days }}

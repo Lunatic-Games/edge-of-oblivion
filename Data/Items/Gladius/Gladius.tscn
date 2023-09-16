@@ -1,17 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6oyy1un0mhdv"]
+[gd_scene load_steps=12 format=3 uid="uid://b6oyy1un0mhdv"]
 
 [ext_resource type="PackedScene" uid="uid://cq6sdagc60luj" path="res://Data/Items/Item.tscn" id="1"]
+[ext_resource type="Script" path="res://LogicTree/Variables/TierableIntVariable.gd" id="2_ck4rn"]
 [ext_resource type="Script" path="res://LogicTree/Variables/IntVariable.gd" id="2_r3n8e"]
 [ext_resource type="Script" path="res://LogicTree/Variables/TileArrayVariable.gd" id="3_aepoh"]
 [ext_resource type="Script" path="res://LogicTree/Conditionals/EveryXCalls.gd" id="3_hv802"]
-[ext_resource type="Script" path="res://LogicTree/Conditionals/IfInt.gd" id="4_ehsl6"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesInRadius.gd" id="5_s1hym"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectTilesByOccupant.gd" id="6_cfatf"]
 [ext_resource type="Script" path="res://LogicTree/Effects/SpawnNode2DOnTiles.gd" id="6_ihmua"]
 [ext_resource type="Script" path="res://LogicTree/Operations/SelectRandomTiles.gd" id="7_u6kmj"]
 [ext_resource type="PackedScene" uid="uid://d1eqdcmq15ulc" path="res://Data/Particles/Slash/SlashParticles.tscn" id="8_hmr6i"]
 [ext_resource type="Script" path="res://LogicTree/Effects/DamageTileOccupants.gd" id="10_wrwdj"]
-[ext_resource type="Script" path="res://LogicTree/Operations/Setters/SetInt.gd" id="12_demeu"]
 
 [node name="Gladius" instance=ExtResource("1")]
 
@@ -30,7 +29,16 @@ script = ExtResource("2_r3n8e")
 default_value = 5
 
 [node name="Damage" type="Node" parent="LT_PersistentVariables" index="1"]
-script = ExtResource("2_r3n8e")
+script = ExtResource("2_ck4rn")
+forge_1_tier_1 = 20
+forge_1_tier_2 = 40
+forge_1_tier_3 = 60
+forge_2_tier_1 = 20
+forge_2_tier_2 = 40
+forge_2_tier_3 = 60
+forge_3_tier_1 = 20
+forge_3_tier_2 = 40
+forge_3_tier_3 = 60
 default_value = 20
 
 [node name="Selected tiles" type="Node" parent="LT_PersistentVariables" index="2"]
@@ -87,27 +95,3 @@ mirror_x_if_left_of_first_tile = NodePath("../../../Item user tile")
 script = ExtResource("10_wrwdj")
 tiles = NodePath("../../../../LT_PersistentVariables/Selected tiles")
 damage_override = NodePath("../../../../LT_PersistentVariables/Damage")
-
-[node name="If tier 2" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="0" node_paths=PackedStringArray("input")]
-script = ExtResource("4_ehsl6")
-input = NodePath("../../New tier")
-comparison = 2
-value = 2
-
-[node name="Increase damage by 20" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 2" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("12_demeu")
-int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
-value = 20
-operation = 1
-
-[node name="If tier 3" type="Node" parent="LT_OnItemTierIncrease/LogicTree" index="1" node_paths=PackedStringArray("input")]
-script = ExtResource("4_ehsl6")
-input = NodePath("../../New tier")
-comparison = 2
-value = 3
-
-[node name="Increase damage by 20" type="Node" parent="LT_OnItemTierIncrease/LogicTree/If tier 3" index="0" node_paths=PackedStringArray("int_variable")]
-script = ExtResource("12_demeu")
-int_variable = NodePath("../../../../LT_PersistentVariables/Damage")
-value = 20
-operation = 1
