@@ -1,4 +1,8 @@
 # Edge of Oblivion
+A turn based action-roguelike made in Godot.
+
+The latest version of the game can be played here: https://lunatic-games.itch.io/edge-of-oblivion.
+
 **Godot version:** 4.1  
 **Platforms:** Windows, Linux
 ## CI/CD Status
